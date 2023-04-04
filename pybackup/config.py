@@ -70,6 +70,7 @@ v.lckers['git'] = partial(gitck2, 'git', v.worktree)
 #v.tgts.add('bitbucket')
 # v.srcs.add('bitbucket')
 v.rckers['bitbucket'] = partial(gitremoteck, 'bitbucket', v.worktree)
+v.rckers['github'] = partial(gitremoteck, 'github', v.worktree)
 
 addSrcDir('proj', ppre('proj'), False)
 
@@ -155,6 +156,15 @@ if 'NOGIT' not in os.environ:
     op1 = GitOps(npl1, None, {
         'wt': v.worktree,
         'rmt': 'bitbucket',
+        'pull': True,
+        'push': True
+    })
+    addArc(op1)
+    
+    npl1 = ('github', 'git')
+    op1 = GitOps(npl1, None, {
+        'wt': v.worktree,
+        'rmt': 'github',
         'pull': True,
         'push': True
     })
