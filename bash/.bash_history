@@ -353,3 +353,38 @@ pb
 vd ..
 cd ..
 git filter-repo
+cd bin
+chmod 755 git-filter-repo
+pb
+vd ..
+git filter-repo
+git init
+git-crypt init
+ls ~ -a
+ls ~/.config -a
+ls ~/.git -a
+ls .git -a
+ls .git/git-crypt -a
+ls .git/git-crypt/keys -a
+cat .git/git-crypt/keys/default -a
+cat .git/git-crypt/keys/default
+ls -a
+ls ..
+cp --help
+ftpsvr
+cd ..
+cd projects
+cat .gitattributes
+ls
+git add .
+git config --global user.email "dpchitester@gmail.com"
+git config --global user.name "Donald Chitester"
+git commit -m abcde
+git remote show
+git remote show -v
+git remote show --verbose
+git remote list
+git push
+git push github master
+git push github master --force
+pbu
