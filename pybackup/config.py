@@ -91,9 +91,9 @@ npl1 = ('bash', 'home')
 op1 = LocalCopy(
     npl1, npl1, {
         'files': [
-            '.termux/*', '.bashrc', '.bashrc0','.swi*', '.profile', '.clang-format',
+            '.termux/*', '.bashrc', '.bashrc0', '.swi*', '.profile', '.clang-format',
             'rsyncd.conf', '.config/rclone/*', '.plaid-cli/*',
-            '.plaid-cli/data', '.plaidrc'
+            '.plaid-cli/data/*', '.plaidrc'
         ]
     })
 #addArc(op1)
@@ -104,7 +104,7 @@ op1 = LocalCopy(
         'files': [
             '.termux/*', '.bashrc', '.bashrc0', '.swi*', '.profile', '.clang-format',
             'rsyncd.conf', '.config/rclone/*', '.plaid-cli/*',
-            '.plaid-cli/data', '.plaidrc'
+            '.plaid-cli/data/*', '.plaidrc'
         ]
     })
 addArc(op1)

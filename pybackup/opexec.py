@@ -75,4 +75,5 @@ def opExec():
 
 
 if __name__ == '__main__':
+    import config
     print(opExec())

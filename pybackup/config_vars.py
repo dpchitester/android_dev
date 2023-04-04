@@ -33,7 +33,7 @@ fmd5hd = {}
 LDhd = {}
 RDhd = {}
 
-# stored directory lists
+# directory lists
 LDlls = {}
 RDlls = {}
 
