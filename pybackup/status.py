@@ -11,7 +11,6 @@ def changed_ops(T=None) -> list[OpBase]:
             e:Edge = findEdge(di, si)
             if Op.ischanged(e):
                 rv.append(Op)
-                break
     return rv
 
 def stsupdate(Si, Dh):
@@ -35,18 +34,22 @@ def rstsupdate(Di, Dh):
 def onestatus(Si):
     # TODO: update as per statuses
     import config_vars as v
-    (Dh, changed) = v.lckers[Si]()
-    if changed:
-        stsupdate(Si, Dh)
-        print()
+    tr = v.lckers[Si]()
+    if tr is not None:
+        (Dh, changed) = tr 
+        if changed:
+            stsupdate(Si, Dh)
+            print()
 
 def ronestatus(Di):
     # TODO: update as per rstatuses
     import config_vars as v
-    (Dh, changed) = v.rckers[Di]()
-    if changed:
-        rstsupdate(Di, Dh)
-        print()
+    tr = v.rckers[Di]()
+    if tr is not None:
+        (Dh, changed) = tr
+        if changed:
+            rstsupdate(Di, Dh)
+            print()
 
 def statuses():
     import config_vars as v
