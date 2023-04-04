@@ -96,7 +96,7 @@ op1 = LocalCopy(
             '.plaid-cli/data', '.plaidrc'
         ]
     })
-addArc(op1)
+#addArc(op1)
 
 npl1 = ('home', 'bash')
 op1 = LocalCopy(
