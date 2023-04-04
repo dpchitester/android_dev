@@ -388,3 +388,39 @@ git push
 git push github master
 git push github master --force
 pbu
+ls
+git add .
+git config --global user.email "dpchitester@gmail.com"
+git config --global user.name "Donald Chitester"
+git commit -m abcde
+git remote show
+git remote show -v
+git remote show --verbose
+git remote list
+git push
+git push github master
+git push github master --force
+pb
+pbu
+npm list
+npm uninstall acorn-walk acorn escodegen googleapis prettier
+npm uninstall acorn-walk acorn escodegen googleapis prettier -g
+npm uninstall sails -g
+npm list -g
+npm uninstall eslint -g
+du
+du -h
+ls -a
+pkg search git-crypt
+pkg list-installed
+vim
+pb && rclone sync . GoogleDrive:/projects/pybackup --progress
+pip uninstall rope snoop
+pip uninstall asttokens cheap-repr executing
+pip uninstall platformdirs Pygments pytoolconfig
+pip uninstall packaging six
+pip list
+ftpsvr
+plaid-cli accounts ns
+cd
+exit
