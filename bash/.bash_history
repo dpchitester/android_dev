@@ -292,3 +292,64 @@ ls .g*
 cd projects && git config credential.helper 'store'
 git push
 pbu
+git diff
+exit
+exit
+cd
+ls .g*
+cd projects && git config credential.helper 'store'
+ftpsvr
+pb
+git status
+git status github
+git remote list -v
+git remote show -v
+git remote -v show
+git config credential-helper
+git config credential-helper 'store'
+git config credential.helper 'store'
+git remote add github
+git remote add github https://github.com/dpchitester/dpchitester.git
+git remote show
+git push bitbucket master
+cat ~/.git-credentials
+git config list
+git config show
+git config credentials.helper
+git config show credentials.helper
+git config get credentials.helper
+git help config
+git config --list
+clear && git config --list
+git status remote
+git status remote bitbucket
+git status remote github
+git config --global credential.helper 'store'
+git push
+git push bitbucket
+pbu
+pb
+git status remote
+git push
+git push bitbucket
+cd ..
+git filter-repo
+pkg install git-filter-repo
+ls *.py
+ls
+git push
+git push bitbucket
+pkg install git-filter-repo
+ls *.py
+vd..
+cd /sdcard/wui
+git clone https://github.com/newren/git-filter-repo
+ftpsvr
+cd
+cd bin
+ls
+chmod 755 git-filter-repo
+pb
+vd ..
+cd ..
+git filter-repo
