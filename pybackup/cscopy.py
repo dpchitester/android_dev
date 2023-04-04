@@ -155,17 +155,19 @@ class CSCopy(OpBase):
             if bv.sfc.fc == 0:
                 print(len(bv.f2d), 'todelete', len(bv.f2c), 'tocopy')
                 bv.skip_matching()
+            if bv.sfc.fc == 0:
                 bv.do_copying()
+            if bv.sfc.fc == 0:
                 if 'delete' in self.opts and self.opts['delete']:
                     bv.do_deletions()
-                if bv.ac2:
-                    del v.RDlls[di]
-                    v.RDlls_changed = True
-                    # rnoc(di)
-                if bv.ac1:
-                    del v.LDlls[si]
-                    v.LDlls_changed = True
-                    # noc(si)
+            if bv.ac2:
+                del v.RDlls[di]
+                v.RDlls_changed = True
+                # rnoc(di)
+            if bv.ac1:
+                del v.LDlls[si]
+                v.LDlls_changed = True
+                # noc(si)
         if self.sfc.fc == 0:
             e.clr()
         return self.sfc.value()

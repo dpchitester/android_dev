@@ -59,7 +59,6 @@ class Mkzip(OpBase):
                 print(fp)
                 maxt = maxmt(sd)
                 utime(fp, ns=(maxt, maxt))
-                e.clr()
                 if di2 in v.LDlls:
                     del v.LDlls[di2]
                     v.LDlls_changed = True
@@ -67,4 +66,6 @@ class Mkzip(OpBase):
             except Exception as e:
                 print(e)
                 fc += 1
+        if fc == 0:
+            e.clr()
         return (tc, fc)

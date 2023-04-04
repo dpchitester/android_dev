@@ -132,8 +132,6 @@ class GitOps(OpBase):
                 else:
                     fc += 1
         if fc == 0 and tc > 0:
-            di, si = self.npl1
-            e:Edge = findEdge(di, si)
             if 'l' in s:
                 e.clr()
             if 'r' in s:

@@ -19,12 +19,12 @@ class Edge():
     def rchk_ct(self):
         return self.rcdt > self.rudt
     def clr(self):
-        if self.udt != self.cdt:
+        if self.udt < self.cdt:
             print('-clr', self.di, self.si)
             self.udt = self.cdt
             ldsv.saveedges()
     def rclr(self):
-        if self.rudt != self.rcdt:
+        if self.rudt < self.rcdt:
             print('-rclr', self.di, self.si)
             self.rudt = self.rcdt
             ldsv.saveedges()

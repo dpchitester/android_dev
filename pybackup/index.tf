@@ -30,7 +30,7 @@
  ACCESS           2: inotify_simple.py 
  add              9: config.py config_funcs.py edge.py pybackup.py 
  add_watch        3: inotify_simple.py pybackup.py 
- addArc          16: config.py edge.py 
+ addArc          17: config.py edge.py 
  addDep           6: config.py edge.py 
  addPre           7: config.py config_funcs.py 
  addSrcDir       10: config.py config_funcs.py 
@@ -58,7 +58,7 @@
  blake2b          2: bhash.py 
  blakeHash       11: bhash.py dirlist.py edge.py gitops.py statushash.py 
  buffer_size      7: inotify_simple.py 
- bv              39: cscopy.py csrestore.py 
+ bv              42: cscopy.py csrestore.py 
  BVar             2: csrestore.py 
  BVars            2: cscopy.py 
  bytes           11: bhash.py dirlist.py opbase.py 
@@ -136,12 +136,12 @@
  Dh2             29: gitops.py statushash.py 
  dhn              5: csrestore.py 
  dho              5: csrestore.py 
- di              71: cscopy.py csrestore.py dirlist.py edge.py gitops.py localcopy.py opbase.py opexec.py status.py statushash.py toposort.py 
- Di              23: gitops.py status.py statushash.py 
+ di              69: cscopy.py csrestore.py dirlist.py edge.py gitops.py localcopy.py opbase.py opexec.py status.py statushash.py toposort.py 
+ Di              24: gitops.py status.py statushash.py 
  di1              2: mkzip.py 
  di2              4: mkzip.py 
  di_dl            3: statushash.py 
- dict             1: config_vars.py 
+ dict             2: config_vars.py 
  digest           2: bhash.py fmd5h.py 
  digest_size      1: bhash.py 
  dirlist          6: bhash.py cscopy.py csrestore.py pybackup.py statushash.py 
@@ -164,10 +164,10 @@
  drain            1: netup.py 
  dst_dls          5: cscopy.py 
  dump             6: ldsv.py 
- e              107: config_funcs.py cscopy.py csrestore.py dirlist.py edge.py gitops.py ldsv.py localcopy.py mkzip.py netup.py opbase.py opexec.py pybackup.py status.py toposort.py 
+ e              110: config_funcs.py cscopy.py csrestore.py dirlist.py edge.py gitops.py ldsv.py localcopy.py mkzip.py netup.py opbase.py opexec.py pybackup.py status.py toposort.py 
  eDep            12: config_vars.py edge.py ldsv.py opexec.py status.py 
  edge            11: config.py config_vars.py cscopy.py csrestore.py gitops.py localcopy.py mkzip.py opbase.py status.py 
- Edge            27: config_vars.py cscopy.py csrestore.py edge.py gitops.py localcopy.py mkzip.py opbase.py 
+ Edge            29: config_vars.py cscopy.py csrestore.py edge.py gitops.py localcopy.py mkzip.py opbase.py status.py 
  edgepf           4: config.py config_vars.py ldsv.py 
  edges            4: config_vars.py edge.py 
  EINTR            1: inotify_simple.py 
@@ -196,7 +196,7 @@
  f2               4: localcopy.py 
  f2c             16: cscopy.py csrestore.py 
  f2d             19: cscopy.py csrestore.py 
- fc              28: cscopy.py gitops.py localcopy.py mkzip.py 
+ fc              32: cscopy.py gitops.py localcopy.py mkzip.py 
  fcntl            1: inotify_simple.py 
  fcopy            1: cscopy.py 
  fd              10: inotify_simple.py 
@@ -210,7 +210,7 @@
  filename         1: __main__.py 
  files            7: config_funcs.py dirlist.py mkzip.py pybackup.py 
  finddict         2: fmd5h.py 
- findEdge        16: cscopy.py csrestore.py edge.py gitops.py localcopy.py mkzip.py status.py 
+ findEdge        15: cscopy.py csrestore.py edge.py gitops.py localcopy.py mkzip.py status.py 
  FIONREAD         3: inotify_simple.py 
  fl              18: config_funcs.py dirlist.py localcopy.py mkzip.py 
  flag             3: inotify_simple.py 
@@ -251,8 +251,8 @@
  gitck1           3: config.py gitops.py 
  gitck2           3: config.py gitops.py 
  gitops           2: config.py 
- GitOps           5: config.py gitops.py 
- gitremoteck      3: config.py gitops.py 
+ GitOps           6: config.py gitops.py 
+ gitremoteck      4: config.py gitops.py 
  gl               2: localcopy.py 
  glob             1: localcopy.py 
  hashlib          4: bhash.py fmd5h.py localcopy.py 
@@ -311,17 +311,17 @@
  ldhck            3: config_funcs.py statushash.py 
  LDhd             7: config_vars.py ldsv.py statushash.py 
  ldhpf            4: config.py config_vars.py ldsv.py 
- ldhset          11: csrestore.py gitops.py status.py statushash.py 
+ ldhset          10: csrestore.py gitops.py status.py statushash.py 
  lDlld            7: cscopy.py csrestore.py dirlist.py statushash.py 
  LDlls           15: config_vars.py cscopy.py csrestore.py dirlist.py ldsv.py localcopy.py mkzip.py pybackup.py 
  LDlls_changed    8: config_vars.py cscopy.py csrestore.py dirlist.py ldsv.py localcopy.py mkzip.py 
  LDlls_xt         5: config_vars.py dirlist.py ldsv.py 
  ldllsf           4: config.py config_vars.py ldsv.py 
- ldsv            24: config.py edge.py pybackup.py status.py statushash.py 
- len             20: asyncrun.py cscopy.py csrestore.py dirlist.py edge.py fmd5h.py gitops.py inotify_simple.py opexec.py pybackup.py 
+ ldsv            21: config.py edge.py pybackup.py status.py statushash.py 
+ len             22: asyncrun.py cscopy.py csrestore.py dirlist.py edge.py fmd5h.py gitops.py inotify_simple.py opexec.py pybackup.py status.py 
  level            1: __main__.py 
  lf              33: cscopy.py csrestore.py 
- list             8: bhash.py config_vars.py dirlist.py mkzip.py opbase.py 
+ list            10: bhash.py config_vars.py dirlist.py mkzip.py opbase.py status.py 
  load             6: ldsv.py 
  load_all         2: config.py ldsv.py 
  loadedges        2: ldsv.py 
@@ -367,7 +367,7 @@
  node             3: opexec.py 
  nodeps           1: opexec.py 
  nodes            8: toposort.py 
- npl1            63: config.py cscopy.py csrestore.py edge.py gitops.py localcopy.py mkzip.py opbase.py status.py 
+ npl1            64: config.py cscopy.py csrestore.py edge.py gitops.py localcopy.py mkzip.py opbase.py status.py 
  npl2            19: cscopy.py csrestore.py gitops.py localcopy.py mkzip.py opbase.py 
  ns               8: config_funcs.py cscopy.py csrestore.py mkzip.py 
  nt              10: cscopy.py csrestore.py 
@@ -382,9 +382,9 @@
  ONLYDIR          1: inotify_simple.py 
  op               5: csrestore.py opexec.py 
  Op               4: status.py 
- op1             32: config.py edge.py 
- opbase           7: config.py config_vars.py cscopy.py csrestore.py gitops.py localcopy.py mkzip.py 
- OpBase          14: config_vars.py cscopy.py csrestore.py gitops.py localcopy.py mkzip.py opbase.py 
+ op1             34: config.py edge.py 
+ opbase           8: config.py config_vars.py cscopy.py csrestore.py gitops.py localcopy.py mkzip.py status.py 
+ OpBase          17: config_vars.py cscopy.py csrestore.py gitops.py localcopy.py mkzip.py opbase.py status.py 
  OpBaseEncoder    2: config.py opbase.py 
  opdep            5: config_vars.py csrestore.py edge.py status.py 
  open            13: fmd5h.py ldsv.py 
@@ -403,9 +403,9 @@
  pack             3: bhash.py 
  parent           6: cscopy.py csrestore.py fmd5h.py localcopy.py 
  parse_events     3: inotify_simple.py 
- partial          8: config.py config_funcs.py 
+ partial          9: config.py config_funcs.py 
  parts            1: fmd5h.py 
- Path            33: bhash.py config_funcs.py config_vars.py csrestore.py dirlist.py ldsv.py mkzip.py pybackup.py 
+ Path            27: bhash.py config_funcs.py config_vars.py csrestore.py dirlist.py ldsv.py mkzip.py pybackup.py 
  path             2: inotify_simple.py 
  pathlib          9: bhash.py config_funcs.py config_vars.py csrestore.py dirlist.py ldsv.py mkzip.py opbase.py pybackup.py 
  paths           19: config_funcs.py config_vars.py 
@@ -431,7 +431,7 @@
  rcdt             8: edge.py 
  rchk_ck          1: csrestore.py 
  rchk_ct          5: cscopy.py csrestore.py edge.py gitops.py 
- rckers           5: config.py config_funcs.py config_vars.py status.py 
+ rckers           6: config.py config_funcs.py config_vars.py status.py 
  rclr             4: csrestore.py edge.py gitops.py 
  rcomm            3: gitops.py 
  rd               4: dirlist.py 
@@ -440,7 +440,8 @@
  rdhck            3: config_funcs.py statushash.py 
  RDhd             7: config_vars.py ldsv.py statushash.py 
  rdhpf            4: config.py config_vars.py ldsv.py 
- rdhset           9: gitops.py status.py statushash.py 
+ rdhset           8: gitops.py status.py statushash.py 
+ RDl              3: status.py 
  rDlld            7: cscopy.py csrestore.py dirlist.py statushash.py 
  RDlls           10: config_vars.py cscopy.py dirlist.py ldsv.py 
  RDlls_changed    6: config_vars.py cscopy.py dirlist.py ldsv.py 
@@ -492,28 +493,29 @@
  saveldlls        4: ldsv.py pybackup.py status.py 
  saverdh          3: ldsv.py statushash.py 
  saverdlls        4: ldsv.py pybackup.py status.py 
- sc              11: cscopy.py localcopy.py 
+ sc              13: cscopy.py localcopy.py 
  sd              22: cscopy.py csrestore.py dirlist.py mkzip.py 
- SDl              6: status.py 
+ SDl              3: status.py 
  se               3: asyncrun.py netup.py 
  select           2: inotify_simple.py 
- self           273: cscopy.py csrestore.py dirlist.py edge.py gitops.py inotify_simple.py localcopy.py mkzip.py opbase.py 
+ self           274: cscopy.py csrestore.py dirlist.py edge.py gitops.py inotify_simple.py localcopy.py mkzip.py opbase.py 
  sepdlls          2: dirlist.py 
  set             19: bhash.py config_vars.py dirlist.py opbase.py pybackup.py 
  setLevel         1: __main__.py 
  sf               8: localcopy.py 
  sfb              3: config_vars.py ldsv.py 
  SFc              4: cscopy.py localcopy.py 
- sfc             29: cscopy.py localcopy.py 
+ sfc             33: cscopy.py localcopy.py 
  sfe              2: localcopy.py 
  sfs              9: localcopy.py 
+ sfv              1: cscopy.py 
  sha256           4: localcopy.py 
  sha256sumf       3: localcopy.py 
  sha256sums       1: localcopy.py 
  shell_command    8: asyncrun.py 
  should_copy      2: localcopy.py 
  shutil           1: mkzip.py 
- si              90: config.py cscopy.py csrestore.py dirlist.py edge.py gitops.py localcopy.py opbase.py opexec.py pybackup.py status.py statushash.py toposort.py 
+ si              88: config.py cscopy.py csrestore.py dirlist.py edge.py gitops.py localcopy.py opbase.py opexec.py pybackup.py status.py statushash.py toposort.py 
  Si              24: gitops.py status.py statushash.py 
  si1              2: mkzip.py 
  si2              2: mkzip.py 
@@ -522,7 +524,6 @@
  skip_matching    2: cscopy.py 
  Sl               3: status.py 
  sleep            2: inotify_simple.py 
- snoop            1: config.py 
  so               8: asyncrun.py netup.py 
  sort             5: dirlist.py mkzip.py 
  sp               3: localcopy.py 
@@ -537,12 +538,12 @@
  stat             5: dirlist.py ldsv.py localcopy.py mkzip.py 
  status           4: opexec.py pybackup.py 
  statuses         2: status.py 
- statushash       9: config_funcs.py csrestore.py gitops.py status.py 
+ statushash       8: config_funcs.py csrestore.py gitops.py status.py 
  stderr           4: asyncrun.py netup.py 
  STDOUT           6: asyncrun.py netup.py 
  stdout           7: asyncrun.py netup.py 
  stem             1: mkzip.py 
- str             35: bhash.py config.py config_funcs.py config_vars.py cscopy.py csrestore.py dirlist.py localcopy.py opbase.py pybackup.py 
+ str             43: bhash.py config.py config_funcs.py config_vars.py cscopy.py csrestore.py dirlist.py localcopy.py opbase.py pybackup.py 
  strerror         1: inotify_simple.py 
  strip            1: netup.py 
  struct           4: bhash.py inotify_simple.py 
@@ -577,7 +578,7 @@
  topdown          5: config_funcs.py dirlist.py mkzip.py pybackup.py 
  topological_sort    3: opexec.py toposort.py 
  toposort         1: opexec.py 
- tr               9: pybackup.py status.py 
+ tr              12: pybackup.py status.py 
  traceback        1: inotify_simple.py 
  trunc2ms         3: config_funcs.py dirlist.py 
  ts               5: opexec.py 
@@ -593,7 +594,7 @@
  update           9: bhash.py fmd5h.py localcopy.py 
  updatets         5: opexec.py pybackup.py status.py 
  utime            7: cscopy.py csrestore.py mkzip.py 
- v              207: config.py config_funcs.py cscopy.py csrestore.py dirlist.py edge.py fmd5h.py ldsv.py localcopy.py mkzip.py opexec.py pybackup.py status.py statushash.py 
+ v              210: config.py config_funcs.py cscopy.py csrestore.py dirlist.py edge.py fmd5h.py ldsv.py localcopy.py mkzip.py opexec.py pybackup.py status.py statushash.py 
  value            8: cscopy.py inotify_simple.py localcopy.py 
  values           1: inotify_simple.py 
  w                6: netup.py 
@@ -603,7 +604,7 @@
  walk            11: config_funcs.py dirlist.py mkzip.py pybackup.py 
  wd               5: inotify_simple.py pybackup.py 
  wdsi             6: pybackup.py 
- worktree         7: config.py config_vars.py 
+ worktree         9: config.py config_vars.py 
  write            3: asyncrun.py netup.py 
  wsetup           1: pybackup.py 
  wt              14: gitops.py 

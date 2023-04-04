@@ -91,7 +91,7 @@ npl1 = ('bash', 'home')
 op1 = LocalCopy(
     npl1, npl1, {
         'files': [
-            '.termux/*', '.bash*', '.swi*', '.profile', '.clang-format',
+            '.termux/*', '.bashrc', '.bashrc0','.swi*', '.profile', '.clang-format',
             'rsyncd.conf', '.config/rclone/*', '.plaid-cli/*',
             '.plaid-cli/data', '.plaidrc'
         ]
@@ -102,7 +102,7 @@ npl1 = ('home', 'bash')
 op1 = LocalCopy(
     npl1, npl1, {
         'files': [
-            '.termux/*', '.bash*', '.swi*', '.profile', '.clang-format',
+            '.termux/*', '.bashrc', '.bashrc0', '.swi*', '.profile', '.clang-format',
             'rsyncd.conf', '.config/rclone/*', '.plaid-cli/*',
             '.plaid-cli/data', '.plaidrc'
         ]

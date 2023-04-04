@@ -1,0 +1,369 @@
+{"_type": "ptag", "name": "JSON_OUTPUT_VERSION", "path": "0.0", "pattern": "in development"}
+{"_type": "ptag", "name": "TAG_FILE_SORTED", "path": "1", "pattern": "0=unsorted, 1=sorted, 2=foldcase"}
+{"_type": "ptag", "name": "TAG_OUTPUT_EXCMD", "path": "mixed", "pattern": "number, pattern, mixed, or combineV2"}
+{"_type": "ptag", "name": "TAG_OUTPUT_FILESEP", "path": "slash", "pattern": "slash or backslash"}
+{"_type": "ptag", "name": "TAG_PATTERN_LENGTH_LIMIT", "path": "96", "pattern": "0 for no limit"}
+{"_type": "ptag", "name": "TAG_PROC_CWD", "path": "/storage/emulated/0/projects/pybackup/", "pattern": ""}
+{"_type": "ptag", "name": "TAG_PROGRAM_AUTHOR", "path": "Universal Ctags Team", "pattern": ""}
+{"_type": "ptag", "name": "TAG_PROGRAM_NAME", "path": "Universal Ctags", "pattern": "Derived from Exuberant Ctags"}
+{"_type": "ptag", "name": "TAG_PROGRAM_URL", "path": "https://ctags.io/", "pattern": "official site"}
+{"_type": "ptag", "name": "TAG_PROGRAM_VERSION", "path": "5.9.0", "pattern": ""}
+{"_type": "tag", "name": "ACCESS", "path": "inotify_simple.py", "pattern": "/^    ACCESS = 0x00000001  #: File was accessed$/", "kind": "variable", "scope": "flags", "scopeKind": "class"}
+{"_type": "tag", "name": "ALL_EVENTS", "path": "inotify_simple.py", "pattern": "/^    ALL_EVENTS = (flags.ACCESS | flags.MODIFY | flags.ATTRIB$/", "kind": "variable", "scope": "masks", "scopeKind": "class"}
+{"_type": "tag", "name": "ATTRIB", "path": "inotify_simple.py", "pattern": "/^    ATTRIB = 0x00000004  #: Metadata changed$/", "kind": "variable", "scope": "flags", "scopeKind": "class"}
+{"_type": "tag", "name": "BVar", "path": "csrestore.py", "pattern": "/^class BVar():$/", "kind": "class"}
+{"_type": "tag", "name": "BVars", "path": "cscopy.py", "pattern": "/^class BVars():$/", "kind": "class"}
+{"_type": "tag", "name": "CLOSE", "path": "inotify_simple.py", "pattern": "/^    CLOSE = flags.CLOSE_WRITE | flags.CLOSE_NOWRITE$/", "kind": "variable", "scope": "masks", "scopeKind": "class"}
+{"_type": "tag", "name": "CLOSE_NOWRITE", "path": "inotify_simple.py", "pattern": "/^    CLOSE_NOWRITE = 0x00000010$/", "kind": "variable", "scope": "flags", "scopeKind": "class"}
+{"_type": "tag", "name": "CLOSE_WRITE", "path": "inotify_simple.py", "pattern": "/^    CLOSE_WRITE = 0x00000008$/", "kind": "variable", "scope": "flags", "scopeKind": "class"}
+{"_type": "tag", "name": "CREATE", "path": "inotify_simple.py", "pattern": "/^    CREATE = 0x00000100  #: Subfile was created$/", "kind": "variable", "scope": "flags", "scopeKind": "class"}
+{"_type": "tag", "name": "CSCopy", "path": "cscopy.py", "pattern": "/^class CSCopy(OpBase):$/", "kind": "class"}
+{"_type": "tag", "name": "CSRestore", "path": "csrestore.py", "pattern": "/^class CSRestore(OpBase):$/", "kind": "class"}
+{"_type": "tag", "name": "DE", "path": "dirlist.py", "pattern": "/^class DE():$/", "kind": "class"}
+{"_type": "tag", "name": "DELETE", "path": "inotify_simple.py", "pattern": "/^    DELETE = 0x00000200  #: Subfile was deleted$/", "kind": "variable", "scope": "flags", "scopeKind": "class"}
+{"_type": "tag", "name": "DELETE_SELF", "path": "inotify_simple.py", "pattern": "/^    DELETE_SELF = 0x00000400  #: Self was deleted$/", "kind": "variable", "scope": "flags", "scopeKind": "class"}
+{"_type": "tag", "name": "DONT_FOLLOW", "path": "inotify_simple.py", "pattern": "/^    DONT_FOLLOW = 0x02000000$/", "kind": "variable", "scope": "flags", "scopeKind": "class"}
+{"_type": "tag", "name": "EXCL_UNLINK", "path": "inotify_simple.py", "pattern": "/^    EXCL_UNLINK = 0x04000000$/", "kind": "variable", "scope": "flags", "scopeKind": "class"}
+{"_type": "tag", "name": "Edge", "path": "edge.py", "pattern": "/^class Edge():$/", "kind": "class"}
+{"_type": "tag", "name": "Event", "path": "inotify_simple.py", "pattern": "/^Event = collections.namedtuple('Event', ['wd', 'mask', 'cookie', 'name'])$/", "kind": "variable"}
+{"_type": "tag", "name": "FileDiff", "path": "localcopy.py", "pattern": "/^class FileDiff():$/", "kind": "class"}
+{"_type": "tag", "name": "GitOps", "path": "gitops.py", "pattern": "/^class GitOps(OpBase):$/", "kind": "class"}
+{"_type": "tag", "name": "IGNORED", "path": "inotify_simple.py", "pattern": "/^    IGNORED = 0x00008000  #: File was ignored$/", "kind": "variable", "scope": "flags", "scopeKind": "class"}
+{"_type": "tag", "name": "INotify", "path": "inotify_simple.py", "pattern": "/^class INotify():$/", "kind": "class"}
+{"_type": "tag", "name": "ISDIR", "path": "inotify_simple.py", "pattern": "/^    ISDIR = 0x40000000$/", "kind": "variable", "scope": "flags", "scopeKind": "class"}
+{"_type": "tag", "name": "LDhd", "path": "config_vars.py", "pattern": "/^LDhd = {}$/", "kind": "variable"}
+{"_type": "tag", "name": "LDlls", "path": "config_vars.py", "pattern": "/^LDlls = {}$/", "kind": "variable"}
+{"_type": "tag", "name": "LDlls_changed", "path": "config_vars.py", "pattern": "/^LDlls_changed = False$/", "kind": "variable"}
+{"_type": "tag", "name": "LDlls_xt", "path": "config_vars.py", "pattern": "/^LDlls_xt = {}$/", "kind": "variable"}
+{"_type": "tag", "name": "LocalCopy", "path": "localcopy.py", "pattern": "/^class LocalCopy(OpBase):$/", "kind": "class"}
+{"_type": "tag", "name": "MASK_ADD", "path": "inotify_simple.py", "pattern": "/^    MASK_ADD = 0x20000000$/", "kind": "variable", "scope": "flags", "scopeKind": "class"}
+{"_type": "tag", "name": "MODIFY", "path": "inotify_simple.py", "pattern": "/^    MODIFY = 0x00000002  #: File was modified$/", "kind": "variable", "scope": "flags", "scopeKind": "class"}
+{"_type": "tag", "name": "MOVE", "path": "inotify_simple.py", "pattern": "/^    MOVE = flags.MOVED_FROM | flags.MOVED_TO$/", "kind": "variable", "scope": "masks", "scopeKind": "class"}
+{"_type": "tag", "name": "MOVED_FROM", "path": "inotify_simple.py", "pattern": "/^    MOVED_FROM = 0x00000040$/", "kind": "variable", "scope": "flags", "scopeKind": "class"}
+{"_type": "tag", "name": "MOVED_TO", "path": "inotify_simple.py", "pattern": "/^    MOVED_TO = 0x00000080  #: File was moved to Y$/", "kind": "variable", "scope": "flags", "scopeKind": "class"}
+{"_type": "tag", "name": "MOVE_SELF", "path": "inotify_simple.py", "pattern": "/^    MOVE_SELF = 0x00000800  #: Self was moved$/", "kind": "variable", "scope": "flags", "scopeKind": "class"}
+{"_type": "tag", "name": "Mkzip", "path": "mkzip.py", "pattern": "/^class Mkzip(OpBase):$/", "kind": "class"}
+{"_type": "tag", "name": "ONESHOT", "path": "inotify_simple.py", "pattern": "/^    ONESHOT = 0x80000000  #: only send event once$/", "kind": "variable", "scope": "flags", "scopeKind": "class"}
+{"_type": "tag", "name": "ONLYDIR", "path": "inotify_simple.py", "pattern": "/^    ONLYDIR = 0x01000000$/", "kind": "variable", "scope": "flags", "scopeKind": "class"}
+{"_type": "tag", "name": "OPEN", "path": "inotify_simple.py", "pattern": "/^    OPEN = 0x00000020  #: File was opened$/", "kind": "variable", "scope": "flags", "scopeKind": "class"}
+{"_type": "tag", "name": "OpBase", "path": "opbase.py", "pattern": "/^class OpBase():$/", "kind": "class"}
+{"_type": "tag", "name": "OpBaseEncoder", "path": "opbase.py", "pattern": "/^class OpBaseEncoder(json.JSONEncoder):$/", "kind": "class"}
+{"_type": "tag", "name": "Q_OVERFLOW", "path": "inotify_simple.py", "pattern": "/^    Q_OVERFLOW = 0x00004000$/", "kind": "variable", "scope": "flags", "scopeKind": "class"}
+{"_type": "tag", "name": "RDhd", "path": "config_vars.py", "pattern": "/^RDhd = {}$/", "kind": "variable"}
+{"_type": "tag", "name": "RDlls", "path": "config_vars.py", "pattern": "/^RDlls = {}$/", "kind": "variable"}
+{"_type": "tag", "name": "RDlls_changed", "path": "config_vars.py", "pattern": "/^RDlls_changed = False$/", "kind": "variable"}
+{"_type": "tag", "name": "RDlls_xt", "path": "config_vars.py", "pattern": "/^RDlls_xt = {}$/", "kind": "variable"}
+{"_type": "tag", "name": "SFc", "path": "cscopy.py", "pattern": "/^class SFc():$/", "kind": "class"}
+{"_type": "tag", "name": "SFc", "path": "localcopy.py", "pattern": "/^class SFc():$/", "kind": "class"}
+{"_type": "tag", "name": "UNMOUNT", "path": "inotify_simple.py", "pattern": "/^    UNMOUNT = 0x00002000$/", "kind": "variable", "scope": "flags", "scopeKind": "class"}
+{"_type": "tag", "name": "_EVENT_STRUCT_FORMAT", "path": "inotify_simple.py", "pattern": "/^_EVENT_STRUCT_FORMAT = 'iIII'$/", "kind": "variable"}
+{"_type": "tag", "name": "_EVENT_STRUCT_SIZE", "path": "inotify_simple.py", "pattern": "/^_EVENT_STRUCT_SIZE = struct.calcsize(_EVENT_STRUCT_FORMAT)$/", "kind": "variable"}
+{"_type": "tag", "name": "__all__", "path": "inotify_simple.py", "pattern": "/^__all__ = ['flags', 'masks', 'parse_events', 'INotify', 'Event']$/", "kind": "variable"}
+{"_type": "tag", "name": "__call__", "path": "cscopy.py", "pattern": "/^    def __call__(self):$/", "kind": "member", "scope": "CSCopy", "scopeKind": "class"}
+{"_type": "tag", "name": "__call__", "path": "csrestore.py", "pattern": "/^    def __call__(self):$/", "kind": "member", "scope": "CSRestore", "scopeKind": "class"}
+{"_type": "tag", "name": "__call__", "path": "gitops.py", "pattern": "/^    def __call__(self):$/", "kind": "member", "scope": "GitOps", "scopeKind": "class"}
+{"_type": "tag", "name": "__call__", "path": "localcopy.py", "pattern": "/^    def __call__(self):$/", "kind": "member", "scope": "LocalCopy", "scopeKind": "class"}
+{"_type": "tag", "name": "__call__", "path": "mkzip.py", "pattern": "/^    def __call__(self):$/", "kind": "member", "scope": "Mkzip", "scopeKind": "class"}
+{"_type": "tag", "name": "__enter__", "path": "inotify_simple.py", "pattern": "/^    def __enter__(self):$/", "kind": "member", "scope": "INotify", "scopeKind": "class"}
+{"_type": "tag", "name": "__eq__", "path": "dirlist.py", "pattern": "/^    def __eq__(self, other):$/", "kind": "member", "scope": "DE", "scopeKind": "class"}
+{"_type": "tag", "name": "__eq__", "path": "edge.py", "pattern": "/^    def __eq__(self, other):$/", "kind": "member", "scope": "Edge", "scopeKind": "class"}
+{"_type": "tag", "name": "__exit__", "path": "inotify_simple.py", "pattern": "/^    def __exit__(self, exc_type, exc_value, traceback):$/", "kind": "member", "scope": "INotify", "scopeKind": "class"}
+{"_type": "tag", "name": "__hash__", "path": "dirlist.py", "pattern": "/^    def __hash__(self):$/", "kind": "member", "scope": "DE", "scopeKind": "class"}
+{"_type": "tag", "name": "__hash__", "path": "edge.py", "pattern": "/^    def __hash__(self):$/", "kind": "member", "scope": "Edge", "scopeKind": "class"}
+{"_type": "tag", "name": "__init__", "path": "cscopy.py", "pattern": "/^    def __init__(self):$/", "kind": "member", "scope": "SFc", "scopeKind": "class"}
+{"_type": "tag", "name": "__init__", "path": "cscopy.py", "pattern": "/^    def __init__(self, di, si, sfc):$/", "kind": "member", "scope": "BVars", "scopeKind": "class"}
+{"_type": "tag", "name": "__init__", "path": "cscopy.py", "pattern": "/^    def __init__(self, npl1, npl2, opts={}):$/", "kind": "member", "scope": "CSCopy", "scopeKind": "class"}
+{"_type": "tag", "name": "__init__", "path": "csrestore.py", "pattern": "/^    def __init__(self, di, si, tcfc):$/", "kind": "member", "scope": "BVar", "scopeKind": "class"}
+{"_type": "tag", "name": "__init__", "path": "csrestore.py", "pattern": "/^    def __init__(self, npl1, npl2, opts={}):$/", "kind": "member", "scope": "CSRestore", "scopeKind": "class"}
+{"_type": "tag", "name": "__init__", "path": "edge.py", "pattern": "/^    def __init__(self, di, si):$/", "kind": "member", "scope": "Edge", "scopeKind": "class"}
+{"_type": "tag", "name": "__init__", "path": "gitops.py", "pattern": "/^    def __init__(self, npl1, npl2, opts={}):$/", "kind": "member", "scope": "GitOps", "scopeKind": "class"}
+{"_type": "tag", "name": "__init__", "path": "inotify_simple.py", "pattern": "/^    def __init__(self):$/", "kind": "member", "scope": "INotify", "scopeKind": "class"}
+{"_type": "tag", "name": "__init__", "path": "localcopy.py", "pattern": "/^    def __init__(self, npl1, npl2, opts={}):$/", "kind": "member", "scope": "LocalCopy", "scopeKind": "class"}
+{"_type": "tag", "name": "__init__", "path": "localcopy.py", "pattern": "/^    def __init__(self, sc=0, fc=0):$/", "kind": "member", "scope": "SFc", "scopeKind": "class"}
+{"_type": "tag", "name": "__init__", "path": "localcopy.py", "pattern": "/^    def __init__(self, sf, df):$/", "kind": "member", "scope": "FileDiff", "scopeKind": "class"}
+{"_type": "tag", "name": "__init__", "path": "mkzip.py", "pattern": "/^    def __init__(self, npl1, npl2, opts={}):$/", "kind": "member", "scope": "Mkzip", "scopeKind": "class"}
+{"_type": "tag", "name": "__init__", "path": "opbase.py", "pattern": "/^    def __init__(self, npl1, npl2, opts={}):$/", "kind": "member", "scope": "OpBase", "scopeKind": "class"}
+{"_type": "tag", "name": "__lt__", "path": "dirlist.py", "pattern": "/^    def __lt__(self, other):$/", "kind": "member", "scope": "DE", "scopeKind": "class"}
+{"_type": "tag", "name": "__repr__", "path": "edge.py", "pattern": "/^    def __repr__(self):$/", "kind": "member", "scope": "Edge", "scopeKind": "class"}
+{"_type": "tag", "name": "_hc", "path": "dirlist.py", "pattern": "/^    _hc: int = field(default=None)$/", "typeref": "typename:int", "kind": "variable", "scope": "DE", "scopeKind": "class"}
+{"_type": "tag", "name": "_libc", "path": "inotify_simple.py", "pattern": "/^_libc = ctypes.cdll.LoadLibrary('libinotifytools.so')$/", "kind": "variable"}
+{"_type": "tag", "name": "_libc_call", "path": "inotify_simple.py", "pattern": "/^def _libc_call(function, *args):$/", "kind": "function"}
+{"_type": "tag", "name": "_pass", "path": "opexec.py", "pattern": "/^_pass = 1$/", "kind": "variable"}
+{"_type": "tag", "name": "a_netup", "path": "netup.py", "pattern": "/^async def a_netup():$/", "kind": "function"}
+{"_type": "tag", "name": "a_netup2", "path": "netup.py", "pattern": "/^async def a_netup2():$/", "kind": "function"}
+{"_type": "tag", "name": "a_run", "path": "asyncrun.py", "pattern": "/^async def a_run(shell_command, cwd=None):$/", "kind": "function"}
+{"_type": "tag", "name": "a_run1", "path": "asyncrun.py", "pattern": "/^async def a_run1(shell_command, cwd=None):$/", "kind": "function"}
+{"_type": "tag", "name": "a_run2", "path": "asyncrun.py", "pattern": "/^async def a_run2(shell_command, cwd=None):$/", "kind": "function"}
+{"_type": "tag", "name": "a_run3", "path": "asyncrun.py", "pattern": "/^async def a_run3(shell_command, cwd=None):$/", "kind": "function"}
+{"_type": "tag", "name": "addArc", "path": "edge.py", "pattern": "/^def addArc(op1):$/", "kind": "function"}
+{"_type": "tag", "name": "addDep", "path": "edge.py", "pattern": "/^def addDep(j, i):$/", "kind": "function"}
+{"_type": "tag", "name": "addPre", "path": "config_funcs.py", "pattern": "/^def addPre(tg, frag):$/", "kind": "function"}
+{"_type": "tag", "name": "addSrcDir", "path": "config_funcs.py", "pattern": "/^def addSrcDir(tg, pth, iscode=False):$/", "kind": "function"}
+{"_type": "tag", "name": "addTgtDir", "path": "config_funcs.py", "pattern": "/^def addTgtDir(tg, pth):$/", "kind": "function"}
+{"_type": "tag", "name": "add_watch", "path": "inotify_simple.py", "pattern": "/^    def add_watch(self, path, mask):$/", "kind": "member", "scope": "INotify", "scopeKind": "class"}
+{"_type": "tag", "name": "ar", "path": "cscopy.py", "pattern": "/^    import asyncrun as ar$/", "file": true, "kind": "namespace", "scope": "fcopy", "scopeKind": "function", "nameref": "module:asyncrun"}
+{"_type": "tag", "name": "ar", "path": "cscopy.py", "pattern": "/^    import asyncrun as ar$/", "file": true, "kind": "namespace", "scope": "fdel", "scopeKind": "function", "nameref": "module:asyncrun"}
+{"_type": "tag", "name": "ar", "path": "cscopy.py", "pattern": "/^    import asyncrun as ar$/", "file": true, "kind": "namespace", "scope": "fsync", "scopeKind": "function", "nameref": "module:asyncrun"}
+{"_type": "tag", "name": "ar", "path": "csrestore.py", "pattern": "/^import asyncrun as ar$/", "kind": "namespace", "nameref": "module:asyncrun"}
+{"_type": "tag", "name": "ar", "path": "dirlist.py", "pattern": "/^    import asyncrun as ar$/", "file": true, "kind": "namespace", "scope": "getdll0", "scopeKind": "function", "nameref": "module:asyncrun"}
+{"_type": "tag", "name": "ar", "path": "dirlist.py", "pattern": "/^    import asyncrun as ar$/", "file": true, "kind": "namespace", "scope": "getdll1", "scopeKind": "function", "nameref": "module:asyncrun"}
+{"_type": "tag", "name": "ar", "path": "dirlist.py", "pattern": "/^    import asyncrun as ar$/", "file": true, "kind": "namespace", "scope": "getdll2", "scopeKind": "function", "nameref": "module:asyncrun"}
+{"_type": "tag", "name": "ar", "path": "gitops.py", "pattern": "/^        import asyncrun as ar$/", "file": true, "kind": "namespace", "scope": "GitOps.__call__", "scopeKind": "member", "nameref": "module:asyncrun"}
+{"_type": "tag", "name": "ar", "path": "gitops.py", "pattern": "/^    import asyncrun as ar$/", "file": true, "kind": "namespace", "scope": "gitck1", "scopeKind": "function", "nameref": "module:asyncrun"}
+{"_type": "tag", "name": "ar", "path": "gitops.py", "pattern": "/^    import asyncrun as ar$/", "file": true, "kind": "namespace", "scope": "gitck2", "scopeKind": "function", "nameref": "module:asyncrun"}
+{"_type": "tag", "name": "ar", "path": "gitops.py", "pattern": "/^    import asyncrun as ar$/", "file": true, "kind": "namespace", "scope": "gitremoteck", "scopeKind": "function", "nameref": "module:asyncrun"}
+{"_type": "tag", "name": "bhu", "path": "bhash.py", "pattern": "/^def bhu(ho, it):$/", "kind": "function"}
+{"_type": "tag", "name": "blakeHash", "path": "bhash.py", "pattern": "/^def blakeHash(it):$/", "kind": "function"}
+{"_type": "tag", "name": "cb1", "path": "pybackup.py", "pattern": "/^async def cb1():$/", "kind": "function"}
+{"_type": "tag", "name": "cb2", "path": "pybackup.py", "pattern": "/^def cb2():$/", "kind": "function"}
+{"_type": "tag", "name": "cdir", "path": "config_funcs.py", "pattern": "/^def cdir(s):$/", "kind": "function"}
+{"_type": "tag", "name": "cel", "path": "pybackup.py", "pattern": "/^cel = None$/", "kind": "variable"}
+{"_type": "tag", "name": "changed_ops", "path": "status.py", "pattern": "/^def changed_ops(T=None) -> list[OpBase]:$/", "typeref": "typename:list[OpBase]", "kind": "function"}
+{"_type": "tag", "name": "chk_ct", "path": "edge.py", "pattern": "/^    def chk_ct(self):$/", "kind": "member", "scope": "Edge", "scopeKind": "class"}
+{"_type": "tag", "name": "chkdiff", "path": "localcopy.py", "pattern": "/^    def chkdiff(self):$/", "kind": "member", "scope": "FileDiff", "scopeKind": "class"}
+{"_type": "tag", "name": "clean", "path": "opexec.py", "pattern": "/^def clean():$/", "kind": "function"}
+{"_type": "tag", "name": "close", "path": "inotify_simple.py", "pattern": "/^    def close(self):$/", "kind": "member", "scope": "INotify", "scopeKind": "class"}
+{"_type": "tag", "name": "clr", "path": "edge.py", "pattern": "/^    def clr(self):$/", "kind": "member", "scope": "Edge", "scopeKind": "class"}
+{"_type": "tag", "name": "cmd2", "path": "netup.py", "pattern": "/^cmd2 = \"termux-wifi-connectioninfo | jq -r '.ip'\"$/", "kind": "variable"}
+{"_type": "tag", "name": "codes", "path": "config_vars.py", "pattern": "/^codes:set[str] = set()$/", "typeref": "typename:set[str]", "kind": "variable"}
+{"_type": "tag", "name": "copy2", "path": "localcopy.py", "pattern": "/^def copy2(f1, f2):$/", "kind": "function"}
+{"_type": "tag", "name": "ct1", "path": "pybackup.py", "pattern": "/^ct1 = None$/", "kind": "variable"}
+{"_type": "tag", "name": "default", "path": "opbase.py", "pattern": "/^    def default(self, obj):$/", "kind": "member", "scope": "OpBaseEncoder", "scopeKind": "class"}
+{"_type": "tag", "name": "df", "path": "localcopy.py", "pattern": "/^    df = None$/", "kind": "variable", "scope": "FileDiff", "scopeKind": "class"}
+{"_type": "tag", "name": "dl", "path": "pybackup.py", "pattern": "/^    import dirlist as dl$/", "file": true, "kind": "namespace", "scope": "main", "scopeKind": "function", "nameref": "module:dirlist"}
+{"_type": "tag", "name": "dllcmp", "path": "dirlist.py", "pattern": "/^def dllcmp(do, dn):$/", "kind": "function"}
+{"_type": "tag", "name": "do_copying", "path": "cscopy.py", "pattern": "/^    def do_copying(self):$/", "kind": "member", "scope": "BVars", "scopeKind": "class"}
+{"_type": "tag", "name": "do_deletions", "path": "cscopy.py", "pattern": "/^    def do_deletions(self):$/", "kind": "member", "scope": "BVars", "scopeKind": "class"}
+{"_type": "tag", "name": "eDep", "path": "config_vars.py", "pattern": "/^eDep:set[Edge] = set()$/", "typeref": "typename:set[Edge]", "kind": "variable"}
+{"_type": "tag", "name": "edgepf", "path": "config_vars.py", "pattern": "/^edgepf:str = None$/", "typeref": "typename:str", "kind": "variable"}
+{"_type": "tag", "name": "edges", "path": "config_vars.py", "pattern": "/^edges:dict[(str, str),Edge] = {}$/", "typeref": "typename:dict[(str, str),Edge]", "kind": "variable"}
+{"_type": "tag", "name": "es", "path": "dirlist.py", "pattern": "/^        def es(it):$/", "file": true, "kind": "function", "scope": "getdll0", "scopeKind": "function"}
+{"_type": "tag", "name": "es", "path": "dirlist.py", "pattern": "/^        def es(it):$/", "file": true, "kind": "function", "scope": "getdll1", "scopeKind": "function"}
+{"_type": "tag", "name": "es", "path": "dirlist.py", "pattern": "/^        def es(it):$/", "file": true, "kind": "function", "scope": "getdll2", "scopeKind": "function"}
+{"_type": "tag", "name": "es", "path": "dirlist.py", "pattern": "/^    def es(it):$/", "file": true, "kind": "function", "scope": "getdll3", "scopeKind": "function"}
+{"_type": "tag", "name": "es", "path": "mkzip.py", "pattern": "/^    def es(it):$/", "file": true, "kind": "function", "scope": "maxmt", "scopeKind": "function"}
+{"_type": "tag", "name": "f1", "path": "config.py", "pattern": "/^def f1():$/", "kind": "function"}
+{"_type": "tag", "name": "fc", "path": "cscopy.py", "pattern": "/^    fc = 0$/", "kind": "variable", "scope": "SFc", "scopeKind": "class"}
+{"_type": "tag", "name": "fcopy", "path": "cscopy.py", "pattern": "/^def fcopy(sd, td, sfc):$/", "kind": "function"}
+{"_type": "tag", "name": "fdel", "path": "cscopy.py", "pattern": "/^def fdel(td, sfc):$/", "kind": "function"}
+{"_type": "tag", "name": "fe", "path": "localcopy.py", "pattern": "/^    fe = 0$/", "kind": "variable", "scope": "FileDiff", "scopeKind": "class"}
+{"_type": "tag", "name": "findEdge", "path": "edge.py", "pattern": "/^def findEdge(di, si) -> Edge:$/", "typeref": "typename:Edge", "kind": "function"}
+{"_type": "tag", "name": "finddict", "path": "fmd5h.py", "pattern": "/^def finddict(d1, fp):$/", "kind": "function"}
+{"_type": "tag", "name": "flags", "path": "inotify_simple.py", "pattern": "/^class flags(enum.IntEnum):$/", "kind": "class"}
+{"_type": "tag", "name": "fmd5f", "path": "fmd5h.py", "pattern": "/^def fmd5f(fp, sz, mt):$/", "kind": "function"}
+{"_type": "tag", "name": "fmd5hd", "path": "config_vars.py", "pattern": "/^fmd5hd = {}$/", "kind": "variable"}
+{"_type": "tag", "name": "fmd5hf", "path": "config_vars.py", "pattern": "/^fmd5hf:str = None$/", "typeref": "typename:str", "kind": "variable"}
+{"_type": "tag", "name": "from_mask", "path": "inotify_simple.py", "pattern": "/^    def from_mask(cls, mask):$/", "kind": "member", "scope": "flags", "scopeKind": "class"}
+{"_type": "tag", "name": "fsync", "path": "cscopy.py", "pattern": "/^def fsync(sd, td, sfc):$/", "kind": "function"}
+{"_type": "tag", "name": "fsync", "path": "csrestore.py", "pattern": "/^def fsync(sd, td, tcfc):$/", "kind": "function"}
+{"_type": "tag", "name": "getDL", "path": "config_funcs.py", "pattern": "/^def getDL(p):$/", "kind": "function"}
+{"_type": "tag", "name": "getDL", "path": "dirlist.py", "pattern": "/^def getDL(p):$/", "kind": "function"}
+{"_type": "tag", "name": "getdll0", "path": "dirlist.py", "pattern": "/^def getdll0():$/", "kind": "function"}
+{"_type": "tag", "name": "getdll1", "path": "dirlist.py", "pattern": "/^def getdll1(di):$/", "kind": "function"}
+{"_type": "tag", "name": "getdll2", "path": "dirlist.py", "pattern": "/^def getdll2(si):$/", "kind": "function"}
+{"_type": "tag", "name": "getdll3", "path": "dirlist.py", "pattern": "/^def getdll3(si):$/", "kind": "function"}
+{"_type": "tag", "name": "getfl", "path": "dirlist.py", "pattern": "/^def getfl(p):$/", "kind": "function"}
+{"_type": "tag", "name": "getfl", "path": "mkzip.py", "pattern": "/^def getfl(p):$/", "kind": "function"}
+{"_type": "tag", "name": "getrdlls", "path": "dirlist.py", "pattern": "/^def getrdlls():$/", "kind": "function"}
+{"_type": "tag", "name": "gitck1", "path": "gitops.py", "pattern": "/^def gitck1(Si, wt):$/", "kind": "function"}
+{"_type": "tag", "name": "gitck2", "path": "gitops.py", "pattern": "/^def gitck2(Si, wt):$/", "kind": "function"}
+{"_type": "tag", "name": "gitremoteck", "path": "gitops.py", "pattern": "/^def gitremoteck(Di, wt):$/", "kind": "function"}
+{"_type": "tag", "name": "hd", "path": "localcopy.py", "pattern": "/^    hd = False$/", "kind": "variable", "scope": "FileDiff", "scopeKind": "class"}
+{"_type": "tag", "name": "hf_dh", "path": "config_vars.py", "pattern": "/^hf_dh = 0$/", "kind": "variable"}
+{"_type": "tag", "name": "hf_dirty", "path": "config_vars.py", "pattern": "/^hf_dirty = False$/", "kind": "variable"}
+{"_type": "tag", "name": "hf_dm", "path": "config_vars.py", "pattern": "/^hf_dm = 0$/", "kind": "variable"}
+{"_type": "tag", "name": "hf_ph", "path": "config_vars.py", "pattern": "/^hf_ph = 0$/", "kind": "variable"}
+{"_type": "tag", "name": "hf_pm", "path": "config_vars.py", "pattern": "/^hf_pm = 0$/", "kind": "variable"}
+{"_type": "tag", "name": "hf_sth", "path": "config_vars.py", "pattern": "/^hf_sth = 0$/", "kind": "variable"}
+{"_type": "tag", "name": "hf_stm", "path": "config_vars.py", "pattern": "/^hf_stm = 0$/", "kind": "variable"}
+{"_type": "tag", "name": "idel", "path": "asyncrun.py", "pattern": "/^idel = 1$/", "kind": "variable"}
+{"_type": "tag", "name": "in1", "path": "pybackup.py", "pattern": "/^in1 = None$/", "kind": "variable"}
+{"_type": "tag", "name": "incp", "path": "opexec.py", "pattern": "/^def incp():$/", "kind": "function"}
+{"_type": "tag", "name": "init2", "path": "cscopy.py", "pattern": "/^    def init2(self):$/", "kind": "member", "scope": "BVars", "scopeKind": "class"}
+{"_type": "tag", "name": "init2", "path": "csrestore.py", "pattern": "/^    def init2(self):$/", "kind": "member", "scope": "BVar", "scopeKind": "class"}
+{"_type": "tag", "name": "ischanged", "path": "cscopy.py", "pattern": "/^    def ischanged(self, e:Edge):$/", "kind": "member", "scope": "CSCopy", "scopeKind": "class"}
+{"_type": "tag", "name": "ischanged", "path": "csrestore.py", "pattern": "/^    def ischanged(self, e:Edge):$/", "kind": "member", "scope": "CSRestore", "scopeKind": "class"}
+{"_type": "tag", "name": "ischanged", "path": "gitops.py", "pattern": "/^    def ischanged(self, e:Edge):$/", "kind": "member", "scope": "GitOps", "scopeKind": "class"}
+{"_type": "tag", "name": "ischanged", "path": "localcopy.py", "pattern": "/^    def ischanged(self, e:Edge):$/", "kind": "member", "scope": "LocalCopy", "scopeKind": "class"}
+{"_type": "tag", "name": "ischanged", "path": "mkzip.py", "pattern": "/^    def ischanged(self, e:Edge):$/", "kind": "member", "scope": "Mkzip", "scopeKind": "class"}
+{"_type": "tag", "name": "ischanged", "path": "opbase.py", "pattern": "/^    def ischanged(self, e:Edge):$/", "kind": "member", "scope": "OpBase", "scopeKind": "class"}
+{"_type": "tag", "name": "istgt", "path": "opexec.py", "pattern": "/^def istgt(T, dep2=None):$/", "kind": "function"}
+{"_type": "tag", "name": "iu", "path": "bhash.py", "pattern": "/^    def iu(it):$/", "file": true, "kind": "function", "scope": "bhu", "scopeKind": "function"}
+{"_type": "tag", "name": "lDlld", "path": "dirlist.py", "pattern": "/^def lDlld(si):$/", "kind": "function"}
+{"_type": "tag", "name": "lckers", "path": "config_vars.py", "pattern": "/^lckers = {}$/", "kind": "variable"}
+{"_type": "tag", "name": "ldh_d", "path": "statushash.py", "pattern": "/^def ldh_d(si):$/", "kind": "function"}
+{"_type": "tag", "name": "ldh_f", "path": "statushash.py", "pattern": "/^def ldh_f(si, dh=None):$/", "kind": "function"}
+{"_type": "tag", "name": "ldhck", "path": "statushash.py", "pattern": "/^def ldhck(Si):$/", "kind": "function"}
+{"_type": "tag", "name": "ldhpf", "path": "config_vars.py", "pattern": "/^ldhpf:str = None$/", "typeref": "typename:str", "kind": "variable"}
+{"_type": "tag", "name": "ldhset", "path": "statushash.py", "pattern": "/^def ldhset(Si, Dh=None):$/", "kind": "function"}
+{"_type": "tag", "name": "ldllsf", "path": "config_vars.py", "pattern": "/^ldllsf:str = None$/", "typeref": "typename:str", "kind": "variable"}
+{"_type": "tag", "name": "load_all", "path": "ldsv.py", "pattern": "/^def load_all():$/", "kind": "function"}
+{"_type": "tag", "name": "loadedges", "path": "ldsv.py", "pattern": "/^def loadedges():$/", "kind": "function"}
+{"_type": "tag", "name": "loadfmd5h", "path": "ldsv.py", "pattern": "/^def loadfmd5h():$/", "kind": "function"}
+{"_type": "tag", "name": "loadldh", "path": "ldsv.py", "pattern": "/^def loadldh():$/", "kind": "function"}
+{"_type": "tag", "name": "loadldlls", "path": "ldsv.py", "pattern": "/^def loadldlls():$/", "kind": "function"}
+{"_type": "tag", "name": "loadrdh", "path": "ldsv.py", "pattern": "/^def loadrdh():$/", "kind": "function"}
+{"_type": "tag", "name": "loadrdlls", "path": "ldsv.py", "pattern": "/^def loadrdlls():$/", "kind": "function"}
+{"_type": "tag", "name": "lrtset", "path": "edge.py", "pattern": "/^def lrtset(di, si):$/", "kind": "function"}
+{"_type": "tag", "name": "main", "path": "pybackup.py", "pattern": "/^def main():$/", "kind": "function"}
+{"_type": "tag", "name": "masks", "path": "inotify_simple.py", "pattern": "/^class masks(enum.IntEnum):$/", "kind": "class"}
+{"_type": "tag", "name": "maxmt", "path": "mkzip.py", "pattern": "/^def maxmt(sd):$/", "kind": "function"}
+{"_type": "tag", "name": "md5sumf", "path": "fmd5h.py", "pattern": "/^def md5sumf(Fn):$/", "kind": "function"}
+{"_type": "tag", "name": "mt", "path": "localcopy.py", "pattern": "/^    mt = 0$/", "kind": "variable", "scope": "FileDiff", "scopeKind": "class"}
+{"_type": "tag", "name": "netup", "path": "netup.py", "pattern": "/^netup = sync.function(a_netup)$/", "kind": "variable"}
+{"_type": "tag", "name": "nodeps", "path": "opexec.py", "pattern": "/^def nodeps(T):$/", "kind": "function"}
+{"_type": "tag", "name": "npl1", "path": "config.py", "pattern": "/^    npl1 = ('bitbucket', 'git')$/", "kind": "variable"}
+{"_type": "tag", "name": "npl1", "path": "config.py", "pattern": "/^    npl1 = ('gd_' + si, si)$/", "kind": "variable"}
+{"_type": "tag", "name": "npl1", "path": "config.py", "pattern": "/^    npl1 = ('git', 'git_index')$/", "kind": "variable"}
+{"_type": "tag", "name": "npl1", "path": "config.py", "pattern": "/^    npl1 = ('github', 'git')$/", "kind": "variable"}
+{"_type": "tag", "name": "npl1", "path": "config.py", "pattern": "/^    npl1 = ('zips', si)$/", "kind": "variable"}
+{"_type": "tag", "name": "npl1", "path": "config.py", "pattern": "/^npl1 = ('backups', 'blogds')$/", "kind": "variable"}
+{"_type": "tag", "name": "npl1", "path": "config.py", "pattern": "/^npl1 = ('bash', 'bin')$/", "kind": "variable"}
+{"_type": "tag", "name": "npl1", "path": "config.py", "pattern": "/^npl1 = ('bash', 'home')$/", "kind": "variable"}
+{"_type": "tag", "name": "npl1", "path": "config.py", "pattern": "/^npl1 = ('bin', 'bash')$/", "kind": "variable"}
+{"_type": "tag", "name": "npl1", "path": "config.py", "pattern": "/^npl1 = ('blog', 'blogds')$/", "kind": "variable"}
+{"_type": "tag", "name": "npl1", "path": "config.py", "pattern": "/^npl1 = ('blogds', 'blog')$/", "kind": "variable"}
+{"_type": "tag", "name": "npl1", "path": "config.py", "pattern": "/^npl1 = ('home', 'bash')$/", "kind": "variable"}
+{"_type": "tag", "name": "npl1", "path": "config.py", "pattern": "/^npl1 = ('plaid-node', 'blogds')$/", "kind": "variable"}
+{"_type": "tag", "name": "npl1", "path": "config.py", "pattern": "/^npl1 = ('sh', 'bash')$/", "kind": "variable"}
+{"_type": "tag", "name": "nts", "path": "opexec.py", "pattern": "/^def nts():$/", "kind": "function"}
+{"_type": "tag", "name": "onestatus", "path": "status.py", "pattern": "/^def onestatus(Si):$/", "kind": "function"}
+{"_type": "tag", "name": "op1", "path": "config.py", "pattern": "/^    op1 = CSCopy(npl1, npl1, {'delete': False})$/", "kind": "variable"}
+{"_type": "tag", "name": "op1", "path": "config.py", "pattern": "/^    op1 = GitOps(npl1, None, {$/", "kind": "variable"}
+{"_type": "tag", "name": "op1", "path": "config.py", "pattern": "/^    op1 = GitOps(npl1, None, {'wt': v.worktree, 'add': True, 'commit': True})$/", "kind": "variable"}
+{"_type": "tag", "name": "op1", "path": "config.py", "pattern": "/^    op1 = Mkzip(npl1, npl1, {'zipfile': 'projects-git.zip'})$/", "kind": "variable"}
+{"_type": "tag", "name": "op1", "path": "config.py", "pattern": "/^    op1 = Mkzip(npl1, npl1, {'zipfile': si + '.zip'})$/", "kind": "variable"}
+{"_type": "tag", "name": "op1", "path": "config.py", "pattern": "/^op1 = LocalCopy($/", "kind": "variable"}
+{"_type": "tag", "name": "op1", "path": "config.py", "pattern": "/^op1 = LocalCopy(npl1, npl1, {$/", "kind": "variable"}
+{"_type": "tag", "name": "op1", "path": "config.py", "pattern": "/^op1 = LocalCopy(npl1, npl1, {'files': ['*.db', 'blog.js']})$/", "kind": "variable"}
+{"_type": "tag", "name": "op1", "path": "config.py", "pattern": "/^op1 = LocalCopy(npl1, npl1, {'files': ['*.db']})$/", "kind": "variable"}
+{"_type": "tag", "name": "op1", "path": "config.py", "pattern": "/^op1 = LocalCopy(npl1, npl1, {'files': ['*.sh', '*.env'], 'exec': True})$/", "kind": "variable"}
+{"_type": "tag", "name": "op1", "path": "config.py", "pattern": "/^op1 = LocalCopy(npl1, npl1, {'files': ['blog.js']})$/", "kind": "variable"}
+{"_type": "tag", "name": "opExec", "path": "opexec.py", "pattern": "/^def opExec():$/", "kind": "function"}
+{"_type": "tag", "name": "opdep", "path": "config_vars.py", "pattern": "/^opdep:list[OpBase] = []$/", "typeref": "typename:list[OpBase]", "kind": "variable"}
+{"_type": "tag", "name": "p1", "path": "config.py", "pattern": "/^    p1 = pdir(si).relative_to(ppre('sd'))$/", "kind": "variable"}
+{"_type": "tag", "name": "parse_events", "path": "inotify_simple.py", "pattern": "/^def parse_events(data):$/", "kind": "function"}
+{"_type": "tag", "name": "paths", "path": "config_vars.py", "pattern": "/^paths:dict[str, Path] = {}$/", "typeref": "typename:dict[str, Path]", "kind": "variable"}
+{"_type": "tag", "name": "pdir", "path": "config_funcs.py", "pattern": "/^def pdir(s):$/", "kind": "function"}
+{"_type": "tag", "name": "pdirs", "path": "config_vars.py", "pattern": "/^pdirs:set[str] = set()$/", "typeref": "typename:set[str]", "kind": "variable"}
+{"_type": "tag", "name": "ppre", "path": "config_funcs.py", "pattern": "/^def ppre(s):$/", "kind": "function"}
+{"_type": "tag", "name": "pres", "path": "config_vars.py", "pattern": "/^pres:set[str] = set()$/", "typeref": "typename:set[str]", "kind": "variable"}
+{"_type": "tag", "name": "proc_nodes", "path": "opexec.py", "pattern": "/^def proc_nodes(L):$/", "kind": "function"}
+{"_type": "tag", "name": "pstats", "path": "ldsv.py", "pattern": "/^def pstats():$/", "kind": "function"}
+{"_type": "tag", "name": "rDlld", "path": "dirlist.py", "pattern": "/^def rDlld(di):$/", "kind": "function"}
+{"_type": "tag", "name": "rchk_ct", "path": "edge.py", "pattern": "/^    def rchk_ct(self):$/", "kind": "member", "scope": "Edge", "scopeKind": "class"}
+{"_type": "tag", "name": "rckers", "path": "config_vars.py", "pattern": "/^rckers = {}$/", "kind": "variable"}
+{"_type": "tag", "name": "rclr", "path": "edge.py", "pattern": "/^    def rclr(self):$/", "kind": "member", "scope": "Edge", "scopeKind": "class"}
+{"_type": "tag", "name": "rdh_d", "path": "statushash.py", "pattern": "/^def rdh_d(di):$/", "kind": "function"}
+{"_type": "tag", "name": "rdh_f", "path": "statushash.py", "pattern": "/^def rdh_f(di, dh=None):$/", "kind": "function"}
+{"_type": "tag", "name": "rdhck", "path": "statushash.py", "pattern": "/^def rdhck(Di):$/", "kind": "function"}
+{"_type": "tag", "name": "rdhpf", "path": "config_vars.py", "pattern": "/^rdhpf:str = None$/", "typeref": "typename:str", "kind": "variable"}
+{"_type": "tag", "name": "rdhset", "path": "statushash.py", "pattern": "/^def rdhset(Di, Dh=None):$/", "kind": "function"}
+{"_type": "tag", "name": "rdllsf", "path": "config_vars.py", "pattern": "/^rdllsf:str = None$/", "typeref": "typename:str", "kind": "variable"}
+{"_type": "tag", "name": "read", "path": "inotify_simple.py", "pattern": "/^    async def read(self, timeout=None, read_delay=None):$/", "kind": "member", "scope": "INotify", "scopeKind": "class"}
+{"_type": "tag", "name": "read_iter", "path": "inotify_simple.py", "pattern": "/^    def read_iter(self, read_delay=None):$/", "kind": "member", "scope": "INotify", "scopeKind": "class"}
+{"_type": "tag", "name": "readso", "path": "asyncrun.py", "pattern": "/^    async def readso():$/", "file": true, "kind": "function", "scope": "a_run3", "scopeKind": "function"}
+{"_type": "tag", "name": "rm_watch", "path": "inotify_simple.py", "pattern": "/^    def rm_watch(self, wd):$/", "kind": "member", "scope": "INotify", "scopeKind": "class"}
+{"_type": "tag", "name": "ronestatus", "path": "status.py", "pattern": "/^def ronestatus(Di):$/", "kind": "function"}
+{"_type": "tag", "name": "round2ms", "path": "config_funcs.py", "pattern": "/^def round2ms(ns):$/", "kind": "function"}
+{"_type": "tag", "name": "rrtset", "path": "edge.py", "pattern": "/^    def rrtset(self, mt=None):$/", "kind": "member", "scope": "Edge", "scopeKind": "class"}
+{"_type": "tag", "name": "rstatuses", "path": "status.py", "pattern": "/^def rstatuses():$/", "kind": "function"}
+{"_type": "tag", "name": "rstsupdate", "path": "status.py", "pattern": "/^def rstsupdate(Di, Dh):$/", "kind": "function"}
+{"_type": "tag", "name": "rt2", "path": "pybackup.py", "pattern": "/^def rt2():$/", "kind": "function"}
+{"_type": "tag", "name": "rto1", "path": "dirlist.py", "pattern": "/^rto1 = 0  # 60*60*.5$/", "kind": "variable"}
+{"_type": "tag", "name": "rto2", "path": "dirlist.py", "pattern": "/^rto2 = 0  # 60*1$/", "kind": "variable"}
+{"_type": "tag", "name": "rtset", "path": "edge.py", "pattern": "/^    def rtset(self, mt=None):$/", "kind": "member", "scope": "Edge", "scopeKind": "class"}
+{"_type": "tag", "name": "run", "path": "asyncrun.py", "pattern": "/^run = sync.function(a_run)$/", "kind": "variable"}
+{"_type": "tag", "name": "run1", "path": "asyncrun.py", "pattern": "/^run1 = sync.function(a_run1)$/", "kind": "variable"}
+{"_type": "tag", "name": "run2", "path": "asyncrun.py", "pattern": "/^run2 = sync.function(a_run2)$/", "kind": "variable"}
+{"_type": "tag", "name": "run3", "path": "asyncrun.py", "pattern": "/^run3 = sync.function(a_run3)$/", "kind": "variable"}
+{"_type": "tag", "name": "rupdatets", "path": "status.py", "pattern": "/^def rupdatets(N):$/", "kind": "function"}
+{"_type": "tag", "name": "save_all", "path": "ldsv.py", "pattern": "/^def save_all():$/", "kind": "function"}
+{"_type": "tag", "name": "saveedges", "path": "ldsv.py", "pattern": "/^def saveedges():$/", "kind": "function"}
+{"_type": "tag", "name": "savefmd5h", "path": "ldsv.py", "pattern": "/^def savefmd5h():$/", "kind": "function"}
+{"_type": "tag", "name": "saveldh", "path": "ldsv.py", "pattern": "/^def saveldh():$/", "kind": "function"}
+{"_type": "tag", "name": "saveldlls", "path": "ldsv.py", "pattern": "/^def saveldlls():$/", "kind": "function"}
+{"_type": "tag", "name": "saverdh", "path": "ldsv.py", "pattern": "/^def saverdh():$/", "kind": "function"}
+{"_type": "tag", "name": "saverdlls", "path": "ldsv.py", "pattern": "/^def saverdlls():$/", "kind": "function"}
+{"_type": "tag", "name": "sc", "path": "cscopy.py", "pattern": "/^    sc = 0$/", "kind": "variable", "scope": "SFc", "scopeKind": "class"}
+{"_type": "tag", "name": "sepdlls", "path": "dirlist.py", "pattern": "/^def sepdlls(dlls):$/", "kind": "function"}
+{"_type": "tag", "name": "sf", "path": "localcopy.py", "pattern": "/^    sf = None$/", "kind": "variable", "scope": "FileDiff", "scopeKind": "class"}
+{"_type": "tag", "name": "sfb", "path": "config_vars.py", "pattern": "/^sfb = 0$/", "kind": "variable"}
+{"_type": "tag", "name": "sfc", "path": "localcopy.py", "pattern": "/^    sfc = SFc()$/", "kind": "variable", "scope": "LocalCopy", "scopeKind": "class"}
+{"_type": "tag", "name": "sha256sumf", "path": "localcopy.py", "pattern": "/^def sha256sumf(Fn):$/", "kind": "function"}
+{"_type": "tag", "name": "sha256sums", "path": "localcopy.py", "pattern": "/^def sha256sums(S1):$/", "kind": "function"}
+{"_type": "tag", "name": "should_copy", "path": "localcopy.py", "pattern": "/^    def should_copy(self):$/", "kind": "member", "scope": "FileDiff", "scopeKind": "class"}
+{"_type": "tag", "name": "skip_matching", "path": "cscopy.py", "pattern": "/^    def skip_matching(self):$/", "kind": "member", "scope": "BVars", "scopeKind": "class"}
+{"_type": "tag", "name": "srcDir", "path": "config_funcs.py", "pattern": "/^def srcDir(s):$/", "kind": "function"}
+{"_type": "tag", "name": "srcs", "path": "config_vars.py", "pattern": "/^srcs:set[str] = set()$/", "typeref": "typename:set[str]", "kind": "variable"}
+{"_type": "tag", "name": "st", "path": "pybackup.py", "pattern": "/^    import status as st$/", "file": true, "kind": "namespace", "scope": "main", "scopeKind": "function", "nameref": "module:status"}
+{"_type": "tag", "name": "statuses", "path": "status.py", "pattern": "/^def statuses():$/", "kind": "function"}
+{"_type": "tag", "name": "stsupdate", "path": "status.py", "pattern": "/^def stsupdate(Si, Dh):$/", "kind": "function"}
+{"_type": "tag", "name": "sync", "path": "asyncrun.py", "pattern": "/^import async_to_sync as sync$/", "kind": "namespace", "nameref": "module:async_to_sync"}
+{"_type": "tag", "name": "sync", "path": "netup.py", "pattern": "/^import async_to_sync as sync$/", "kind": "namespace", "nameref": "module:async_to_sync"}
+{"_type": "tag", "name": "sz", "path": "localcopy.py", "pattern": "/^    sz = 0$/", "kind": "variable", "scope": "FileDiff", "scopeKind": "class"}
+{"_type": "tag", "name": "t1", "path": "csrestore.py", "pattern": "/^    t1 = time.time()$/", "kind": "variable"}
+{"_type": "tag", "name": "t2", "path": "csrestore.py", "pattern": "/^    t2 = time.time()$/", "kind": "variable"}
+{"_type": "tag", "name": "tdir", "path": "config_funcs.py", "pattern": "/^def tdir(s):$/", "kind": "function"}
+{"_type": "tag", "name": "tdirs", "path": "config_vars.py", "pattern": "/^tdirs:set[str] = set()$/", "typeref": "typename:set[str]", "kind": "variable"}
+{"_type": "tag", "name": "tgts", "path": "config_vars.py", "pattern": "/^tgts:set[str] = set()$/", "typeref": "typename:set[str]", "kind": "variable"}
+{"_type": "tag", "name": "topological_sort", "path": "toposort.py", "pattern": "/^def topological_sort(dependency_pairs):$/", "kind": "function"}
+{"_type": "tag", "name": "tr", "path": "pybackup.py", "pattern": "/^tr = 0$/", "kind": "variable"}
+{"_type": "tag", "name": "trunc2ms", "path": "config_funcs.py", "pattern": "/^def trunc2ms(ns):$/", "kind": "function"}
+{"_type": "tag", "name": "tsks", "path": "opexec.py", "pattern": "/^tsks = []$/", "kind": "variable"}
+{"_type": "tag", "name": "txt", "path": "asyncrun.py", "pattern": "/^txt = ''$/", "kind": "variable"}
+{"_type": "tag", "name": "updatets", "path": "status.py", "pattern": "/^def updatets(N):$/", "kind": "function"}
+{"_type": "tag", "name": "v", "path": "config.py", "pattern": "/^import config_vars as v$/", "kind": "namespace", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "config_funcs.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "addPre", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "config_funcs.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "addSrcDir", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "config_funcs.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "addTgtDir", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "config_funcs.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "cdir", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "config_funcs.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "pdir", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "config_funcs.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "ppre", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "config_funcs.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "srcDir", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "config_funcs.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "tdir", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "cscopy.py", "pattern": "/^        import config_vars as v$/", "file": true, "kind": "namespace", "scope": "CSCopy.__call__", "scopeKind": "member", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "csrestore.py", "pattern": "/^import config_vars as v$/", "kind": "namespace", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "dirlist.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "getrdlls", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "dirlist.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "lDlld", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "dirlist.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "rDlld", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "dirlist.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "sepdlls", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "edge.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "addArc", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "edge.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "addDep", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "edge.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "findEdge", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "fmd5h.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "fmd5f", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "ldsv.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "loadedges", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "ldsv.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "loadfmd5h", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "ldsv.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "loadldh", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "ldsv.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "loadldlls", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "ldsv.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "loadrdh", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "ldsv.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "loadrdlls", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "ldsv.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "pstats", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "ldsv.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "saveedges", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "ldsv.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "savefmd5h", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "ldsv.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "saveldh", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "ldsv.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "saveldlls", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "ldsv.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "saverdh", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "ldsv.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "saverdlls", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "localcopy.py", "pattern": "/^        import config_vars as v$/", "file": true, "kind": "namespace", "scope": "LocalCopy.__call__", "scopeKind": "member", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "mkzip.py", "pattern": "/^import config_vars as v$/", "kind": "namespace", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "opexec.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "istgt", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "opexec.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "nodeps", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "opexec.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "nts", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "opexec.py", "pattern": "/^import config_vars as v$/", "kind": "namespace", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "pybackup.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "wsetup", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "pybackup.py", "pattern": "/^import config_vars as v$/", "kind": "namespace", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "status.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "changed_ops", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "status.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "onestatus", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "status.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "ronestatus", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "status.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "rstatuses", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "status.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "rstsupdate", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "status.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "statuses", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "status.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "stsupdate", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "statushash.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "ldh_f", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "v", "path": "statushash.py", "pattern": "/^    import config_vars as v$/", "file": true, "kind": "namespace", "scope": "rdh_f", "scopeKind": "function", "nameref": "module:config_vars"}
+{"_type": "tag", "name": "value", "path": "cscopy.py", "pattern": "/^    def value(self):$/", "kind": "member", "scope": "SFc", "scopeKind": "class"}
+{"_type": "tag", "name": "value", "path": "localcopy.py", "pattern": "/^    def value(self):$/", "kind": "member", "scope": "SFc", "scopeKind": "class"}
+{"_type": "tag", "name": "wdsi", "path": "pybackup.py", "pattern": "/^wdsi = {}$/", "kind": "variable"}
+{"_type": "tag", "name": "worktree", "path": "config_vars.py", "pattern": "/^worktree:Path = None$/", "typeref": "typename:Path", "kind": "variable"}
+{"_type": "tag", "name": "wsetup", "path": "pybackup.py", "pattern": "/^async def wsetup():$/", "kind": "function"}

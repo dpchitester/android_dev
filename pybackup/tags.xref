@@ -1,0 +1,366 @@
+ACCESS           variable    186 inotify_simple.py ACCESS = 0x00000001 #: File was accessed
+ALL_EVENTS       variable    236 inotify_simple.py ALL_EVENTS = (flags.ACCESS | flags.MODIFY | flags.ATTRIB
+ATTRIB           variable    188 inotify_simple.py ATTRIB = 0x00000004 #: Metadata changed
+BVar             class        37 csrestore.py     class BVar():
+BVars            class        61 cscopy.py        class BVars():
+CLOSE            variable    230 inotify_simple.py CLOSE = flags.CLOSE_WRITE | flags.CLOSE_NOWRITE
+CLOSE_NOWRITE    variable    192 inotify_simple.py CLOSE_NOWRITE = 0x00000010
+CLOSE_WRITE      variable    190 inotify_simple.py CLOSE_WRITE = 0x00000008
+CREATE           variable    197 inotify_simple.py CREATE = 0x00000100 #: Subfile was created
+CSCopy           class       137 cscopy.py        class CSCopy(OpBase):
+CSRestore        class        72 csrestore.py     class CSRestore(OpBase):
+DE               class        12 dirlist.py       class DE():
+DELETE           variable    198 inotify_simple.py DELETE = 0x00000200 #: Subfile was deleted
+DELETE_SELF      variable    199 inotify_simple.py DELETE_SELF = 0x00000400 #: Self was deleted
+DONT_FOLLOW      variable    211 inotify_simple.py DONT_FOLLOW = 0x02000000
+EXCL_UNLINK      variable    213 inotify_simple.py EXCL_UNLINK = 0x04000000
+Edge             class         5 edge.py          class Edge():
+Event            variable    151 inotify_simple.py Event = collections.namedtuple('Event', ['wd', 'mask', 'cookie', 'name'])
+FileDiff         class         4 localcopy.py     class FileDiff():
+GitOps           class        80 gitops.py        class GitOps(OpBase):
+IGNORED          variable    206 inotify_simple.py IGNORED = 0x00008000 #: File was ignored
+INotify          class        33 inotify_simple.py class INotify():
+ISDIR            variable    217 inotify_simple.py ISDIR = 0x40000000
+LDhd             variable     33 config_vars.py   LDhd = {}
+LDlls            variable     37 config_vars.py   LDlls = {}
+LDlls_changed    variable     44 config_vars.py   LDlls_changed = False
+LDlls_xt         variable     41 config_vars.py   LDlls_xt = {}
+LocalCopy        class        90 localcopy.py     class LocalCopy(OpBase):
+MASK_ADD         variable    215 inotify_simple.py MASK_ADD = 0x20000000
+MODIFY           variable    187 inotify_simple.py MODIFY = 0x00000002 #: File was modified
+MOVE             variable    232 inotify_simple.py MOVE = flags.MOVED_FROM | flags.MOVED_TO
+MOVED_FROM       variable    195 inotify_simple.py MOVED_FROM = 0x00000040
+MOVED_TO         variable    196 inotify_simple.py MOVED_TO = 0x00000080 #: File was moved to Y
+MOVE_SELF        variable    200 inotify_simple.py MOVE_SELF = 0x00000800 #: Self was moved
+Mkzip            class        39 mkzip.py         class Mkzip(OpBase):
+ONESHOT          variable    218 inotify_simple.py ONESHOT = 0x80000000 #: only send event once
+ONLYDIR          variable    209 inotify_simple.py ONLYDIR = 0x01000000
+OPEN             variable    193 inotify_simple.py OPEN = 0x00000020 #: File was opened
+OpBase           class        34 opbase.py        class OpBase():
+OpBaseEncoder    class         4 opbase.py        class OpBaseEncoder(json.JSONEncoder):
+Q_OVERFLOW       variable    205 inotify_simple.py Q_OVERFLOW = 0x00004000
+RDhd             variable     34 config_vars.py   RDhd = {}
+RDlls            variable     38 config_vars.py   RDlls = {}
+RDlls_changed    variable     45 config_vars.py   RDlls_changed = False
+RDlls_xt         variable     42 config_vars.py   RDlls_xt = {}
+SFc              class         4 cscopy.py        class SFc():
+SFc              class        55 localcopy.py     class SFc():
+UNMOUNT          variable    203 inotify_simple.py UNMOUNT = 0x00002000
+_EVENT_STRUCT_FORMAT variable    153 inotify_simple.py _EVENT_STRUCT_FORMAT = 'iIII'
+_EVENT_STRUCT_SIZE variable    154 inotify_simple.py _EVENT_STRUCT_SIZE = struct.calcsize(_EVENT_STRUCT_FORMAT)
+__all__          variable     13 inotify_simple.py __all__ = ['flags', 'masks', 'parse_events', 'INotify', 'Event']
+__call__         member       44 mkzip.py         def __call__(self):
+__call__         member       77 csrestore.py     def __call__(self):
+__call__         member       85 gitops.py        def __call__(self):
+__call__         member       96 localcopy.py     def __call__(self):
+__call__         member      143 cscopy.py        def __call__(self):
+__enter__        member      139 inotify_simple.py def __enter__(self):
+__eq__           member       15 edge.py          def __eq__(self, other):
+__eq__           member       25 dirlist.py       def __eq__(self, other):
+__exit__         member      142 inotify_simple.py def __exit__(self, exc_type, exc_value, traceback):
+__hash__         member       13 edge.py          def __hash__(self):
+__hash__         member       19 dirlist.py       def __hash__(self):
+__init__         member        6 edge.py          def __init__(self, di, si):
+__init__         member        7 cscopy.py        def __init__(self):
+__init__         member       12 localcopy.py     def __init__(self, sf, df):
+__init__         member       35 inotify_simple.py def __init__(self):
+__init__         member       35 opbase.py        def __init__(self, npl1, npl2, opts={}):
+__init__         member       39 csrestore.py     def __init__(self, di, si, tcfc):
+__init__         member       40 mkzip.py         def __init__(self, npl1, npl2, opts={}):
+__init__         member       56 localcopy.py     def __init__(self, sc=0, fc=0):
+__init__         member       62 cscopy.py        def __init__(self, di, si, sfc):
+__init__         member       73 csrestore.py     def __init__(self, npl1, npl2, opts={}):
+__init__         member       81 gitops.py        def __init__(self, npl1, npl2, opts={}):
+__init__         member       92 localcopy.py     def __init__(self, npl1, npl2, opts={}):
+__init__         member      138 cscopy.py        def __init__(self, npl1, npl2, opts={}):
+__lt__           member       29 dirlist.py       def __lt__(self, other):
+__repr__         member       43 edge.py          def __repr__(self):
+_hc              variable     17 dirlist.py       _hc: int = field(default=None)
+_libc            variable     15 inotify_simple.py _libc = ctypes.cdll.LoadLibrary('libinotifytools.so')
+_libc_call       function     19 inotify_simple.py def _libc_call(function, *args):
+_pass            variable      5 opexec.py        _pass = 1
+a_netup          function      7 netup.py         async def a_netup():
+a_netup2         function     31 netup.py         async def a_netup2():
+a_run            function     10 asyncrun.py      async def a_run(shell_command, cwd=None):
+a_run1           function     25 asyncrun.py      async def a_run1(shell_command, cwd=None):
+a_run2           function     38 asyncrun.py      async def a_run2(shell_command, cwd=None):
+a_run3           function     44 asyncrun.py      async def a_run3(shell_command, cwd=None):
+addArc           function     67 edge.py          def addArc(op1):
+addDep           function     61 edge.py          def addDep(j, i):
+addPre           function     77 config_funcs.py  def addPre(tg, frag):
+addSrcDir        function     62 config_funcs.py  def addSrcDir(tg, pth, iscode=False):
+addTgtDir        function     49 config_funcs.py  def addTgtDir(tg, pth):
+add_watch        member       47 inotify_simple.py def add_watch(self, path, mask):
+ar               namespace     5 gitops.py        import asyncrun as ar
+ar               namespace     9 csrestore.py     import asyncrun as ar
+ar               namespace    13 cscopy.py        import asyncrun as ar
+ar               namespace    22 gitops.py        import asyncrun as ar
+ar               namespace    30 cscopy.py        import asyncrun as ar
+ar               namespace    38 gitops.py        import asyncrun as ar
+ar               namespace    48 cscopy.py        import asyncrun as ar
+ar               namespace    81 dirlist.py       import asyncrun as ar
+ar               namespace    86 gitops.py        import asyncrun as ar
+ar               namespace   147 dirlist.py       import asyncrun as ar
+ar               namespace   179 dirlist.py       import asyncrun as ar
+bhu              function      6 bhash.py         def bhu(ho, it):
+blakeHash        function     32 bhash.py         def blakeHash(it):
+cb1              function     51 pybackup.py      async def cb1():
+cb2              function     70 pybackup.py      def cb2():
+cdir             function     41 config_funcs.py  def cdir(s):
+cel              variable     13 pybackup.py      cel = None
+changed_ops      function      5 status.py        def changed_ops(T=None) -> list[OpBase]:
+chk_ct           member       17 edge.py          def chk_ct(self):
+chkdiff          member       16 localcopy.py     def chkdiff(self):
+clean            function     16 opexec.py        def clean():
+close            member      134 inotify_simple.py def close(self):
+clr              member       21 edge.py          def clr(self):
+cmd2             variable     28 netup.py         cmd2 = "termux-wifi-connectioninfo | jq -r '.ip'"
+codes            variable     14 config_vars.py   codes:set[str] = set()
+copy2            function     77 localcopy.py     def copy2(f1, f2):
+ct1              variable     77 pybackup.py      ct1 = None
+default          member        5 opbase.py        def default(self, obj):
+df               variable      6 localcopy.py     df = None
+dl               namespace   104 pybackup.py      import dirlist as dl
+dllcmp           function    273 dirlist.py       def dllcmp(do, dn):
+do_copying       member      117 cscopy.py        def do_copying(self):
+do_deletions     member      129 cscopy.py        def do_deletions(self):
+eDep             variable     24 config_vars.py   eDep:set[Edge] = set()
+edgepf           variable     48 config_vars.py   edgepf:str = None
+edges            variable     27 config_vars.py   edges:dict[(str, str),Edge] = {}
+es               function     28 mkzip.py         def es(it):
+es               function     90 dirlist.py       def es(it):
+es               function    158 dirlist.py       def es(it):
+es               function    192 dirlist.py       def es(it):
+es               function    219 dirlist.py       def es(it):
+f1               function     50 config.py        def f1():
+fc               variable      6 cscopy.py        fc = 0
+fcopy            function     29 cscopy.py        def fcopy(sd, td, sfc):
+fdel             function     47 cscopy.py        def fdel(td, sfc):
+fe               variable      7 localcopy.py     fe = 0
+findEdge         function     50 edge.py          def findEdge(di, si) -> Edge:
+finddict         function     15 fmd5h.py         def finddict(d1, fp):
+flags            class       182 inotify_simple.py class flags(enum.IntEnum):
+fmd5f            function     24 fmd5h.py         def fmd5f(fp, sz, mt):
+fmd5hd           variable     30 config_vars.py   fmd5hd = {}
+fmd5hf           variable     51 config_vars.py   fmd5hf:str = None
+from_mask        member      221 inotify_simple.py def from_mask(cls, mask):
+fsync            function     12 cscopy.py        def fsync(sd, td, sfc):
+fsync            function     20 csrestore.py     def fsync(sd, td, tcfc):
+getDL            function     57 dirlist.py       def getDL(p):
+getDL            function     87 config_funcs.py  def getDL(p):
+getdll0          function     80 dirlist.py       def getdll0():
+getdll1          function    146 dirlist.py       def getdll1(di):
+getdll2          function    178 dirlist.py       def getdll2(si):
+getdll3          function    212 dirlist.py       def getdll3(si):
+getfl            function      9 mkzip.py         def getfl(p):
+getfl            function     33 dirlist.py       def getfl(p):
+getrdlls         function    234 dirlist.py       def getrdlls():
+gitck1           function      4 gitops.py        def gitck1(Si, wt):
+gitck2           function     21 gitops.py        def gitck2(Si, wt):
+gitremoteck      function     37 gitops.py        def gitremoteck(Di, wt):
+hd               variable     10 localcopy.py     hd = False
+hf_dh            variable     61 config_vars.py   hf_dh = 0
+hf_dirty         variable     59 config_vars.py   hf_dirty = False
+hf_dm            variable     60 config_vars.py   hf_dm = 0
+hf_ph            variable     63 config_vars.py   hf_ph = 0
+hf_pm            variable     62 config_vars.py   hf_pm = 0
+hf_sth           variable     65 config_vars.py   hf_sth = 0
+hf_stm           variable     64 config_vars.py   hf_stm = 0
+idel             variable      7 asyncrun.py      idel = 1
+in1              variable     12 pybackup.py      in1 = None
+incp             function     10 opexec.py        def incp():
+init2            member       53 csrestore.py     def init2(self):
+init2            member       76 cscopy.py        def init2(self):
+ischanged        member       39 opbase.py        def ischanged(self, e:Edge):
+ischanged        member       42 mkzip.py         def ischanged(self, e:Edge):
+ischanged        member       75 csrestore.py     def ischanged(self, e:Edge):
+ischanged        member       83 gitops.py        def ischanged(self, e:Edge):
+ischanged        member       94 localcopy.py     def ischanged(self, e:Edge):
+ischanged        member      141 cscopy.py        def ischanged(self, e:Edge):
+istgt            function     31 opexec.py        def istgt(T, dep2=None):
+iu               function      9 bhash.py         def iu(it):
+lDlld            function    245 dirlist.py       def lDlld(si):
+lckers           variable     17 config_vars.py   lckers = {}
+ldh_d            function     21 statushash.py    def ldh_d(si):
+ldh_f            function      1 statushash.py    def ldh_f(si, dh=None):
+ldhck            function     57 statushash.py    def ldhck(Si):
+ldhpf            variable     52 config_vars.py   ldhpf:str = None
+ldhset           function     39 statushash.py    def ldhset(Si, Dh=None):
+ldllsf           variable     49 config_vars.py   ldllsf:str = None
+load_all         function    140 ldsv.py          def load_all():
+loadedges        function     54 ldsv.py          def loadedges():
+loadfmd5h        function     73 ldsv.py          def loadfmd5h():
+loadldh          function    104 ldsv.py          def loadldh():
+loadldlls        function      6 ldsv.py          def loadldlls():
+loadrdh          function    113 ldsv.py          def loadrdh():
+loadrdlls        function     17 ldsv.py          def loadrdlls():
+lrtset           function     57 edge.py          def lrtset(di, si):
+main             function    100 pybackup.py      def main():
+masks            class       226 inotify_simple.py class masks(enum.IntEnum):
+maxmt            function     25 mkzip.py         def maxmt(sd):
+md5sumf          function      1 fmd5h.py         def md5sumf(Fn):
+mt               variable      9 localcopy.py     mt = 0
+netup            variable     39 netup.py         netup = sync.function(a_netup)
+nodeps           function     23 opexec.py        def nodeps(T):
+npl1             variable     90 config.py        npl1 = ('bash', 'home')
+npl1             variable    101 config.py        npl1 = ('home', 'bash')
+npl1             variable    112 config.py        npl1 = ('bin', 'bash')
+npl1             variable    119 config.py        npl1 = ('bash', 'bin')
+npl1             variable    126 config.py        npl1 = ('sh', 'bash')
+npl1             variable    130 config.py        npl1 = ('blogds', 'blog')
+npl1             variable    134 config.py        npl1 = ('blog', 'blogds')
+npl1             variable    138 config.py        npl1 = ('plaid-node', 'blogds')
+npl1             variable    146 config.py        npl1 = ('backups', 'blogds')
+npl1             variable    151 config.py        npl1 = ('git', 'git_index')
+npl1             variable    155 config.py        npl1 = ('bitbucket', 'git')
+npl1             variable    164 config.py        npl1 = ('github', 'git')
+npl1             variable    174 config.py        npl1 = ('zips', si)
+npl1             variable    179 config.py        npl1 = ('zips', si)
+npl1             variable    186 config.py        npl1 = ('gd_' + si, si)
+nts              function     41 opexec.py        def nts():
+onestatus        function     35 status.py        def onestatus(Si):
+op1              variable     91 config.py        op1 = LocalCopy(
+op1              variable    102 config.py        op1 = LocalCopy(
+op1              variable    113 config.py        op1 = LocalCopy(npl1, npl1, {
+op1              variable    120 config.py        op1 = LocalCopy(npl1, npl1, {
+op1              variable    127 config.py        op1 = LocalCopy(npl1, npl1, {'files': ['*.sh', '*.env'], 'exec': True})
+op1              variable    131 config.py        op1 = LocalCopy(npl1, npl1, {'files': ['blog.js']})
+op1              variable    135 config.py        op1 = LocalCopy(npl1, npl1, {'files': ['*.db', 'blog.js']})
+op1              variable    139 config.py        op1 = LocalCopy(npl1, npl1, {'files': ['*.db']})
+op1              variable    147 config.py        op1 = LocalCopy(npl1, npl1, {'files': ['*.db']})
+op1              variable    152 config.py        op1 = GitOps(npl1, None, {'wt': v.worktree, 'add': True, 'commit': True})
+op1              variable    156 config.py        op1 = GitOps(npl1, None, {
+op1              variable    165 config.py        op1 = GitOps(npl1, None, {
+op1              variable    175 config.py        op1 = Mkzip(npl1, npl1, {'zipfile': si + '.zip'})
+op1              variable    180 config.py        op1 = Mkzip(npl1, npl1, {'zipfile': 'projects-git.zip'})
+op1              variable    189 config.py        op1 = CSCopy(npl1, npl1, {'delete': False})
+opExec           function     66 opexec.py        def opExec():
+opdep            variable     21 config_vars.py   opdep:list[OpBase] = []
+p1               variable    184 config.py        p1 = pdir(si).relative_to(ppre('sd'))
+parse_events     function    157 inotify_simple.py def parse_events(data):
+paths            variable      6 config_vars.py   paths:dict[str, Path] = {}
+pdir             function     10 config_funcs.py  def pdir(s):
+pdirs            variable     10 config_vars.py   pdirs:set[str] = set()
+ppre             function      3 config_funcs.py  def ppre(s):
+pres             variable      9 config_vars.py   pres:set[str] = set()
+proc_nodes       function     51 opexec.py        def proc_nodes(L):
+pstats           function     82 ldsv.py          def pstats():
+rDlld            function    259 dirlist.py       def rDlld(di):
+rchk_ct          member       19 edge.py          def rchk_ct(self):
+rckers           variable     18 config_vars.py   rckers = {}
+rclr             member       26 edge.py          def rclr(self):
+rdh_d            function     30 statushash.py    def rdh_d(di):
+rdh_f            function     11 statushash.py    def rdh_f(di, dh=None):
+rdhck            function     65 statushash.py    def rdhck(Di):
+rdhpf            variable     53 config_vars.py   rdhpf:str = None
+rdhset           function     48 statushash.py    def rdhset(Di, Dh=None):
+rdllsf           variable     50 config_vars.py   rdllsf:str = None
+read             member       69 inotify_simple.py async def read(self, timeout=None, read_delay=None):
+read_iter        member      103 inotify_simple.py def read_iter(self, read_delay=None):
+readso           function     54 asyncrun.py      async def readso():
+rm_watch         member       62 inotify_simple.py def rm_watch(self, wd):
+ronestatus       function     43 status.py        def ronestatus(Di):
+round2ms         function    109 config_funcs.py  def round2ms(ns):
+rrtset           member       37 edge.py          def rrtset(self, mt=None):
+rstatuses        function     63 status.py        def rstatuses():
+rstsupdate       function     26 status.py        def rstsupdate(Di, Dh):
+rt2              function     80 pybackup.py      def rt2():
+rto1             variable      8 dirlist.py       rto1 = 0 # 60*60*.5
+rto2             variable      9 dirlist.py       rto2 = 0 # 60*1
+rtset            member       31 edge.py          def rtset(self, mt=None):
+run              variable     89 asyncrun.py      run = sync.function(a_run)
+run1             variable     90 asyncrun.py      run1 = sync.function(a_run1)
+run2             variable     91 asyncrun.py      run2 = sync.function(a_run2)
+run3             variable     92 asyncrun.py      run3 = sync.function(a_run3)
+rupdatets        function     84 status.py        def rupdatets(N):
+save_all         function    149 ldsv.py          def save_all():
+saveedges        function     63 ldsv.py          def saveedges():
+savefmd5h        function     91 ldsv.py          def savefmd5h():
+saveldh          function    122 ldsv.py          def saveldh():
+saveldlls        function     28 ldsv.py          def saveldlls():
+saverdh          function    131 ldsv.py          def saverdh():
+saverdlls        function     41 ldsv.py          def saverdlls():
+sc               variable      5 cscopy.py        sc = 0
+sepdlls          function    108 dirlist.py       def sepdlls(dlls):
+sf               variable      5 localcopy.py     sf = None
+sfb              variable     66 config_vars.py   sfb = 0
+sfc              variable     91 localcopy.py     sfc = SFc()
+sha256sumf       function     68 localcopy.py     def sha256sumf(Fn):
+sha256sums       function     62 localcopy.py     def sha256sums(S1):
+should_copy      member       42 localcopy.py     def should_copy(self):
+skip_matching    member       87 cscopy.py        def skip_matching(self):
+srcDir           function     25 config_funcs.py  def srcDir(s):
+srcs             variable     12 config_vars.py   srcs:set[str] = set()
+st               namespace   103 pybackup.py      import status as st
+statuses         function     51 status.py        def statuses():
+stsupdate        function     17 status.py        def stsupdate(Si, Dh):
+sync             namespace     4 asyncrun.py      import async_to_sync as sync
+sync             namespace     4 netup.py         import async_to_sync as sync
+sz               variable      8 localcopy.py     sz = 0
+t1               variable    163 csrestore.py     t1 = time.time()
+t2               variable    169 csrestore.py     t2 = time.time()
+tdir             function     17 config_funcs.py  def tdir(s):
+tdir             function     33 config_funcs.py  def tdir(s):
+tdirs            variable     11 config_vars.py   tdirs:set[str] = set()
+tgts             variable     13 config_vars.py   tgts:set[str] = set()
+topological_sort function      4 toposort.py      def topological_sort(dependency_pairs):
+tr               variable     48 pybackup.py      tr = 0
+trunc2ms         function    112 config_funcs.py  def trunc2ms(ns):
+tsks             variable      7 opexec.py        tsks = []
+txt              variable      6 asyncrun.py      txt = ''
+updatets         function     75 status.py        def updatets(N):
+v                namespace     2 statushash.py    import config_vars as v
+v                namespace     3 opexec.py        import config_vars as v
+v                namespace     4 config_funcs.py  import config_vars as v
+v                namespace     5 config.py        import config_vars as v
+v                namespace     5 mkzip.py         import config_vars as v
+v                namespace     6 status.py        import config_vars as v
+v                namespace     7 ldsv.py          import config_vars as v
+v                namespace     7 pybackup.py      import config_vars as v
+v                namespace    11 config_funcs.py  import config_vars as v
+v                namespace    12 statushash.py    import config_vars as v
+v                namespace    17 csrestore.py     import config_vars as v
+v                namespace    18 config_funcs.py  import config_vars as v
+v                namespace    18 ldsv.py          import config_vars as v
+v                namespace    18 pybackup.py      import config_vars as v
+v                namespace    18 status.py        import config_vars as v
+v                namespace    24 opexec.py        import config_vars as v
+v                namespace    25 fmd5h.py         import config_vars as v
+v                namespace    26 config_funcs.py  import config_vars as v
+v                namespace    28 status.py        import config_vars as v
+v                namespace    30 ldsv.py          import config_vars as v
+v                namespace    32 opexec.py        import config_vars as v
+v                namespace    34 config_funcs.py  import config_vars as v
+v                namespace    37 status.py        import config_vars as v
+v                namespace    42 config_funcs.py  import config_vars as v
+v                namespace    42 opexec.py        import config_vars as v
+v                namespace    43 ldsv.py          import config_vars as v
+v                namespace    45 status.py        import config_vars as v
+v                namespace    51 config_funcs.py  import config_vars as v
+v                namespace    51 edge.py          import config_vars as v
+v                namespace    52 status.py        import config_vars as v
+v                namespace    55 ldsv.py          import config_vars as v
+v                namespace    62 edge.py          import config_vars as v
+v                namespace    64 config_funcs.py  import config_vars as v
+v                namespace    64 ldsv.py          import config_vars as v
+v                namespace    64 status.py        import config_vars as v
+v                namespace    68 edge.py          import config_vars as v
+v                namespace    74 ldsv.py          import config_vars as v
+v                namespace    78 config_funcs.py  import config_vars as v
+v                namespace    83 ldsv.py          import config_vars as v
+v                namespace    92 ldsv.py          import config_vars as v
+v                namespace    99 localcopy.py     import config_vars as v
+v                namespace   105 ldsv.py          import config_vars as v
+v                namespace   109 dirlist.py       import config_vars as v
+v                namespace   114 ldsv.py          import config_vars as v
+v                namespace   123 ldsv.py          import config_vars as v
+v                namespace   132 ldsv.py          import config_vars as v
+v                namespace   144 cscopy.py        import config_vars as v
+v                namespace   235 dirlist.py       import config_vars as v
+v                namespace   246 dirlist.py       import config_vars as v
+v                namespace   260 dirlist.py       import config_vars as v
+value            member        9 cscopy.py        def value(self):
+value            member       59 localcopy.py     def value(self):
+wdsi             variable     11 pybackup.py      wdsi = {}
+worktree         variable     56 config_vars.py   worktree:Path = None
+wsetup           function     15 pybackup.py      async def wsetup():
