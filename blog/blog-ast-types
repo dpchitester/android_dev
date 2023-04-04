@@ -1,0 +1,104 @@
+[
+    {
+        "ArrayPattern": 1
+    },
+    {
+        "ForOfStatement": 1
+    },
+    {
+        "ClassBody": 1
+    },
+    {
+        "ClassDeclaration": 1
+    },
+    {
+        "ObjectExpression": 2
+    },
+    {
+        "Property": 3
+    },
+    {
+        "CatchClause": 4
+    },
+    {
+        "TryStatement": 4
+    },
+    {
+        "MethodDefinition": 4
+    },
+    {
+        "ForStatement": 6
+    },
+    {
+        "ThrowStatement": 7
+    },
+    {
+        "ConditionalExpression": 7
+    },
+    {
+        "UpdateExpression": 8
+    },
+    {
+        "ArrayExpression": 10
+    },
+    {
+        "FunctionExpression": 11
+    },
+    {
+        "UnaryExpression": 16
+    },
+    {
+        "LogicalExpression": 17
+    },
+    {
+        "ArrowFunctionExpression": 19
+    },
+    {
+        "ReturnStatement": 21
+    },
+    {
+        "NewExpression": 36
+    },
+    {
+        "FunctionDeclaration": 36
+    },
+    {
+        "ThisExpression": 37
+    },
+    {
+        "IfStatement": 39
+    },
+    {
+        "AwaitExpression": 51
+    },
+    {
+        "AssignmentExpression": 79
+    },
+    {
+        "BlockStatement": 113
+    },
+    {
+        "VariableDeclaration": 131
+    },
+    {
+        "VariableDeclarator": 132
+    },
+    {
+        "BinaryExpression": 140
+    },
+    {
+        "ExpressionStatement": 231
+    },
+    {
+        "Literal": 263
+    },
+    {
+        "CallExpression": 283
+    },
+    {
+        "MemberExpression": 337
+    },
+    {
+        "Identifier": 927
+    }
+]

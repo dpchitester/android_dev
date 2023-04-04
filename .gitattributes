@@ -1,0 +1,7 @@
+.gitattributes !filter !diff
+bash/.config/* filter=git-crypt diff=git-crypt
+bash/.plaid-cli/* filter=git-crypt diff=git-crypt
+plaid-flask/config/* filter=git-crypt diff=git-crypt
+plaid-node/plaid.js filter=git-crypt diff=git-crypt
+python-flask/config/* filter=git-crypt diff=git-crypt
+plaid.env filter=git-crypt diff=git-crypt
