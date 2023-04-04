@@ -425,3 +425,7 @@ plaid-cli accounts ns
 cd
 exit
 pbu
+pb
+cd ../bash
+touch .plaidrc
+pbu
