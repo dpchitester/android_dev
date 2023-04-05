@@ -40,9 +40,11 @@ def gitremoteck(Di, wt):
     Dh1 = rdh_f(Di)
     Dh2 = None
     # print(Di, 'status here')
-    cmd = 'git remote update'
+    cmd = 'git remote update ' + Di
     rc = ar.run1(cmd, cwd=wt)
     if rc == 0:
+        cmd = 'git branch master -u ' + Di + '/master'
+        rc = ar.run1(cmd, cwd=wt)
         cmd = 'git rev-parse @'
         rc = ar.run1(cmd, cwd=wt)
         if rc == 0:
@@ -55,9 +57,9 @@ def gitremoteck(Di, wt):
                 rc = ar.run1(cmd, cwd=wt)
                 if rc == 0:
                     bcomm = ar.txt.rstrip()
-                    #print('lcomm', lcomm)
-                    #print('rcomm', rcomm)
-                    #print('bcomm', bcomm)
+                    print('lcomm', lcomm)
+                    print('rcomm', rcomm)
+                    print('bcomm', bcomm)
                     if lcomm == rcomm:
                         print('up-to-date')
                         Dh2 = 1
