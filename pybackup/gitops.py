@@ -25,6 +25,7 @@ def gitck1(Si, wt):
         print(rv)
     return (Dh2, len(rv) > 0 and Dh2 != Dh1)
 
+@snoop
 def gitck2(Si, wt):
     from statushash import ldh_f, ldhset, rdh_f, rdhset
     Dh1 = ldh_f(Si)
@@ -85,7 +86,6 @@ class GitOps(OpBase):
         super(GitOps, self).__init__(npl1, npl2, opts)
     def ischanged(self, e:Edge):
         return e.chk_ct() | e.rchk_ct()
-    @snoop
     def __call__(self):
         import asyncrun as ar
         from statushash import ldh_f, ldhset, rdh_f, rdhset

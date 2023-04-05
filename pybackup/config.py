@@ -64,6 +64,7 @@ v.srcs.add('git_index')
 v.lckers['git_index'] = partial(gitck1, 'git_index', v.worktree)
 
 addSrcDir('.git', ppre('proj') / '.git', False)
+v.srcs.add('git')
 v.lckers['git'] = partial(gitck2, 'git', v.worktree)
 
 v.tgts.add('bitbucket')
