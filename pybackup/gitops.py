@@ -1,11 +1,14 @@
 from opbase import OpBase
 from edge import Edge, findEdge
 
+class GitCmdException(Exception):
+    pass
+
 def gitcmd(cmd, wt):
     import asyncrun as ar
     rc = ar.run1(cmd, cwd=wt)
     if rc != 0:
-        raise Exception('gitcmd')
+        raise GitCmdException('gitcmd rc: ' + str(rc))
     return ar.txt.rstrip()
 
 def gitck1(Si, wt):
