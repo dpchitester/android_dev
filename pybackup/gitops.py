@@ -40,11 +40,11 @@ def gitremoteck(Di, wt):
     Dh1 = rdh_f(Di)
     Dh2 = None
     # print(Di, 'status here')
+    cmd = 'git branch master -u ' + Di + '/master'
+    rc = ar.run1(cmd, cwd=wt)
     cmd = 'git remote update ' + Di
     rc = ar.run1(cmd, cwd=wt)
     if rc == 0:
-        cmd = 'git branch master -u ' + Di + '/master'
-        rc = ar.run1(cmd, cwd=wt)
         cmd = 'git rev-parse @'
         rc = ar.run1(cmd, cwd=wt)
         if rc == 0:
@@ -104,6 +104,8 @@ class GitOps(OpBase):
         if not anyd:
             return (tc, fc)
         wt = self.opts['wt']
+        cmd = 'git branch master -u ' + di + '/master'
+        rc = ar.run1(cmd, cwd=wt)
         if 'add' in self.opts:
             rc = ar.run2('git add -A .', cwd=wt)
             if rc == 0:
