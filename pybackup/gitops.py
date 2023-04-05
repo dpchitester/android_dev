@@ -1,14 +1,14 @@
 from opbase import OpBase
 from edge import Edge, findEdge
 
-class GitCmdException(Exception):
+class GitCmdFailure(Exception):
     pass
 
 def gitcmd(cmd, wt):
     import asyncrun as ar
     rc = ar.run1(cmd, cwd=wt)
     if rc != 0:
-        raise GitCmdException('gitcmd rc: ' + str(rc))
+        raise GitCmdFailure('gitcmd rc: ' + str(rc))
     return ar.txt.rstrip()
 
 def gitck1(Si, wt):
@@ -31,9 +31,9 @@ def gitck2(Si, wt):
     if Dh1 is None:
         Dh1 = 0
     cmd = 'git rev-list --count bitbucket/master..master'
-    rv1 = gitcmd(cmd. wt)
+    rv1 = gitcmd(cmd, wt)
     cmd = 'git rev-list --count github/master..master'
-    rv2 = gitcmd(cmd. wt)
+    rv2 = gitcmd(cmd, wt)
     Dh2 = int(rv1) + int(rv2)
     if Dh2 == 0:
         ldhset(Si, Dh2)
