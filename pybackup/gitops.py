@@ -33,6 +33,12 @@ def gitck2(Si, wt):
             ldhset(Si, Dh2)
         return (Dh2, Dh2 > Dh1)
 
+def gitcmd(cmd, wt):
+    rc = ar.run1(cmd, cwd=wt)
+    if rc != 0:
+        raise Exception('gitcmd')
+    return ar.txt.rstrip()
+
 
 def gitremoteck(Di, wt):
     import asyncrun as ar
@@ -40,38 +46,34 @@ def gitremoteck(Di, wt):
     Dh1 = rdh_f(Di)
     Dh2 = None
     # print(Di, 'status here')
-    cmd = 'git branch master -u ' + Di + '/master'
-    rc = ar.run1(cmd, cwd=wt)
-    cmd = 'git remote update ' + Di
-    rc = ar.run1(cmd, cwd=wt)
-    if rc == 0:
+    try:
+        cmd = 'git branch master -u ' + Di + '/master'
+        gitcmd(cmd, wt)
+        cmd = 'git remote update ' + Di
+        gitcmd(cmd, wt)
         cmd = 'git rev-parse @'
-        rc = ar.run1(cmd, cwd=wt)
-        if rc == 0:
-            lcomm = ar.txt.rstrip()
-            cmd = 'git rev-parse @{u}'
-            rc = ar.run1(cmd, cwd=wt)
-            if rc == 0:
-                rcomm = ar.txt.rstrip()
-                cmd = 'git merge-base @ @{u}'
-                rc = ar.run1(cmd, cwd=wt)
-                if rc == 0:
-                    bcomm = ar.txt.rstrip()
-                    print('lcomm', lcomm)
-                    print('rcomm', rcomm)
-                    print('bcomm', bcomm)
-                    if lcomm == rcomm:
-                        print('up-to-date')
-                        Dh2 = 1
-                    elif lcomm == bcomm:
-                        print('need-to-pull')
-                        Dh2 = 3
-                    elif rcomm == bcomm:
-                        print('need-to-push')
-                        Dh2 = 2
-                    else:
-                        print('diverged')
-                        Dh2 = 4
+        lcomm = gitcmd(cmd, wt)
+        cmd = 'git rev-parse @{u}'
+        rcomm = gitcmd(cmd, wt)
+        cmd = 'git merge-base @ @{u}'
+        bcomm = gitcmd(cmd, wt)
+        print('lcomm', lcomm)
+        print('rcomm', rcomm)
+        print('bcomm', bcomm)
+        if lcomm == rcomm:
+            print('up-to-date')
+            Dh2 = 1
+        elif lcomm == bcomm:
+            print('need-to-pull')
+            Dh2 = 3
+        elif rcomm == bcomm:
+            print('need-to-push')
+            Dh2 = 2
+        else:
+            print('diverged')
+            Dh2 = 4
+    except:
+        pass
     if Dh2 is not None:
         if Dh2 == 1:
             rdhset(Di, Dh2)
