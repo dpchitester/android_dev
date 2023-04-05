@@ -85,7 +85,7 @@ class GitOps(OpBase):
         super(GitOps, self).__init__(npl1, npl2, opts)
     def ischanged(self, e:Edge):
         return e.chk_ct() | e.rchk_ct()
-
+    @snoop
     def __call__(self):
         import asyncrun as ar
         from statushash import ldh_f, ldhset, rdh_f, rdhset
