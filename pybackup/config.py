@@ -46,7 +46,6 @@ addSrcDir('backups', ppre('sd') / 'backups', False)
 addSrcDir('home', ppre('FLAGS'), False)
 addSrcDir('bin', pdir('home') / 'bin', False)
 
-
 def f1():
     dl = getDL(ppre('proj'))
     for d in dl:
@@ -64,10 +63,11 @@ v.worktree = ppre('sd') / 'projects'
 v.srcs.add('git_index')
 v.lckers['git_index'] = partial(gitck1, 'git_index', v.worktree)
 
-addSrcDir('git', ppre('proj') / '.git', False)
+addSrcDir('.git', ppre('proj') / '.git', False)
 v.lckers['git'] = partial(gitck2, 'git', v.worktree)
 
-# v.tgts.add('bitbucket')
+#v.tgts.add('bitbucket')
+#v.tgts.add('github')
 # v.srcs.add('bitbucket')
 v.rckers['bitbucket'] = partial(gitremoteck, 'bitbucket', v.worktree)
 v.rckers['github'] = partial(gitremoteck, 'github', v.worktree)
@@ -175,7 +175,7 @@ for si in v.codes:
     op1 = Mkzip(npl1, npl1, {'zipfile': si + '.zip'})
     addArc(op1)
 
-for si in ('git', ):
+for si in ('.git', ):
     npl1 = ('zips', si)
     op1 = Mkzip(npl1, npl1, {'zipfile': 'projects-git.zip'})
     addArc(op1)
