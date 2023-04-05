@@ -106,11 +106,12 @@ class GitOps(OpBase):
         if not anyd:
             return (tc, fc)
         wt = self.opts['wt']
-        cmd = 'git branch master -u ' + di + '/master'
-        try:
-            gitcmd(cmd, wt)
-        except:
-            print(':', cmd)
+        if 'pull' in self.opts or 'push' in self.opts:
+            cmd = 'git branch master -u ' + di + '/master'
+            try:
+                gitcmd(cmd, wt)
+            except:
+                print(':', cmd)
         if 'add' in self.opts:
             rc = ar.run2('git add -A .', cwd=wt)
             if rc == 0:
