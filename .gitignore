@@ -17,6 +17,7 @@
 *.sass-cache
 *.swo
 *.swp
+*.tf
 *.vi
 *.zip
 *~
@@ -87,3 +88,6 @@ local.properties
 PHILC.*
 asco*.*
 Altium/CM/**
+rclone
+plaid-cli
+**/Finance.db

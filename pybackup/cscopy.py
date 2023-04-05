@@ -129,7 +129,7 @@ class BVars():
     def do_deletions(self):
         for rf in self.f2d.copy():  # do deletions
             cfp = rf.nm
-            if fdel(self.td / cfp, self.tcfc):
+            if fdel(self.td / cfp, self.sfc):
                 self.f2d.remove(rf)
                 self.ac2 += 1
 

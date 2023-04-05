@@ -25,7 +25,6 @@ def gitck1(Si, wt):
         print(rv)
     return (Dh2, len(rv) > 0 and Dh2 != Dh1)
 
-@snoop
 def gitck2(Si, wt):
     from statushash import ldh_f, ldhset, rdh_f, rdhset
     Dh1 = ldh_f(Si)
@@ -57,9 +56,9 @@ def gitremoteck(Di, wt):
         rcomm = gitcmd(cmd, wt)
         cmd = 'git merge-base @ @{u}'
         bcomm = gitcmd(cmd, wt)
-        print('lcomm', lcomm)
-        print('rcomm', rcomm)
-        print('bcomm', bcomm)
+        # print('lcomm', lcomm)
+        # print('rcomm', rcomm)
+        # print('bcomm', bcomm)
         if lcomm == rcomm:
             print('up-to-date')
             Dh2 = 1

@@ -187,5 +187,5 @@ for si in ('proj', 'zips'):
     npl1 = ('gd_' + si, si)
     #op1 = CSRestore(npl1, None, {})
     #addArc(op1)
-    op1 = CSCopy(npl1, npl1, {'delete': False})
+    op1 = CSCopy(npl1, npl1, {'delete': True})
     addArc(op1)
