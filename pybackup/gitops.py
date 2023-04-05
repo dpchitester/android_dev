@@ -5,15 +5,13 @@ import snoop
 class GitCmdFailure(Exception):
     pass
 
-@snoop()
 def gitcmd(cmd, wt):
     import asyncrun as ar
     rc = ar.run1(cmd, cwd=wt)
     if rc != 0:
-        raise GitCmdFailure('gitcmd rc: ' + str(rc))
+        raise GitCmdFailure('gitcmd rc: ' + str(rc) + cmd)
     return ar.txt.rstrip()
 
-@snoop()
 def gitck1(Si, wt):
     from statushash import ldh_f, ldhset, rdh_f, rdhset
     from bhash import blakeHash
@@ -27,7 +25,6 @@ def gitck1(Si, wt):
         print(rv)
     return (Dh2, len(rv) > 0 and Dh2 != Dh1)
 
-@snoop()
 def gitck2(Si, wt):
     from statushash import ldh_f, ldhset, rdh_f, rdhset
     Dh1 = ldh_f(Si)
@@ -42,13 +39,12 @@ def gitck2(Si, wt):
         ldhset(Si, Dh2)
     return (Dh2, Dh2 > Dh1)
 
-
-@snoop()
 def gitremoteck(Di, wt):
     from statushash import ldh_f, ldhset, rdh_f, rdhset
     Dh1 = rdh_f(Di)
     Dh2 = None
     # print(Di, 'status here')
+    cmd = ''
     try:
         cmd = 'git branch master -u ' + Di + '/master'
         gitcmd(cmd, wt)
@@ -89,7 +85,7 @@ class GitOps(OpBase):
         super(GitOps, self).__init__(npl1, npl2, opts)
     def ischanged(self, e:Edge):
         return e.chk_ct() | e.rchk_ct()
-    @snoop()
+
     def __call__(self):
         import asyncrun as ar
         from statushash import ldh_f, ldhset, rdh_f, rdhset
@@ -113,9 +109,10 @@ class GitOps(OpBase):
         if 'pull' in self.opts or 'push' in self.opts:
             cmd = 'git branch master -u ' + di + '/master'
             try:
-                gitcmd(cmd, wt)
+                rv = gitcmd(cmd, wt)
+                print(rv)
             except:
-                print(':', cmd)
+                print('error:', cmd)
         if 'add' in self.opts:
             rc = ar.run2('git add -A .', cwd=wt)
             if rc == 0:
