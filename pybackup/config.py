@@ -92,20 +92,16 @@ npl1 = ('bash', 'home')
 op1 = LocalCopy(
     npl1, npl1, {
         'files': [
-            '.termux/*', '.bashrc', '.bashrc0', '.swi*', '.profile', '.clang-format',
-            'rsyncd.conf', '.config/rclone/*', '.plaid-cli/*',
-            '.plaid-cli/data/*', '.plaidrc'
+            '.termux/*', '.bashrc', '.bashrc0', '.profile', '.config/rclone/*', '.plaid-cli/*','.plaid-cli/data/*', '.plaidrc', '.gitcredentials', '.gitconfig'
         ]
     })
-#addArc(op1)
+addArc(op1)
 
 npl1 = ('home', 'bash')
 op1 = LocalCopy(
     npl1, npl1, {
         'files': [
-            '.termux/*', '.bashrc', '.bashrc0', '.swi*', '.profile', '.clang-format',
-            'rsyncd.conf', '.config/rclone/*', '.plaid-cli/*',
-            '.plaid-cli/data/*', '.plaidrc'
+            '.termux/*', '.bashrc', '.bashrc0', '.profile', '.config/rclone/*', '.plaid-cli/*','.plaid-cli/data/*', '.plaidrc', '.gitcredentials', '.gitconfig'
         ]
     })
 addArc(op1)

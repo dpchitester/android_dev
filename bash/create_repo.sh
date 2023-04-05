@@ -5,9 +5,9 @@ pushd /sdcard/projects
 
 if [ "$1" != "" ]; then
     echo "$1"
-    curl -X DELETE -H "Content-Type: application/json" -d '{ "scm": "git" }' https://dpchitester:arcdpc00@api.bitbucket.org/2.0/repositories/dpchitester/$1
+    curl -X DELETE -H "Content-Type: application/json" -d '{ "scm": "git" }' https://dpchitester:ATBBCeteQw4LEu9HVJPLDezYyDYR83B8D743@api.bitbucket.org/2.0/repositories/dpchitester/$1
     if [ $? -eq 0 ]; then
-        curl -X POST -H "Content-Type: application/json" -d '{ "scm": "git" }' https://dpchitester:arcdpc00@api.bitbucket.org/2.0/repositories/dpchitester/$1
+        curl -X POST -H "Content-Type: application/json" -d '{ "scm": "git" }' https://dpchitester:ATBBCeteQw4LEu9HVJPLDezYyDYR83B8D743@api.bitbucket.org/2.0/repositories/dpchitester/$1
         if [ $? -eq 0 ]; then
             echo "command success"
         else
