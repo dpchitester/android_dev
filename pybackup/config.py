@@ -2,13 +2,13 @@ import os
 import json
 from functools import partial
 
+from opbase import OpBaseEncoder
+
 import config_vars as v
 from config_funcs import *
 
-from opbase import OpBaseEncoder
-
 addPre('FLAGS', os.environ['HOME'])
-print("FLAGS=" + str(ppre('FLAGS')))
+# print("FLAGS=" + str(ppre('FLAGS')))
 
 v.edgepf = ppre('FLAGS') / 'edges.pp'
 v.ldllsf = ppre('FLAGS') / 'ldlls.pp'
@@ -67,7 +67,7 @@ v.lckers['git_index'] = partial(gitck1, 'git_index', v.worktree)
 addSrcDir('git', ppre('proj') / '.git', False)
 v.lckers['git'] = partial(gitck2, 'git', v.worktree)
 
-#v.tgts.add('bitbucket')
+# v.tgts.add('bitbucket')
 # v.srcs.add('bitbucket')
 v.rckers['bitbucket'] = partial(gitremoteck, 'bitbucket', v.worktree)
 v.rckers['github'] = partial(gitremoteck, 'github', v.worktree)
@@ -180,7 +180,7 @@ for si in ('git', ):
     op1 = Mkzip(npl1, npl1, {'zipfile': 'projects-git.zip'})
     addArc(op1)
 
-for si in ('proj', ):
+for si in ('proj', 'zips'):
     p1 = pdir(si).relative_to(ppre('sd'))
     addTgtDir('gd_' + si, ppre('gd') / p1)
     npl1 = ('gd_' + si, si)
