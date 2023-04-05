@@ -1,6 +1,5 @@
 from opbase import OpBase
 from edge import Edge, findEdge
-import snoop
 
 class GitCmdFailure(Exception):
     pass

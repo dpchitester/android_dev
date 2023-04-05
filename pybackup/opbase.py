@@ -38,3 +38,9 @@ class OpBase():
         self.opts = opts
     def ischanged(self, e:Edge):
         return e.chk_ct()
+    def __repr__(self):
+        return str(self.__class__) + ': \n' +\
+                '\t' + str(self.npl1) + ', ' +\
+                '\t' + str(self.npl2) + ', ' +\
+                '\t' + str(self.opts) + '\n\n'
+
