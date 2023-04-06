@@ -7,16 +7,24 @@ from pathlib import Path
 import config_vars as v
 import config_funcs
 import config
+from os import walk
+from config_funcs import srcDir
+
+from inotify_simple import flags
+from status import onestatus
+from config_vars import LDlls
+from opexec import clean, opExec
+
+import ldsv
+import status as st
+import dirlist as dl
+
 
 wdsi = {}
 in1 = None
 cel = None
 
 async def wsetup():
-    from os import walk
-    from config_funcs import srcDir
-    import config_vars as v
-    from inotify_simple import flags
     global wdsi, in1
     for si in v.srcs:
         try:
@@ -49,8 +57,6 @@ tr = 0
 
 
 async def cb1():
-    from status import onestatus
-    from config_vars import LDlls
     global tr, in1
     sis = set()
     evs = await in1.read(1000, 1000)
@@ -78,8 +84,6 @@ ct1 = None
 
 
 def rt2():
-    from opexec import clean, opExec
-    import ldsv
     itc = 0
     rv = False
     while True:
@@ -99,9 +103,6 @@ def rt2():
 
 def main():
     print('-main')
-    import ldsv
-    import status as st
-    import dirlist as dl
     st.updatets(0)
     dl.getrdlls()
     st.rupdatets(0)

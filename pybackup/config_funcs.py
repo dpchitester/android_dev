@@ -1,21 +1,23 @@
 from pathlib import Path
+from os import walk
+from functools import partial
+
+import config_vars as v
+from statushash import rdhck, ldhck
 
 def ppre(s):
-    import config_vars as v
     if s in v.pres:
         return v.paths[s]
     else:
         raise KeyError(s + " tag not in pres")
 
 def pdir(s):
-    import config_vars as v
     if s in v.pdirs:
         return v.paths[s]
     else:
         raise KeyError(s + " tag not in pdirs")
 
 def tdir(s):
-    import config_vars as v
     if s in v.tdirs:
         return v.paths[s]
     else:
@@ -23,7 +25,6 @@ def tdir(s):
 
 
 def srcDir(s):
-    import config_vars as v
     if s in v.srcs:
         return v.paths[s]
     else:
@@ -31,7 +32,6 @@ def srcDir(s):
 
 
 def tdir(s):
-    import config_vars as v
     if s in v.tgts:
         return v.paths[s]
     else:
@@ -39,7 +39,6 @@ def tdir(s):
 
 
 def cdir(s):
-    import config_vars as v
     if s in v.codes:
         return v.paths[s]
     else:
@@ -47,9 +46,6 @@ def cdir(s):
 
 
 def addTgtDir(tg, pth):
-    from functools import partial
-    import config_vars as v
-    from statushash import rdhck
     if not isinstance(pth, Path):
         pth = Path(pth)
     if tg in v.paths and v.paths[tg] != pth:
@@ -60,9 +56,6 @@ def addTgtDir(tg, pth):
     v.tdirs.add(tg)
 
 def addSrcDir(tg, pth, iscode=False):
-    from functools import partial
-    import config_vars as v
-    from statushash import ldhck
     if not isinstance(pth, Path):
         pth = Path(pth)
     if tg in v.paths and v.paths[tg] != pth:
@@ -75,7 +68,6 @@ def addSrcDir(tg, pth, iscode=False):
         v.codes.add(tg)
 
 def addPre(tg, frag):
-    import config_vars as v
     if not isinstance(frag, Path):
         frag = Path(frag)
     if tg in v.paths and v.paths[tg] != frag:
@@ -85,7 +77,6 @@ def addPre(tg, frag):
 
 
 def getDL(p):
-    from os import walk
     # print(str(p))
     fl = []
     try:

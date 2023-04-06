@@ -1,5 +1,7 @@
+from hashlib import md5
+import config_vars as v
+
 def md5sumf(Fn):
-    from hashlib import md5
     if Fn.exists():
         #print('-md5sumf', Fn)
         ho = md5()
@@ -22,7 +24,6 @@ def finddict(d1, fp):
 
 
 def fmd5f(fp, sz, mt):
-    import config_vars as v
     d1 = finddict(v.fmd5hd, fp)
     try:
         (osz, omt, oh) = d1[fp.name]

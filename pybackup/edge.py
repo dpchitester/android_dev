@@ -1,6 +1,7 @@
 import time
 from bhash import blakeHash
 import ldsv
+import config_vars as v
 
 class Edge():
     def __init__(self, di, si):
@@ -48,7 +49,6 @@ class Edge():
 # change detected time
 
 def findEdge(di, si) -> Edge:
-    import config_vars as v
     if len(v.edges) != len(v.eDep):
         for e in v.eDep:
             v.edges[e.di, e.si] = e
@@ -59,13 +59,11 @@ def lrtset(di, si):
     e.rtset()
 
 def addDep(j, i):
-    import config_vars as v
     e:Edge = Edge(j, i)
     if e not in v.eDep:
         v.eDep.add(e)
 
 def addArc(op1):
-    import config_vars as v
     if op1 not in v.opdep:
         v.opdep.append(op1)
     j, i = op1.npl1

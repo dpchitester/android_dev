@@ -1,5 +1,9 @@
+import config_vars as v
+from bhash import blakeHash
+from dirlist import lDlld, rDlld
+import ldsv
+
 def ldh_f(Si, dh=None):
-    import config_vars as v
     if Si not in v.LDhd:
         v.LDhd[Si] = None
     odh = v.LDhd[Si]
@@ -9,7 +13,6 @@ def ldh_f(Si, dh=None):
 
 
 def rdh_f(Di, dh=None):
-    import config_vars as v
     if Di not in v.RDhd:
         v.RDhd[Di] = None
     odh = v.RDhd[Di]
@@ -19,8 +22,6 @@ def rdh_f(Di, dh=None):
 
 
 def ldh_d(Si):
-    from bhash import blakeHash
-    from dirlist import lDlld
     Si_dl = lDlld(Si)
     if Si_dl is not None:
         return blakeHash(Si_dl)
@@ -28,8 +29,6 @@ def ldh_d(Si):
 
 
 def rdh_d(Di):
-    from bhash import blakeHash
-    from dirlist import rDlld
     Di_dl = rDlld(Di)
     if Di_dl is not None:
         return blakeHash(Di_dl)
@@ -37,7 +36,6 @@ def rdh_d(Di):
 
 
 def ldhset(Si, Dh=None):
-    import ldsv
     if Dh is None:
         Dh = ldh_d(Si)
     if Dh is not None:
@@ -46,7 +44,6 @@ def ldhset(Si, Dh=None):
 
 
 def rdhset(Di, Dh=None):
-    import ldsv
     if Dh is None:
         Dh = rdh_d(Di)
     if Dh is not None:

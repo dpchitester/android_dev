@@ -1,5 +1,12 @@
+from os import utime
+
+import config_vars as v
+from config_funcs import pdir, tdir
+import asyncrun as ar
+from netup import netup
 from opbase import OpBase
-from edge import Edge
+from edge import Edge, findEdge
+from dirlist import dllcmp, lDlld, rDlld
 
 class SFc():
     sc = 0
@@ -10,8 +17,6 @@ class SFc():
         return (self.sc, self.fc)
 
 def fsync(sd, td, sfc):
-    import asyncrun as ar
-    from netup import netup
     if (netup()):
         # print('fsync', sd, td)
         cmd = 'rclone sync "' + str(sd) + '" "' + str(
@@ -27,8 +32,6 @@ def fsync(sd, td, sfc):
 
 
 def fcopy(sd, td, sfc):
-    import asyncrun as ar
-    from netup import netup
     if (netup()):
         # print('fcopy', sd, td)
         cmd = 'rclone copyto "' + str(sd) + '" "' + str(
@@ -45,8 +48,6 @@ def fcopy(sd, td, sfc):
 
 
 def fdel(td, sfc):
-    import asyncrun as ar
-    from netup import netup
     if (netup()):
         cmd = 'rclone delete "' + str(td) + '" --progress'
         print(cmd)
@@ -60,7 +61,6 @@ def fdel(td, sfc):
 
 class BVars():
     def __init__(self, di, si, sfc):
-        from config_funcs import pdir, tdir
         self.si = si
         self.di = di
         self.sd = pdir(si)
@@ -74,7 +74,6 @@ class BVars():
         self.ac2 = 0
 
     def init2(self):
-        from dirlist import dllcmp, lDlld, rDlld
         self.src_dls = lDlld(self.si)
         if self.src_dls is None:
             self.sfc.fc+=1
@@ -85,7 +84,6 @@ class BVars():
             self.f2d, self.f2c = dllcmp(self.dst_dls, self.src_dls)
 
     def skip_matching(self):
-        from os import utime
        # handle slip through mismatched on times or more recent
         for rf in self.f2d.copy():
             for lf in self.f2c.copy():
@@ -141,12 +139,10 @@ class CSCopy(OpBase):
     def ischanged(self, e:Edge):
         return e.chk_ct() | e.rchk_ct()        
     def __call__(self):
-        import config_vars as v
-        from netup import netup
-        from edge import findEdge
         print('CSCopy')
         if not netup():
-            return False
+            self.sfc.fc+=1
+            return self.sfc.value()
         di, si = self.npl1
         e:Edge = findEdge(di, si)
         if e.chk_ct():

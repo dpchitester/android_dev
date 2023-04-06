@@ -1,9 +1,10 @@
 from edge import findEdge, Edge
 from statushash import ldhset, rdhset
 from opbase import OpBase
+import config_vars as v
+import ldsv, config
 
 def changed_ops(T=None) -> list[OpBase]:
-    import config_vars as v
     rv:list[OpBase] = []
     for Op in v.opdep:
         di, si = Op.npl1
@@ -14,7 +15,6 @@ def changed_ops(T=None) -> list[OpBase]:
     return rv
 
 def stsupdate(Si, Dh):
-    import config_vars as v
     # print(Si, end=' ')
     print(Si, end=' ')
     # N1 = v.srcts[Si]
@@ -24,7 +24,6 @@ def stsupdate(Si, Dh):
 
 def rstsupdate(Di, Dh):
     # print(Si, end=' ')
-    import config_vars as v
     print(Di, end=' ')
     # N1 = v.srcts[Si]
     for e in [e for e in v.eDep if e.di == Di]:
@@ -33,7 +32,6 @@ def rstsupdate(Di, Dh):
 
 def onestatus(Si):
     # TODO: update as per statuses
-    import config_vars as v
     tr = v.lckers[Si]()
     if tr is not None:
         (Dh, changed) = tr 
@@ -43,7 +41,6 @@ def onestatus(Si):
 
 def ronestatus(Di):
     # TODO: update as per rstatuses
-    import config_vars as v
     tr = v.rckers[Di]()
     if tr is not None:
         (Dh, changed) = tr
@@ -52,7 +49,6 @@ def ronestatus(Di):
             print()
 
 def statuses():
-    import config_vars as v
     SDl = []
     for Si in v.srcs:
         #print('calling lckers', Si)
@@ -64,7 +60,6 @@ def statuses():
     return SDl
 
 def rstatuses():
-    import config_vars as v
     RDl = []
     for Di in v.tgts:
         if Di.startswith('gd_') or Di == 'bitbucket' or Di =='github':
@@ -95,7 +90,6 @@ def rupdatets(N):
 
 
 if __name__ == '__main__':
-    import ldsv, config
     updatets(1)
     rupdatets(1)
     print(changed_ops())

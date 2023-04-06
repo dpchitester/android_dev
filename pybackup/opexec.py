@@ -1,8 +1,7 @@
 import asyncio
 from toposort import topological_sort
 import config_vars as v
-import snoop
-import sys
+from status import changed_ops, updatets, rupdatets
 
 _pass = 1
 
@@ -16,14 +15,12 @@ def incp():
     return i
 
 def clean():
-    from status import changed_ops
     res = len(changed_ops()) == 0
     if res:
         print('clean')
     return res
 
 def nodeps(T):
-    import config_vars as v
     for e in v.eDep:
         if e.si == T:
             return False
@@ -31,7 +28,6 @@ def nodeps(T):
 
 
 def istgt(T, dep2=None):
-    import config_vars as v
     if dep2 is None:
         dep2 = v.eDep
     for e in dep2:
@@ -41,7 +37,6 @@ def istgt(T, dep2=None):
 
 
 def nts():
-    import config_vars as v
     print('-nts')
     p1 = topological_sort(v.eDep)
     ts = [t for elem in p1 for t in elem]
@@ -51,7 +46,6 @@ def nts():
 
 
 def proc_nodes(L):
-    from status import updatets, rupdatets, changed_ops
     n = 1
     for node in L:
         print('node:', node)
@@ -64,12 +58,7 @@ def proc_nodes(L):
                 n += 1
     return True
 
-try:
-    depth = int(sys.argv[1])
-except:
-    depth = 1
 
-@snoop(depth=depth)
 def opExec():
     print('-opexec')
     g1 = nts()

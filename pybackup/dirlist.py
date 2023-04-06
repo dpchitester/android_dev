@@ -1,9 +1,21 @@
 import asyncio
 from pathlib import Path
+from os import walk
 import json
 import datetime
 import time
 from dataclasses import dataclass, field
+from fnmatch import fnmatch
+from bisect import bisect_left
+
+import asyncrun as ar
+import config_vars as v
+from config_funcs import ppre, tdir, pdir, srcDir, trunc2ms
+import asyncrun as ar
+from bhash import blakeHash
+
+from fmd5h import fmd5f
+
 
 rto1 = 0  # 60*60*.5
 rto2 = 0  # 60*1
@@ -17,7 +29,6 @@ class DE():
     _hc: int = field(default=None)
 
     def __hash__(self):
-        from bhash import blakeHash
         if self._hc is None:
             self._hc = blakeHash((self.nm, self.sz, self.mt, self.md5))
         return self._hc
@@ -31,7 +42,6 @@ class DE():
             other.nm), other.sz, other.mt, other.md5)
 
 def getfl(p):
-    from os import walk
     # print(str(p))
     fl = []
     try:
@@ -55,7 +65,6 @@ def getfl(p):
 
 
 def getDL(p):
-    from os import walk
     # print(str(p))
     fl = []
     try:
@@ -78,8 +87,6 @@ def getDL(p):
 
 
 def getdll0():
-    import asyncrun as ar
-    from config_funcs import ppre
     td = ppre('gd')
     #print('getdll0',td)
     cmd = 'rclone lsjson "' + str(td) + '" --recursive --files-only --hash'
@@ -106,11 +113,7 @@ def getdll0():
 
 
 def sepdlls(dlls):
-    import config_vars as v
-    from config_funcs import ppre, tdir
-    from fnmatch import fnmatch
-    from bisect import bisect_left
-    print("-sepdlls")
+   print("-sepdlls")
     for di in v.tdirs:
         if di.startswith('gd_'):
             v.RDlls[di] = []
@@ -144,8 +147,6 @@ def sepdlls(dlls):
 
 
 def getdll1(di):
-    import asyncrun as ar
-    from config_funcs import tdir
     td = tdir(di)
     #print('getdll1', di, str(td))
     cmd = 'rclone lsjson "' + str(
@@ -176,8 +177,6 @@ def getdll1(di):
 
 
 def getdll2(si):
-    import asyncrun as ar
-    from config_funcs import pdir
     td = pdir(si)
     #print('getdll2', si, str(td))
     cmd = 'rclone lsjson "' + str(
@@ -210,8 +209,6 @@ def getdll2(si):
 
 
 def getdll3(si):
-    from config_funcs import srcDir, trunc2ms
-    from fmd5h import fmd5f
     sd = srcDir(si)
     #print('getdll3', si, str(sd))
     l1 = getfl(sd)
@@ -232,7 +229,6 @@ def getdll3(si):
 
 
 def getrdlls():
-    import config_vars as v
     t1 = time.time()
     rv = getdll0()
     if rv is not None:
@@ -243,7 +239,6 @@ def getrdlls():
 
 
 def lDlld(si):
-    import config_vars as v
     #print('-ldlld', si)
     if si not in v.LDlls or v.LDlls_xt[si] + rto2 <= time.time():
         rv = getdll3(si)
@@ -257,7 +252,6 @@ def lDlld(si):
 
 
 def rDlld(di):
-    import config_vars as v
     #print('-rdlld', di)
     if di not in v.RDlls or v.RDlls_xt[di] + rto1 <= time.time():
         rv = getdll1(di)

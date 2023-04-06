@@ -1,9 +1,10 @@
+from os import walk, utime
 from pathlib import Path
 from shutil import make_archive
-from os import walk, utime
 from opbase import OpBase
 import config_vars as v
 from edge import findEdge, Edge
+from config_funcs import pdir, tdir
 
 
 def getfl(p):
@@ -42,7 +43,6 @@ class Mkzip(OpBase):
     def ischanged(self, e:Edge):
         return e.chk_ct()
     def __call__(self):
-        from config_funcs import pdir, tdir
         print('Mkzip')
         tc = 0
         fc = 0

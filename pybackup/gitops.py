@@ -1,19 +1,20 @@
 from opbase import OpBase
 from edge import Edge, findEdge
+import asyncrun as ar
+from statushash import ldh_f, ldhset, rdh_f, rdhset
+from bhash import blakeHash
+from netup import netup
 
 class GitCmdFailure(Exception):
     pass
 
 def gitcmd(cmd, wt):
-    import asyncrun as ar
     rc = ar.run1(cmd, cwd=wt)
     if rc != 0:
         raise GitCmdFailure('gitcmd rc: ' + str(rc) + cmd)
     return ar.txt.rstrip()
 
 def gitck1(Si, wt):
-    from statushash import ldh_f, ldhset, rdh_f, rdhset
-    from bhash import blakeHash
     Dh1 = ldh_f(Si)
     cmd = 'git status --porcelain --untracked-files=all'
     rv = gitcmd(cmd, wt)
@@ -25,7 +26,6 @@ def gitck1(Si, wt):
     return (Dh2, len(rv) > 0 and Dh2 != Dh1)
 
 def gitck2(Si, wt):
-    from statushash import ldh_f, ldhset, rdh_f, rdhset
     Dh1 = ldh_f(Si)
     if Dh1 is None:
         Dh1 = 0
@@ -39,7 +39,6 @@ def gitck2(Si, wt):
     return (Dh2, Dh2 > Dh1)
 
 def gitremoteck(Di, wt):
-    from statushash import ldh_f, ldhset, rdh_f, rdhset
     Dh1 = rdh_f(Di)
     Dh2 = None
     # print(Di, 'status here')
@@ -85,9 +84,6 @@ class GitOps(OpBase):
     def ischanged(self, e:Edge):
         return e.chk_ct() | e.rchk_ct()
     def __call__(self):
-        import asyncrun as ar
-        from statushash import ldh_f, ldhset, rdh_f, rdhset
-        from netup import netup
         print('Gitbackup')
         tc = 0
         fc = 0

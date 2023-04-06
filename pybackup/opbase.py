@@ -1,9 +1,9 @@
 import json
 from edge import Edge
+from pathlib import PosixPath
 
 class OpBaseEncoder(json.JSONEncoder):
     def default(self, obj):
-        from pathlib import PosixPath
         if isinstance(obj, PosixPath):
             #print(1, obj.__class__)
             return str(obj)
