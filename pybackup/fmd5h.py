@@ -13,10 +13,10 @@ def md5sumf(Fn):
                 while len(b) > 0:
                     ho.update(b)
                     b = fh.read(1 << 15)
+            return ho.digest()
         except Exception as e:
             print(e)
             raise e
-        return ho.digest()
     return None
 
 
@@ -37,8 +37,7 @@ def fmd5f(fp, sz, mt):
     except KeyError:
         (osz, omt, oh) = (-1, -1, b'')
         v.hf_dm += 1
-        pp(fp)
-        pp(v.hf_dm)
+        pp(fp, sz, mt, v.hf_dm)
     if osz == sz and omt == mt:
         v.hf_sth += 1
     else:
@@ -47,8 +46,7 @@ def fmd5f(fp, sz, mt):
             d1[fp.name] = (sz, mt, oh)
             v.hf_dirty = True
             v.hf_stm += 1
-            pp(fp)
-            pp(v.hf_stm)
+            pp(fp, sz, mt, oh, v.hf_stm)
         except:
             pass
     return oh
