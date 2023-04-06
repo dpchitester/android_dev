@@ -82,7 +82,7 @@ def copy2(f1, f2):
     # print('copying ', f1, 'to', f2)
     if f1.is_file():
         f2 = f2.parent
-    cmd = 'cp -f -p ' + str(f1) + ' ' + str(f2)
+    cmd = 'cp -u -p ' + str(f1) + ' ' + str(f2)
     print(cmd)
     return run1(cmd)
 
@@ -112,6 +112,8 @@ class LocalCopy(OpBase):
                     self.sfc.fc += 1
                     return self.sfc.value()
                 for fsf in fl:
+                    if fsf.is_dir():
+                        continue
                     rf = fsf.relative_to(sp)
                     fdf = dp / rf
                     pd = fdf.parent
