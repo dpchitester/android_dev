@@ -29,13 +29,13 @@ def fmd5f(fp, sz, mt):
         (osz, omt, oh) = d1[fp.name]
         v.hf_dh += 1
     except KeyError:
-        v.hf_dm += 1
         (osz, omt, oh) = (-1, -1, b'')
+        v.hf_dm += 1
     if osz == sz and omt == mt:
         v.hf_sth += 1
-        return oh
-    v.hf_stm += 1
-    nh = md5sumf(fp)
-    d1[fp.name] = (sz, mt, nh)
-    v.hf_dirty = True
-    return nh
+    else:
+        oh = md5sumf(fp)
+        d1[fp.name] = (sz, mt, oh)
+        v.hf_dirty = True
+        v.hf_stm += 1
+    return oh

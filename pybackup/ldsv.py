@@ -73,10 +73,10 @@ def loadfmd5h():
 
 
 def pstats():
-    print('fp miss', v.hf_dm)
-    print('fp hit', v.hf_dh)
-    print('szmt miss', v.hf_stm)
-    print('szmt hit', v.hf_sth)
+    print('hash-dict name hit', v.hf_dh)
+    print('hash-dict name miss', v.hf_dm)
+    print('hash-dict sz-mt hit', v.hf_sth)
+    print('hash-dict sz-mt miss', v.hf_stm)
     print('sfb', v.sfb)
 
 
