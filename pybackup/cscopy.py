@@ -3,12 +3,13 @@ import json
 from pathlib import Path
 
 import config_vars as v
-from config_funcs import pdir, tdir
+from config_funcs import pdir, tdir, ppre
 import asyncrun as ar
 from netup import netup
 from opbase import OpBase
 from edge import Edge, findEdge
 from dirlist import dllcmp, lDlld, rDlld, DE, getRemoteDE
+from bisect import bisect_left
 
 import snoop
 from snoop import pp
@@ -22,7 +23,25 @@ class SFc():
         return (self.sc, self.fc)
 
 @snoop
-def fsync(di, sd, td, sfc):
+def findLDE(si, td, dl):
+    rd = pdir(si).relative_to(ppre('proj'))
+    de = DE(rd, 0, 0, b'')
+    i = bisect_left(dl, de)
+    if dl[i].nm == td.name:
+        return (i, True)
+    return (i, False)
+
+@snoop
+def findRDE(di, td, dl):
+    rd = tdir(di).relative_to(ppre('gd'))
+    de = DE(rd, 0, 0, b'')
+    i = bisect_left(dl, de)
+    if dl[i].nm == td.name:
+        return (i, True)
+    return (i, False)
+
+
+def fsync(di, si, sd, td, sfc):
     if (netup()):
         # print('fsync', sd, td)
         cmd = 'rclone sync "' + str(sd) + '" "' + str(
@@ -32,8 +51,15 @@ def fsync(di, sd, td, sfc):
         rc = ar.run2(cmd)
         if rc == 0:
             sfc.sc+=1
-            rde = getRemoteDE(td)
-            pp(v.RDlls[di])
+            with snoop:
+                rde = getRemoteDE(td)
+                sdei = findLDE(si, sd, v.LDlls[si])
+                ddei = findRDE(di, td, v.RDlls[di])
+                pp(sdei, ddei)
+                sdei = sdei[0]
+                ddei = ddei[0]
+                pp(v.LDlls[si][sdei])
+                pp(v.RDlls[di][ddei])
             return True
         sfc.fc+=1
     return False
@@ -106,12 +132,12 @@ class BVars():
                             self.f2d.remove(rf)
                             self.f2c.remove(lf)
 
-    def do_copying(self, di):
+    def do_copying(self, di, si):
         for lf in self.f2c.copy():
             # TODO: use Path
             cfp = lf.nm
             # print(cfp)
-            if fsync(di, self.sd / cfp, self.td / cfp, self.sfc):
+            if fsync(di, si, self.sd / cfp, self.td / cfp, self.sfc):
                 self.ac2 += 1
                 self.f2c.remove(lf)
                 for rf in self.f2d.copy():
@@ -147,7 +173,7 @@ class CSCopy(OpBase):
                 bv.skip_matching()
                 print('skip', len(bv.f2d), 'todelete', len(bv.f2c), 'tocopy')
             if bv.sfc.fc == 0:
-                bv.do_copying(di)
+                bv.do_copying(di,si)
             if bv.sfc.fc == 0:
                 if 'delete' in self.opts and self.opts['delete']:
                     bv.do_deletions()
