@@ -2,6 +2,7 @@ import asyncio
 from toposort import topological_sort
 import config_vars as v
 import snoop
+import sys
 
 _pass = 1
 
@@ -63,7 +64,12 @@ def proc_nodes(L):
                 n += 1
     return True
 
-@snoop(depth=3)
+try:
+    depth = int(sys.argv[1])
+except:
+    depth = 1
+
+@snoop(depth=depth)
 def opExec():
     print('-opexec')
     g1 = nts()
