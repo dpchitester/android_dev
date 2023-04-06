@@ -122,7 +122,7 @@ class BVars():
                             print('newer mismatched file on cloud', rf.nm)
                             self.f2d.remove(rf)
                             self.f2c.remove(lf)
-
+    @snoop
     def do_copying(self, di, si):
         for lf in self.f2c.copy():
             # TODO: use Path
