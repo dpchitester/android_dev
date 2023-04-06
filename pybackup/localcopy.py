@@ -83,7 +83,7 @@ def copy2(f1, f2):
     if f1.is_file():
         f2 = f2.parent
     cmd = 'cp -u -p ' + str(f1) + ' ' + str(f2)
-    print(f1.name)
+    print('copying', f1.name)
     return run1(cmd)
 
 #import shutil
