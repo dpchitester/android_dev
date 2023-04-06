@@ -29,7 +29,6 @@ def findLDE(di, si, sd, td, dl):
     i = bisect_left(dl, de)
     return i
 
-@snoop
 def findRDE(di, si, sd, td, dl):
     rd = td.relative_to(tdir(di))
     de = DE(rd, 0, 0, b'')
@@ -47,13 +46,10 @@ def fsync(di, si, sd, td, sfc):
         rc = ar.run2(cmd)
         if rc == 0:
             sfc.sc+=1
-            with snoop:
-                rde = getRemoteDE(td)
-                sdei = findLDE(di, si, sd, td, v.LDlls[si])
-                ddei = findRDE(di, si, sd, td, v.RDlls[di])
-                pp(v.LDlls[si][sdei])
-                pp(v.RDlls[di][ddei])
-                pp(v.LDlls[si][sdei]==v.RDlls[di][ddei])
+            rde = getRemoteDE(td)
+            ddei = findRDE(di, si, sd, td, v.RDlls[di])
+            if ddei >= 0:
+                pp(v.RDlls[di][ddei], rde)
             return True
         sfc.fc+=1
     return False
