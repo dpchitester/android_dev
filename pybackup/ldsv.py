@@ -81,15 +81,14 @@ def pstats():
 
 
 def savefmd5h():
-    if v.hf_dirty:
-        try:
-            with open(v.fmd5hf, "wb") as fh:
-                pickle.dump(v.fmd5hd, fh)
-            v.sfb += v.fmd5hf.stat().st_size
-            pstats()
-            v.hf_dirty = False
-        except Exception as e:
-            print("savefmd5h failed", e)
+    try:
+        with open(v.fmd5hf, "wb") as fh:
+            pickle.dump(v.fmd5hd, fh)
+        v.sfb += v.fmd5hf.stat().st_size
+        pstats()
+        v.hf_dirty = False
+    except Exception as e:
+        print("savefmd5h failed", e)
 
 
 def loadldh():
