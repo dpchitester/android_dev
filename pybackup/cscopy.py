@@ -1,6 +1,7 @@
 from os import utime
 import json
 from pathlib import Path
+import datetime
 
 import config_vars as v
 from config_funcs import pdir, tdir, ppre
@@ -8,7 +9,7 @@ import asyncrun as ar
 from netup import netup
 from opbase import OpBase
 from edge import Edge, findEdge
-from dirlist import dllcmp, lDlld, rDlld, DE, getRemoteDE
+from dirlist import dllcmp, lDlld, rDlld, DE
 from bisect import bisect_left
 
 import snoop
@@ -21,6 +22,22 @@ class SFc():
         pass
     def value(self):
         return (self.sc, self.fc)
+
+def getRemoteDE(sf:Path):
+    cmd = 'rclone lsjson "' + str(sf) + '" --hash'
+    rc = ar.run1(cmd)
+    if rc == 0:
+        rd = sf.relative_to(ppre('gd')).parent
+        it = json.loads(ar.txt)[0]
+        it1 = rd / Path(it['Path'])
+        it2 = it['Size']
+        it3 = it['ModTime'][:-1] + '-00:00'
+        it3 = datetime.datetime.fromisoformat(it3).timestamp()
+        if 'Hashes' in it:
+            it4 = bytes.fromhex(it['Hashes']['md5'])
+        else:
+            it4 = bytes()
+        return DE(it1, it2, it3, it4)
 
 
 def findLDE(di, si, sd, td, dl):
