@@ -23,22 +23,18 @@ class SFc():
         return (self.sc, self.fc)
 
 @snoop
-def findLDE(di, si, sd, dl):
+def findLDE(di, si, sd, td, dl):
     ld = sd.relative_to(pdir(si))
     de = DE(ld, 0, 0, b'')
     i = bisect_left(dl, de)
-    if dl[i].nm == ld.name:
-        return (i, ld, True)
-    return (i, ld, False)
+    return i
 
 @snoop
-def findRDE(di, si, td, dl):
+def findRDE(di, si, sd, td, dl):
     rd = td.relative_to(tdir(di))
     de = DE(rd, 0, 0, b'')
     i = bisect_left(dl, de)
-    if dl[i].nm == rd.name:
-        return (i, rd, True)
-    return (i, rd, False)
+    return i
 
 
 def fsync(di, si, sd, td, sfc):
@@ -53,11 +49,8 @@ def fsync(di, si, sd, td, sfc):
             sfc.sc+=1
             with snoop:
                 rde = getRemoteDE(td)
-                sdei_t = findLDE(di, si, sd, v.LDlls[si])
-                ddei_t = findRDE(di, si, td, v.RDlls[di])
-                pp(sdei_t, ddei_t)
-                sdei = sdei_t[0]
-                ddei = ddei_t[0]
+                sdei = findLDE(di, si, sd, td, v.LDlls[si])
+                ddei = findRDE(di, si, sd, td, v.RDlls[di])
                 pp(v.LDlls[si][sdei])
                 pp(v.RDlls[di][ddei])
                 pp(v.LDlls[si][sdei]==v.RDlls[di][ddei])
