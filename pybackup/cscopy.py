@@ -1,4 +1,6 @@
 from os import utime
+import json
+from pathlib import Path
 
 import config_vars as v
 from config_funcs import pdir, tdir
@@ -6,7 +8,8 @@ import asyncrun as ar
 from netup import netup
 from opbase import OpBase
 from edge import Edge, findEdge
-from dirlist import dllcmp, lDlld, rDlld
+from dirlist import dllcmp, lDlld, rDlld, DE, getDE
+
 
 class SFc():
     sc = 0

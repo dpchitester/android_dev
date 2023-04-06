@@ -10,9 +10,7 @@ from bisect import bisect_left
 
 import asyncrun as ar
 import config_vars as v
-import asyncrun as ar
 from bhash import blakeHash
-
 from fmd5h import fmd5f
 
 
@@ -39,6 +37,21 @@ class DE():
     def __lt__(self, other):
         return (str(self.nm), self.sz, self.mt, self.md5) < (str(
             other.nm), other.sz, other.mt, other.md5)
+
+def getDE(sf:Path):
+    cmd = 'rclone lsjson "' + str(sf) + '" --hash'
+    rc = ar.run1(cmd)
+    if rc == 0:
+        it = json.loads(ar.txt)[0]
+        it1 = Path(it['Path'])
+        it2 = it['Size']
+        it3 = it['ModTime'][:-1] + '-00:00'
+        it3 = datetime.datetime.fromisoformat(it3).timestamp()
+        if 'Hashes' in it:
+            it4 = bytes.fromhex(it['Hashes']['md5'])
+        else:
+            it4 = bytes()
+        return DE(it1, it2, it3, it4)
 
 def getfl(p):
     # print(str(p))
