@@ -23,17 +23,17 @@ class SFc():
         return (self.sc, self.fc)
 
 @snoop
-def findLDE(si, td, dl):
-    rd = pdir(si).relative_to(ppre('proj'))
-    de = DE(rd, 0, 0, b'')
+def findLDE(di, si, sd, dl):
+    ld = sd.relative_to(pdir(si))
+    de = DE(ld, 0, 0, b'')
     i = bisect_left(dl, de)
-    if dl[i].nm == td.name:
+    if dl[i].nm == sd.name:
         return (i, True)
     return (i, False)
 
 @snoop
-def findRDE(di, td, dl):
-    rd = tdir(di).relative_to(ppre('gd'))
+def findRDE(di, si, td, dl):
+    rd = td.relative_to(tdir(di))
     de = DE(rd, 0, 0, b'')
     i = bisect_left(dl, de)
     if dl[i].nm == td.name:
@@ -53,13 +53,14 @@ def fsync(di, si, sd, td, sfc):
             sfc.sc+=1
             with snoop:
                 rde = getRemoteDE(td)
-                sdei = findLDE(si, sd, v.LDlls[si])
-                ddei = findRDE(di, td, v.RDlls[di])
+                sdei = findLDE(di, si, sd, v.LDlls[si])
+                ddei = findRDE(di, si, td, v.RDlls[di])
                 pp(sdei, ddei)
                 sdei = sdei[0]
                 ddei = ddei[0]
                 pp(v.LDlls[si][sdei])
                 pp(v.RDlls[di][ddei])
+                pp(v.LDlls[si][sdei]==v.RDlls[di][ddei])
             return True
         sfc.fc+=1
     return False
