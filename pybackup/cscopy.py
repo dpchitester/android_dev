@@ -23,20 +23,21 @@ class SFc():
     def value(self):
         return (self.sc, self.fc)
 
-def getRemoteDE(sf:Path):
+def getRemoteDE(di, sf:Path):
     cmd = 'rclone lsjson "' + str(sf) + '" --hash'
     rc = ar.run1(cmd)
     if rc == 0:
-        rd = sf.relative_to(ppre('gd')).parent
-        it = json.loads(ar.txt)[0]
-        it1 = rd / Path(it['Path'])
-        it2 = it['Size']
-        it3 = it['ModTime'][:-1] + '-00:00'
-        it3 = datetime.datetime.fromisoformat(it3).timestamp()
-        if 'Hashes' in it:
-            it4 = bytes.fromhex(it['Hashes']['md5'])
-        else:
-            it4 = bytes()
+        with snoop:
+            rd = sf.relative_to(tdir(di)).parent
+            it = json.loads(ar.txt)[0]
+            it1 = rd / it['Path']
+            it2 = it['Size']
+            it3 = it['ModTime'][:-1] + '-00:00'
+            it3 = datetime.datetime.fromisoformat(it3).timestamp()
+            if 'Hashes' in it:
+                it4 = bytes.fromhex(it['Hashes']['md5'])
+            else:
+                it4 = bytes()
         return DE(it1, it2, it3, it4)
 
 
@@ -47,9 +48,11 @@ def findLDE(di, si, sd, td, dl):
     return i
 
 def findRDE(di, si, sd, td, dl):
-    rd = td.relative_to(tdir(di))
-    de = DE(rd, 0, 0, b'')
-    i = bisect_left(dl, de)
+    with snoop:
+        rd = td.relative_to(tdir(di))
+        pp(rd)
+        de = DE(rd, 0, 0, b'')
+        i = bisect_left(dl, de)
     return i
 
 
@@ -63,11 +66,10 @@ def fsync(di, si, sd, td, sfc):
         rc = ar.run2(cmd)
         if rc == 0:
             sfc.sc+=1
-            with snoop:
-                rde = getRemoteDE(td)
-                ddei = findRDE(di, si, sd, td, v.RDlls[di])
-                if ddei >= 0:
-                    pp(v.RDlls[di][ddei], rde)
+            rde = getRemoteDE(di, td)
+            ddei = findRDE(di, si, sd, td, v.RDlls[di])
+            if ddei >= 0:
+                v.RDlls[di][ddei]
             return True
         sfc.fc+=1
     return False
