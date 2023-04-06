@@ -1,5 +1,7 @@
 from hashlib import md5
 import config_vars as v
+import snoop
+from snoop import pp
 
 def md5sumf(Fn):
     if Fn.exists():
@@ -31,6 +33,8 @@ def fmd5f(fp, sz, mt):
     except KeyError:
         (osz, omt, oh) = (-1, -1, b'')
         v.hf_dm += 1
+        pp(fp)
+        pp(v.hf_dm)
     if osz == sz and omt == mt:
         v.hf_sth += 1
     else:
@@ -38,4 +42,6 @@ def fmd5f(fp, sz, mt):
         d1[fp.name] = (sz, mt, oh)
         v.hf_dirty = True
         v.hf_stm += 1
+        pp(fp)
+        pp(v.hf_stm)
     return oh
