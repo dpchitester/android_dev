@@ -29,16 +29,16 @@ class FileDiff():
         if self.fe == 0:
             sfs = self.sf.stat()
             dfs = self.df.stat()
-            if dfs.st_size < sfs.st_size:
+            if sfs.st_size > dfs.st_size:
                 self.sz = 1
                 print('source larger:', sfs.st_size - dfs.st_size, self.sf.name)
-            elif dfs.st_size > sfs.st_size:
+            elif sfs.st_size < dfs.st_size:
                 self.sz = -1
                 print('dest larger:', dfs.st_size - sfs.st_size, self.sf.name)
-            if dfs.st_mtime_ns < sfs.st_mtime_ns:
+            if sfs.st_mtime_ns > dfs.st_mtime_ns:
                 self.mt = 1
                 print('source newer:', (sfs.st_mtime_ns - dfs.st_mtime_ns) / 1E9, self.sf.name)
-            elif dfs.st_mtime_ns > sfs.st_mtime_ns:
+            elif sfs.st_mtime_ns < dfs.st_mtime_ns:
                 self.mt = -1
                 print('dest newer:', (dfs.st_mtime_ns - sfs.st_mtime_ns) / 1E9, self.sf.name)
             if sha256sumf(self.sf) != sha256sumf(self.df):
