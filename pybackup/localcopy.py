@@ -31,19 +31,19 @@ class FileDiff():
             dfs = self.df.stat()
             if dfs.st_size < sfs.st_size:
                 self.sz = 1
-                print('size less:', dfs.st_size - sfs.st_size)
+                print('source larger:', sfs.st_size - dfs.st_size)
             elif dfs.st_size > sfs.st_size:
                 self.sz = -1
-                print('size more:', dfs.st_size - sfs.st_size)
+                print('dest larger:', dfs.st_size - sfs.st_size)
             if dfs.st_mtime_ns < sfs.st_mtime_ns:
                 self.mt = 1
-                print('time later:', (dfs.st_mtime_ns - sfs.st_mtime_ns) / 1E9)
+                print('source newer:', (sfs.st_mtime_ns - dfs.st_mtime_ns) / 1E9)
             elif dfs.st_mtime_ns > sfs.st_mtime_ns:
                 self.mt = -1
-                print('time later:', (dfs.st_mtime_ns - sfs.st_mtime_ns) / 1E9)
+                print('dest newer:', (dfs.st_mtime_ns - sfs.st_mtime_ns) / 1E9)
             if sha256sumf(self.sf) != sha256sumf(self.df):
                 self.hd = True
-                print('hash diff:', str(self.sf), str(self.df))
+                print('hash mismatch:')
 
     def should_copy(self):
         self.chkdiff()
