@@ -70,7 +70,6 @@ class BVars():
         self.f2d = None
         self.f2c = None
         self.sfc = sfc
-        self.ac1 = 0
         self.ac2 = 0
 
     def init2(self):
@@ -148,10 +147,6 @@ class CSCopy(OpBase):
                 del v.RDlls[di]
                 v.RDlls_changed = True
                 # rnoc(di)
-            if bv.ac1:
-                del v.LDlls[si]
-                v.LDlls_changed = True
-                # noc(si)
         if self.sfc.fc == 0:
             e.clr()
         return self.sfc.value()
