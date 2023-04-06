@@ -27,17 +27,16 @@ def getRemoteDE(di, sf:Path):
     cmd = 'rclone lsjson "' + str(sf) + '" --hash'
     rc = ar.run1(cmd)
     if rc == 0:
-        with snoop:
-            rd = sf.relative_to(tdir(di)).parent
-            it = json.loads(ar.txt)[0]
-            it1 = rd / it['Path']
-            it2 = it['Size']
-            it3 = it['ModTime'][:-1] + '-00:00'
-            it3 = datetime.datetime.fromisoformat(it3).timestamp()
-            if 'Hashes' in it:
-                it4 = bytes.fromhex(it['Hashes']['md5'])
-            else:
-                it4 = bytes()
+        rd = sf.relative_to(tdir(di)).parent
+        it = json.loads(ar.txt)[0]
+        it1 = rd / it['Path']
+        it2 = it['Size']
+        it3 = it['ModTime'][:-1] + '-00:00'
+        it3 = datetime.datetime.fromisoformat(it3).timestamp()
+        if 'Hashes' in it:
+            it4 = bytes.fromhex(it['Hashes']['md5'])
+        else:
+            it4 = bytes()
         return DE(it1, it2, it3, it4)
 
 
@@ -48,11 +47,9 @@ def findLDE(di, si, sd, td, dl):
     return i
 
 def findRDE(di, si, sd, td, dl):
-    with snoop:
-        rd = td.relative_to(tdir(di))
-        pp(rd)
-        de = DE(rd, 0, 0, b'')
-        i = bisect_left(dl, de)
+    rd = td.relative_to(tdir(di))
+    de = DE(rd, 0, 0, b'')
+    i = bisect_left(dl, de)
     return i
 
 
@@ -65,11 +62,15 @@ def fsync(di, si, sd, td, sfc):
         print(cmd)
         rc = ar.run2(cmd)
         if rc == 0:
-            sfc.sc+=1
+            sfc.sc += 1
             rde = getRemoteDE(di, td)
             ddei = findRDE(di, si, sd, td, v.RDlls[di])
             if ddei >= 0:
-                v.RDlls[di][ddei]
+                lrde = v.RDlls[di][ddei]
+                lrde.sz = rde.sz 
+                lrde.mt = rde.mt
+                lrde.md5 = rde.md5
+                # TODO: some sort statushash update
             return True
         sfc.fc+=1
     return False
