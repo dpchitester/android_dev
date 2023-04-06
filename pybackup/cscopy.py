@@ -10,6 +10,8 @@ from opbase import OpBase
 from edge import Edge, findEdge
 from dirlist import dllcmp, lDlld, rDlld, DE, getRemoteDE
 
+import snoop
+from snoop import pp
 
 class SFc():
     sc = 0
@@ -19,7 +21,8 @@ class SFc():
     def value(self):
         return (self.sc, self.fc)
 
-def fsync(sd, td, sfc):
+@snoop
+def fsync(di, sd, td, sfc):
     if (netup()):
         # print('fsync', sd, td)
         cmd = 'rclone sync "' + str(sd) + '" "' + str(
@@ -29,6 +32,8 @@ def fsync(sd, td, sfc):
         rc = ar.run2(cmd)
         if rc == 0:
             sfc.sc+=1
+            rde = getRemoteDE(td)
+            pp(v.RDlls[di])
             return True
         sfc.fc+=1
     return False
@@ -101,12 +106,12 @@ class BVars():
                             self.f2d.remove(rf)
                             self.f2c.remove(lf)
 
-    def do_copying(self):
+    def do_copying(self, di):
         for lf in self.f2c.copy():
             # TODO: use Path
             cfp = lf.nm
             # print(cfp)
-            if fsync(self.sd / cfp, self.td / cfp, self.sfc):
+            if fsync(di, self.sd / cfp, self.td / cfp, self.sfc):
                 self.ac2 += 1
                 self.f2c.remove(lf)
                 for rf in self.f2d.copy():
@@ -142,14 +147,15 @@ class CSCopy(OpBase):
                 bv.skip_matching()
                 print('skip', len(bv.f2d), 'todelete', len(bv.f2c), 'tocopy')
             if bv.sfc.fc == 0:
-                bv.do_copying()
+                bv.do_copying(di)
             if bv.sfc.fc == 0:
                 if 'delete' in self.opts and self.opts['delete']:
                     bv.do_deletions()
             if bv.ac2:
-                del v.RDlls[di]
-                v.RDlls_changed = True
+                #del v.RDlls[di]
+                #v.RDlls_changed = True
                 # rnoc(di)
+                pass
         if self.sfc.fc == 0:
             e.clr()
         return self.sfc.value()
