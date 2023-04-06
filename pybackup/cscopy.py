@@ -37,7 +37,9 @@ def getRemoteDE(di, sf:Path):
             it4 = bytes.fromhex(it['Hashes']['md5'])
         else:
             it4 = bytes()
-        return DE(it1, it2, it3, it4)
+        nde = DE(it1, it2, it3, it4)
+        print('new nde:', str(nde))
+        return nde
 
 
 def findLDE(di, si, sd, td, dl):
@@ -65,12 +67,10 @@ def fsync(di, si, sd, td, sfc):
             sfc.sc += 1
             rde = getRemoteDE(di, td)
             ddei = findRDE(di, si, sd, td, v.RDlls[di])
-            if ddei >= 0:
-                lrde = v.RDlls[di][ddei]
-                lrde.sz = rde.sz 
-                lrde.mt = rde.mt
-                lrde.md5 = rde.md5
-                # TODO: some sort statushash update
+            if ddei < len(v.RDlls[di]) and rde.nm == rde.nm:
+                v.RDlls[di][ddei] = rde
+            else:
+                v.RDlls[di].insert(ddei, rde)
             return True
         sfc.fc+=1
     return False
