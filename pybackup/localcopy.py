@@ -83,7 +83,7 @@ def copy2(f1, f2):
     if f1.is_file():
         f2 = f2.parent
     cmd = 'cp -u -p ' + str(f1) + ' ' + str(f2)
-    print(cmd)
+    print(f1.name)
     return run1(cmd)
 
 #import shutil
@@ -124,6 +124,7 @@ class LocalCopy(OpBase):
                         if fdiff.should_copy():
                             rv = copy2(fsf, fdf)
                             if rv == 0:
+                                print(' ...copied.')
                                 if 'exec' in self.opts:
                                     fdf.chmod(496)
                                 self.sfc.sc += 1
