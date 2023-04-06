@@ -1,7 +1,6 @@
 from pathlib import Path
 import pickle
 import os
-import config_vars as v
 
 
 def loadldlls():
@@ -141,3 +140,5 @@ def save_all():
     savefmd5h()
     saveldh()
     saverdh()
+
+import config_vars as v

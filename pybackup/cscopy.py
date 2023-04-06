@@ -91,20 +91,20 @@ class BVars():
                 if rf.nm == lf.nm:  # names match
                     if rf.md5 == lf.md5:  # hashes match
                         # TODO: correct for conflicting times
+                        #print('time conflict', rf.nm)
+                        #print(rf.mt, '--', lf.mt)
+                        #b1 = abs(rf.mt - lf.mt) <= .00101
+                        #b2 = rf.mt < lf.mt
+                        #if b1:
+                            #print('time diff is only', rf[2] - lf[2])
+                        #if b1 or b2:
+                            #print('retrograding local timestamp', lf.nm)
+                            #nt = int(rf.mt * 1000) * 1000000
+                            #print('to', nt)
+                            #utime(self.sd / lf.nm, ns=(nt, nt))
+                            #self.ac1 += 1
                         self.f2d.remove(rf)
                         self.f2c.remove(lf)
-                        print('time conflict', rf.nm)
-                        print(rf.mt, '--', lf.mt)
-                        b1 = abs(rf.mt - lf.mt) <= .00101
-                        b2 = rf.mt < lf.mt
-                        if b1:
-                            print('time diff is only', rf[2] - lf[2])
-                        if b1 or b2:
-                            print('retrograding local timestamp', lf.nm)
-                            nt = int(rf.mt * 1000) * 1000000
-                            print('to', nt)
-                            utime(self.sd / lf.nm, ns=(nt, nt))
-                            self.ac1 += 1
                     else:
                         b1 = rf.mt > lf.mt
                         if b1:

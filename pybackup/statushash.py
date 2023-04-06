@@ -1,5 +1,4 @@
 from bhash import blakeHash
-from dirlist import lDlld, rDlld
 import ldsv
 
 def ldh_f(Si, dh=None):
@@ -66,3 +65,4 @@ def rdhck(Di):
     return (None, False)
 
 import config_vars as v
+from dirlist import lDlld, rDlld

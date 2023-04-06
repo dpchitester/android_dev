@@ -1,7 +1,5 @@
 import time
 from bhash import blakeHash
-import ldsv
-import config_vars as v
 
 class Edge():
     def __init__(self, di, si):
@@ -69,6 +67,8 @@ def addArc(op1):
     j, i = op1.npl1
     addDep(j, i)
 
+import config_vars as v
+import ldsv
 
 if __name__ == '__main__':
     lrtset('git', 'pyth')
