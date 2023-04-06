@@ -1,4 +1,3 @@
-import config_vars as v
 from bhash import blakeHash
 from dirlist import lDlld, rDlld
 import ldsv
@@ -65,3 +64,5 @@ def rdhck(Di):
     if Dh2 is not None:
         return (Dh2, Dh1 != Dh2)
     return (None, False)
+
+import config_vars as v

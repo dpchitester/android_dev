@@ -10,7 +10,6 @@ from bisect import bisect_left
 
 import asyncrun as ar
 import config_vars as v
-from config_funcs import ppre, tdir, pdir, srcDir, trunc2ms
 import asyncrun as ar
 from bhash import blakeHash
 
@@ -113,7 +112,7 @@ def getdll0():
 
 
 def sepdlls(dlls):
-   print("-sepdlls")
+    print("-sepdlls")
     for di in v.tdirs:
         if di.startswith('gd_'):
             v.RDlls[di] = []
@@ -271,3 +270,4 @@ def dllcmp(do, dn):
     todelete = dos - dns
     return (todelete, tocopy)
 
+from config_funcs import ppre, tdir, pdir, srcDir, trunc2ms

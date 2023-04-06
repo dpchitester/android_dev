@@ -4,19 +4,11 @@ import asyncio
 from os import walk, environ
 from pathlib import Path
 
-import config_vars as v
-import config_funcs
-import config
 from os import walk
-from config_funcs import srcDir
 
 from inotify_simple import flags
-from status import onestatus
-from config_vars import LDlls
-from opexec import clean, opExec
 
 import ldsv
-import status as st
 import dirlist as dl
 
 
@@ -110,6 +102,14 @@ def main():
     ldsv.save_all()
 
 
+import config_vars as v
+import config_funcs
+import config
+from config_funcs import srcDir
+from config_vars import LDlls
+from status import onestatus
+from opexec import clean, opExec
+import status as st
 
 if __name__ == '__main__':
     main()
