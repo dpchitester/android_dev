@@ -22,7 +22,7 @@ class SFc():
     def value(self):
         return (self.sc, self.fc)
 
-@snoop
+
 def findLDE(di, si, sd, td, dl):
     ld = sd.relative_to(pdir(si))
     de = DE(ld, 0, 0, b'')
@@ -46,10 +46,11 @@ def fsync(di, si, sd, td, sfc):
         rc = ar.run2(cmd)
         if rc == 0:
             sfc.sc+=1
-            rde = getRemoteDE(td)
-            ddei = findRDE(di, si, sd, td, v.RDlls[di])
-            if ddei >= 0:
-                pp(v.RDlls[di][ddei], rde)
+            with snoop:
+                rde = getRemoteDE(td)
+                ddei = findRDE(di, si, sd, td, v.RDlls[di])
+                if ddei >= 0:
+                    pp(v.RDlls[di][ddei], rde)
             return True
         sfc.fc+=1
     return False
