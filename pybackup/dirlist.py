@@ -38,7 +38,7 @@ class DE():
         return (str(self.nm), self.sz, self.mt, self.md5) < (str(
             other.nm), other.sz, other.mt, other.md5)
 
-def getDE(sf:Path):
+def getRemoteDE(sf:Path):
     cmd = 'rclone lsjson "' + str(sf) + '" --hash'
     rc = ar.run1(cmd)
     if rc == 0:

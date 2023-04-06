@@ -8,7 +8,7 @@ import asyncrun as ar
 from netup import netup
 from opbase import OpBase
 from edge import Edge, findEdge
-from dirlist import dllcmp, lDlld, rDlld, DE, getDE
+from dirlist import dllcmp, lDlld, rDlld, DE, getRemoteDE
 
 
 class SFc():

@@ -7,11 +7,15 @@ def md5sumf(Fn):
     if Fn.exists():
         #print('-md5sumf', Fn)
         ho = md5()
-        with open(Fn, 'rb') as fh:
-            b = fh.read(1 << 15)
-            while len(b) > 0:
-                ho.update(b)
+        try:
+            with open(Fn, 'rb') as fh:
                 b = fh.read(1 << 15)
+                while len(b) > 0:
+                    ho.update(b)
+                    b = fh.read(1 << 15)
+        except Exception as e:
+            print(e)
+            raise e
         return ho.digest()
     return None
 
@@ -38,10 +42,13 @@ def fmd5f(fp, sz, mt):
     if osz == sz and omt == mt:
         v.hf_sth += 1
     else:
-        oh = md5sumf(fp)
-        d1[fp.name] = (sz, mt, oh)
-        v.hf_dirty = True
-        v.hf_stm += 1
-        pp(fp)
-        pp(v.hf_stm)
+        try:
+            oh = md5sumf(fp)
+            d1[fp.name] = (sz, mt, oh)
+            v.hf_dirty = True
+            v.hf_stm += 1
+            pp(fp)
+            pp(v.hf_stm)
+        except:
+            pass
     return oh
