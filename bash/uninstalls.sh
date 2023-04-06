@@ -163,8 +163,13 @@
 # pkg uninstall zlib
 # pkg uninstall zstd
 # pip uninstall ------------- -------
+# pip uninstall asttokens     2.2.1
 # pip uninstall async-to-sync 0.2.3
+# pip uninstall cheap-repr    0.5.1
+# pip uninstall executing     1.2.0
 # pip uninstall pip           23.0.1
+# pip uninstall Pygments      2.14.0
 # pip uninstall setuptools    67.6.1
+# pip uninstall six           1.16.0
 # pip uninstall snoop         0.4.3
 # pip uninstall tarjan        0.2.3.2

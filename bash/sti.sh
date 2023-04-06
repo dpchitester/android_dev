@@ -10,15 +10,15 @@ pushd /sdcard/projects/bash
     a=()
     mapfile -t a <<<"$il"
     for i in "${a[@]:1}"; do
-        echo "pkg install ${i%%/*}" >>$f1
-        echo "pkg uninstall ${i%%/*}" >>$f2
+        echo "# pkg install ${i%%/*}" >>$f1
+        echo "# pkg uninstall ${i%%/*}" >>$f2
     done
     pl=$(pip list)
     a=()
     mapfile -t a <<<"$pl"
     for i in "${a[@]:1}"; do
-        echo "pip install ${i%%/*}" >>$f1
-        echo "pip uninstall ${i%%/*}" >>$f2
+        echo "# pip install ${i%%/*}" >>$f1
+        echo "# pip uninstall ${i%%/*}" >>$f2
     done
 popd
 

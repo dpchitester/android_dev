@@ -163,8 +163,13 @@
 # pkg install zlib
 # pkg install zstd
 # pip install ------------- -------
+# pip install asttokens     2.2.1
 # pip install async-to-sync 0.2.3
+# pip install cheap-repr    0.5.1
+# pip install executing     1.2.0
 # pip install pip           23.0.1
+# pip install Pygments      2.14.0
 # pip install setuptools    67.6.1
+# pip install six           1.16.0
 # pip install snoop         0.4.3
 # pip install tarjan        0.2.3.2
