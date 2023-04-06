@@ -27,18 +27,18 @@ def findLDE(di, si, sd, dl):
     ld = sd.relative_to(pdir(si))
     de = DE(ld, 0, 0, b'')
     i = bisect_left(dl, de)
-    if dl[i].nm == sd.name:
-        return (i, True)
-    return (i, False)
+    if dl[i].nm == ld.name:
+        return (i, ld, True)
+    return (i, ld, False)
 
 @snoop
 def findRDE(di, si, td, dl):
     rd = td.relative_to(tdir(di))
     de = DE(rd, 0, 0, b'')
     i = bisect_left(dl, de)
-    if dl[i].nm == td.name:
-        return (i, True)
-    return (i, False)
+    if dl[i].nm == rd.name:
+        return (i, rd, True)
+    return (i, rd, False)
 
 
 def fsync(di, si, sd, td, sfc):
@@ -53,11 +53,11 @@ def fsync(di, si, sd, td, sfc):
             sfc.sc+=1
             with snoop:
                 rde = getRemoteDE(td)
-                sdei = findLDE(di, si, sd, v.LDlls[si])
-                ddei = findRDE(di, si, td, v.RDlls[di])
-                pp(sdei, ddei)
-                sdei = sdei[0]
-                ddei = ddei[0]
+                sdei_t = findLDE(di, si, sd, v.LDlls[si])
+                ddei_t = findRDE(di, si, td, v.RDlls[di])
+                pp(sdei_t, ddei_t)
+                sdei = sdei_t[0]
+                ddei = ddei_t[0]
                 pp(v.LDlls[si][sdei])
                 pp(v.RDlls[di][ddei])
                 pp(v.LDlls[si][sdei]==v.RDlls[di][ddei])
