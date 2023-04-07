@@ -224,9 +224,7 @@ def getdll2(si):
 
 
 def getdll3(si):
-    pp(si)
     sd = srcDir(si)
-    pp(sd)
     #print('getdll3', si, str(sd))
     l1 = getfl(sd)
 

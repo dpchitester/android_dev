@@ -21,8 +21,8 @@ def finddict(d1, fp):
     for dp in ta:
         if dp not in d1:
             d1[dp] = {}
-        d2 = d1[dp]
-    return d2
+        d1 = d1[dp]
+    return d1
 
 
 def fmd5f(fp, sz, mt):
@@ -42,9 +42,6 @@ def fmd5f(fp, sz, mt):
             v.hf_sth += 1
             return oh
         else:
-            #pp(fp)
-            #pp(sz, osz)
-            #pp(mt, omt)
             v.hf_stm += 1
             return new_hash()
 
