@@ -17,8 +17,8 @@ import snoop
 from snoop import pp
 
 
-rto1 = 0  # 60*60*.5
-rto2 = 0  # 60*1
+rto1 = 0  # 60*1
+rto2 = 0  # 60*60*.5
 
 @dataclass
 class DE():
@@ -41,20 +41,6 @@ class DE():
         return (str(self.nm), self.sz, self.mt, self.md5) < (str(
             other.nm), other.sz, other.mt, other.md5)
 
-def getRemoteDE(sf:Path):
-    cmd = 'rclone lsjson "' + str(sf) + '" --hash'
-    rc = ar.run1(cmd)
-    if rc == 0:
-        it = json.loads(ar.txt)[0]
-        it1 = Path(it['Path'])
-        it2 = it['Size']
-        it3 = it['ModTime'][:-1] + '-00:00'
-        it3 = datetime.datetime.fromisoformat(it3).timestamp()
-        if 'Hashes' in it:
-            it4 = bytes.fromhex(it['Hashes']['md5'])
-        else:
-            it4 = bytes()
-        return DE(it1, it2, it3, it4)
 
 def getfl(p):
     # print(str(p))
@@ -255,7 +241,7 @@ def getrdlls():
 
 def lDlld(si):
     #print('-ldlld', si)
-    if si not in v.LDlls or v.LDlls_xt[si] + rto2 <= time.time():
+    if si not in v.LDlls or v.LDlls_xt[si] + rto1 <= time.time():
         rv = getdll3(si)
         if rv is not None:
             #print(si, 'ldll obtained')
@@ -268,7 +254,7 @@ def lDlld(si):
 
 def rDlld(di):
     #print('-rdlld', di)
-    if di not in v.RDlls or v.RDlls_xt[di] + rto1 <= time.time():
+    if di not in v.RDlls or v.RDlls_xt[di] + rto2 <= time.time():
         rv = getdll1(di)
         if rv is not None:
             #print(di, 'rdll obtained')

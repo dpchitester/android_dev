@@ -66,6 +66,7 @@ def fsync(di, si, sd, td, sfc):
                 v.RDlls[di][ddei] = rde
             else:
                 v.RDlls[di].insert(ddei, rde)
+            # TODO: update dir hash so as block to block update of remote status
             return True
     sfc.fc+=1
     return False

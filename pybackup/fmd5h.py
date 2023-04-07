@@ -1,11 +1,9 @@
 from hashlib import md5
 import config_vars as v
-import snoop
-from snoop import pp
 
 def md5sumf(Fn):
     if Fn.exists():
-        #print('-md5sumf', Fn)
+        print('-md5sumf', Fn.name)
         ho = md5()
         with open(Fn, 'rb') as fh:
             b = fh.read(1 << 15)
@@ -27,7 +25,6 @@ def finddict(d1, fp):
 
 def fmd5f(fp, sz, mt):
     def new_hash():
-        print('md5 hash', fp.name)
         nh = md5sumf(fp)
         d1[fp.name] = (sz, mt, nh)
         v.hf_dirty = True
