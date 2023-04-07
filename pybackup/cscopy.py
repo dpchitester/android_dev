@@ -12,9 +12,6 @@ from edge import Edge, findEdge
 from dirlist import dllcmp, lDlld, rDlld, DE
 from bisect import bisect_left
 
-import snoop
-from snoop import pp
-
 class SFc():
     sc = 0
     fc = 0
@@ -70,7 +67,7 @@ def fsync(di, si, sd, td, sfc):
             else:
                 v.RDlls[di].insert(ddei, rde)
             return True
-        sfc.fc+=1
+    sfc.fc+=1
     return False
 
 
