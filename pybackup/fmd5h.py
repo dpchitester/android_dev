@@ -42,9 +42,9 @@ def fmd5f(fp, sz, mt):
             v.hf_sth += 1
             return oh
         else:
-            pp(fp)
-            pp(sz, osz)
-            pp(mt, omt)
+            #pp(fp)
+            #pp(sz, osz)
+            #pp(mt, omt)
             v.hf_stm += 1
             return new_hash()
 

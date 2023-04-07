@@ -13,6 +13,9 @@ import config_vars as v
 from bhash import blakeHash
 from fmd5h import fmd5f
 
+import snoop
+from snoop import pp
+
 
 rto1 = 0  # 60*60*.5
 rto2 = 0  # 60*1
@@ -221,7 +224,9 @@ def getdll2(si):
 
 
 def getdll3(si):
+    pp(si)
     sd = srcDir(si)
+    pp(sd)
     #print('getdll3', si, str(sd))
     l1 = getfl(sd)
 
