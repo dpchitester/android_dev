@@ -41,7 +41,6 @@ def getRemoteDE(di, sf:Path):
         print('new nde:', str(nde))
         return nde
 
-
 def findLDE(di, si, sd, td, dl):
     ld = sd.relative_to(pdir(si))
     de = DE(ld, 0, 0, b'')
@@ -53,7 +52,6 @@ def findRDE(di, si, sd, td, dl):
     de = DE(rd, 0, 0, b'')
     i = bisect_left(dl, de)
     return i
-
 
 def fsync(di, si, sd, td, sfc):
     if (netup()):
@@ -67,7 +65,7 @@ def fsync(di, si, sd, td, sfc):
             sfc.sc += 1
             rde = getRemoteDE(di, td)
             ddei = findRDE(di, si, sd, td, v.RDlls[di])
-            if ddei < len(v.RDlls[di]) and rde.nm == rde.nm:
+            if ddei < len(v.RDlls[di]) and rde.nm == v.RDlls[di][ddei].nm:
                 v.RDlls[di][ddei] = rde
             else:
                 v.RDlls[di].insert(ddei, rde)
