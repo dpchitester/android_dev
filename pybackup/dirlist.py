@@ -88,6 +88,7 @@ def getDL(p):
 
 
 def getdll0():
+    v.dl0_cs += 1
     td = ppre('gd')
     #print('getdll0',td)
     cmd = 'rclone lsjson "' + str(td) + '" --recursive --files-only --hash'
@@ -148,6 +149,7 @@ def sepdlls(dlls):
 
 
 def getdll1(di):
+    v.dl1_cs += 1
     td = tdir(di)
     #print('getdll1', di, str(td))
     cmd = 'rclone lsjson "' + str(
@@ -178,6 +180,7 @@ def getdll1(di):
 
 
 def getdll2(si):
+    v.dl2_cs += 1
     td = pdir(si)
     #print('getdll2', si, str(td))
     cmd = 'rclone lsjson "' + str(
@@ -210,6 +213,7 @@ def getdll2(si):
 
 
 def getdll3(si):
+    v.dl3_cs += 1
     sd = srcDir(si)
     #print('getdll3', si, str(sd))
     l1 = getfl(sd)

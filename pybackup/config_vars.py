@@ -75,3 +75,8 @@ hf_ph:int = 0
 hf_stm:int = 0
 hf_sth:int = 0
 sfb:int = 0
+dl0_cs = 0
+dl1_cs= 0
+dl2_cs = 0
+dl3_cs = 0
+

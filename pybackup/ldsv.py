@@ -78,6 +78,10 @@ def pstats():
     print('hash-dict sz-mt hit', v.hf_sth)
     print('hash-dict sz-mt miss', v.hf_stm)
     print('sfb', v.sfb)
+    print('dl0_cs', v.dl0_cs)
+    print('dl1_cs', v.dl1_cs)
+    print('dl1_cs', v.dl2_cs)
+    print('dl1_cs', v.dl3_cs)
 
 
 def savefmd5h():
