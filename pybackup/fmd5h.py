@@ -27,6 +27,7 @@ def finddict(d1, fp):
 
 def fmd5f(fp, sz, mt):
     def new_hash():
+        print('md5 hash', fp.name)
         nh = md5sumf(fp)
         d1[fp.name] = (sz, mt, nh)
         v.hf_dirty = True
