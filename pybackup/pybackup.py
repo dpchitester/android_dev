@@ -87,9 +87,9 @@ def rt2():
             print('backups appear pending')
             rv1 = opExec()
             print('rv1', rv1)
-        ldsv.savefmd5h()
-        ldsv.saveldlls()
-        ldsv.saverdlls()
+        #ldsv.savefmd5h()
+        #ldsv.saveldlls()
+        #ldsv.saverdlls()
         if not rv1:
             break
 
