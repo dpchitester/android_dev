@@ -30,7 +30,6 @@ def fmd5f(fp, sz, mt):
         nh = md5sumf(fp)
         d1[fp.name] = (sz, mt, nh)
         v.hf_dirty = True
-        v.hf_stm += 1
         return nh
     d1 = finddict(v.fmd5hd, fp)
     if fp.name not in d1:
@@ -43,6 +42,9 @@ def fmd5f(fp, sz, mt):
             v.hf_sth += 1
             return oh
         else:
+            pp(fp)
+            pp(sz, osz)
+            pp(mt, omt)
             v.hf_stm += 1
             return new_hash()
 
