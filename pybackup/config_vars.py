@@ -1,66 +1,77 @@
 from pathlib import Path
 from edge import Edge
 from opbase import OpBase
+from typing import Dict, Set, List, Tuple, Union, Callable, TypeAlias
+from dirlist import DE
+
+NodeTag:TypeAlias = str
 
 # any/all mostly local directory path(s)
-paths:dict[str, Path] = {}
+paths:Dict[NodeTag, Path] = {}
 
 # tag attributes/types/classes
-pres:set[str] = set()
-pdirs:set[str] = set()
-tdirs:set[str] = set()
-srcs:set[str] = set()
-tgts:set[str] = set()
-codes:set[str] = set()
+pres:Set[NodeTag] = set()
+pdirs:Set[NodeTag] = set()
+tdirs:Set[NodeTag] = set()
+srcs:Set[NodeTag] = set()
+tgts:Set[NodeTag] = set()
+codes:Set[NodeTag] = set()
 
 # checkers
-lckers = {}
-rckers = {}
+lckers:Dict[NodeTag, Callable] = {}
+rckers:Dict[NodeTag, Callable] = {}
 
 # operations (function objects)
-opdep:list[OpBase] = []
+opdep:List[OpBase] = []
 
 # dependencies as edge set
-eDep:set[Edge] = set()
+eDep:Set[Edge] = set()
 
 # dependencies as stored by di,si
-edges:dict[(str, str),Edge] = {}
+edges:Dict[Tuple[NodeTag, NodeTag], Edge] = {}
 
-# local file md5 hashes
-fmd5hd = {}
+Hash:TypeAlias = bytes
+
+Hdt1:TypeAlias = Dict[NodeTag, Hash]
 
 # directory lists hashes
-LDhd = {}
-RDhd = {}
+
+LDhd:Hdt1 = {}
+RDhd:Hdt1 = {}
+
+Hdt2:TypeAlias = Dict[Path, Union[Path, Hash]]
+
+# local file md5 hashes
+fmd5hd:Hdt2 = {}
 
 # directory lists
-LDlls = {}
-RDlls = {}
+LDlls:Dict[NodeTag, List[DE]] = {}
+RDlls:Dict[NodeTag, List[DE]] = {}
 
 # update times of directory lists
-LDlls_xt = {}
-RDlls_xt = {}
+LDlls_xt:Dict[NodeTag, float] = {}
+RDlls_xt:Dict[NodeTag, float] = {}
 
-LDlls_changed = False
-RDlls_changed = False
+LDlls_changed:bool = False
+RDlls_changed:bool = False
 
 # pickle file filenames
-edgepf:str = None
-ldllsf:str = None
-rdllsf:str = None
-fmd5hf:str = None
-ldhpf:str = None
-rdhpf:str = None
+edgepf:Path = None
+ldllsf:Path = None
+rdllsf:Path = None
+fmd5hf:Path = None
+ldhpf:Path = None
+rdhpf:Path = None
 
 # worktree of git repo
 worktree:Path = None
 
 # directory list hashing stats
 hf_dirty = False
-hf_dm = 0
-hf_dh = 0
-hf_pm = 0
-hf_ph = 0
-hf_stm = 0
-hf_sth = 0
-sfb = 0
+hf_dm:int = 0
+hf_dh:int = 0
+hf_pm:int = 0
+hf_ph:int = 0
+hf_stm:int = 0
+hf_sth:int = 0
+sfb:int = 0
