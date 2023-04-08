@@ -283,7 +283,6 @@ def dllcmp(do, dn):
 import snoop
 from snoop import pp
 
-@snoop
 def getRemoteDE(di, sf: Path):
     cmd = 'rclone lsjson "' + str(sf) + '" --hash'
     rc = ar.run1(cmd)
