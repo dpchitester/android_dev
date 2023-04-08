@@ -162,14 +162,21 @@
 # pkg uninstall xz-utils
 # pkg uninstall zlib
 # pkg uninstall zstd
-# pip uninstall ------------- -------
-# pip uninstall asttokens     2.2.1
-# pip uninstall async-to-sync 0.2.3
-# pip uninstall cheap-repr    0.5.1
-# pip uninstall executing     1.2.0
-# pip uninstall pip           23.0.1
-# pip uninstall Pygments      2.14.0
-# pip uninstall setuptools    67.6.1
-# pip uninstall six           1.16.0
-# pip uninstall snoop         0.4.3
-# pip uninstall tarjan        0.2.3.2
+# pip uninstall --------------- -------
+# pip uninstall asttokens       2.2.1
+# pip uninstall async-to-sync   0.2.3
+# pip uninstall black           23.3.0
+# pip uninstall cheap-repr      0.5.1
+# pip uninstall click           8.1.3
+# pip uninstall executing       1.2.0
+# pip uninstall isort           5.12.0
+# pip uninstall mypy-extensions 1.0.0
+# pip uninstall packaging       23.0
+# pip uninstall pathspec        0.11.1
+# pip uninstall pip             23.0.1
+# pip uninstall platformdirs    3.2.0
+# pip uninstall Pygments        2.14.0
+# pip uninstall setuptools      67.6.1
+# pip uninstall six             1.16.0
+# pip uninstall snoop           0.4.3
+# pip uninstall tarjan          0.2.3.2
