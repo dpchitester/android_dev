@@ -8,7 +8,7 @@ from config_funcs import pdir, tdir
 from dirlist import getRemoteDE
 from edge import Edge, findEdge
 from opbase import OpBase
-from status import onestatus
+from status import onestatus, ronestatus
 
 
 def getfl(p):
