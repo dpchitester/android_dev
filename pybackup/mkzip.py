@@ -73,8 +73,8 @@ class Mkzip(OpBase):
                 sc += 1
                 rde = None
                 if di2 in v.LDlls:
-                    rde = getRemoteDE(di2, fp)
-                    ddei = findRDE(di2, si2, sd, td, v.LDlls[di2])
+                    rde = getRemoteDE(di2, zp)
+                    ddei = findRDE(di2, si2, sd, zp, v.LDlls[di2])
                     if ddei < len(v.LDlls[di2]) and rde.nm == v.LDlls[di2][ddei].nm:
                         v.LDlls[di2][ddei] = rde
                         v.LDlls_changed = True
@@ -83,8 +83,8 @@ class Mkzip(OpBase):
                         v.LDlls_changed = True
                 if di2 in v.RDlls:
                     if rde is None:
-                        rde = getRemoteDE(di2, fp)
-                    ddei = findRDE(di2, si2, sd, td, v.RDlls[di2])
+                        rde = getRemoteDE(di2, zp)
+                    ddei = findRDE(di2, si2, sd, zp, v.RDlls[di2])
                     if ddei < len(v.RDlls[di2]) and rde.nm == v.RDlls[di2][ddei].nm:
                         v.RDlls[di2][ddei] = rde
                         v.RDlls_changed = True
