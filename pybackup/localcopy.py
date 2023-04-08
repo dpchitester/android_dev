@@ -10,7 +10,7 @@ from config_funcs import pdir, tdir
 import config_vars as v
 from status import onestatus
 from dirlist import getRemoteDE, DE
-
+from bisect import bisect_left
 
 class FileDiff:
     sf = None
