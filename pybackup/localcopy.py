@@ -4,7 +4,7 @@ from pathlib import Path
 
 from opbase import OpBase
 from edge import Edge, findEdge
-from asyncrun import run1
+from asyncrun import run1, txt
 from config_funcs import pdir, tdir
 import config_vars as v
 from status import onestatus
@@ -82,10 +82,10 @@ def sha256sumf(Fn):
 
 def getRemoteDE(di, sf:Path):
     cmd = 'rclone lsjson "' + str(sf) + '" --hash'
-    rc = ar.run1(cmd)
+    rc = run1(cmd)
     if rc == 0:
         rd = sf.relative_to(tdir(di)).parent
-        it = json.loads(ar.txt)[0]
+        it = json.loads(txt)[0]
         it1 = rd / it['Path']
         it2 = it['Size']
         it3 = it['ModTime'][:-1] + '-00:00'
