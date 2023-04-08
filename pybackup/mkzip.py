@@ -40,8 +40,8 @@ def maxmt(sd):
     return st[0]
 
 
-def findRDE(di, si, sd, td, dl):
-    rd = td.relative_to(tdir(di))
+def findRDE(di, si, sd, tp, dl):
+    rd = tp.relative_to(tdir(di))
     de = DE(rd, 0, 0, b"")
     i = bisect_left(dl, de)
     return i
@@ -63,9 +63,9 @@ class Mkzip(OpBase):
         if e.chk_ct():
             di2, si2 = self.npl2
             sd = pdir(si2)
+            td = tdir(di2)
             zf = self.opts.get("zipfile", "temp.zip")
             rp = Path(zf)
-            td = tdir(di2)
             zp = td / rp.stem
             try:
                 fp = Path(make_archive(zp, "zip", sd, ".", True))
@@ -75,8 +75,8 @@ class Mkzip(OpBase):
                 sc += 1
                 rde = None
                 if di2 in v.LDlls:
-                    rde = getRemoteDE(di2, zp)
-                    ddei = findRDE(di2, si2, sd, td, v.LDlls[di2])
+                    rde = getRemoteDE(di2, fp)
+                    ddei = findRDE(di2, si2, sd, fp, v.LDlls[di2])
                     if ddei < len(v.LDlls[di2]) and rde.nm == v.LDlls[di2][ddei].nm:
                         v.LDlls[di2][ddei] = rde
                         v.LDlls_changed = True
@@ -85,8 +85,8 @@ class Mkzip(OpBase):
                         v.LDlls_changed = True
                 if di2 in v.RDlls:
                     if rde is None:
-                        rde = getRemoteDE(di2, zp)
-                    ddei = findRDE(di2, si2, sd, td, v.RDlls[di2])
+                        rde = getRemoteDE(di2, fp)
+                    ddei = findRDE(di2, si2, sd, fp, v.RDlls[di2])
                     if ddei < len(v.RDlls[di2]) and rde.nm == v.RDlls[di2][ddei].nm:
                         v.RDlls[di2][ddei] = rde
                         v.RDlls_changed = True
