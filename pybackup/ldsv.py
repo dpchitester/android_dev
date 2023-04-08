@@ -7,8 +7,8 @@ def loadldlls():
     try:
         with open(v.ldllsf, "rb") as fh:
             td = pickle.load(fh)
-            v.LDlls = td['ldlls']
-            v.LDlls_xt = td['ldlls_xt']
+            v.LDlls = td["ldlls"]
+            v.LDlls_xt = td["ldlls_xt"]
     except Exception as e:
         print("loadldlls failed", e)
 
@@ -17,8 +17,8 @@ def loadrdlls():
     try:
         with open(v.rdllsf, "rb") as fh:
             td = pickle.load(fh)
-            v.RDlls = td['rdlls']
-            v.RDlls_xt = td['rdlls_xt']
+            v.RDlls = td["rdlls"]
+            v.RDlls_xt = td["rdlls_xt"]
     except Exception as e:
         print("loadrdlls failed", e)
 
@@ -56,7 +56,7 @@ def loadedges():
 
 
 def saveedges():
-    #print("-saveedges")
+    # print("-saveedges")
     try:
         with open(v.edgepf, "wb") as fh:
             pickle.dump(v.eDep, fh)
@@ -73,15 +73,15 @@ def loadfmd5h():
 
 
 def pstats():
-    print('hash-dict name hit', v.hf_dh)
-    print('hash-dict name miss', v.hf_dm)
-    print('hash-dict sz-mt hit', v.hf_sth)
-    print('hash-dict sz-mt miss', v.hf_stm)
-    print('sfb', v.sfb)
-    print('dl0_cs', v.dl0_cs)
-    print('dl1_cs', v.dl1_cs)
-    print('dl2_cs', v.dl2_cs)
-    print('dl3_cs', v.dl3_cs)
+    print("hash-dict name hit", v.hf_dh)
+    print("hash-dict name miss", v.hf_dm)
+    print("hash-dict sz-mt hit", v.hf_sth)
+    print("hash-dict sz-mt miss", v.hf_stm)
+    print("sfb", v.sfb)
+    print("dl0_cs", v.dl0_cs)
+    print("dl1_cs", v.dl1_cs)
+    print("dl2_cs", v.dl2_cs)
+    print("dl3_cs", v.dl3_cs)
 
 
 def savefmd5h():
@@ -130,7 +130,7 @@ def saverdh():
 
 def load_all():
     loadrdlls()
-    #loadldlls()
+    # loadldlls()
     loadedges()
     loadfmd5h()
     loadldh()
@@ -139,10 +139,11 @@ def load_all():
 
 def save_all():
     saverdlls()
-    #saveldlls()
+    # saveldlls()
     saveedges()
     savefmd5h()
     saveldh()
     saverdh()
+
 
 import config_vars as v

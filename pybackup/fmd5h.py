@@ -1,11 +1,12 @@
 from hashlib import md5
 import config_vars as v
 
+
 def md5sumf(Fn):
     if Fn.exists():
-        print('-md5sumf', Fn.name)
+        print("-md5sumf", Fn.name)
         ho = md5()
-        with open(Fn, 'rb') as fh:
+        with open(Fn, "rb") as fh:
             b = fh.read(1 << 15)
             while len(b) > 0:
                 ho.update(b)
@@ -29,6 +30,7 @@ def fmd5f(fp, sz, mt):
         d1[fp.name] = (sz, mt, nh)
         v.hf_dirty = True
         return nh
+
     d1 = finddict(v.fmd5hd, fp)
     if fp.name not in d1:
         v.hf_dm += 1
@@ -42,4 +44,3 @@ def fmd5f(fp, sz, mt):
         else:
             v.hf_stm += 1
             return new_hash()
-

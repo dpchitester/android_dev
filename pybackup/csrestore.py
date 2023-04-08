@@ -23,7 +23,7 @@ def fsync(sd, td, tcfc):
         if not td.exists():
             makedirs(td, exist_ok=True)
         cmd = 'rclone sync "' + str(sd) + '" "' + str(td) + '" --progress'
-        #cmd += ' --exclude ".git/**" --exclude "__pycache__/**"'
+        # cmd += ' --exclude ".git/**" --exclude "__pycache__/**"'
         print(cmd)
         rc = ar.run2(cmd)
         if rc == 0:
@@ -34,8 +34,7 @@ def fsync(sd, td, tcfc):
     return False
 
 
-class BVar():
-
+class BVar:
     def __init__(self, di, si, tcfc):
         self.si = si
         self.di = di
@@ -72,39 +71,41 @@ class BVar():
 class CSRestore(OpBase):
     def __init__(self, npl1, npl2, opts={}):
         super(CSRestore, self).__init__(npl1, npl2, opts)
-    def ischanged(self, e:Edge):
+
+    def ischanged(self, e: Edge):
         return e.chk_ct() | e.rchk_ck()
+
     def __call__(self):
         tcfc = [0, 0]
-        print('CSRestore')
+        print("CSRestore")
         if not netup():
             return (tcfc[0], tcfc[1])
         di, si = self.npl1
-        e:Edge = findEdge(di, si)
+        e: Edge = findEdge(di, si)
         if e.rchk_ct():
-            print('r', di, si)
+            print("r", di, si)
             bv = BVar(di, si, tcfc)
             rv = bv.init2()
-            #sd = pdir(si)
+            # sd = pdir(si)
             if rv == 1:  # couldn't get remote hash
                 pass
             else:
                 if rv == 2:  # hashes match
                     e.rclr()
                 else:
-                    print('hash mismatch')
+                    print("hash mismatch")
                     print(bv.si, bv.dho, bv.dhn)
                     if rv == 3:  # dlo not obtainable
                         pass
                     else:
                         if len(bv.f2d):
-                            print(len(bv.f2d), 'todelete')
+                            print(len(bv.f2d), "todelete")
                             for it in bv.f2d:
-                                print('\t', it.nm)
+                                print("\t", it.nm)
                         if len(bv.f2c):
-                            print(len(bv.f2c), 'tocopy')
+                            print(len(bv.f2c), "tocopy")
                             for it in bv.f2c:
-                                print('\t', it.nm)
+                                print("\t", it.nm)
 
                         for rf in bv.f2d.copy():
                             found = False
@@ -115,22 +116,32 @@ class CSRestore(OpBase):
                                     if rf.md5 == lf.md5:  # hashes match
                                         if rf.mt < lf.mt:
                                             print(
-                                                'hashes match but it has older file time!'
+                                                "hashes match but it has older file time!"
                                             )
-                                            print('retrograding local copy',
-                                                  rf.nm, rf.mt, lf.mt)
+                                            print(
+                                                "retrograding local copy",
+                                                rf.nm,
+                                                rf.mt,
+                                                lf.mt,
+                                            )
                                             nt = int(rf.mt * 1000) * 1000000
                                             utime(bv.sd / lf.nm, ns=(nt, nt))
                                             bv.ac1 += 1
                                             tcfc[0] += 1
-                                        elif abs(rf.mt - lf.mt) <= .00101:
+                                        elif abs(rf.mt - lf.mt) <= 0.00101:
                                             print(
-                                                'hashes match but remote has newer file time',
-                                                lf.nm, rf.mt, lf.mt)
-                                            print('time diff is only',
-                                                  rf.mt - lf.mt)
-                                            print('retrograding local copy',
-                                                  lf.nm, rf.mt, lf.mt)
+                                                "hashes match but remote has newer file time",
+                                                lf.nm,
+                                                rf.mt,
+                                                lf.mt,
+                                            )
+                                            print("time diff is only", rf.mt - lf.mt)
+                                            print(
+                                                "retrograding local copy",
+                                                lf.nm,
+                                                rf.mt,
+                                                lf.mt,
+                                            )
                                             nt = int(rf.mt * 1000) * 1000000
                                             utime(bv.sd / lf.nm, ns=(nt, nt))
                                             bv.ac1 += 1
@@ -140,15 +151,15 @@ class CSRestore(OpBase):
                                     else:
                                         if rf.mt > lf.mt:
                                             if fsync(
-                                                    bv.td / rf.nm,
-                                                    bv.sd / lf.nm.parent,
-                                                    tcfc):
+                                                bv.td / rf.nm,
+                                                bv.sd / lf.nm.parent,
+                                                tcfc,
+                                            ):
                                                 bv.f2d.remove(rf)
                                                 bv.f2c.remove(lf)
                                                 bv.ac1 += 1
                             if not found:
-                                if fsync(bv.td / rf.nm,
-                                               bv.sd / rf.nm.parent, tcfc):
+                                if fsync(bv.td / rf.nm, bv.sd / rf.nm.parent, tcfc):
                                     bv.f2d.remove(rf)
                                     bv.ac1 += 1
             if bv.ac1:
@@ -159,9 +170,9 @@ class CSRestore(OpBase):
         return (tcfc[0], tcfc[1])
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     t1 = time.time()
-    environ['TSREST'] = "True"
+    environ["TSREST"] = "True"
     if netup():
         for op in v.opdep:
             if isinstance(op, CSRestore):

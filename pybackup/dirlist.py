@@ -20,8 +20,9 @@ from snoop import pp
 rto1 = 0  # 60*1
 rto2 = 0  # 60*60*.5
 
+
 @dataclass
-class DE():
+class DE:
     nm: Path
     sz: int
     mt: float
@@ -34,12 +35,20 @@ class DE():
         return self._hc
 
     def __eq__(self, other):
-        return (str(self.nm), self.sz, self.mt,
-                self.md5) == (str(other.nm), other.sz, other.mt, other.md5)
+        return (str(self.nm), self.sz, self.mt, self.md5) == (
+            str(other.nm),
+            other.sz,
+            other.mt,
+            other.md5,
+        )
 
     def __lt__(self, other):
-        return (str(self.nm), self.sz, self.mt, self.md5) < (str(
-            other.nm), other.sz, other.mt, other.md5)
+        return (str(self.nm), self.sz, self.mt, self.md5) < (
+            str(other.nm),
+            other.sz,
+            other.mt,
+            other.md5,
+        )
 
 
 def getfl(p):
@@ -50,13 +59,13 @@ def getfl(p):
             fl.append(p)
             return fl
         for pth, dirs, files in walk(p, topdown=True):
-            if '.git' in pth:
+            if ".git" in pth:
                 dirs = []
                 break
-            if '.git' in dirs:
-                dirs.remove('.git')
-            if '__pycache__' in dirs:
-                dirs.remove('__pycache__')
+            if ".git" in dirs:
+                dirs.remove(".git")
+            if "__pycache__" in dirs:
+                dirs.remove("__pycache__")
             for f in files:
                 fl.append(Path(pth, f))
         return fl
@@ -70,13 +79,13 @@ def getDL(p):
     fl = []
     try:
         for pth, dirs, files in walk(p, topdown=True):
-            if '.git' in pth:
+            if ".git" in pth:
                 dirs = []
                 break
-            if '.git' in dirs:
-                dirs.remove('.git')
-            if '__pycache__' in dirs:
-                dirs.remove('__pycache__')
+            if ".git" in dirs:
+                dirs.remove(".git")
+            if "__pycache__" in dirs:
+                dirs.remove("__pycache__")
             for d in dirs.copy():
                 fl.append(Path(pth, d))
                 dirs.remove(d)
@@ -89,20 +98,20 @@ def getDL(p):
 
 def getdll0():
     v.dl0_cs += 1
-    td = ppre('gd')
-    #print('getdll0',td)
+    td = ppre("gd")
+    # print('getdll0',td)
     cmd = 'rclone lsjson "' + str(td) + '" --recursive --files-only --hash'
     rc = ar.run1(cmd)
     if rc == 0:
         l1 = json.loads(ar.txt)
 
         def es(it):
-            it1 = Path(it['Path'])
-            it2 = it['Size']
-            it3 = it['ModTime'][:-1] + '-00:00'
+            it1 = Path(it["Path"])
+            it2 = it["Size"]
+            it3 = it["ModTime"][:-1] + "-00:00"
             it3 = datetime.datetime.fromisoformat(it3).timestamp()
-            if 'Hashes' in it:
-                it4 = bytes.fromhex(it['Hashes']['md5'])
+            if "Hashes" in it:
+                it4 = bytes.fromhex(it["Hashes"]["md5"])
             else:
                 it4 = bytes()
             return DE(it1, it2, it3, it4)
@@ -117,43 +126,42 @@ def getdll0():
 def sepdlls(dlls):
     print("-sepdlls")
     for di in v.tdirs:
-        if di.startswith('gd_'):
+        if di.startswith("gd_"):
             v.RDlls[di] = []
             v.RDlls_xt[di] = time.time()
             v.RDlls_changed = True
-            rd = tdir(di).relative_to(ppre('gd'))
-            tds = str(rd) + '/'
-            i = bisect_left(dlls, DE(tds, 0, 0, b''))
+            rd = tdir(di).relative_to(ppre("gd"))
+            tds = str(rd) + "/"
+            i = bisect_left(dlls, DE(tds, 0, 0, b""))
             # print(tds, i)
             if i == len(dlls):
                 continue
             de = dlls[i]
-            if not fnmatch(de.nm, tds + '*'):
-                print('error')
+            if not fnmatch(de.nm, tds + "*"):
+                print("error")
                 print(rd, tds, i, de.nm)
                 # TODO: apply panic procedure
                 continue
-            while fnmatch(de.nm, tds + '*'):
+            while fnmatch(de.nm, tds + "*"):
                 de2 = DE(de.nm, de.sz, de.mt, de.md5)
                 # TODO: use Path
                 de2.nm = de2.nm.relative_to(rd)
                 # print(de2[0])
-                #if de2 in csdlls[di]:
-                #csdlls[di].remove(de2)
+                # if de2 in csdlls[di]:
+                # csdlls[di].remove(de2)
                 v.RDlls[di].append(de2)
                 i += 1
                 if i == len(dlls):
                     break
                 de = dlls[i]
-    print(len(v.RDlls), 'rdlls')
+    print(len(v.RDlls), "rdlls")
 
 
 def getdll1(di):
     v.dl1_cs += 1
     td = tdir(di)
-    #print('getdll1', di, str(td))
-    cmd = 'rclone lsjson "' + str(
-        td) + '" --recursive --files-only --hash --fast-list'
+    # print('getdll1', di, str(td))
+    cmd = 'rclone lsjson "' + str(td) + '" --recursive --files-only --hash --fast-list'
     # print(cmd)
     rc = ar.run1(cmd)
     if rc == 0:
@@ -161,12 +169,12 @@ def getdll1(di):
 
         def es(it):
             # TODO: use Path
-            it1 = Path(it['Path'])
-            it2 = it['Size']
-            it3 = it['ModTime'][:-1] + '-00:00'
+            it1 = Path(it["Path"])
+            it2 = it["Size"]
+            it3 = it["ModTime"][:-1] + "-00:00"
             it3 = datetime.datetime.fromisoformat(it3).timestamp()
-            if 'Hashes' in it:
-                it4 = bytes.fromhex(it['Hashes']['md5'])
+            if "Hashes" in it:
+                it4 = bytes.fromhex(it["Hashes"]["md5"])
             else:
                 it4 = bytes()
             return DE(it1, it2, it3, it4)
@@ -182,9 +190,8 @@ def getdll1(di):
 def getdll2(si):
     v.dl2_cs += 1
     td = pdir(si)
-    #print('getdll2', si, str(td))
-    cmd = 'rclone lsjson "' + str(
-        td) + '" --recursive --files-only --hash --fast-list'
+    # print('getdll2', si, str(td))
+    cmd = 'rclone lsjson "' + str(td) + '" --recursive --files-only --hash --fast-list'
     if not td.is_file():
         cmd += ' --exclude ".git/**" --exclude "__pycache__/**"'
     # print(cmd)
@@ -194,12 +201,12 @@ def getdll2(si):
 
         def es(it):
             # TODO: use Path
-            it1 = Path(it['Path'])
-            it2 = it['Size']
-            it3 = it['ModTime'][:-7] + '-00:00'
+            it1 = Path(it["Path"])
+            it2 = it["Size"]
+            it3 = it["ModTime"][:-7] + "-00:00"
             it3 = datetime.datetime.fromisoformat(it3).timestamp()
-            if 'Hashes' in it:
-                it4 = bytes.fromhex(it['Hashes']['md5'])
+            if "Hashes" in it:
+                it4 = bytes.fromhex(it["Hashes"]["md5"])
             else:
                 it4 = bytes()
             return DE(it1, it2, it3, it4)
@@ -215,7 +222,7 @@ def getdll2(si):
 def getdll3(si):
     v.dl3_cs += 1
     sd = srcDir(si)
-    #print('getdll3', si, str(sd))
+    # print('getdll3', si, str(sd))
     l1 = getfl(sd)
 
     def es(it):
@@ -244,11 +251,11 @@ def getrdlls():
 
 
 def lDlld(si):
-    #print('-ldlld', si)
-    if si not in v.LDlls: # or v.LDlls_xt[si] + rto1 <= time.time():
+    # print('-ldlld', si)
+    if si not in v.LDlls:  # or v.LDlls_xt[si] + rto1 <= time.time():
         rv = getdll3(si)
         if rv is not None:
-            #print(si, 'ldll obtained')
+            # print(si, 'ldll obtained')
             v.LDlls[si] = rv
             v.LDlls_xt[si] = time.time()
             v.LDlls_changed = True
@@ -257,11 +264,11 @@ def lDlld(si):
 
 
 def rDlld(di):
-    #print('-rdlld', di)
-    if di not in v.RDlls: # or v.RDlls_xt[di] + rto2 <= time.time():
+    # print('-rdlld', di)
+    if di not in v.RDlls:  # or v.RDlls_xt[di] + rto2 <= time.time():
         rv = getdll1(di)
         if rv is not None:
-            #print(di, 'rdll obtained')
+            # print(di, 'rdll obtained')
             v.RDlls[di] = rv
             v.RDlls_xt[di] = time.time()
             v.RDlls_changed = True
@@ -275,5 +282,25 @@ def dllcmp(do, dn):
     tocopy = dns - dos
     todelete = dos - dns
     return (todelete, tocopy)
+
+
+def getRemoteDE(di, sf: Path):
+    cmd = 'rclone lsjson "' + str(sf) + '" --hash'
+    rc = ar.run1(cmd)
+    if rc == 0:
+        rd = sf.relative_to(tdir(di)).parent
+        it = json.loads(ar.txt)[0]
+        it1 = rd / it["Path"]
+        it2 = it["Size"]
+        it3 = it["ModTime"][:-1] + "-00:00"
+        it3 = datetime.datetime.fromisoformat(it3).timestamp()
+        if "Hashes" in it:
+            it4 = bytes.fromhex(it["Hashes"]["md5"])
+        else:
+            it4 = bytes()
+        nde = DE(it1, it2, it3, it4)
+        print("new nde:", str(nde))
+        return nde
+
 
 from config_funcs import ppre, tdir, pdir, srcDir, trunc2ms

@@ -14,11 +14,13 @@ def incp():
     _pass += 1
     return i
 
+
 def clean():
     res = len(changed_ops()) == 0
     if res:
-        print('clean')
+        print("clean")
     return res
+
 
 def nodeps(T):
     for e in v.eDep:
@@ -37,7 +39,7 @@ def istgt(T, dep2=None):
 
 
 def nts():
-    print('-nts')
+    print("-nts")
     p1 = topological_sort(v.eDep)
     ts = [t for elem in p1 for t in elem]
     ts = [d for d in ts if istgt(d)]
@@ -48,19 +50,19 @@ def nts():
 def proc_nodes(L):
     n = 1
     for node in L:
-        print('node:', node)
+        print("node:", node)
         ss = changed_ops(node)
         for op in ss:
             tc, _ = op()
             if tc:
                 updatets(n)
-                #rupdatets(n)
+                # rupdatets(n)
                 n += 1
     return True
 
 
 def opExec():
-    print('-opexec')
+    print("-opexec")
     g1 = nts()
     p1 = incp()
     if not proc_nodes(g1):
@@ -70,6 +72,7 @@ def opExec():
     return False
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import config
+
     print(opExec())

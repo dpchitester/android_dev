@@ -8,19 +8,19 @@ async def a_netup():
     con = open_connection("www.bitbucket.org", 80)
     try:
         (r, w) = await wait_for(con, 20)
-        w.write(b'HEAD')
-        w.write(b'/')
+        w.write(b"HEAD")
+        w.write(b"/")
         await w.drain()
         w.close()
         await w.wait_closed()
-        #await r.read()
+        # await r.read()
         if os.getuid() != 10749:
-            #return await a_netup2()
+            # return await a_netup2()
             return True
         else:
             return True
     except Exception as e:
-        print('network error ', e)
+        print("network error ", e)
         raise e
         return False
 
@@ -34,10 +34,11 @@ async def a_netup2():
     rv = so.decode()
     rv = rv.strip()
     print(rv)
-    return p.returncode == 0 and rv != '0.0.0.0'
+    return p.returncode == 0 and rv != "0.0.0.0"
+
 
 netup = sync.function(a_netup)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print(netup())

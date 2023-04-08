@@ -6,6 +6,7 @@ import config_vars as v
 from edge import findEdge, Edge
 from config_funcs import pdir, tdir
 from status import onestatus
+from dirlist import getRemoteDE
 
 
 def getfl(p):
@@ -38,29 +39,58 @@ def maxmt(sd):
     return st[0]
 
 
+def findRDE(di, si, sd, td, dl):
+    rd = td.relative_to(tdir(di))
+    de = DE(rd, 0, 0, b"")
+    i = bisect_left(dl, de)
+    return i
+
+
 class Mkzip(OpBase):
     def __init__(self, npl1, npl2, opts={}):
         super(Mkzip, self).__init__(npl1, npl2, opts)
-    def ischanged(self, e:Edge):
+
+    def ischanged(self, e: Edge):
         return e.chk_ct()
+
     def __call__(self):
-        print('Mkzip')
+        print("Mkzip")
         sc = 0
         fc = 0
         di1, si1 = self.npl1
-        e:Edge = findEdge(di1, si1)
+        e: Edge = findEdge(di1, si1)
         if e.chk_ct():
             di2, si2 = self.npl2
             sd = pdir(si2)
-            zf = self.opts.get('zipfile', 'temp.zip')
+            zf = self.opts.get("zipfile", "temp.zip")
             rp = Path(zf)
             zp = tdir(di2) / rp.stem
             try:
-                fp = make_archive(zp, 'zip', sd, '.', True)
+                fp = make_archive(zp, "zip", sd, ".", True)
                 print(fp)
                 maxt = maxmt(sd)
                 utime(fp, ns=(maxt, maxt))
                 sc += 1
+                rde = None
+                if di in v.LDlls:
+                    rde = getRemoteDE(di, fp)
+                    ddei = findRDE(di, si, sd, td, v.LDlls[di])
+                    if ddei < len(v.LDlls[di]) and rde.nm == v.LDlls[di][ddei].nm:
+                        v.LDlls[di][ddei] = rde
+                        v.LDlls_changed = True
+                    else:
+                        v.LDlls[di].insert(ddei, rde)
+                        v.LDlls_changed = True
+                if di in v.RDlls:
+                    if rde is None:
+                        rde = getRemoteDE(di, fp)
+                    ddei = findRDE(di, si, sd, td, v.RDlls[di])
+                    if ddei < len(v.RDlls[di]) and rde.nm == v.RDlls[di][ddei].nm:
+                        v.RDlls[di][ddei] = rde
+                        v.RDlls_changed = True
+                    else:
+                        v.RDlls[di].insert(ddei, rde)
+                        v.RDlls_changed = True
             except Exception as e:
                 print(e)
                 fc += 1
@@ -68,7 +98,7 @@ class Mkzip(OpBase):
             e.clr()
         if sc > 0:
             if di1 in v.LDlls:
-                del v.LDlls[di1]
-                v.LDlls_changed = True
                 onestatus(di1)
+            if di1 in v.RDlls:
+                ronestatus(di1)
         return (sc, fc)

@@ -9,61 +9,48 @@ import asyncrun as ar
 from netup import netup
 from opbase import OpBase
 from edge import Edge, findEdge
-from dirlist import dllcmp, lDlld, rDlld, DE
+from dirlist import dllcmp, lDlld, rDlld, DE, getRemoteDE
 from bisect import bisect_left
 from status import ronestatus
 
-class SFc():
+
+class SFc:
     sc = 0
     fc = 0
+
     def __init__(self):
         pass
+
     def value(self):
         return (self.sc, self.fc)
 
-def getRemoteDE(di, sf:Path):
-    cmd = 'rclone lsjson "' + str(sf) + '" --hash'
-    rc = ar.run1(cmd)
-    if rc == 0:
-        rd = sf.relative_to(tdir(di)).parent
-        it = json.loads(ar.txt)[0]
-        it1 = rd / it['Path']
-        it2 = it['Size']
-        it3 = it['ModTime'][:-1] + '-00:00'
-        it3 = datetime.datetime.fromisoformat(it3).timestamp()
-        if 'Hashes' in it:
-            it4 = bytes.fromhex(it['Hashes']['md5'])
-        else:
-            it4 = bytes()
-        nde = DE(it1, it2, it3, it4)
-        print('new nde:', str(nde))
-        return nde
 
 def findLDE(di, si, sd, td, dl):
     ld = sd.relative_to(pdir(si))
-    de = DE(ld, 0, 0, b'')
+    de = DE(ld, 0, 0, b"")
     i = bisect_left(dl, de)
     return i
+
 
 def findRDE(di, si, sd, td, dl):
     rd = td.relative_to(tdir(di))
-    de = DE(rd, 0, 0, b'')
+    de = DE(rd, 0, 0, b"")
     i = bisect_left(dl, de)
     return i
 
+
 def fsync(di, si, sd, td, sfc):
-    if (netup()):
+    if netup():
         # print('fsync', sd, td)
-        cmd = 'rclone sync "' + str(sd) + '" "' + str(
-            td.parent) + '" --progress'
+        cmd = 'rclone sync "' + str(sd) + '" "' + str(td.parent) + '" --progress'
         # cmd += ' --exclude ".git/**" --exclude "__pycache__/**"'
         print(cmd)
         rc = ar.run2(cmd)
         if rc == 0:
             sfc.sc += 1
-            if di in v.LDlls:
+            if di in v.RDlls:
                 rde = getRemoteDE(di, td)
-                ddei = findRDE(di, si, sd, td, v.LDlls[di])
+                ddei = findRDE(di, si, sd, td, v.RDlls[di])
                 if ddei < len(v.RDlls[di]) and rde.nm == v.RDlls[di][ddei].nm:
                     v.RDlls[di][ddei] = rde
                     v.RDlls_changed = True
@@ -71,52 +58,62 @@ def fsync(di, si, sd, td, sfc):
                     v.RDlls[di].insert(ddei, rde)
                     v.RDlls_changed = True
             return True
-    sfc.fc+=1
+        else:
+            sfc.fc += 1
+            print(ar.txt)
     return False
 
 
 def fcopy(di, si, sd, td, sfc):
-    if (netup()):
+    if netup():
         # print('fcopy', sd, td)
-        cmd = 'rclone copyto "' + str(sd) + '" "' + str(
-            td) + '" --ignore-checksum --ignore-times --no-traverse --progress'
+        cmd = (
+            'rclone copyto "'
+            + str(sd)
+            + '" "'
+            + str(td)
+            + '" --ignore-checksum --ignore-times --no-traverse --progress'
+        )
         # if not sd.is_file():
         #    cmd += ' --exclude ".git/**" --exclude "__pycache__/**"'
         print(cmd)
         rc = ar.run2(cmd)
         if rc == 0:
-            sfc.sc+=1
-            rde = getRemoteDE(di, td)
-            ddei = findRDE(di, si, sd, td, v.RDlls[di])
-            if ddei < len(v.RDlls[di]) and rde.nm == v.RDlls[di][ddei].nm:
-                v.RDlls[di][ddei] = rde
-                v.RDlls_changed = True
-            else:
-                v.RDlls[di].insert(ddei, rde)
-                v.RDlls_changed = True
-            return True
-        sfc.fc+=1
+            sfc.sc += 1
+            if di in v.RDlls:
+                rde = getRemoteDE(di, td)
+                ddei = findRDE(di, si, sd, td, v.RDlls[di])
+                if ddei < len(v.RDlls[di]) and rde.nm == v.RDlls[di][ddei].nm:
+                    v.RDlls[di][ddei] = rde
+                    v.RDlls_changed = True
+                else:
+                    v.RDlls[di].insert(ddei, rde)
+                    v.RDlls_changed = True
+                return True
+        sfc.fc += 1
     return False
 
 
 def fdel(di, si, sd, td, sfc):
-    if (netup()):
+    if netup():
         cmd = 'rclone delete "' + str(td) + '" --progress'
         print(cmd)
-        rde = getRemoteDE(di, td)
+        if di in v.RDlls:
+            rde = getRemoteDE(di, td)
         rc = ar.run2(cmd)
         if rc == 0:
             sfc.sc += 1
-            ddei = findRDE(di, si, sd, td, v.RDlls[di])
-            if ddei < len(v.RDlls[di]) and rde.nm == v.RDlls[di][ddei].nm:
-                v.RDlls[di].pop(ddei)
-                v.RDlls_changed = True
+            if di in v.RDlls:
+                ddei = findRDE(di, si, sd, td, v.RDlls[di])
+                if ddei < len(v.RDlls[di]) and rde.nm == v.RDlls[di][ddei].nm:
+                    v.RDlls[di].pop(ddei)
+                    v.RDlls_changed = True
             return True
-        sfc.fc+=1
+        sfc.fc += 1
     return False
 
 
-class BVars():
+class BVars:
     def __init__(self, di, si, sfc):
         self.si = si
         self.di = di
@@ -132,15 +129,15 @@ class BVars():
     def init2(self):
         self.src_dls = lDlld(self.si)
         if self.src_dls is None:
-            self.sfc.fc+=1
+            self.sfc.fc += 1
         self.dst_dls = rDlld(self.di)
         if self.dst_dls is None:
-            self.sfc.fc+=1
+            self.sfc.fc += 1
         if self.src_dls is not None and self.dst_dls is not None:
             self.f2d, self.f2c = dllcmp(self.dst_dls, self.src_dls)
 
     def skip_matching(self):
-       # handle slip through mismatched on times or more recent
+        # handle slip through mismatched on times or more recent
         for rf in self.f2d.copy():
             for lf in self.f2c.copy():
                 # TODO: use Path
@@ -151,7 +148,7 @@ class BVars():
                     else:
                         b1 = rf.mt > lf.mt
                         if b1:
-                            print('newer mismatched file on cloud', rf.nm)
+                            print("newer mismatched file on cloud", rf.nm)
                             self.f2d.remove(rf)
                             self.f2c.remove(lf)
 
@@ -170,7 +167,7 @@ class BVars():
     def do_deletions(self):
         for rf in self.f2d.copy():  # do deletions
             cfp = rf.nm
-            if fdel(self.di, self.si, self.sd /cfp, self.td / cfp, self.sfc):
+            if fdel(self.di, self.si, self.sd / cfp, self.td / cfp, self.sfc):
                 self.f2d.remove(rf)
                 self.ac2 += 1
 
@@ -179,26 +176,28 @@ class CSCopy(OpBase):
     def __init__(self, npl1, npl2, opts={}):
         super(CSCopy, self).__init__(npl1, npl2, opts)
         self.sfc = SFc()
-    def ischanged(self, e:Edge):
-        return e.chk_ct() | e.rchk_ct()        
+
+    def ischanged(self, e: Edge):
+        return e.chk_ct() | e.rchk_ct()
+
     def __call__(self):
-        print('CSCopy')
+        print("CSCopy")
         if not netup():
-            self.sfc.fc+=1
+            self.sfc.fc += 1
             return self.sfc.value()
         di, si = self.npl1
-        e:Edge = findEdge(di, si)
+        e: Edge = findEdge(di, si)
         if e.chk_ct():
             bv = BVars(di, si, self.sfc)
             bv.init2()
             if bv.sfc.fc == 0:
-                print('raw', len(bv.f2d), 'todelete', len(bv.f2c), 'tocopy')
+                print("raw", len(bv.f2d), "todelete", len(bv.f2c), "tocopy")
                 bv.skip_matching()
-                print('skip', len(bv.f2d), 'todelete', len(bv.f2c), 'tocopy')
+                print("skip", len(bv.f2d), "todelete", len(bv.f2c), "tocopy")
             if bv.sfc.fc == 0:
                 bv.do_copying()
             if bv.sfc.fc == 0:
-                if 'delete' in self.opts and self.opts['delete']:
+                if "delete" in self.opts and self.opts["delete"]:
                     bv.do_deletions()
             if bv.ac2:
                 pass

@@ -5,12 +5,14 @@ import json
 
 from opbase import OpBase
 from edge import Edge, findEdge
-from asyncrun import run1, txt
+import asyncrun as ar
 from config_funcs import pdir, tdir
 import config_vars as v
 from status import onestatus
+from dirlist import getRemoteDE
 
-class FileDiff():
+
+class FileDiff:
     sf = None
     df = None
     fe = 0
@@ -21,7 +23,7 @@ class FileDiff():
     def __init__(self, sf, df):
         self.sf = sf
         self.df = df
-        
+
     def chkdiff(self):
         sfe = self.sf.exists()
         if sfe:
@@ -34,19 +36,27 @@ class FileDiff():
             dfs = self.df.stat()
             if sfs.st_size > dfs.st_size:
                 self.sz = 1
-                print('source larger:', sfs.st_size - dfs.st_size, self.sf.name)
+                print("source larger:", sfs.st_size - dfs.st_size, self.sf.name)
             elif sfs.st_size < dfs.st_size:
                 self.sz = -1
-                print('dest larger:', dfs.st_size - sfs.st_size, self.sf.name)
+                print("dest larger:", dfs.st_size - sfs.st_size, self.sf.name)
             if sfs.st_mtime_ns > dfs.st_mtime_ns:
                 self.mt = 1
-                print('source newer:', (sfs.st_mtime_ns - dfs.st_mtime_ns) / 1E9, self.sf.name)
+                print(
+                    "source newer:",
+                    (sfs.st_mtime_ns - dfs.st_mtime_ns) / 1e9,
+                    self.sf.name,
+                )
             elif sfs.st_mtime_ns < dfs.st_mtime_ns:
                 self.mt = -1
-                print('dest newer:', (dfs.st_mtime_ns - sfs.st_mtime_ns) / 1E9, self.sf.name)
+                print(
+                    "dest newer:",
+                    (dfs.st_mtime_ns - sfs.st_mtime_ns) / 1e9,
+                    self.sf.name,
+                )
             if sha256sumf(self.sf) != sha256sumf(self.df):
                 self.hd = True
-                print('hash mismatch:', self.sf.name)
+                print("hash mismatch:", self.sf.name)
 
     def should_copy(self):
         self.chkdiff()
@@ -61,17 +71,21 @@ class FileDiff():
         else:
             return self.hd
 
-class SFc():
+
+class SFc:
     def __init__(self, sc=0, fc=0):
-        self.sc=sc
-        self.fc=fc
+        self.sc = sc
+        self.fc = fc
+
     def value(self):
         return (self.sc, self.fc)
+
 
 def sha256sums(S1):
     ho = sha256()
     ho.update(S1)
     return ho.hexdigest()
+
 
 def sha256sumf(Fn):
     if Fn.exists():
@@ -81,29 +95,13 @@ def sha256sumf(Fn):
         return ho.hexdigest()
     return None
 
-def getRemoteDE(di, sf:Path):
-    cmd = 'rclone lsjson "' + str(sf) + '" --hash'
-    rc = run1(cmd)
-    if rc == 0:
-        rd = sf.relative_to(tdir(di)).parent
-        it = json.loads(txt)[0]
-        it1 = rd / it['Path']
-        it2 = it['Size']
-        it3 = it['ModTime'][:-1] + '-00:00'
-        it3 = datetime.datetime.fromisoformat(it3).timestamp()
-        if 'Hashes' in it:
-            it4 = bytes.fromhex(it['Hashes']['md5'])
-        else:
-            it4 = bytes()
-        nde = DE(it1, it2, it3, it4)
-        print('new nde:', str(nde))
-        return nde
 
 def findRDE(di, si, sd, td, dl):
     rd = td.relative_to(tdir(di))
-    de = DE(rd, 0, 0, b'')
+    de = DE(rd, 0, 0, b"")
     i = bisect_left(dl, de)
     return i
+
 
 def copy2(di, si, sd, td, sfc):
     # print('copying ', f1, 'to', f2)
@@ -111,13 +109,14 @@ def copy2(di, si, sd, td, sfc):
         td2 = td.parent
     else:
         td2 = td
-    cmd = 'cp -u -p ' + str(sd) + ' ' + str(td2)
-    print('copying', sd.name)
-    rv = run1(cmd)
+    cmd = "cp -u -p " + str(sd) + " " + str(td2)
+    print("copying", sd.name)
+    rv = ar.run1(cmd)
     if rv == 0:
         sfc.sc += 1
-        rde = getRemoteDE(di, td)
+        rde = None
         if di in v.LDlls:
+            rde = getRemoteDE(di, td)
             ddei = findRDE(di, si, sd, td, v.LDlls[di])
             if ddei < len(v.LDlls[di]) and rde.nm == v.LDlls[di][ddei].nm:
                 v.LDlls[di][ddei] = rde
@@ -126,6 +125,8 @@ def copy2(di, si, sd, td, sfc):
                 v.LDlls[di].insert(ddei, rde)
                 v.LDlls_changed = True
         if di in v.RDlls:
+            if rde is None:
+                rde = getRemoteDE(di, td)
             ddei = findRDE(di, si, sd, td, v.RDlls[di])
             if ddei < len(v.RDlls[di]) and rde.nm == v.RDlls[di][ddei].nm:
                 v.RDlls[di][ddei] = rde
@@ -135,26 +136,31 @@ def copy2(di, si, sd, td, sfc):
                 v.RDlls_changed = True
     else:
         sfc.fc -= 1
+        print(ar.txt)
     return rv
 
-#import shutil
-#shutil.copy2(f1, f2)
+
+# import shutil
+# shutil.copy2(f1, f2)
 
 
 class LocalCopy(OpBase):
     sfc = SFc()
+
     def __init__(self, npl1, npl2, opts={}):
         super(LocalCopy, self).__init__(npl1, npl2, opts)
-    def ischanged(self, e:Edge):
+
+    def ischanged(self, e: Edge):
         return e.chk_ct()
+
     def __call__(self):
         di, si = self.npl1
-        e:Edge = findEdge(di, si)
+        e: Edge = findEdge(di, si)
         if e.chk_ct():
-            print('LocalCopy', self.npl1, self.npl2)
+            print("LocalCopy", self.npl1, self.npl2)
             sp = pdir(self.npl2[1])
             dp = tdir(self.npl2[0])
-            gl = self.opts.get('files', ['**/*'])
+            gl = self.opts.get("files", ["**/*"])
             for g in gl:
                 try:
                     fl = sp.glob(g)
@@ -175,8 +181,8 @@ class LocalCopy(OpBase):
                         if fdiff.should_copy():
                             rv = copy2(di, si, fsf, fdf, self.sfc)
                             if rv == 0:
-                                print(' ...copied.')
-                                if 'exec' in self.opts:
+                                print(" ...copied.")
+                                if "exec" in self.opts:
                                     fdf.chmod(496)
                     except Exception as e:
                         print(e)
