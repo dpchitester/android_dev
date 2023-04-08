@@ -64,15 +64,16 @@ def fsync(di, si, sd, td, sfc):
             ddei = findRDE(di, si, sd, td, v.RDlls[di])
             if ddei < len(v.RDlls[di]) and rde.nm == v.RDlls[di][ddei].nm:
                 v.RDlls[di][ddei] = rde
+                v.RDlls_changed = True
             else:
                 v.RDlls[di].insert(ddei, rde)
-            # TODO: update dir hash so as block to block update of remote status
+                v.RDlls_changed = True
             return True
     sfc.fc+=1
     return False
 
 
-def fcopy(sd, td, sfc):
+def fcopy(di, si, sd, td, sfc):
     if (netup()):
         # print('fcopy', sd, td)
         cmd = 'rclone copyto "' + str(sd) + '" "' + str(
@@ -83,18 +84,31 @@ def fcopy(sd, td, sfc):
         rc = ar.run2(cmd)
         if rc == 0:
             sfc.sc+=1
+            rde = getRemoteDE(di, td)
+            ddei = findRDE(di, si, sd, td, v.RDlls[di])
+            if ddei < len(v.RDlls[di]) and rde.nm == v.RDlls[di][ddei].nm:
+                v.RDlls[di][ddei] = rde
+                v.RDlls_changed = True
+            else:
+                v.RDlls[di].insert(ddei, rde)
+                v.RDlls_changed = True
             return True
         sfc.fc+=1
     return False
 
 
-def fdel(td, sfc):
+def fdel(di, si, sd, td, sfc):
     if (netup()):
         cmd = 'rclone delete "' + str(td) + '" --progress'
         print(cmd)
+        rde = getRemoteDE(di, td)
         rc = ar.run2(cmd)
         if rc == 0:
-            sfc.sc+=1
+            sfc.sc += 1
+            ddei = findRDE(di, si, sd, td, v.RDlls[di])
+            if ddei < len(v.RDlls[di]) and rde.nm == v.RDlls[di][ddei].nm:
+                v.RDlls[di].pop(ddei)
+                v.RDlls_changed = True
             return True
         sfc.fc+=1
     return False
@@ -139,12 +153,12 @@ class BVars():
                             self.f2d.remove(rf)
                             self.f2c.remove(lf)
 
-    def do_copying(self, di, si):
+    def do_copying(self):
         for lf in self.f2c.copy():
             # TODO: use Path
             cfp = lf.nm
             # print(cfp)
-            if fsync(di, si, self.sd / cfp, self.td / cfp, self.sfc):
+            if fsync(self.di, self.si, self.sd / cfp, self.td / cfp, self.sfc):
                 self.ac2 += 1
                 self.f2c.remove(lf)
                 for rf in self.f2d.copy():
@@ -154,7 +168,7 @@ class BVars():
     def do_deletions(self):
         for rf in self.f2d.copy():  # do deletions
             cfp = rf.nm
-            if fdel(self.td / cfp, self.sfc):
+            if fdel(self.di, self.si, self.sd /cfp, self.td / cfp, self.sfc):
                 self.f2d.remove(rf)
                 self.ac2 += 1
 
@@ -180,14 +194,11 @@ class CSCopy(OpBase):
                 bv.skip_matching()
                 print('skip', len(bv.f2d), 'todelete', len(bv.f2c), 'tocopy')
             if bv.sfc.fc == 0:
-                bv.do_copying(di,si)
+                bv.do_copying()
             if bv.sfc.fc == 0:
                 if 'delete' in self.opts and self.opts['delete']:
                     bv.do_deletions()
             if bv.ac2:
-                #del v.RDlls[di]
-                #v.RDlls_changed = True
-                # rnoc(di)
                 pass
         if self.sfc.fc == 0:
             e.clr()
