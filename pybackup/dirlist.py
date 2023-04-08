@@ -280,8 +280,10 @@ def dllcmp(do, dn):
     todelete = dos - dns
     return (todelete, tocopy)
 
+
 import snoop
 from snoop import pp
+
 
 def getRemoteDE(di, sf: Path):
     cmd = 'rclone lsjson "' + str(sf) + '" --hash'

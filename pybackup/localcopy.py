@@ -12,6 +12,7 @@ from status import onestatus
 from dirlist import getRemoteDE, DE
 from bisect import bisect_left
 
+
 class FileDiff:
     sf = None
     df = None
