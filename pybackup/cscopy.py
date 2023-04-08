@@ -61,14 +61,15 @@ def fsync(di, si, sd, td, sfc):
         rc = ar.run2(cmd)
         if rc == 0:
             sfc.sc += 1
-            rde = getRemoteDE(di, td)
-            ddei = findRDE(di, si, sd, td, v.RDlls[di])
-            if ddei < len(v.RDlls[di]) and rde.nm == v.RDlls[di][ddei].nm:
-                v.RDlls[di][ddei] = rde
-                v.RDlls_changed = True
-            else:
-                v.RDlls[di].insert(ddei, rde)
-                v.RDlls_changed = True
+            if di in v.LDlls:
+                rde = getRemoteDE(di, td)
+                ddei = findRDE(di, si, sd, td, v.LDlls[di])
+                if ddei < len(v.RDlls[di]) and rde.nm == v.RDlls[di][ddei].nm:
+                    v.RDlls[di][ddei] = rde
+                    v.RDlls_changed = True
+                else:
+                    v.RDlls[di].insert(ddei, rde)
+                    v.RDlls_changed = True
             return True
     sfc.fc+=1
     return False

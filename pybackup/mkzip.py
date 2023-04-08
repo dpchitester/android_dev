@@ -45,7 +45,7 @@ class Mkzip(OpBase):
         return e.chk_ct()
     def __call__(self):
         print('Mkzip')
-        tc = 0
+        sc = 0
         fc = 0
         di1, si1 = self.npl1
         e:Edge = findEdge(di1, si1)
@@ -60,15 +60,15 @@ class Mkzip(OpBase):
                 print(fp)
                 maxt = maxmt(sd)
                 utime(fp, ns=(maxt, maxt))
-                tc += 1
+                sc += 1
             except Exception as e:
                 print(e)
                 fc += 1
         if fc == 0:
             e.clr()
-        if tc > 0:
+        if sc > 0:
             if di1 in v.LDlls:
                 del v.LDlls[di1]
                 v.LDlls_changed = True
                 onestatus(di1)
-        return (tc, fc)
+        return (sc, fc)
