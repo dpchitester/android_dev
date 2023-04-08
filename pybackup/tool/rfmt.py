@@ -5,7 +5,7 @@ from sys import exit
 
 print("-- rfmt.py --")
 
-cmd = 'black -t py311 *.py'
+cmd = "black -t py311 *.py"
 print(cmd)
 res = run(cmd, shell=True)
 exit(res)

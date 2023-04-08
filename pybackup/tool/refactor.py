@@ -7,27 +7,29 @@ from rope.contrib.findit import find_occurrences
 from rope.refactor.move import create_move
 from rope.refactor.rename import Rename
 
-proj = Project('.')
+proj = Project(".")
 
 # analyze_modules(proj)
 import snoop
 
 mods = []
 
+
 def doChGl(old, new):
     global mods
     mods = proj.get_python_files()
-    mods = list(filter(lambda fp: '/' not in str(fp.path), mods))
+    mods = list(filter(lambda fp: "/" not in str(fp.path), mods))
     for mod in mods:
         if doCh(mod, old, new):
             return
+
 
 def doCh(mod, old, new):
     global mods
     try:
         idx = mod.read().index(old, 0)
     except ValueError as e:
-        #print(e)
+        # print(e)
         return False
     rv = find_occurrences(proj, mod, idx, resources=mods)
     if len(rv) > 0:
@@ -45,6 +47,7 @@ def doCh(mod, old, new):
         return True
     return False
 
+
 doit = False
 
 # mod2 = proj.get_resource(f2)
@@ -53,4 +56,3 @@ doChGl("bctck", "chk_ct")
 doChGl("rbctck", "rchk_ct")
 
 proj.close()
-

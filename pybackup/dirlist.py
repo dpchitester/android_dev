@@ -17,8 +17,6 @@ rto1 = 0  # 60*1
 rto2 = 0  # 60*60*.5
 
 
-
-
 def getfl(p):
     # print(str(p))
     fl = []
@@ -251,6 +249,7 @@ def dllcmp(do, dn):
     todelete = dos - dns
     return (todelete, tocopy)
 
+
 def getRemoteDE(di, sf: Path):
     cmd = 'rclone lsjson "' + str(sf) + '" --hash'
     rc = ar.run1(cmd)
@@ -268,5 +267,3 @@ def getRemoteDE(di, sf: Path):
         nde = v.DE(it1, it2, it3, it4)
         print("new nde:", str(nde))
         return nde
-
-

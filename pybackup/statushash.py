@@ -66,5 +66,3 @@ def rdhck(Di):
     if Dh2 is not None:
         return (Dh2, Dh1 != Dh2)
     return (None, False)
-
-
