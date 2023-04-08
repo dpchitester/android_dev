@@ -66,7 +66,7 @@ class Mkzip(OpBase):
             rp = Path(zf)
             zp = tdir(di2) / rp.stem
             try:
-                fp = make_archive(zp, "zip", sd, ".", True)
+                fp = Path(make_archive(zp, "zip", sd, ".", True))
                 print(fp)
                 maxt = maxmt(sd)
                 utime(fp, ns=(maxt, maxt))
