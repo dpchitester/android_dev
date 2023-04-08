@@ -115,8 +115,8 @@ def copy2(di, si, sd, td, sfc):
     rv = run1(cmd)
     if rv == 0:
         sfc.sc += 1
+        rde = getRemoteDE(di, td)
         if di in v.LDlls:
-            rde = getRemoteDE(di, td)
             ddei = findRDE(di, si, sd, td, v.LDlls[di])
             if ddei < len(v.LDlls[di]) and rde.nm == v.LDlls[di][ddei].nm:
                 v.LDlls[di][ddei] = rde
@@ -124,6 +124,14 @@ def copy2(di, si, sd, td, sfc):
             else:
                 v.LDlls[di].insert(ddei, rde)
                 v.LDlls_changed = True
+        if di in v.RDlls:
+            ddei = findRDE(di, si, sd, td, v.RDlls[di])
+            if ddei < len(v.RDlls[di]) and rde.nm == v.RDlls[di][ddei].nm:
+                v.RDlls[di][ddei] = rde
+                v.RDlls_changed = True
+            else:
+                v.RDlls[di].insert(ddei, rde)
+                v.RDlls_changed = True
     else:
         sfc.fc -= 1
     return rv
@@ -164,13 +172,11 @@ class LocalCopy(OpBase):
                             makedirs(pd, exist_ok=True)
                         fdiff = FileDiff(fsf, fdf)
                         if fdiff.should_copy():
-                            rv = copy2(di, si, fsf, fdf, sfc)
+                            rv = copy2(di, si, fsf, fdf, self.sfc)
                             if rv == 0:
                                 print(' ...copied.')
                                 if 'exec' in self.opts:
                                     fdf.chmod(496)
-                            else:
-                                self.sfc.fc += 1
                     except Exception as e:
                         print(e)
                         self.sfc.fc += 1
@@ -179,4 +185,6 @@ class LocalCopy(OpBase):
             if self.sfc.sc > 0:
                 if di in v.LDlls:
                     onestatus(di)
+                if di in v.RDlls:
+                    ronestatus(di)
         return self.sfc.value()
