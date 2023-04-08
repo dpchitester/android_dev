@@ -11,7 +11,7 @@ from opbase import OpBase
 from edge import Edge, findEdge
 from dirlist import dllcmp, lDlld, rDlld, DE, getRemoteDE
 from bisect import bisect_left
-from status import ronestatus
+from status import onestatus, ronestatus
 
 
 class SFc:
