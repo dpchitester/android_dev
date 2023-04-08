@@ -1,9 +1,9 @@
-from pathlib import Path
-from os import walk
 from functools import partial
+from os import walk
+from pathlib import Path
 
 import config_vars as v
-from statushash import rdhck, ldhck
+from statushash import ldhck, rdhck
 
 
 def ppre(s):

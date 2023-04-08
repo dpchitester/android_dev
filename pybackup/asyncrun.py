@@ -1,6 +1,7 @@
-from asyncio.subprocess import PIPE, STDOUT
-from asyncio import create_subprocess_shell, wait, ensure_future
 import sys
+from asyncio import create_subprocess_shell, ensure_future, wait
+from asyncio.subprocess import PIPE, STDOUT
+
 import async_to_sync as sync
 
 txt = ""

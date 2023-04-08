@@ -1,8 +1,10 @@
-from datetime import datetime
-from pyswip import Prolog, Functor, Atom, Variable, Query
-import parser
 import json
+import parser
+from datetime import datetime
+
 from opclasses import *
+from pyswip import Atom, Functor, Prolog, Query, Variable
+
 import config as e
 
 pl = Prolog()

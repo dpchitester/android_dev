@@ -1,11 +1,10 @@
-import os
 import json
+import os
 from functools import partial
-
-from opbase import OpBaseEncoder
 
 import config_vars as v
 from config_funcs import *
+from opbase import OpBaseEncoder
 
 addPre("FLAGS", os.environ["HOME"])
 # print("FLAGS=" + str(ppre('FLAGS')))
@@ -20,18 +19,15 @@ v.rdhpf = ppre("FLAGS") / "rdhd.pp"
 # for pf in [edgepf, ldllsf, rdllsf, fmd5hf, ldhpf, rdhpf]:
 #    print(pf.name, str(pf))
 
-from edge import addDep, addArc
-
 import ldsv
+from edge import addArc, addDep
 
 ldsv.load_all()
 
-from gitops import gitck1, gitck2, gitremoteck
-
-from localcopy import LocalCopy
-from gitops import GitOps
 from cscopy import CSCopy
 from csrestore import CSRestore
+from gitops import GitOps, gitck1, gitck2, gitremoteck
+from localcopy import LocalCopy
 from mkzip import Mkzip
 
 addPre("sd", "/sdcard")

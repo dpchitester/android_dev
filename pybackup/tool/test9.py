@@ -1,5 +1,5 @@
-from pathlib import Path
 from os import walk
+from pathlib import Path
 
 from config import path, srcs, tagid
 

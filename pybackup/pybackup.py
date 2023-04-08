@@ -1,16 +1,12 @@
 #!/data/data/com.termux/files/usr/bin/env python
 
 import asyncio
-from os import walk, environ
+from os import environ, walk
 from pathlib import Path
 
-from os import walk
-
-from inotify_simple import flags
-
-import ldsv
 import dirlist as dl
-
+import ldsv
+from inotify_simple import flags
 
 wdsi = {}
 in1 = None
@@ -108,14 +104,14 @@ def main():
     ldsv.save_all()
 
 
-import config_vars as v
-import config_funcs
 import config
+import config_funcs
+import config_vars as v
+import status as st
 from config_funcs import srcDir
 from config_vars import LDlls
-from status import onestatus
 from opexec import clean, opExec
-import status as st
+from status import onestatus
 
 if __name__ == "__main__":
     main()

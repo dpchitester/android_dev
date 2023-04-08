@@ -1,11 +1,13 @@
 #!/data/data/com.termux/files/usr/bin/env python
+from glob import glob
+from sys import exit
+
+from funcs import srun
+from gb_env import pdir
+from pygments import highlight
 from pygments.formatters import HtmlFormatter
 from pygments.lexers import PrologLexer
-from pygments import highlight
-from sys import exit
-from glob import glob
-from gb_env import pdir
-from funcs import srun
+
 print("-- rfmt2.py --")
 
 # cmd = 'yapf -i -r -vv ' + pdir['pyth'] + '/*.py'

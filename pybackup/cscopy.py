@@ -1,16 +1,16 @@
-from os import utime
-import json
-from pathlib import Path
 import datetime
+import json
+from bisect import bisect_left
+from os import utime
+from pathlib import Path
 
-import config_vars as v
-from config_funcs import pdir, tdir, ppre
 import asyncrun as ar
+import config_vars as v
+from config_funcs import pdir, ppre, tdir
+from dirlist import dllcmp, getRemoteDE, lDlld, rDlld
+from edge import Edge, findEdge
 from netup import netup
 from opbase import OpBase
-from edge import Edge, findEdge
-from dirlist import dllcmp, lDlld, rDlld, DE, getRemoteDE
-from bisect import bisect_left
 from status import onestatus, ronestatus
 
 
@@ -27,14 +27,14 @@ class SFc:
 
 def findLDE(di, si, sd, td, dl):
     ld = sd.relative_to(pdir(si))
-    de = DE(ld, 0, 0, b"")
+    de = v.DE(ld, 0, 0, b"")
     i = bisect_left(dl, de)
     return i
 
 
 def findRDE(di, si, sd, td, dl):
     rd = td.relative_to(tdir(di))
-    de = DE(rd, 0, 0, b"")
+    de = v.DE(rd, 0, 0, b"")
     i = bisect_left(dl, de)
     return i
 

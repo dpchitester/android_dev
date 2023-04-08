@@ -1,7 +1,8 @@
 import asyncio
-from toposort import topological_sort
+
 import config_vars as v
-from status import changed_ops, updatets, rupdatets
+from status import changed_ops, rupdatets, updatets
+from toposort import topological_sort
 
 _pass = 1
 

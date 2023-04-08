@@ -1,9 +1,9 @@
-from opbase import OpBase
-from edge import Edge, findEdge
 import asyncrun as ar
-from statushash import ldh_f, ldhset, rdh_f, rdhset
 from bhash import blakeHash
+from edge import Edge, findEdge
 from netup import netup
+from opbase import OpBase
+from statushash import ldh_f, ldhset, rdh_f, rdhset
 
 
 class GitCmdFailure(Exception):

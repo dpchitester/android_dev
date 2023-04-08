@@ -1,4 +1,5 @@
 from os import getenv
+
 pre = {}
 pre['proj'] = '/sdcard/projects'
 

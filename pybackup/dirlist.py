@@ -1,51 +1,22 @@
 import asyncio
-from pathlib import Path
-from os import walk
-import json
 import datetime
+import json
 import time
-from dataclasses import dataclass, field
-from fnmatch import fnmatch
 from bisect import bisect_left
+from fnmatch import fnmatch
+from os import walk
+from pathlib import Path
 
 import asyncrun as ar
 import config_vars as v
 from bhash import blakeHash
+from config_funcs import pdir, ppre, srcDir, tdir, trunc2ms
 from fmd5h import fmd5f
-
 
 rto1 = 0  # 60*1
 rto2 = 0  # 60*60*.5
 
 
-@dataclass
-class DE:
-    nm: Path
-    sz: int
-    mt: float
-    md5: bytes
-    _hc: int = field(default=None)
-
-    def __hash__(self):
-        if self._hc is None:
-            self._hc = blakeHash((self.nm, self.sz, self.mt, self.md5))
-        return self._hc
-
-    def __eq__(self, other):
-        return (str(self.nm), self.sz, self.mt, self.md5) == (
-            str(other.nm),
-            other.sz,
-            other.mt,
-            other.md5,
-        )
-
-    def __lt__(self, other):
-        return (str(self.nm), self.sz, self.mt, self.md5) < (
-            str(other.nm),
-            other.sz,
-            other.mt,
-            other.md5,
-        )
 
 
 def getfl(p):
@@ -111,7 +82,7 @@ def getdll0():
                 it4 = bytes.fromhex(it["Hashes"]["md5"])
             else:
                 it4 = bytes()
-            return DE(it1, it2, it3, it4)
+            return v.DE(it1, it2, it3, it4)
 
         st = list(map(es, l1))
         st.sort()
@@ -129,7 +100,7 @@ def sepdlls(dlls):
             v.RDlls_changed = True
             rd = tdir(di).relative_to(ppre("gd"))
             tds = str(rd) + "/"
-            i = bisect_left(dlls, DE(tds, 0, 0, b""))
+            i = bisect_left(dlls, v.DE(tds, 0, 0, b""))
             # print(tds, i)
             if i == len(dlls):
                 continue
@@ -140,7 +111,7 @@ def sepdlls(dlls):
                 # TODO: apply panic procedure
                 continue
             while fnmatch(de.nm, tds + "*"):
-                de2 = DE(de.nm, de.sz, de.mt, de.md5)
+                de2 = v.DE(de.nm, de.sz, de.mt, de.md5)
                 # TODO: use Path
                 de2.nm = de2.nm.relative_to(rd)
                 # print(de2[0])
@@ -174,7 +145,7 @@ def getdll1(di):
                 it4 = bytes.fromhex(it["Hashes"]["md5"])
             else:
                 it4 = bytes()
-            return DE(it1, it2, it3, it4)
+            return v.DE(it1, it2, it3, it4)
 
         st = list(map(es, l1))
         st.sort()
@@ -206,7 +177,7 @@ def getdll2(si):
                 it4 = bytes.fromhex(it["Hashes"]["md5"])
             else:
                 it4 = bytes()
-            return DE(it1, it2, it3, it4)
+            return v.DE(it1, it2, it3, it4)
 
         st = list(map(es, l1))
         st.sort()
@@ -230,7 +201,7 @@ def getdll3(si):
         it3 = fs.st_mtime_ns
         it3 = trunc2ms(it3)
         it4 = fmd5f(it, it2, it3)
-        return DE(it1, it2, it3, it4)
+        return v.DE(it1, it2, it3, it4)
 
     st = list(map(es, l1))
     st.sort()
@@ -280,11 +251,6 @@ def dllcmp(do, dn):
     todelete = dos - dns
     return (todelete, tocopy)
 
-
-import snoop
-from snoop import pp
-
-
 def getRemoteDE(di, sf: Path):
     cmd = 'rclone lsjson "' + str(sf) + '" --hash'
     rc = ar.run1(cmd)
@@ -299,9 +265,8 @@ def getRemoteDE(di, sf: Path):
             it4 = bytes.fromhex(it["Hashes"]["md5"])
         else:
             it4 = bytes()
-        nde = DE(it1, it2, it3, it4)
+        nde = v.DE(it1, it2, it3, it4)
         print("new nde:", str(nde))
         return nde
 
 
-from config_funcs import ppre, tdir, pdir, srcDir, trunc2ms

@@ -1,5 +1,7 @@
-from bhash import blakeHash
+import config_vars as v
+import dirlist as dl
 import ldsv
+from bhash import blakeHash
 
 
 def ldh_f(Si, dh=None):
@@ -21,14 +23,14 @@ def rdh_f(Di, dh=None):
 
 
 def ldh_d(Si):
-    Si_dl = lDlld(Si)
+    Si_dl = dl.lDlld(Si)
     if Si_dl is not None:
         return blakeHash(Si_dl)
     return None
 
 
 def rdh_d(Di):
-    Di_dl = rDlld(Di)
+    Di_dl = dl.rDlld(Di)
     if Di_dl is not None:
         return blakeHash(Di_dl)
     return None
@@ -66,5 +68,3 @@ def rdhck(Di):
     return (None, False)
 
 
-import config_vars as v
-from dirlist import lDlld, rDlld

@@ -1,20 +1,19 @@
 import asyncio
-from pathlib import Path
-from bisect import insort
 import json
 import time
+from bisect import insort
 from math import floor
-from os import makedirs, utime, environ
+from os import environ, makedirs, utime
+from pathlib import Path
 
 import asyncrun as ar
-from opbase import OpBase
-from netup import netup
-
-from statushash import ldh_d, rdh_d, rdh_f, ldhset
-from dirlist import dllcmp, lDlld, rDlld
-from config_funcs import pdir, tdir
-from edge import Edge, findEdge
 import config_vars as v
+from config_funcs import pdir, tdir
+from dirlist import dllcmp, lDlld, rDlld
+from edge import Edge, findEdge
+from netup import netup
+from opbase import OpBase
+from statushash import ldh_d, ldhset, rdh_d, rdh_f
 
 
 def fsync(sd, td, tcfc):

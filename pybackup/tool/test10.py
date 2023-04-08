@@ -1,5 +1,5 @@
+from campy.graphics.gobjects import GOval, GRect
 from campy.graphics.gwindow import GWindow
-from campy.graphics.gobjects import GRect, GOval
 
 window = GWindow()
 rect = GRect(200, 100)  # A rectangle 200 pixels wide and 100 pixels tall.

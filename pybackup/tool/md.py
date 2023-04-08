@@ -1,8 +1,8 @@
-from pathlib import Path
-from module_dependencies import Source
-from pprint import pprint
 import sys
+from pathlib import Path
+from pprint import pprint
 
+from module_dependencies import Source
 
 fn = sys.argv[1]
 # This creates a Source instance for this file itself

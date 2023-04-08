@@ -1,11 +1,11 @@
 #!/data/data/com.termux/files/usr/bin/python
 
-from rope.base.project import Project
-from rope.refactor.rename import Rename
-from rope.refactor.move import create_move
-from rope.contrib.findit import find_occurrences
-from rope.base.libutils import analyze_modules 
 from rope.base.exceptions import RefactoringError
+from rope.base.libutils import analyze_modules
+from rope.base.project import Project
+from rope.contrib.findit import find_occurrences
+from rope.refactor.move import create_move
+from rope.refactor.rename import Rename
 
 proj = Project('.')
 

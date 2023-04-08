@@ -1,9 +1,10 @@
 #!/data/data/com.termux/files/usr/bin/env python
 
-import sh
 import os
-import pyDatalog
 import traceback
+
+import pyDatalog
+import sh
 
 my_ls = sh.ls.bake('-AgGlR', '--block-size=1', '--time-style=+%s',
                    '--color=never')

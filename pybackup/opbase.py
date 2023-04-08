@@ -1,6 +1,7 @@
 import json
-from edge import Edge
 from pathlib import PosixPath
+
+from edge import Edge
 
 
 class OpBaseEncoder(json.JSONEncoder):

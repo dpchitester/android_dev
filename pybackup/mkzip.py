@@ -1,13 +1,14 @@
-from os import walk, utime
+from bisect import bisect_left
+from os import utime, walk
 from pathlib import Path
 from shutil import make_archive
-from opbase import OpBase
+
 import config_vars as v
-from edge import findEdge, Edge
 from config_funcs import pdir, tdir
+from dirlist import getRemoteDE
+from edge import Edge, findEdge
+from opbase import OpBase
 from status import onestatus
-from dirlist import getRemoteDE, DE
-from bisect import bisect_left
 
 
 def getfl(p):
@@ -42,7 +43,7 @@ def maxmt(sd):
 
 def findRDE(di, si, sd, tp, dl):
     rd = tp.relative_to(tdir(di))
-    de = DE(rd, 0, 0, b"")
+    de = v.DE(rd, 0, 0, b"")
     i = bisect_left(dl, de)
     return i
 

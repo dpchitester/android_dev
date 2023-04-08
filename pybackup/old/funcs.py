@@ -1,9 +1,11 @@
-from sys import stdout
-from subprocess import run, Popen, PIPE
-from os.path import exists, isdir
-from os import fsdecode, getenv, lstat, utime, mkdir, rmdir
 from glob import glob
+from os import fsdecode, getenv, lstat, mkdir, rmdir, utime
+from os.path import exists, isdir
+from subprocess import PIPE, Popen, run
+from sys import stdout
+
 from gb_env import *
+
 print("-- funcs.py --")
 
 

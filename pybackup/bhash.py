@@ -1,11 +1,11 @@
+from hashlib import blake2b
 from pathlib import Path, PosixPath
 from struct import pack, unpack
-from hashlib import blake2b
+
+import config_vars as v
 
 
 def bhu(ho, it):
-    from dirlist import DE
-
     def iu(it):
         for itit in it:
             bhu(ho, itit)
@@ -20,7 +20,7 @@ def bhu(ho, it):
         tuple: iu,
         set: iu,
         list: iu,
-        DE: lambda it: iu((it.nm, it.sz, it.mt, it.md5)),
+        v.DE: lambda it: iu((it.nm, it.sz, it.mt, it.md5)),
     }
     try:
         bhuf[type(it)](it)

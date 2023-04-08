@@ -1,6 +1,7 @@
-from asyncio import create_subprocess_shell, run, open_connection, wait_for
-from asyncio.subprocess import PIPE, STDOUT
 import os
+from asyncio import create_subprocess_shell, open_connection, run, wait_for
+from asyncio.subprocess import PIPE, STDOUT
+
 import async_to_sync as sync
 
 

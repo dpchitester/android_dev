@@ -1,14 +1,14 @@
-import os
-import enum
-import collections
-import struct
-import select
-import time
-import ctypes
-from errno import EINTR
-from termios import FIONREAD
-from fcntl import ioctl
 import asyncio
+import collections
+import ctypes
+import enum
+import os
+import select
+import struct
+import time
+from errno import EINTR
+from fcntl import ioctl
+from termios import FIONREAD
 
 __all__ = ["flags", "masks", "parse_events", "INotify", "Event"]
 

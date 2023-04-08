@@ -1,8 +1,40 @@
+from dataclasses import dataclass, field
 from pathlib import Path
+from typing import Callable, Dict, List, Set, Tuple, TypeAlias, Union
+
+from bhash import blakeHash
 from edge import Edge
 from opbase import OpBase
-from typing import Dict, Set, List, Tuple, Union, Callable, TypeAlias
-from dirlist import DE
+
+
+@dataclass
+class DE:
+    nm: Path
+    sz: int
+    mt: float
+    md5: bytes
+    _hc: int = field(default=None)
+
+    def __hash__(self):
+        if self._hc is None:
+            self._hc = blakeHash((self.nm, self.sz, self.mt, self.md5))
+        return self._hc
+
+    def __eq__(self, other):
+        return (str(self.nm), self.sz, self.mt, self.md5) == (
+            str(other.nm),
+            other.sz,
+            other.mt,
+            other.md5,
+        )
+
+    def __lt__(self, other):
+        return (str(self.nm), self.sz, self.mt, self.md5) < (
+            str(other.nm),
+            other.sz,
+            other.mt,
+            other.md5,
+        )
 
 NodeTag: TypeAlias = str
 
@@ -80,3 +112,4 @@ dl0_cs = 0
 dl1_cs = 0
 dl2_cs = 0
 dl3_cs = 0
+

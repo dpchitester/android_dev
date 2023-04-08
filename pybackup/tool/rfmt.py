@@ -1,8 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/env python
-from sys import exit
-
-from subprocess import run
 from pathlib import Path
+from subprocess import run
+from sys import exit
 
 print("-- rfmt.py --")
 

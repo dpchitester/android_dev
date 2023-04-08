@@ -2,12 +2,13 @@
 
 print("-- scpy.py --")
 
-from funcs import srun, ts2, bctck, bctclr, clr
-from gb_env import pdir, binsrc
 from glob import glob
 from os import getenv, lstat, mkdir
 from os.path import exists
 from sys import exit
+
+from funcs import bctck, bctclr, clr, srun, ts2
+from gb_env import binsrc, pdir
 
 st = getenv('HOME') + '/bin'
 

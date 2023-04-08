@@ -1,9 +1,10 @@
 #!/data/data/com.termux/files/usr/bin/env python
 print("-- fdbackup.py --")
 
+from sys import exit
+
 from funcs import *
 from gb_env import *
-from sys import exit
 
 
 def r_fdb2(n2, n1):

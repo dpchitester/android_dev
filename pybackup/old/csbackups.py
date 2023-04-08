@@ -2,9 +2,10 @@
 
 print("-- csbackups.py --")
 
-from gb_env import *
-from funcs import *
 from sys import exit
+
+from funcs import *
+from gb_env import *
 
 
 # csname projsubdir

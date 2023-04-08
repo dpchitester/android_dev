@@ -1,5 +1,6 @@
 import sys
 from pathlib import Path
+
 from bowler import Query
 
 old_name, new_name = sys.argv[1:]

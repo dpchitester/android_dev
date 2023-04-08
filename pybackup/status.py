@@ -1,8 +1,9 @@
-from edge import findEdge, Edge
-from statushash import ldhset, rdhset
-from opbase import OpBase
+import config
 import config_vars as v
-import ldsv, config
+import ldsv
+from edge import Edge, findEdge
+from opbase import OpBase
+from statushash import ldhset, rdhset
 
 
 def changed_ops(T=None) -> list[OpBase]:

@@ -1,16 +1,16 @@
-from os import makedirs
-from hashlib import sha256
-from pathlib import Path
 import json
-
-from opbase import OpBase
-from edge import Edge, findEdge
-import asyncrun as ar
-from config_funcs import pdir, tdir
-import config_vars as v
-from status import onestatus
-from dirlist import getRemoteDE, DE
 from bisect import bisect_left
+from hashlib import sha256
+from os import makedirs
+from pathlib import Path
+
+import asyncrun as ar
+import config_vars as v
+from config_funcs import pdir, tdir
+from dirlist import getRemoteDE
+from edge import Edge, findEdge
+from opbase import OpBase
+from status import onestatus
 
 
 class FileDiff:
@@ -99,7 +99,7 @@ def sha256sumf(Fn):
 
 def findRDE(di, si, sd, td, dl):
     rd = td.relative_to(tdir(di))
-    de = DE(rd, 0, 0, b"")
+    de = v.DE(rd, 0, 0, b"")
     i = bisect_left(dl, de)
     return i
 
