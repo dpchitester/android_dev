@@ -68,4 +68,9 @@ class Mkzip(OpBase):
                 fc += 1
         if fc == 0:
             e.clr()
+        if self.sfc.sc > 0:
+                tv = self.npl2[0]
+                if tv in v.LDlls:
+                    del v.LDlls[tv]
+                    v.LDlls_changed = True
         return (tc, fc)
