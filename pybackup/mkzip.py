@@ -72,24 +72,24 @@ class Mkzip(OpBase):
                 utime(fp, ns=(maxt, maxt))
                 sc += 1
                 rde = None
-                if di in v.LDlls:
-                    rde = getRemoteDE(di, fp)
-                    ddei = findRDE(di, si, sd, td, v.LDlls[di])
-                    if ddei < len(v.LDlls[di]) and rde.nm == v.LDlls[di][ddei].nm:
-                        v.LDlls[di][ddei] = rde
+                if di2 in v.LDlls:
+                    rde = getRemoteDE(di2, fp)
+                    ddei = findRDE(di2, si2, sd, td, v.LDlls[di2])
+                    if ddei < len(v.LDlls[di2]) and rde.nm == v.LDlls[di2][ddei].nm:
+                        v.LDlls[di2][ddei] = rde
                         v.LDlls_changed = True
                     else:
-                        v.LDlls[di].insert(ddei, rde)
+                        v.LDlls[di2].insert(ddei, rde)
                         v.LDlls_changed = True
-                if di in v.RDlls:
+                if di2 in v.RDlls:
                     if rde is None:
-                        rde = getRemoteDE(di, fp)
-                    ddei = findRDE(di, si, sd, td, v.RDlls[di])
-                    if ddei < len(v.RDlls[di]) and rde.nm == v.RDlls[di][ddei].nm:
-                        v.RDlls[di][ddei] = rde
+                        rde = getRemoteDE(di2, fp)
+                    ddei = findRDE(di2, si2, sd, td, v.RDlls[di2])
+                    if ddei < len(v.RDlls[di2]) and rde.nm == v.RDlls[di2][ddei].nm:
+                        v.RDlls[di2][ddei] = rde
                         v.RDlls_changed = True
                     else:
-                        v.RDlls[di].insert(ddei, rde)
+                        v.RDlls[di2].insert(ddei, rde)
                         v.RDlls_changed = True
             except Exception as e:
                 print(e)
@@ -97,8 +97,8 @@ class Mkzip(OpBase):
         if fc == 0:
             e.clr()
         if sc > 0:
-            if di1 in v.LDlls:
-                onestatus(di1)
-            if di1 in v.RDlls:
-                ronestatus(di1)
+            if di2 in v.LDlls:
+                onestatus(di2)
+            if di2 in v.RDlls:
+                ronestatus(di2)
         return (sc, fc)
