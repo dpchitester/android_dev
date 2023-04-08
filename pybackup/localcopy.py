@@ -6,6 +6,7 @@ from edge import Edge, findEdge
 from asyncrun import run1
 from config_funcs import pdir, tdir
 import config_vars as v
+from status import onestatus
 
 class FileDiff():
     sf = None
@@ -140,4 +141,5 @@ class LocalCopy(OpBase):
                 if tv in v.LDlls:
                     del v.LDlls[tv]
                     v.LDlls_changed = True
+                    onestatus(si)
         return self.sfc.value()

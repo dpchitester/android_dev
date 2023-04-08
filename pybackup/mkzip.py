@@ -5,6 +5,7 @@ from opbase import OpBase
 import config_vars as v
 from edge import findEdge, Edge
 from config_funcs import pdir, tdir
+from status import onestatus
 
 
 def getfl(p):
@@ -70,4 +71,5 @@ class Mkzip(OpBase):
             if tv in v.LDlls:
                 del v.LDlls[tv]
                 v.LDlls_changed = True
+                onestatus(si)
         return (tc, fc)
