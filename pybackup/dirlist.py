@@ -13,9 +13,6 @@ import config_vars as v
 from bhash import blakeHash
 from fmd5h import fmd5f
 
-import snoop
-from snoop import pp
-
 
 rto1 = 0  # 60*1
 rto2 = 0  # 60*60*.5
@@ -283,7 +280,10 @@ def dllcmp(do, dn):
     todelete = dos - dns
     return (todelete, tocopy)
 
+import snoop
+from snoop import pp
 
+@snoop
 def getRemoteDE(di, sf: Path):
     cmd = 'rclone lsjson "' + str(sf) + '" --hash'
     rc = ar.run1(cmd)
