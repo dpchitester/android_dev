@@ -7,6 +7,7 @@ from edge import findEdge, Edge
 from config_funcs import pdir, tdir
 from status import onestatus
 from dirlist import getRemoteDE, DE
+from bisect import bisect_left
 
 
 def getfl(p):
