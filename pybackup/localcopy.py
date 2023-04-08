@@ -9,7 +9,7 @@ import asyncrun as ar
 from config_funcs import pdir, tdir
 import config_vars as v
 from status import onestatus
-from dirlist import getRemoteDE
+from dirlist import getRemoteDE, DE
 
 
 class FileDiff:
