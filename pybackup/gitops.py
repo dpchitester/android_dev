@@ -69,7 +69,7 @@ def gitremoteck(Di, wt):
         else:
             print('diverged')
             Dh2 = 4
-    except GitCommandFailure as e:
+    except GitCmdFailure as e:
         print(e)
     if Dh2 is not None:
         if Dh2 == 1:
