@@ -137,9 +137,8 @@ class LocalCopy(OpBase):
             if self.sfc.fc == 0:
                 e.clr()
             if self.sfc.sc > 0:
-                tv = self.npl2[0]
-                if tv in v.LDlls:
-                    del v.LDlls[tv]
+                if di in v.LDlls:
+                    del v.LDlls[di]
                     v.LDlls_changed = True
-                    onestatus(si)
+                    onestatus(di)
         return self.sfc.value()
