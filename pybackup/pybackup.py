@@ -96,7 +96,7 @@ def rt2():
 def main():
     print('-main')
     st.updatets(0)
-    dl.getrdlls()
+    # dl.getrdlls()
     st.rupdatets(0)
     rt2()
     ldsv.save_all()
