@@ -245,7 +245,7 @@ def getrdlls():
 
 def lDlld(si):
     #print('-ldlld', si)
-    if si not in v.LDlls or v.LDlls_xt[si] + rto1 <= time.time():
+    if si not in v.LDlls: # or v.LDlls_xt[si] + rto1 <= time.time():
         rv = getdll3(si)
         if rv is not None:
             #print(si, 'ldll obtained')
