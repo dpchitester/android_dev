@@ -39,7 +39,8 @@ Hdt1:TypeAlias = Dict[NodeTag, Hash]
 LDhd:Hdt1 = {}
 RDhd:Hdt1 = {}
 
-Hdt2:TypeAlias = Dict[Path, Union[Path, Hash]]
+Hde:TypeAlias = Tuple[int, float, Hash]
+Hdt2:TypeAlias = Dict[Path, Union['Hdt2', Hde]] 
 
 # local file md5 hashes
 fmd5hd:Hdt2 = {}

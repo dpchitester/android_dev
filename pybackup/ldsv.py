@@ -129,8 +129,8 @@ def saverdh():
 
 
 def load_all():
-    loadrdlls()
-    loadldlls()
+    #loadrdlls()
+    #loadldlls()
     loadedges()
     loadfmd5h()
     loadldh()
@@ -138,8 +138,8 @@ def load_all():
 
 
 def save_all():
-    saverdlls()
-    saveldlls()
+    #saverdlls()
+    #saveldlls()
     saveedges()
     savefmd5h()
     saveldh()
