@@ -6,7 +6,7 @@ import config_vars as v
 from edge import findEdge, Edge
 from config_funcs import pdir, tdir
 from status import onestatus
-from dirlist import getRemoteDE
+from dirlist import getRemoteDE, DE
 
 
 def getfl(p):
