@@ -71,5 +71,5 @@ class Mkzip(OpBase):
             if tv in v.LDlls:
                 del v.LDlls[tv]
                 v.LDlls_changed = True
-                onestatus(si1)
+                onestatus(tv)
         return (tc, fc)

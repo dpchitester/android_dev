@@ -11,7 +11,7 @@ from opbase import OpBase
 from edge import Edge, findEdge
 from dirlist import dllcmp, lDlld, rDlld, DE
 from bisect import bisect_left
-from status import onestatus
+from status import ronestatus
 
 class SFc():
     sc = 0
@@ -66,11 +66,9 @@ def fsync(di, si, sd, td, sfc):
             if ddei < len(v.RDlls[di]) and rde.nm == v.RDlls[di][ddei].nm:
                 v.RDlls[di][ddei] = rde
                 v.RDlls_changed = True
-                onestatus(si)
             else:
                 v.RDlls[di].insert(ddei, rde)
                 v.RDlls_changed = True
-                onestatus(si)
             return True
     sfc.fc+=1
     return False
@@ -92,11 +90,9 @@ def fcopy(di, si, sd, td, sfc):
             if ddei < len(v.RDlls[di]) and rde.nm == v.RDlls[di][ddei].nm:
                 v.RDlls[di][ddei] = rde
                 v.RDlls_changed = True
-                onestatus(si)
             else:
                 v.RDlls[di].insert(ddei, rde)
                 v.RDlls_changed = True
-                onestatus(si)
             return True
         sfc.fc+=1
     return False
@@ -114,7 +110,6 @@ def fdel(di, si, sd, td, sfc):
             if ddei < len(v.RDlls[di]) and rde.nm == v.RDlls[di][ddei].nm:
                 v.RDlls[di].pop(ddei)
                 v.RDlls_changed = True
-                onestatus(si)
             return True
         sfc.fc+=1
     return False
@@ -208,4 +203,7 @@ class CSCopy(OpBase):
                 pass
         if self.sfc.fc == 0:
             e.clr()
+        if self.sfc.sc > 0:
+            if di in v.RDlls:
+                ronestatus(di)
         return self.sfc.value()
