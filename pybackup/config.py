@@ -402,4 +402,4 @@ class DE:
     def __eq__(self, other):
         return self.nm == other.nm
     def __hash__(self):
-        return blakeHash(self)
+        return hash((self.nm, self.sz, self.mt, self.md5))
