@@ -5,8 +5,8 @@ from os import makedirs
 from pathlib import Path
 
 import asyncrun as ar
-import config_vars as v
-from config_funcs import pdir, tdir
+import config as v
+
 from dirlist import getRemoteDE
 from edge import Edge, findEdge
 from opbase import OpBase
@@ -98,7 +98,7 @@ def sha256sumf(Fn):
 
 
 def findRDE(di, si, sd, td, dl):
-    rd = td.relative_to(tdir(di))
+    rd = td.relative_to(v.tdir(di))
     de = v.DE(rd, 0, 0, b"")
     i = bisect_left(dl, de)
     return i
@@ -159,8 +159,8 @@ class LocalCopy(OpBase):
         e: Edge = findEdge(di, si)
         if e.chk_ct():
             print("LocalCopy", self.npl1, self.npl2)
-            sp = pdir(self.npl2[1])
-            dp = tdir(self.npl2[0])
+            sp = v.pdir(self.npl2[1])
+            dp = v.tdir(self.npl2[0])
             gl = self.opts.get("files", ["**/*"])
             for g in gl:
                 try:

@@ -7,8 +7,8 @@ from os import environ, makedirs, utime
 from pathlib import Path
 
 import asyncrun as ar
-import config_vars as v
-from config_funcs import pdir, tdir
+import config as v
+
 from dirlist import dllcmp, lDlld, rDlld
 from edge import Edge, findEdge
 from netup import netup
@@ -37,8 +37,8 @@ class BVar:
     def __init__(self, di, si, tcfc):
         self.si = si
         self.di = di
-        self.sd = pdir(si)
-        self.td = tdir(di)
+        self.sd = v.pdir(si)
+        self.td = v.tdir(di)
         self.dln = None
         self.dhn = None
         self.dlo = None
@@ -72,7 +72,7 @@ class CSRestore(OpBase):
         super(CSRestore, self).__init__(npl1, npl2, opts)
 
     def ischanged(self, e: Edge):
-        return e.chk_ct() | e.rchk_ck()
+        return e.chk_ct() | e.rchk_ct()
 
     def __call__(self):
         tcfc = [0, 0]
@@ -85,7 +85,7 @@ class CSRestore(OpBase):
             print("r", di, si)
             bv = BVar(di, si, tcfc)
             rv = bv.init2()
-            # sd = pdir(si)
+            # sd = v.pdir(si)
             if rv == 1:  # couldn't get remote hash
                 pass
             else:

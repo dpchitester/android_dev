@@ -1,4 +1,4 @@
-import config_vars as v
+import config as v
 import dirlist as dl
 import ldsv
 from bhash import blakeHash

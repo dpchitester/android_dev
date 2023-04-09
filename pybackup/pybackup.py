@@ -4,9 +4,13 @@ import asyncio
 from os import environ, walk
 from pathlib import Path
 
+import config as v
 import dirlist as dl
 import ldsv
+import status as st
 from inotify_simple import flags
+from opexec import clean, opExec
+from status import onestatus
 
 wdsi = {}
 in1 = None
@@ -17,7 +21,7 @@ async def wsetup():
     global wdsi, in1
     for si in v.srcs:
         try:
-            p = srcDir(si)
+            p = v.srcDir(si)
             rv = in1.add_watch(str(p), flags.MODIFY)
             # asyncio.sleep(0)
             wdsi[rv] = (si, p)
@@ -55,8 +59,8 @@ async def cb1():
         if si != "git":
             if si not in sis:
                 sis.add(si)
-                if si in LDlls:
-                    del LDlls[si]
+                if si in v.LDlls:
+                    del v.LDlls[si]
                     print("cb1 onestatus", si)
                     onestatus(si)
                 if si in RDlls:
@@ -78,7 +82,7 @@ ct1 = None
 
 def rt2():
     itc = 0
-    rv = False
+    rv1 = False
     while True:
         itc += 1
         cl = clean()
@@ -97,20 +101,12 @@ def rt2():
 
 def main():
     print("-main")
+    v.initConfig()
     st.updatets(0)
     # dl.getrdlls()
     st.rupdatets(0)
     rt2()
 
-
-import config
-import config_funcs
-import config_vars as v
-import status as st
-from config_funcs import srcDir
-from config_vars import LDlls
-from opexec import clean, opExec
-from status import onestatus
 
 if __name__ == "__main__":
     main()

@@ -1,197 +1,416 @@
 import json
 import os
+from dataclasses import dataclass, field
 from functools import partial
-
-import config_vars as v
-from config_funcs import *
-from opbase import OpBaseEncoder
-
-addPre("FLAGS", os.environ["HOME"])
-# print("FLAGS=" + str(ppre('FLAGS')))
-
-v.edgepf = ppre("FLAGS") / "edges.pp"
-v.ldllsf = ppre("FLAGS") / "ldlls.pp"
-v.rdllsf = ppre("FLAGS") / "rdlls.pp"
-v.fmd5hf = ppre("FLAGS") / "fmd5h.pp"
-v.ldhpf = ppre("FLAGS") / "ldhd.pp"
-v.rdhpf = ppre("FLAGS") / "rdhd.pp"
-# print("pf's set now")
-# for pf in [edgepf, ldllsf, rdllsf, fmd5hf, ldhpf, rdhpf]:
-#    print(pf.name, str(pf))
+from os import walk
+from pathlib import Path
+from typing import Callable, Dict, List, Set, Tuple, TypeAlias, Union
 
 import ldsv
-from edge import addArc, addDep
-
-ldsv.load_all()
-
+from bhash import blakeHash
 from cscopy import CSCopy
 from csrestore import CSRestore
+from edge import Edge, addArc, addDep
 from gitops import GitOps, gitck1, gitck2, gitremoteck
 from localcopy import LocalCopy
 from mkzip import Mkzip
-
-addPre("sd", "/sdcard")
-addPre("proj", ppre("sd") / "projects")
-addPre("bkx", ppre("FLAGS") / ".bkx")
-addPre("gd", "GoogleDrive:")
-addPre("dsblog", os.environ["FDB_PATH"])
-
-addSrcDir("docs", ppre("sd") / "Documents", False)
-addSrcDir("blogds", ppre("dsblog"), False)
-addSrcDir("backups", ppre("sd") / "backups", False)
-addSrcDir("home", ppre("FLAGS"), False)
-addSrcDir("bin", pdir("home") / "bin", False)
+from opbase import OpBase, OpBaseEncoder
+from statushash import ldhck, rdhck
 
 
-def f1():
-    dl = getDL(ppre("proj"))
-    for d in dl:
-        addSrcDir(d.name, d, True)
-        addDep("git_index", d.name)
-        addDep("zips", d.name)
-        addDep("proj", d.name)
+def initConfig():
+    addPre("FLAGS", os.environ["HOME"])
+    # print("FLAGS=" + str(ppre('FLAGS')))
 
+    global edgepf, ldllsf, rdllsf, fmd5hf, ldhpf, rdhpf
 
-f1()
+    edgepf = ppre("FLAGS") / "edges.pp"
+    ldllsf = ppre("FLAGS") / "ldlls.pp"
+    rdllsf = ppre("FLAGS") / "rdlls.pp"
+    fmd5hf = ppre("FLAGS") / "fmd5h.pp"
+    ldhpf = ppre("FLAGS") / "ldhd.pp"
+    rdhpf = ppre("FLAGS") / "rdhd.pp"
+    # print("pf's set now")
+    # for pf in [edgepf, ldllsf, rdllsf, fmd5hf, ldhpf, rdhpf]:
+    #    print(pf.name, str(pf))
 
-addSrcDir("zips", ppre("sd") / "zips", False)
+    ldsv.load_all()
 
-v.worktree = ppre("sd") / "projects"
+    addPre("sd", "/sdcard")
+    addPre("proj", ppre("sd") / "projects")
+    addPre("bkx", ppre("FLAGS") / ".bkx")
+    addPre("gd", "GoogleDrive:")
+    addPre("dsblog", os.environ["FDB_PATH"])
 
-v.srcs.add("git_index")
-v.lckers["git_index"] = partial(gitck1, "git_index", v.worktree)
+    addSrcDir("docs", ppre("sd") / "Documents", False)
+    addSrcDir("blogds", ppre("dsblog"), False)
+    addSrcDir("backups", ppre("sd") / "backups", False)
+    addSrcDir("home", ppre("FLAGS"), False)
+    addSrcDir("bin", pdir("home") / "bin", False)
 
-addSrcDir(".git", ppre("proj") / ".git", False)
-v.srcs.add("git")
-v.lckers["git"] = partial(gitck2, "git", v.worktree)
+    def f1():
+        dl = getDL(ppre("proj"))
+        for d in dl:
+            addSrcDir(d.name, d, True)
+            addDep("git_index", d.name)
+            addDep("zips", d.name)
+            addDep("proj", d.name)
 
-v.tgts.add("bitbucket")
-v.tgts.add("github")
-# v.srcs.add('bitbucket')
-v.rckers["bitbucket"] = partial(gitremoteck, "bitbucket", v.worktree)
-v.rckers["github"] = partial(gitremoteck, "github", v.worktree)
+    f1()
 
-addSrcDir("proj", ppre("proj"), False)
+    addSrcDir("zips", ppre("sd") / "zips", False)
 
-addTgtDir("home", ppre("FLAGS"))
-addTgtDir("bin", tdir("home") / "bin")
-addTgtDir("sh", tdir("home") / "bin/sh")
-addTgtDir("pl", tdir("home") / "bin/pl")
-addTgtDir("backups", ppre("sd") / "backups")
-addTgtDir("zips", ppre("sd") / "zips")
-addTgtDir("blogds", ppre("dsblog"))
-addTgtDir("blog", ppre("proj") / "blog")
-addTgtDir("termux-backup", ppre("sd") / "backups" / "termux-backup")
-addTgtDir("bash", ppre("proj") / "bash")
-addTgtDir("plaid-node", ppre("proj") / "plaid-node")
+    global worktree
+    worktree = ppre("sd") / "projects"
 
+    srcs.add("git_index")
+    lckers["git_index"] = partial(gitck1, "git_index", worktree)
 
-npl1 = ("bash", "home")
-op1 = LocalCopy(
-    npl1,
-    npl1,
-    {
-        "files": [
-            ".termux/*",
-            ".bashrc",
-            ".bashrc0",
-            ".profile",
-            ".config/rclone/*",
-            ".plaid-cli/*",
-            ".plaid-cli/data/*",
-            ".plaidrc",
-            ".gitcredentials",
-            ".gitconfig",
-        ]
-    },
-)
-addArc(op1)
+    addSrcDir(".git", ppre("proj") / ".git", False)
+    srcs.add("git")
+    lckers["git"] = partial(gitck2, "git", worktree)
 
-npl1 = ("home", "bash")
-op1 = LocalCopy(
-    npl1,
-    npl1,
-    {
-        "files": [
-            ".termux/*",
-            ".bashrc",
-            ".bashrc0",
-            ".profile",
-            ".config/rclone/*",
-            ".plaid-cli/*",
-            ".plaid-cli/data/*",
-            ".plaidrc",
-            ".gitcredentials",
-            ".gitconfig",
-        ]
-    },
-)
-addArc(op1)
+    tgts.add("bitbucket")
+    tgts.add("github")
+    # srcs.add('bitbucket')
+    rckers["bitbucket"] = partial(gitremoteck, "bitbucket", worktree)
+    rckers["github"] = partial(gitremoteck, "github", worktree)
 
-npl1 = ("bin", "bash")
-op1 = LocalCopy(npl1, npl1, {"files": ["termux-*", "pbu", "rbu"], "exec": True})
-addArc(op1)
+    addSrcDir("proj", ppre("proj"), False)
 
-npl1 = ("bash", "bin")
-op1 = LocalCopy(npl1, npl1, {"files": ["termux-*", "pbu", "rbu"], "exec": False})
-addArc(op1)
+    addTgtDir("home", ppre("FLAGS"))
+    addTgtDir("bin", tdir("home") / "bin")
+    addTgtDir("sh", tdir("home") / "bin/sh")
+    addTgtDir("pl", tdir("home") / "bin/pl")
+    addTgtDir("backups", ppre("sd") / "backups")
+    addTgtDir("zips", ppre("sd") / "zips")
+    addTgtDir("blogds", ppre("dsblog"))
+    addTgtDir("blog", ppre("proj") / "blog")
+    addTgtDir("termux-backup", ppre("sd") / "backups" / "termux-backup")
+    addTgtDir("bash", ppre("proj") / "bash")
+    addTgtDir("plaid-node", ppre("proj") / "plaid-node")
 
-npl1 = ("sh", "bash")
-op1 = LocalCopy(npl1, npl1, {"files": ["*.sh", "*.env"], "exec": True})
-addArc(op1)
-
-npl1 = ("blogds", "blog")
-op1 = LocalCopy(npl1, npl1, {"files": ["blog.js"]})
-addArc(op1)
-
-npl1 = ("blog", "blogds")
-op1 = LocalCopy(npl1, npl1, {"files": ["*.db", "blog.js"]})
-addArc(op1)
-
-npl1 = ("plaid-node", "blogds")
-op1 = LocalCopy(npl1, npl1, {"files": ["*.db"]})
-addArc(op1)
-
-# npl1 = ('termux-backup', 'home')
-# op1 = LocalCopy(npl1, npl1, {'files': ['**/*.*']})
-# addArc(op1)
-
-npl1 = ("backups", "blogds")
-op1 = LocalCopy(npl1, npl1, {"files": ["*.db"]})
-addArc(op1)
-
-if "NOGIT" not in os.environ:
-    npl1 = ("git", "git_index")
-    op1 = GitOps(npl1, None, {"wt": v.worktree, "add": True, "commit": True})
-    addArc(op1)
-
-    npl1 = ("bitbucket", "git")
-    op1 = GitOps(
-        npl1, None, {"wt": v.worktree, "rmt": "bitbucket", "pull": True, "push": True}
+    npl1 = ("bash", "home")
+    op1 = LocalCopy(
+        npl1,
+        npl1,
+        {
+            "files": [
+                ".termux/*",
+                ".bashrc",
+                ".bashrc0",
+                ".profile",
+                ".config/rclone/*",
+                ".plaid-cli/*",
+                ".plaid-cli/data/*",
+                ".plaidrc",
+                ".gitcredentials",
+                ".gitconfig",
+            ]
+        },
     )
     addArc(op1)
 
-    npl1 = ("github", "git")
-    op1 = GitOps(
-        npl1, None, {"wt": v.worktree, "rmt": "github", "pull": True, "push": True}
+    npl1 = ("home", "bash")
+    op1 = LocalCopy(
+        npl1,
+        npl1,
+        {
+            "files": [
+                ".termux/*",
+                ".bashrc",
+                ".bashrc0",
+                ".profile",
+                ".config/rclone/*",
+                ".plaid-cli/*",
+                ".plaid-cli/data/*",
+                ".plaidrc",
+                ".gitcredentials",
+                ".gitconfig",
+            ]
+        },
     )
     addArc(op1)
 
-for si in v.codes:
-    npl1 = ("zips", si)
-    op1 = Mkzip(npl1, npl1, {"zipfile": si + ".zip"})
+    npl1 = ("bin", "bash")
+    op1 = LocalCopy(npl1, npl1, {"files": ["termux-*", "pbu", "rbu"], "exec": True})
     addArc(op1)
 
-for si in (".git",):
-    npl1 = ("zips", si)
-    op1 = Mkzip(npl1, npl1, {"zipfile": "projects-git.zip"})
+    npl1 = ("bash", "bin")
+    op1 = LocalCopy(npl1, npl1, {"files": ["termux-*", "pbu", "rbu"], "exec": False})
     addArc(op1)
 
-for si in ("proj", "zips"):
-    p1 = pdir(si).relative_to(ppre("sd"))
-    addTgtDir("gd_" + si, ppre("gd") / p1)
-    npl1 = ("gd_" + si, si)
-    # op1 = CSRestore(npl1, None, {})
+    npl1 = ("sh", "bash")
+    op1 = LocalCopy(npl1, npl1, {"files": ["*.sh", "*.env"], "exec": True})
+    addArc(op1)
+
+    npl1 = ("blogds", "blog")
+    op1 = LocalCopy(npl1, npl1, {"files": ["blog.js"]})
+    addArc(op1)
+
+    npl1 = ("blog", "blogds")
+    op1 = LocalCopy(npl1, npl1, {"files": ["*.db", "blog.js"]})
+    addArc(op1)
+
+    npl1 = ("plaid-node", "blogds")
+    op1 = LocalCopy(npl1, npl1, {"files": ["*.db"]})
+    addArc(op1)
+
+    # npl1 = ('termux-backup', 'home')
+    # op1 = LocalCopy(npl1, npl1, {'files': ['**/*.*']})
     # addArc(op1)
-    op1 = CSCopy(npl1, npl1, {"delete": True})
+
+    npl1 = ("backups", "blogds")
+    op1 = LocalCopy(npl1, npl1, {"files": ["*.db"]})
     addArc(op1)
+
+    if "NOGIT" not in os.environ:
+        npl1 = ("git", "git_index")
+        op1 = GitOps(npl1, None, {"wt": worktree, "add": True, "commit": True})
+        addArc(op1)
+
+        npl1 = ("bitbucket", "git")
+        op1 = GitOps(
+            npl1,
+            None,
+            {"wt": worktree, "rmt": "bitbucket", "pull": True, "push": True},
+        )
+        addArc(op1)
+
+        npl1 = ("github", "git")
+        op1 = GitOps(
+            npl1, None, {"wt": worktree, "rmt": "github", "pull": True, "push": True}
+        )
+        addArc(op1)
+
+    for si in codes:
+        npl1 = ("zips", si)
+        op1 = Mkzip(npl1, npl1, {"zipfile": si + ".zip"})
+        addArc(op1)
+
+    for si in (".git",):
+        npl1 = ("zips", si)
+        op1 = Mkzip(npl1, npl1, {"zipfile": "projects-git.zip"})
+        addArc(op1)
+
+    for si in ("proj", "zips"):
+        p1 = pdir(si).relative_to(ppre("sd"))
+        addTgtDir("gd_" + si, ppre("gd") / p1)
+        npl1 = ("gd_" + si, si)
+        # op1 = CSRestore(npl1, None, {})
+        # addArc(op1)
+        op1 = CSCopy(npl1, npl1, {"delete": True})
+        addArc(op1)
+
+
+def ppre(s):
+    if s in pres:
+        return paths[s]
+    else:
+        raise KeyError(s + " tag not in pres")
+
+
+def pdir(s):
+    if s in pdirs:
+        return paths[s]
+    else:
+        raise KeyError(s + " tag not in pdirs")
+
+
+def tdir(s):
+    if s in tdirs:
+        return paths[s]
+    else:
+        raise KeyError(s + " tag not in tdirs")
+
+
+def srcDir(s):
+    if s in srcs:
+        return paths[s]
+    else:
+        raise KeyError(s + " tag not in srcs")
+
+
+def tgt(s):
+    if s in tgts:
+        return paths[s]
+    else:
+        raise KeyError(s + " tag not in tgts")
+
+
+def cdir(s):
+    if s in codes:
+        return paths[s]
+    else:
+        raise KeyError(s + " tag not in codes")
+
+
+def addTgtDir(tg, pth):
+    if not isinstance(pth, Path):
+        pth = Path(pth)
+    if tg in paths and paths[tg] != pth:
+        raise Exception("path tag collision", tg, pth, paths[tg])
+    paths[tg] = pth
+    tgts.add(tg)
+    rckers[tg] = partial(rdhck, tg)
+    tdirs.add(tg)
+
+
+def addSrcDir(tg, pth, iscode=False):
+    if not isinstance(pth, Path):
+        pth = Path(pth)
+    if tg in paths and paths[tg] != pth:
+        raise Exception("path tag collision", tg, pth, paths[tg])
+    paths[tg] = pth
+    pdirs.add(tg)
+    srcs.add(tg)
+    lckers[tg] = partial(ldhck, tg)
+    if iscode:
+        codes.add(tg)
+
+
+def addPre(tg, frag):
+    if not isinstance(frag, Path):
+        frag = Path(frag)
+    if tg in paths and paths[tg] != frag:
+        raise Exception("path tag collision", tg, paths[tg])
+    paths[tg] = frag
+    pres.add(tg)
+
+
+def getDL(p):
+    # print(str(p))
+    fl = []
+    try:
+        for pth, dirs, files in walk(p, topdown=True):
+            if ".git" in pth:
+                dirs = []
+                break
+            if ".git" in dirs:
+                dirs.remove(".git")
+            if "__pycache__" in dirs:
+                dirs.remove("__pycache__")
+            for d in dirs.copy():
+                fl.append(Path(pth, d))
+                dirs.remove(d)
+            break
+        return fl
+    except Exception as e:
+        print("getDL", e)
+        return None
+
+
+def round2ms(ns):
+    return int(str(ns + 500000)[:-6]) / 1e3
+
+
+def trunc2ms(ns):
+    return int(str(ns)[:-6]) / 1e3
+
+
+@dataclass
+class DE:
+    nm: Path
+    sz: int
+    mt: float
+    md5: bytes
+    _hc: bytes | None = field(default=None)
+
+    def __hash__(self):
+        if self._hc is None:
+            self._hc = blakeHash((self.nm, self.sz, self.mt, self.md5))
+        return self._hc
+
+    def __eq__(self, other):
+        return (str(self.nm), self.sz, self.mt, self.md5) == (
+            str(other.nm),
+            other.sz,
+            other.mt,
+            other.md5,
+        )
+
+    def __lt__(self, other):
+        return (str(self.nm), self.sz, self.mt, self.md5) < (
+            str(other.nm),
+            other.sz,
+            other.mt,
+            other.md5,
+        )
+
+
+NodeTag: TypeAlias = str
+
+# any/all mostly local directory path(s)
+paths: Dict[NodeTag, Path] = {}
+
+# tag attributes/types/classes
+pres: Set[NodeTag] = set()
+pdirs: Set[NodeTag] = set()
+tdirs: Set[NodeTag] = set()
+srcs: Set[NodeTag] = set()
+tgts: Set[NodeTag] = set()
+codes: Set[NodeTag] = set()
+
+# checkers
+lckers: Dict[NodeTag, Callable] = {}
+rckers: Dict[NodeTag, Callable] = {}
+
+# operations (function objects)
+opdep: List[OpBase] = []
+
+# dependencies as edge set
+eDep: Set[Edge] = set()
+
+# dependencies as stored by di,si
+edges: Dict[Tuple[NodeTag, NodeTag], Edge] = {}
+
+Hash: TypeAlias = bytes
+
+Hdt1: TypeAlias = Dict[NodeTag, Hash]
+
+# directory lists hashes
+
+LDhd: Hdt1 = {}
+RDhd: Hdt1 = {}
+
+Hde: TypeAlias = Tuple[int, float, Hash]
+Hdt2: TypeAlias = Dict[Path, Union["Hdt2", Hde]]
+
+# local file md5 hashes
+fmd5hd: Hdt2 = {}
+
+# directory lists
+LDlls: Dict[NodeTag, List[DE]] = {}
+RDlls: Dict[NodeTag, List[DE]] = {}
+
+# update times of directory lists
+LDlls_xt: Dict[NodeTag, float] = {}
+RDlls_xt: Dict[NodeTag, float] = {}
+
+LDlls_changed: bool = False
+RDlls_changed: bool = False
+
+# pickle file filenames
+edgepf: Path | None = None
+ldllsf: Path | None = None
+rdllsf: Path | None = None
+fmd5hf: Path | None = None
+ldhpf: Path | None = None
+rdhpf: Path | None = None
+
+# worktree of git repo
+worktree: Path | None = None
+
+# directory list hashing stats
+hf_dirty: bool = False
+hf_dm: int = 0
+hf_dh: int = 0
+hf_pm: int = 0
+hf_ph: int = 0
+hf_stm: int = 0
+hf_sth: int = 0
+sfb: int = 0
+dl0_cs = 0
+dl1_cs = 0
+dl2_cs = 0
+dl3_cs = 0

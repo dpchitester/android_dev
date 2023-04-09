@@ -2,7 +2,7 @@ from hashlib import blake2b
 from pathlib import Path, PosixPath
 from struct import pack, unpack
 
-import config_vars as v
+import config as v
 
 
 def bhu(ho, it):

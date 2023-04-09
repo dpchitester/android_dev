@@ -5,8 +5,8 @@ from os import utime
 from pathlib import Path
 
 import asyncrun as ar
-import config_vars as v
-from config_funcs import pdir, ppre, tdir
+import config as v
+
 from dirlist import dllcmp, getRemoteDE, lDlld, rDlld
 from edge import Edge, findEdge
 from netup import netup
@@ -26,14 +26,14 @@ class SFc:
 
 
 def findLDE(di, si, sd, td, dl):
-    ld = sd.relative_to(pdir(si))
+    ld = sd.relative_to(v.pdir(si))
     de = v.DE(ld, 0, 0, b"")
     i = bisect_left(dl, de)
     return i
 
 
 def findRDE(di, si, sd, td, dl):
-    rd = td.relative_to(tdir(di))
+    rd = td.relative_to(v.tdir(di))
     de = v.DE(rd, 0, 0, b"")
     i = bisect_left(dl, de)
     return i
@@ -117,8 +117,8 @@ class BVars:
     def __init__(self, di, si, sfc):
         self.si = si
         self.di = di
-        self.sd = pdir(si)
-        self.td = tdir(di)
+        self.sd = v.pdir(si)
+        self.td = v.tdir(di)
         self.src_dls = None
         self.dst_dls = None
         self.f2d = None

@@ -8,9 +8,8 @@ from os import walk
 from pathlib import Path
 
 import asyncrun as ar
-import config_vars as v
+import config as v
 from bhash import blakeHash
-from config_funcs import pdir, ppre, srcDir, tdir, trunc2ms
 from fmd5h import fmd5f
 
 rto1 = 0  # 60*1
@@ -64,7 +63,7 @@ def getDL(p):
 
 def getdll0():
     v.dl0_cs += 1
-    td = ppre("gd")
+    td = v.ppre("gd")
     # print('getdll0',td)
     cmd = 'rclone lsjson "' + str(td) + '" --recursive --files-only --hash'
     rc = ar.run1(cmd)
@@ -96,7 +95,7 @@ def sepdlls(dlls):
             v.RDlls[di] = []
             v.RDlls_xt[di] = time.time()
             v.RDlls_changed = True
-            rd = tdir(di).relative_to(ppre("gd"))
+            rd = v.tdir(di).relative_to(v.ppre("gd"))
             tds = str(rd) + "/"
             i = bisect_left(dlls, v.DE(tds, 0, 0, b""))
             # print(tds, i)
@@ -125,7 +124,7 @@ def sepdlls(dlls):
 
 def getdll1(di):
     v.dl1_cs += 1
-    td = tdir(di)
+    td = v.tdir(di)
     # print('getdll1', di, str(td))
     cmd = 'rclone lsjson "' + str(td) + '" --recursive --files-only --hash --fast-list'
     # print(cmd)
@@ -155,7 +154,7 @@ def getdll1(di):
 
 def getdll2(si):
     v.dl2_cs += 1
-    td = pdir(si)
+    td = v.pdir(si)
     # print('getdll2', si, str(td))
     cmd = 'rclone lsjson "' + str(td) + '" --recursive --files-only --hash --fast-list'
     if not td.is_file():
@@ -187,7 +186,7 @@ def getdll2(si):
 
 def getdll3(si):
     v.dl3_cs += 1
-    sd = srcDir(si)
+    sd = v.srcDir(si)
     # print('getdll3', si, str(sd))
     l1 = getfl(sd)
 
@@ -197,7 +196,7 @@ def getdll3(si):
         fs = it.stat()
         it2 = fs.st_size
         it3 = fs.st_mtime_ns
-        it3 = trunc2ms(it3)
+        it3 = v.trunc2ms(it3)
         it4 = fmd5f(it, it2, it3)
         return v.DE(it1, it2, it3, it4)
 
@@ -254,7 +253,7 @@ def getRemoteDE(di, sf: Path):
     cmd = 'rclone lsjson "' + str(sf) + '" --hash'
     rc = ar.run1(cmd)
     if rc == 0:
-        rd = sf.relative_to(tdir(di)).parent
+        rd = sf.relative_to(v.tdir(di)).parent
         it = json.loads(ar.txt)[0]
         it1 = rd / it["Path"]
         it2 = it["Size"]

@@ -1,6 +1,6 @@
 from hashlib import md5
 
-import config_vars as v
+import config as v
 
 
 def md5sumf(Fn):

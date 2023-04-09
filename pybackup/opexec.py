@@ -1,6 +1,6 @@
 import asyncio
 
-import config_vars as v
+import config as v
 from status import changed_ops, rupdatets, updatets
 from toposort import topological_sort
 

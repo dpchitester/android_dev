@@ -3,8 +3,8 @@ from os import utime, walk
 from pathlib import Path
 from shutil import make_archive
 
-import config_vars as v
-from config_funcs import pdir, tdir
+import config as v
+
 from dirlist import getRemoteDE
 from edge import Edge, findEdge
 from opbase import OpBase
@@ -42,7 +42,7 @@ def maxmt(sd):
 
 
 def findRDE(di, si, sd, tp, dl):
-    rd = tp.relative_to(tdir(di))
+    rd = tp.relative_to(v.tdir(di))
     de = v.DE(rd, 0, 0, b"")
     i = bisect_left(dl, de)
     return i
@@ -63,8 +63,8 @@ class Mkzip(OpBase):
         e: Edge = findEdge(di1, si1)
         if e.chk_ct():
             di2, si2 = self.npl2
-            sd = pdir(si2)
-            td = tdir(di2)
+            sd = v.pdir(si2)
+            td = v.tdir(di2)
             zf = self.opts.get("zipfile", "temp.zip")
             rp = Path(zf)
             zp = td / rp.stem

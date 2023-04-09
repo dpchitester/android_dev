@@ -146,4 +146,4 @@ def save_all():
     saverdh()
 
 
-import config_vars as v
+import config as v

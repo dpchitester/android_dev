@@ -82,7 +82,7 @@ def addArc(op1):
     addDep(j, i)
 
 
-import config_vars as v
+import config as v
 import ldsv
 
 if __name__ == "__main__":
