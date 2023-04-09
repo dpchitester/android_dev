@@ -82,7 +82,7 @@ def getdll0():
             return v.DE(it1, it2, it3, it4)
 
         st = list(map(es, l1))
-        st.sort()
+        st.sort(key=lambda de: de.nm)
         print(len(st), "de's")
         return st
     return None
@@ -145,7 +145,7 @@ def getdll1(di):
             return v.DE(it1, it2, it3, it4)
 
         st = list(map(es, l1))
-        st.sort()
+        st.sort(key=lambda de: de.nm)
         return st
     if rc == 3:
         return []
@@ -177,7 +177,7 @@ def getdll2(si):
             return v.DE(it1, it2, it3, it4)
 
         st = list(map(es, l1))
-        st.sort()
+        st.sort(key=lambda de: de.nm)
         return st
     if rc == 3:
         return []
@@ -201,7 +201,7 @@ def getdll3(si):
         return v.DE(it1, it2, it3, it4)
 
     st = list(map(es, l1))
-    st.sort()
+    st.sort(key=lambda de: de.nm)
     return st
 
 
