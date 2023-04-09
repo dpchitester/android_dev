@@ -268,5 +268,5 @@ def getRemoteDE(di, sf: Path):
         else:
             it4 = bytes()
         nde = v.DE(it1, it2, it3, it4)
-        print("new nde:", str(nde))
+        print("new nde:", nde.nm, nde.sz, nde.mt)
         return nde
