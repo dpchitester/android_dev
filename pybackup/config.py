@@ -397,25 +397,9 @@ class DE:
     sz: int
     mt: float
     md5: bytes
-    _hc: bytes | None = field(default=None)
-
-    def __hash__(self):
-        if self._hc is None:
-            self._hc = blakeHash((self.nm, self.sz, self.mt, self.md5))
-        return self._hc
-
-    def __eq__(self, other):
-        return (str(self.nm), self.sz, self.mt, self.md5) == (
-            str(other.nm),
-            other.sz,
-            other.mt,
-            other.md5,
-        )
-
     def __lt__(self, other):
-        return (str(self.nm), self.sz, self.mt, self.md5) < (
-            str(other.nm),
-            other.sz,
-            other.mt,
-            other.md5,
-        )
+        return self.nm < other.nm
+    def __eq__(self, other):
+        return self.nm == other.nm
+    def __hash__(self):
+        return blakeHash(self)
