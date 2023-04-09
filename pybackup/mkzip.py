@@ -5,7 +5,7 @@ from pathlib import Path
 from shutil import make_archive
 
 import config as v
-from dirlist import getRemoteDE
+from dirlist import getRemoteDE, findLDE, findRDE
 from edge import Edge, findEdge
 from opbase import OpBase
 from status import onestatus, ronestatus
@@ -41,12 +41,6 @@ def maxmt(sd):
     return int(math.floor(st[0] / 1.0e6) * 1.0e6)
 
 
-def findRDE(di, si, sd, tp, dl):
-    rd = tp.relative_to(v.tdir(di))
-    i = bisect_left(dl, rd, key=lambda de: de.nm)
-    return i
-
-
 class Mkzip(OpBase):
     def __init__(self, npl1, npl2, opts={}):
         super(Mkzip, self).__init__(npl1, npl2, opts)
@@ -76,7 +70,7 @@ class Mkzip(OpBase):
                 rde = None
                 if di2 in v.LDlls:
                     rde = getRemoteDE(di2, fp)
-                    ddei = findRDE(di2, si2, sd, fp, v.LDlls[di2])
+                    ddei = findLDE(di2, fp, v.LDlls[di2])
                     if ddei < len(v.LDlls[di2]) and rde.nm == v.LDlls[di2][ddei].nm:
                         v.LDlls[di2][ddei] = rde
                         v.LDlls_changed = True
@@ -86,7 +80,7 @@ class Mkzip(OpBase):
                 if di2 in v.RDlls:
                     if rde is None:
                         rde = getRemoteDE(di2, fp)
-                    ddei = findRDE(di2, si2, sd, fp, v.RDlls[di2])
+                    ddei = findRDE(di2, fp, v.RDlls[di2])
                     if ddei < len(v.RDlls[di2]) and rde.nm == v.RDlls[di2][ddei].nm:
                         v.RDlls[di2][ddei] = rde
                         v.RDlls_changed = True

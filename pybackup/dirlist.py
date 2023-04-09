@@ -270,3 +270,14 @@ def getRemoteDE(di, sf: Path):
         nde = v.DE(it1, it2, it3, it4)
         print("new nde:", nde.nm, nde.sz, nde.mt)
         return nde
+
+def findLDE(si, sd, dl):
+    ld = sd.relative_to(v.pdir(si))
+    i = bisect_left(dl, ld, key=lambda de: de.nm)
+    return i
+
+
+def findRDE(di, td, dl):
+    rd = td.relative_to(v.tdir(di))
+    i = bisect_left(dl, rd, key=lambda de: de.nm)
+    return i

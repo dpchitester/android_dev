@@ -6,7 +6,7 @@ from pathlib import Path
 
 import asyncrun as ar
 import config as v
-from dirlist import getRemoteDE
+from dirlist import getRemoteDE, findLDE, findRDE
 from edge import Edge, findEdge
 from opbase import OpBase
 from status import onestatus
@@ -95,13 +95,6 @@ def sha256sumf(Fn):
         return ho.hexdigest()
     return None
 
-
-def findRDE(di, si, sd, td, dl):
-    rd = td.relative_to(v.tdir(di))
-    i = bisect_left(dl, rd, key=lambda de: de.nm)
-    return i
-
-
 def copy2(di, si, sd, td, sfc):
     # print('copying ', f1, 'to', f2)
     if td.is_file():
@@ -116,7 +109,7 @@ def copy2(di, si, sd, td, sfc):
         rde = None
         if di in v.LDlls:
             rde = getRemoteDE(di, td)
-            ddei = findRDE(di, si, sd, td, v.LDlls[di])
+            ddei = findLDE(di, td, v.LDlls[di])
             if ddei < len(v.LDlls[di]) and rde.nm == v.LDlls[di][ddei].nm:
                 v.LDlls[di][ddei] = rde
                 v.LDlls_changed = True
@@ -126,7 +119,7 @@ def copy2(di, si, sd, td, sfc):
         if di in v.RDlls:
             if rde is None:
                 rde = getRemoteDE(di, td)
-            ddei = findRDE(di, si, sd, td, v.RDlls[di])
+            ddei = findRDE(di, td, v.RDlls[di])
             if ddei < len(v.RDlls[di]) and rde.nm == v.RDlls[di][ddei].nm:
                 v.RDlls[di][ddei] = rde
                 v.RDlls_changed = True

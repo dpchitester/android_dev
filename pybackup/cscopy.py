@@ -6,12 +6,11 @@ from pathlib import Path
 
 import asyncrun as ar
 import config as v
-from dirlist import dllcmp, getRemoteDE, lDlld, rDlld
+from dirlist import dllcmp, getRemoteDE, findLDE, findRDE, lDlld, rDlld
 from edge import Edge, findEdge
 from netup import netup
 from opbase import OpBase
 from status import onestatus, ronestatus
-
 
 class SFc:
     sc = 0
@@ -24,16 +23,6 @@ class SFc:
         return (self.sc, self.fc)
 
 
-def findLDE(di, si, sd, td, dl):
-    ld = sd.relative_to(v.pdir(si))
-    i = bisect_left(dl, ld, key=lambda de: de.nm)
-    return i
-
-
-def findRDE(di, td, dl):
-    rd = td.relative_to(v.tdir(di))
-    i = bisect_left(dl, rd, key=lambda de: de.nm)
-    return i
 
 
 def fsync(di, si, sd, td, sfc):
