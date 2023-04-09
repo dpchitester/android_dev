@@ -1,1 +1,0 @@
-am start -d "$(realpath $1)" -t "text/python" -a android.intent.action.VIEW
