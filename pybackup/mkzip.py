@@ -1,11 +1,10 @@
+import math
 from bisect import bisect_left
 from os import utime, walk
 from pathlib import Path
 from shutil import make_archive
-import math
 
 import config as v
-
 from dirlist import getRemoteDE
 from edge import Edge, findEdge
 from opbase import OpBase
@@ -39,7 +38,7 @@ def maxmt(sd):
 
     st = list(map(es, l1))
     st.sort(reverse=True)
-    return int(math.floor(st[0]/1.0e6)*1.0e6)
+    return int(math.floor(st[0] / 1.0e6) * 1.0e6)
 
 
 def findRDE(di, si, sd, tp, dl):

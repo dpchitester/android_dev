@@ -6,7 +6,6 @@ from pathlib import Path
 
 import asyncrun as ar
 import config as v
-
 from dirlist import getRemoteDE
 from edge import Edge, findEdge
 from opbase import OpBase

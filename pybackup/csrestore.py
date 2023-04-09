@@ -8,7 +8,6 @@ from pathlib import Path
 
 import asyncrun as ar
 import config as v
-
 from dirlist import dllcmp, lDlld, rDlld
 from edge import Edge, findEdge
 from netup import netup

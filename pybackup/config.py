@@ -96,6 +96,7 @@ dl1_cs = 0
 dl2_cs = 0
 dl3_cs = 0
 
+
 def initConfig():
     addPre("FLAGS", os.environ["HOME"])
     # print("FLAGS=" + str(ppre('FLAGS')))
@@ -211,11 +212,15 @@ def initConfig():
     addArc(op1)
 
     npl1 = ("bin", "bash")
-    op1 = LocalCopy(npl1, npl1, {"files": ["termux-*", "pbu", "rbu", "qe"], "exec": True})
+    op1 = LocalCopy(
+        npl1, npl1, {"files": ["termux-*", "pbu", "rbu", "qe"], "exec": True}
+    )
     addArc(op1)
 
     npl1 = ("bash", "bin")
-    op1 = LocalCopy(npl1, npl1, {"files": ["termux-*", "pbu", "rbu", "qe"], "exec": False})
+    op1 = LocalCopy(
+        npl1, npl1, {"files": ["termux-*", "pbu", "rbu", "qe"], "exec": False}
+    )
     addArc(op1)
 
     npl1 = ("sh", "bash")
@@ -414,5 +419,3 @@ class DE:
             other.mt,
             other.md5,
         )
-
-

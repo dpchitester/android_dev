@@ -12,8 +12,8 @@ import config as v
 from bhash import blakeHash
 from fmd5h import fmd5f
 
-rto1 = 60*1
-rto2 = 60*1
+rto1 = 60 * 1
+rto2 = 60 * 1
 
 
 def getfl(p):
@@ -220,7 +220,7 @@ def lDlld(si):
     if si not in v.LDlls or v.LDlls_xt[si] + rto1 <= time.time():
         rv = getdll3(si)
         if rv is not None:
-            print(si, 'ldll obtained')
+            print(si, "ldll obtained")
             v.LDlls[si] = rv
             v.LDlls_xt[si] = time.time()
             v.LDlls_changed = True
@@ -233,7 +233,7 @@ def rDlld(di):
     if di not in v.RDlls or v.RDlls_xt[di] + rto2 <= time.time():
         rv = getdll1(di)
         if rv is not None:
-            print(di, 'rdll obtained')
+            print(di, "rdll obtained")
             v.RDlls[di] = rv
             v.RDlls_xt[di] = time.time()
             v.RDlls_changed = True
