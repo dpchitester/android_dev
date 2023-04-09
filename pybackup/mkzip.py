@@ -39,7 +39,7 @@ def maxmt(sd):
 
     st = list(map(es, l1))
     st.sort(reverse=True)
-    return math.floor(st[0]*1e3)/1e3
+    return math.floor(st[0]*1.0e3)/1.0e3
 
 
 def findRDE(di, si, sd, tp, dl):
