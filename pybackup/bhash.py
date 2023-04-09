@@ -19,7 +19,7 @@ def bhu(ho, it1):
         tuple: lambda it: iu(it),
         set: lambda it: iu(it),
         list: lambda it: iu(it),
-        v.DE: lambda it: iu((it.nm, it.sz, it.nm, it.md5))
+        v.DE: lambda it: ho.update(pack("i", hash(it))),
     }
     try:
         bhuf[type(it1)](it1)
