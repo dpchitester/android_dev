@@ -88,9 +88,9 @@ def rt2():
             print("backups appear pending")
             rv1 = opExec()
             print("rv1", rv1)
-        # ldsv.savefmd5h()
+        ldsv.savefmd5h()
         # ldsv.saveldlls()
-        # ldsv.saverdlls()
+        ldsv.saverdlls()
         if not rv1:
             break
 
@@ -101,7 +101,6 @@ def main():
     # dl.getrdlls()
     st.rupdatets(0)
     rt2()
-    ldsv.save_all()
 
 
 import config
