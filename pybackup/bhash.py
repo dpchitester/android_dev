@@ -6,9 +6,6 @@ import config as v
 
 
 def bhu(ho, it1):
-    def iu(it2):
-        for it3 in it2:
-            bhu(ho, it3)
     bhuf = {
         bytes: lambda it: ho.update(it),
         int: lambda it: ho.update(pack("i", it)),
@@ -16,10 +13,10 @@ def bhu(ho, it1):
         str: lambda it: ho.update(it.encode()),
         Path: lambda it: ho.update(str(it).encode()),
         PosixPath: lambda it: ho.update(str(it).encode()),
-        tuple: lambda it: iu(it),
-        set: lambda it: iu(it),
-        list: lambda it: iu(it),
-        v.DE: lambda it: iu((it.nm, it.sz, it.mt, it.md5)),
+        tuple: lambda it: [bhuf[type(it2)](it2) for it2 in it],
+        set: lambda it: [bhuf[type(it2)](it2) for it2 in it],
+        list: lambda it: [bhuf[type(it2)](it2) for it2 in it],
+        v.DE: lambda it: [bhuf[type(it2)](it2) for it2 in (it.nm, it.sz, it.mt, it.md5)],
     }
     try:
         bhuf[type(it1)](it1)
