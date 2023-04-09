@@ -47,6 +47,7 @@ def initConfig():
     addSrcDir("backups", ppre("sd") / "backups", False)
     addSrcDir("home", ppre("FLAGS"), False)
     addSrcDir("bin", pdir("home") / "bin", False)
+    addSrcDir("vids", ppre("sd") / "VideoDownloader/Download", False)
 
     def f1():
         dl = getDL(ppre("proj"))
@@ -193,7 +194,7 @@ def initConfig():
         op1 = Mkzip(npl1, npl1, {"zipfile": "projects-git.zip"})
         addArc(op1)
 
-    for si in ("proj", "zips"):
+    for si in ("proj", "zips", "vids"):
         p1 = pdir(si).relative_to(ppre("sd"))
         addTgtDir("gd_" + si, ppre("gd") / p1)
         npl1 = ("gd_" + si, si)
