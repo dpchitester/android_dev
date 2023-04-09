@@ -97,7 +97,7 @@ def sepdlls(dlls):
             v.RDlls_changed = True
             rd = v.tdir(di).relative_to(v.ppre("gd"))
             tds = str(rd) + "/"
-            i = bisect_left(dlls, v.DE(tds, 0, 0, b""))
+            i = bisect_left(dlls, tds, key=lambda de: de.nm)
             # print(tds, i)
             if i == len(dlls):
                 continue

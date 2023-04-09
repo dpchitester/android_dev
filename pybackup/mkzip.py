@@ -43,8 +43,7 @@ def maxmt(sd):
 
 def findRDE(di, si, sd, tp, dl):
     rd = tp.relative_to(v.tdir(di))
-    de = v.DE(rd, 0, 0, b"")
-    i = bisect_left(dl, de)
+    i = bisect_left(dl, rd, key=lambda de: de.nm)
     return i
 
 

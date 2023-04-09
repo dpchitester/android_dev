@@ -26,15 +26,13 @@ class SFc:
 
 def findLDE(di, si, sd, td, dl):
     ld = sd.relative_to(v.pdir(si))
-    de = v.DE(ld, 0, 0, b"")
-    i = bisect_left(dl, de)
+    i = bisect_left(dl, ld, key=lambda de: de.nm)
     return i
 
 
-def findRDE(di, si, sd, td, dl):
+def findRDE(di, td, dl):
     rd = td.relative_to(v.tdir(di))
-    de = v.DE(rd, 0, 0, b"")
-    i = bisect_left(dl, de)
+    i = bisect_left(dl, rd, key=lambda de: de.nm)
     return i
 
 
@@ -49,7 +47,7 @@ def fsync(di, si, sd, td, sfc):
             sfc.sc += 1
             if di in v.RDlls:
                 rde = getRemoteDE(di, td)
-                ddei = findRDE(di, si, sd, td, v.RDlls[di])
+                ddei = findRDE(di, td, v.RDlls[di])
                 if ddei < len(v.RDlls[di]) and rde.nm == v.RDlls[di][ddei].nm:
                     v.RDlls[di][ddei] = rde
                     v.RDlls_changed = True
@@ -81,7 +79,7 @@ def fcopy(di, si, sd, td, sfc):
             sfc.sc += 1
             if di in v.RDlls:
                 rde = getRemoteDE(di, td)
-                ddei = findRDE(di, si, sd, td, v.RDlls[di])
+                ddei = findRDE(di, td, v.RDlls[di])
                 if ddei < len(v.RDlls[di]) and rde.nm == v.RDlls[di][ddei].nm:
                     v.RDlls[di][ddei] = rde
                     v.RDlls_changed = True
@@ -103,7 +101,7 @@ def fdel(di, si, sd, td, sfc):
         if rc == 0:
             sfc.sc += 1
             if di in v.RDlls:
-                ddei = findRDE(di, si, sd, td, v.RDlls[di])
+                ddei = findRDE(di, td, v.RDlls[di])
                 if ddei < len(v.RDlls[di]) and rde.nm == v.RDlls[di][ddei].nm:
                     v.RDlls[di].pop(ddei)
                     v.RDlls_changed = True

@@ -98,8 +98,7 @@ def sha256sumf(Fn):
 
 def findRDE(di, si, sd, td, dl):
     rd = td.relative_to(v.tdir(di))
-    de = v.DE(rd, 0, 0, b"")
-    i = bisect_left(dl, de)
+    i = bisect_left(dl, rd, key=lambda de: de.nm)
     return i
 
 
