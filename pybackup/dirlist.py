@@ -13,7 +13,7 @@ from bhash import blakeHash
 from fmd5h import fmd5f
 
 rto1 = 60*1
-rto2 = 60*15
+rto2 = 60*1
 
 
 def getfl(p):
