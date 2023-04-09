@@ -104,7 +104,7 @@ class BVars:
         self.si = si
         self.di = di
         self.sd = v.pdir(si)
-        self.td = v.tdir(di)
+        self.td = v.tgt(di)
         self.src_dls = None
         self.dst_dls = None
         self.f2d = None

@@ -57,7 +57,7 @@ class Mkzip(OpBase):
         if e.chk_ct():
             di2, si2 = self.npl2
             sd = v.pdir(si2)
-            td = v.tdir(di2)
+            td = v.tgt(di2)
             zf = self.opts.get("zipfile", "temp.zip")
             rp = Path(zf)
             zp = td / rp.stem

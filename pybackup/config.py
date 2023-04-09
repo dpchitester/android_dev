@@ -127,6 +127,9 @@ def initConfig():
     addSrcDir("home", ppre("FLAGS"), False)
     addSrcDir("bin", pdir("home") / "bin", False)
     addSrcDir("vids", ppre("sd") / "VideoDownloader/Download", False)
+    addSrcDir("zips", ppre("sd") / "zips", False)
+    addSrcDir(".git", ppre("proj") / ".git", False)
+    addSrcDir("proj", ppre("proj"), False)
 
     def f1():
         dl = getDL(ppre("proj"))
@@ -138,25 +141,20 @@ def initConfig():
 
     f1()
 
-    addSrcDir("zips", ppre("sd") / "zips", False)
-
     global worktree
     worktree = ppre("sd") / "projects"
 
     srcs.add("git_index")
     lckers["git_index"] = partial(gitck1, "git_index", worktree)
 
-    addSrcDir(".git", ppre("proj") / ".git", False)
     srcs.add("git")
     lckers["git"] = partial(gitck2, "git", worktree)
 
     tgts.add("bitbucket")
     tgts.add("github")
-    # srcs.add('bitbucket')
+
     rckers["bitbucket"] = partial(gitremoteck, "bitbucket", worktree)
     rckers["github"] = partial(gitremoteck, "github", worktree)
-
-    addSrcDir("proj", ppre("proj"), False)
 
     addTgtDir("home", ppre("FLAGS"))
     addTgtDir("bin", tdir("home") / "bin")

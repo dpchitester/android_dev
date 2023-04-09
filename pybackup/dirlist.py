@@ -90,12 +90,12 @@ def getdll0():
 
 def sepdlls(dlls):
     print("-sepdlls")
-    for di in v.tdirs:
+    for di in v.tgts:
         if di.startswith("gd_"):
             v.RDlls[di] = []
             v.RDlls_xt[di] = time.time()
             v.RDlls_changed = True
-            rd = v.tdir(di).relative_to(v.ppre("gd"))
+            rd = v.tgt(di).relative_to(v.ppre("gd"))
             tds = str(rd) + "/"
             i = bisect_left(dlls, tds, key=lambda de: de.nm)
             # print(tds, i)
@@ -124,7 +124,7 @@ def sepdlls(dlls):
 
 def getdll1(di):
     v.dl1_cs += 1
-    td = v.tdir(di)
+    td = v.tgt(di)
     # print('getdll1', di, str(td))
     cmd = 'rclone lsjson "' + str(td) + '" --recursive --files-only --hash --fast-list'
     # print(cmd)
@@ -257,7 +257,7 @@ def getRemoteDE(di, sf: Path):
     cmd = 'rclone lsjson "' + str(sf) + '" --hash'
     rc = ar.run1(cmd)
     if rc == 0:
-        rd = sf.relative_to(v.tdir(di)).parent
+        rd = sf.relative_to(v.tgt(di)).parent
         it = json.loads(ar.txt)[0]
         it1 = rd / it["Path"]
         it2 = it["Size"]
@@ -278,6 +278,6 @@ def findLDE(si, sd, dl):
 
 
 def findRDE(di, td, dl):
-    rd = td.relative_to(v.tdir(di))
+    rd = td.relative_to(v.tgt(di))
     i = bisect_left(dl, rd, key=lambda de: de.nm)
     return i

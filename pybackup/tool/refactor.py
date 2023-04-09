@@ -52,7 +52,7 @@ doit = False
 
 # mod2 = proj.get_resource(f2)
 
-doChGl("bctck", "chk_ct")
-doChGl("rbctck", "rchk_ct")
+doChGl("lckers", "sckers")
+#doChGl("rbctck", "rchk_ct")
 
 proj.close()

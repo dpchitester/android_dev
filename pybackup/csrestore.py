@@ -37,7 +37,7 @@ class BVar:
         self.si = si
         self.di = di
         self.sd = v.pdir(si)
-        self.td = v.tdir(di)
+        self.td = v.tgt(di)
         self.dln = None
         self.dhn = None
         self.dlo = None
