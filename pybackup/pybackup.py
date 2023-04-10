@@ -21,7 +21,7 @@ async def wsetup():
     global wdsi, in1
     for si in v.srcs:
         try:
-            p = v.srcDir(si)
+            p = v.src(si)
             rv = in1.add_watch(str(p), flags.MODIFY)
             # asyncio.sleep(0)
             wdsi[rv] = (si, p)

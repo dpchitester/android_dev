@@ -124,7 +124,7 @@ def initConfig():
     addSrcDir("blogds", ppre("dsblog"), False)
     addSrcDir("backups", ppre("sd") / "backups", False)
     addSrcDir("home", ppre("FLAGS"), False)
-    addSrcDir("bin", srcDir("home") / "bin", False)
+    addSrcDir("bin", src("home") / "bin", False)
     addSrcDir("vids", ppre("sd") / "VideoDownloader/Download", False)
     addSrcDir("zips", ppre("sd") / "zips", False)
     addSrcDir(".git", ppre("proj") / ".git", False)
@@ -274,7 +274,7 @@ def initConfig():
         addArc(op1)
 
     for si in ("proj", "zips", "vids"):
-        p1 = srcDir(si).relative_to(ppre("sd"))
+        p1 = src(si).relative_to(ppre("sd"))
         addTgtDir("gd_" + si, ppre("gd") / p1)
         npl1 = ("gd_" + si, si)
         # op1 = CSRestore(npl1, None, {})
@@ -289,7 +289,7 @@ def ppre(s):
     else:
         raise KeyError(s + " tag not in pres")
 
-def srcDir(s):
+def src(s):
     if s in srcs:
         return paths[s]
     else:
