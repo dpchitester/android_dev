@@ -6,7 +6,8 @@ from pathlib import Path
 
 import asyncrun as ar
 import config as v
-from dirlist import dllcmp, getRemoteDE, findLDE, findRDE, lDlld, rDlld
+from dirlist import dllcmp, lDlld, rDlld
+from findde import getRemoteDE, findDE
 from edge import Edge, findEdge
 from netup import netup
 from opbase import OpBase
@@ -34,15 +35,6 @@ def fsync(di, si, sd, td, sfc):
         rc = ar.run2(cmd)
         if rc == 0:
             sfc.sc += 1
-            if di in v.TDlls:
-                rde = getRemoteDE(di, td)
-                ddei = findRDE(di, td, v.TDlls[di])
-                if ddei < len(v.TDlls[di]) and rde.nm == v.TDlls[di][ddei].nm:
-                    v.TDlls[di][ddei] = rde
-                    v.TDlls_changed = True
-                else:
-                    v.TDlls[di].insert(ddei, rde)
-                    v.TDlls_changed = True
             return True
         else:
             sfc.fc += 1
@@ -66,16 +58,7 @@ def fcopy(di, si, sd, td, sfc):
         rc = ar.run2(cmd)
         if rc == 0:
             sfc.sc += 1
-            if di in v.TDlls:
-                rde = getRemoteDE(di, td)
-                ddei = findRDE(di, td, v.TDlls[di])
-                if ddei < len(v.TDlls[di]) and rde.nm == v.TDlls[di][ddei].nm:
-                    v.TDlls[di][ddei] = rde
-                    v.TDlls_changed = True
-                else:
-                    v.TDlls[di].insert(ddei, rde)
-                    v.TDlls_changed = True
-                return True
+            return True
         sfc.fc += 1
     return False
 
@@ -89,11 +72,6 @@ def fdel(di, si, sd, td, sfc):
         rc = ar.run2(cmd)
         if rc == 0:
             sfc.sc += 1
-            if di in v.TDlls:
-                ddei = findRDE(di, td, v.TDlls[di])
-                if ddei < len(v.TDlls[di]) and rde.nm == v.TDlls[di][ddei].nm:
-                    v.TDlls[di].pop(ddei)
-                    v.TDlls_changed = True
             return True
         sfc.fc += 1
     return False
@@ -190,6 +168,8 @@ class CSCopy(OpBase):
         if self.sfc.fc == 0:
             e.clr()
         if self.sfc.sc > 0:
-            if di in v.TDlls:
+            if di in v.srcs:
+                onestatus(di)
+            if di in v.tgts:
                 ronestatus(di)
         return self.sfc.value()

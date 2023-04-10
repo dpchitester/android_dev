@@ -253,31 +253,3 @@ def dllcmp(do, dn):
     return (todelete, tocopy)
 
 
-def getRemoteDE(di, sf: Path):
-    cmd = 'rclone lsjson "' + str(sf) + '" --hash'
-    rc = ar.run1(cmd)
-    if rc == 0:
-        rd = sf.relative_to(v.tgt(di)).parent
-        it = json.loads(ar.txt)[0]
-        it1 = rd / it["Path"]
-        it2 = it["Size"]
-        it3 = it["ModTime"][:-1] + "-00:00"
-        it3 = datetime.datetime.fromisoformat(it3).timestamp()
-        if "Hashes" in it:
-            it4 = bytes.fromhex(it["Hashes"]["md5"])
-        else:
-            it4 = bytes()
-        nde = v.DE(it1, it2, it3, it4)
-        print("new nde:", nde.nm, nde.sz, nde.mt)
-        return nde
-
-def findLDE(si, sd, dl):
-    ld = sd.relative_to(v.src(si))
-    i = bisect_left(dl, ld, key=lambda de: de.nm)
-    return i
-
-
-def findRDE(di, td, dl):
-    rd = td.relative_to(v.tgt(di))
-    i = bisect_left(dl, rd, key=lambda de: de.nm)
-    return i

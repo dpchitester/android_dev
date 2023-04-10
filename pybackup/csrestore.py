@@ -161,8 +161,8 @@ class CSRestore(OpBase):
                                     bv.f2d.remove(rf)
                                     bv.ac1 += 1
             if bv.ac1:
-                del v.SDlls[si]
-                v.SDlls_changed = True
+                if si in srcs:
+                    onestatus(si)
             if tcfc[1] == 0:
                 e.rclr()
         return (tcfc[0], tcfc[1])

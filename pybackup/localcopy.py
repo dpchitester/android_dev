@@ -6,7 +6,8 @@ from pathlib import Path
 
 import asyncrun as ar
 import config as v
-from dirlist import getRemoteDE, findLDE, findRDE
+
+from findde import getRemoteDE, findDE
 from edge import Edge, findEdge
 from opbase import OpBase
 from status import onestatus
@@ -106,26 +107,6 @@ def copy2(di, si, sd, td, sfc):
     rv = ar.run1(cmd)
     if rv == 0:
         sfc.sc += 1
-        rde = None
-        if di in v.SDlls:
-            rde = getRemoteDE(di, td)
-            ddei = findLDE(di, td, v.SDlls[di])
-            if ddei < len(v.SDlls[di]) and rde.nm == v.SDlls[di][ddei].nm:
-                v.SDlls[di][ddei] = rde
-                v.SDlls_changed = True
-            else:
-                v.SDlls[di].insert(ddei, rde)
-                v.SDlls_changed = True
-        if di in v.TDlls:
-            if rde is None:
-                rde = getRemoteDE(di, td)
-            ddei = findRDE(di, td, v.TDlls[di])
-            if ddei < len(v.TDlls[di]) and rde.nm == v.TDlls[di][ddei].nm:
-                v.TDlls[di][ddei] = rde
-                v.TDlls_changed = True
-            else:
-                v.TDlls[di].insert(ddei, rde)
-                v.TDlls_changed = True
     else:
         sfc.fc -= 1
         print(ar.txt)
@@ -182,8 +163,8 @@ class LocalCopy(OpBase):
             if self.sfc.fc == 0:
                 e.clr()
             if self.sfc.sc > 0:
-                if di in v.SDlls:
+                if di in srcs:
                     onestatus(di)
-                if di in v.TDlls:
+                if di in tgts:
                     ronestatus(di)
         return self.sfc.value()

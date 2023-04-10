@@ -68,8 +68,9 @@ def statuses():
 
 def rstatuses():
     RDl = []
+    excs = ["home", ".git"]
     for Di in v.tgts:
-        if Di.startswith("gd_") or Di == "bitbucket" or Di == "github":
+        if Di not in excs:
             tr = v.rckers[Di]()
             if tr is not None:
                 (Dh, changed) = tr
