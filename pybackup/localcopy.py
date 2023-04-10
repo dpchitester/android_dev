@@ -10,7 +10,7 @@ from dirlist import getRemoteDE, findLDE, findRDE
 from edge import Edge, findEdge
 from opbase import OpBase
 from status import onestatus
-
+from snoop import snoop, pp
 
 class FileDiff:
     sf = None
