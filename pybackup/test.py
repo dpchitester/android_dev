@@ -24,7 +24,7 @@ def findAllDi(fp1):
                 l1.append({di: rp1})
         except:
             pass
-    return l2
+    return l1
             
 def test1():
     v.initConfig()
