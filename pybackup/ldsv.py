@@ -7,8 +7,8 @@ def loadldlls():
     try:
         with open(v.ldllsf, "rb") as fh:
             td = pickle.load(fh)
-            v.LDlls = td["ldlls"]
-            v.LDlls_xt = td["ldlls_xt"]
+            v.SDlls = td["ldlls"]
+            v.SDlls_xt = td["ldlls_xt"]
     except Exception as e:
         print("loadldlls failed", e)
 
@@ -17,32 +17,32 @@ def loadrdlls():
     try:
         with open(v.rdllsf, "rb") as fh:
             td = pickle.load(fh)
-            v.RDlls = td["rdlls"]
-            v.RDlls_xt = td["rdlls_xt"]
+            v.TDlls = td["rdlls"]
+            v.TDlls_xt = td["rdlls_xt"]
     except Exception as e:
         print("loadrdlls failed", e)
 
 
 def saveldlls():
     # print('-saveldlls')
-    if v.LDlls_changed:
+    if v.SDlls_changed:
         try:
             with open(v.ldllsf, "wb") as fh:
-                td = {"ldlls": v.LDlls, "ldlls_xt": v.LDlls_xt}
+                td = {"ldlls": v.SDlls, "ldlls_xt": v.SDlls_xt}
                 pickle.dump(td, fh)
-                v.LDlls_changed = False
+                v.SDlls_changed = False
         except Exception as e:
             print("savedlls failed", e)
 
 
 def saverdlls():
     # print('-saverdlls')
-    if v.RDlls_changed:
+    if v.TDlls_changed:
         try:
             with open(v.rdllsf, "wb") as fh:
-                td = {"rdlls": v.RDlls, "rdlls_xt": v.RDlls_xt}
+                td = {"rdlls": v.TDlls, "rdlls_xt": v.TDlls_xt}
                 pickle.dump(td, fh)
-                v.RDlls_changed = False
+                v.TDlls_changed = False
         except Exception as e:
             print("saverdlls failed", e)
 

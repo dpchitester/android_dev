@@ -92,9 +92,9 @@ def sepdlls(dlls):
     print("-sepdlls")
     for di in v.tgts:
         if di.startswith("gd_"):
-            v.RDlls[di] = []
-            v.RDlls_xt[di] = time.time()
-            v.RDlls_changed = True
+            v.TDlls[di] = []
+            v.TDlls_xt[di] = time.time()
+            v.TDlls_changed = True
             rd = v.tgt(di).relative_to(v.ppre("gd"))
             tds = str(rd) + "/"
             i = bisect_left(dlls, tds, key=lambda de: de.nm)
@@ -114,12 +114,12 @@ def sepdlls(dlls):
                 # print(de2[0])
                 # if de2 in csdlls[di]:
                 # csdlls[di].remove(de2)
-                v.RDlls[di].append(de2)
+                v.TDlls[di].append(de2)
                 i += 1
                 if i == len(dlls):
                     break
                 de = dlls[i]
-    print(len(v.RDlls), "rdlls")
+    print(len(v.TDlls), "rdlls")
 
 
 def getdll1(di):
@@ -217,32 +217,32 @@ def getrdlls():
 
 def lDlld(si):
     # print('-ldlld', si)
-    if si not in v.LDlls or v.LDlls_xt[si] + rto1 <= time.time():
+    if si not in v.SDlls or v.SDlls_xt[si] + rto1 <= time.time():
         print("obtaining", si, "ldll...", end='')
         rv = getdll3(si)
         if rv is not None:
             print("done.")
-            v.LDlls[si] = rv
-            v.LDlls_xt[si] = time.time()
-            v.LDlls_changed = True
+            v.SDlls[si] = rv
+            v.SDlls_xt[si] = time.time()
+            v.SDlls_changed = True
         else:
             print("failed.")
-    return v.LDlls[si]
+    return v.SDlls[si]
 
 
 def rDlld(di):
     # print('-rdlld', di)
-    if di not in v.RDlls or v.RDlls_xt[di] + rto2 <= time.time():
+    if di not in v.TDlls or v.TDlls_xt[di] + rto2 <= time.time():
         print("obtaining", di, "rdll...", end='')
         rv = getdll1(di)
         if rv is not None:
             print("done.")
-            v.RDlls[di] = rv
-            v.RDlls_xt[di] = time.time()
-            v.RDlls_changed = True
+            v.TDlls[di] = rv
+            v.TDlls_xt[di] = time.time()
+            v.TDlls_changed = True
         else:
             print("failed.")
-    return v.RDlls[di]
+    return v.TDlls[di]
 
 
 def dllcmp(do, dn):

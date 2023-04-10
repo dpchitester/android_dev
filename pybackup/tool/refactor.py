@@ -52,7 +52,9 @@ doit = True
 
 # mod2 = proj.get_resource(f2)
 
-doChGl("LDlls", "SDlls")
-doChGl("RDlls", "TDlls")
+doChGl("LDlls_xt", "SDlls_xt")
+doChGl("RDlls_xt", "TDlls_xt")
+doChGl("LDlls_changed", "SDlls_changed")
+doChGl("RDlls_changed", "TDlls_changed")
 
 proj.close()

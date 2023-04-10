@@ -34,15 +34,15 @@ def fsync(di, si, sd, td, sfc):
         rc = ar.run2(cmd)
         if rc == 0:
             sfc.sc += 1
-            if di in v.RDlls:
+            if di in v.TDlls:
                 rde = getRemoteDE(di, td)
-                ddei = findRDE(di, td, v.RDlls[di])
-                if ddei < len(v.RDlls[di]) and rde.nm == v.RDlls[di][ddei].nm:
-                    v.RDlls[di][ddei] = rde
-                    v.RDlls_changed = True
+                ddei = findRDE(di, td, v.TDlls[di])
+                if ddei < len(v.TDlls[di]) and rde.nm == v.TDlls[di][ddei].nm:
+                    v.TDlls[di][ddei] = rde
+                    v.TDlls_changed = True
                 else:
-                    v.RDlls[di].insert(ddei, rde)
-                    v.RDlls_changed = True
+                    v.TDlls[di].insert(ddei, rde)
+                    v.TDlls_changed = True
             return True
         else:
             sfc.fc += 1
@@ -66,15 +66,15 @@ def fcopy(di, si, sd, td, sfc):
         rc = ar.run2(cmd)
         if rc == 0:
             sfc.sc += 1
-            if di in v.RDlls:
+            if di in v.TDlls:
                 rde = getRemoteDE(di, td)
-                ddei = findRDE(di, td, v.RDlls[di])
-                if ddei < len(v.RDlls[di]) and rde.nm == v.RDlls[di][ddei].nm:
-                    v.RDlls[di][ddei] = rde
-                    v.RDlls_changed = True
+                ddei = findRDE(di, td, v.TDlls[di])
+                if ddei < len(v.TDlls[di]) and rde.nm == v.TDlls[di][ddei].nm:
+                    v.TDlls[di][ddei] = rde
+                    v.TDlls_changed = True
                 else:
-                    v.RDlls[di].insert(ddei, rde)
-                    v.RDlls_changed = True
+                    v.TDlls[di].insert(ddei, rde)
+                    v.TDlls_changed = True
                 return True
         sfc.fc += 1
     return False
@@ -84,16 +84,16 @@ def fdel(di, si, sd, td, sfc):
     if netup():
         cmd = 'rclone delete "' + str(td) + '" --progress'
         print(cmd)
-        if di in v.RDlls:
+        if di in v.TDlls:
             rde = getRemoteDE(di, td)
         rc = ar.run2(cmd)
         if rc == 0:
             sfc.sc += 1
-            if di in v.RDlls:
-                ddei = findRDE(di, td, v.RDlls[di])
-                if ddei < len(v.RDlls[di]) and rde.nm == v.RDlls[di][ddei].nm:
-                    v.RDlls[di].pop(ddei)
-                    v.RDlls_changed = True
+            if di in v.TDlls:
+                ddei = findRDE(di, td, v.TDlls[di])
+                if ddei < len(v.TDlls[di]) and rde.nm == v.TDlls[di][ddei].nm:
+                    v.TDlls[di].pop(ddei)
+                    v.TDlls_changed = True
             return True
         sfc.fc += 1
     return False
@@ -190,6 +190,6 @@ class CSCopy(OpBase):
         if self.sfc.fc == 0:
             e.clr()
         if self.sfc.sc > 0:
-            if di in v.RDlls:
+            if di in v.TDlls:
                 ronestatus(di)
         return self.sfc.value()

@@ -59,8 +59,8 @@ async def cb1():
         if si != "git":
             if si not in sis:
                 sis.add(si)
-                if si in v.LDlls:
-                    del v.LDlls[si]
+                if si in v.SDlls:
+                    del v.SDlls[si]
                     print("cb1 onestatus", si)
                     onestatus(si)
                 if si in RDlls:

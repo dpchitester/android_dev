@@ -58,15 +58,15 @@ Hdt2: TypeAlias = Dict[Path, Union["Hdt2", Hde]]
 fmd5hd: Hdt2 = {}
 
 # files lists
-LDlls: Dict[NodeTag, List["DE"]] = {}
-RDlls: Dict[NodeTag, List["DE"]] = {}
+SDlls: Dict[NodeTag, List["DE"]] = {}
+TDlls: Dict[NodeTag, List["DE"]] = {}
 
 # update times of directory lists
-LDlls_xt: Dict[NodeTag, float] = {}
-RDlls_xt: Dict[NodeTag, float] = {}
+SDlls_xt: Dict[NodeTag, float] = {}
+TDlls_xt: Dict[NodeTag, float] = {}
 
-LDlls_changed: bool = False
-RDlls_changed: bool = False
+SDlls_changed: bool = False
+TDlls_changed: bool = False
 
 # pickle file filenames
 edgepf: Path | None = None

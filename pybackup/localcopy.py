@@ -107,25 +107,25 @@ def copy2(di, si, sd, td, sfc):
     if rv == 0:
         sfc.sc += 1
         rde = None
-        if di in v.LDlls:
+        if di in v.SDlls:
             rde = getRemoteDE(di, td)
-            ddei = findLDE(di, td, v.LDlls[di])
-            if ddei < len(v.LDlls[di]) and rde.nm == v.LDlls[di][ddei].nm:
-                v.LDlls[di][ddei] = rde
-                v.LDlls_changed = True
+            ddei = findLDE(di, td, v.SDlls[di])
+            if ddei < len(v.SDlls[di]) and rde.nm == v.SDlls[di][ddei].nm:
+                v.SDlls[di][ddei] = rde
+                v.SDlls_changed = True
             else:
-                v.LDlls[di].insert(ddei, rde)
-                v.LDlls_changed = True
-        if di in v.RDlls:
+                v.SDlls[di].insert(ddei, rde)
+                v.SDlls_changed = True
+        if di in v.TDlls:
             if rde is None:
                 rde = getRemoteDE(di, td)
-            ddei = findRDE(di, td, v.RDlls[di])
-            if ddei < len(v.RDlls[di]) and rde.nm == v.RDlls[di][ddei].nm:
-                v.RDlls[di][ddei] = rde
-                v.RDlls_changed = True
+            ddei = findRDE(di, td, v.TDlls[di])
+            if ddei < len(v.TDlls[di]) and rde.nm == v.TDlls[di][ddei].nm:
+                v.TDlls[di][ddei] = rde
+                v.TDlls_changed = True
             else:
-                v.RDlls[di].insert(ddei, rde)
-                v.RDlls_changed = True
+                v.TDlls[di].insert(ddei, rde)
+                v.TDlls_changed = True
     else:
         sfc.fc -= 1
         print(ar.txt)
@@ -182,8 +182,8 @@ class LocalCopy(OpBase):
             if self.sfc.fc == 0:
                 e.clr()
             if self.sfc.sc > 0:
-                if di in v.LDlls:
+                if di in v.SDlls:
                     onestatus(di)
-                if di in v.RDlls:
+                if di in v.TDlls:
                     ronestatus(di)
         return self.sfc.value()
