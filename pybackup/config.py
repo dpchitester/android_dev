@@ -24,7 +24,7 @@ paths: Dict[NodeTag, Path] = {}
 
 # tag attributes/types/classes
 pres: Set[NodeTag] = set()
-pdirs: Set[NodeTag] = set()
+# pdirs: Set[NodeTag] = set()
 srcs: Set[NodeTag] = set()
 tgts: Set[NodeTag] = set()
 codes: Set[NodeTag] = set()
