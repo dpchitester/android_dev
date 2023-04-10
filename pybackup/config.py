@@ -25,7 +25,6 @@ paths: Dict[NodeTag, Path] = {}
 # tag attributes/types/classes
 pres: Set[NodeTag] = set()
 pdirs: Set[NodeTag] = set()
-tdirs: Set[NodeTag] = set()
 srcs: Set[NodeTag] = set()
 tgts: Set[NodeTag] = set()
 codes: Set[NodeTag] = set()
@@ -58,7 +57,7 @@ Hdt2: TypeAlias = Dict[Path, Union["Hdt2", Hde]]
 # local file md5 hashes
 fmd5hd: Hdt2 = {}
 
-# directory lists
+# files lists
 LDlls: Dict[NodeTag, List["DE"]] = {}
 RDlls: Dict[NodeTag, List["DE"]] = {}
 
@@ -157,9 +156,9 @@ def initConfig():
     rckers["github"] = partial(gitremoteck, "github", worktree)
 
     addTgtDir("home", ppre("FLAGS"))
-    addTgtDir("bin", tdir("home") / "bin")
-    addTgtDir("sh", tdir("home") / "bin/sh")
-    addTgtDir("pl", tdir("home") / "bin/pl")
+    addTgtDir("bin", tgt("home") / "bin")
+    addTgtDir("sh", tgt("home") / "bin/sh")
+    addTgtDir("pl", tgt("home") / "bin/pl")
     addTgtDir("backups", ppre("sd") / "backups")
     addTgtDir("zips", ppre("sd") / "zips")
     addTgtDir("blogds", ppre("dsblog"))
@@ -298,13 +297,6 @@ def pdir(s):
         raise KeyError(s + " tag not in pdirs")
 
 
-def tdir(s):
-    if s in tdirs:
-        return paths[s]
-    else:
-        raise KeyError(s + " tag not in tdirs")
-
-
 def srcDir(s):
     if s in srcs:
         return paths[s]
@@ -334,7 +326,6 @@ def addTgtDir(tg, pth):
     paths[tg] = pth
     tgts.add(tg)
     rckers[tg] = partial(rdhck, tg)
-    tdirs.add(tg)
 
 
 def addSrcDir(tg, pth, iscode=False):

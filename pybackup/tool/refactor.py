@@ -48,11 +48,11 @@ def doCh(mod, old, new):
     return False
 
 
-doit = False
+doit = True
 
 # mod2 = proj.get_resource(f2)
 
-doChGl("lckers", "sckers")
-#doChGl("rbctck", "rchk_ct")
+doChGl("LDlls", "SDlls")
+doChGl("RDlls", "TDlls")
 
 proj.close()
