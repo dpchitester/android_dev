@@ -370,6 +370,12 @@ def round2ms(ns):
 def trunc2ms(ns):
     return int(str(ns)[:-6]) / 1e3
 
+class FSEntity:
+    pass
+class Local(FSEntity):
+    pass
+class Remote(FSEntity):
+    pass
 
 @dataclass
 class DE:

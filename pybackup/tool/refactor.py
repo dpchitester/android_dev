@@ -49,9 +49,9 @@ def doCh(mod, old, new):
     return False
 
 
-if argv[1] == "--replace":
+if argv[1] == "-r":
     doit = True
-elif argv[1] == "--dry-run":
+elif argv[1] == "-d":
     doit = False
 else:
     exit(1)
