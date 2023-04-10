@@ -150,7 +150,7 @@ class LocalCopy(OpBase):
         e: Edge = findEdge(di, si)
         if e.chk_ct():
             print("LocalCopy", self.npl1, self.npl2)
-            sp = v.pdir(self.npl2[1])
+            sp = v.srcDir(self.npl2[1])
             dp = v.tgt(self.npl2[0])
             gl = self.opts.get("files", ["**/*"])
             for g in gl:

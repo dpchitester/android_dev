@@ -36,7 +36,7 @@ class BVar:
     def __init__(self, di, si, tcfc):
         self.si = si
         self.di = di
-        self.sd = v.pdir(si)
+        self.sd = v.srcDir(si)
         self.td = v.tgt(di)
         self.dln = None
         self.dhn = None

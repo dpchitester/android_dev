@@ -1,4 +1,5 @@
 #!/data/data/com.termux/files/usr/bin/python
+from sys import argv, exit
 
 from rope.base.exceptions import RefactoringError
 from rope.base.libutils import analyze_modules
@@ -48,13 +49,18 @@ def doCh(mod, old, new):
     return False
 
 
-doit = True
+if argv[1] == "--replace":
+    doit = True
+elif argv[1] == "--dry-run":
+    doit = False
+else:
+    exit(1)
+
+if len(argv) != 4:
+    exit(2)
 
 # mod2 = proj.get_resource(f2)
 
-doChGl("LDlls_xt", "SDlls_xt")
-doChGl("RDlls_xt", "TDlls_xt")
-doChGl("LDlls_changed", "SDlls_changed")
-doChGl("RDlls_changed", "TDlls_changed")
+doChGl(argv[2], argv[3])
 
 proj.close()

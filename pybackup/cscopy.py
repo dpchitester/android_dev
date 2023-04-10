@@ -103,7 +103,7 @@ class BVars:
     def __init__(self, di, si, sfc):
         self.si = si
         self.di = di
-        self.sd = v.pdir(si)
+        self.sd = v.srcDir(si)
         self.td = v.tgt(di)
         self.src_dls = None
         self.dst_dls = None

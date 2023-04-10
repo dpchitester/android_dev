@@ -124,7 +124,7 @@ def initConfig():
     addSrcDir("blogds", ppre("dsblog"), False)
     addSrcDir("backups", ppre("sd") / "backups", False)
     addSrcDir("home", ppre("FLAGS"), False)
-    addSrcDir("bin", pdir("home") / "bin", False)
+    addSrcDir("bin", srcDir("home") / "bin", False)
     addSrcDir("vids", ppre("sd") / "VideoDownloader/Download", False)
     addSrcDir("zips", ppre("sd") / "zips", False)
     addSrcDir(".git", ppre("proj") / ".git", False)
@@ -274,7 +274,7 @@ def initConfig():
         addArc(op1)
 
     for si in ("proj", "zips", "vids"):
-        p1 = pdir(si).relative_to(ppre("sd"))
+        p1 = srcDir(si).relative_to(ppre("sd"))
         addTgtDir("gd_" + si, ppre("gd") / p1)
         npl1 = ("gd_" + si, si)
         # op1 = CSRestore(npl1, None, {})
@@ -288,14 +288,6 @@ def ppre(s):
         return paths[s]
     else:
         raise KeyError(s + " tag not in pres")
-
-
-def pdir(s):
-    if s in pdirs:
-        return paths[s]
-    else:
-        raise KeyError(s + " tag not in pdirs")
-
 
 def srcDir(s):
     if s in srcs:
@@ -334,7 +326,6 @@ def addSrcDir(tg, pth, iscode=False):
     if tg in paths and paths[tg] != pth:
         raise Exception("path tag collision", tg, pth, paths[tg])
     paths[tg] = pth
-    pdirs.add(tg)
     srcs.add(tg)
     lckers[tg] = partial(ldhck, tg)
     if iscode:

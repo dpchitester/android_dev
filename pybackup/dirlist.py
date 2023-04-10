@@ -154,7 +154,7 @@ def getdll1(di):
 
 def getdll2(si):
     v.dl2_cs += 1
-    td = v.pdir(si)
+    td = v.srcDir(si)
     # print('getdll2', si, str(td))
     cmd = 'rclone lsjson "' + str(td) + '" --recursive --files-only --hash --fast-list'
     if not td.is_file():
@@ -272,7 +272,7 @@ def getRemoteDE(di, sf: Path):
         return nde
 
 def findLDE(si, sd, dl):
-    ld = sd.relative_to(v.pdir(si))
+    ld = sd.relative_to(v.srcDir(si))
     i = bisect_left(dl, ld, key=lambda de: de.nm)
     return i
 

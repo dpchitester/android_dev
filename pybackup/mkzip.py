@@ -56,7 +56,7 @@ class Mkzip(OpBase):
         e: Edge = findEdge(di1, si1)
         if e.chk_ct():
             di2, si2 = self.npl2
-            sd = v.pdir(si2)
+            sd = v.srcDir(si2)
             td = v.tgt(di2)
             zf = self.opts.get("zipfile", "temp.zip")
             rp = Path(zf)
