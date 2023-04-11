@@ -5,6 +5,7 @@ from functools import partial
 from os import walk
 from pathlib import Path
 from typing import Callable, Dict, List, Set, Tuple, TypeAlias, Union
+from math import floor
 
 import ldsv
 from bhash import blakeHash
@@ -368,7 +369,7 @@ def round2ms(ns):
 
 
 def trunc2ms(ns):
-    return int(str(ns)[:-6]) / 1e3
+    return floor(ns/1.0e6)/1.0e3
 
 
 @dataclass
