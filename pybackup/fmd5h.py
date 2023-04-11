@@ -16,7 +16,6 @@ def md5sumf(Fn):
         return ho.digest()
     return None
 
-@snoop
 def fmd5f(fp, sz, mt, nh=None):
     d1 = v.fmd5hd
     if fp not in d1:
@@ -27,13 +26,17 @@ def fmd5f(fp, sz, mt, nh=None):
         d1[fp] = nfse
         v.hf_dirty = True
         return nfse
-    else:
+    else: # existing
         v.hf_dh += 1
         ofse = d1[fp]
-        if ofse.sz == sz and ofse.mt == mt:
-            return ofse
-        if nh is None:
-            ofse.md5 = md5sumf(fp)
+        if ofse.sz != sz or ofse.mt != mt:
+            ofse.sz = sz
+            ofse.mt = mt
+            if nh is not None:
+                ofse.md5 = nh
+            else:
+                ofse.md5 = md5sumf(fp)
         else:
-            ofse.md5 = nh
+            if nh is not None and ofse.md5 != nh:
+                ofse.md5 = nh            
         return ofse
