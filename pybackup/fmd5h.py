@@ -2,6 +2,7 @@ from hashlib import md5
 
 import config as v
 
+from snoop import snoop, pp
 
 def md5sumf(Fn):
     if Fn.exists():
@@ -15,7 +16,7 @@ def md5sumf(Fn):
         return ho.digest()
     return None
 
-
+@snoop
 def fmd5f(fp, sz, mt, nh=None):
     d1 = v.fmd5hd
     if fp not in d1:
@@ -29,9 +30,10 @@ def fmd5f(fp, sz, mt, nh=None):
     else:
         v.hf_dh += 1
         ofse = d1[fp]
-        ofse.sz = sz
-        ofse.mt = mt
+        if ofse.sz == sz and ofse.mt == mt:
+            return ofse
         if nh is None:
-            nh = md5sumf(fp)
-        ofse.md5 = nh
+            ofse.md5 = md5sumf(fp)
+        else:
+            ofse.md5 = nh
         return ofse
