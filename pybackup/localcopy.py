@@ -9,7 +9,7 @@ import config as v
 from edge import Edge, findEdge
 from findde import findDE, getRemoteDE, updateDEs
 from opbase import OpBase
-from status import onestatus
+from status import onestatus, ronestatus
 
 
 class FileDiff:
@@ -164,8 +164,8 @@ class LocalCopy(OpBase):
             if self.sfc.fc == 0:
                 e.clr()
             if self.sfc.sc > 0:
-                if di in srcs:
+                if di in v.srcs:
                     onestatus(di)
-                if di in tgts:
+                if di in v.tgts:
                     ronestatus(di)
         return self.sfc.value()
