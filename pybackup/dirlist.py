@@ -8,6 +8,8 @@ from math import floor
 from os import walk
 from pathlib import Path
 
+from snoop import snoop, pp
+
 import asyncrun as ar
 import config as v
 from bhash import blakeHash
@@ -89,7 +91,7 @@ def getdll0():
         return st
     return None
 
-
+@snoop
 def sepdlls(dlls):
     print("-sepdlls")
     for di in v.tgts:
