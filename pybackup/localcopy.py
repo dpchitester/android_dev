@@ -39,7 +39,7 @@ class FileDiff:
                 print("source larger:", sfs.st_size - dfs.st_size, self.sf.name)
             elif sfs.st_size < dfs.st_size:
                 self.sz = -1
-                print("dest larger:", dfs.st_size - sfs.st_size, self.sf.name)
+                print("source smaller:", dfs.st_size - sfs.st_size, self.sf.name)
             if sfs.st_mtime_ns > dfs.st_mtime_ns:
                 self.mt = 1
                 print(
@@ -50,8 +50,8 @@ class FileDiff:
             elif sfs.st_mtime_ns < dfs.st_mtime_ns:
                 self.mt = -1
                 print(
-                    "dest newer:",
-                    (dfs.st_mtime_ns - sfs.st_mtime_ns) / 1e9,
+                    "source older:",
+                    (sfs.st_mtime_ns - dfs.st_mtime_ns) / 1e9,
                     self.sf.name,
                 )
             if sha256sumf(self.sf) != sha256sumf(self.df):
