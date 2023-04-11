@@ -16,22 +16,12 @@ def md5sumf(Fn):
     return None
 
 
-def finddict(d1, fp):
-    ta = fp.parent.parts
-    for dp in ta:
-        if dp not in d1:
-            d1[dp] = {}
-        d1 = d1[dp]
-    return d1
-
-
 def fmd5f(fp, sz, mt):
     def new_hash():
         nh = md5sumf(fp)
         d1[fp] = (sz, mt, nh)
         v.hf_dirty = True
         return nh
-
     d1 = v.fmd5hd
     if fp not in d1:
         v.hf_dm += 1
