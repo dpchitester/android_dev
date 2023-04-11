@@ -83,7 +83,6 @@ def getdll0():
             else:
                 it4 = bytes()
             fp = td / it1
-            # pp(fp, td, it1)
             fse = fmd5f(fp, it2, it3, it4)
             return v.DE(it1, fse)
 
@@ -116,14 +115,10 @@ def sepdlls(dlls):
                 continue
             while fnmatch(de.nm, tds + "*"):
                 fp = v.ppre('gd') / de.nm
-                # pp(fp, v.ppre('gd'), de.nm)
                 fse = fmd5f(fp, de.i.sz, de.i.mt, de.i.md5)
                 de2 = v.DE(de.nm, fse)
                 # TODO: use Path
                 de2.nm = de2.nm.relative_to(rd)
-                # print(de2[0])
-                # if de2 in csdlls[di]:
-                # csdlls[di].remove(de2)
                 v.TDlls[di].append(de2)
                 i += 1
                 if i == len(dlls):
@@ -153,7 +148,6 @@ def getdll1(di):
             else:
                 it4 = bytes()
             fp = td / it1
-            # pp(fp, td, it1)
             fse = fmd5f(fp, it2, it3, it4)
             return v.DE(it1, fse)
 
@@ -187,7 +181,7 @@ def getdll2(si):
                 it4 = bytes.fromhex(it["Hashes"]["md5"])
             else:
                 it4 = bytes()
-            # pp(fp = td / it1)
+            fp = td / it1
             fse = fmd5f(fp, it2, it3, it4)
             return v.DE(it1, fse)
 
@@ -213,7 +207,6 @@ def getdll3(si):
         it3 = fs.st_mtime_ns
         it3 = v.trunc2ms(it3)
         fp = td / it1
-        # pp(fp, td, it1)
         fse = fmd5f(fp, it2, it3)
         return v.DE(it1, fse)
 
