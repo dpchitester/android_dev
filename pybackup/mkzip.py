@@ -73,8 +73,8 @@ class Mkzip(OpBase):
         if fc == 0:
             e.clr()
         if sc > 0:
-            if di2 in srcs:
+            if di2 in v.srcs:
                 onestatus(di2)
-            if di2 in tgts:
+            if di2 in v.tgts:
                 ronestatus(di2)
         return (sc, fc)
