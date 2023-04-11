@@ -12,6 +12,7 @@ from edge import Edge, findEdge
 from findde import findDE, getRemoteDE
 from opbase import OpBase
 from status import onestatus
+from findde import updateDEs
 
 
 class FileDiff:
@@ -97,6 +98,7 @@ def sha256sumf(Fn):
         return ho.hexdigest()
     return None
 
+
 def copy2(di, si, sd, td, sfc):
     # print('copying ', f1, 'to', f2)
     if td.is_file():
@@ -158,6 +160,7 @@ class LocalCopy(OpBase):
                                 print(" ...copied.")
                                 if "exec" in self.opts:
                                     fdf.chmod(496)
+                                updateDEs(dp, rf)
                     except Exception as e:
                         print(e)
                         self.sfc.fc += 1

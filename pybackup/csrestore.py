@@ -13,7 +13,7 @@ from edge import Edge, findEdge
 from netup import netup
 from opbase import OpBase
 from statushash import ldh_d, ldhset, rdh_d, rdh_f
-
+from findde import updateDEs
 
 def fsync(sd, td, tcfc):
     if netup():
@@ -163,6 +163,8 @@ class CSRestore(OpBase):
             if bv.ac1:
                 if si in srcs:
                     onestatus(si)
+                if di in tgts:
+                    ronestatus(di)
             if tcfc[1] == 0:
                 e.rclr()
         return (tcfc[0], tcfc[1])

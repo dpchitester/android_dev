@@ -9,7 +9,7 @@ from edge import Edge, findEdge
 from findde import findDE, getRemoteDE
 from opbase import OpBase
 from status import onestatus, ronestatus
-
+from findde import updateDEs
 
 def getfl(p):
     # print(str(p))
@@ -67,6 +67,7 @@ class Mkzip(OpBase):
                 maxt = maxmt(sd)
                 utime(fp, ns=(maxt, maxt))
                 sc += 1
+                updateDEs(td, rp)
             except Exception as e:
                 print(e)
                 fc += 1

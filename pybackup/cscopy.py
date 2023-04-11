@@ -8,7 +8,7 @@ import asyncrun as ar
 import config as v
 from dirlist import dllcmp, lDlld, rDlld
 from edge import Edge, findEdge
-from findde import findDE, getRemoteDE
+from findde import updateDEs
 from netup import netup
 from opbase import OpBase
 from status import onestatus, ronestatus
@@ -128,6 +128,7 @@ class BVars:
                 for rf in self.f2d.copy():
                     if rf.nm == lf.nm:
                         self.f2d.remove(rf)
+                updateDEs(self.td, cfp)
 
     def do_deletions(self):
         for rf in self.f2d.copy():  # do deletions
@@ -135,6 +136,7 @@ class BVars:
             if fdel(self.di, self.si, self.sd / cfp, self.td / cfp, self.sfc):
                 self.f2d.remove(rf)
                 self.ac2 += 1
+                updateDEs(self.td, cfp)
 
 
 class CSCopy(OpBase):
