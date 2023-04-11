@@ -25,8 +25,6 @@ class SFc:
         return (self.sc, self.fc)
 
 
-
-
 def fsync(di, si, sd, td, sfc):
     if netup():
         # print('fsync', sd, td)
@@ -68,8 +66,6 @@ def fdel(di, si, sd, td, sfc):
     if netup():
         cmd = 'rclone delete "' + str(td) + '" --progress'
         print(cmd)
-        if di in v.TDlls:
-            rde = getRemoteDE(di, td)
         rc = ar.run2(cmd)
         if rc == 0:
             sfc.sc += 1

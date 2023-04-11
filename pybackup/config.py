@@ -2,10 +2,10 @@ import json
 import os
 from dataclasses import dataclass, field
 from functools import partial
+from math import floor
 from os import walk
 from pathlib import Path
 from typing import Callable, Dict, List, Set, Tuple, TypeAlias, Union
-from math import floor
 
 import ldsv
 from bhash import blakeHash
@@ -290,6 +290,7 @@ def ppre(s):
     else:
         raise KeyError(s + " tag not in pres")
 
+
 def src(s):
     if s in srcs:
         return paths[s]
@@ -369,7 +370,7 @@ def round2ms(ns):
 
 
 def trunc2ms(ns):
-    return floor(ns/1.0e6)/1.0e3
+    return floor(ns / 1.0e6) / 1.0e3
 
 
 @dataclass
@@ -378,9 +379,12 @@ class DE:
     sz: int
     mt: float
     md5: bytes
+
     def __lt__(self, other):
         return self.nm < other.nm
+
     def __eq__(self, other):
         return self.nm == other.nm
+
     def __hash__(self):
         return hash((self.nm, self.sz, self.mt, self.md5))

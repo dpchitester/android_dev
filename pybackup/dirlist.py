@@ -4,9 +4,9 @@ import json
 import time
 from bisect import bisect_left
 from fnmatch import fnmatch
+from math import floor
 from os import walk
 from pathlib import Path
-from math import floor
 
 import asyncrun as ar
 import config as v
@@ -219,7 +219,7 @@ def getrdlls():
 def lDlld(si):
     # print('-ldlld', si)
     if si not in v.SDlls or v.SDlls_xt[si] + rto1 <= time.time():
-        print("obtaining", si, "ldll...", end='')
+        print("obtaining", si, "ldll...", end="")
         rv = getdll3(si)
         if rv is not None:
             print("done.")
@@ -234,7 +234,7 @@ def lDlld(si):
 def rDlld(di):
     # print('-rdlld', di)
     if di not in v.TDlls or v.TDlls_xt[di] + rto2 <= time.time():
-        print("obtaining", di, "rdll...", end='')
+        print("obtaining", di, "rdll...", end="")
         rv = getdll1(di)
         if rv is not None:
             print("done.")
@@ -252,5 +252,3 @@ def dllcmp(do, dn):
     tocopy = dns - dos
     todelete = dos - dns
     return (todelete, tocopy)
-
-

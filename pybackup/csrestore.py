@@ -10,10 +10,11 @@ import asyncrun as ar
 import config as v
 from dirlist import dllcmp, lDlld, rDlld
 from edge import Edge, findEdge
+from findde import updateDEs
 from netup import netup
 from opbase import OpBase
 from statushash import ldh_d, ldhset, rdh_d, rdh_f
-from findde import updateDEs
+
 
 def fsync(sd, td, tcfc):
     if netup():

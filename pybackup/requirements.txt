@@ -1,2 +1,0 @@
-async-to-sync==0.2.3
-tarjan==0.2.3.2

@@ -2,14 +2,13 @@ import datetime
 import json
 import time
 from bisect import bisect_left
-from pathlib import Path
 from math import floor
-
-from snoop import pp, snoop
+from pathlib import Path
 
 import asyncrun as ar
 import config as v
 from status import changed_ops, rupdatets, updatets
+
 
 def findDE(dl, rp):
     i = bisect_left(dl, rp, key=lambda de: de.nm)
@@ -96,7 +95,7 @@ def updateDEs(rd, f1):
     def doSOne(dl, rp, tde, i, si):
         if sde:
             if tde:
-                print('update', sde.nm, "->", tde.nm)
+                print("update", sde.nm, "->", tde.nm)
                 if tde.sz != sde.sz:
                     print("size mismatch")
                     tde.sz = sde.sz
@@ -128,7 +127,7 @@ def updateDEs(rd, f1):
     def doTOne(dl, rp, tde, i, di):
         if sde:
             if tde:
-                print('update', sde.nm, "->", tde.nm)
+                print("update", sde.nm, "->", tde.nm)
                 if tde.sz != sde.sz:
                     print("size mismatch")
                     tde.sz = sde.sz
@@ -161,6 +160,7 @@ def updateDEs(rd, f1):
         doSOne(*it)
     for it in tdes:
         doTOne(*it)
+
 
 def test1():
     v.initConfig()
