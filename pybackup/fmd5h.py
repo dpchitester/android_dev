@@ -5,7 +5,7 @@ import config as v
 
 def md5sumf(Fn):
     if Fn.exists():
-        print("-md5sumf", Fn.name)
+        print("-md5sumf", str(Fn))
         ho = md5()
         with open(Fn, "rb") as fh:
             b = fh.read(1 << 15)
