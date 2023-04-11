@@ -7,11 +7,12 @@ from pathlib import Path
 import asyncrun as ar
 import config as v
 from dirlist import dllcmp, lDlld, rDlld
-from findde import getRemoteDE, findDE
 from edge import Edge, findEdge
+from findde import findDE, getRemoteDE
 from netup import netup
 from opbase import OpBase
 from status import onestatus, ronestatus
+
 
 class SFc:
     sc = 0

@@ -5,8 +5,8 @@ from pathlib import Path
 from shutil import make_archive
 
 import config as v
-from findde import getRemoteDE, findDE
 from edge import Edge, findEdge
+from findde import findDE, getRemoteDE
 from opbase import OpBase
 from status import onestatus, ronestatus
 

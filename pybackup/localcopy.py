@@ -4,14 +4,15 @@ from hashlib import sha256
 from os import makedirs
 from pathlib import Path
 
+from snoop import pp, snoop
+
 import asyncrun as ar
 import config as v
-
-from findde import getRemoteDE, findDE
 from edge import Edge, findEdge
+from findde import findDE, getRemoteDE
 from opbase import OpBase
 from status import onestatus
-from snoop import snoop, pp
+
 
 class FileDiff:
     sf = None

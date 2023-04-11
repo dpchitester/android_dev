@@ -1,12 +1,14 @@
-import time
-from pathlib import Path
-import config as v
-from snoop import snoop, pp
-import asyncrun as ar
-import json
 import datetime
+import json
+import time
 from bisect import bisect_left
-from status import updatets, rupdatets, changed_ops
+from pathlib import Path
+
+from snoop import pp, snoop
+
+import asyncrun as ar
+import config as v
+from status import changed_ops, rupdatets, updatets
 
 
 def findDE(dl, rp):
@@ -161,12 +163,12 @@ def updateDEs(rd, f1):
         doTOne(*it)
 
 
-@snoop
+@snoop(depth=2)
 def test1():
     v.initConfig()
     updatets(0)
-    rd = v.src("proj")
-    f = "temp.py"
+    rd = v.src("pybackup")
+    f = "findde.py"
     updateDEs(rd, f)
     updatets(1)
     print(changed_ops())
