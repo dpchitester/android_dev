@@ -82,7 +82,9 @@ def getdll0():
                 it4 = bytes.fromhex(it["Hashes"]["md5"])
             else:
                 it4 = bytes()
-            fse = fmd5f(td / it1, it2, it3, it4)
+            with snoop:
+                fp = td / it1
+            fse = fmd5f(fp, it2, it3, it4)
             return v.DE(it1, fse)
 
         st = list(map(es, l1))
@@ -91,7 +93,7 @@ def getdll0():
         return st
     return None
 
-@snoop
+
 def sepdlls(dlls):
     print("-sepdlls")
     for di in v.tgts:
@@ -113,7 +115,9 @@ def sepdlls(dlls):
                 # TODO: apply panic procedure
                 continue
             while fnmatch(de.nm, tds + "*"):
-                fse = fmd5f(v.ppre('gd') / de.nm, de.i.sz, de.i.mt, de.i.md5)
+                with snoop:
+                    fp = v.ppre('gd') / de.nm
+                fse = fmd5f(fp, de.i.sz, de.i.mt, de.i.md5)
                 de2 = v.DE(de.nm, fse)
                 # TODO: use Path
                 de2.nm = de2.nm.relative_to(rd)
@@ -148,7 +152,9 @@ def getdll1(di):
                 it4 = bytes.fromhex(it["Hashes"]["md5"])
             else:
                 it4 = bytes()
-            fse = fmd5f(td / it1, it2, it3, it4)
+            with snoop:
+                fp = td / it1
+            fse = fmd5f(fp, it2, it3, it4)
             return v.DE(it1, fse)
 
         st = list(map(es, l1))
@@ -181,7 +187,9 @@ def getdll2(si):
                 it4 = bytes.fromhex(it["Hashes"]["md5"])
             else:
                 it4 = bytes()
-            fse = fmd5f(td / it1, it2, it3, it4)
+            with snoop:
+                fp = td / it1
+            fse = fmd5f(fp, it2, it3, it4)
             return v.DE(it1, fse)
 
         st = list(map(es, l1))
@@ -205,7 +213,9 @@ def getdll3(si):
         it2 = fs.st_size
         it3 = fs.st_mtime_ns
         it3 = v.trunc2ms(it3)
-        fse = fmd5f(td / it1, it2, it3)
+        with snoop:
+            fp = td / it1
+        fse = fmd5f(fp, it2, it3)
         return v.DE(it1, fse)
 
     st = list(map(es, l1))
