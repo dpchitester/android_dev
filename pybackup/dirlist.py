@@ -218,8 +218,8 @@ def getrdlls():
 
 def lDlld(si):
     # print('-ldlld', si)
+    print("obtaining", si, "ldll...", end="")
     if si not in v.SDlls or v.SDlls_xt[si] + rto1 <= time.time():
-        print("obtaining", si, "ldll...", end="")
         rv = getdll3(si)
         if rv is not None:
             print("done.")
@@ -228,13 +228,15 @@ def lDlld(si):
             v.SDlls_changed = True
         else:
             print("failed.")
+    else:
+        print("retrieved.")
     return v.SDlls[si]
 
 
 def rDlld(di):
     # print('-rdlld', di)
+    print("obtaining", di, "rdll...", end="")
     if di not in v.TDlls or v.TDlls_xt[di] + rto2 <= time.time():
-        print("obtaining", di, "rdll...", end="")
         rv = getdll1(di)
         if rv is not None:
             print("done.")
@@ -243,6 +245,8 @@ def rDlld(di):
             v.TDlls_changed = True
         else:
             print("failed.")
+    else:
+        print("retrieved.")
     return v.TDlls[di]
 
 
