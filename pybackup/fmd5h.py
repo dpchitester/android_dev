@@ -28,17 +28,17 @@ def finddict(d1, fp):
 def fmd5f(fp, sz, mt):
     def new_hash():
         nh = md5sumf(fp)
-        d1[fp.name] = (sz, mt, nh)
+        d1[fp] = (sz, mt, nh)
         v.hf_dirty = True
         return nh
 
-    d1 = finddict(v.fmd5hd, fp)
-    if fp.name not in d1:
+    d1 = v.fmd5hd
+    if fp not in d1:
         v.hf_dm += 1
         return new_hash()
     else:
         v.hf_dh += 1
-        (osz, omt, oh) = d1[fp.name]
+        (osz, omt, oh) = d1[fp]
         if osz == sz and omt == mt:
             v.hf_sth += 1
             return oh
