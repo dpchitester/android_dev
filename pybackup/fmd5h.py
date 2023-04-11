@@ -18,10 +18,13 @@ def md5sumf(Fn):
 
 def fmd5f(fp, sz, mt, nh=None):
     d1 = v.fmd5hd
-    if fp not in d1:
+    if fp not in d1: # new
         v.hf_dm += 1
         if nh is None:
             nh = md5sumf(fp)
+            pp('new fse, file md5')
+        else:
+            pp('new fse, supplied md5')
         nfse = v.FSe(sz, mt, nh)
         d1[fp] = nfse
         v.hf_dirty = True
@@ -30,13 +33,21 @@ def fmd5f(fp, sz, mt, nh=None):
         v.hf_dh += 1
         ofse = d1[fp]
         if ofse.sz != sz or ofse.mt != mt:
-            ofse.sz = sz
-            ofse.mt = mt
+            if ofse.sz != sz:
+                pp('size diff:', sz - ofse.sz)
+                ofse.sz = sz
+            if ofse.mt != mt:
+                pp('mt diff:', mt - ofse.mt)
+                ofse.mt = mt
             if nh is not None:
+                pp('md5 furnished:', nh!=ofse.md5)
                 ofse.md5 = nh
             else:
-                ofse.md5 = md5sumf(fp)
+                nh = md5sumf(fp)
+                pp('md5 file hashed:', nh!=ofse.md5)
+                ofse.md5 = nh
         else:
-            if nh is not None and ofse.md5 != nh:
+            if nh is not None:
+                pp('md5 update:', nh!=ofse.md5)
                 ofse.md5 = nh            
         return ofse
