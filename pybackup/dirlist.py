@@ -71,7 +71,7 @@ def getdll0():
     if rc == 0:
         l1 = json.loads(ar.txt)
 
-        def es(it):
+        def es(it:dict):
             it1 = Path(it["Path"])
             it2 = it["Size"]
             it3 = it["ModTime"][:-1] + "-00:00"
@@ -80,7 +80,8 @@ def getdll0():
                 it4 = bytes.fromhex(it["Hashes"]["md5"])
             else:
                 it4 = bytes()
-            return v.DE(it1, it2, it3, it4)
+            fse = fmd5f(td / it1, it2, it3, it4)
+            return v.DE(it1, fse)
 
         st = list(map(es, l1))
         st.sort(key=lambda de: de.nm)
@@ -96,7 +97,8 @@ def sepdlls(dlls):
             v.TDlls[di] = []
             v.TDlls_xt[di] = time.time()
             v.TDlls_changed = True
-            rd = v.tgt(di).relative_to(v.ppre("gd"))
+            bd = v.tgts(di)
+            rd = bd.relative_to(v.ppre("gd"))
             tds = str(rd) + "/"
             i = bisect_left(dlls, tds, key=lambda de: de.nm)
             # print(tds, i)
@@ -109,7 +111,8 @@ def sepdlls(dlls):
                 # TODO: apply panic procedure
                 continue
             while fnmatch(de.nm, tds + "*"):
-                de2 = v.DE(de.nm, de.sz, de.mt, de.md5)
+                fse = fmd5f(v.ppre('gd') / de.nm, de.i.sz, de.i.mt, de.i.md5)
+                de2 = v.DE(de.nm, fse)
                 # TODO: use Path
                 de2.nm = de2.nm.relative_to(rd)
                 # print(de2[0])
@@ -133,7 +136,7 @@ def getdll1(di):
     if rc == 0:
         l1 = json.loads(ar.txt)
 
-        def es(it):
+        def es(it:dict):
             # TODO: use Path
             it1 = Path(it["Path"])
             it2 = it["Size"]
@@ -143,7 +146,8 @@ def getdll1(di):
                 it4 = bytes.fromhex(it["Hashes"]["md5"])
             else:
                 it4 = bytes()
-            return v.DE(it1, it2, it3, it4)
+            fse = fmd5f(td / it1, it2, it3, it4)
+            return v.DE(it1, fse)
 
         st = list(map(es, l1))
         st.sort(key=lambda de: de.nm)
@@ -165,7 +169,7 @@ def getdll2(si):
     if rc == 0:
         l1 = json.loads(ar.txt)
 
-        def es(it):
+        def es(it:dict):
             # TODO: use Path
             it1 = Path(it["Path"])
             it2 = it["Size"]
@@ -175,7 +179,8 @@ def getdll2(si):
                 it4 = bytes.fromhex(it["Hashes"]["md5"])
             else:
                 it4 = bytes()
-            return v.DE(it1, it2, it3, it4)
+            fse = fmd5f(td / it1, it2, it3, it4)
+            return v.DE(it1, fse)
 
         st = list(map(es, l1))
         st.sort(key=lambda de: de.nm)
@@ -187,19 +192,19 @@ def getdll2(si):
 
 def getdll3(si):
     v.dl3_cs += 1
-    sd = v.src(si)
+    td = v.src(si)
     # print('getdll3', si, str(sd))
-    l1 = getfl(sd)
+    l1 = getfl(td)
 
-    def es(it):
+    def es(it:Path):
         # TODO: use Path
-        it1 = it.relative_to(sd)
+        it1 = it.relative_to(td)
         fs = it.stat()
         it2 = fs.st_size
         it3 = fs.st_mtime_ns
         it3 = v.trunc2ms(it3)
-        it4 = fmd5f(it, it2, it3)
-        return v.DE(it1, it2, it3, it4)
+        fse = fmd5f(td / it1, it2, it3)
+        return v.DE(it1, fse)
 
     st = list(map(es, l1))
     st.sort(key=lambda de: de.nm)

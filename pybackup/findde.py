@@ -8,7 +8,7 @@ from pathlib import Path
 import asyncrun as ar
 import config as v
 from status import changed_ops, rupdatets, updatets
-
+from fmd5h import fmd5f
 
 def findDE(dl, rp):
     i = bisect_left(dl, rp, key=lambda de: de.nm)
@@ -33,8 +33,9 @@ def getRemoteDE(rd: Path, rfp: Path):
             it4 = bytes.fromhex(it["Hashes"]["md5"])
         else:
             it4 = bytes()
-        nde = v.DE(it1, it2, it3, it4)
-        print("new nde:", nde.nm, nde.sz, nde.mt)
+        fse = fmd5f(rd / rfp, it2, it3, it4)
+        nde = v.DE(it1, fse)
+        print("new nde:", nde.nm, nde.i.sz, nde.i.mt)
         return nde
     else:
         print("getRemoteDE returned", rc)
@@ -88,32 +89,34 @@ def findTDEs(fp):
 
 
 def updateDEs(rd, f1):
+    fp = rd / f1
     sde = getRemoteDE(rd, f1)
-    sdes = findSDEs(rd / f1)
-    tdes = findTDEs(rd / f1)
+    sdes = findSDEs(fp)
+    tdes = findTDEs(fp)
 
     def doSOne(dl, rp, tde, i, si):
         if sde:
             if tde:
                 print("update", sde.nm, "->", tde.nm)
-                if tde.sz != sde.sz:
+                if tde.i.sz != sde.i.sz:
                     print("size mismatch")
-                    tde.sz = sde.sz
+                    tde.i.sz = sde.i.sz
                     v.SDlls_xt[si] = time.time()
                     v.SDlls_changed = True
-                if tde.mt != sde.mt:
+                if tde.i.mt != sde.i.mt:
                     print("modtime mismatch")
-                    tde.mt = sde.mt
+                    tde.i.mt = sde.i.mt
                     v.SDlls_xt[si] = time.time()
                     v.SDlls_changed = True
-                if tde.md5 != sde.md5:
+                if tde.i.md5 != sde.i.md5:
                     print("md5 mismatch")
-                    tde.md5 = sde.md5
+                    tde.i.md5 = sde.i.md5
                     v.SDlls_xt[si] = time.time()
                     v.SDlls_changed = True
             else:
                 print("insert", sde.nm)
-                tde = DE(rp, sde.sz, sde.mt, sde.md5)
+                fse = fmd5f(fp, sde.i.sz, sde.i.mt, sde.i.md5)
+                tde = DE(rp, fse)
                 dl.insert(i, tde)
                 v.SDlls_xt[si] = time.time()
                 v.SDlls_changed = True
@@ -128,24 +131,25 @@ def updateDEs(rd, f1):
         if sde:
             if tde:
                 print("update", sde.nm, "->", tde.nm)
-                if tde.sz != sde.sz:
+                if tde.i.sz != sde.i.sz:
                     print("size mismatch")
-                    tde.sz = sde.sz
+                    tde.i.sz = sde.i.sz
                     v.TDlls_xt[di] = time.time()
                     v.TDlls_changed = True
-                if tde.mt != sde.mt:
+                if tde.i.mt != sde.i.mt:
                     print("modtime mismatch")
-                    tde.mt = sde.mt
+                    tde.i.mt = sde.i.mt
                     v.TDlls_xt[di] = time.time()
                     v.TDlls_changed = True
-                if tde.md5 != sde.md5:
+                if tde.i.md5 != sde.i.md5:
                     print("md5 mismatch")
-                    tde.md5 = sde.md5
+                    tde.i.md5 = sde.i.md5
                     v.TDlls_xt[di] = time.time()
                     v.TDlls_changed = True
             else:
                 print("insert", sde.nm)
-                tde = DE(rp, sde.sz, sde.mt, sde.md5)
+                fse = fmd5f(fp, sde.i.sz, sde.i.mt, sde.i.md5)
+                tde = DE(rp, fse)
                 dl.insert(i, tde)
                 v.TDlls_xt[di] = time.time()
                 v.TDlls_changed = True

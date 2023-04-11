@@ -103,11 +103,11 @@ class BVars:
             for lf in self.f2c.copy():
                 # TODO: use Path
                 if rf.nm == lf.nm:  # names match
-                    if rf.md5 == lf.md5:  # hashes match
+                    if rf.i.md5 == lf.i.md5:  # hashes match
                         self.f2d.remove(rf)
                         self.f2c.remove(lf)
                     else:
-                        b1 = rf.mt > lf.mt
+                        b1 = rf.i.mt > lf.i.mt
                         if b1:
                             print("newer mismatched file on cloud", rf.nm)
                             self.f2d.remove(rf)

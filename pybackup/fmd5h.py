@@ -16,22 +16,22 @@ def md5sumf(Fn):
     return None
 
 
-def fmd5f(fp, sz, mt):
-    def new_hash():
-        nh = md5sumf(fp)
-        d1[fp] = (sz, mt, nh)
-        v.hf_dirty = True
-        return nh
+def fmd5f(fp, sz, mt, nh=None):
     d1 = v.fmd5hd
     if fp not in d1:
         v.hf_dm += 1
-        return new_hash()
+        if nh is None:
+            nh = md5sumf(fp)
+        nfse = v.FSe(sz, mt, nh)
+        d1[fp] = nfse
+        v.hf_dirty = True
+        return nfse
     else:
         v.hf_dh += 1
-        (osz, omt, oh) = d1[fp]
-        if osz == sz and omt == mt:
-            v.hf_sth += 1
-            return oh
-        else:
-            v.hf_stm += 1
-            return new_hash()
+        ofse = d1[fp]
+        ofse.sz = sz
+        ofse.mt = mt
+        if nh is None:
+            nh = md5sumf(fp)
+        ofse.md5 = nh
+        return ofse
