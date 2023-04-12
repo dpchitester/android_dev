@@ -13,7 +13,7 @@ from fmd5h import fmd5f
 from status import changed_ops, rupdatets, updatets
 
 
-def findDE(dl, rp):
+def findDE(dl, rp:Path):
     i = bisect_left(dl, rp, key=lambda de: de.nm)
     if i < len(dl) and rp.name == dl[i].nm.name:
         return (dl[i], i)
@@ -51,7 +51,7 @@ def getRemoteDEs(rd: Path, fl: list[str]):
     return []
 
 
-def findSis(fp1):
+def findSis(fp1:Path):
     l1 = {}
     for si in v.srcs:
         try:
@@ -64,7 +64,7 @@ def findSis(fp1):
     return l1
 
 
-def findDis(fp1):
+def findDis(fp1:Path):
     l1 = {}
     for di in v.tgts:
         try:
@@ -77,7 +77,7 @@ def findDis(fp1):
     return l1
 
 
-def findSDEs(fp):
+def findSDEs(fp:Path):
     sil = findSis(fp)
     de_l = []
     for si in sil:
@@ -88,7 +88,7 @@ def findSDEs(fp):
     return de_l
 
 
-def findTDEs(fp):
+def findTDEs(fp:Path):
     dil = findDis(fp)
     de_l = []
     for di in dil:
@@ -98,11 +98,11 @@ def findTDEs(fp):
             de_l.append((v.TDlls[di], rp, de, i, di))
     return de_l
 
-@snoop
-def updateDEs(rd, flst):
+
+def updateDEs(rd:Path, flst:list[str]):
     sdel = getRemoteDEs(rd, flst)
     for sde in sdel:
-        fp = str(Path(rd, sde.nm))
+        fp = Path(rd, sde.nm)
         sdes = findSDEs(fp)
         tdes = findTDEs(fp)
     
