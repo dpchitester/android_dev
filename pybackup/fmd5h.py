@@ -36,6 +36,7 @@ def fmd5f(fp, sz, mt, nh=None):
         v.hf_dh += 1
         ofse = d1[fp]
         if ofse.sz != sz or ofse.mt != mt:
+            v.hf_stm += 1
             if ofse.sz != sz:
                 # pp('size diff:', sz - ofse.sz)
                 ofse.sz = sz
@@ -50,6 +51,7 @@ def fmd5f(fp, sz, mt, nh=None):
                 # pp('md5 file hashed:', nh!=ofse.md5)
                 ofse.md5 = nh
         else:
+            v.hf_sth += 1
             if nh is not None:
                 # pp('md5 update:', nh!=ofse.md5)
                 ofse.md5 = nh
