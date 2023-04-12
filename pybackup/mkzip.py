@@ -6,7 +6,7 @@ from shutil import make_archive
 
 import config as v
 from edge import Edge, findEdge
-from findde import findDE, getRemoteDE, updateDEs
+from findde import updateDEs
 from opbase import OpBase
 from status import onestatus, ronestatus
 
@@ -67,7 +67,7 @@ class Mkzip(OpBase):
                 maxt = maxmt(sd)
                 utime(fp, ns=(maxt, maxt))
                 sc += 1
-                updateDEs(td, rp)
+                updateDEs(td, [rp])
             except Exception as e:
                 print(e)
                 fc += 1

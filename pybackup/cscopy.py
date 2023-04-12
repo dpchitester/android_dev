@@ -29,7 +29,7 @@ def fsync(di, si, sd, td, sfc):
     if netup():
         # print('fsync', sd, td)
         cmd = (
-            'rclone sync "'
+            'rclone copy "'
             + str(sd.parent)
             + '" "'
             + str(td.parent)
@@ -48,28 +48,29 @@ def fsync(di, si, sd, td, sfc):
             print(ar.txt)
     return False
 
-
-def fcopy(di, si, sd, td, sfc):
+def fsyncl(di, si, sd, td, fl, sfc):
+    cmd = 'rclone copy "'
+    cmd += str(sd) + '" "'
+    cmd += str(td) + '" '
+    for fn in fl:
+        cmd += '--include "' + str(fn.nm) + '" '
+    cmd += '--progress '
+    cmd += '--exclude "**/.git/**/*" '
+    cmd += '--exclude "**/__pycache__/**/*" '
+    cmd += '--exclude "**/node_modules/**/*" '
+    cmd += '--log-file="rclone.log" '
+    cmd += '--use-json-log'
     if netup():
-        # print('fcopy', sd, td)
-        cmd = (
-            'rclone copyto "'
-            + str(sd)
-            + '" "'
-            + str(td)
-            + '" --ignore-checksum --ignore-times --no-traverse --progress'
-            + ' --log-file="rclone.log" --use-json-log'
-        )
-        # if not sd.is_file():
-        #    cmd += ' --exclude ".git/**" --exclude "__pycache__/**"'
-        print(cmd)
+        print('fsync', sd, td, list(map(lambda de: de.nm, fl)))
+        # print(cmd)
         rc = ar.run2(cmd)
         if rc == 0:
-            sfc.sc += 1
+            sfc.sc += len(fl)
             return True
-        sfc.fc += 1
+        else:
+            sfc.fc += 1
+            print(ar.txt)
     return False
-
 
 def fdel(di, si, sd, td, sfc):
     if netup():
@@ -80,6 +81,24 @@ def fdel(di, si, sd, td, sfc):
             + ' --progress --log-file "rclone.log" --use-json-log'
         )
         print(cmd)
+        rc = ar.run2(cmd)
+        if rc == 0:
+            sfc.sc += 1
+            return True
+        sfc.fc += 1
+    return False
+
+def fdell(di, si, sd, td, fl, sfc):
+    cmd = 'rclone delete "'
+    cmd += str(td) + '" '
+    for fn in fl:
+        cmd += '--include "' + str(fn.nm) + '" '
+    cmd += '--progress '
+    cmd += '--log-file="rclone.log" '
+    cmd += '--use-json-log'
+    if netup():
+        print('delete', sd, td, list(map(lambda de: de.nm, fl)))
+        # print(cmd)
         rc = ar.run2(cmd)
         if rc == 0:
             sfc.sc += 1
@@ -128,25 +147,25 @@ class BVars:
                             self.f2c.remove(lf)
 
     def do_copying(self):
-        for lf in self.f2c.copy():
-            # TODO: use Path
-            cfp = lf.nm
-            # print(cfp)
-            if fsync(self.di, self.si, self.sd / cfp, self.td / cfp, self.sfc):
+        # TODO: use Path
+        cfpl = self.f2c.copy()
+        # print(cfp)
+        if fsyncl(self.di, self.si, self.sd, self.td, cfpl, self.sfc):
+            for lf in cfpl:
                 self.ac2 += 1
                 self.f2c.remove(lf)
                 for rf in self.f2d.copy():
                     if rf.nm == lf.nm:
                         self.f2d.remove(rf)
-                updateDEs(self.td, cfp)
-
+            updateDEs(self.td, [de.nm for de in cfpl])
+    
     def do_deletions(self):
-        for rf in self.f2d.copy():  # do deletions
-            cfp = rf.nm
-            if fdel(self.di, self.si, self.sd / cfp, self.td / cfp, self.sfc):
-                self.f2d.remove(rf)
+        cfpl = self.f2d.copy()
+        if fdell(self.di, self.si, self.sd, self.td, cfpl, self.sfc):
+            for rf in cfpl:  # do deletions
                 self.ac2 += 1
-                updateDEs(self.td, cfp)
+                self.f2d.remove(rf)
+            updateDEs(self.td, [de.nm for de in cfpl])
 
 
 class CSCopy(OpBase):

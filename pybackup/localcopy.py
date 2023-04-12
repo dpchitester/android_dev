@@ -7,7 +7,7 @@ from pathlib import Path
 import asyncrun as ar
 import config as v
 from edge import Edge, findEdge
-from findde import findDE, getRemoteDE, updateDEs
+from findde import updateDEs
 from opbase import OpBase
 from status import onestatus, ronestatus
 
@@ -157,7 +157,7 @@ class LocalCopy(OpBase):
                                 print(" ...copied.")
                                 if "exec" in self.opts:
                                     fdf.chmod(496)
-                                updateDEs(dp, rf)
+                                updateDEs(dp, [rf.nm])
                     except Exception as e:
                         print(e)
                         self.sfc.fc += 1

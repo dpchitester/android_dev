@@ -104,7 +104,7 @@ def main():
     v.initConfig()
     st.updatets(0)
     # dl.getrdlls()
-    st.rupdatets(0)
+    # st.rupdatets(0)
     rt2()
 
 

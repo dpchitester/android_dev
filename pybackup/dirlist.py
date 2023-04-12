@@ -18,6 +18,18 @@ from fmd5h import fmd5f
 rto1 = 60 * 5
 rto2 = 60 * 60
 
+dexs = {'.git','node_modules','__pycache__','.ropeproject','.mypyproject'}
+
+
+def proc_dirs(dirs):
+    dirs[:] = [d for d in dirs if d not in dexs]
+
+def isbaddir(dir):
+    for dp in Path(dir).parts:
+        if dp in dexs:
+            return True
+    return False
+        
 
 def getfl(p):
     # print(str(p))
@@ -27,19 +39,17 @@ def getfl(p):
             fl.append(p)
             return fl
         for pth, dirs, files in walk(p, topdown=True):
-            if ".git" in pth:
+            if not isbaddir(pth):
+                proc_dirs(dirs)
+                for f in files:
+                    fl.append(Path(pth, f))
+            else:
                 dirs = []
-                break
-            if ".git" in dirs:
-                dirs.remove(".git")
-            if "__pycache__" in dirs:
-                dirs.remove("__pycache__")
-            for f in files:
-                fl.append(Path(pth, f))
+                files = []
         return fl
     except Exception as e:
         print(e)
-        return None
+        return fl
 
 
 def getDL(p):
@@ -47,28 +57,27 @@ def getDL(p):
     fl = []
     try:
         for pth, dirs, files in walk(p, topdown=True):
-            if ".git" in pth:
+            if not isbaddir(pth):
+                proc_dirs(dirs)
+                for d in dirs.copy():
+                    fl.append(Path(pth, d))
+                    dirs.remove(d)
+            else:
                 dirs = []
-                break
-            if ".git" in dirs:
-                dirs.remove(".git")
-            if "__pycache__" in dirs:
-                dirs.remove("__pycache__")
-            for d in dirs.copy():
-                fl.append(Path(pth, d))
-                dirs.remove(d)
-            break
+                files = []
         return fl
     except Exception as e:
         print("getDL", e)
-        return None
+        return fl
 
 
 def getdll0():
     v.dl0_cs += 1
     td = v.ppre("gd")
     # print('getdll0',td)
-    cmd = 'rclone lsjson "' + str(td) + '" --recursive --files-only --hash'
+    cmd = 'rclone lsjson "' + str(td) + '" --recursive --files-only --hash '
+    for ex in dexs:
+        cmd += ' --exclude "**/' + ex + '/*" '
     rc = ar.run1(cmd)
     if rc == 0:
         l1 = json.loads(ar.txt)
@@ -131,12 +140,15 @@ def getdll1(di):
     v.dl1_cs += 1
     td = v.tgt(di)
     # print('getdll1', di, str(td))
-    cmd = 'rclone lsjson "' + str(td) + '" --recursive --files-only --hash --fast-list'
+    cmd = 'rclone lsjson "' + str(td) + '" --recursive --files-only --hash --fast-list '
+    for ex in dexs:
+        cmd += ' --exclude "**/' + ex + '/*" '
     # print(cmd)
     rc = ar.run1(cmd)
     if rc == 0:
         l1 = json.loads(ar.txt)
-
+        if l1 is None:
+            l1 = []
         def es(it: dict):
             # TODO: use Path
             it1 = Path(it["Path"])
@@ -163,9 +175,10 @@ def getdll2(si):
     v.dl2_cs += 1
     td = v.src(si)
     # print('getdll2', si, str(td))
-    cmd = 'rclone lsjson "' + str(td) + '" --recursive --files-only --hash --fast-list'
+    cmd = 'rclone lsjson "' + str(td) + '" --recursive --files-only --hash --fast-list '
     if not td.is_file():
-        cmd += ' --exclude ".git/**" --exclude "__pycache__/**"'
+        for ex in dexs:
+            cmd += ' --exclude "**/' + ex + '/*" '
     # print(cmd)
     rc = ar.run1(cmd)
     if rc == 0:

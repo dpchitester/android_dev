@@ -18,29 +18,35 @@ def findDE(dl, rp):
     return (None, i)
 
 
-def getRemoteDE(rd: Path, rfp: Path):
-    cmd = 'rclone lsjson "' + str(rd / rfp) + '" --hash'
+def getRemoteDEs(rd: Path, fl: list[Path]):
+    cmd = 'rclone lsjson "' + str(rd) + '" '
+    for fn in fl:
+        cmd += '--include "' + str(fn) + '" '
+    cmd += ' --hash'
     rc = ar.run1(cmd)
     if rc == 0:
         if ar.txt == "[]":
-            print("lsjson returned empty list:", rd / rfp)
-            return None
-        it = json.loads(ar.txt)[0]
-        it1 = rfp
-        it2 = it["Size"]
-        it3 = it["ModTime"][:-1] + "-00:00"
-        it3 = datetime.datetime.fromisoformat(it3).timestamp()
-        if "Hashes" in it:
-            it4 = bytes.fromhex(it["Hashes"]["md5"])
-        else:
-            it4 = bytes()
-        fse = fmd5f(rd / rfp, it2, it3, it4)
-        nde = v.DE(it1, fse)
-        print("new nde:", nde.nm, nde.i.sz, nde.i.mt)
-        return nde
+            print("lsjson returned empty list")
+            return []
+        delst = []
+        jsl = json.loads(ar.txt)
+        for it in jsl:
+            it1 = it["Path"]
+            it2 = it["Size"]
+            it3 = it["ModTime"][:-1] + "-00:00"
+            it3 = datetime.datetime.fromisoformat(it3).timestamp()
+            if "Hashes" in it:
+                it4 = bytes.fromhex(it["Hashes"]["md5"])
+            else:
+                it4 = bytes()
+            fse = fmd5f(rd / it1, it2, it3, it4)
+            nde = v.DE(it1, fse)
+            print("new nde:", nde.nm, nde.i.sz, nde.i.mt)
+            delst.append(nde)
+        return delst
     else:
         print("getRemoteDE returned", rc)
-    return None
+    return []
 
 
 def findSis(fp1):
@@ -89,82 +95,83 @@ def findTDEs(fp):
     return de_l
 
 
-def updateDEs(rd, f1):
-    fp = rd / f1
-    sde = getRemoteDE(rd, f1)
-    sdes = findSDEs(fp)
-    tdes = findTDEs(fp)
-
-    def doSOne(dl, rp, tde, i, si):
-        if sde:
-            if tde:
-                print("update", sde.nm, "->", tde.nm)
-                if tde.i.sz != sde.i.sz:
-                    print("size mismatch")
-                    tde.i.sz = sde.i.sz
-                    v.SDlls_xt[si] = time.time()
-                    v.SDlls_changed = True
-                if tde.i.mt != sde.i.mt:
-                    print("modtime mismatch")
-                    tde.i.mt = sde.i.mt
-                    v.SDlls_xt[si] = time.time()
-                    v.SDlls_changed = True
-                if tde.i.md5 != sde.i.md5:
-                    print("md5 mismatch")
-                    tde.i.md5 = sde.i.md5
+def updateDEs(rd, delst):
+    sdel = getRemoteDEs(rd, delst)
+    for sde in sdel:
+        fp = rd / sde.nm
+        sdes = findSDEs(fp)
+        tdes = findTDEs(fp)
+    
+        def doSOne(dl, rp, tde, i, si):
+            if sde:
+                if tde:
+                    print("update", sde.nm, "->", tde.nm)
+                    if tde.i.sz != sde.i.sz:
+                        print("size mismatch")
+                        tde.i.sz = sde.i.sz
+                        v.SDlls_xt[si] = time.time()
+                        v.SDlls_changed = True
+                    if tde.i.mt != sde.i.mt:
+                        print("modtime mismatch")
+                        tde.i.mt = sde.i.mt
+                        v.SDlls_xt[si] = time.time()
+                        v.SDlls_changed = True
+                    if tde.i.md5 != sde.i.md5:
+                        print("md5 mismatch")
+                        tde.i.md5 = sde.i.md5
+                        v.SDlls_xt[si] = time.time()
+                        v.SDlls_changed = True
+                else:
+                    print("insert", sde.nm)
+                    fse = fmd5f(fp, sde.i.sz, sde.i.mt, sde.i.md5)
+                    tde = v.DE(rp, fse)
+                    dl.insert(i, tde)
                     v.SDlls_xt[si] = time.time()
                     v.SDlls_changed = True
             else:
-                print("insert", sde.nm)
-                fse = fmd5f(fp, sde.i.sz, sde.i.mt, sde.i.md5)
-                tde = v.DE(rp, fse)
-                dl.insert(i, tde)
-                v.SDlls_xt[si] = time.time()
-                v.SDlls_changed = True
-        else:
-            if tde:
-                print("delete", rp)
-                dl.pop(i)
-                v.SDlls_xt[si] = time.time()
-                v.SDlls_changed = True
-
-    def doTOne(dl, rp, tde, i, di):
-        if sde:
-            if tde:
-                print("update", sde.nm, "->", tde.nm)
-                if tde.i.sz != sde.i.sz:
-                    print("size mismatch")
-                    tde.i.sz = sde.i.sz
-                    v.TDlls_xt[di] = time.time()
-                    v.TDlls_changed = True
-                if tde.i.mt != sde.i.mt:
-                    print("modtime mismatch")
-                    tde.i.mt = sde.i.mt
-                    v.TDlls_xt[di] = time.time()
-                    v.TDlls_changed = True
-                if tde.i.md5 != sde.i.md5:
-                    print("md5 mismatch")
-                    tde.i.md5 = sde.i.md5
+                if tde:
+                    print("delete", rp)
+                    dl.pop(i)
+                    v.SDlls_xt[si] = time.time()
+                    v.SDlls_changed = True
+    
+        def doTOne(dl, rp, tde, i, di):
+            if sde:
+                if tde:
+                    print("update", sde.nm, "->", tde.nm)
+                    if tde.i.sz != sde.i.sz:
+                        print("size mismatch")
+                        tde.i.sz = sde.i.sz
+                        v.TDlls_xt[di] = time.time()
+                        v.TDlls_changed = True
+                    if tde.i.mt != sde.i.mt:
+                        print("modtime mismatch")
+                        tde.i.mt = sde.i.mt
+                        v.TDlls_xt[di] = time.time()
+                        v.TDlls_changed = True
+                    if tde.i.md5 != sde.i.md5:
+                        print("md5 mismatch")
+                        tde.i.md5 = sde.i.md5
+                        v.TDlls_xt[di] = time.time()
+                        v.TDlls_changed = True
+                else:
+                    print("insert", sde.nm)
+                    fse = fmd5f(fp, sde.i.sz, sde.i.mt, sde.i.md5)
+                    tde = v.DE(rp, fse)
+                    dl.insert(i, tde)
                     v.TDlls_xt[di] = time.time()
                     v.TDlls_changed = True
             else:
-                print("insert", sde.nm)
-                fse = fmd5f(fp, sde.i.sz, sde.i.mt, sde.i.md5)
-                tde = v.DE(rp, fse)
-                dl.insert(i, tde)
-                v.TDlls_xt[di] = time.time()
-                v.TDlls_changed = True
-        else:
-            if tde:
-                print("delete", rp)
-                dl.pop(i)
-                v.TDlls_xt[di] = time.time()
-                v.TDlls_changed = True
-
-    for it in sdes:
-        doSOne(*it)
-    for it in tdes:
-        doTOne(*it)
+                if tde:
+                    print("delete", rp)
+                    dl.pop(i)
+                    v.TDlls_xt[di] = time.time()
+                    v.TDlls_changed = True
+    
+        for it in sdes:
+            doSOne(*it)
+        for it in tdes:
+            doTOne(*it)
 
 
 def test1():
