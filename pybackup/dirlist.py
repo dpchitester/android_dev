@@ -14,8 +14,8 @@ import asyncrun as ar
 import config as v
 from fmd5h import fmd5f
 
-rto1 = 60 * 5
-rto2 = 60 * 60
+rto1 = 60 * 0
+rto2 = 60 * 0
 
 
 def getfl(p):
@@ -63,7 +63,7 @@ def getdll0():
     td = v.ppre("gd")
     # print('getdll0',td)
     cmd = 'rclone lsjson "' + str(td) + '" --recursive --files-only --hash '
-    for ex in dexs:
+    for ex in v.dexs:
         cmd += ' --exclude "**/' + ex + '/*" '
     rc = ar.run1(cmd)
     if rc == 0:
@@ -128,7 +128,7 @@ def getdll1(di):
     td = v.tgt(di)
     # print('getdll1', di, str(td))
     cmd = 'rclone lsjson "' + str(td) + '" --recursive --files-only --hash --fast-list '
-    for ex in dexs:
+    for ex in v.dexs:
         cmd += ' --exclude "**/' + ex + '/*" '
     # print(cmd)
     rc = ar.run1(cmd)
@@ -165,7 +165,7 @@ def getdll2(si):
     # print('getdll2', si, str(td))
     cmd = 'rclone lsjson "' + str(td) + '" --recursive --files-only --hash --fast-list '
     if not td.is_file():
-        for ex in dexs:
+        for ex in v.dexs:
             cmd += ' --exclude "**/' + ex + '/*" '
     # print(cmd)
     rc = ar.run1(cmd)
