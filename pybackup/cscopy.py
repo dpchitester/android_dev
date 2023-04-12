@@ -61,7 +61,7 @@ def fsyncl(di, si, sd, td, fl, sfc):
     cmd += '--log-file="rclone.log" '
     cmd += '--use-json-log'
     if netup():
-        print('copy', sd, td, list(map(lambda de: de.nm, fl)))
+        print('copy', sd, td, list(map(lambda de: str(de.nm), fl)))
         # print(cmd)
         rc = ar.run2(cmd)
         if rc == 0:
@@ -97,7 +97,7 @@ def fdell(di, si, sd, td, fl, sfc):
     cmd += '--log-file="rclone.log" '
     cmd += '--use-json-log'
     if netup():
-        print('delete', sd, td, list(map(lambda de: de.nm, fl)))
+        print('delete', sd, td, list(map(lambda de: str(de.nm), fl)))
         # print(cmd)
         rc = ar.run2(cmd)
         if rc == 0:

@@ -24,7 +24,7 @@ def getRemoteDEs(rd: Path, fl: list[str]):
     cmd = 'rclone lsjson "' + str(rd) + '" '
     for fn in fl:
         cmd += '--include "' + fn + '" '
-    cmd += ' --hash'
+    cmd += ' --recursive --files-only --hash'
     rc = ar.run1(cmd)
     if rc == 0:
         if ar.txt == "[]":
