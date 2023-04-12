@@ -2,6 +2,7 @@ import os
 import pickle
 from pathlib import Path
 
+import config as v
 
 def loadldlls():
     try:
@@ -146,4 +147,3 @@ def save_all():
     saverdh()
 
 
-import config as v
