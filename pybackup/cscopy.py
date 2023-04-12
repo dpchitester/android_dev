@@ -56,11 +56,11 @@ def fsyncl(di, si, sd, td, fl, sfc):
     for fn in fl:
         cmd += '--include "' + str(fn.nm) + '" '
     cmd += "--progress "
-    cmd += '--exclude "**/.git/**/*" '
-    cmd += '--exclude "**/__pycache__/**/*" '
-    cmd += '--exclude "**/node_modules/**/*" '
-    cmd += '--log-file="rclone.log" '
-    cmd += "--use-json-log"
+    # cmd += '--exclude "**/.git/**/*" '
+    # cmd += '--exclude "**/__pycache__/**/*" '
+    # cmd += '--exclude "**/node_modules/**/*" '
+    # cmd += '--log-file="rclone.log" '
+    # cmd += "--use-json-log"
     if netup():
         print("copy", sd, td, list(map(lambda de: str(de.nm), fl)))
         # print(cmd)
@@ -99,8 +99,8 @@ def fdell(di, si, sd, td, fl, sfc):
     for fn in fl:
         cmd += '--include "' + str(fn.nm) + '" '
     cmd += "--progress "
-    cmd += '--log-file="rclone.log" '
-    cmd += "--use-json-log"
+    # cmd += '--log-file="rclone.log" '
+    # cmd += "--use-json-log"
     if netup():
         print("delete", sd, td, list(map(lambda de: str(de.nm), fl)))
         # print(cmd)
