@@ -141,7 +141,7 @@ class CSCopy(OpBase):
         self.sfc = SFc()
 
     def ischanged(self, e: Edge):
-        return e.chk_ct() | e.rchk_ct()
+        return e.chk_ct() or e.rchk_ct()
 
     def __call__(self):
         print("CSCopy")
