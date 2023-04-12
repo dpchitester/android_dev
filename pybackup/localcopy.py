@@ -157,7 +157,7 @@ class LocalCopy(OpBase):
                                 print(" ...copied.")
                                 if "exec" in self.opts:
                                     fdf.chmod(496)
-                                updateDEs(dp, [rf.nm])
+                                updateDEs(dp, [str(rf)])
                     except Exception as e:
                         print(e)
                         self.sfc.fc += 1

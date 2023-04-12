@@ -5,6 +5,8 @@ from bisect import bisect_left
 from math import floor
 from pathlib import Path
 
+from snoop import snoop, pp
+
 import asyncrun as ar
 import config as v
 from fmd5h import fmd5f
@@ -18,10 +20,10 @@ def findDE(dl, rp):
     return (None, i)
 
 
-def getRemoteDEs(rd: Path, fl: list[Path]):
+def getRemoteDEs(rd: Path, fl: list[str]):
     cmd = 'rclone lsjson "' + str(rd) + '" '
     for fn in fl:
-        cmd += '--include "' + str(fn) + '" '
+        cmd += '--include "' + fn + '" '
     cmd += ' --hash'
     rc = ar.run1(cmd)
     if rc == 0:
@@ -31,7 +33,7 @@ def getRemoteDEs(rd: Path, fl: list[Path]):
         delst = []
         jsl = json.loads(ar.txt)
         for it in jsl:
-            it1 = it["Path"]
+            it1 = Path(it["Path"])
             it2 = it["Size"]
             it3 = it["ModTime"][:-1] + "-00:00"
             it3 = datetime.datetime.fromisoformat(it3).timestamp()
@@ -80,8 +82,9 @@ def findSDEs(fp):
     de_l = []
     for si in sil:
         rp = sil[si]
-        de, i = findDE(v.SDlls[si], rp)
-        de_l.append((v.SDlls[si], rp, de, i, si))
+        if si in v.SDlls:
+            de, i = findDE(v.SDlls[si], rp)
+            de_l.append((v.SDlls[si], rp, de, i, si))
     return de_l
 
 
@@ -90,13 +93,14 @@ def findTDEs(fp):
     de_l = []
     for di in dil:
         rp = dil[di]
-        de, i = findDE(v.TDlls[di], rp)
-        de_l.append((v.TDlls[di], rp, de, i, di))
+        if di in v.TDlls:
+            de, i = findDE(v.TDlls[di], rp)
+            de_l.append((v.TDlls[di], rp, de, i, di))
     return de_l
 
-
-def updateDEs(rd, delst):
-    sdel = getRemoteDEs(rd, delst)
+@snoop
+def updateDEs(rd, flst):
+    sdel = getRemoteDEs(rd, flst)
     for sde in sdel:
         fp = rd / sde.nm
         sdes = findSDEs(fp)
