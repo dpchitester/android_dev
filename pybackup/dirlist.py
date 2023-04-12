@@ -8,11 +8,11 @@ from math import floor
 from os import walk
 from pathlib import Path
 
-from snoop import snoop, pp
+from snoop import pp, snoop
 
 import asyncrun as ar
 import config as v
-from bhash import blakeHash
+
 from fmd5h import fmd5f
 
 rto1 = 60 * 5
@@ -73,7 +73,7 @@ def getdll0():
     if rc == 0:
         l1 = json.loads(ar.txt)
 
-        def es(it:dict):
+        def es(it: dict):
             it1 = Path(it["Path"])
             it2 = it["Size"]
             it3 = it["ModTime"][:-1] + "-00:00"
@@ -114,7 +114,7 @@ def sepdlls(dlls):
                 # TODO: apply panic procedure
                 continue
             while fnmatch(de.nm, tds + "*"):
-                fp = v.ppre('gd') / de.nm
+                fp = v.ppre("gd") / de.nm
                 fse = fmd5f(fp, de.i.sz, de.i.mt, de.i.md5)
                 de2 = v.DE(de.nm, fse)
                 # TODO: use Path
@@ -137,7 +137,7 @@ def getdll1(di):
     if rc == 0:
         l1 = json.loads(ar.txt)
 
-        def es(it:dict):
+        def es(it: dict):
             # TODO: use Path
             it1 = Path(it["Path"])
             it2 = it["Size"]
@@ -171,7 +171,7 @@ def getdll2(si):
     if rc == 0:
         l1 = json.loads(ar.txt)
 
-        def es(it:dict):
+        def es(it: dict):
             # TODO: use Path
             it1 = Path(it["Path"])
             it2 = it["Size"]
@@ -199,7 +199,7 @@ def getdll3(si):
     # print('getdll3', si, str(sd))
     l1 = getfl(td)
 
-    def es(it:Path):
+    def es(it: Path):
         # TODO: use Path
         it1 = it.relative_to(td)
         fs = it.stat()
@@ -227,36 +227,36 @@ def getrdlls():
 
 def lDlld(si):
     # print('-ldlld', si)
-    #print("obtaining", si, "ldll...", end="")
+    # print("obtaining", si, "ldll...", end="")
     if si not in v.SDlls or v.SDlls_xt[si] + rto1 <= time.time():
         rv = getdll3(si)
         if rv is not None:
-            #print("done.")
+            # print("done.")
             v.SDlls[si] = rv
             v.SDlls_xt[si] = time.time()
             v.SDlls_changed = True
         else:
             print("failed.")
     else:
-        #print("retrieved.")
+        # print("retrieved.")
         pass
     return v.SDlls[si]
 
 
 def rDlld(di):
     # print('-rdlld', di)
-    #print("obtaining", di, "rdll...", end="")
+    # print("obtaining", di, "rdll...", end="")
     if di not in v.TDlls or v.TDlls_xt[di] + rto2 <= time.time():
         rv = getdll1(di)
         if rv is not None:
-            #print("done.")
+            # print("done.")
             v.TDlls[di] = rv
             v.TDlls_xt[di] = time.time()
             v.TDlls_changed = True
         else:
             print("failed.")
     else:
-        #print("retrieved.")
+        # print("retrieved.")
         pass
     return v.TDlls[di]
 

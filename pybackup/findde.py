@@ -7,8 +7,9 @@ from pathlib import Path
 
 import asyncrun as ar
 import config as v
-from status import changed_ops, rupdatets, updatets
 from fmd5h import fmd5f
+from status import changed_ops, rupdatets, updatets
+
 
 def findDE(dl, rp):
     i = bisect_left(dl, rp, key=lambda de: de.nm)

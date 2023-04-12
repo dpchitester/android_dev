@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Callable, Dict, List, Set, Tuple, TypeAlias, Union
 
 import ldsv
-from bhash import blakeHash
+
 from cscopy import CSCopy
 from csrestore import CSRestore
 from edge import Edge, addArc, addDep
@@ -380,10 +380,11 @@ class FSe:
     mt: float
     md5: bytes
 
-    def __init__(self, sz:int, mt: float, md5:bytes):
+    def __init__(self, sz: int, mt: float, md5: bytes):
         self.sz = sz
         self.mt = mt
         self.md5 = md5
+
 
 @dataclass
 class DE:
@@ -398,4 +399,3 @@ class DE:
 
     def __hash__(self):
         return hash((self.nm, self.i.sz, self.i.mt, self.i.md5))
-

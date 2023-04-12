@@ -2,10 +2,9 @@ from hashlib import blake2b
 from pathlib import Path, PosixPath
 from struct import pack, unpack
 
-import config as v
-
 
 def bhu(ho, it1):
+    from config import DE, FSe
     bhuf = {
         bytes: lambda it: ho.update(it),
         int: lambda it: ho.update(pack("i", it)),
@@ -16,12 +15,8 @@ def bhu(ho, it1):
         tuple: lambda it: [bhuf[type(it2)](it2) for it2 in it],
         set: lambda it: [bhuf[type(it2)](it2) for it2 in it],
         list: lambda it: [bhuf[type(it2)](it2) for it2 in it],
-        v.DE: lambda it: [
-            bhuf[type(it2)](it2) for it2 in (it.nm, it.i)
-        ],
-        v.FSe: lambda it: [
-            bhuf[type(it2)](it2) for it2 in (it.sz, it.mt, it.md5)
-        ]
+        DE: lambda it: [bhuf[type(it2)](it2) for it2 in (it.nm, it.i)],
+        FSe: lambda it: [bhuf[type(it2)](it2) for it2 in (it.sz, it.mt, it.md5)],
     }
     try:
         bhuf[type(it1)](it1)
@@ -35,3 +30,4 @@ def blakeHash(it):
     bhu(ho, it)
     rv = unpack("i", ho.digest())
     return rv[0]
+

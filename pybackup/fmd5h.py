@@ -1,8 +1,9 @@
 from hashlib import md5
 
+from snoop import pp, snoop
+
 import config as v
 
-from snoop import snoop, pp
 
 def md5sumf(Fn):
     if Fn.exists():
@@ -16,9 +17,10 @@ def md5sumf(Fn):
         return ho.digest()
     return None
 
+
 def fmd5f(fp, sz, mt, nh=None):
     d1 = v.fmd5hd
-    if fp not in d1: # new
+    if fp not in d1:  # new
         v.hf_dm += 1
         if nh is None:
             nh = md5sumf(fp)
@@ -30,7 +32,7 @@ def fmd5f(fp, sz, mt, nh=None):
         d1[fp] = nfse
         v.hf_dirty = True
         return nfse
-    else: # existing
+    else:  # existing
         v.hf_dh += 1
         ofse = d1[fp]
         if ofse.sz != sz or ofse.mt != mt:
@@ -50,5 +52,5 @@ def fmd5f(fp, sz, mt, nh=None):
         else:
             if nh is not None:
                 # pp('md5 update:', nh!=ofse.md5)
-                ofse.md5 = nh            
+                ofse.md5 = nh
         return ofse
