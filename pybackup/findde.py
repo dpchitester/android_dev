@@ -102,7 +102,7 @@ def findTDEs(fp):
 def updateDEs(rd, flst):
     sdel = getRemoteDEs(rd, flst)
     for sde in sdel:
-        fp = rd / sde.nm
+        fp = rd / str(sde.nm)
         sdes = findSDEs(fp)
         tdes = findTDEs(fp)
     
