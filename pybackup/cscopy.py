@@ -28,7 +28,15 @@ class SFc:
 def fsync(di, si, sd, td, sfc):
     if netup():
         # print('fsync', sd, td)
-        cmd = 'rclone sync "' + str(sd) + '" "' + str(td.parent) + '" --progress'
+        cmd = (
+            'rclone sync "'
+            + str(sd.parent)
+            + '" "'
+            + str(td.parent)
+            + '" --include "'
+            + str(td.name)
+            + '" --progress --log-file="rclone.log" --use-json-log'
+        )
         # cmd += ' --exclude ".git/**" --exclude "__pycache__/**"'
         print(cmd)
         rc = ar.run2(cmd)
@@ -50,6 +58,7 @@ def fcopy(di, si, sd, td, sfc):
             + '" "'
             + str(td)
             + '" --ignore-checksum --ignore-times --no-traverse --progress'
+            + ' --log-file="rclone.log" --use-json-log'
         )
         # if not sd.is_file():
         #    cmd += ' --exclude ".git/**" --exclude "__pycache__/**"'
@@ -64,7 +73,12 @@ def fcopy(di, si, sd, td, sfc):
 
 def fdel(di, si, sd, td, sfc):
     if netup():
-        cmd = 'rclone delete "' + str(td) + '" --progress'
+        cmd = (
+            'rclone delete "'
+            + str(td)
+            + '"'
+            + ' --progress --log-file "rclone.log" --use-json-log'
+        )
         print(cmd)
         rc = ar.run2(cmd)
         if rc == 0:

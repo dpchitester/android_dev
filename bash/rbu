@@ -2,6 +2,6 @@ export FDB_PATH=/sdcard/Android/data/com.smartphoneremote.androidscriptfree/file
 pushd ~/projects
 for d in $(find * -maxdepth 0 -type d);
 do
-    (echo "syncing $d..." && rclone copy ~/projects/$d GoogleDrive:/projects/$d --progress && echo "$d synced.")
+    (echo "syncing $d..." && rclone sync /sdcard/projects/$d GoogleDrive:/projects/$d --progress && echo "$d synced.")
 done
 popd

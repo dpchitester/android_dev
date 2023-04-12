@@ -117,7 +117,7 @@ def updateDEs(rd, f1):
             else:
                 print("insert", sde.nm)
                 fse = fmd5f(fp, sde.i.sz, sde.i.mt, sde.i.md5)
-                tde = DE(rp, fse)
+                tde = v.DE(rp, fse)
                 dl.insert(i, tde)
                 v.SDlls_xt[si] = time.time()
                 v.SDlls_changed = True
@@ -150,7 +150,7 @@ def updateDEs(rd, f1):
             else:
                 print("insert", sde.nm)
                 fse = fmd5f(fp, sde.i.sz, sde.i.mt, sde.i.md5)
-                tde = DE(rp, fse)
+                tde = v.DE(rp, fse)
                 dl.insert(i, tde)
                 v.TDlls_xt[di] = time.time()
                 v.TDlls_changed = True
