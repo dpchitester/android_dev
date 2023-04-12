@@ -8,7 +8,6 @@ from pathlib import Path
 from typing import Callable, Dict, List, Set, Tuple, TypeAlias, Union
 
 import ldsv
-
 from cscopy import CSCopy
 from csrestore import CSRestore
 from edge import Edge, addArc, addDep

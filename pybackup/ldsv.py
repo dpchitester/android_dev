@@ -4,6 +4,7 @@ from pathlib import Path
 
 import config as v
 
+
 def loadldlls():
     try:
         with open(v.ldllsf, "rb") as fh:
@@ -145,5 +146,3 @@ def save_all():
     savefmd5h()
     saveldh()
     saverdh()
-
-

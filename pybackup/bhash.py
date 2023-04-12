@@ -5,6 +5,7 @@ from struct import pack, unpack
 
 def bhu(ho, it1):
     from config import DE, FSe
+
     bhuf = {
         bytes: lambda it: ho.update(it),
         int: lambda it: ho.update(pack("i", it)),
@@ -30,4 +31,3 @@ def blakeHash(it):
     bhu(ho, it)
     rv = unpack("i", ho.digest())
     return rv[0]
-

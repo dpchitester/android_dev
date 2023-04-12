@@ -1,8 +1,8 @@
 import time
 
-from bhash import blakeHash
 import config as v
 import ldsv
+from bhash import blakeHash
 
 
 class Edge:
@@ -82,7 +82,6 @@ def addArc(op1):
         v.opdep.append(op1)
     j, i = op1.npl1
     addDep(j, i)
-
 
 
 if __name__ == "__main__":

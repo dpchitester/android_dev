@@ -5,15 +5,13 @@ from bisect import bisect_left
 from math import floor
 from pathlib import Path
 
-from snoop import snoop, pp
-
 import asyncrun as ar
 import config as v
 from fmd5h import fmd5f
 from status import changed_ops, rupdatets, updatets
 
 
-def findDE(dl, rp:Path):
+def findDE(dl, rp: Path):
     i = bisect_left(dl, rp, key=lambda de: de.nm)
     if i < len(dl) and rp.name == dl[i].nm.name:
         return (dl[i], i)
@@ -24,7 +22,7 @@ def getRemoteDEs(rd: Path, fl: list[str]):
     cmd = 'rclone lsjson "' + str(rd) + '" '
     for fn in fl:
         cmd += '--include "' + fn + '" '
-    cmd += ' --recursive --files-only --hash'
+    cmd += " --recursive --files-only --hash"
     rc = ar.run1(cmd)
     if rc == 0:
         if ar.txt == "[]":
@@ -51,7 +49,7 @@ def getRemoteDEs(rd: Path, fl: list[str]):
     return []
 
 
-def findSis(fp1:Path):
+def findSis(fp1: Path):
     l1 = {}
     for si in v.srcs:
         try:
@@ -64,7 +62,7 @@ def findSis(fp1:Path):
     return l1
 
 
-def findDis(fp1:Path):
+def findDis(fp1: Path):
     l1 = {}
     for di in v.tgts:
         try:
@@ -77,7 +75,7 @@ def findDis(fp1:Path):
     return l1
 
 
-def findSDEs(fp:Path):
+def findSDEs(fp: Path):
     sil = findSis(fp)
     de_l = []
     for si in sil:
@@ -88,7 +86,7 @@ def findSDEs(fp:Path):
     return de_l
 
 
-def findTDEs(fp:Path):
+def findTDEs(fp: Path):
     dil = findDis(fp)
     de_l = []
     for di in dil:
@@ -99,13 +97,13 @@ def findTDEs(fp:Path):
     return de_l
 
 
-def updateDEs(rd:Path, flst:list[str]):
+def updateDEs(rd: Path, flst: list[str]):
     sdel = getRemoteDEs(rd, flst)
     for sde in sdel:
         fp = Path(rd, sde.nm)
         sdes = findSDEs(fp)
         tdes = findTDEs(fp)
-    
+
         def doSOne(dl, rp, tde, i, si):
             if sde:
                 if tde:
@@ -138,7 +136,7 @@ def updateDEs(rd:Path, flst:list[str]):
                     dl.pop(i)
                     v.SDlls_xt[si] = time.time()
                     v.SDlls_changed = True
-    
+
         def doTOne(dl, rp, tde, i, di):
             if sde:
                 if tde:
@@ -171,7 +169,7 @@ def updateDEs(rd:Path, flst:list[str]):
                     dl.pop(i)
                     v.TDlls_xt[di] = time.time()
                     v.TDlls_changed = True
-    
+
         for it in sdes:
             doSOne(*it)
         for it in tdes:

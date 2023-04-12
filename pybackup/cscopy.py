@@ -48,20 +48,21 @@ def fsync(di, si, sd, td, sfc):
             print(ar.txt)
     return False
 
+
 def fsyncl(di, si, sd, td, fl, sfc):
     cmd = 'rclone copy "'
     cmd += str(sd) + '" "'
     cmd += str(td) + '" '
     for fn in fl:
         cmd += '--include "' + str(fn.nm) + '" '
-    cmd += '--progress '
+    cmd += "--progress "
     cmd += '--exclude "**/.git/**/*" '
     cmd += '--exclude "**/__pycache__/**/*" '
     cmd += '--exclude "**/node_modules/**/*" '
     cmd += '--log-file="rclone.log" '
-    cmd += '--use-json-log'
+    cmd += "--use-json-log"
     if netup():
-        print('copy', sd, td, list(map(lambda de: str(de.nm), fl)))
+        print("copy", sd, td, list(map(lambda de: str(de.nm), fl)))
         # print(cmd)
         rc = ar.run2(cmd)
         if rc == 0:
@@ -71,6 +72,7 @@ def fsyncl(di, si, sd, td, fl, sfc):
             sfc.fc += 1
             print(ar.txt)
     return False
+
 
 def fdel(di, si, sd, td, sfc):
     if netup():
@@ -88,16 +90,17 @@ def fdel(di, si, sd, td, sfc):
         sfc.fc += 1
     return False
 
+
 def fdell(di, si, sd, td, fl, sfc):
     cmd = 'rclone delete "'
     cmd += str(td) + '" '
     for fn in fl:
         cmd += '--include "' + str(fn.nm) + '" '
-    cmd += '--progress '
+    cmd += "--progress "
     cmd += '--log-file="rclone.log" '
-    cmd += '--use-json-log'
+    cmd += "--use-json-log"
     if netup():
-        print('delete', sd, td, list(map(lambda de: str(de.nm), fl)))
+        print("delete", sd, td, list(map(lambda de: str(de.nm), fl)))
         # print(cmd)
         rc = ar.run2(cmd)
         if rc == 0:
@@ -149,7 +152,7 @@ class BVars:
     def do_copying(self):
         # TODO: use Path
         cfpl = self.f2c.copy()
-        if len(cfpl)==0:
+        if len(cfpl) == 0:
             return
         # print(cfp)
         if fsyncl(self.di, self.si, self.sd, self.td, cfpl, self.sfc):
@@ -160,10 +163,10 @@ class BVars:
                     if rf.nm == lf.nm:
                         self.f2d.remove(rf)
             updateDEs(self.td, [str(de.nm) for de in cfpl])
-    
+
     def do_deletions(self):
         cfpl = self.f2d.copy()
-        if len(cfpl)==0:
+        if len(cfpl) == 0:
             return
         if fdell(self.di, self.si, self.sd, self.td, cfpl, self.sfc):
             for rf in cfpl:  # do deletions

@@ -12,24 +12,24 @@ from snoop import pp, snoop
 
 import asyncrun as ar
 import config as v
-
 from fmd5h import fmd5f
 
 rto1 = 60 * 5
 rto2 = 60 * 60
 
-dexs = {'.git','node_modules','__pycache__','.ropeproject','.mypyproject'}
+dexs = {".git", "node_modules", "__pycache__", ".ropeproject", ".mypyproject"}
 
 
 def proc_dirs(dirs):
     dirs[:] = [d for d in dirs if not isbaddir(d)]
+
 
 def isbaddir(dir):
     for dp in Path(dir).parts:
         if dp in dexs:
             return True
     return False
-        
+
 
 def getfl(p):
     # print(str(p))
@@ -149,6 +149,7 @@ def getdll1(di):
         l1 = json.loads(ar.txt)
         if l1 is None:
             l1 = []
+
         def es(it: dict):
             # TODO: use Path
             it1 = Path(it["Path"])
