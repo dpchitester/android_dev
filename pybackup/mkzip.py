@@ -59,15 +59,14 @@ class Mkzip(OpBase):
             sd = v.src(si2)
             td = v.tgt(di2)
             zf = self.opts.get("zipfile", "temp.zip")
-            rp = Path(zf)
-            zp = td / rp.stem
+            zp = td / Path(zf).stem
             try:
                 fp = Path(make_archive(zp, "zip", sd, ".", True))
                 print(fp)
                 maxt = maxmt(sd)
                 utime(fp, ns=(maxt, maxt))
                 sc += 1
-                updateDEs(td, [rp])
+                updateDEs(td, [zf])
             except Exception as e:
                 print(e)
                 fc += 1
