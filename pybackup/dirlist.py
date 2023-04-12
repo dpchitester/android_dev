@@ -22,7 +22,7 @@ dexs = {'.git','node_modules','__pycache__','.ropeproject','.mypyproject'}
 
 
 def proc_dirs(dirs):
-    dirs[:] = [d for d in dirs if d not in dexs]
+    dirs[:] = [d for d in dirs if not isbaddir(d)]
 
 def isbaddir(dir):
     for dp in Path(dir).parts:
