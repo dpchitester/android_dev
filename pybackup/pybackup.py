@@ -59,12 +59,10 @@ async def cb1():
         if si != "git":
             if si not in sis:
                 sis.add(si)
-                if si in v.SDlls:
-                    del v.SDlls[si]
+                if si in v.srcs:
                     print("cb1 onestatus", si)
                     onestatus(si)
-                if si in RDlls:
-                    del RDlls[si]
+                if si in v.tgts:
                     print("cb1 ronestatus", si)
                     ronestatus(si)
     tr -= 1
@@ -88,6 +86,8 @@ def rt2():
         cl = clean()
         if cl:
             print("backups appear done")
+            rv1 = False
+            print("rv1", rv1)
         else:
             print("backups appear pending")
             rv1 = opExec()
