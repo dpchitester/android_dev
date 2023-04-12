@@ -40,19 +40,24 @@ def fmd5f(fp, sz, mt, nh=None):
             if ofse.sz != sz:
                 # pp('size diff:', sz - ofse.sz)
                 ofse.sz = sz
+                v.hf_dirty = True
             if ofse.mt != mt:
                 # pp('mt diff:', mt - ofse.mt)
                 ofse.mt = mt
+                v.hf_dirty = True
             if nh is not None:
                 # pp('md5 furnished:', nh!=ofse.md5)
                 ofse.md5 = nh
+                v.hf_dirty = True
             else:
                 nh = md5sumf(fp)
                 # pp('md5 file hashed:', nh!=ofse.md5)
                 ofse.md5 = nh
+                v.hf_dirty = True
         else:
             v.hf_sth += 1
             if nh is not None:
                 # pp('md5 update:', nh!=ofse.md5)
                 ofse.md5 = nh
+                v.hf_dirty = True
         return ofse
