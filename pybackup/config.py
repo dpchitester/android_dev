@@ -274,7 +274,7 @@ def initConfig():
         op1 = Mkzip(npl1, npl1, {"zipfile": "projects-git.zip"})
         addArc(op1)
 
-    for si in (*codes, "proj", "zips", "vids"):
+    for si in ("proj",*codes):
         p1 = src(si).relative_to(ppre("sd"))
         addTgtDir("gd_" + si, ppre("gd") / p1)
         npl1 = ("gd_" + si, si)
@@ -343,26 +343,34 @@ def addPre(tg, frag):
     pres.add(tg)
 
 
+dexs = {".git", "node_modules", "__pycache__", ".ropeproject", ".mypyproject"}
+
+
+def proc_dirs(dirs):
+    dirs[:] = [d for d in dirs if not isbaddir(d)]
+
+
+def isbaddir(dir):
+    return any([dp for dp in Path(dir).parts if dp in dexs])
+
+
 def getDL(p):
     # print(str(p))
     fl = []
     try:
         for pth, dirs, files in walk(p, topdown=True):
-            if ".git" in pth:
+            if not isbaddir(pth):
+                proc_dirs(dirs)
+                for d in dirs.copy():
+                    fl.append(Path(pth, d))
+                    dirs.remove(d)
+            else:
                 dirs = []
-                break
-            if ".git" in dirs:
-                dirs.remove(".git")
-            if "__pycache__" in dirs:
-                dirs.remove("__pycache__")
-            for d in dirs.copy():
-                fl.append(Path(pth, d))
-                dirs.remove(d)
-            break
+                files = []
         return fl
     except Exception as e:
         print("getDL", e)
-        return None
+        return fl
 
 
 def round2ms(ns):

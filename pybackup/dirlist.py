@@ -17,19 +17,6 @@ from fmd5h import fmd5f
 rto1 = 60 * 5
 rto2 = 60 * 60
 
-dexs = {".git", "node_modules", "__pycache__", ".ropeproject", ".mypyproject"}
-
-
-def proc_dirs(dirs):
-    dirs[:] = [d for d in dirs if not isbaddir(d)]
-
-
-def isbaddir(dir):
-    for dp in Path(dir).parts:
-        if dp in dexs:
-            return True
-    return False
-
 
 def getfl(p):
     # print(str(p))
@@ -39,8 +26,8 @@ def getfl(p):
             fl.append(p)
             return fl
         for pth, dirs, files in walk(p, topdown=True):
-            if not isbaddir(pth):
-                proc_dirs(dirs)
+            if not v.isbaddir(pth):
+                v.proc_dirs(dirs)
                 for f in files:
                     fl.append(Path(pth, f))
             else:
@@ -57,8 +44,8 @@ def getDL(p):
     fl = []
     try:
         for pth, dirs, files in walk(p, topdown=True):
-            if not isbaddir(pth):
-                proc_dirs(dirs)
+            if not v.isbaddir(pth):
+                v.proc_dirs(dirs)
                 for d in dirs.copy():
                     fl.append(Path(pth, d))
                     dirs.remove(d)
