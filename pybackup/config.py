@@ -343,7 +343,7 @@ def addPre(tg, frag):
     pres.add(tg)
 
 
-dexs = {".git", "node_modules", "__pycache__", ".ropeproject", ".mypyproject"}
+dexs = {".cache", ".git", "node_modules", "__pycache__", ".ropeproject", ".mypyproject"}
 
 
 def proc_dirs(dirs):
