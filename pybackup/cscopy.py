@@ -87,7 +87,9 @@ def fdel(di, si, sd, td, sfc):
         if rc == 0:
             sfc.sc += 1
             return True
-        sfc.fc += 1
+        else:
+            sfc.fc += 1
+            print(ar.txt)
     return False
 
 
@@ -106,7 +108,9 @@ def fdell(di, si, sd, td, fl, sfc):
         if rc == 0:
             sfc.sc += 1
             return True
-        sfc.fc += 1
+        else:
+            sfc.fc += 1
+            print(ar.txt)
     return False
 
 
