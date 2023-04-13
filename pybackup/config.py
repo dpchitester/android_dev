@@ -274,7 +274,7 @@ def initConfig():
         op1 = Mkzip(npl1, npl1, {"zipfile": "projects-git.zip"})
         addArc(op1)
 
-    for si in ("proj",*codes, "zips"):
+    for si in ("proj", *codes, "zips"):
         p1 = src(si).relative_to(ppre("sd"))
         addTgtDir("gd_" + si, ppre("gd") / p1)
         npl1 = ("gd_" + si, si)
@@ -406,3 +406,27 @@ class DE:
 
     def __hash__(self):
         return hash((self.nm, self.i.sz, self.i.mt, self.i.md5))
+
+
+class SD():
+    def __init__(self, pre):
+        self.pre = pre
+
+
+class Ext3(SD):
+    pass
+
+
+class FAT32(SD):
+    pass
+
+
+class CS(SD):
+    pass
+
+
+ext3 = Ext3(os.environ["HOME"])
+sdcard = SD("/sdcard")
+cloud1 = CS("GoogleDrive:")
+cloud2 = CS("OneDrive:")
+cloud3 = CS("DropBox:")

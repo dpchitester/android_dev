@@ -35,7 +35,7 @@ def rstsupdate(Di, Dh):
 
 
 def onestatus(Si):
-    # TODO: update as per statuses
+    # TODO: update as per src_statuses
     tr = v.lckers[Si]()
     if tr is not None:
         (Dh, changed) = tr
@@ -45,7 +45,7 @@ def onestatus(Si):
 
 
 def ronestatus(Di):
-    # TODO: update as per rstatuses
+    # TODO: update as per tgt_statuses
     tr = v.rckers[Di]()
     if tr is not None:
         (Dh, changed) = tr
@@ -54,7 +54,7 @@ def ronestatus(Di):
             print()
 
 
-def statuses():
+def src_statuses():
     SDl = []
     for Si in v.srcs:
         # print('calling lckers', Si)
@@ -66,7 +66,7 @@ def statuses():
     return SDl
 
 
-def rstatuses():
+def tgt_statuses():
     RDl = []
     excs = ["home", ".git"]
     for Di in v.tgts:
@@ -81,7 +81,7 @@ def rstatuses():
 
 def updatets(N):
     print("Status", N)
-    Sl = statuses()
+    Sl = src_statuses()
     if len(Sl):
         print("changed: ", end="")
         for Si, Dh in Sl:
@@ -91,7 +91,7 @@ def updatets(N):
 
 def rupdatets(N):
     print("RStatus", N)
-    Dl = rstatuses()
+    Dl = tgt_statuses()
     if len(Dl):
         print("rchanged: ", end="")
         for Di, Dh in Dl:

@@ -23,14 +23,14 @@ def rdh_f(Di, dh=None):
 
 
 def ldh_d(Si):
-    Si_dl = dl.lDlld(Si)
+    Si_dl = dl.sDlld(Si)
     if Si_dl is not None:
         return blakeHash(Si_dl)
     return None
 
 
 def rdh_d(Di):
-    Di_dl = dl.rDlld(Di)
+    Di_dl = dl.tDlld(Di)
     if Di_dl is not None:
         return blakeHash(Di_dl)
     return None

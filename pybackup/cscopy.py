@@ -6,7 +6,7 @@ from pathlib import Path
 
 import asyncrun as ar
 import config as v
-from dirlist import dllcmp, lDlld, rDlld
+from dirlist import dllcmp, sDlld, tDlld
 from edge import Edge, findEdge
 from findde import updateDEs
 from netup import netup
@@ -128,10 +128,10 @@ class BVars:
         self.ac2 = 0
 
     def init2(self):
-        self.src_dls = lDlld(self.si)
+        self.src_dls = sDlld(self.si)
         if self.src_dls is None:
             self.sfc.fc += 1
-        self.dst_dls = rDlld(self.di)
+        self.dst_dls = tDlld(self.di)
         if self.dst_dls is None:
             self.sfc.fc += 1
         if self.src_dls is not None and self.dst_dls is not None:

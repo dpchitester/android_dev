@@ -8,7 +8,7 @@ from pathlib import Path
 
 import asyncrun as ar
 import config as v
-from dirlist import dllcmp, lDlld, rDlld
+from dirlist import dllcmp, sDlld, tDlld
 from edge import Edge, findEdge
 from findde import updateDEs
 from netup import netup
@@ -57,10 +57,10 @@ class BVar:
             return 1
         if self.dho == self.dhn:
             return 2
-        self.dln = lDlld(self.si)
+        self.dln = sDlld(self.si)
         if self.dln is None:
             return 3
-        self.dlo = rDlld(self.di)
+        self.dlo = tDlld(self.di)
         if self.dlo is None:
             return 3
         self.f2d, self.f2c = dllcmp(self.dlo, self.dln)

@@ -39,7 +39,7 @@ def getfl(p):
         return fl
 
 
-def getDL(p): # list of first level dirs
+def getDL(p):  # list of first level dirs
     # print(str(p))
     fl = []
     try:
@@ -58,7 +58,7 @@ def getDL(p): # list of first level dirs
         return fl
 
 
-def getdll0(): # remote-entire-drive
+def getdll0():  # remote-entire-drive
     v.dl0_cs += 1
     td = v.ppre("gd")
     # print('getdll0',td)
@@ -123,7 +123,7 @@ def sepdlls(dlls):
     print(len(v.TDlls), "rdlls")
 
 
-def getdll1(di): # remote-target
+def getdll1(di):  # remote-target
     v.dl1_cs += 1
     td = v.tgt(di)
     # print('getdll1', di, str(td))
@@ -158,7 +158,8 @@ def getdll1(di): # remote-target
         return []
     return None
 
-def getdll5(si): # remote-source
+
+def getdll5(si):  # remote-source
     v.dl1_cs += 1
     td = v.src(si)
     # print('getdll1', di, str(td))
@@ -194,7 +195,7 @@ def getdll5(si): # remote-source
     return None
 
 
-def getdll2(si): # remote-source
+def getdll2(si):  # remote-source
     v.dl2_cs += 1
     td = v.src(si)
     # print('getdll2', si, str(td))
@@ -229,7 +230,7 @@ def getdll2(si): # remote-source
     return None
 
 
-def getdll3(si): # local-source
+def getdll3(si):  # local-source
     v.dl3_cs += 1
     td = v.src(si)
     # print('getdll3', si, str(sd))
@@ -249,8 +250,9 @@ def getdll3(si): # local-source
     st = list(map(es, l1))
     st.sort(key=lambda de: de.nm)
     return st
-    
-def getdll4(di): # local-target
+
+
+def getdll4(di):  # local-target
     v.dl3_cs += 1
     td = v.tgt(di)
     # print('getdll4', si, str(sd))
@@ -272,7 +274,7 @@ def getdll4(di): # local-target
     return st
 
 
-def getrdlls(): # remote entire drive
+def getrdlls():  # remote entire drive
     t1 = time.time()
     rv = getdll0()
     if rv is not None:
@@ -282,12 +284,13 @@ def getrdlls(): # remote entire drive
         print(round(t2 - t1, 3), round(t3 - t2, 3))
 
 
-def lDlld(si):
+def sDlld(si):
     def getfn(si):
-        if 'gd_' in si:
+        if "gd_" in si:
             return getdll5
         else:
             return getdll3
+
     # print('-ldlld', si)
     # print("obtaining", si, "ldll...", end="")
     if si not in v.SDlls or v.SDlls_xt[si] + rto1 <= time.time():
@@ -305,12 +308,13 @@ def lDlld(si):
     return v.SDlls[si]
 
 
-def rDlld(di):
+def tDlld(di):
     def getfn(di):
-        if 'gd_' in di:
+        if "gd_" in di:
             return getdll1
         else:
             return getdll4
+
     # print('-rdlld', di)
     # print("obtaining", di, "rdll...", end="")
     if di not in v.TDlls or v.TDlls_xt[di] + rto2 <= time.time():
