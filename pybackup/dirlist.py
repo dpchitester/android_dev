@@ -17,17 +17,6 @@ from fmd5h import fmd5f
 rto1 = 60 * 0
 rto2 = 60 * 0
 
-def dir_reader_select(tg):
-    if tg in tgts:
-        if 'gd_' in tg: # remote-target
-            return getdll1
-        else: # local-target
-            return getdll4
-    if tg in srcs:
-        if 'gd_' in tg: # remote-source
-            return getdll5
-        else: # local-source
-            return getdll3
 
 def getfl(p):
     # print(str(p))
@@ -294,10 +283,15 @@ def getrdlls(): # remote entire drive
 
 
 def lDlld(si):
+    def getfn(si):
+        if 'gd_' in si:
+            return getdll5
+        else:
+            return getdll3
     # print('-ldlld', si)
     # print("obtaining", si, "ldll...", end="")
     if si not in v.SDlls or v.SDlls_xt[si] + rto1 <= time.time():
-        rv = getdll3(si)
+        rv = getfn(si)(si)
         if rv is not None:
             # print("done.")
             v.SDlls[si] = rv
@@ -312,10 +306,15 @@ def lDlld(si):
 
 
 def rDlld(di):
+    def getfn(di):
+        if 'gd_' in di:
+            return getdll1
+        else:
+            return getdll4
     # print('-rdlld', di)
     # print("obtaining", di, "rdll...", end="")
     if di not in v.TDlls or v.TDlls_xt[di] + rto2 <= time.time():
-        rv = getdll1(di)
+        rv = getfn(di)(di)
         if rv is not None:
             # print("done.")
             v.TDlls[di] = rv
