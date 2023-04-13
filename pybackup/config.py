@@ -53,7 +53,7 @@ LDhd: Hdt1 = {}
 RDhd: Hdt1 = {}
 
 Hde: TypeAlias = Tuple[int, float, Hash]
-Hdt2: TypeAlias = Dict[Path, Union["Hdt2", Hde]]
+Hdt2: TypeAlias = Dict[Path, Hde]
 
 # local file md5 hashes
 fmd5hd: Hdt2 = {}

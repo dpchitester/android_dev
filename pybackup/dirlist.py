@@ -17,6 +17,17 @@ from fmd5h import fmd5f
 rto1 = 60 * 0
 rto2 = 60 * 0
 
+def dir_reader_select(tg):
+    if tg in tgts:
+        if 'gd_' in tg: # remote-target
+            return getdll1
+        else: # local-target
+            return getdll4
+    if tg in srcs:
+        if 'gd_' in tg: # remote-source
+            return getdll5
+        else: # local-source
+            return getdll3
 
 def getfl(p):
     # print(str(p))
@@ -39,7 +50,7 @@ def getfl(p):
         return fl
 
 
-def getDL(p):
+def getDL(p): # list of first level dirs
     # print(str(p))
     fl = []
     try:
@@ -58,7 +69,7 @@ def getDL(p):
         return fl
 
 
-def getdll0():
+def getdll0(): # remote-entire-drive
     v.dl0_cs += 1
     td = v.ppre("gd")
     # print('getdll0',td)
@@ -123,7 +134,7 @@ def sepdlls(dlls):
     print(len(v.TDlls), "rdlls")
 
 
-def getdll1(di):
+def getdll1(di): # remote-target
     v.dl1_cs += 1
     td = v.tgt(di)
     # print('getdll1', di, str(td))
@@ -158,8 +169,43 @@ def getdll1(di):
         return []
     return None
 
+def getdll5(si): # remote-source
+    v.dl1_cs += 1
+    td = v.src(si)
+    # print('getdll1', di, str(td))
+    cmd = 'rclone lsjson "' + str(td) + '" --recursive --files-only --hash --fast-list '
+    for ex in v.dexs:
+        cmd += ' --exclude "**/' + ex + '/*" '
+    # print(cmd)
+    rc = ar.run1(cmd)
+    if rc == 0:
+        l1 = json.loads(ar.txt)
+        if l1 is None:
+            l1 = []
 
-def getdll2(si):
+        def es(it: dict):
+            # TODO: use Path
+            it1 = Path(it["Path"])
+            it2 = it["Size"]
+            it3 = it["ModTime"][:-1] + "-00:00"
+            it3 = datetime.datetime.fromisoformat(it3).timestamp()
+            if "Hashes" in it:
+                it4 = bytes.fromhex(it["Hashes"]["md5"])
+            else:
+                it4 = bytes()
+            fp = td / it1
+            fse = fmd5f(fp, it2, it3, it4)
+            return v.DE(it1, fse)
+
+        st = list(map(es, l1))
+        st.sort(key=lambda de: de.nm)
+        return st
+    if rc == 3:
+        return []
+    return None
+
+
+def getdll2(si): # remote-source
     v.dl2_cs += 1
     td = v.src(si)
     # print('getdll2', si, str(td))
@@ -194,7 +240,7 @@ def getdll2(si):
     return None
 
 
-def getdll3(si):
+def getdll3(si): # local-source
     v.dl3_cs += 1
     td = v.src(si)
     # print('getdll3', si, str(sd))
@@ -214,9 +260,30 @@ def getdll3(si):
     st = list(map(es, l1))
     st.sort(key=lambda de: de.nm)
     return st
+    
+def getdll4(di): # local-target
+    v.dl3_cs += 1
+    td = v.tgt(di)
+    # print('getdll4', si, str(sd))
+    l1 = getfl(td)
+
+    def es(it: Path):
+        # TODO: use Path
+        it1 = it.relative_to(td)
+        fs = it.stat()
+        it2 = fs.st_size
+        it3 = fs.st_mtime_ns
+        it3 = v.trunc2ms(it3)
+        fp = td / it1
+        fse = fmd5f(fp, it2, it3)
+        return v.DE(it1, fse)
+
+    st = list(map(es, l1))
+    st.sort(key=lambda de: de.nm)
+    return st
 
 
-def getrdlls():
+def getrdlls(): # remote entire drive
     t1 = time.time()
     rv = getdll0()
     if rv is not None:
