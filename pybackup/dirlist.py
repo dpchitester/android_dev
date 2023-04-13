@@ -19,6 +19,7 @@ rto2 = 60 * 0
 
 
 def getfl(p):
+    pt = type(p)
     # print(str(p))
     fl = []
     try:
@@ -26,10 +27,11 @@ def getfl(p):
             fl.append(p)
             return fl
         for pth, dirs, files in walk(p, topdown=True):
+            pth = pt(pth)
             if not v.isbaddir(pth):
-                v.proc_dirs(dirs)
+                v.proc_dirs(dirs, pt)
                 for f in files:
-                    fl.append(Path(pth, f))
+                    fl.append(pth / f)
             else:
                 dirs = []
                 files = []
@@ -38,24 +40,6 @@ def getfl(p):
         print(e)
         return fl
 
-
-def getDL(p):  # list of first level dirs
-    # print(str(p))
-    fl = []
-    try:
-        for pth, dirs, files in walk(p, topdown=True):
-            if not v.isbaddir(pth):
-                v.proc_dirs(dirs)
-                for d in dirs.copy():
-                    fl.append(Path(pth, d))
-                    dirs.remove(d)
-            else:
-                dirs = []
-                files = []
-        return fl
-    except Exception as e:
-        print("getDL", e)
-        return fl
 
 
 def getdll0():  # remote-entire-drive

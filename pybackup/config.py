@@ -7,7 +7,7 @@ from os import walk
 from pathlib import Path
 from typing import Callable, Dict, List, Set, Tuple, TypeAlias, Union
 
-import ldsv
+from ldsv import load_all
 from cscopy import CSCopy
 from csrestore import CSRestore
 from edge import Edge, addArc, addDep
@@ -15,6 +15,7 @@ from gitops import GitOps, gitck1, gitck2, gitremoteck
 from localcopy import LocalCopy
 from mkzip import Mkzip
 from opbase import OpBase, OpBaseEncoder
+from sd import *
 from statushash import ldhck, rdhck
 
 NodeTag: TypeAlias = str
@@ -96,9 +97,21 @@ dl1_cs = 0
 dl2_cs = 0
 dl3_cs = 0
 
+home:Ext3|None = None
+sdcard:Fat32|None = None
+cloud1:CS|None = None
+cloud2:CS|None = None
+cloud3:CS|None = None
 
 def initConfig():
-    addPre("FLAGS", os.environ["HOME"])
+    global home, sdcard, cloud1, cloud2, cloud3
+    home = Ext3(os.environ["HOME"])
+    sdcard = Fat32("/sdcard")
+    cloud1 = CS("GoogleDrive:")
+    cloud2 = CS("OneDrive:")
+    cloud3 = CS("DropBox:")
+
+    addPre("FLAGS", home)
     # print("FLAGS=" + str(ppre('FLAGS')))
 
     global edgepf, ldllsf, rdllsf, fmd5hf, ldhpf, rdhpf
@@ -113,18 +126,17 @@ def initConfig():
     # for pf in [edgepf, ldllsf, rdllsf, fmd5hf, ldhpf, rdhpf]:
     #    print(pf.name, str(pf))
 
-    ldsv.load_all()
-
-    addPre("sd", "/sdcard")
+    load_all()
+    
+    addPre("sd", sdcard)
     addPre("proj", ppre("sd") / "projects")
-    addPre("bkx", ppre("FLAGS") / ".bkx")
-    addPre("gd", "GoogleDrive:")
-    addPre("dsblog", os.environ["FDB_PATH"])
+    addPre("gd", cloud1)
+    addPre("dsblog", Fat32(os.environ["FDB_PATH"]))
 
     addSrcDir("docs", ppre("sd") / "Documents", False)
     addSrcDir("blogds", ppre("dsblog"), False)
     addSrcDir("backups", ppre("sd") / "backups", False)
-    addSrcDir("home", ppre("FLAGS"), False)
+    addSrcDir("home", home, False)
     addSrcDir("bin", src("home") / "bin", False)
     addSrcDir("vids", ppre("sd") / "VideoDownloader/Download", False)
     addSrcDir("zips", ppre("sd") / "zips", False)
@@ -346,23 +358,25 @@ def addPre(tg, frag):
 dexs = {".cache", ".git", "node_modules", "__pycache__", ".ropeproject", ".mypyproject"}
 
 
-def proc_dirs(dirs):
-    dirs[:] = [d for d in dirs if not isbaddir(d)]
+def proc_dirs(dirs, pt):
+    dirs[:] = [pt(d) for d in dirs if not isbaddir(pt(d))]
 
 
 def isbaddir(dir):
-    return any([dp for dp in Path(dir).parts if dp in dexs])
+    return any([dp for dp in dir.parts if dp in dexs])
 
 
 def getDL(p):
+    pt = type(p)
     # print(str(p))
     fl = []
     try:
         for pth, dirs, files in walk(p, topdown=True):
+            pth = pt(pth)
             if not isbaddir(pth):
-                proc_dirs(dirs)
+                proc_dirs(dirs, pt)
                 for d in dirs.copy():
-                    fl.append(Path(pth, d))
+                    fl.append(pth / d)
                     dirs.remove(d)
             else:
                 dirs = []
@@ -408,25 +422,3 @@ class DE:
         return hash((self.nm, self.i.sz, self.i.mt, self.i.md5))
 
 
-class SD():
-    def __init__(self, pre):
-        self.pre = pre
-
-
-class Ext3(SD):
-    pass
-
-
-class FAT32(SD):
-    pass
-
-
-class CS(SD):
-    pass
-
-
-ext3 = Ext3(os.environ["HOME"])
-sdcard = SD("/sdcard")
-cloud1 = CS("GoogleDrive:")
-cloud2 = CS("OneDrive:")
-cloud3 = CS("DropBox:")
