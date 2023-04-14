@@ -52,24 +52,24 @@ def after_load():
             if si in v.LDlls and isinstance(pth, FS_Mixin):
                 pth.Dll = v.LDlls[si]
                 pth.Dll_xt = v.LDlls_xt[si]
-                pth.SDh = v.LDhd[si]
+            pth.SDh = v.LDhd[si]
         else:
             if si in v.RDlls and isinstance(pth, FS_Mixin):
                 pth.Dll = v.RDlls[si]
                 pth.Dlls_xt = v.RDlls_xt[si]
-                pth.SDh = v.RDhd[si]
+            pth.SDh = v.RDhd[si]
     for di in v.tgts:
         pth = v.tgt(di)
         if not pth.isremote:
             if di in v.LDlls and isinstance(pth, FS_Mixin):
                 pth.Dll = v.LDlls[di]
                 pth.Dll_xt = v.LDlls_xt[di]
-                pth.SDh = v.LDhd[di]
+            pth.SDh = v.LDhd[di]
         else:
             if di in v.RDlls and isinstance(pth, FS_Mixin):
                 pth.Dll = v.RDlls[di]
                 pth.Dll_xt = v.RDlls_xt[di]
-                pth.SDh = v.RDhd[di]
+            pth.SDh = v.RDhd[di]
 
 
 def loadldlls():
