@@ -282,10 +282,10 @@ def initConfig():
         )
         addArc(op1)
 
-    for si in codes:
-        npl1 = ("zips", si)
-        op1 = Mkzip(npl1, npl1, {"zipfile": si + ".zip"})
-        addArc(op1)
+    #for si in codes:
+        #npl1 = ("zips", si)
+        #op1 = Mkzip(npl1, npl1, {"zipfile": si + ".zip"})
+        #addArc(op1)
 
     for si in (".git",):
         npl1 = ("zips", si)
