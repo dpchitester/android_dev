@@ -30,9 +30,6 @@ srcs: Set[NodeTag] = set()
 tgts: Set[NodeTag] = set()
 codes: Set[NodeTag] = set()
 
-# checkers
-lckers: Dict[NodeTag, Callable] = {}
-rckers: Dict[NodeTag, Callable] = {}
 
 # operations (function objects)
 opdep: List[OpBase] = []
@@ -59,15 +56,15 @@ Hdt2: TypeAlias = Dict[Path, Hde]
 fmd5hd: Hdt2 = {}
 
 # files lists
-SDlls: Dict[NodeTag, List["DE"]] = {}
-TDlls: Dict[NodeTag, List["DE"]] = {}
+LDlls: Dict[NodeTag, List["DE"]] = {}
+RDlls: Dict[NodeTag, List["DE"]] = {}
 
 # update times of directory lists
-SDlls_xt: Dict[NodeTag, float] = {}
-TDlls_xt: Dict[NodeTag, float] = {}
+LDlls_xt: Dict[NodeTag, float] = {}
+RDlls_xt: Dict[NodeTag, float] = {}
 
-SDlls_changed: bool = False
-TDlls_changed: bool = False
+LDlls_changed: bool = False
+RDlls_changed: bool = False
 
 # pickle file filenames
 edgepf: Path | None = None
@@ -128,7 +125,6 @@ def initConfig():
     # for pf in [edgepf, ldllsf, rdllsf, fmd5hf, ldhpf, rdhpf]:
     #    print(pf.name, str(pf))
 
-    load_all()
 
     addPre("sd", sdcard)
     addPre("proj", ppre("sd") / "projects")
@@ -306,6 +302,7 @@ def initConfig():
         op1 = CSCopy(npl1, npl1, {"delete": True})
         addArc(op1)
 
+    load_all()
 
 def ppre(s):
     if s in pres:

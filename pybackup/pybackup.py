@@ -94,9 +94,8 @@ def rt2():
             print("rv1", rv1)
         if not rv1:
             break
-    ldsv.savefmd5h()
-    # ldsv.saveldlls()
-    ldsv.saverdlls()
+    ldsv.save_all()
+
 
 
 def main():

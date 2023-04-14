@@ -21,9 +21,6 @@ class SD(type(Path())):
     Dll_xt = 0
     Dll_changed = False
     SDh = None
-    TDh = None
-
-
 
     def sdh_f(self, dh=None):
         odh = self.SDh

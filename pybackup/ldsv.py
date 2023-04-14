@@ -2,15 +2,79 @@ import os
 import pickle
 from pathlib import Path
 
+def prep_save():
+    import config as v
+    v.LDlls = {}
+    v.LDlls_xt = {}
+    v.LDhd = {}
+    v.RDlls = {}
+    v.RDlls_xt = {}
+    v.RDhd = {}
+    for si in v.srcs:
+        pth = v.src(si)
+        if not pth.isremote:
+            if pth.Dll:
+                v.LDlls[si] = pth.Dll
+                v.LDlls_xt[si] = pth.Dll_xt
+                v.LDlls_changed |= pth.Dlls_changed
+            v.LDhd[si] = pth.SDh
+        else:
+            if pth.Dll:
+                v.RDlls[si] = pth.Dll
+                v.RDlls_xt[si] = pth.Dll_xt
+                v.RDlls_changed |= pth.Dlls_changed
+            v.RDhd[si] = pth.SDh
+    for di in v.tgts:
+        pth = v.tgt(di)
+        if not pth.isremote:
+            if pth.Dll:
+                v.LDlls[di] = pth.Dll
+                v.LDlls_xt[di] = pth.Dll_xt
+                v.LDlls_changed |= pth.Dlls_changed
+            v.LDhd[di] = pth.SDh
+        else:
+            if pth.Dll:
+                v.RDlls[di] = pth.Dll
+                v.RDlls_xt[di] = pth.Dll_xt
+                v.RDlls_changed |= pth.Dlls_changed
+            v.RDhd[di] = pth.SDh
 
+def after_load():
+    import config as v
+    for si in v.srcs:
+        pth = v.src(si)
+        if not pth.isremote:
+            if si in v.LDlls:
+                pth.Dll = v.LDlls[si]
+                pth.Dll_xt = v.LDlls_xt[si]
+                pth.SDh = v.LDhd[si]
+        else:
+            if si in v.RDlls:
+                pth.Dll = v.RDlls[si]
+                pth.Dlls_xt = v.RDlls_xt[si]
+                pth.SDh = v.RDhd[si]
+    for di in v.tgts:
+        pth = v.tgt(di)
+        if not pth.isremote:
+            if di in v.LDlls:
+                pth.Dll = v.LDlls[di]
+                pth.Dll_xt = v.LDlls_xt[di]
+                pth.SDh = v.LDhd[di]
+        else:
+            if di in v.RDlls:
+                pth.Dll = v.RDlls[di]
+                pth.Dll_xt = v.RDlls_xt[di]
+                pth.SDh = v.RDhd[di]
+
+    
 def loadldlls():
     import config as v
 
     try:
         with open(v.ldllsf, "rb") as fh:
             td = pickle.load(fh)
-            v.SDlls = td["ldlls"]
-            v.SDlls_xt = td["ldlls_xt"]
+            v.LDlls = td["ldlls"]
+            v.LDlls_xt = td["ldlls_xt"]
     except Exception as e:
         print("loadldlls failed", e)
 
@@ -21,8 +85,8 @@ def loadrdlls():
     try:
         with open(v.rdllsf, "rb") as fh:
             td = pickle.load(fh)
-            v.TDlls = td["rdlls"]
-            v.TDlls_xt = td["rdlls_xt"]
+            v.RDlls = td["rdlls"]
+            v.RDlls_xt = td["rdlls_xt"]
     except Exception as e:
         print("loadrdlls failed", e)
 
@@ -31,10 +95,10 @@ def saveldlls():
     import config as v
 
     # print('-saveldlls')
-    if v.SDlls_changed:
+    if v.LDlls_changed:
         try:
             with open(v.ldllsf, "wb") as fh:
-                td = {"ldlls": v.SDlls, "ldlls_xt": v.SDlls_xt}
+                td = {"ldlls": v.LDlls, "ldlls_xt": v.LDlls_xt}
                 pickle.dump(td, fh)
                 v.SDlls_changed = False
         except Exception as e:
@@ -45,12 +109,12 @@ def saverdlls():
     import config as v
 
     # print('-saverdlls')
-    if v.TDlls_changed:
+    if v.RDlls_changed:
         try:
             with open(v.rdllsf, "wb") as fh:
-                td = {"rdlls": v.TDlls, "rdlls_xt": v.TDlls_xt}
+                td = {"rdlls": v.RDlls, "rdlls_xt": v.RDlls_xt}
                 pickle.dump(td, fh)
-                v.TDlls_changed = False
+                v.RDlls_changed = False
         except Exception as e:
             print("saverdlls failed", e)
 
@@ -158,16 +222,17 @@ def saverdh():
 
 def load_all():
     loadrdlls()
-    # loadldlls()
+    loadldlls()
     loadedges()
     loadfmd5h()
     loadldh()
     loadrdh()
-
+    after_load()
 
 def save_all():
+    prep_save()
     saverdlls()
-    # saveldlls()
+    saveldlls()
     saveedges()
     savefmd5h()
     saveldh()
