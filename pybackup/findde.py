@@ -8,7 +8,7 @@ from pathlib import Path
 import asyncrun as ar
 import config as v
 from fmd5h import fmd5f
-from status import changed_ops, rupdatets, updatets
+from status import changed_ops, updatets
 
 
 def findDE(dl, rp: Path):
@@ -19,6 +19,7 @@ def findDE(dl, rp: Path):
 
 
 def getRemoteDEs(rd: Path, fl: list[str]):
+    pt = type(rd)
     cmd = 'rclone lsjson "' + str(rd) + '" '
     for fn in fl:
         cmd += '--include "' + fn + '" '
@@ -31,7 +32,7 @@ def getRemoteDEs(rd: Path, fl: list[str]):
         delst = []
         jsl = json.loads(ar.txt)
         for it in jsl:
-            it1 = Path(it["Path"])
+            it1 = pt(it["Path"])
             it2 = it["Size"]
             it3 = it["ModTime"][:-1] + "-00:00"
             it3 = datetime.datetime.fromisoformat(it3).timestamp()
@@ -79,10 +80,11 @@ def findSDEs(fp: Path):
     sil = findSis(fp)
     de_l = []
     for si in sil:
+        p = v.src(si)
         rp = sil[si]
-        if si in v.SDlls:
-            de, i = findDE(v.SDlls[si], rp)
-            de_l.append((v.SDlls[si], rp, de, i, si))
+        if p.Dll:
+            de, i = findDE(p.Dll, rp)
+            de_l.append((p.Dll, rp, de, i, si))
     return de_l
 
 
@@ -90,85 +92,88 @@ def findTDEs(fp: Path):
     dil = findDis(fp)
     de_l = []
     for di in dil:
+        p = v.tgt(di)
         rp = dil[di]
-        if di in v.TDlls:
-            de, i = findDE(v.TDlls[di], rp)
-            de_l.append((v.TDlls[di], rp, de, i, di))
+        if p.Dll:
+            de, i = findDE(p.Dll, rp)
+            de_l.append((p.Dll, rp, de, i, di))
     return de_l
 
 
 def updateDEs(rd: Path, flst: list[str]):
     sdel = getRemoteDEs(rd, flst)
     for sde in sdel:
-        fp = Path(rd, sde.nm)
+        fp = rd / sde.nm
         sdes = findSDEs(fp)
         tdes = findTDEs(fp)
 
         def doSOne(dl, rp, tde, i, si):
+            p = v.src(si)
             if sde:
                 if tde:
                     print("update", sde.nm, "->", tde.nm)
                     if tde.i.sz != sde.i.sz:
                         print("size mismatch")
                         tde.i.sz = sde.i.sz
-                        v.SDlls_xt[si] = time.time()
-                        v.SDlls_changed = True
+                        p.Dll_xt = time.time()
+                        p.Dll_changed = True
                     if tde.i.mt != sde.i.mt:
                         print("modtime mismatch")
                         tde.i.mt = sde.i.mt
-                        v.SDlls_xt[si] = time.time()
-                        v.SDlls_changed = True
+                        p.Dll_xt = time.time()
+                        p.Dll_changed = True
                     if tde.i.md5 != sde.i.md5:
                         print("md5 mismatch")
                         tde.i.md5 = sde.i.md5
-                        v.SDlls_xt[si] = time.time()
-                        v.SDlls_changed = True
+                        p.Dll_xt = time.time()
+                        p.Dll_changed = True
                 else:
                     print("insert", sde.nm)
                     fse = fmd5f(fp, sde.i.sz, sde.i.mt, sde.i.md5)
                     tde = v.DE(rp, fse)
                     dl.insert(i, tde)
-                    v.SDlls_xt[si] = time.time()
-                    v.SDlls_changed = True
+                    p.Dll_xt = time.time()
+                    p.Dll_changed = True
             else:
                 if tde:
                     print("delete", rp)
                     dl.pop(i)
-                    v.SDlls_xt[si] = time.time()
-                    v.SDlls_changed = True
+                    p.Dll_xt = time.time()
+                    p.Dll_changed = True
 
         def doTOne(dl, rp, tde, i, di):
+            p = v.tgt(di)
             if sde:
                 if tde:
                     print("update", sde.nm, "->", tde.nm)
                     if tde.i.sz != sde.i.sz:
                         print("size mismatch")
                         tde.i.sz = sde.i.sz
-                        v.TDlls_xt[di] = time.time()
-                        v.TDlls_changed = True
+                        p.Dll_xt = time.time()
+                        p.Dll_changed = True
                     if tde.i.mt != sde.i.mt:
                         print("modtime mismatch")
                         tde.i.mt = sde.i.mt
-                        v.TDlls_xt[di] = time.time()
-                        v.TDlls_changed = True
+                        p.Dll_xt = time.time()
+                        p.Dll_changed = True
                     if tde.i.md5 != sde.i.md5:
                         print("md5 mismatch")
                         tde.i.md5 = sde.i.md5
-                        v.TDlls_xt[di] = time.time()
-                        v.TDlls_changed = True
+                        p.Dll_xt = time.time()
+                        p.Dll_changed = True
                 else:
                     print("insert", sde.nm)
                     fse = fmd5f(fp, sde.i.sz, sde.i.mt, sde.i.md5)
                     tde = v.DE(rp, fse)
                     dl.insert(i, tde)
-                    v.TDlls_xt[di] = time.time()
-                    v.TDlls_changed = True
+                    p.Dll_xt = time.time()
+                    p.Dll_changed = True
             else:
                 if tde:
                     print("delete", rp)
                     dl.pop(i)
-                    v.TDlls_xt[di] = time.time()
-                    v.TDlls_changed = True
+                    p.Dll_xt = time.time()
+                    p.Dll_changed = True
 
         for it in sdes:
             doSOne(*it)

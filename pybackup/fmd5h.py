@@ -1,9 +1,5 @@
 from hashlib import md5
 
-from snoop import pp, snoop
-
-import config as v
-
 
 def md5sumf(Fn):
     if Fn.exists():
@@ -19,6 +15,8 @@ def md5sumf(Fn):
 
 
 def fmd5f(fp, sz, mt, nh=None):
+    import config as v
+
     d1 = v.fmd5hd
     if fp not in d1:  # new
         v.hf_dm += 1

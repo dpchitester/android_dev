@@ -7,16 +7,15 @@ from os import walk
 from pathlib import Path
 from typing import Callable, Dict, List, Set, Tuple, TypeAlias, Union
 
-from ldsv import load_all
 from cscopy import CSCopy
 from csrestore import CSRestore
 from edge import Edge, addArc, addDep
-from gitops import GitOps, gitck1, gitck2, gitremoteck
+from gitops import GitOps
+from ldsv import load_all
 from localcopy import LocalCopy
 from mkzip import Mkzip
 from opbase import OpBase, OpBaseEncoder
-from sd import *
-from statushash import ldhck, rdhck
+from store import *
 
 NodeTag: TypeAlias = str
 
@@ -96,12 +95,15 @@ dl0_cs = 0
 dl1_cs = 0
 dl2_cs = 0
 dl3_cs = 0
+dl4_cs = 0
+dl5_cs = 0
 
-home:Ext3|None = None
-sdcard:Fat32|None = None
-cloud1:CS|None = None
-cloud2:CS|None = None
-cloud3:CS|None = None
+home: Ext3 | None = None
+sdcard: Fat32 | None = None
+cloud1: CS | None = None
+cloud2: CS | None = None
+cloud3: CS | None = None
+
 
 def initConfig():
     global home, sdcard, cloud1, cloud2, cloud3
@@ -127,7 +129,7 @@ def initConfig():
     #    print(pf.name, str(pf))
 
     load_all()
-    
+
     addPre("sd", sdcard)
     addPre("proj", ppre("sd") / "projects")
     addPre("gd", cloud1)
@@ -156,17 +158,26 @@ def initConfig():
     global worktree
     worktree = ppre("sd") / "projects"
 
-    srcs.add("git_index")
-    lckers["git_index"] = partial(gitck1, "git_index", worktree)
+    gi1 = GitIndex(worktree)
+    gi1.tag = "git_index"
+    addSrcDir("git_index", gi1)
 
-    srcs.add("git")
-    lckers["git"] = partial(gitck2, "git", worktree)
+    gre1 = GitRepo(worktree)
+    gre1.tag = "git"
+    gre1.rmts = ["bitbucket", "github"]
+    addSrcDir("git", gre1)
 
-    tgts.add("bitbucket")
-    tgts.add("github")
+    gr1 = GitRemote(worktree)
+    gr1.url = "https://www.bitbucket.org/dpchitester/android_dev.git"
+    gr1.tag = "bitbucket"
+    gr1.rmt = "bitbucket"
+    addTgtDir("bitbucket", gr1)
 
-    rckers["bitbucket"] = partial(gitremoteck, "bitbucket", worktree)
-    rckers["github"] = partial(gitremoteck, "github", worktree)
+    gr2 = GitRemote(worktree)
+    gr2.url = "https://github.com/dpchitester/android_dev.git"
+    gr2.tag = "github"
+    gr2.rmt = "github"
+    addTgtDir("github", gr2)
 
     addTgtDir("home", ppre("FLAGS"))
     addTgtDir("bin", tgt("home") / "bin")
@@ -325,37 +336,48 @@ def cdir(s):
 
 
 def addTgtDir(tg, pth):
-    if not isinstance(pth, Path):
-        pth = Path(pth)
+    if not isinstance(pth, SD):
+        raise Exception("not an SD type")
     if tg in paths and paths[tg] != pth:
         raise Exception("path tag collision", tg, pth, paths[tg])
     paths[tg] = pth
+    pth.tag = tg
+    pth.istgt = True
     tgts.add(tg)
-    rckers[tg] = partial(rdhck, tg)
 
 
 def addSrcDir(tg, pth, iscode=False):
-    if not isinstance(pth, Path):
-        pth = Path(pth)
+    if not isinstance(pth, SD):
+        raise Exception("not an SD type")
     if tg in paths and paths[tg] != pth:
         raise Exception("path tag collision", tg, pth, paths[tg])
     paths[tg] = pth
+    pth.tag = tg
+    pth.issrc = True
     srcs.add(tg)
-    lckers[tg] = partial(ldhck, tg)
     if iscode:
         codes.add(tg)
 
 
 def addPre(tg, frag):
-    if not isinstance(frag, Path):
-        frag = Path(frag)
+    if not isinstance(frag, SD):
+        raise Exception("not an SD type")
     if tg in paths and paths[tg] != frag:
         raise Exception("path tag collision", tg, paths[tg])
     paths[tg] = frag
+    frag.tag = tg
     pres.add(tg)
 
 
-dexs = {".cache", ".git", "node_modules", "__pycache__", ".ropeproject", ".mypyproject"}
+dexs = {
+    ".cache",
+    ".git",
+    "node_modules",
+    "__pycache__",
+    ".ropeproject",
+    ".mypyproject",
+    ".mypy_cache",
+}
 
 
 def proc_dirs(dirs, pt):
@@ -420,5 +442,3 @@ class DE:
 
     def __hash__(self):
         return hash((self.nm, self.i.sz, self.i.mt, self.i.md5))
-
-

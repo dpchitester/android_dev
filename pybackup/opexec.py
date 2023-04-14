@@ -1,12 +1,10 @@
 import asyncio
 
 import config as v
-from status import changed_ops, rupdatets, updatets
+from status import changed_ops, updatets
 from toposort import topological_sort
 
 _pass = 1
-
-tsks = []
 
 
 def incp():

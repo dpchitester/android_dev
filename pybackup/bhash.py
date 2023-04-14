@@ -2,10 +2,10 @@ from hashlib import blake2b
 from pathlib import Path, PosixPath
 from struct import pack, unpack
 
-from sd import *
 
 def bhu(ho, it1):
     from config import DE, FSe
+    from store import CS, SD, Ext3, Fat32, Local, Remote
 
     bhuf = {
         bytes: lambda it: ho.update(it),
@@ -15,6 +15,8 @@ def bhu(ho, it1):
         Path: lambda it: ho.update(str(it).encode()),
         PosixPath: lambda it: ho.update(str(it).encode()),
         SD: lambda it: ho.update(str(it).encode()),
+        Local: lambda it: ho.update(str(it).encode()),
+        Remote: lambda it: ho.update(str(it).encode()),
         Ext3: lambda it: ho.update(str(it).encode()),
         Fat32: lambda it: ho.update(str(it).encode()),
         CS: lambda it: ho.update(str(it).encode()),

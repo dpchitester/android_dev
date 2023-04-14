@@ -41,7 +41,6 @@ def getfl(p):
         return fl
 
 
-
 def getdll0():  # remote-entire-drive
     v.dl0_cs += 1
     td = v.ppre("gd")
@@ -76,11 +75,11 @@ def getdll0():  # remote-entire-drive
 def sepdlls(dlls):
     print("-sepdlls")
     for di in v.tgts:
-        if di.startswith("gd_"):
+        bd = v.tgt(di)
+        if bd.isremote:
             v.TDlls[di] = []
             v.TDlls_xt[di] = time.time()
             v.TDlls_changed = True
-            bd = v.tgts(di)
             rd = bd.relative_to(v.ppre("gd"))
             tds = str(rd) + "/"
             i = bisect_left(dlls, tds, key=lambda de: de.nm)
@@ -144,7 +143,7 @@ def getdll1(di):  # remote-target
 
 
 def getdll5(si):  # remote-source
-    v.dl1_cs += 1
+    v.dl5_cs += 1
     td = v.src(si)
     # print('getdll1', di, str(td))
     cmd = 'rclone lsjson "' + str(td) + '" --recursive --files-only --hash --fast-list '
@@ -237,7 +236,7 @@ def getdll3(si):  # local-source
 
 
 def getdll4(di):  # local-target
-    v.dl3_cs += 1
+    v.dl4_cs += 1
     td = v.tgt(di)
     # print('getdll4', si, str(sd))
     l1 = getfl(td)
@@ -269,51 +268,41 @@ def getrdlls():  # remote entire drive
 
 
 def sDlld(si):
-    def getfn(si):
-        if "gd_" in si:
-            return getdll5
-        else:
-            return getdll3
-
+    p = v.src(si)
     # print('-ldlld', si)
-    # print("obtaining", si, "ldll...", end="")
-    if si not in v.SDlls or v.SDlls_xt[si] + rto1 <= time.time():
-        rv = getfn(si)(si)
+    print("obtaining", si, "ldll...", end="")
+    if p.Dll is None or p.Dll_xt + rto1 <= time.time():
+        rv = p.getdll()
         if rv is not None:
-            # print("done.")
-            v.SDlls[si] = rv
-            v.SDlls_xt[si] = time.time()
-            v.SDlls_changed = True
+            print("done.")
+            p.Dll = rv
+            p.Dll_xt = time.time()
+            p.Dll_changed = True
         else:
             print("failed.")
     else:
-        # print("retrieved.")
+        print("retrieved.")
         pass
-    return v.SDlls[si]
+    return p.Dll
 
 
 def tDlld(di):
-    def getfn(di):
-        if "gd_" in di:
-            return getdll1
-        else:
-            return getdll4
-
+    p = v.tgt(di)
     # print('-rdlld', di)
-    # print("obtaining", di, "rdll...", end="")
-    if di not in v.TDlls or v.TDlls_xt[di] + rto2 <= time.time():
-        rv = getfn(di)(di)
+    print("obtaining", di, "rdll...", end="")
+    if p.Dll is None or p.Dll_xt + rto1 <= time.time():
+        rv = p.getdll()
         if rv is not None:
-            # print("done.")
-            v.TDlls[di] = rv
-            v.TDlls_xt[di] = time.time()
-            v.TDlls_changed = True
+            print("done.")
+            p.Dll = rv
+            p.Dll_xt = time.time()
+            p.Dll_changed = True
         else:
             print("failed.")
     else:
-        # print("retrieved.")
+        print("retrieved.")
         pass
-    return v.TDlls[di]
+    return p.Dll
 
 
 def dllcmp(do, dn):

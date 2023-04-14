@@ -3,9 +3,9 @@ import pickle
 from pathlib import Path
 
 
-
 def loadldlls():
     import config as v
+
     try:
         with open(v.ldllsf, "rb") as fh:
             td = pickle.load(fh)
@@ -17,6 +17,7 @@ def loadldlls():
 
 def loadrdlls():
     import config as v
+
     try:
         with open(v.rdllsf, "rb") as fh:
             td = pickle.load(fh)
@@ -28,6 +29,7 @@ def loadrdlls():
 
 def saveldlls():
     import config as v
+
     # print('-saveldlls')
     if v.SDlls_changed:
         try:
@@ -41,6 +43,7 @@ def saveldlls():
 
 def saverdlls():
     import config as v
+
     # print('-saverdlls')
     if v.TDlls_changed:
         try:
@@ -54,6 +57,7 @@ def saverdlls():
 
 def loadedges():
     import config as v
+
     try:
         with open(v.edgepf, "rb") as fh:
             v.eDep = pickle.load(fh)
@@ -63,6 +67,7 @@ def loadedges():
 
 def saveedges():
     import config as v
+
     # print("-saveedges")
     try:
         with open(v.edgepf, "wb") as fh:
@@ -73,6 +78,7 @@ def saveedges():
 
 def loadfmd5h():
     import config as v
+
     try:
         with open(v.fmd5hf, "rb") as fh:
             v.fmd5hd = pickle.load(fh)
@@ -82,6 +88,7 @@ def loadfmd5h():
 
 def pstats():
     import config as v
+
     print("hash-dict name hit", v.hf_dh)
     print("hash-dict name miss", v.hf_dm)
     print("hash-dict sz-mt hit", v.hf_sth)
@@ -91,10 +98,13 @@ def pstats():
     print("dl1_cs", v.dl1_cs)
     print("dl2_cs", v.dl2_cs)
     print("dl3_cs", v.dl3_cs)
+    print("dl4_cs", v.dl4_cs)
+    print("dl5_cs", v.dl5_cs)
 
 
 def savefmd5h():
     import config as v
+
     if v.hf_dirty:
         try:
             with open(v.fmd5hf, "wb") as fh:
@@ -108,6 +118,7 @@ def savefmd5h():
 
 def loadldh():
     import config as v
+
     try:
         with open(v.ldhpf, "rb") as fh:
             v.LDhd = pickle.load(fh)
@@ -117,6 +128,7 @@ def loadldh():
 
 def loadrdh():
     import config as v
+
     try:
         with open(v.rdhpf, "rb") as fh:
             v.RDhd = pickle.load(fh)
@@ -126,6 +138,7 @@ def loadrdh():
 
 def saveldh():
     import config as v
+
     try:
         with open(v.ldhpf, "wb") as fh:
             pickle.dump(v.LDhd, fh)
@@ -135,6 +148,7 @@ def saveldh():
 
 def saverdh():
     import config as v
+
     try:
         with open(v.rdhpf, "wb") as fh:
             pickle.dump(v.RDhd, fh)
@@ -158,4 +172,3 @@ def save_all():
     savefmd5h()
     saveldh()
     saverdh()
-

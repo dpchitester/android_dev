@@ -8,7 +8,7 @@ import config as v
 from edge import Edge, findEdge
 from findde import updateDEs
 from opbase import OpBase
-from status import onestatus, ronestatus
+from status import onestatus
 
 
 def getfl(p):
@@ -75,6 +75,4 @@ class Mkzip(OpBase):
         if sc > 0:
             if di2 in v.srcs:
                 onestatus(di2)
-            if di2 in v.tgts:
-                ronestatus(di2)
         return (sc, fc)

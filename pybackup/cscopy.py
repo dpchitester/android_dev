@@ -6,12 +6,12 @@ from pathlib import Path
 
 import asyncrun as ar
 import config as v
-from dirlist import dllcmp, sDlld, tDlld
+from dirlist import dllcmp
 from edge import Edge, findEdge
 from findde import updateDEs
 from netup import netup
 from opbase import OpBase
-from status import onestatus, ronestatus
+from status import onestatus
 
 
 class SFc:
@@ -35,7 +35,7 @@ def fsync(di, si, sd, td, sfc):
             + str(td.parent)
             + '" --include "'
             + str(td.name)
-            + '" --progress --log-file="rclone.log" --use-json-log'
+            + '" --progress'
         )
         # cmd += ' --exclude ".git/**" --exclude "__pycache__/**"'
         print(cmd)
@@ -76,12 +76,7 @@ def fsyncl(di, si, sd, td, fl, sfc):
 
 def fdel(di, si, sd, td, sfc):
     if netup():
-        cmd = (
-            'rclone delete "'
-            + str(td)
-            + '"'
-            + ' --progress --log-file "rclone.log" --use-json-log'
-        )
+        cmd = 'rclone delete "' + str(td) + '"' + " --progress"
         print(cmd)
         rc = ar.run2(cmd)
         if rc == 0:
@@ -128,10 +123,10 @@ class BVars:
         self.ac2 = 0
 
     def init2(self):
-        self.src_dls = sDlld(self.si)
+        self.src_dls = self.sd.Dlld()
         if self.src_dls is None:
             self.sfc.fc += 1
-        self.dst_dls = tDlld(self.di)
+        self.dst_dls = self.td.Dlld()
         if self.dst_dls is None:
             self.sfc.fc += 1
         if self.src_dls is not None and self.dst_dls is not None:
@@ -214,6 +209,4 @@ class CSCopy(OpBase):
         if self.sfc.sc > 0:
             if di in v.srcs:
                 onestatus(di)
-            if di in v.tgts:
-                ronestatus(di)
         return self.sfc.value()

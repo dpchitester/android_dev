@@ -13,7 +13,6 @@ from edge import Edge, findEdge
 from findde import updateDEs
 from netup import netup
 from opbase import OpBase
-from statushash import ldh_d, ldhset, rdh_d, rdh_f
 
 
 def fsync(sd, td, tcfc):
@@ -49,18 +48,18 @@ class BVar:
         self.ac1 = 0
 
     def init2(self):
-        self.dhn = ldh_d(self.si)
+        self.dhn = self.sd.sdh_d()
         if self.dhn is None:
             return 1
-        self.dho = rdh_d(self.di)
+        self.dho = self.td.tdh_d()
         if self.dho is None:
             return 1
         if self.dho == self.dhn:
             return 2
-        self.dln = sDlld(self.si)
+        self.dln = self.sd.Dlld()
         if self.dln is None:
             return 3
-        self.dlo = tDlld(self.di)
+        self.dlo = self.td.Dlld()
         if self.dlo is None:
             return 3
         self.f2d, self.f2c = dllcmp(self.dlo, self.dln)
