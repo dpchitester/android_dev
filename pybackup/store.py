@@ -60,7 +60,7 @@ class SD(type(Path())):
         else:
             ch = 'l'
         print("obtaining", self.tag, ch+"dll...", end="")
-        if p.Dll is None or p.Dll_xt + rto1 <= time.time():
+        if p.Dll is None: # or p.Dll_xt + rto1 <= time.time():
             rv = p.getdll()
             if rv is not None:
                 print("done.")
