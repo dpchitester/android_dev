@@ -292,7 +292,7 @@ def initConfig():
         op1 = Mkzip(npl1, npl1, {"zipfile": "projects-git.zip"})
         addArc(op1)
 
-    for si in ("proj", *codes, "zips"):
+    for si in ("proj",):
         p1 = src(si).relative_to(ppre("sd"))
         addTgtDir("gd_" + si, ppre("gd") / p1)
         npl1 = ("gd_" + si, si)
