@@ -104,7 +104,7 @@ def saveldlls():
             with open(v.ldllsf, "wb") as fh:
                 td = {"ldlls": v.LDlls, "ldlls_xt": v.LDlls_xt}
                 pickle.dump(td, fh)
-                v.SDlls_changed = False
+                v.LDlls_changed = False
         except Exception as e:
             print("savedlls failed", e)
 
