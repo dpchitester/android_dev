@@ -55,7 +55,11 @@ class SD(type(Path())):
     def Dlld(self):
         p = self
         # print('-ldlld', si)
-        print("obtaining", self.tag, "dll...", end="")
+        if p.isremote:
+            ch = 'r'
+        else:
+            ch = 'l'
+        print("obtaining", self.tag, ch+"dll...", end="")
         if p.Dll is None or p.Dll_xt + rto1 <= time.time():
             rv = p.getdll()
             if rv is not None:
