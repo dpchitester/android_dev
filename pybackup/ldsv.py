@@ -16,13 +16,13 @@ def prep_save():
             if pth.Dll:
                 v.LDlls[si] = pth.Dll
                 v.LDlls_xt[si] = pth.Dll_xt
-                v.LDlls_changed |= pth.Dlls_changed
+                v.LDlls_changed |= pth.Dll_changed
             v.LDhd[si] = pth.SDh
         else:
             if pth.Dll:
                 v.RDlls[si] = pth.Dll
                 v.RDlls_xt[si] = pth.Dll_xt
-                v.RDlls_changed |= pth.Dlls_changed
+                v.RDlls_changed |= pth.Dll_changed
             v.RDhd[si] = pth.SDh
     for di in v.tgts:
         pth = v.tgt(di)
@@ -30,13 +30,13 @@ def prep_save():
             if pth.Dll:
                 v.LDlls[di] = pth.Dll
                 v.LDlls_xt[di] = pth.Dll_xt
-                v.LDlls_changed |= pth.Dlls_changed
+                v.LDlls_changed |= pth.Dll_changed
             v.LDhd[di] = pth.SDh
         else:
             if pth.Dll:
                 v.RDlls[di] = pth.Dll
                 v.RDlls_xt[di] = pth.Dll_xt
-                v.RDlls_changed |= pth.Dlls_changed
+                v.RDlls_changed |= pth.Dll_changed
             v.RDhd[di] = pth.SDh
 
 def after_load():
