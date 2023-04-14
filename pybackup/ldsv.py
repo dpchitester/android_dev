@@ -2,6 +2,7 @@ import os
 import pickle
 from pathlib import Path
 
+from store import FS_Mixin
 
 def prep_save():
     import config as v
@@ -15,13 +16,13 @@ def prep_save():
     for si in v.srcs:
         pth = v.src(si)
         if not pth.isremote:
-            if pth.Dll:
+            if isinstance(pth, FS_Mixin) and pth.Dll:
                 v.LDlls[si] = pth.Dll
                 v.LDlls_xt[si] = pth.Dll_xt
                 v.LDlls_changed |= pth.Dll_changed
             v.LDhd[si] = pth.SDh
         else:
-            if pth.Dll:
+            if isinstance(pth, FS_Mixin) and pth.Dll:
                 v.RDlls[si] = pth.Dll
                 v.RDlls_xt[si] = pth.Dll_xt
                 v.RDlls_changed |= pth.Dll_changed
@@ -29,13 +30,13 @@ def prep_save():
     for di in v.tgts:
         pth = v.tgt(di)
         if not pth.isremote:
-            if pth.Dll:
+            if isinstance(pth, FS_Mixin) and pth.Dll:
                 v.LDlls[di] = pth.Dll
                 v.LDlls_xt[di] = pth.Dll_xt
                 v.LDlls_changed |= pth.Dll_changed
             v.LDhd[di] = pth.SDh
         else:
-            if pth.Dll:
+            if isinstance(pth, FS_Mixin) and pth.Dll:
                 v.RDlls[di] = pth.Dll
                 v.RDlls_xt[di] = pth.Dll_xt
                 v.RDlls_changed |= pth.Dll_changed
@@ -48,24 +49,24 @@ def after_load():
     for si in v.srcs:
         pth = v.src(si)
         if not pth.isremote:
-            if si in v.LDlls:
+            if si in v.LDlls and isinstance(pth, FS_Mixin):
                 pth.Dll = v.LDlls[si]
                 pth.Dll_xt = v.LDlls_xt[si]
                 pth.SDh = v.LDhd[si]
         else:
-            if si in v.RDlls:
+            if si in v.RDlls and isinstance(pth, FS_Mixin):
                 pth.Dll = v.RDlls[si]
                 pth.Dlls_xt = v.RDlls_xt[si]
                 pth.SDh = v.RDhd[si]
     for di in v.tgts:
         pth = v.tgt(di)
         if not pth.isremote:
-            if di in v.LDlls:
+            if di in v.LDlls and isinstance(pth, FS_Mixin):
                 pth.Dll = v.LDlls[di]
                 pth.Dll_xt = v.LDlls_xt[di]
                 pth.SDh = v.LDhd[di]
         else:
-            if di in v.RDlls:
+            if di in v.RDlls and isinstance(pth, FS_Mixin):
                 pth.Dll = v.RDlls[di]
                 pth.Dll_xt = v.RDlls_xt[di]
                 pth.SDh = v.RDhd[di]
