@@ -11,22 +11,10 @@ rto1 = 60 * 15
 rto2 = 60 * 15
 
 
-class SD(type(Path())):
-    _flavour = type(Path())._flavour
-    tag = None
-    issrc = None
-    istgt = None
-    isremote = False
+class FS_Mixin:
     Dll = None
     Dll_xt = 0
     Dll_changed = False
-    SDh = None
-
-    def sdh_f(self, dh=None):
-        odh = self.SDh
-        if dh is not None:
-            self.SDh = dh
-        return odh
 
     def sdh_d(self):
         from bhash import blakeHash
@@ -35,22 +23,6 @@ class SD(type(Path())):
         if Si_dl is not None:
             return blakeHash(Si_dl)
         return None
-
-    def sdhset(self, Dh=None):
-        import ldsv
-
-        if Dh is None:
-            Dh = self.sdh_d()
-        if Dh is not None:
-            self.sdh_f(Dh)
-            ldsv.saveldh()
-
-    def sdhck(self):
-        Dh1 = self.sdh_f()
-        Dh2 = self.sdh_d()
-        if Dh2 is not None:
-            return (Dh2, Dh1 != Dh2)
-        return (None, False)
 
     def Dlld(self):
         p = self
@@ -75,9 +47,52 @@ class SD(type(Path())):
         return p.Dll
 
 
-class Local(SD):
-    _flavour = type(Path())._flavour
+class CFS_Mixin(FS_Mixin):
+    def getfl(self):
+        import config as v
 
+        cmd = 'rclone lsjson "' + str(self) + '" --recursive --files-only --hash '
+        for ex in v.dexs:
+            cmd += ' --exclude "**/' + ex + '/*" '
+        rc = ar.run1(cmd)
+        if rc == 0:
+            l1 = json.loads(ar.txt)
+            return l1
+        if rc == 3:
+            return []
+        return None
+
+    def getdll(self):  # remote-source
+        import config as v
+        from fmd5h import fmd5f
+
+        v.dl5_cs += 1
+        pt = type(self)
+        # print('getdll1', di, str(td))
+        l1 = self.getfl()
+        if l1:
+
+            def es(it: dict):
+                # TODO: use Path
+                it1 = pt(it["Path"])
+                it2 = it["Size"]
+                it3 = it["ModTime"][:-1] + "-00:00"
+                it3 = datetime.datetime.fromisoformat(it3).timestamp()
+                if "Hashes" in it:
+                    it4 = bytes.fromhex(it["Hashes"]["md5"])
+                else:
+                    it4 = bytes()
+                fp = self / it1
+                fse = fmd5f(fp, it2, it3, it4)
+                return v.DE(it1, fse)
+
+            st = list(map(es, l1))
+            st.sort(key=lambda de: de.nm)
+            return st
+        return None
+
+
+class PFS_Mixin(FS_Mixin):
     def getfl(self):
         import config as v
 
@@ -125,64 +140,56 @@ class Local(SD):
         return st
 
 
+class SD(type(Path())):
+    _flavour = type(Path())._flavour
+    tag = None
+    issrc = None
+    istgt = None
+    SDh = None
+
+    def sdh_f(self, dh=None):
+        odh = self.SDh
+        if dh is not None:
+            self.SDh = dh
+        return odh
+
+    def sdhset(self, Dh=None):
+        import ldsv
+
+        if Dh is None:
+            Dh = self.sdh_d()
+        if Dh is not None:
+            self.sdh_f(Dh)
+            ldsv.saveldh()
+
+    def sdhck(self):
+        Dh1 = self.sdh_f()
+        Dh2 = self.sdh_d()
+        if Dh2 is not None:
+            return (Dh2, Dh1 != Dh2)
+        return (None, False)
+
+
+class Local(SD):
+    _flavour = type(Path())._flavour
+    isremote = False
+
+
 class Remote(SD):
     _flavour = type(Path())._flavour
     isremote = True
 
 
-class Ext3(Local):
+class Ext3(Local, PFS_Mixin):
     _flavour = type(Path())._flavour
 
 
-class Fat32(Local):
+class Fat32(Local, PFS_Mixin):
     _flavour = type(Path())._flavour
 
 
-class CS(Remote):
+class CS(Remote, CFS_Mixin):
     _flavour = type(Path())._flavour
-
-    def getfl(self):
-        import config as v
-
-        cmd = 'rclone lsjson "' + str(self) + '" --recursive --files-only --hash '
-        for ex in v.dexs:
-            cmd += ' --exclude "**/' + ex + '/*" '
-        rc = ar.run1(cmd)
-        if rc == 0:
-            l1 = json.loads(ar.txt)
-            return l1
-        if rc == 3:
-            return []
-        return None
-
-    def getdll(self):  # remote-source
-        import config as v
-        from fmd5h import fmd5f
-
-        v.dl5_cs += 1
-        pt = type(self)
-        # print('getdll1', di, str(td))
-        l1 = self.getfl()
-        if l1:
-
-            def es(it: dict):
-                # TODO: use Path
-                it1 = pt(it["Path"])
-                it2 = it["Size"]
-                it3 = it["ModTime"][:-1] + "-00:00"
-                it3 = datetime.datetime.fromisoformat(it3).timestamp()
-                if "Hashes" in it:
-                    it4 = bytes.fromhex(it["Hashes"]["md5"])
-                else:
-                    it4 = bytes()
-                fp = self / it1
-                fse = fmd5f(fp, it2, it3, it4)
-                return v.DE(it1, fse)
-
-            st = list(map(es, l1))
-            st.sort(key=lambda de: de.nm)
-            return st
-        return None
 
 
 class GitCmdFailure(Exception):
