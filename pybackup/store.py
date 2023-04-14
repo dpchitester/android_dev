@@ -245,7 +245,7 @@ class GitRemote(Remote):
         return self.gitremoteck()
 
     def gitremoteck(self):
-        Dh1 = self.tdh_f()
+        Dh1 = self.sdh_f()
         Dh2 = None
         # print(Di, 'status here')
         cmd = ""
