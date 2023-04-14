@@ -234,8 +234,11 @@ class GitRepo(Local):
 
 class GitRemote(Remote):
     rmt = None
+    url = None
 
 
+    def sdhck(self):
+        return self.gitremoteck()
     def tdhck(self):
         return self.gitremoteck()
 
