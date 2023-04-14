@@ -70,9 +70,8 @@ class Mkzip(OpBase):
             except Exception as e:
                 print(e)
                 fc += 1
+            if sc > 0:
+                onestatus(di2)
         if fc == 0:
             e.clr()
-        if sc > 0:
-            if di2 in v.srcs:
-                onestatus(di2)
         return (sc, fc)
