@@ -46,7 +46,6 @@ def src_statuses():
     return SDl
 
 
-
 def updatets(N):
     print("Status", N)
     Sl = src_statuses()
@@ -57,8 +56,6 @@ def updatets(N):
         print()
 
 
-
 if __name__ == "__main__":
     updatets(1)
     print(changed_ops())
-

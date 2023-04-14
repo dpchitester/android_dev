@@ -125,7 +125,6 @@ def initConfig():
     # for pf in [edgepf, ldllsf, rdllsf, fmd5hf, ldhpf, rdhpf]:
     #    print(pf.name, str(pf))
 
-
     addPre("sd", sdcard)
     addPre("proj", ppre("sd") / "projects")
     addPre("gd", cloud1)
@@ -303,6 +302,7 @@ def initConfig():
         addArc(op1)
 
     load_all()
+
 
 def ppre(s):
     if s in pres:

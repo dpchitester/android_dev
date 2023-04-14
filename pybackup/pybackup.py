@@ -97,7 +97,6 @@ def rt2():
     ldsv.save_all()
 
 
-
 def main():
     print("-main")
     v.initConfig()

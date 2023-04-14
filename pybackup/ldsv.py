@@ -2,8 +2,10 @@ import os
 import pickle
 from pathlib import Path
 
+
 def prep_save():
     import config as v
+
     v.LDlls = {}
     v.LDlls_xt = {}
     v.LDhd = {}
@@ -39,8 +41,10 @@ def prep_save():
                 v.RDlls_changed |= pth.Dll_changed
             v.RDhd[di] = pth.SDh
 
+
 def after_load():
     import config as v
+
     for si in v.srcs:
         pth = v.src(si)
         if not pth.isremote:
@@ -66,7 +70,7 @@ def after_load():
                 pth.Dll_xt = v.RDlls_xt[di]
                 pth.SDh = v.RDhd[di]
 
-    
+
 def loadldlls():
     import config as v
 
@@ -222,12 +226,13 @@ def saverdh():
 
 def load_all():
     loadrdlls()
-    loadldlls()
+    # loadldlls()
     loadedges()
     loadfmd5h()
     loadldh()
     loadrdh()
     after_load()
+
 
 def save_all():
     prep_save()

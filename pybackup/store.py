@@ -1,14 +1,14 @@
 import datetime
-import time
-from pathlib import Path, PosixPath
-from os import walk
 import json
+import time
+from os import walk
+from pathlib import Path, PosixPath
 
 import asyncrun as ar
 import ldsv
 
-rto1 = 60 * 0
-rto2 = 60 * 0
+rto1 = 60 * 15
+rto2 = 60 * 15
 
 
 class SD(type(Path())):
@@ -74,7 +74,6 @@ class SD(type(Path())):
 class Local(SD):
     _flavour = type(Path())._flavour
 
-
     def getfl(self):
         import config as v
 
@@ -138,7 +137,6 @@ class Fat32(Local):
 class CS(Remote):
     _flavour = type(Path())._flavour
 
-
     def getfl(self):
         import config as v
 
@@ -195,12 +193,12 @@ def gitcmd(cmd, wt):
 
 
 class GitIndex(Local):
-
     def sdhck(self):
         return self.gitck1()
 
     def gitck1(self):
         from bhash import blakeHash
+
         Dh1 = self.sdh_f()
         cmd = "git status --porcelain --untracked-files=all"
         rv = gitcmd(cmd, self)
@@ -214,7 +212,6 @@ class GitIndex(Local):
 
 class GitRepo(Local):
     rmts = None
-
 
     def sdhck(self):
         return self.gitck2()
@@ -232,13 +229,14 @@ class GitRepo(Local):
             self.sdhset(Dh2)
         return (Dh2, Dh2 > Dh1)
 
+
 class GitRemote(Remote):
     rmt = None
     url = None
 
-
     def sdhck(self):
         return self.gitremoteck()
+
     def tdhck(self):
         return self.gitremoteck()
 
