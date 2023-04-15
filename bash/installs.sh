@@ -163,26 +163,8 @@
 # pkg install xz-utils
 # pkg install zlib
 # pkg install zstd
-# pip install ----------------- -------
-# pip install asttokens         2.2.1
-# pip install async-to-sync     0.2.3
-# pip install black             23.3.0
-# pip install cheap-repr        0.5.1
-# pip install click             8.1.3
-# pip install executing         1.2.0
-# pip install isort             5.12.0
-# pip install mypy              1.2.0
-# pip install mypy-extensions   1.0.0
-# pip install packaging         23.0
-# pip install pathspec          0.11.1
-# pip install pip               23.0.1
-# pip install platformdirs      3.2.0
-# pip install pyflakes          3.0.1
-# pip install Pygments          2.14.0
-# pip install pytoolconfig      1.2.5
-# pip install rope              1.7.0
-# pip install setuptools        67.6.1
-# pip install six               1.16.0
-# pip install snoop             0.4.3
-# pip install tarjan            0.2.3.2
-# pip install typing_extensions 4.5.0
+# pip install ------------- -------
+# pip install async-to-sync 0.2.3
+# pip install pip           23.0.1
+# pip install setuptools    67.6.1
+# pip install tarjan        0.2.3.2
