@@ -1,7 +1,7 @@
 import time
 
 rto1 = 60 * 15
-rto2 = 60 * 15
+rto2 = 60 * 1
 
 
 class FS_Mixin:
@@ -24,7 +24,7 @@ class FS_Mixin:
             ch = "r"
         else:
             ch = "l"
-        if p.Dll is None:  # or p.Dll_xt + rto1 <= time.time():
+        if p.Dll is None or p.Dll_xt + rto1 <= time.time():
             print("obtaining", self.tag, ch + "dll...", end="")
             rv = p.getdll()
             if rv is not None:
