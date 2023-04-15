@@ -42,7 +42,7 @@ class GitCommit(Local):
         return (Dh2, rv > 0 and Dh2 != Dh1)
 
 class GitRepo(Local):
-    rmts = None
+    rmts = []
 
     def sdhck(self):
         return self.gitck2()

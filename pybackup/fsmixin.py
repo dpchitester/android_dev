@@ -6,7 +6,7 @@ rto2 = 60 * 15
 
 class FS_Mixin:
     Dll = None
-    Dll_xt = 0
+    Dll_xt = 0.0
     Dll_changed = False
 
     def sdh_d(self):

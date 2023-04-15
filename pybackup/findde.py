@@ -186,7 +186,7 @@ def test1():
     updatets(0)
     rd = v.src("pybackup")
     f = "findde.py"
-    updateDEs(rd, f)
+    updateDEs(rd, [f])
     updatets(1)
     print(changed_ops())
 

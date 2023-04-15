@@ -74,9 +74,9 @@ def sepdlls(dlls):
     for di in v.tgts:
         bd = v.tgt(di)
         if bd.isremote:
-            v.TDlls[di] = []
-            v.TDlls_xt[di] = time.time()
-            v.TDlls_changed = True
+            v.RDlls[di] = []
+            v.RDlls_xt[di] = time.time()
+            v.RDlls_changed = True
             rd = bd.relative_to(v.ppre("gd"))
             tds = str(rd) + "/"
             i = bisect_left(dlls, tds, key=lambda de: de.nm)

@@ -3,7 +3,7 @@ from edge import Edge, findEdge
 from gitclasses import gitcmd
 from netup import netup
 from opbase import OpBase
-from config import v
+import config as v
 
 class GitAdd(OpBase):
     def __init__(self, npl1, npl2, opts={}):

@@ -7,8 +7,8 @@ from typing import Dict, List, Set, Tuple, TypeAlias
 from cscopy import CSCopy
 from de import DE, FSe
 from edge import Edge, addArc, addDep
-from gitclasses import GitIndex, GitRemote, GitRepo
-from gitops import GitOps
+from gitclasses import GitAdd, GitCommit, GitRepo, GitRemote
+from gitops import GitAdd as opGitAdd, GitCommit as opGitCommit, GitPush as opGitPush
 from ldsv import load_all
 from localcopy import LocalCopy
 from mkzip import Mkzip
@@ -64,15 +64,15 @@ LDlls_changed: bool = False
 RDlls_changed: bool = False
 
 # pickle file filenames
-edgepf: Path | None = None
-ldllsf: Path | None = None
-rdllsf: Path | None = None
-fmd5hf: Path | None = None
-ldhpf: Path | None = None
-rdhpf: Path | None = None
+edgepf: Path = None
+ldllsf: Path = None
+rdllsf: Path = None
+fmd5hf: Path  = None
+ldhpf: Path = None
+rdhpf: Path = None
 
 # worktree of git repo
-worktree: Path | None = None
+worktree: Path = None
 
 # directory list hashing stats
 hf_dirty: bool = False
@@ -150,30 +150,30 @@ def initConfig():
     global worktree
     worktree = ppre("sd") / "projects"
 
-    gi1 = GitAdd(worktree)
-    gi1.tag = "git_add"
-    addSrcDir("git_add", gi1)
+    ga1 = GitAdd(worktree)
+    ga1.tag = "git_add"
+    addSrcDir("git_add", ga1)
 
-    gi1 = GitCommit(worktree)
-    gi1.tag = "git_commit"
-    addSrcDir("git_commit", gi1)
+    gc1 = GitCommit(worktree)
+    gc1.tag = "git_commit"
+    addSrcDir("git_commit", gc1)
     
     gre1 = GitRepo(worktree)
     gre1.tag = "git"
     gre1.rmts = ["bitbucket", "github"]
     addSrcDir("git", gre1)
 
-    gr1 = GitRemote(worktree)
-    gr1.url = "https://www.bitbucket.org/dpchitester/android_dev.git"
-    gr1.tag = "bitbucket"
-    gr1.rmt = "bitbucket"
-    addTgtDir("bitbucket", gr1)
+    gre2 = GitRemote(worktree)
+    gre2.url = "https://www.bitbucket.org/dpchitester/android_dev.git"
+    gre2.tag = "bitbucket"
+    gre2.rmt = "bitbucket"
+    addTgtDir("bitbucket", gre2)
 
-    gr2 = GitRemote(worktree)
-    gr2.url = "https://github.com/dpchitester/android_dev.git"
-    gr2.tag = "github"
-    gr2.rmt = "github"
-    addTgtDir("github", gr2)
+    gre3 = GitRemote(worktree)
+    gre3.url = "https://github.com/dpchitester/android_dev.git"
+    gre3.tag = "github"
+    gre3.rmt = "github"
+    addTgtDir("github", gre3)
 
     addTgtDir("home", ppre("FLAGS"))
     addTgtDir("bin", tgt("home") / "bin")
@@ -266,15 +266,15 @@ def initConfig():
 
     if "NOGIT" not in os.environ:
         npl1 = ("git_commit", "git_add")
-        op1 = GitAdd(npl1, None, {"wt": worktree})
+        op1 = opGitAdd(npl1, npl1, {"wt": worktree})
         addArc(op1)
 
         npl1 = ("git", "git_commit")
-        op1 = GitCommit(npl1, None, {"wt": worktree})
+        op1 = opGitCommit(npl1, npl1, {"wt": worktree})
         addArc(op1)
 
         npl1 = ("bitbucket", "git")
-        op1 = GitPush(
+        op1 = opGitPush(
             npl1,
             None,
             {"wt": worktree, "rmt": "bitbucket"},
@@ -282,7 +282,7 @@ def initConfig():
         addArc(op1)
 
         npl1 = ("github", "git")
-        op1 = GitPush(
+        op1 = opGitPush(
             npl1, 
             None, 
             {"wt": worktree, "rmt": "github"},

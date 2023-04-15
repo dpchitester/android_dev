@@ -66,8 +66,8 @@ class Mkzip(OpBase):
                 utime(fp, ns=(maxt, maxt))
                 sc += 1
                 updateDEs(td, [zf])
-            except Exception as e:
-                print(e)
+            except Exception as er:
+                print(er)
                 fc += 1
             if sc > 0:
                 onestatus(di2)
