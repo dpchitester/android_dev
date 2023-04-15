@@ -13,23 +13,33 @@ def gitcmd(cmd, wt):
     return ar.txt.rstrip()
 
 
-class GitIndex(Local):
+class GitAdd(Local):
     def sdhck(self):
-        return self.gitck1()
-
-    def gitck1(self):
-        from bhash import blakeHash
-
         Dh1 = self.sdh_f()
         cmd = "git status --porcelain --untracked-files=all"
         rv = gitcmd(cmd, self)
-        Dh2 = blakeHash(rv)
-        if len(rv) == 0:
+        rv = rv.split('\n')
+        rv = len([ln for ln in rv if len(ln)>1 and ln[1]!=' '])
+        Dh2 = rv
+        if rv == 0:
             self.sdhset(Dh2)
         elif Dh2 != Dh1:
             print(rv)
-        return (Dh2, len(rv) > 0 and Dh2 != Dh1)
+        return (Dh2, rv > 0 and Dh2 != Dh1)
 
+class GitCommit(Local):
+    def sdhck(self):
+        Dh1 = self.sdh_f()
+        cmd = "git status --porcelain --untracked-files=all"
+        rv = gitcmd(cmd, self)
+        rv = rv.split('\n')
+        rv = len([ln for ln in rv if len(ln)>1 and ln[0]!=' '])
+        Dh2 = rv
+        if rv == 0:
+            self.sdhset(Dh2)
+        elif Dh2 != Dh1:
+            print(rv)
+        return (Dh2, rv > 0 and Dh2 != Dh1)
 
 class GitRepo(Local):
     rmts = None
@@ -48,7 +58,7 @@ class GitRepo(Local):
         Dh2 = rv
         if Dh2 == 0:
             self.sdhset(Dh2)
-        return (Dh2, Dh2 > Dh1)
+        return (Dh2, rv > 0 and Dh2 != Dh1)
 
 
 class GitRemote(Remote):

@@ -141,7 +141,7 @@ def initConfig():
         dl = getDL(ppre("proj"))
         for d in dl:
             addSrcDir(d.name, d, True)
-            addDep("git_index", d.name)
+            addDep("git_add", d.name)
             addDep("zips", d.name)
             addDep("proj", d.name)
 
@@ -150,10 +150,14 @@ def initConfig():
     global worktree
     worktree = ppre("sd") / "projects"
 
-    gi1 = GitIndex(worktree)
-    gi1.tag = "git_index"
-    addSrcDir("git_index", gi1)
+    gi1 = GitAdd(worktree)
+    gi1.tag = "git_add"
+    addSrcDir("git_add", gi1)
 
+    gi1 = GitCommit(worktree)
+    gi1.tag = "git_commit"
+    addSrcDir("git_commit", gi1)
+    
     gre1 = GitRepo(worktree)
     gre1.tag = "git"
     gre1.rmts = ["bitbucket", "github"]
@@ -261,21 +265,27 @@ def initConfig():
     addArc(op1)
 
     if "NOGIT" not in os.environ:
-        npl1 = ("git", "git_index")
-        op1 = GitOps(npl1, None, {"wt": worktree, "add": True, "commit": True})
+        npl1 = ("git_commit", "git_add")
+        op1 = GitAdd(npl1, None, {"wt": worktree})
+        addArc(op1)
+
+        npl1 = ("git", "git_commit")
+        op1 = GitCommit(npl1, None, {"wt": worktree})
         addArc(op1)
 
         npl1 = ("bitbucket", "git")
-        op1 = GitOps(
+        op1 = GitPush(
             npl1,
             None,
-            {"wt": worktree, "rmt": "bitbucket", "pull": True, "push": True},
+            {"wt": worktree, "rmt": "bitbucket"},
         )
         addArc(op1)
 
         npl1 = ("github", "git")
-        op1 = GitOps(
-            npl1, None, {"wt": worktree, "rmt": "github", "pull": True, "push": True}
+        op1 = GitPush(
+            npl1, 
+            None, 
+            {"wt": worktree, "rmt": "github"},
         )
         addArc(op1)
 
