@@ -16,7 +16,7 @@ def prep_save():
         pth = v.src(si)
         if not pth.isremote:
             if isinstance(pth, FS_Mixin):
-                v.LDlls[si] = pth.Dll
+                v.LDlls[si] = None # pth.Dll
                 v.LDlls_xt[si] = pth.Dll_xt
                 v.LDlls_changed |= pth.Dll_changed
             v.LDhd[si] = pth.SDh
@@ -30,7 +30,7 @@ def prep_save():
         pth = v.tgt(di)
         if not pth.isremote:
             if isinstance(pth, FS_Mixin):
-                v.LDlls[di] = pth.Dll
+                v.LDlls[di] = None # pth.Dll
                 v.LDlls_xt[di] = pth.Dll_xt
                 v.LDlls_changed |= pth.Dll_changed
             v.LDhd[di] = pth.SDh
@@ -50,7 +50,7 @@ def after_load():
         if not pth.isremote:
             if isinstance(pth, FS_Mixin):
                 try:
-                    # pth.Dll = v.LDlls[si]
+                    pth.Dll = None # v.LDlls[si]
                     pth.Dll_xt = v.LDlls_xt[si]
                     pth.SDh = v.LDhd[si]
                 except:
@@ -68,7 +68,7 @@ def after_load():
         if not pth.isremote:
             if isinstance(pth, FS_Mixin):
                 try:
-                    # pth.Dll = v.LDlls[di]
+                    pth.Dll = None # v.LDlls[di]
                     pth.Dll_xt = v.LDlls_xt[di]
                     pth.SDh = v.LDhd[di]
                 except:
