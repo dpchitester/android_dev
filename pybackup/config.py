@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Dict, List, Set, Tuple, TypeAlias
 
 from cscopy import CSCopy
-from de import DE
+from de import DE, FSe
 from edge import Edge, addArc, addDep
 from gitclasses import GitIndex, GitRemote, GitRepo
 from gitops import GitOps
@@ -47,8 +47,7 @@ Hdt1: TypeAlias = Dict[NodeTag, Hash]
 LDhd: Hdt1 = {}
 RDhd: Hdt1 = {}
 
-Hde: TypeAlias = Tuple[int, float, Hash]
-Hdt2: TypeAlias = Dict[Path, Hde]
+Hdt2: TypeAlias = Dict[Path, FSe]
 
 # local file md5 hashes
 fmd5hd: Hdt2 = {}
