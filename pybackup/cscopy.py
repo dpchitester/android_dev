@@ -166,7 +166,12 @@ class BVars:
                 self.ac2 += 1
                 self.f2d.remove(rf)
             updateDEs(self.td, [str(de.nm) for de in cfpl])
-
+        else:
+            print('deleting failed')
+            self.td.Dll = None
+            self.td.Dlld()
+            if di in v.srcs:
+                onestatus(di)
 
 class CSCopy(OpBase):
     def __init__(self, npl1, npl2, opts={}):
