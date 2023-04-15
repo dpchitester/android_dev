@@ -92,11 +92,11 @@ dl3_cs = 0
 dl4_cs = 0
 dl5_cs = 0
 
-home: Ext3 | None = None
-sdcard: Fat32 | None = None
-cloud1: CS | None = None
-cloud2: CS | None = None
-cloud3: CS | None = None
+home: Ext3 = None
+sdcard: Fat32 = None
+cloud1: CS = None
+cloud2: CS = None
+cloud3: CS = None
 
 
 def initConfig():
@@ -299,7 +299,7 @@ def initConfig():
     # op1 = Mkzip(npl1, npl1, {"zipfile": "projects-git.zip"})
     # addArc(op1)
 
-    for si in ("proj",):
+    for si in ("proj", *codes, "vids", "zips"):
         p1 = src(si).relative_to(ppre("sd"))
         addTgtDir("gd_" + si, ppre("gd") / p1)
         npl1 = ("gd_" + si, si)

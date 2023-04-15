@@ -108,9 +108,12 @@ def updateDEs(rd: Path, flst: list[str]):
         tdes = findTDEs(fp)
 
         def doSOne(dl, rp, tde, i, si):
-            sde = [sde for sde in sdel if sde.nm.name==tde.nm.name]
-            if len(sde):
-                sde = sde[0]
+            if tde:
+                sde = [sde for sde in sdel if sde.nm.name==tde.nm.name]
+                if len(sde):
+                    sde = sde[0]
+                else:
+                    sde = None
             else:
                 sde = None
             p = v.src(si)
@@ -137,9 +140,12 @@ def updateDEs(rd: Path, flst: list[str]):
                     dl.pop(i)
 
         def doTOne(dl, rp, tde, i, di):
-            sde = [sde for sde in sdel if sde.nm.name==tde.nm.name]
-            if len(sde):
-                sde = sde[0]
+            if tde:
+                sde = [sde for sde in sdel if sde.nm.name==tde.nm.name]
+                if len(sde):
+                    sde = sde[0]
+                else:
+                    sde = None
             else:
                 sde = None
             p = v.tgt(di)
