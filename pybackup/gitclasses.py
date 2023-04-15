@@ -1,5 +1,5 @@
 import asyncrun as ar
-from sd import Local, Remote
+from sd import SD, Local, Remote
 
 
 class GitCmdFailure(Exception):

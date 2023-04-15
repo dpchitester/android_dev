@@ -28,25 +28,13 @@ def wsetup():
         try:
             p = v.src(si)
             pt = type(p)
-            if isinstance(p, FS_Mixin):
-                rv = in1.add_watch(str(p), flags.MODIFY)
-                wdsi[rv] = (si, p)
-                if p.is_dir():
-                    # TODO: not up to date
-                    for pth, dirs, files in walk(p, topdown=True):
-                        pth = pt(pth)
-                        if ".git" in pth.parts:
-                            dirs = []
-                            break
-                        if ".git" in dirs:
-                            dirs.remove(".git")
-                        if "__pycache__" in dirs:
-                            dirs.remove("__pycache__")
-                        for d in dirs:
-                            cp = pth / d
-                            rv = in1.add_watch(str(cp), flags.MODIFY)
-                            wdsi[rv] = (si, cp)
-                            # asyncio.sleep(0)
+            if p.is_dir() and not v.isbaddir(p) and isinstance(p, FS_Mixin):
+                # TODO: not up to date
+                for pth, dirs, files in walk(p, topdown=True):
+                    pth = pt(pth)
+                    v.proc_dirs(dirs, pt)
+                    rv = in1.add_watch(str(pth), flags.MODIFY)
+                    wdsi[rv] = (si, pth)
         except Exception as e:
             print(e)
     print(len(wdsi), "watches")
@@ -103,7 +91,7 @@ def rt2():
             rv1 = opExec()
         proc_events()
         ldsv.save_all()
-        time.sleep(2)
+        asyncio.sleep(2)
 
 
 def main():
