@@ -3,6 +3,7 @@ import asyncio
 from os import environ, walk
 from pathlib import Path
 import multiprocessing as mp
+import time
 
 import config as v
 import ldsv
@@ -92,7 +93,7 @@ def rt2():
             print("backups appear pending")
             rv1 = opExec()
         ldsv.save_all()
-        time.sleep(12)
+        time.sleep(2)
 
 
 def main():
