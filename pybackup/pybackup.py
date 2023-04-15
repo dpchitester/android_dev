@@ -11,6 +11,7 @@ import status as st
 from config import src, srcs
 
 from inotify_simple import INotify, flags, Event
+from findde import updateDEs
 from fsmixin import FS_Mixin
 from netup import netup
 from opexec import clean, opExec
