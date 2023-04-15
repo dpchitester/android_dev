@@ -102,12 +102,17 @@ def findTDEs(fp: Path):
 
 def updateDEs(rd: Path, flst: list[str]):
     sdel = getRemoteDEs(rd, flst)
-    for sde in sdel:
-        fp = rd / sde.nm
+    for fi in flst:
+        fp = rd / fi
         sdes = findSDEs(fp)
         tdes = findTDEs(fp)
 
         def doSOne(dl, rp, tde, i, si):
+            sde = [sde for sde in sdel if sde.nm.name==tde.nm.name]
+            if len(sde):
+                sde = sde[0]
+            else:
+                sde = None
             p = v.src(si)
             if sde:
                 if tde:
@@ -115,33 +120,28 @@ def updateDEs(rd: Path, flst: list[str]):
                     if tde.i.sz != sde.i.sz:
                         print("size mismatch")
                         tde.i.sz = sde.i.sz
-                        p.Dll_xt = time.time()
-                        p.Dll_changed = True
                     if tde.i.mt != sde.i.mt:
                         print("modtime mismatch")
                         tde.i.mt = sde.i.mt
-                        p.Dll_xt = time.time()
-                        p.Dll_changed = True
                     if tde.i.md5 != sde.i.md5:
                         print("md5 mismatch")
                         tde.i.md5 = sde.i.md5
-                        p.Dll_xt = time.time()
-                        p.Dll_changed = True
                 else:
                     print("insert", sde.nm)
                     fse = fmd5f(fp, sde.i.sz, sde.i.mt, sde.i.md5)
                     tde = DE(rp, fse)
                     dl.insert(i, tde)
-                    p.Dll_xt = time.time()
-                    p.Dll_changed = True
             else:
                 if tde:
                     print("delete", rp)
                     dl.pop(i)
-                    p.Dll_xt = time.time()
-                    p.Dll_changed = True
 
         def doTOne(dl, rp, tde, i, di):
+            sde = [sde for sde in sdel if sde.nm.name==tde.nm.name]
+            if len(sde):
+                sde = sde[0]
+            else:
+                sde = None
             p = v.tgt(di)
             if sde:
                 if tde:
@@ -149,32 +149,21 @@ def updateDEs(rd: Path, flst: list[str]):
                     if tde.i.sz != sde.i.sz:
                         print("size mismatch")
                         tde.i.sz = sde.i.sz
-                        p.Dll_xt = time.time()
-                        p.Dll_changed = True
                     if tde.i.mt != sde.i.mt:
                         print("modtime mismatch")
                         tde.i.mt = sde.i.mt
-                        p.Dll_xt = time.time()
-                        p.Dll_changed = True
                     if tde.i.md5 != sde.i.md5:
                         print("md5 mismatch")
                         tde.i.md5 = sde.i.md5
-                        p.Dll_xt = time.time()
-                        p.Dll_changed = True
                 else:
                     print("insert", sde.nm)
                     fse = fmd5f(fp, sde.i.sz, sde.i.mt, sde.i.md5)
                     tde = DE(rp, fse)
                     dl.insert(i, tde)
-                    p.Dll_xt = time.time()
-                    p.Dll_changed = True
             else:
                 if tde:
                     print("delete", rp)
                     dl.pop(i)
-                    p.Dll_xt = time.time()
-                    p.Dll_changed = True
-
         for it in sdes:
             doSOne(*it)
         for it in tdes:
