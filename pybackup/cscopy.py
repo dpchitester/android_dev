@@ -198,7 +198,7 @@ class CSCopy(OpBase):
             if bv.sfc.fc == 0:
                 bv.do_copying()
             if bv.sfc.fc == 0:
-                if "delete" in self.opts and self.opts["delete"]:
+                if "delete" in self.opts and self.opts["delete"] and len(self.f2d):
                     bv.do_deletions()
             if bv.ac2:
                 pass
