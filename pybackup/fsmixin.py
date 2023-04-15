@@ -35,5 +35,5 @@ class FS_Mixin:
             else:
                 print("failed.")
         else:
-            print("retrieved", self.tag, ch + "dll.")
+            print("fetched", self.tag, ch + "dll from cache.")
         return p.Dll
