@@ -1,7 +1,7 @@
 import time
 
-rto1 = 60 * 15
-rto2 = 60 * 1
+rto1 = 60 * 1
+rto2 = 60 * 15
 
 
 class FS_Mixin:
