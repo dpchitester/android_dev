@@ -50,7 +50,7 @@ def after_load():
         if not pth.isremote:
             if isinstance(pth, FS_Mixin):
                 try:
-                    pth.Dll = v.LDlls[si]
+                    # pth.Dll = v.LDlls[si]
                     pth.Dll_xt = v.LDlls_xt[si]
                     pth.SDh = v.LDhd[si]
                 except:
@@ -68,7 +68,7 @@ def after_load():
         if not pth.isremote:
             if isinstance(pth, FS_Mixin):
                 try:
-                    pth.Dll = v.LDlls[di]
+                    # pth.Dll = v.LDlls[di]
                     pth.Dll_xt = v.LDlls_xt[di]
                     pth.SDh = v.LDhd[di]
                 except:
