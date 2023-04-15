@@ -1,5 +1,9 @@
 from os import walk
+import datetime
+import json
 
+import asyncrun as ar
+from de import DE
 from fsmixin import FS_Mixin
 
 
@@ -30,7 +34,6 @@ class PFS_Mixin(FS_Mixin):
 
     def getdll(self):  # local-source
         import config as v
-        from de import DE
         from fmd5h import fmd5f
 
         v.dl3_cs += 1
