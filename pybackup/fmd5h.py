@@ -3,7 +3,7 @@ from hashlib import md5
 
 def md5sumf(Fn):
     if Fn.exists():
-        print("-md5sumf", str(Fn), "\r", end="")
+        # print("-md5sumf", str(Fn))
         ho = md5()
         with open(Fn, "rb") as fh:
             b = fh.read(1 << 15)

@@ -24,8 +24,8 @@ class FS_Mixin:
             ch = "r"
         else:
             ch = "l"
-        print("obtaining", self.tag, ch + "dll...", end="")
         if p.Dll is None:  # or p.Dll_xt + rto1 <= time.time():
+            print("obtaining", self.tag, ch + "dll...", end="")
             rv = p.getdll()
             if rv is not None:
                 print("done.")
@@ -35,6 +35,5 @@ class FS_Mixin:
             else:
                 print("failed.")
         else:
-            print("retrieved.")
-            pass
+            print("retrieved", self.tag, ch + "dll.")
         return p.Dll
