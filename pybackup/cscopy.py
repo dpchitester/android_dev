@@ -159,19 +159,11 @@ class BVars:
 
     def do_deletions(self):
         cfpl = self.f2d.copy()
-        if len(cfpl) == 0:
-            return
         if fdell(self.di, self.si, self.sd, self.td, cfpl, self.sfc):
             for rf in cfpl:  # do deletions
                 self.ac2 += 1
                 self.f2d.remove(rf)
-            updateDEs(self.td, [str(de.nm) for de in cfpl])
-        else:
-            print('deleting failed')
-            self.td.Dll = None
-            self.td.Dlld()
-            if di in v.srcs:
-                onestatus(di)
+        updateDEs(self.td, [str(de.nm) for de in cfpl])
 
 class CSCopy(OpBase):
     def __init__(self, npl1, npl2, opts={}):
