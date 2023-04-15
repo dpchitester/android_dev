@@ -10,13 +10,13 @@ import ldsv
 import status as st
 from config import src, srcs
 
-from inotify_simple import INotify, flags
+from inotify_simple import INotify, flags, Event
 from fsmixin import FS_Mixin
 from netup import netup
 from opexec import clean, opExec
 from status import onestatus, updatets
 
-wdsi = {}
+wdsi: dict[int, tuple[str, FS_Mixin]] = {}
 in1 = None
 cel = None
 
@@ -52,21 +52,28 @@ def wsetup():
 
 tr = 0
 
+sis:dict[str, list[str]] = {}
+
+def proc_events():
+    for si in sis:
+        p = v.src(si)
+        fl = sis[si]
+        sis[si] = []
+        updateDEs(p, fl)
+        
 
 async def cb1():
-    global tr, in1, v
-    sis = set()
+    global tr, in1, v, sis
     evs = in1.read(1000, 1000)
     for ev in evs:
-        print(ev)
         si = wdsi[ev.wd][0]
-        if si in v.srcs:
-            p = v.src(si)
-            if si not in sis:
-                if isinstance(p, FS_Mixin):
-                    sis.add(si)
-                    print("cb1 onestatus", si)
-                    onestatus(si)
+        p = wdsi[ev.wd][1]
+        fn = ev.name
+        if si not in sis:
+            sis[si] = []
+        if fn not in sis[si]:
+            sis[si].append(fn)
+
     tr -= 1
 
 
@@ -92,6 +99,7 @@ def rt2():
         else:
             print("backups appear pending")
             rv1 = opExec()
+        proc_events()
         ldsv.save_all()
         time.sleep(2)
 
