@@ -18,8 +18,8 @@ class GitAdd(Local):
         Dh1 = self.sdh_f()
         cmd = "git status --porcelain --untracked-files=all"
         rv = gitcmd(cmd, self)
-        rv = rv.split('\n')
-        rv = len([ln for ln in rv if len(ln)>1 and ln[1]!=' '])
+        rv = rv.split("\n")
+        rv = len([ln for ln in rv if len(ln) > 1 and ln[1] != " "])
         Dh2 = rv
         if rv == 0:
             self.sdhset(Dh2)
@@ -27,19 +27,21 @@ class GitAdd(Local):
             print(rv)
         return (Dh2, rv > 0 and Dh2 != Dh1)
 
+
 class GitCommit(Local):
     def sdhck(self):
         Dh1 = self.sdh_f()
         cmd = "git status --porcelain --untracked-files=all"
         rv = gitcmd(cmd, self)
-        rv = rv.split('\n')
-        rv = len([ln for ln in rv if len(ln)>1 and ln[0]!=' '])
+        rv = rv.split("\n")
+        rv = len([ln for ln in rv if len(ln) > 1 and ln[0] != " "])
         Dh2 = rv
         if rv == 0:
             self.sdhset(Dh2)
         elif Dh2 != Dh1:
             print(rv)
         return (Dh2, rv > 0 and Dh2 != Dh1)
+
 
 class GitRepo(Local):
     rmts = []

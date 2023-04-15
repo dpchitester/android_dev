@@ -165,6 +165,7 @@ class BVars:
                 self.f2d.remove(rf)
         updateDEs(self.td, [str(de.nm) for de in cfpl])
 
+
 class CSCopy(OpBase):
     def __init__(self, npl1, npl2, opts={}):
         super(CSCopy, self).__init__(npl1, npl2, opts)

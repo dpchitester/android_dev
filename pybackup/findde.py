@@ -109,7 +109,7 @@ def updateDEs(rd: Path, flst: list[str]):
 
         def doSOne(dl, rp, tde, i, si):
             if tde:
-                sde = [sde for sde in sdel if sde.nm.name==tde.nm.name]
+                sde = [sde for sde in sdel if sde.nm.name == tde.nm.name]
                 if len(sde):
                     sde = sde[0]
                 else:
@@ -141,7 +141,7 @@ def updateDEs(rd: Path, flst: list[str]):
 
         def doTOne(dl, rp, tde, i, di):
             if tde:
-                sde = [sde for sde in sdel if sde.nm.name==tde.nm.name]
+                sde = [sde for sde in sdel if sde.nm.name == tde.nm.name]
                 if len(sde):
                     sde = sde[0]
                 else:
@@ -170,6 +170,7 @@ def updateDEs(rd: Path, flst: list[str]):
                 if tde:
                     print("delete", rp)
                     dl.pop(i)
+
         for it in sdes:
             doSOne(*it)
         for it in tdes:

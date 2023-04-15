@@ -7,8 +7,10 @@ from typing import Dict, List, Set, Tuple, TypeAlias
 from cscopy import CSCopy
 from de import DE, FSe
 from edge import Edge, addArc, addDep
-from gitclasses import GitAdd, GitCommit, GitRepo, GitRemote
-from gitops import GitAdd as opGitAdd, GitCommit as opGitCommit, GitPush as opGitPush
+from gitclasses import GitAdd, GitCommit, GitRemote, GitRepo
+from gitops import GitAdd as opGitAdd
+from gitops import GitCommit as opGitCommit
+from gitops import GitPush as opGitPush
 from ldsv import load_all
 from localcopy import LocalCopy
 from mkzip import Mkzip
@@ -67,7 +69,7 @@ RDlls_changed: bool = False
 edgepf: Path = None
 ldllsf: Path = None
 rdllsf: Path = None
-fmd5hf: Path  = None
+fmd5hf: Path = None
 ldhpf: Path = None
 rdhpf: Path = None
 
@@ -157,7 +159,7 @@ def initConfig():
     gc1 = GitCommit(worktree)
     gc1.tag = "git_commit"
     addSrcDir("git_commit", gc1)
-    
+
     gre1 = GitRepo(worktree)
     gre1.tag = "git"
     gre1.rmts = ["bitbucket", "github"]
@@ -283,8 +285,8 @@ def initConfig():
 
         npl1 = ("github", "git")
         op1 = opGitPush(
-            npl1, 
-            None, 
+            npl1,
+            None,
             {"wt": worktree, "rmt": "github"},
         )
         addArc(op1)
