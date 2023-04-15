@@ -34,7 +34,8 @@ def wsetup():
                 if p.is_dir():
                     # TODO: not up to date
                     for pth, dirs, files in walk(p, topdown=True):
-                        if ".git" in pth:
+                        pth = pt(pth)
+                        if ".git" in pth.parts:
                             dirs = []
                             break
                         if ".git" in dirs:
@@ -42,7 +43,7 @@ def wsetup():
                         if "__pycache__" in dirs:
                             dirs.remove("__pycache__")
                         for d in dirs:
-                            cp = pt(pth) / d
+                            cp = pth / d
                             rv = in1.add_watch(str(cp), flags.MODIFY)
                             wdsi[rv] = (si, cp)
                             # asyncio.sleep(0)
