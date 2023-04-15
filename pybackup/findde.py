@@ -7,6 +7,7 @@ from pathlib import Path
 import asyncrun as ar
 import config as v
 from de import DE
+from fsmixin import FS_Mixin
 from fmd5h import fmd5f
 from status import changed_ops, updatets
 
@@ -82,7 +83,7 @@ def findSDEs(fp: Path):
     for si in sil:
         p = v.src(si)
         rp = sil[si]
-        if p.Dll:
+        if isinstance(p, FS_Mixin) and p.Dll:
             de, i = findDE(p.Dll, rp)
             de_l.append((p.Dll, rp, de, i, si))
     return de_l
@@ -94,7 +95,7 @@ def findTDEs(fp: Path):
     for di in dil:
         p = v.tgt(di)
         rp = dil[di]
-        if p.Dll:
+        if isinstance(p, FS_Mixin) and p.Dll:
             de, i = findDE(p.Dll, rp)
             de_l.append((p.Dll, rp, de, i, di))
     return de_l
