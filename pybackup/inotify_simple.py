@@ -64,7 +64,7 @@ class INotify:
             wd (int): The watch descriptor to remove"""
         _libc_call(_libc.inotify_rm_watch, self.fd, wd)
 
-    async def read(self, timeout=None, read_delay=None):
+    def read(self, timeout=None, read_delay=None):
         """Read the inotify file descriptor and return the resulting list of
         :attr:`~inotify_simple.Event` namedtuples (wd, mask, cookie, name).
 
@@ -85,7 +85,7 @@ class INotify:
         pending = self._poller.poll(timeout)
         if pending and read_delay is not None:
             # Wait for more events to accumulate:
-            await asyncio.sleep(read_delay / 1000.0)
+            time.sleep(read_delay / 1000.0)
         # How much data is available to read?
         bytes_avail = ctypes.c_int()
         ioctl(self.fd, FIONREAD, bytes_avail)
