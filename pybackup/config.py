@@ -364,6 +364,7 @@ def addPre(tg, frag):
 
 
 dexs = {
+    ".cargo",
     ".cache",
     ".git",
     "node_modules",
