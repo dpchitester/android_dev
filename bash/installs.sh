@@ -177,6 +177,7 @@
 # pip install pathspec          0.11.1
 # pip install pip               23.0.1
 # pip install platformdirs      3.2.0
+# pip install pyflakes          3.0.1
 # pip install Pygments          2.14.0
 # pip install pytoolconfig      1.2.5
 # pip install rope              1.7.0

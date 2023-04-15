@@ -11,7 +11,7 @@
 # pkg uninstall binutils-bin
 # pkg uninstall binutils-libs
 # pkg uninstall binutils
-pkg uninstall bison
+# pkg uninstall bison
 # pkg uninstall brotli
 # pkg uninstall build-essential
 # pkg uninstall busybox
@@ -23,7 +23,7 @@ pkg uninstall bison
 # pkg uninstall command-not-found
 # pkg uninstall coreutils
 # pkg uninstall curl
-pkg uninstall dart
+# pkg uninstall dart
 # pkg uninstall dash
 # pkg uninstall debianutils
 # pkg uninstall dialog
@@ -132,7 +132,7 @@ pkg uninstall dart
 # pkg uninstall patch
 # pkg uninstall pcre2
 # pkg uninstall pcre
-pkg uninstall perl
+# pkg uninstall perl
 # pkg uninstall pkg-config
 # pkg uninstall procps
 # pkg uninstall psmisc
@@ -177,6 +177,7 @@ pkg uninstall perl
 # pip uninstall pathspec          0.11.1
 # pip uninstall pip               23.0.1
 # pip uninstall platformdirs      3.2.0
+# pip uninstall pyflakes          3.0.1
 # pip uninstall Pygments          2.14.0
 # pip uninstall pytoolconfig      1.2.5
 # pip uninstall rope              1.7.0
