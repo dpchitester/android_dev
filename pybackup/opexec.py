@@ -1,5 +1,3 @@
-import asyncio
-
 import config as v
 from status import changed_ops, updatets
 from toposort import topological_sort
@@ -63,7 +61,7 @@ def proc_nodes(L):
 def opExec():
     print("-opexec")
     g1 = nts()
-    p1 = incp()
+    incp()
     if not proc_nodes(g1):
         return False
     if clean():

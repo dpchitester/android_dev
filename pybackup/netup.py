@@ -39,6 +39,7 @@ async def a_netup2():
 
 
 netup = sync.function(a_netup)
+netup2 = sync.function(a_netup2)
 
 
 if __name__ == "__main__":

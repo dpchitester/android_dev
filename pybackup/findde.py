@@ -2,11 +2,11 @@ import datetime
 import json
 import time
 from bisect import bisect_left
-from math import floor
 from pathlib import Path
 
 import asyncrun as ar
 import config as v
+from de import DE
 from fmd5h import fmd5f
 from status import changed_ops, updatets
 
@@ -41,7 +41,7 @@ def getRemoteDEs(rd: Path, fl: list[str]):
             else:
                 it4 = bytes()
             fse = fmd5f(rd / it1, it2, it3, it4)
-            nde = v.DE(it1, fse)
+            nde = DE(it1, fse)
             print("new nde:", nde.nm, nde.i.sz, nde.i.mt)
             delst.append(nde)
         return delst
@@ -130,7 +130,7 @@ def updateDEs(rd: Path, flst: list[str]):
                 else:
                     print("insert", sde.nm)
                     fse = fmd5f(fp, sde.i.sz, sde.i.mt, sde.i.md5)
-                    tde = v.DE(rp, fse)
+                    tde = DE(rp, fse)
                     dl.insert(i, tde)
                     p.Dll_xt = time.time()
                     p.Dll_changed = True
@@ -164,7 +164,7 @@ def updateDEs(rd: Path, flst: list[str]):
                 else:
                     print("insert", sde.nm)
                     fse = fmd5f(fp, sde.i.sz, sde.i.mt, sde.i.md5)
-                    tde = v.DE(rp, fse)
+                    tde = DE(rp, fse)
                     dl.insert(i, tde)
                     p.Dll_xt = time.time()
                     p.Dll_changed = True

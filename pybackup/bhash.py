@@ -2,11 +2,11 @@ from hashlib import blake2b
 from pathlib import Path, PosixPath
 from struct import pack, unpack
 
+from de import DE, FSe
+from sd import CS, SD, Ext3, Fat32, Local, Remote
+
 
 def bhu(ho, it1):
-    from config import DE, FSe
-    from store import CS, SD, Ext3, Fat32, Local, Remote
-
     bhuf = {
         bytes: lambda it: ho.update(it),
         int: lambda it: ho.update(pack("i", it)),
@@ -29,7 +29,7 @@ def bhu(ho, it1):
     try:
         bhuf[type(it1)](it1)
     except KeyError:
-        print("key error", type(it), "??")
+        print("key error", type(it1), "??")
 
 
 # flattened list blake2b with integer result

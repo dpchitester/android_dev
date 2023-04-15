@@ -1,11 +1,10 @@
 #!/data/data/com.termux/files/usr/bin/env python
 
-import asyncio
-from os import environ, walk
+
+from os import walk
 from pathlib import Path
 
 import config as v
-import dirlist as dl
 import ldsv
 import status as st
 from inotify_simple import flags
@@ -62,9 +61,6 @@ async def cb1():
                 if si in v.srcs:
                     print("cb1 onestatus", si)
                     onestatus(si)
-                if si in v.tgts:
-                    print("cb1 ronestatus", si)
-                    ronestatus(si)
     tr -= 1
 
 

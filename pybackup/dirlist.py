@@ -1,17 +1,14 @@
-import asyncio
 import datetime
 import json
 import time
 from bisect import bisect_left
 from fnmatch import fnmatch
-from math import floor
 from os import walk
 from pathlib import Path
 
-from snoop import pp, snoop
-
 import asyncrun as ar
 import config as v
+from de import DE
 from fmd5h import fmd5f
 
 rto1 = 60 * 0
@@ -33,8 +30,8 @@ def getfl(p):
                 for f in files:
                     fl.append(pth / f)
             else:
-                dirs = []
-                files = []
+                dirs.clear()
+                files.clear()
         return fl
     except Exception as e:
         print(e)
@@ -63,7 +60,7 @@ def getdll0():  # remote-entire-drive
                 it4 = bytes()
             fp = td / it1
             fse = fmd5f(fp, it2, it3, it4)
-            return v.DE(it1, fse)
+            return DE(it1, fse)
 
         st = list(map(es, l1))
         st.sort(key=lambda de: de.nm)
@@ -95,7 +92,7 @@ def sepdlls(dlls):
             while fnmatch(de.nm, tds + "*"):
                 fp = v.ppre("gd") / de.nm
                 fse = fmd5f(fp, de.i.sz, de.i.mt, de.i.md5)
-                de2 = v.DE(de.nm, fse)
+                de2 = DE(de.nm, fse)
                 # TODO: use Path
                 de2.nm = de2.nm.relative_to(rd)
                 v.TDlls[di].append(de2)
@@ -132,7 +129,7 @@ def getdll1(di):  # remote-target
                 it4 = bytes()
             fp = td / it1
             fse = fmd5f(fp, it2, it3, it4)
-            return v.DE(it1, fse)
+            return DE(it1, fse)
 
         st = list(map(es, l1))
         st.sort(key=lambda de: de.nm)
@@ -168,7 +165,7 @@ def getdll5(si):  # remote-source
                 it4 = bytes()
             fp = td / it1
             fse = fmd5f(fp, it2, it3, it4)
-            return v.DE(it1, fse)
+            return DE(it1, fse)
 
         st = list(map(es, l1))
         st.sort(key=lambda de: de.nm)
@@ -203,7 +200,7 @@ def getdll2(si):  # remote-source
                 it4 = bytes()
             fp = td / it1
             fse = fmd5f(fp, it2, it3, it4)
-            return v.DE(it1, fse)
+            return DE(it1, fse)
 
         st = list(map(es, l1))
         st.sort(key=lambda de: de.nm)
@@ -228,7 +225,7 @@ def getdll3(si):  # local-source
         it3 = v.trunc2ms(it3)
         fp = td / it1
         fse = fmd5f(fp, it2, it3)
-        return v.DE(it1, fse)
+        return DE(it1, fse)
 
     st = list(map(es, l1))
     st.sort(key=lambda de: de.nm)
@@ -250,7 +247,7 @@ def getdll4(di):  # local-target
         it3 = v.trunc2ms(it3)
         fp = td / it1
         fse = fmd5f(fp, it2, it3)
-        return v.DE(it1, fse)
+        return DE(it1, fse)
 
     st = list(map(es, l1))
     st.sort(key=lambda de: de.nm)

@@ -16,6 +16,7 @@ def md5sumf(Fn):
 
 def fmd5f(fp, sz, mt, nh=None):
     import config as v
+    from de import FSe
 
     d1 = v.fmd5hd
     if fp not in d1:  # new
@@ -26,7 +27,7 @@ def fmd5f(fp, sz, mt, nh=None):
         else:
             # pp('new fse, supplied md5')
             pass
-        nfse = v.FSe(sz, mt, nh)
+        nfse = FSe(sz, mt, nh)
         d1[fp] = nfse
         v.hf_dirty = True
         return nfse

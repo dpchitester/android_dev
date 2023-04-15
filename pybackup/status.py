@@ -1,5 +1,4 @@
 import config as v
-import ldsv
 from edge import Edge, findEdge
 from opbase import OpBase
 
