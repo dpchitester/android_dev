@@ -108,6 +108,7 @@ def cb2():
 
 def proc_events():
     print("-proc_events-1")
+    print(sis)
     for si in sis:
         print("-proc_events-2")
         p = v.src(si)
