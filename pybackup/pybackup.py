@@ -138,8 +138,7 @@ if __name__ == "__main__":
         try:
             cel.run_until_complete(grp)
         except CancelledError as e:
-            print(e)
-            
+            pass
     except KeyboardInterrupt:
         print("shutting down")
     finally:
