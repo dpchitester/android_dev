@@ -63,6 +63,7 @@ def rt2():
             rv1 = opExec()
             ldsv.save_all()
             print("-rt2-5")
+        asyncio.sleep(0)
         proc_events()
         print("-rt2-6")
 
@@ -91,6 +92,7 @@ async def cb1():
                 if fn not in sis[si]:
                     print("-cb1-8")
                     sis[si].append(rfn)
+            asyncio.sleep(0)
     except Exception as e:
         print(e)
     print("-cb1-9")
