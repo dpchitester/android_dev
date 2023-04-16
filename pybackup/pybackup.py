@@ -128,8 +128,10 @@ if __name__ == "__main__":
     in1 = Inotify()
     cel = asyncio.get_event_loop()
     try:
-        cel.create_task(main())
-        cel.create_task(cb1())
+        tsk1 = cel.create_task(main())
+        tsk2 = cel.create_task(cb1())
+        grp = asyncio.gather(tsk1, tsk2)
+        asyncio.run_until_complete(grp)
     except KeyboardInterrupt:
         print("shutting down")
     finally:
