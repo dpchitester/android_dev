@@ -120,6 +120,7 @@ def proc_events():
 async def main():
     global cel, wdsi, in1, v
     print("-main-1")
+    cel.create_task(cb2())
     wsetup()
     print("-main-2")
     updatets(0)
@@ -135,7 +136,6 @@ if __name__ == "__main__":
     v.initConfig()
     in1 = Inotify()
     cel = asyncio.get_event_loop()
-    cel.create_task(cb2())
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
