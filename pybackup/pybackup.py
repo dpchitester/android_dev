@@ -104,7 +104,7 @@ def cb2():
     if not tr1:
         print("-cb2-2")
         tr1 += 1
-        cb2t = cel.create_task(cb1())
+        cb2t = cel.create_task(cb1)
         
 
 
