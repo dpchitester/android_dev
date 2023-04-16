@@ -101,7 +101,7 @@ async def cb1():
     tr1 -= 1
 
 
-def cb2():
+async def cb2():
     global tr1, cel, cb2t
     print("-cb2-1")
     if not tr1:
@@ -120,7 +120,7 @@ async def main():
     print("-main-2")
     in1 = Inotify()
     print("-main-3")
-    cel.add_reader(in1.fd, cb2)
+    cel.add_reader(in1.fd, cb2())
     print("-main-4")
     wsetup()
     print("-main-5")
