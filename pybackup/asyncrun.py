@@ -56,14 +56,10 @@ def a_run2(shell_command, cwd=None):
         text=True,
         universal_newlines=True,
     )
-    so = p.stdout
-    if so:
-        so = re.sub(r"\r\n", "\n", so)
-        txt = so
     return p.returncode
 
 
 run = a_run
 run1 = a_run1
 run2 = a_run2
-run3 = None
+
