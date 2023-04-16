@@ -69,6 +69,7 @@ async def cb1():
     if cb2t:
         cb2t = None
 
+
 def cb2():
     global tr, cel, cb2t
     print("-cb2")
