@@ -1,9 +1,9 @@
 #!/data/data/com.termux/files/usr/bin/env python
-import asyncio
-from asyncio.exceptions import CancelledError
+import threading as th
+
 from os import environ, walk
 from pathlib import Path
-import multiprocessing as mp
+
 import time
 
 import config as v
@@ -38,14 +38,16 @@ def wsetup():
                 for pth, dirs, files in walk(p, topdown=True):
                     pth = pt(pth)
                     v.proc_dirs(dirs, pt)
-                    wa: Watch = in1.add_watch(pth, Mask.MODIFY | Mask.CLOSE_WRITE | Mask.CREATE | Mask.DELETE)
+                    wa: Watch = in1.add_watch(
+                        pth, Mask.MODIFY | Mask.CLOSE_WRITE | Mask.CREATE | Mask.DELETE
+                    )
                     wdsi[wa] = si
         except Exception as e:
             print(e)
     print(len(wdsi), "watches")
 
 
-async def rt2():
+def rt2():
     print("-rt2-1")
     itc = 0
     while True:
@@ -64,17 +66,16 @@ async def rt2():
             rv1 = opExec()
             ldsv.save_all()
             print("-rt2-5")
-        await asyncio.sleep(0)
         proc_events()
         print("-rt2-6")
 
 
-async def cb1():
+def cb1():
     global tr1, in1, v, sis
     print("-cb1-1")
 
     try:
-        async for ev in in1:
+        for ev in in1:
             # print("-cb1-2", ev)
             si = wdsi[ev.watch]
             # print("-cb1-3", si)
@@ -91,13 +92,10 @@ async def cb1():
                 if fn not in sis[si]:
                     print("-cb1-8", rfn)
                     sis[si].append(rfn)
-            await asyncio.sleep(0)
     except Exception as e:
         print(e)
     print("-cb1-9")
     tr1 -= 1
-
-
 
 
 def proc_events():
@@ -109,42 +107,21 @@ def proc_events():
         sis[si], fl = [], sis[si]
         updateDEs(p, fl)
 
+
 tsk1 = None
 tsk2 = None
 
-async def main():
-    global cel, wdsi, in1, v
-    print("-main-1")
+
+def main():
+    global cel, wdsi, in1, v, th1, th2
+    v.initConfig()
+    in1 = Inotify()
     wsetup()
-    print("-main-2")
     updatets(0)
-    print("-main-3")
-    await rt2()
-    print("-main-4")
-    if cb1t:
-        print("-main-6")
-        # cb1t.cancel()
-    # tsk2.cancel()
+    th1 = th.Thread(target=cb1)
+    th1.start()
+    rt2()
 
 
 if __name__ == "__main__":
-    v.initConfig()
-    in1 = Inotify()
-    cel = asyncio.get_event_loop()
-    try:
-        tsk1 = cel.create_task(main())
-        tsk2 = cel.create_task(cb1())
-        grp = asyncio.gather(tsk1, tsk2)
-        try:
-            cel.run_until_complete(grp)
-        except CancelledError as e:
-            pass
-    except KeyboardInterrupt:
-        print("shutting down")
-    finally:
-        if cb1t and not cb1t.done():
-            cb1t.cancel()
-        if in1:
-            in1.close()
-        cel.run_until_complete(cel.shutdown_asyncgens())
-        cel.close()
+    main()
