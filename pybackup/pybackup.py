@@ -97,14 +97,14 @@ async def cb1():
     tr1 -= 1
 
 
-async def cb2():
+def cb2():
     global tr1, cel, cb1t
     print("-cb2-1")
     if not tr1:
         print("-cb2-2")
         tr1 += 1
         cb1t = cel.create_task(cb1())
-        await c1bt
+
 
 
 def proc_events():
