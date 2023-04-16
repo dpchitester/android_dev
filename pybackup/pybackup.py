@@ -99,7 +99,7 @@ async def cb1():
 
 
 def cb2():
-    global tr, cel, cb2t
+    global tr1, cel, cb2t
     print("-cb2-1")
     if not tr1:
         print("-cb2-2")
