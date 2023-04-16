@@ -104,7 +104,7 @@ def cb2():
     if not tr1:
         print("-cb2-2")
         tr1 += 1
-        cb2t = cel.create_task(cb1)
+        cb2t = cel.create_task(cb1())
         
 
 
@@ -137,5 +137,5 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print('shutting down')
     finally:
-        cel.run_until_complete(loop.shutdown_asyncgens())
+        cel.run_until_complete(cel.shutdown_asyncgens())
         cel.close()
