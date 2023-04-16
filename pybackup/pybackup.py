@@ -18,6 +18,7 @@ from opexec import clean, opExec
 from status import onestatus, updatets
 
 wdsi: dict[int, tuple[str, FS_Mixin]] = {}
+sis: dict[str, list[str]] = {}
 in1 = None
 cel = None
 cb2t = None
@@ -42,7 +43,6 @@ def wsetup():
     print(len(wdsi), "watches")
 
 
-sis: dict[str, list[str]] = {}
 
 def rt2():
     print("-rt2-1")
@@ -140,5 +140,7 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print('shutting down')
     finally:
+        cb2t.cancel()
+        in1.close()
         cel.run_until_complete(cel.shutdown_asyncgens())
         cel.close()
