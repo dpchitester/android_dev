@@ -50,7 +50,6 @@ def rt2():
     while True:
         itc += 1
         print("-rt2-2")
-        proc_events()
         cl = clean()
         if cl:
             print("-rt2-3")
@@ -64,6 +63,7 @@ def rt2():
             rv1 = opExec()
             ldsv.save_all()
             print("-rt2-5")
+        proc_events()
         print("-rt2-6")
 
 
