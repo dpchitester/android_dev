@@ -21,8 +21,9 @@ wdsi: dict[Watch, tuple[str, FS_Mixin]] = {}
 sis: dict[v.NodeTag, list[str]] = {}
 in1 = None
 cel = None
-cb2t = None
+cb1t = None
 tr1 = 0
+
 
 def wsetup():
     global wdsi, in1, v
@@ -36,12 +37,11 @@ def wsetup():
                 for pth, dirs, files in walk(p, topdown=True):
                     pth = pt(pth)
                     v.proc_dirs(dirs, pt)
-                    wa:Watch = in1.add_watch(pth, Mask.MODIFY|Mask.ACCESS)
+                    wa: Watch = in1.add_watch(pth, Mask.MODIFY | Mask.ACCESS)
                     wdsi[wa] = si
         except Exception as e:
             print(e)
     print(len(wdsi), "watches")
-
 
 
 def rt2():
@@ -98,23 +98,21 @@ async def cb1():
 
 
 def cb2():
-    global tr1, cel, cb2t
+    global tr1, cel, cb1t
     print("-cb2-1")
     if not tr1:
         print("-cb2-2")
         tr1 += 1
-        cb2t = cel.create_task(cb1())
-        
+        cb1t = cel.create_task(cb1())
 
 
 def proc_events():
     print("-proc_events-1")
     for si in sis:
-        print('-proc_events-2')
+        print("-proc_events-2")
         p = v.src(si)
         sis[si], fl = [], sis[si]
         updateDEs(p, fl)
-
 
 
 async def main():
@@ -132,19 +130,21 @@ async def main():
     print("-main-6")
     rt2()
     print("-main-7")
-    if cb2t:
+    if cb1t:
         print("-main-8")
-        #cb2t.cancel()
+        # cb1t.cancel()
 
 
 if __name__ == "__main__":
     cel = asyncio.get_event_loop()
     try:
-        cel.run_until_complete(main())
+        asyncio.run(main())
     except KeyboardInterrupt:
-        print('shutting down')
+        print("shutting down")
     finally:
-        cb2t.cancel()
-        in1.close()
+        if cb1t and not cb1t.done():
+            cb1t.cancel()
+        if in1:
+            in1.close()
         cel.run_until_complete(cel.shutdown_asyncgens())
         cel.close()
