@@ -135,7 +135,7 @@ if __name__ == "__main__":
     v.initConfig()
     in1 = Inotify()
     cel = asyncio.get_event_loop()
-    cel.add_reader(in1.fd, cb2())
+    cel.add_reader(in1.fd, cb2)
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
