@@ -44,40 +44,6 @@ def wsetup():
 
 sis: dict[str, list[str]] = {}
 
-
-def proc_events():
-    print("-proc_events")
-    for si in sis:
-        p = v.src(si)
-        sis[si], fl = [], sis[si]
-        updateDEs(p, fl)
-
-
-async def cb1():
-    global tr, in1, v, sis
-    print("-cb1")
-    evs = in1.read(1000, 1000)
-    for ev in evs:
-        si = wdsi[ev.wd][0]
-        p = wdsi[ev.wd][1]
-        fn = ev.name
-        p = p.relative_to(v.src(si))
-        if si not in sis:
-            sis[si] = []
-        if fn not in sis[si]:
-            sis[si].append(p / fn)
-    tr1 -= 1
-
-
-async def cb2():
-    global tr, cel, cb2t
-    print("-cb2")
-    if not tr1:
-        tr1 += 1
-        cb2t = cel.create_task(cb1())
-        
-
-
 def rt2():
     print("-rt2-1")
     itc = 0
@@ -99,17 +65,68 @@ def rt2():
             ldsv.save_all()
         print("-rt2-6")
 
+def proc_events():
+    print("-proc_events-1")
+    for si in sis:
+        print('-proc_events-2')
+        p = v.src(si)
+        sis[si], fl = [], sis[si]
+        updateDEs(p, fl)
+
+
+async def cb1():
+    global tr, in1, v, sis
+    print("-cb1-1")
+    evs = in1.read(1000, 1000)
+    for ev in evs:
+        print("-cb1-2")
+        si = wdsi[ev.wd][0]
+        print("-cb1-3")
+        p = wdsi[ev.wd][1]
+        print("-cb1-4")
+        fn = ev.name
+        print("-cb1-5")
+        p = p.relative_to(v.src(si))
+        print("-cb1-6")
+        if si not in sis:
+            print("-cb1-7")
+            sis[si] = []
+        if fn not in sis[si]:
+            print("-cb1-8")
+            sis[si].append(p / fn)
+    print("-cb1-9")
+    tr1 -= 1
+
+
+def cb2():
+    global tr, cel, cb2t
+    print("-cb2-1")
+    if not tr1:
+        print("-cb2-2")
+        tr1 += 1
+        cb2t = cel.create_task(cb1())
+        
+
+
+
 
 async def main():
     global cel, wdsi, in1, v
-    print("-main")
+    print("-main-1")
     v.initConfig()
+    print("-main-2")
     in1 = INotify()
+    print("-main-3")
     cel.add_reader(in1.fd, cb2)
+    print("-main-4")
     wsetup()
+    print("-main-5")
     updatets(0)
+    print("-main-6")
     rt2()
+    print("-main-7")
     if cb2t:
+        print("-main-8")
         cb2t.cancel()
 
 
