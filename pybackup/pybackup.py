@@ -44,7 +44,7 @@ def wsetup():
     print(len(wdsi), "watches")
 
 
-def rt2():
+async def rt2():
     print("-rt2-1")
     itc = 0
     while True:
@@ -63,7 +63,7 @@ def rt2():
             rv1 = opExec()
             ldsv.save_all()
             print("-rt2-5")
-        asyncio.sleep(0)
+        await asyncio.sleep(0)
         proc_events()
         print("-rt2-6")
 
@@ -116,7 +116,7 @@ async def main():
     print("-main-2")
     updatets(0)
     print("-main-3")
-    rt2()
+    await rt2()
     print("-main-4")
     if cb1t:
         print("-main-6")
