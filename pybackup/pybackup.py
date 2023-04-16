@@ -74,17 +74,17 @@ async def cb1():
 
     try:
         async for ev in in1:
-            print("-cb1-2")
+            print("-cb1-2", ev)
             si = wdsi[ev.watch]
-            print("-cb1-3")
+            print("-cb1-3", si)
             p = ev.path
             if p.is_dir():
-                print("-cb1-4")
+                print("-cb1-4",p)
                 fn = ev.name
-                print("-cb1-5")
+                print("-cb1-5", fn)
                 rp = p.relative_to(v.src(si))
                 rfn = rp / fn
-                print("-cb1-6")
+                print("-cb1-6", rp, rfn)
                 if si not in sis:
                     print("-cb1-7")
                     sis[si] = []
