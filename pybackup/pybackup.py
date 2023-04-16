@@ -9,7 +9,7 @@ import config as v
 import ldsv
 import status as st
 
-from inotify_simple import INotify, flags, Event
+from asyncinotify import Inotify, Mask, Event
 from findde import updateDEs
 from fsmixin import FS_Mixin
 from netup import netup
@@ -35,7 +35,7 @@ def wsetup():
                 for pth, dirs, files in walk(p, topdown=True):
                     pth = pt(pth)
                     v.proc_dirs(dirs, pt)
-                    rv = in1.add_watch(str(pth), flags.MODIFY)
+                    rv = in1.add_watch(pth, Mask.MODIFY|Mask.ACCESS)
                     wdsi[rv] = (si, pth)
         except Exception as e:
             print(e)
@@ -77,8 +77,8 @@ def proc_events():
 async def cb1():
     global tr, in1, v, sis
     print("-cb1-1")
-    evs = in1.read(1000, 1000)
-    for ev in evs:
+
+    async for ev in in1:
         print("-cb1-2")
         si = wdsi[ev.wd][0]
         print("-cb1-3")
@@ -115,7 +115,7 @@ async def main():
     print("-main-1")
     v.initConfig()
     print("-main-2")
-    in1 = INotify()
+    in1 = Inotify()
     print("-main-3")
     cel.add_reader(in1.fd, cb2)
     print("-main-4")
@@ -132,4 +132,10 @@ async def main():
 
 if __name__ == "__main__":
     cel = asyncio.get_event_loop()
-    asyncio.run(main())
+    try:
+        cel.run_until_complete(main())
+    except KeyboardInterrupt:
+        print('shutting down')
+    finally:
+        cel.run_until_complete(loop.shutdown_asyncgens())
+        cel.close()
