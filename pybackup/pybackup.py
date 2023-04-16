@@ -107,7 +107,7 @@ async def cb2():
     if not tr1:
         print("-cb2-2")
         tr1 += 1
-        cb2t = cel.create_task(cb1())
+        cb2t = cel.create_task(cb1)
         
 
 
@@ -120,7 +120,7 @@ async def main():
     print("-main-2")
     in1 = Inotify()
     print("-main-3")
-    cel.add_reader(in1.fd, cb2())
+    cel.add_reader(in1.fd, cb2)
     print("-main-4")
     wsetup()
     print("-main-5")
