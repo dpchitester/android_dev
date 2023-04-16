@@ -97,13 +97,14 @@ async def cb1():
     tr1 -= 1
 
 
-def cb2():
+async def cb2():
     global tr1, cel, cb1t
     print("-cb2-1")
     if not tr1:
         print("-cb2-2")
         tr1 += 1
         cb1t = cel.create_task(cb1())
+        await c1bt
 
 
 def proc_events():
@@ -134,7 +135,7 @@ if __name__ == "__main__":
     v.initConfig()
     in1 = Inotify()
     cel = asyncio.get_event_loop()
-    cel.add_reader(in1.fd, cb2)
+    cel.add_reader(in1.fd, cb2())
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
