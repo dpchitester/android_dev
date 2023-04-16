@@ -130,7 +130,7 @@ async def main():
     print("-main-7")
     if cb2t:
         print("-main-8")
-        cb2t.cancel()
+        #cb2t.cancel()
 
 
 if __name__ == "__main__":
