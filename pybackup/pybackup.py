@@ -66,12 +66,11 @@ def rt2():
             rv1 = opExec()
             ldsv.save_all()
             print("-rt2-5")
-        proc_events()
         print("-rt2-6")
 
 
 def cb1():
-    global tr1, in1, v, sis
+    global th2, in1, v, sis
     print("-cb1-1")
 
     try:
@@ -90,6 +89,9 @@ def cb1():
                 if str(rfn) not in sis[si]:
                     print("-cb1-8", rfn)
                     sis[si].append(str(rfn))
+                    if th2 is None:
+                        th2 = th.Thread(target=proc_events)
+                        th2.start()
     except Exception as e:
         print(e)
     print("-cb1-9")
@@ -97,6 +99,7 @@ def cb1():
 
 
 def proc_events():
+    global th2
     print("-proc_events-1")
     print(sis)
     for si in sis:
@@ -104,12 +107,13 @@ def proc_events():
         p = v.src(si)
         sis[si], fl = [], sis[si]
         if len(fl):
-            print('updateDEs', p, fl)
+            print("updateDEs", p, fl)
             # updateDEs(p, fl)
+    th2 = None
 
 
-tsk1 = None
-tsk2 = None
+th1 = None
+th2 = None
 
 
 def main():
