@@ -37,7 +37,7 @@ def wsetup():
                 for pth, dirs, files in walk(p, topdown=True):
                     pth = pt(pth)
                     v.proc_dirs(dirs, pt)
-                    wa: Watch = in1.add_watch(pth, Mask.MODIFY | Mask.ACCESS)
+                    wa: Watch = in1.add_watch(pth, Mask.ACCESS | Mask.MODIFY | Mask.ATTRIB | Mask.CLOSE_WRITE | Mask.CLOSE_NOWRITE | Mask.OPEN | Mask.MOVED_FROM | Mask.MOVED_TO | Mask.CREATE | Mask.DELETE | Mask.DELETE_SELF | Mask.MOVE_SELF)
                     wdsi[wa] = si
         except Exception as e:
             print(e)
@@ -67,12 +67,12 @@ def rt2():
         print("-rt2-6")
 
 
-def cb1():
+async def cb1():
     global tr1, in1, v, sis
     print("-cb1-1")
 
     try:
-        for ev in in1:
+        async for ev in in1:
             print("-cb1-2")
             si = wdsi[ev.watch]
             print("-cb1-3")
@@ -97,13 +97,13 @@ def cb1():
     tr1 -= 1
 
 
-def cb2():
+async def cb2():
     global tr1, cel, cb1t
     print("-cb2-1")
     if not tr1:
         print("-cb2-2")
         tr1 += 1
-        cb1()
+        await cb1()
 
 
 
@@ -135,7 +135,7 @@ if __name__ == "__main__":
     v.initConfig()
     in1 = Inotify()
     cel = asyncio.get_event_loop()
-    cel.add_reader(in1.fd, cb2)
+    cel.create_task(cb2())
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
