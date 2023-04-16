@@ -75,7 +75,7 @@ def proc_events():
 
 
 async def cb1():
-    global tr, in1, v, sis
+    global tr1, in1, v, sis
     print("-cb1-1")
 
     try:
