@@ -108,6 +108,8 @@ async def main():
     wsetup()
     updatets(0)
     rt2()
+    if cb2t:
+        cb2t.cancel()
 
 
 if __name__ == "__main__":
