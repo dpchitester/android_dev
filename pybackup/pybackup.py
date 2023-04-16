@@ -95,7 +95,6 @@ def cb1():
     except Exception as e:
         print(e)
     print("-cb1-9")
-    tr1 -= 1
 
 
 def proc_events():
