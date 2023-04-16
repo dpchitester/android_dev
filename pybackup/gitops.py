@@ -104,7 +104,7 @@ class GitPush(OpBase):
         if not anyd:
             return (tc, fc)
         if rmt == "local" or (netup()):
-            rc = ar.run2("git push " + rmt + " master", cwd=self.opts["wt"])
+            rc = ar.run2("git push " + rmt + " master --porcelain", cwd=self.opts["wt"])
             if rc == 0:
                 tc += 1
             else:
