@@ -83,8 +83,8 @@ def proc_events():
         p = v.src(si)
         sis[si], fl = [], sis[si]
         if len(fl):
-            print("updateDEs", p, fl)
-            # updateDEs(p, fl)
+            print("-proc_events-3: updateDEs", p, fl)
+            updateDEs(p, fl)
     th2 = None
 
 
@@ -99,15 +99,12 @@ def rt2():
             print("-rt2-3")
             print("no backups appear pending")
             rv1 = False
-            ldsv.save_all()
             break
         else:
             print("-rt2-4")
             print("backups appear pending")
             rv1 = opExec()
-            ldsv.save_all()
-            print("-rt2-5")
-        print("-rt2-6")
+        print("-rt2-5")
 
 
 def main():
@@ -119,7 +116,7 @@ def main():
     th1 = th.Thread(target=cb1)
     th1.start()
     rt2()
-
+    ldsv.save_all()
 
 if __name__ == "__main__":
     main()
