@@ -1,5 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/env python
 import asyncio
+from asyncio.exceptions import CancelledError
 from os import environ, walk
 from pathlib import Path
 import multiprocessing as mp
@@ -134,7 +135,11 @@ if __name__ == "__main__":
         tsk1 = cel.create_task(main())
         tsk2 = cel.create_task(cb1())
         grp = asyncio.gather(tsk1, tsk2)
-        cel.run_until_complete(grp)
+        try:
+            cel.run_until_complete(grp)
+        except CancelledError as e:
+            print(e)
+            
     except KeyboardInterrupt:
         print("shutting down")
     finally:
