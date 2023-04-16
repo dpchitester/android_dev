@@ -8,7 +8,6 @@ import time
 import config as v
 import ldsv
 import status as st
-from config import src, srcs
 
 from inotify_simple import INotify, flags, Event
 from findde import updateDEs
@@ -62,10 +61,11 @@ def cb1():
         si = wdsi[ev.wd][0]
         p = wdsi[ev.wd][1]
         fn = ev.name
+        p = p.relative_to(v.src(si))
         if si not in sis:
             sis[si] = []
         if fn not in sis[si]:
-            sis[si].append(fn)
+            sis[si].append(p / fn)
 
 
 async def cb2():
