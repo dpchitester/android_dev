@@ -78,7 +78,7 @@ async def cb1():
             si = wdsi[ev.watch]
             # print("-cb1-3", si)
             p = ev.path
-            if p.is_file():
+            if not ev.mask & Mask.ISDIR:
                 # print("-cb1-4",p)
                 fn = ev.name
                 # print("-cb1-5", fn)
@@ -88,7 +88,7 @@ async def cb1():
                     # print("-cb1-7")
                     sis[si] = []
                 if fn not in sis[si]:
-                    print("-cb1-8")
+                    print("-cb1-8", rfn)
                     sis[si].append(rfn)
             asyncio.sleep(0)
     except Exception as e:
