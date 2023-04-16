@@ -9,7 +9,7 @@ import config as v
 import ldsv
 import status as st
 
-from asyncinotify import Inotify, Mask, Event
+from asyncinotify import Inotify, Mask, Event, Watch
 from findde import updateDEs
 from fsmixin import FS_Mixin
 from netup import netup
@@ -17,8 +17,8 @@ from opexec import clean, opExec
 
 from status import onestatus, updatets
 
-wdsi: dict[int, tuple[str, FS_Mixin]] = {}
-sis: dict[str, list[str]] = {}
+wdsi: dict[Watch, tuple[str, FS_Mixin]] = {}
+sis: dict[v.NodeTag, list[str]] = {}
 in1 = None
 cel = None
 cb2t = None
@@ -36,8 +36,8 @@ def wsetup():
                 for pth, dirs, files in walk(p, topdown=True):
                     pth = pt(pth)
                     v.proc_dirs(dirs, pt)
-                    rv = in1.add_watch(pth, Mask.MODIFY|Mask.ACCESS)
-                    wdsi[rv] = (si, pth)
+                    wa:Watch = in1.add_watch(pth, Mask.MODIFY|Mask.ACCESS)
+                    wdsi[wa] = si
         except Exception as e:
             print(e)
     print(len(wdsi), "watches")
@@ -56,22 +56,15 @@ def rt2():
             print("-rt2-3")
             print("no backups appear pending")
             rv1 = False
+            ldsv.save_all()
             break
         else:
             print("-rt2-4")
             print("backups appear pending")
             rv1 = opExec()
-            print("-rt2-5")
             ldsv.save_all()
+            print("-rt2-5")
         print("-rt2-6")
-
-def proc_events():
-    print("-proc_events-1")
-    for si in sis:
-        print('-proc_events-2')
-        p = v.src(si)
-        sis[si], fl = [], sis[si]
-        updateDEs(p, fl)
 
 
 async def cb1():
@@ -79,11 +72,13 @@ async def cb1():
     print("-cb1-1")
 
     try:
-        async for ev in in1:
+        for ev in in1:
             print("-cb1-2")
-            si = wdsi[ev.wd][0]
+            si = wdsi[ev.watch]
             print("-cb1-3")
-            p = wdsi[ev.wd][1]
+            p = ev.path
+            if not p.is_dir():
+                p = ev.path.parent
             print("-cb1-4")
             fn = ev.name
             print("-cb1-5")
@@ -110,6 +105,14 @@ def cb2():
         cb2t = cel.create_task(cb1())
         
 
+
+def proc_events():
+    print("-proc_events-1")
+    for si in sis:
+        print('-proc_events-2')
+        p = v.src(si)
+        sis[si], fl = [], sis[si]
+        updateDEs(p, fl)
 
 
 
