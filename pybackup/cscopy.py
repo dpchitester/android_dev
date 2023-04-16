@@ -176,7 +176,7 @@ class CSCopy(OpBase):
 
     def __call__(self):
         di, si = self.npl1
-        print("CSCopy", di, '<-', si)
+        print("CSCopy", si+'->'+di)
         if not netup():
             self.sfc.fc += 1
             return self.sfc.value()
