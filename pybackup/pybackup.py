@@ -131,7 +131,7 @@ if __name__ == "__main__":
         tsk1 = cel.create_task(main())
         tsk2 = cel.create_task(cb1())
         grp = asyncio.gather(tsk1, tsk2)
-        asyncio.run_until_complete(grp)
+        cel.run_until_complete(grp)
     except KeyboardInterrupt:
         print("shutting down")
     finally:
