@@ -87,7 +87,7 @@ def cb1():
                 if si not in sis:
                     # print("-cb1-7")
                     sis[si] = []
-                if fn not in sis[si]:
+                if str(rfn) not in sis[si]:
                     print("-cb1-8", rfn)
                     sis[si].append(str(rfn))
     except Exception as e:
