@@ -118,25 +118,22 @@ def proc_events():
 async def main():
     global cel, wdsi, in1, v
     print("-main-1")
-    v.initConfig()
-    print("-main-2")
-    in1 = Inotify()
-    print("-main-3")
-    cel.add_reader(in1.fd, cb2)
-    print("-main-4")
     wsetup()
-    print("-main-5")
+    print("-main-2")
     updatets(0)
-    print("-main-6")
+    print("-main-3")
     rt2()
-    print("-main-7")
+    print("-main-4")
     if cb1t:
-        print("-main-8")
+        print("-main-6")
         # cb1t.cancel()
 
 
 if __name__ == "__main__":
+    v.initConfig()
+    in1 = Inotify()
     cel = asyncio.get_event_loop()
+    cel.add_reader(in1.fd, cb2)
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
