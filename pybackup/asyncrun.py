@@ -55,7 +55,6 @@ def a_run2(shell_command, cwd=None):
         cwd=cwd,
         text=True,
         universal_newlines=True,
-        capture_output=True,
     )
     so = p.stdout
     if so:
