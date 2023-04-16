@@ -108,6 +108,8 @@ def proc_events():
         sis[si], fl = [], sis[si]
         updateDEs(p, fl)
 
+tsk1 = None
+tsk2 = None
 
 async def main():
     global cel, wdsi, in1, v
@@ -121,6 +123,7 @@ async def main():
     if cb1t:
         print("-main-6")
         # cb1t.cancel()
+    tsk2.cancel()
 
 
 if __name__ == "__main__":
