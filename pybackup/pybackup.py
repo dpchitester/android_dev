@@ -21,7 +21,7 @@ wdsi: dict[int, tuple[str, FS_Mixin]] = {}
 in1 = None
 cel = None
 cb2t = None
-
+tr1 = 0
 
 def wsetup():
     global wdsi, in1, v
@@ -66,14 +66,16 @@ async def cb1():
             sis[si] = []
         if fn not in sis[si]:
             sis[si].append(p / fn)
-    if cb2t:
-        cb2t = None
+    tr1 -= 1
 
 
 def cb2():
     global tr, cel, cb2t
     print("-cb2")
-    cb2t = cel.create_task(cb1())
+    if not tr1:
+        tr1 += 1
+        cb2t = cel.create_task(cb1())
+        
 
 
 def rt2():
