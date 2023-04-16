@@ -175,11 +175,11 @@ class CSCopy(OpBase):
         return e.chk_ct() or e.rchk_ct()
 
     def __call__(self):
-        print("CSCopy")
+        di, si = self.npl1
+        print("CSCopy", di, '<-', si)
         if not netup():
             self.sfc.fc += 1
             return self.sfc.value()
-        di, si = self.npl1
         e: Edge = findEdge(di, si)
         if e.chk_ct():
             bv = BVars(di, si, self.sfc)
