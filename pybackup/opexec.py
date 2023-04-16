@@ -47,7 +47,7 @@ def nts():
 def proc_nodes(L):
     n = 1
     for node in L:
-        print("node:", node)
+        # print("node:", node)
         ss = changed_ops(node)
         for op in ss:
             tc, _ = op()
