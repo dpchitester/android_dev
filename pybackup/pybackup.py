@@ -53,7 +53,7 @@ def proc_events():
         updateDEs(p, fl)
 
 
-def cb1():
+async def cb1():
     global tr, in1, v, sis
     print("-cb1")
     evs = in1.read(1000, 1000)
@@ -66,12 +66,12 @@ def cb1():
             sis[si] = []
         if fn not in sis[si]:
             sis[si].append(p / fn)
+    if cb2t:
+        cb2t = None
 
-async def cb2():
+def cb2():
     global tr, cel, cb2t
     print("-cb2")
-    if cb2t:
-        await cb2t
     cb2t = cel.create_task(cb1())
 
 
@@ -95,7 +95,6 @@ def rt2():
             print("-rt2-5")
             ldsv.save_all()
         print("-rt2-6")
-        time.sleep(10)
 
 
 async def main():
@@ -103,7 +102,7 @@ async def main():
     print("-main")
     v.initConfig()
     in1 = INotify()
-    cel.add_reader(in1.fd, cb2())
+    cel.add_reader(in1.fd, cb2)
     wsetup()
     updatets(0)
     rt2()
