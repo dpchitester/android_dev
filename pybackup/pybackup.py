@@ -67,12 +67,12 @@ def rt2():
         print("-rt2-6")
 
 
-async def cb1():
+def cb1():
     global tr1, in1, v, sis
     print("-cb1-1")
 
     try:
-        async for ev in in1:
+        for ev in in1:
             print("-cb1-2")
             si = wdsi[ev.watch]
             print("-cb1-3")
@@ -103,7 +103,7 @@ def cb2():
     if not tr1:
         print("-cb2-2")
         tr1 += 1
-        cb1t = cel.create_task(cb1())
+        cb1()
 
 
 
