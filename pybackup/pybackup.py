@@ -67,7 +67,6 @@ def cb1():
         if fn not in sis[si]:
             sis[si].append(p / fn)
 
-
 async def cb2():
     global tr, cel, cb2t
     print("-cb2")
@@ -114,4 +113,4 @@ async def main():
 
 if __name__ == "__main__":
     cel = asyncio.get_event_loop()
-    cel.run_until_complete(main())
+    asyncio.run(main())
