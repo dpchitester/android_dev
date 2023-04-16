@@ -103,8 +103,9 @@ def proc_events():
         print("-proc_events-2")
         p = v.src(si)
         sis[si], fl = [], sis[si]
-        print('updateDEs', fl)
-        # updateDEs(p, fl)
+        if len(fl):
+            print('updateDEs', p, fl)
+            # updateDEs(p, fl)
 
 
 tsk1 = None
