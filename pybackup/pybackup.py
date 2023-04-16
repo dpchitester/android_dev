@@ -78,8 +78,7 @@ async def cb1():
             si = wdsi[ev.watch]
             print("-cb1-3")
             p = ev.path
-            if p.is_file():
-                p = ev.path.parent
+            if p.is_dir():
                 print("-cb1-4")
                 fn = ev.name
                 print("-cb1-5")
