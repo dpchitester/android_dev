@@ -78,13 +78,12 @@ async def cb1():
             si = wdsi[ev.watch]
             print("-cb1-3", si)
             p = ev.path
-            if p.is_dir():
+            if p.is_file():
                 print("-cb1-4",p)
                 fn = ev.name
                 print("-cb1-5", fn)
-                rp = p.relative_to(v.src(si))
-                rfn = rp / fn
-                print("-cb1-6", rp, rfn)
+                rfn = p.relative_to(v.src(si))
+                print("-cb1-6", rfn)
                 if si not in sis:
                     print("-cb1-7")
                     sis[si] = []
