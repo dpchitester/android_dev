@@ -15,15 +15,18 @@ from findde import updateDEs
 from fsmixin import FS_Mixin
 from netup import netup
 from opexec import clean, opExec
+
 from status import onestatus, updatets
 
 wdsi: dict[int, tuple[str, FS_Mixin]] = {}
 in1 = None
 cel = None
+cb2t = None
 
 
 def wsetup():
     global wdsi, in1, v
+    print('-wsetup')
     for si in v.srcs:
         try:
             p = v.src(si)
@@ -40,20 +43,19 @@ def wsetup():
     print(len(wdsi), "watches")
 
 
-tr = 0
-
 sis:dict[str, list[str]] = {}
 
+
 def proc_events():
+    print('-proc_events')
     for si in sis:
         p = v.src(si)
-        fl = sis[si]
-        sis[si] = []
+        sis[si], fl = [], sis[si]
         updateDEs(p, fl)
-        
 
-async def cb1():
+def cb1():
     global tr, in1, v, sis
+    print('-cb1')
     evs = in1.read(1000, 1000)
     for ev in evs:
         si = wdsi[ev.wd][0]
@@ -64,45 +66,46 @@ async def cb1():
         if fn not in sis[si]:
             sis[si].append(fn)
 
-    tr -= 1
 
 
-def cb2():
-    global tr, cel
-    if not tr:
-        tr += 1
-        cel.create_task(cb1())
-
-
-ct1 = None
-
+async def cb2():
+    global tr, cel, cb2t
+    print('-cb2')
+    if cb2t:
+        await cb2t
+    cb2t = cel.create_task(cb1())
 
 def rt2():
+    print('-rt2-1')
     itc = 0
     while True:
         itc += 1
+        print('-rt2-2')
         updatets(itc)
+        print('-rt2-3')
         cl = clean()
         if cl:
-            print("backups appear done")
+            print('-rt4')
+            print("no backups appear pending")
             rv1 = False
         else:
+            print('-rt5')
             print("backups appear pending")
             rv1 = opExec()
+            ldsv.save_all()
+        print('-rt2-6')
         proc_events()
-        ldsv.save_all()
-        asyncio.sleep(2)
+        print('-rt2-7')
+        time.sleep(10)
 
-
-def main():
+async def main():
     global cel, wdsi, in1, v
     print("-main")
     v.initConfig()
-    with INotify() as in1:
-        cel.add_reader(in1.fd, cb2)
-        wsetup()
-        rt2()
-
+    in1 = INotify()
+    cel.add_reader(in1.fd, cb2)
+    wsetup()
+    rt2()
 
 if __name__ == "__main__":
     cel = asyncio.get_event_loop()
