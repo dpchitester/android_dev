@@ -97,14 +97,6 @@ async def cb1():
     tr1 -= 1
 
 
-async def cb2():
-    global tr1, cel, cb1t
-    print("-cb2-1")
-    if not tr1:
-        print("-cb2-2")
-        tr1 += 1
-        await cb1()
-
 
 
 def proc_events():
@@ -120,7 +112,6 @@ def proc_events():
 async def main():
     global cel, wdsi, in1, v
     print("-main-1")
-    cel.create_task(cb2())
     wsetup()
     print("-main-2")
     updatets(0)
@@ -137,7 +128,8 @@ if __name__ == "__main__":
     in1 = Inotify()
     cel = asyncio.get_event_loop()
     try:
-        asyncio.run(main())
+        cel.create_task(main())
+        cel.create_task(cb1())
     except KeyboardInterrupt:
         print("shutting down")
     finally:
