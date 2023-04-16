@@ -82,21 +82,20 @@ def rt2():
     while True:
         itc += 1
         print("-rt2-2")
-        updatets(itc)
-        print("-rt2-3")
+        proc_events()
         cl = clean()
         if cl:
-            print("-rt4")
+            print("-rt2-3")
             print("no backups appear pending")
             rv1 = False
+            break
         else:
-            print("-rt5")
+            print("-rt2-4")
             print("backups appear pending")
             rv1 = opExec()
+            print("-rt2-5")
             ldsv.save_all()
         print("-rt2-6")
-        proc_events()
-        print("-rt2-7")
         time.sleep(10)
 
 
@@ -105,8 +104,9 @@ async def main():
     print("-main")
     v.initConfig()
     in1 = INotify()
-    cel.add_reader(in1.fd, cb2)
+    cel.add_reader(in1.fd, cb2())
     wsetup()
+    updatets(0)
     rt2()
 
 
