@@ -124,7 +124,7 @@ async def main():
     if cb1t:
         print("-main-6")
         # cb1t.cancel()
-    tsk2.cancel()
+    # tsk2.cancel()
 
 
 if __name__ == "__main__":
