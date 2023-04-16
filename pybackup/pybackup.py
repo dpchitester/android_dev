@@ -37,7 +37,7 @@ def wsetup():
                 for pth, dirs, files in walk(p, topdown=True):
                     pth = pt(pth)
                     v.proc_dirs(dirs, pt)
-                    wa: Watch = in1.add_watch(pth, Mask.ACCESS | Mask.MODIFY | Mask.ATTRIB | Mask.CLOSE_WRITE | Mask.CLOSE_NOWRITE | Mask.OPEN | Mask.MOVED_FROM | Mask.MOVED_TO | Mask.CREATE | Mask.DELETE | Mask.DELETE_SELF | Mask.MOVE_SELF)
+                    wa: Watch = in1.add_watch(pth, Mask.MODIFY | Mask.CLOSE_WRITE | Mask.CREATE | Mask.DELETE)
                     wdsi[wa] = si
         except Exception as e:
             print(e)
@@ -90,7 +90,7 @@ async def cb1():
                 if fn not in sis[si]:
                     print("-cb1-8", rfn)
                     sis[si].append(rfn)
-            asyncio.sleep(0)
+            await asyncio.sleep(0)
     except Exception as e:
         print(e)
     print("-cb1-9")
