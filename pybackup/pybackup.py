@@ -81,8 +81,6 @@ def cb1():
             # print("-cb1-3", si)
             p = ev.path
             if not ev.mask & Mask.ISDIR:
-                # print("-cb1-4",p)
-                fn = ev.name
                 # print("-cb1-5", fn)
                 rfn = p.relative_to(v.src(si))
                 # print("-cb1-6", rfn)
@@ -91,7 +89,7 @@ def cb1():
                     sis[si] = []
                 if fn not in sis[si]:
                     print("-cb1-8", rfn)
-                    sis[si].append(rfn)
+                    sis[si].append(str(rfn))
     except Exception as e:
         print(e)
     print("-cb1-9")
