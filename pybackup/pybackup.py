@@ -26,7 +26,7 @@ cb2t = None
 
 def wsetup():
     global wdsi, in1, v
-    print('-wsetup')
+    print("-wsetup")
     for si in v.srcs:
         try:
             p = v.src(si)
@@ -43,19 +43,20 @@ def wsetup():
     print(len(wdsi), "watches")
 
 
-sis:dict[str, list[str]] = {}
+sis: dict[str, list[str]] = {}
 
 
 def proc_events():
-    print('-proc_events')
+    print("-proc_events")
     for si in sis:
         p = v.src(si)
         sis[si], fl = [], sis[si]
         updateDEs(p, fl)
 
+
 def cb1():
     global tr, in1, v, sis
-    print('-cb1')
+    print("-cb1")
     evs = in1.read(1000, 1000)
     for ev in evs:
         si = wdsi[ev.wd][0]
@@ -67,36 +68,37 @@ def cb1():
             sis[si].append(fn)
 
 
-
 async def cb2():
     global tr, cel, cb2t
-    print('-cb2')
+    print("-cb2")
     if cb2t:
         await cb2t
     cb2t = cel.create_task(cb1())
 
+
 def rt2():
-    print('-rt2-1')
+    print("-rt2-1")
     itc = 0
     while True:
         itc += 1
-        print('-rt2-2')
+        print("-rt2-2")
         updatets(itc)
-        print('-rt2-3')
+        print("-rt2-3")
         cl = clean()
         if cl:
-            print('-rt4')
+            print("-rt4")
             print("no backups appear pending")
             rv1 = False
         else:
-            print('-rt5')
+            print("-rt5")
             print("backups appear pending")
             rv1 = opExec()
             ldsv.save_all()
-        print('-rt2-6')
+        print("-rt2-6")
         proc_events()
-        print('-rt2-7')
+        print("-rt2-7")
         time.sleep(10)
+
 
 async def main():
     global cel, wdsi, in1, v
@@ -106,6 +108,7 @@ async def main():
     cel.add_reader(in1.fd, cb2)
     wsetup()
     rt2()
+
 
 if __name__ == "__main__":
     cel = asyncio.get_event_loop()

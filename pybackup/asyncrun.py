@@ -12,7 +12,14 @@ idel = 1
 def a_run(shell_command, cwd=None):
     global txt
     txt = ""
-    p = subprocess.run(shell_command, shell=True, cwd=cwd, text=True, universal_newlines=True, capture_output=True)
+    p = subprocess.run(
+        shell_command,
+        shell=True,
+        cwd=cwd,
+        text=True,
+        universal_newlines=True,
+        capture_output=True,
+    )
     so = p.stdout
     if so:
         so = re.sub(r"\r\n", "\n", so)
@@ -25,7 +32,14 @@ def a_run(shell_command, cwd=None):
 def a_run1(shell_command, cwd=None):
     global txt
     txt = ""
-    p = subprocess.run(shell_command, shell=True, cwd=cwd, text=True, universal_newlines=True,capture_output=True)
+    p = subprocess.run(
+        shell_command,
+        shell=True,
+        cwd=cwd,
+        text=True,
+        universal_newlines=True,
+        capture_output=True,
+    )
     so = p.stdout
     if so:
         so = re.sub(r"\r\n", "\n", so)
@@ -34,12 +48,21 @@ def a_run1(shell_command, cwd=None):
 
 
 def a_run2(shell_command, cwd=None):
-    p = subprocess.run(shell_command, shell=True, cwd=cwd, text=True, universal_newlines=True,capture_output=True)
+    global txt
+    p = subprocess.run(
+        shell_command,
+        shell=True,
+        cwd=cwd,
+        text=True,
+        universal_newlines=True,
+        capture_output=True,
+    )
     so = p.stdout
     if so:
         so = re.sub(r"\r\n", "\n", so)
         txt = so
     return p.returncode
+
 
 run = a_run
 run1 = a_run1
