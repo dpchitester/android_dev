@@ -37,7 +37,7 @@ def wsetup():
                 for pth, dirs, files in walk(p, topdown=True):
                     pth = pt(pth)
                     v.proc_dirs(dirs, pt)
-                    wa: Watch = in1.add_watch(pth, 0x3FF)
+                    wa: Watch = in1.add_watch(pth, Mask(0x306))
                     wdsi[wa] = si
         except Exception as e:
             print(e)
@@ -47,35 +47,30 @@ def wsetup():
 def cb1():
     global th2, in1, v, sis
     print("-cb1-1")
-
-    try:
-        for ev in in1:
-            print("-cb1-2 ev:", ev)
-            si = wdsi[ev.watch]
-            print("-cb1-3 si:", si)
-            p = ev.path
-            if not ev.mask & Mask.ISDIR:
-                print("-cb1-4 fn:", fn)
-                rfn = str(p.relative_to(v.src(si)))
-                print("-cb1-5 rfn:", rfn)
-                if si not in sis:
-                    print("-cb1-6 []", [])
-                    sis[si] = []
-                if rfn not in sis[si]:
-                    print("-cb1-7 rfn:", rfn)
-                    sis[si].append(rfn)
-                    if th2 is None:
-                        print("-cb1-7 th2 is None")
-                        th2 = th.Thread(target=proc_events)
-                        th2.start()
-                    elif not th2.is_alive():
-                        print("-cb1-7 th2 not is_alive")
-                        th2 = th.Thread(target=proc_events)
-                        th2.start()
-    except Exception as e:
-        print("-cb1-10")
-        print(e)
-    print("-cb1-11")
+    for ev in in1:
+        print("-cb1-2 ev:", ev)
+        si = wdsi[ev.watch]
+        print("-cb1-3 si:", si)
+        p = ev.path
+        print("-cb1-4 p:", p)
+        if not ev.mask & Mask.ISDIR:
+            rfn = str(p.relative_to(v.src(si)))
+            print("-cb1-5 rfn:", rfn)
+            if si not in sis:
+                print("-cb1-6 []", [])
+                sis[si] = []
+            if rfn not in sis[si]:
+                print("-cb1-7 rfn:", rfn)
+                sis[si].append(rfn)
+                if th2 is None:
+                    print("-cb1-8 th2 is None")
+                    th2 = th.Thread(target=proc_events)
+                    th2.start()
+                elif not th2.is_alive():
+                    print("-cb1-9 th2 not is_alive")
+                    th2 = th.Thread(target=proc_events)
+                    th2.start()
+    print("-cb1-10")
 
 
 def proc_events():
@@ -110,12 +105,12 @@ def rt2():
 def main():
     global cel, wdsi, in1, v, th1, th2
     v.initConfig()
-    in1 = Inotify()
-    wsetup()
-    updatets(0)
-    th1 = th.Thread(target=cb1)
-    th1.start()
-    rt2()
+    with Inotify() as in1:
+        wsetup()
+        updatets(0)
+        th1 = th.Thread(target=cb1)
+        th1.start()
+        rt2()
     ldsv.save_all()
 
 
