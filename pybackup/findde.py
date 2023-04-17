@@ -13,7 +13,7 @@ from fsmixin import FS_Mixin
 from status import changed_ops, updatets
 
 ul1 = Lock()
-
+from snoop import snoop, pp
 
 def findDE(dl, rp: Path):
     i = bisect_left(dl, rp, key=lambda de: de.nm)
@@ -21,7 +21,7 @@ def findDE(dl, rp: Path):
         return (dl[i], i)
     return (None, i)
 
-
+@snoop
 def getRemoteDEs(rd: Path, fl: list[str]):
     pt = type(rd)
     cmd = 'rclone lsjson "' + str(rd) + '" '
@@ -30,6 +30,7 @@ def getRemoteDEs(rd: Path, fl: list[str]):
     cmd += " --recursive --files-only --hash"
     rc = ar.run1(cmd)
     if rc == 0:
+        print('json return', ar.txt)
         if ar.txt == "[]":
             print("lsjson returned empty list")
             return []

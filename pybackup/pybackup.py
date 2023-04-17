@@ -80,7 +80,6 @@ def proc_events():
     sis: dict[v.NodeTag, list[str]] = {}
     sislk = Lock()
 
-    @snoop(depth=3)
     def itty(p, fl):
         updateDEs(p, fl)
 
