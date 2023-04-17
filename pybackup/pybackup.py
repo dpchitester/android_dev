@@ -38,7 +38,7 @@ def wsetup():
                     pth = pt(pth)
                     v.proc_dirs(dirs, pt)
                     wa: Watch = in1.add_watch(
-                        pth, Mask.MODIFY | Mask.CLOSE_WRITE | Mask.CREATE | Mask.DELETE
+                        pth, 0x3FF
                     )
                     wdsi[wa] = si
         except Exception as e:
