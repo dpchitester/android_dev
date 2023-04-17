@@ -17,7 +17,6 @@ from mkzip import Mkzip
 from opbase import OpBase
 from sd import CS, SD, Ext3, Fat32
 
-
 NodeTag: TypeAlias = str
 
 # any/all mostly local directory path(s)

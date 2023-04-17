@@ -44,14 +44,18 @@ def wsetup():
                     v.proc_dirs(dirs, pt)
                     wa: Watch = in1.add_watch(pth, Mask(0x306))
                     wdsi[wa] = si
-        except Exception as e:
-            print(e)
+        except KeyboardInterrupt as exc:
+            print(exc)
+            raise exc
+        except Exception as exc:
+            print(exc)
+            raise exc
     print(len(wdsi), "watches")
 
 
 def cb1():
     global in1, eq1, qe1
-    print("-cb1-1")
+    print("-cb1 started")
     while True:
         try:
             for ev in in1:
@@ -59,7 +63,8 @@ def cb1():
         except BlockingIOError:
             pass
         except KeyboardInterrupt as exc:
-            return
+            print(exc)
+            raise exc
         except Exception as exc:
             print(exc)
             raise exc
@@ -69,8 +74,23 @@ def cb1():
 
 def proc_events():
     global th3
+    print("-proc_events started")
     sis: dict[v.NodeTag, list[str]] = {}
     sislk = Lock()
+
+    def procq():
+        nonlocal sis
+        with sislk:
+            tsis, sis = sis, {}
+            for si in tsis:
+                p = v.src(si)
+                fl = tsis[si]
+                if len(fl):
+                    print("-proc_events-3: updateDEs", p, fl)
+                    th = Thread(target=updateDEs, args=(p, fl))
+                    th.start()
+                    print("ude thread", th)
+
     while True:
         try:
             ev1: WEvent = eq1.get(timeout=0.01)
@@ -90,23 +110,12 @@ def proc_events():
             finally:
                 eq1.task_done()
         except Empty:
-
-            def proc1():
-                nonlocal sis
-                with sislk:
-                    tsis, sis = sis, {}
-                    for si in tsis:
-                        p = v.src(si)
-                        fl = tsis[si]
-                        if len(fl):
-                            print("-proc_events-3: updateDEs", p, fl)
-                            updateDEs(p, fl)
-
             if len(sis):
-                th3 = Thread(target=proc1)
+                th3 = Thread(target=procq)
                 th3.start()
         except KeyboardInterrupt as exc:
-            return
+            print(exc)
+            raise exc
         except Exception as exc:
             print(exc)
             raise exc
@@ -150,12 +159,12 @@ def main():
             print(exc)
         except Exception as exc:
             print(exc)
-            return
-        qe1.set()
-        for th in [th1, th2, th3]:
-            while th and th.is_alive():
-                sleep(1)
-    ldsv.save_all()
+        finally:
+            qe1.set()
+            for th in [th1, th2, th3]:
+                while th and th.is_alive():
+                    sleep(1)
+            ldsv.save_all()
 
 
 if __name__ == "__main__":

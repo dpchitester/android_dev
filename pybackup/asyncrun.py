@@ -1,9 +1,7 @@
-import subprocess
-from threading import Lock
-
 import re
-
+import subprocess
 import sys
+from threading import Lock
 
 shell_lock = Lock()
 
