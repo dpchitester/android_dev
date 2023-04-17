@@ -47,36 +47,29 @@ def wsetup():
 def cb1():
     global th2, in1, sis
     print("-cb1-1")
-    while True:
-        print("-cb1-2")
-        try:
-            print("-cb1-3")
-            for ev in in1:
-                print("-cb1-4 ev:", ev)
-                si = wdsi[ev.watch]
-                print("-cb1-5 si:", si)
-                p = ev.path
-                print("-cb1-6 p:", p)
-                if not ev.mask & Mask.ISDIR:
-                    rfn = str(p.relative_to(v.src(si)))
-                    print("-cb1-7 rfn:", rfn)
-                    if si not in sis:
-                        print("-cb1-8 []", [])
-                        sis[si] = []
-                    if rfn not in sis[si]:
-                        print("-cb1-9 rfn:", rfn)
-                        sis[si].append(rfn)
-                        if th2 is None:
-                            print("-cb1-10 th2 is None")
-                            th2 = th.Thread(target=proc_events)
-                            th2.start()
-                        elif not th2.is_alive():
-                            print("-cb1-11 th2 not is_alive")
-                            th2 = th.Thread(target=proc_events)
-                            th2.start()
-        except BlockingIOError:
-            print("-cb1-12")
-            pass
+    for ev in in1:
+        print("-cb1-4 ev:", ev)
+        si = wdsi[ev.watch]
+        print("-cb1-5 si:", si)
+        p = ev.path
+        print("-cb1-6 p:", p)
+        if not ev.mask & Mask.ISDIR:
+            rfn = str(p.relative_to(v.src(si)))
+            print("-cb1-7 rfn:", rfn)
+            if si not in sis:
+                print("-cb1-8 []", [])
+                sis[si] = []
+            if rfn not in sis[si]:
+                print("-cb1-9 rfn:", rfn)
+                sis[si].append(rfn)
+                if th2 is None:
+                    print("-cb1-10 th2 is None")
+                    th2 = th.Thread(target=proc_events)
+                    th2.start()
+                elif not th2.is_alive():
+                    print("-cb1-11 th2 not is_alive")
+                    th2 = th.Thread(target=proc_events)
+                    th2.start()
     print("-cb1-13")
 
 
@@ -120,6 +113,12 @@ def main():
         th1 = th.Thread(target=cb1)
         th1.start()
         rt2()
+        while th2 and th2.is_alive():
+            sleep(1)
+        if th2 and th2.is_alive():
+            th2.cancel()
+        if th1 and th1.is_alive():
+            th1.cancel()
     ldsv.save_all()
 
 
