@@ -45,44 +45,48 @@ def wsetup():
 
 
 def cb1():
-    global th1, th2, in1, v, sis
+    global th2, in1, sis
     print("-cb1-1")
-    try:
-        for ev in in1:
-            print("-cb1-2 ev:", ev)
-            si = wdsi[ev.watch]
-            print("-cb1-3 si:", si)
-            p = ev.path
-            print("-cb1-4 p:", p)
-            if not ev.mask & Mask.ISDIR:
-                rfn = str(p.relative_to(v.src(si)))
-                print("-cb1-5 rfn:", rfn)
-                if si not in sis:
-                    print("-cb1-6 []", [])
-                    sis[si] = []
-                if rfn not in sis[si]:
+    while True:
+        print("-cb1-2")
+        try:
+            print("-cb1-3")
+            for ev in in1:
+                print("-cb1-4 ev:", ev)
+                si = wdsi[ev.watch]
+                print("-cb1-5 si:", si)
+                p = ev.path
+                print("-cb1-6 p:", p)
+                if not ev.mask & Mask.ISDIR:
+                    rfn = str(p.relative_to(v.src(si)))
                     print("-cb1-7 rfn:", rfn)
-                    sis[si].append(rfn)
-                    if th2 is None:
-                        print("-cb1-8 th2 is None")
-                        th2 = th.Thread(target=proc_events)
-                        th2.start()
-                    elif not th2.is_alive():
-                        print("-cb1-9 th2 not is_alive")
-                        th2 = th.Thread(target=proc_events)
-                        th2.start()
-    except BlockingIOError:
-        print("-cb1-10")
-        th1 = th.Thread(target=cb1)
-        th1.start()
-    print("-cb1-11")
+                    if si not in sis:
+                        print("-cb1-8 []", [])
+                        sis[si] = []
+                    if rfn not in sis[si]:
+                        print("-cb1-9 rfn:", rfn)
+                        sis[si].append(rfn)
+                        if th2 is None:
+                            print("-cb1-10 th2 is None")
+                            th2 = th.Thread(target=proc_events)
+                            th2.start()
+                        elif not th2.is_alive():
+                            print("-cb1-11 th2 not is_alive")
+                            th2 = th.Thread(target=proc_events)
+                            th2.start()
+        except BlockingIOError:
+            print("-cb1-12")
+            pass
+    print("-cb1-13")
 
 
 def proc_events():
+    global sis
     print(sis)
-    for si in sis:
+    tsis, sis = sis, {}
+    for si in tsis:
         p = v.src(si)
-        sis[si], fl = [], sis[si]
+        fl = tsis[si]
         if len(fl):
             print("-proc_events-3: updateDEs", p, fl)
             updateDEs(p, fl)
@@ -110,7 +114,7 @@ def rt2():
 def main():
     global cel, wdsi, in1, v, th1, th2
     v.initConfig()
-    with Inotify() as in1:
+    with Inotify(sync_timeout=-1) as in1:
         wsetup()
         updatets(0)
         th1 = th.Thread(target=cb1)
