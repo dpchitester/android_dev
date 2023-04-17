@@ -9,6 +9,8 @@ from time import sleep
 from asyncinotify import Event as WEvent
 from asyncinotify import Inotify, Mask, Watch
 
+from snoop import snoop, pp
+
 import config as v
 import ldsv
 import status as st
@@ -78,6 +80,10 @@ def proc_events():
     sis: dict[v.NodeTag, list[str]] = {}
     sislk = Lock()
 
+    @snoop(depth=3)
+    def itty(p, fl):
+        updateDEs(p, fl)
+
     def procq():
         nonlocal sis
         with sislk:
@@ -87,7 +93,7 @@ def proc_events():
                 fl = tsis[si]
                 if len(fl):
                     print("-proc_events-3: updateDEs", p, fl)
-                    th = Thread(target=updateDEs, args=(p, fl))
+                    th = Thread(target=itty, args=(p, fl))
                     th.start()
                     print("ude thread", th)
 
@@ -101,7 +107,7 @@ def proc_events():
                 p: Path = ev1.path
                 if not ev1.mask & Mask.ISDIR:
                     rfn: Path = str(p.relative_to(v.src(si)))
-                    print("pe p,rfn", p, rfn)
+                    print("pe p,rfn", p.parent, rfn)
                     with sislk:
                         if si not in sis:
                             sis[si] = []
