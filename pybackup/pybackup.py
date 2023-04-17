@@ -86,11 +86,15 @@ def proc_events():
 
 
 def rt2():
+    global th1
     print("-rt2-1")
     itc = 0
     while True:
         itc += 1
         print("-rt2-2")
+        if not th1 or not th1.is_alive():
+            th1 = th.Thread(target=cb1)
+            th1.start()
         cl = clean()
         if cl:
             print("-rt2-3")
@@ -107,7 +111,7 @@ def rt2():
 def main():
     global cel, wdsi, in1, v, th1, th2
     v.initConfig()
-    with Inotify(sync_timeout=-1) as in1:
+    with Inotify(sync_timeout=60) as in1:
         wsetup()
         updatets(0)
         th1 = th.Thread(target=cb1)
@@ -115,10 +119,8 @@ def main():
         rt2()
         while th2 and th2.is_alive():
             sleep(1)
-        if th2 and th2.is_alive():
-            th2.cancel()
-        if th1 and th1.is_alive():
-            th1.cancel()
+        while th1 and th1.is_alive():
+            sleep(1)
     ldsv.save_all()
 
 
