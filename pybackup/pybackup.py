@@ -54,14 +54,13 @@ def wsetup():
 
 def cb1():
     global in1, eq1, qe1
-    qm = 0
     print("-cb1 started")
     while True:
         try:
             for ev in in1:
                 eq1.put(ev)
-                qm = max(qm, eq1.qsize())
-                print(qm)
+                qs = eq1.qsize()
+                print(qs)
         except BlockingIOError:
             pass
         except KeyboardInterrupt as exc:
@@ -95,6 +94,8 @@ def proc_events():
             ev1: WEvent = eq1.get(timeout=0.666)
             if ev1 is None:
                 continue
+            qs = eq1.qsize()
+            print(qs)
             try:
                 si: NodeTag = wdsi[ev1.watch]
                 p: Path = ev1.path
