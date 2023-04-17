@@ -3,10 +3,11 @@
 from os import environ, walk
 from pathlib import Path
 from queue import Empty, Queue
-from threading import Thread, Event, Lock
+from threading import Event, Lock, Thread
 from time import sleep
 
-from asyncinotify import Event as WEvent, Inotify, Mask, Watch
+from asyncinotify import Event as WEvent
+from asyncinotify import Inotify, Mask, Watch
 
 import config as v
 import ldsv
@@ -49,7 +50,7 @@ def wsetup():
 
 
 def cb1():
-    global in1, eq1
+    global in1, eq1, qe1
     print("-cb1-1")
     while True:
         try:
@@ -57,6 +58,8 @@ def cb1():
                 eq1.put(ev)
         except BlockingIOError:
             pass
+        except Exception as exc:
+            print(exc)
         if qe1.is_set():
             break
 
@@ -67,18 +70,24 @@ def proc_events():
     sislk = Lock()
     while True:
         try:
-            ev1:WEvent = eq1.get(timeout=1)
-            si:NodeTag = wdsi[ev1.watch]
-            p:Path = ev1.path
-            if not ev1.mask & Mask.ISDIR:
-                rfn:Path = str(p.relative_to(v.src(si)))
-                with sislk:
-                    if si not in sis:
-                        sis[si] = []
-                    if rfn not in sis[si]:
-                        sis[si].append(rfn)
-            continue
+            ev1: WEvent = eq1.get(timeout=0.01)
+            if ev1 is None:
+                continue
+            try:
+                si: NodeTag = wdsi[ev1.watch]
+                p: Path = ev1.path
+                if not ev1.mask & Mask.ISDIR:
+                    rfn: Path = str(p.relative_to(v.src(si)))
+                    print("pe p,rfn", p, rfn)
+                    with sislk:
+                        if si not in sis:
+                            sis[si] = []
+                        if rfn not in sis[si]:
+                            sis[si].append(rfn)
+            finally:
+                eq1.task_done()
         except Empty:
+
             def proc1():
                 nonlocal sis
                 with sislk:
@@ -93,6 +102,8 @@ def proc_events():
             if len(sis):
                 th3 = Thread(target=proc1)
                 th3.start()
+        except Exception as exc:
+            print(exc)
         if qe1.is_set():
             break
 
@@ -120,7 +131,7 @@ def rt2():
 def main():
     global cel, wdsi, in1, v, th1, th2, th3
     v.initConfig()
-    with Inotify(sync_timeout=1) as in1:
+    with Inotify(sync_timeout=0.01) as in1:
         wsetup()
         updatets(0)
         th1 = Thread(target=cb1)
