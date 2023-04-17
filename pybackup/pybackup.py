@@ -60,6 +60,7 @@ def cb1():
             pass
         except Exception as exc:
             print(exc)
+            raise exc
         if qe1.is_set():
             break
 
@@ -104,6 +105,7 @@ def proc_events():
                 th3.start()
         except Exception as exc:
             print(exc)
+            raise exc
         if qe1.is_set():
             break
 
