@@ -1,6 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/env python
 import threading as th
-import time
+from time import sleep
 from os import environ, walk
 from pathlib import Path
 
