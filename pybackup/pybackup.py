@@ -9,8 +9,6 @@ from time import sleep
 from asyncinotify import Event as WEvent
 from asyncinotify import Inotify, Mask, Watch
 
-from snoop import snoop, pp
-
 import config as v
 import ldsv
 import status as st

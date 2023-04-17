@@ -13,7 +13,6 @@ from fsmixin import FS_Mixin
 from status import changed_ops, updatets
 
 ul1 = Lock()
-from snoop import snoop, pp
 
 def findDE(dl, rp: Path):
     i = bisect_left(dl, rp, key=lambda de: de.nm)
@@ -22,6 +21,7 @@ def findDE(dl, rp: Path):
     return (None, i)
 
 def getRemoteDEs(rd: Path, fl: list[str]):
+    print('getRemoteDEs', rd, fl)
     pt = type(rd)
     cmd = 'rclone lsjson "' + str(rd) + '" '
     for fn in fl:
@@ -31,7 +31,7 @@ def getRemoteDEs(rd: Path, fl: list[str]):
     if rc == 0:
         if ar.txt == "":
             print("lsjson returned empty string", cmd)
-            return []
+            return
         delst = []
         jsl = json.loads(ar.txt)
         for it in jsl:
@@ -50,7 +50,6 @@ def getRemoteDEs(rd: Path, fl: list[str]):
         return delst
     else:
         print("getRemoteDE returned", rc)
-    return []
 
 
 def findSis(fp1: Path):
@@ -106,6 +105,11 @@ def findTDEs(fp: Path):
 def updateDEs(rd: Path, flst: list[str]):
     with ul1:
         sdel = getRemoteDEs(rd, flst)
+        if sdel is None:
+            print('getRemoteDEs returned None')
+            return
+        elif sdel == []:
+            print('getRemoteDEs returned []')
         for fi in flst:
             fp = rd / fi
             sdes = findSDEs(fp)
