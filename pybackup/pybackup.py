@@ -23,7 +23,6 @@ in1 = None
 
 th1 = None
 th2 = None
-th3 = None
 
 qe1 = Event()
 dl1 = Lock()
@@ -158,7 +157,7 @@ def main():
             print(exc)
         finally:
             qe1.set()
-            for th in [th1, th2, th3]:
+            for th in [th1, th2]:
                 th.join()
             ldsv.save_all()
 
