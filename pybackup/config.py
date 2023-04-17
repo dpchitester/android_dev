@@ -313,9 +313,11 @@ def initConfig():
     load_all()
     
     import threading, builtins
+    l1 = threading.Lock()
     tmp = builtins.print
     def print(*args,**kwargs):
-        return tmp(threading.get_ident(), *args,**kwargs)
+        with l1:
+            return tmp(threading.get_ident(), *args,**kwargs)
     builtins.print = print
         
 
