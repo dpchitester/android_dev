@@ -72,8 +72,7 @@ def cb1():
                     elif not th2.is_alive():
                         th2 = th.Thread(target=proc_events)
                         th2.start()
-                        
-                        
+
     except Exception as e:
         print(e)
     print("-cb1-10")
@@ -122,6 +121,7 @@ def main():
     th1.start()
     rt2()
     ldsv.save_all()
+
 
 if __name__ == "__main__":
     main()
