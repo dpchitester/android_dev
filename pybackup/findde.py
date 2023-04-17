@@ -21,7 +21,6 @@ def findDE(dl, rp: Path):
         return (dl[i], i)
     return (None, i)
 
-@snoop
 def getRemoteDEs(rd: Path, fl: list[str]):
     pt = type(rd)
     cmd = 'rclone lsjson "' + str(rd) + '" '
@@ -30,9 +29,8 @@ def getRemoteDEs(rd: Path, fl: list[str]):
     cmd += " --recursive --files-only --hash"
     rc = ar.run1(cmd)
     if rc == 0:
-        print('json return', ar.txt)
-        if ar.txt == "[]":
-            print("lsjson returned empty list")
+        if ar.txt == "":
+            print("lsjson returned empty string", cmd)
             return []
         delst = []
         jsl = json.loads(ar.txt)
@@ -142,8 +140,8 @@ def updateDEs(rd: Path, flst: list[str]):
                         dl.insert(i, tde)
                 else:
                     if tde:
-                        print("delete", rp)
-                        dl.pop(i)
+                        print("wouldvdelete", rp)
+                        # dl.pop(i)
 
             def doTOne(dl, rp, tde, i, di):
                 if tde:
@@ -174,8 +172,8 @@ def updateDEs(rd: Path, flst: list[str]):
                         dl.insert(i, tde)
                 else:
                     if tde:
-                        print("delete", rp)
-                        dl.pop(i)
+                        print("would delete", rp)
+                        # dl.pop(i)
 
             for it in sdes:
                 doSOne(*it)
