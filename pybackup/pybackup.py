@@ -57,18 +57,19 @@ def cb1():
             # print("-cb1-3", si)
             p = ev.path
             if not ev.mask & Mask.ISDIR:
-                # print("-cb1-5", fn)
+                # print("-cb1-4", fn)
                 rfn = str(p.relative_to(v.src(si)))
-                # print("-cb1-6", rfn)
+                # print("-cb1-5", rfn)
                 if si not in sis:
-                    # print("-cb1-7")
+                    print("-cb1-6", [])
                     sis[si] = []
                 if rfn not in sis[si]:
-                    print("-cb1-8", rfn)
+                    print("-cb1-7", rfn)
                     sis[si].append(rfn)
                     if th2 is None:
                         th2 = th.Thread(target=proc_events)
                         th2.start()
+                        print("-cb1-8", th2)
     except Exception as e:
         print(e)
     print("-cb1-9")
