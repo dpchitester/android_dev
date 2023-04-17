@@ -102,17 +102,13 @@ def proc_events():
             try:
                 si: NodeTag = wdsi[ev1.watch]
                 p: Path = ev1.path
-                print('-proc_events ev1.path:', ev1.path)
-                print('-proc_events ev1.name:', ev1.name)
-                print('-proc_events v.src(si):', v.src(si))
                 if not ev1.mask & Mask.ISDIR:
-                    rfn: Path = str(p.relative_to(v.src(si)))
-                    print('-proc_events rfn:', rfn)
+                    rfn: Path = p.relative_to(v.src(si))
                     with sislk:
                         if si not in sis:
                             sis[si] = []
                         if rfn not in sis[si]:
-                            sis[si].append(rfn)
+                            sis[si].append(str(rfn))
             finally:
                 eq1.task_done()
         except Empty:
