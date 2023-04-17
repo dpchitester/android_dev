@@ -107,8 +107,9 @@ def proc_events():
                     with sislk:
                         if si not in sis:
                             sis[si] = []
+                        rfn = str(rfn)
                         if rfn not in sis[si]:
-                            sis[si].append(str(rfn))
+                            sis[si].append(rfn)
             finally:
                 eq1.task_done()
         except Empty:
