@@ -79,17 +79,13 @@ def cb1():
 
 
 def proc_events():
-    global th2
-    print("-proc_events-1")
     print(sis)
     for si in sis:
-        print("-proc_events-2")
         p = v.src(si)
         sis[si], fl = [], sis[si]
         if len(fl):
             print("-proc_events-3: updateDEs", p, fl)
             updateDEs(p, fl)
-    print("-proc_events-4")
 
 
 def rt2():
