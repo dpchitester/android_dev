@@ -37,9 +37,7 @@ def wsetup():
                 for pth, dirs, files in walk(p, topdown=True):
                     pth = pt(pth)
                     v.proc_dirs(dirs, pt)
-                    wa: Watch = in1.add_watch(
-                        pth, 0x3FF
-                    )
+                    wa: Watch = in1.add_watch(pth, 0x3FF)
                     wdsi[wa] = si
         except Exception as e:
             print(e)
@@ -52,30 +50,32 @@ def cb1():
 
     try:
         for ev in in1:
-            # print("-cb1-2", ev)
+            print("-cb1-2 ev:", ev)
             si = wdsi[ev.watch]
-            # print("-cb1-3", si)
+            print("-cb1-3 si:", si)
             p = ev.path
             if not ev.mask & Mask.ISDIR:
-                # print("-cb1-4", fn)
+                print("-cb1-4 fn:", fn)
                 rfn = str(p.relative_to(v.src(si)))
-                # print("-cb1-5", rfn)
+                print("-cb1-5 rfn:", rfn)
                 if si not in sis:
-                    print("-cb1-6", [])
+                    print("-cb1-6 []", [])
                     sis[si] = []
                 if rfn not in sis[si]:
-                    print("-cb1-7", rfn)
+                    print("-cb1-7 rfn:", rfn)
                     sis[si].append(rfn)
                     if th2 is None:
+                        print("-cb1-7 th2 is None")
                         th2 = th.Thread(target=proc_events)
                         th2.start()
                     elif not th2.is_alive():
+                        print("-cb1-7 th2 not is_alive")
                         th2 = th.Thread(target=proc_events)
                         th2.start()
-
     except Exception as e:
+        print("-cb1-10")
         print(e)
-    print("-cb1-10")
+    print("-cb1-11")
 
 
 def proc_events():
