@@ -3,7 +3,7 @@
 from os import environ, walk
 from pathlib import Path
 from queue import Empty, Queue
-from threading import Event, Lock, Thread
+from threading import Thread, Event, Lock, Thread
 from time import sleep
 
 from asyncinotify import Event as WEvent
@@ -162,7 +162,8 @@ def main():
         finally:
             qe1.set()
             for th in [th1, th2]:
-                th.join()
+                if th:
+                    th.join()
             ldsv.save_all()
 
 

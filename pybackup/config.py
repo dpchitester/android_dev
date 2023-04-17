@@ -311,7 +311,13 @@ def initConfig():
         addArc(op1)
 
     load_all()
-
+    
+    import threading, builtins
+    tmp = builtins.print
+    def print(*args,**kwargs):
+        return tmp(threading.get_ident(), *args,**kwargs)
+    builtins.print = print
+        
 
 def ppre(s):
     if s in pres:
