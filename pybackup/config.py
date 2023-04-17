@@ -317,7 +317,7 @@ def initConfig():
     tmp = builtins.print
     def print(*args,**kwargs):
         with l1:
-            return tmp(threading.get_ident(), *args,**kwargs)
+            return tmp(threading.current_thread().name, *args,**kwargs)
     builtins.print = print
         
 
