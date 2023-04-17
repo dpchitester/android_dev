@@ -3,6 +3,7 @@ import json
 import time
 from bisect import bisect_left
 from pathlib import Path
+from threading import Lock
 
 import asyncrun as ar
 import config as v
@@ -10,6 +11,8 @@ from de import DE
 from fsmixin import FS_Mixin
 from fmd5h import fmd5f
 from status import changed_ops, updatets
+
+ul1 = Lock()
 
 
 def findDE(dl, rp: Path):
@@ -102,80 +105,81 @@ def findTDEs(fp: Path):
 
 
 def updateDEs(rd: Path, flst: list[str]):
-    sdel = getRemoteDEs(rd, flst)
-    for fi in flst:
-        fp = rd / fi
-        sdes = findSDEs(fp)
-        tdes = findTDEs(fp)
+    with ul1:
+        sdel = getRemoteDEs(rd, flst)
+        for fi in flst:
+            fp = rd / fi
+            sdes = findSDEs(fp)
+            tdes = findTDEs(fp)
 
-        def doSOne(dl, rp, tde, i, si):
-            if tde:
-                sde = [sde for sde in sdel if sde.nm.name == tde.nm.name]
-                if len(sde):
-                    sde = sde[0]
+            def doSOne(dl, rp, tde, i, si):
+                if tde:
+                    sde = [sde for sde in sdel if sde.nm.name == tde.nm.name]
+                    if len(sde):
+                        sde = sde[0]
+                    else:
+                        sde = None
                 else:
                     sde = None
-            else:
-                sde = None
-            p = v.src(si)
-            if sde:
-                if tde:
-                    print("update", sde.nm, "->", tde.nm)
-                    if tde.i.sz != sde.i.sz:
-                        print("size mismatch")
-                        tde.i.sz = sde.i.sz
-                    if tde.i.mt != sde.i.mt:
-                        print("modtime mismatch")
-                        tde.i.mt = sde.i.mt
-                    if tde.i.md5 != sde.i.md5:
-                        print("md5 mismatch")
-                        tde.i.md5 = sde.i.md5
+                p = v.src(si)
+                if sde:
+                    if tde:
+                        print("update", sde.nm, "->", tde.nm)
+                        if tde.i.sz != sde.i.sz:
+                            print("size mismatch")
+                            tde.i.sz = sde.i.sz
+                        if tde.i.mt != sde.i.mt:
+                            print("modtime mismatch")
+                            tde.i.mt = sde.i.mt
+                        if tde.i.md5 != sde.i.md5:
+                            print("md5 mismatch")
+                            tde.i.md5 = sde.i.md5
+                    else:
+                        print("insert", sde.nm)
+                        fse = fmd5f(fp, sde.i.sz, sde.i.mt, sde.i.md5)
+                        tde = DE(rp, fse)
+                        dl.insert(i, tde)
                 else:
-                    print("insert", sde.nm)
-                    fse = fmd5f(fp, sde.i.sz, sde.i.mt, sde.i.md5)
-                    tde = DE(rp, fse)
-                    dl.insert(i, tde)
-            else:
-                if tde:
-                    print("delete", rp)
-                    dl.pop(i)
+                    if tde:
+                        print("delete", rp)
+                        dl.pop(i)
 
-        def doTOne(dl, rp, tde, i, di):
-            if tde:
-                sde = [sde for sde in sdel if sde.nm.name == tde.nm.name]
-                if len(sde):
-                    sde = sde[0]
+            def doTOne(dl, rp, tde, i, di):
+                if tde:
+                    sde = [sde for sde in sdel if sde.nm.name == tde.nm.name]
+                    if len(sde):
+                        sde = sde[0]
+                    else:
+                        sde = None
                 else:
                     sde = None
-            else:
-                sde = None
-            p = v.tgt(di)
-            if sde:
-                if tde:
-                    print("update", sde.nm, "->", tde.nm)
-                    if tde.i.sz != sde.i.sz:
-                        print("size mismatch")
-                        tde.i.sz = sde.i.sz
-                    if tde.i.mt != sde.i.mt:
-                        print("modtime mismatch")
-                        tde.i.mt = sde.i.mt
-                    if tde.i.md5 != sde.i.md5:
-                        print("md5 mismatch")
-                        tde.i.md5 = sde.i.md5
+                p = v.tgt(di)
+                if sde:
+                    if tde:
+                        print("update", sde.nm, "->", tde.nm)
+                        if tde.i.sz != sde.i.sz:
+                            print("size mismatch")
+                            tde.i.sz = sde.i.sz
+                        if tde.i.mt != sde.i.mt:
+                            print("modtime mismatch")
+                            tde.i.mt = sde.i.mt
+                        if tde.i.md5 != sde.i.md5:
+                            print("md5 mismatch")
+                            tde.i.md5 = sde.i.md5
+                    else:
+                        print("insert", sde.nm)
+                        fse = fmd5f(fp, sde.i.sz, sde.i.mt, sde.i.md5)
+                        tde = DE(rp, fse)
+                        dl.insert(i, tde)
                 else:
-                    print("insert", sde.nm)
-                    fse = fmd5f(fp, sde.i.sz, sde.i.mt, sde.i.md5)
-                    tde = DE(rp, fse)
-                    dl.insert(i, tde)
-            else:
-                if tde:
-                    print("delete", rp)
-                    dl.pop(i)
+                    if tde:
+                        print("delete", rp)
+                        dl.pop(i)
 
-        for it in sdes:
-            doSOne(*it)
-        for it in tdes:
-            doTOne(*it)
+            for it in sdes:
+                doSOne(*it)
+            for it in tdes:
+                doTOne(*it)
 
 
 def test1():

@@ -1,10 +1,12 @@
 #!/data/data/com.termux/files/usr/bin/env python
-import threading as th
-from time import sleep
+
 from os import environ, walk
 from pathlib import Path
+from queue import Empty, Queue
+from threading import Thread, Event, Lock
+from time import sleep
 
-from asyncinotify import Event, Inotify, Mask, Watch
+from asyncinotify import Event as WEvent, Inotify, Mask, Watch
 
 import config as v
 import ldsv
@@ -16,13 +18,15 @@ from opexec import clean, opExec
 from status import onestatus, updatets
 
 wdsi: dict[Watch, tuple[str, FS_Mixin]] = {}
-sis: dict[v.NodeTag, list[str]] = {}
 in1 = None
-cel = None
-cb1t = None
-tr1 = 0
+
 th1 = None
 th2 = None
+th3 = None
+
+qe1 = Event()
+dl1 = Lock()
+eq1 = Queue()
 
 
 def wsetup():
@@ -45,44 +49,52 @@ def wsetup():
 
 
 def cb1():
-    global th2, in1, sis
-    # print("-cb1-1")
-    for ev in in1:
-        # print("-cb1-4 ev:", ev)
-        si = wdsi[ev.watch]
-        # print("-cb1-5 si:", si)
-        p = ev.path
-        # print("-cb1-6 p:", p)
-        if not ev.mask & Mask.ISDIR:
-            rfn = str(p.relative_to(v.src(si)))
-            # print("-cb1-7 rfn:", rfn)
-            if si not in sis:
-                # print("-cb1-8 []", [])
-                sis[si] = []
-            if rfn not in sis[si]:
-                # print("-cb1-9 rfn:", rfn)
-                sis[si].append(rfn)
-                if th2 is None:
-                    # print("-cb1-10 th2 is None")
-                    th2 = th.Thread(target=proc_events)
-                    th2.start()
-                elif not th2.is_alive():
-                    # print("-cb1-11 th2 not is_alive")
-                    th2 = th.Thread(target=proc_events)
-                    th2.start()
-    # print("-cb1-13")
+    global in1, eq1
+    print("-cb1-1")
+    while True:
+        try:
+            for ev in in1:
+                eq1.put(ev)
+        except BlockingIOError:
+            pass
+        if qe1.is_set():
+            break
 
 
 def proc_events():
-    global sis
-    # print(sis)
-    tsis, sis = sis, {}
-    for si in tsis:
-        p = v.src(si)
-        fl = tsis[si]
-        if len(fl):
-            # print("-proc_events-3: updateDEs", p, fl)
-            updateDEs(p, fl)
+    global th3
+    sis: dict[v.NodeTag, list[str]] = {}
+    sislk = Lock()
+    while True:
+        try:
+            ev1:WEvent = eq1.get(timeout=1)
+            si:NodeTag = wdsi[ev1.watch]
+            p:Path = ev1.path
+            if not ev1.mask & Mask.ISDIR:
+                rfn:Path = str(p.relative_to(v.src(si)))
+                with sislk:
+                    if si not in sis:
+                        sis[si] = []
+                    if rfn not in sis[si]:
+                        sis[si].append(rfn)
+            continue
+        except Empty:
+            def proc1():
+                nonlocal sis
+                with sislk:
+                    tsis, sis = sis, {}
+                    for si in tsis:
+                        p = v.src(si)
+                        fl = tsis[si]
+                        if len(fl):
+                            print("-proc_events-3: updateDEs", p, fl)
+                            updateDEs(p, fl)
+
+            if len(sis):
+                th3 = Thread(target=proc1)
+                th3.start()
+        if qe1.is_set():
+            break
 
 
 def rt2():
@@ -92,9 +104,6 @@ def rt2():
     while True:
         itc += 1
         # print("-rt2-2")
-        if not th1 or not th1.is_alive():
-            th1 = th.Thread(target=cb1)
-            th1.start()
         cl = clean()
         if cl:
             # print("-rt2-3")
@@ -109,18 +118,20 @@ def rt2():
 
 
 def main():
-    global cel, wdsi, in1, v, th1, th2
+    global cel, wdsi, in1, v, th1, th2, th3
     v.initConfig()
-    with Inotify(sync_timeout=60) as in1:
+    with Inotify(sync_timeout=1) as in1:
         wsetup()
         updatets(0)
-        th1 = th.Thread(target=cb1)
+        th1 = Thread(target=cb1)
         th1.start()
+        th2 = Thread(target=proc_events)
+        th2.start()
         rt2()
-        while th2 and th2.is_alive():
-            sleep(1)
-        while th1 and th1.is_alive():
-            sleep(1)
+        qe1.set()
+        for th in [th1, th2, th3]:
+            while th and th.is_alive():
+                sleep(1)
     ldsv.save_all()
 
 
