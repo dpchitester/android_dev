@@ -54,11 +54,14 @@ def wsetup():
 
 def cb1():
     global in1, eq1, qe1
+    qm = 0
     print("-cb1 started")
     while True:
         try:
             for ev in in1:
                 eq1.put(ev)
+                qm = max(qm, eq1.qsize())
+                print(qm)
         except BlockingIOError:
             pass
         except KeyboardInterrupt as exc:
@@ -142,7 +145,7 @@ def rt2():
 def main():
     global cel, wdsi, in1, v, th1, th2, th3
     v.initConfig()
-    with Inotify(sync_timeout=0.01) as in1:
+    with Inotify(sync_timeout=0.666) as in1:
         try:
             wsetup()
             updatets(0)
