@@ -69,10 +69,14 @@ def cb1():
                     if th2 is None:
                         th2 = th.Thread(target=proc_events)
                         th2.start()
-                        print("-cb1-8", th2)
+                    elif not th2.is_alive():
+                        th2 = th.Thread(target=proc_events)
+                        th2.start()
+                        
+                        
     except Exception as e:
         print(e)
-    print("-cb1-9")
+    print("-cb1-10")
 
 
 def proc_events():
@@ -87,9 +91,6 @@ def proc_events():
             print("-proc_events-3: updateDEs", p, fl)
             updateDEs(p, fl)
     print("-proc_events-4")
-    th2.stop()
-    print("-proc_events-5", th2)
-    th2 = None
 
 
 def rt2():
