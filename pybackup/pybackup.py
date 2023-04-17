@@ -86,6 +86,9 @@ def proc_events():
         if len(fl):
             print("-proc_events-3: updateDEs", p, fl)
             updateDEs(p, fl)
+    print("-proc_events-4")
+    th2.stop()
+    print("-proc_events-5", th2)
     th2 = None
 
 
