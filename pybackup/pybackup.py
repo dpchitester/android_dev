@@ -76,7 +76,7 @@ def proc_events():
     print("-proc_events started")
     sis: dict[v.NodeTag, list[str]] = {}
     sislk = Lock()
-        
+
     def procq():
         nonlocal sis
         with sislk:
@@ -159,8 +159,7 @@ def main():
         finally:
             qe1.set()
             for th in [th1, th2, th3]:
-                while th and th.is_alive():
-                    sleep(1)
+                th.join()
             ldsv.save_all()
 
 
