@@ -64,7 +64,7 @@ def cb1():
             pass
         except KeyboardInterrupt as exc:
             print(exc)
-            raise exc
+            break
         except Exception as exc:
             print(exc)
             raise exc
@@ -73,14 +73,10 @@ def cb1():
 
 
 def proc_events():
-    global th3
     print("-proc_events started")
     sis: dict[v.NodeTag, list[str]] = {}
     sislk = Lock()
-
-    def itty(p, fl):
-        updateDEs(p, fl)
-
+        
     def procq():
         nonlocal sis
         with sislk:
@@ -90,13 +86,11 @@ def proc_events():
                 fl = tsis[si]
                 if len(fl):
                     print("-proc_events-3: updateDEs", p, fl)
-                    th = Thread(target=itty, args=(p, fl))
-                    th.start()
-                    print("ude thread", th)
+                    updateDEs(p, fl)
 
     while True:
         try:
-            ev1: WEvent = eq1.get(timeout=0.01)
+            ev1: WEvent = eq1.get(timeout=0.666)
             if ev1 is None:
                 continue
             try:
@@ -118,10 +112,10 @@ def proc_events():
                 th3.start()
         except KeyboardInterrupt as exc:
             print(exc)
-            raise exc
+            break
         except Exception as exc:
             print(exc)
-            raise exc
+            break
         if qe1.is_set():
             break
 
