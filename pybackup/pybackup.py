@@ -58,6 +58,8 @@ def cb1():
                 eq1.put(ev)
         except BlockingIOError:
             pass
+        except KeyboardInterrupt as exc:
+            return
         except Exception as exc:
             print(exc)
             raise exc
@@ -103,6 +105,8 @@ def proc_events():
             if len(sis):
                 th3 = Thread(target=proc1)
                 th3.start()
+        except KeyboardInterrupt as exc:
+            return
         except Exception as exc:
             print(exc)
             raise exc
@@ -134,13 +138,19 @@ def main():
     global cel, wdsi, in1, v, th1, th2, th3
     v.initConfig()
     with Inotify(sync_timeout=0.01) as in1:
-        wsetup()
-        updatets(0)
-        th1 = Thread(target=cb1)
-        th1.start()
-        th2 = Thread(target=proc_events)
-        th2.start()
-        rt2()
+        try:
+            wsetup()
+            updatets(0)
+            th1 = Thread(target=cb1)
+            th1.start()
+            th2 = Thread(target=proc_events)
+            th2.start()
+            rt2()
+        except KeyboardInterrupt as exc:
+            print(exc)
+        except Exception as exc:
+            print(exc)
+            return
         qe1.set()
         for th in [th1, th2, th3]:
             while th and th.is_alive():
