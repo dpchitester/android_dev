@@ -42,7 +42,7 @@ def getdll0():  # remote-entire-drive
     v.dl0_cs += 1
     td = v.ppre("gd")
     # print('getdll0',td)
-    cmd = 'rclone lsjson "' + str(td) + '" --recursive --files-only --hash '
+    cmd = 'rclone lsjson "' + str(td) + '" --recursive --files-only '
     for ex in v.dexs:
         cmd += ' --exclude "**/' + ex + '/*" '
     rc = ar.run1(cmd)
@@ -104,7 +104,7 @@ def getdll1(di):  # remote-target
     v.dl1_cs += 1
     td = v.tgt(di)
     # print('getdll1', di, str(td))
-    cmd = 'rclone lsjson "' + str(td) + '" --recursive --files-only --hash --fast-list '
+    cmd = 'rclone lsjson "' + str(td) + '" --recursive --files-only --fast-list '
     for ex in v.dexs:
         cmd += ' --exclude "**/' + ex + '/*" '
     # print(cmd)
@@ -137,7 +137,7 @@ def getdll5(si):  # remote-source
     v.dl5_cs += 1
     td = v.src(si)
     # print('getdll1', di, str(td))
-    cmd = 'rclone lsjson "' + str(td) + '" --recursive --files-only --hash --fast-list '
+    cmd = 'rclone lsjson "' + str(td) + '" --recursive --files-only --fast-list '
     for ex in v.dexs:
         cmd += ' --exclude "**/' + ex + '/*" '
     # print(cmd)
@@ -170,7 +170,7 @@ def getdll2(si):  # remote-source
     v.dl2_cs += 1
     td = v.src(si)
     # print('getdll2', si, str(td))
-    cmd = 'rclone lsjson "' + str(td) + '" --recursive --files-only --hash --fast-list '
+    cmd = 'rclone lsjson "' + str(td) + '" --recursive --files-only --fast-list '
     if not td.is_file():
         for ex in v.dexs:
             cmd += ' --exclude "**/' + ex + '/*" '
