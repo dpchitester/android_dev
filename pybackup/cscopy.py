@@ -30,9 +30,9 @@ def ftouch(di, si, sd, td, lf, sfc):
         # print('copy', sd, td)
         cmd = (
             'rclone touch "'
-            + str(td.parent)
+            + str(td)
             + '" --include "'
-            + str(td.name)
+            + str(lf.nm.name)
             + '" --timestamp "'
             + nt
             + '" --progress'
@@ -172,7 +172,7 @@ class BVars:
                     if rf.i.sz == lf.i.sz and rf.i.mt == lf.i.mt:  # hashes match
                         self.f2d.remove(rf)
                         self.f2c.remove(lf)
-                    if rf.i.sz == lf.i.sz:
+                    elif rf.i.sz == lf.i.sz:
                         # TODO:
                         if ftouch(self.di, self.si, self.sd, self.td, lf, self.sfc):
                             updateDEs(self.td, [str(de.nm) for de in [lf]])
