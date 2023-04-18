@@ -1,8 +1,6 @@
 import time
 
-rto1 = 60 * 15
-rto2 = 60 * 15
-
+rto1 = 60 * 5
 
 class FS_Mixin:
     Dll = None
@@ -24,7 +22,7 @@ class FS_Mixin:
             ch = "r"
         else:
             ch = "l"
-        if p.Dll is None or p.Dll_xt + rto1 <= time.time():
+        if p.Dll is None or (p.isremote and p.Dll_xt + rto1 <= time.time()):
             # print("sucking/scanning for", self.tag, ch + "dll...", end="")
             rv = p.getdll()
             if rv is not None:
