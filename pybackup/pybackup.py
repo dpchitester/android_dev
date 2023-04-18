@@ -58,8 +58,7 @@ def cb1():
         try:
             for ev in in1:
                 eq1.put(ev)
-                qs = eq1.qsize()
-                print(qs)
+                
         except BlockingIOError:
             pass
         except KeyboardInterrupt as exc:
@@ -93,8 +92,7 @@ def proc_events():
             ev1: WEvent = eq1.get(timeout=0.666)
             if ev1 is None:
                 continue
-            qs = eq1.qsize()
-            print(qs)
+            
             try:
                 si: NodeTag = wdsi[ev1.watch]
                 wp:Path = ev1.watch.path
