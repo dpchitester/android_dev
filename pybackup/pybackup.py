@@ -97,9 +97,9 @@ def proc_events():
             print(qs)
             try:
                 si: NodeTag = wdsi[ev1.watch]
-                wp = ev1.watch.path
+                wp:Path = ev1.watch.path
                 p: Path = ev1.path
-                sip = v.src(si)
+                sip:Path = v.src(si)
                 assert wp == p == sip
                 print("wp, p, sip", wp, p, sip)
                 if not ev1.mask & Mask.ISDIR:
