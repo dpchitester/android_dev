@@ -176,7 +176,7 @@ class BVars:
                         elif rf.i.mt < lf.i.mt:
                             if ftouch(self.di, self.si, self.sd, rf, self.sfc):
                                 updateDEs(self.sd, [str(de.nm) for de in [rf]])
-                        
+
     def do_copying(self):
         # TODO: use Path
         from status import onestatus

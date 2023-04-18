@@ -84,6 +84,7 @@ def addDep(j, i):
 
 def addArc(op1):
     import config as v
+
     if op1 not in v.opdep:
         v.opdep.append(op1)
     j, i = op1.npl1

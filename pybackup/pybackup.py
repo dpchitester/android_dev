@@ -44,10 +44,10 @@ def wsetup():
                     wdsi[wa] = si
         except KeyboardInterrupt as exc:
             print(exc)
-            raise exc
+            break
         except Exception as exc:
             print(exc)
-            raise exc
+            break
     print(len(wdsi), "watches")
 
 
@@ -63,10 +63,10 @@ def cb1():
             pass
         except KeyboardInterrupt as exc:
             print(exc)
-            raise exc
+            break
         except Exception as exc:
             print(exc)
-            raise exc
+            break
         if qe1.is_set():
             break
 
@@ -95,11 +95,9 @@ def proc_events():
 
             try:
                 si: NodeTag = wdsi[ev1.watch]
-                
-                p: Path = ev1.path
-                
 
-                
+                p: Path = ev1.path
+
                 if not ev1.mask & Mask.ISDIR:
                     rfn: Path = p.relative_to(v.src(si))
                     with sislk:
@@ -119,10 +117,10 @@ def proc_events():
                 th3.start()
         except KeyboardInterrupt as exc:
             print(exc)
-            raise exc
+            break
         except Exception as exc:
             print(exc)
-            raise exc
+            break
         if qe1.is_set():
             break
 
