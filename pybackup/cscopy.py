@@ -135,12 +135,7 @@ class BVars:
                     if rf.i.sz == lf.i.sz and rf.i.mt == lf.i.mt:  # hashes match
                         self.f2d.remove(rf)
                         self.f2c.remove(lf)
-                    else:
-                        b1 = rf.i.mt > lf.i.mt
-                        if b1:
-                            print("newer mismatched file on cloud", rf.nm)
-                            self.f2d.remove(rf)
-                            self.f2c.remove(lf)
+                    
 
     def do_copying(self):
         # TODO: use Path
