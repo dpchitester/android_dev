@@ -44,7 +44,7 @@ class PFS_Mixin(FS_Mixin):
             fs = it.stat()
             it2 = fs.st_size
             it3 = fs.st_mtime_ns
-            it3 = v.trunc2ms(it3)
+            it3 = v.ns_trunc2ms(it3)
             fp = self / it1
             fse = FSe(it2, it3)
             return DE(it1, fse)

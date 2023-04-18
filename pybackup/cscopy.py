@@ -1,11 +1,7 @@
 import asyncrun as ar
-import config as v
-from dirlist import dllcmp
-from edge import Edge, findEdge
-from findde import updateDEs
 from netup import netup
 from opbase import OpBase
-from status import onestatus
+import datetime as dt
 
 
 class SFc:
@@ -17,6 +13,40 @@ class SFc:
 
     def value(self):
         return (self.sc, self.fc)
+
+
+def ts2st(ts):
+    import config as v
+
+    t2 = v.ts_trunc2ms(ts)
+    t2 = dt.datetime.fromtimestamp(t2, tz=dt.timezone.utc)
+    t2 = t2.isoformat()[:-6] + "Z"
+    return t2
+
+
+def ftouch(di, si, sd, td, lf, sfc):
+    if netup():
+        nt = ts2st(lf.i.mt)
+        # print('copy', sd, td)
+        cmd = (
+            'rclone touch "'
+            + str(td.parent)
+            + '" --include "'
+            + str(td.name)
+            + '" --timestamp "'
+            + nt
+            + '" --progress'
+        )
+        # cmd += ' --exclude ".git/**" --exclude "__pycache__/**"'
+        print(cmd)
+        rc = ar.run2(cmd)
+        if rc == 0:
+            sfc.sc += 1
+            return True
+        else:
+            sfc.fc += 1
+            print(ar.txt)
+    return False
 
 
 def fsync(di, si, sd, td, sfc):
@@ -105,6 +135,8 @@ def fdell(di, si, sd, td, fl, sfc):
 
 class BVars:
     def __init__(self, di, si, sfc):
+        import config as v
+
         self.si = si
         self.di = di
         self.sd = v.src(si)
@@ -117,6 +149,8 @@ class BVars:
         self.ac2 = 0
 
     def init2(self):
+        from dirlist import dllcmp
+
         self.src_dls = self.sd.Dlld()
         if self.src_dls is None:
             self.sfc.fc += 1
@@ -128,6 +162,9 @@ class BVars:
 
     def skip_matching(self):
         # handle slip through mismatched on times or more recent
+        from findde import updateDEs
+        from status import onestatus
+
         for rf in self.f2d.copy():
             for lf in self.f2c.copy():
                 # TODO: use Path
@@ -135,14 +172,22 @@ class BVars:
                     if rf.i.sz == lf.i.sz and rf.i.mt == lf.i.mt:  # hashes match
                         self.f2d.remove(rf)
                         self.f2c.remove(lf)
+                    if rf.i.sz == lf.i.sz:
+                        # TODO:
+                        if ftouch(self.di, self.si, self.sd, self.td, lf, self.sfc):
+                            updateDEs(self.td, [str(de.nm) for de in [lf]])
 
     def do_copying(self):
         # TODO: use Path
+        from status import onestatus
+
         cfpl = self.f2c.copy()
         if len(cfpl) == 0:
             return
         # print(cfp)
         if fsyncl(self.di, self.si, self.sd, self.td, cfpl, self.sfc):
+            from findde import updateDEs
+
             for lf in cfpl:
                 self.ac2 += 1
                 self.f2c.remove(lf)
@@ -152,6 +197,9 @@ class BVars:
             updateDEs(self.td, [str(de.nm) for de in cfpl])
 
     def do_deletions(self):
+        from findde import updateDEs
+        from status import onestatus
+
         cfpl = self.f2d.copy()
         if fdell(self.di, self.si, self.sd, self.td, cfpl, self.sfc):
             for rf in cfpl:  # do deletions
@@ -161,6 +209,8 @@ class BVars:
 
 
 class CSCopy(OpBase):
+    from edge import Edge, findEdge
+
     def __init__(self, npl1, npl2, opts={}):
         super(CSCopy, self).__init__(npl1, npl2, opts)
         self.sfc = SFc()
@@ -169,6 +219,10 @@ class CSCopy(OpBase):
         return e.chk_ct() or e.rchk_ct()
 
     def __call__(self):
+        import config as v
+        from status import onestatus
+        from edge import Edge, findEdge
+
         di, si = self.npl1
         print("CSCopy", si + "->" + di)
         if not netup():

@@ -1,6 +1,5 @@
 import time
 
-import config as v
 import ldsv
 from bhash import blakeHash
 
@@ -60,6 +59,8 @@ class Edge:
 
 
 def findEdge(di, si) -> Edge:
+    import config as v
+
     if len(v.edges) != len(v.eDep):
         for e in v.eDep:
             v.edges[e.di, e.si] = e
@@ -67,17 +68,22 @@ def findEdge(di, si) -> Edge:
 
 
 def lrtset(di, si):
+    import config as v
+
     e: Edge = findEdge(di, si)
     e.rtset()
 
 
 def addDep(j, i):
+    import config as v
+
     e: Edge = Edge(j, i)
     if e not in v.eDep:
         v.eDep.add(e)
 
 
 def addArc(op1):
+    import config as v
     if op1 not in v.opdep:
         v.opdep.append(op1)
     j, i = op1.npl1

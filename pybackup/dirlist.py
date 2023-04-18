@@ -206,7 +206,7 @@ def getdll3(si):  # local-source
         fs = it.stat()
         it2 = fs.st_size
         it3 = fs.st_mtime_ns
-        it3 = v.trunc2ms(it3)
+        it3 = v.ns_trunc2ms(it3)
 
         fse = FSe(it2, it3)
         return DE(it1, fse)
@@ -228,7 +228,7 @@ def getdll4(di):  # local-target
         fs = it.stat()
         it2 = fs.st_size
         it3 = fs.st_mtime_ns
-        it3 = v.trunc2ms(it3)
+        it3 = v.ns_trunc2ms(it3)
 
         fse = FSe(it2, it3)
         return DE(it1, fse)
