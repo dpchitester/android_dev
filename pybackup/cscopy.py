@@ -24,10 +24,9 @@ def ts2st(ts):
     return t2
 
 
-def ftouch(di, si, sd, td, lf, sfc):
+def ftouch(di, si, td, lf, sfc):
     if netup():
         nt = ts2st(lf.i.mt)
-        # print('copy', sd, td)
         cmd = (
             'rclone touch "'
             + str(td)
@@ -173,9 +172,9 @@ class BVars:
                         self.f2d.remove(rf)
                         self.f2c.remove(lf)
                     elif rf.i.sz == lf.i.sz:
-                        # TODO:
-                        if ftouch(self.di, self.si, self.sd, self.td, lf, self.sfc):
-                            updateDEs(self.td, [str(de.nm) for de in [lf]])
+                        if rf.i.mt > lf.i.mt:
+                            if ftouch(self.di, self.si, self.td, lf, self.sfc):
+                                updateDEs(self.td, [str(de.nm) for de in [lf]])
 
     def do_copying(self):
         # TODO: use Path
