@@ -6,8 +6,7 @@ from queue import Empty, Queue
 from threading import Thread, Event, Lock, Thread
 from time import sleep
 
-from asyncinotify import Event as WEvent
-from asyncinotify import Inotify, Mask, Watch
+from asyncinotify import Event as WEvent, Inotify, Mask, Watch
 
 import config as v
 import ldsv
@@ -98,7 +97,11 @@ def proc_events():
             print(qs)
             try:
                 si: NodeTag = wdsi[ev1.watch]
+                wp = ev1.watch.path
                 p: Path = ev1.path
+                sip = v.src(si)
+                assert wp == p == sip
+                print('wp, p, sip', wp, p, sip)
                 if not ev1.mask & Mask.ISDIR:
                     rfn: Path = p.relative_to(v.src(si))
                     with sislk:
