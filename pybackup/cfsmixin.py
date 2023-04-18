@@ -36,7 +36,7 @@ class CFS_Mixin(FS_Mixin):
                 it2 = it["Size"]
                 it3 = it["ModTime"][:-1] + "-00:00"
                 it3 = datetime.datetime.fromisoformat(it3).timestamp()
-
+                it3 = v.ts_trunc2ms(it3)
                 fp = self / it1
                 fse = FSe(it2, it3)
                 return DE(it1, fse)

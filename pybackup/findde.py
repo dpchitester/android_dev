@@ -41,7 +41,7 @@ def getRemoteDEs(rd: Path, fl: list[str]):
             it2 = it["Size"]
             it3 = it["ModTime"][:-1] + "-00:00"
             it3 = datetime.datetime.fromisoformat(it3).timestamp()
-
+            it3 = v.ts_trunc2ms(it3)
             fse = FSe(it2, it3)
             nde = DE(it1, fse)
             print("new nde:", nde.nm, nde.i.sz, nde.i.mt)
