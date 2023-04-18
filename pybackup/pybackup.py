@@ -101,7 +101,7 @@ def proc_events():
                 p: Path = ev1.path
                 sip = v.src(si)
                 assert wp == p == sip
-                print('wp, p, sip', wp, p, sip)
+                print("wp, p, sip", wp, p, sip)
                 if not ev1.mask & Mask.ISDIR:
                     rfn: Path = p.relative_to(v.src(si))
                     with sislk:
@@ -110,6 +110,8 @@ def proc_events():
                         rfn = str(rfn)
                         if rfn not in sis[si]:
                             sis[si].append(rfn)
+            except Exception as exc:
+                print(exc)
             finally:
                 eq1.task_done()
         except Empty:
