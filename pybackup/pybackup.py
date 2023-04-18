@@ -63,7 +63,7 @@ def cb1():
             pass
         except KeyboardInterrupt as exc:
             print(exc)
-            break
+            raise exc
         except Exception as exc:
             print(exc)
             raise exc
@@ -110,6 +110,7 @@ def proc_events():
                             sis[si].append(rfn)
             except Exception as exc:
                 print(exc)
+                raise exc
             finally:
                 eq1.task_done()
         except Empty:
@@ -118,10 +119,10 @@ def proc_events():
                 th3.start()
         except KeyboardInterrupt as exc:
             print(exc)
-            break
+            raise exc
         except Exception as exc:
             print(exc)
-            break
+            raise exc
         if qe1.is_set():
             break
 
