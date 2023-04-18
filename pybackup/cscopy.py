@@ -29,9 +29,7 @@ def ftouch(di, si, td, lf, sfc):
         nt = ts2st(lf.i.mt)
         cmd = (
             'rclone touch "'
-            + str(td)
-            + '" --include "'
-            + str(lf.nm)
+            + str(td / lf.nm)
             + '" --timestamp "'
             + nt
             + '" --progress --no-create'
