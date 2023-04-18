@@ -20,7 +20,7 @@ def ts2st(ts):
 
     t2 = v.ts_trunc2ms(ts)
     t2 = dt.datetime.fromtimestamp(t2, tz=dt.timezone.utc)
-    t2 = t2.isoformat()[:-6]
+    t2 = t2.isoformat()[:-9]
     return t2
 
 
@@ -175,7 +175,10 @@ class BVars:
                         if rf.i.mt > lf.i.mt:
                             if ftouch(self.di, self.si, self.td, lf, self.sfc):
                                 updateDEs(self.td, [str(de.nm) for de in [lf]])
-
+                        else:
+                            if ftouch(self.di, self.si, self.sd, rf, self.sfc):
+                                updateDEs(self.sd, [str(de.nm) for de in [rf]])
+                        
     def do_copying(self):
         # TODO: use Path
         from status import onestatus
