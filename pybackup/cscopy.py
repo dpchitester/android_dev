@@ -31,10 +31,10 @@ def ftouch(di, si, td, lf, sfc):
             'rclone touch "'
             + str(td)
             + '" --include "'
-            + str(lf.nm.name)
+            + str(lf.nm)
             + '" --timestamp "'
             + nt
-            + '" --progress'
+            + '" --progress --no-create'
         )
         # cmd += ' --exclude ".git/**" --exclude "__pycache__/**"'
         print(cmd)
