@@ -156,7 +156,6 @@ def saveedges():
         print("saveedges failed", e)
 
 
-
 def pstats():
     import config as v
 
@@ -167,8 +166,6 @@ def pstats():
     print("dl3_cs", v.dl3_cs)
     print("dl4_cs", v.dl4_cs)
     print("dl5_cs", v.dl5_cs)
-
-
 
 
 def loadldh():

@@ -14,14 +14,16 @@ from status import changed_ops, updatets
 
 ul1 = Lock()
 
+
 def findDE(dl, rp: Path):
     i = bisect_left(dl, rp, key=lambda de: de.nm)
     if i < len(dl) and rp.name == dl[i].nm.name:
         return (dl[i], i)
     return (None, i)
 
+
 def getRemoteDEs(rd: Path, fl: list[str]):
-    print('getRemoteDEs', rd, fl)
+    print("getRemoteDEs", rd, fl)
     pt = type(rd)
     cmd = 'rclone lsjson "' + str(rd) + '" '
     for fn in fl:
@@ -39,7 +41,7 @@ def getRemoteDEs(rd: Path, fl: list[str]):
             it2 = it["Size"]
             it3 = it["ModTime"][:-1] + "-00:00"
             it3 = datetime.datetime.fromisoformat(it3).timestamp()
-            
+
             fse = FSe(it2, it3)
             nde = DE(it1, fse)
             print("new nde:", nde.nm, nde.i.sz, nde.i.mt)
@@ -103,10 +105,10 @@ def updateDEs(rd: Path, flst: list[str]):
     with ul1:
         sdel = getRemoteDEs(rd, flst)
         if sdel is None:
-            print('getRemoteDEs returned None')
+            print("getRemoteDEs returned None")
             return
         elif sdel == []:
-            print('getRemoteDEs returned []')
+            print("getRemoteDEs returned []")
         for fi in flst:
             fp = rd / fi
             sdes = findSDEs(fp)
@@ -131,7 +133,7 @@ def updateDEs(rd: Path, flst: list[str]):
                         if tde.i.mt != sde.i.mt:
                             print("modtime mismatch")
                             tde.i.mt = sde.i.mt
-                        
+
                     else:
                         print("insert", sde.nm)
                         fse = FSe(sde.i.sz, sde.i.mt)
@@ -161,7 +163,7 @@ def updateDEs(rd: Path, flst: list[str]):
                         if tde.i.mt != sde.i.mt:
                             print("modtime mismatch")
                             tde.i.mt = sde.i.mt
-                        
+
                     else:
                         print("insert", sde.nm)
                         fse = FSe(sde.i.sz, sde.i.mt)

@@ -58,7 +58,7 @@ def cb1():
         try:
             for ev in in1:
                 eq1.put(ev)
-                
+
         except BlockingIOError:
             pass
         except KeyboardInterrupt as exc:
@@ -92,12 +92,12 @@ def proc_events():
             ev1: WEvent = eq1.get(timeout=0.666)
             if ev1 is None:
                 continue
-            
+
             try:
                 si: NodeTag = wdsi[ev1.watch]
-                wp:Path = ev1.watch.path
+                wp: Path = ev1.watch.path
                 p: Path = ev1.path
-                sip:Path = v.src(si)
+                sip: Path = v.src(si)
                 assert wp == p == sip
                 print("wp, p, sip", wp, p, sip)
                 if not ev1.mask & Mask.ISDIR:

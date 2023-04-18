@@ -52,7 +52,6 @@ RDhd: Hdt1 = {}
 Hdt2: TypeAlias = Dict[Path, FSe]
 
 
-
 # files lists
 LDlls: Dict[NodeTag, List["DE"]] = {}
 RDlls: Dict[NodeTag, List["DE"]] = {}
@@ -116,7 +115,7 @@ def initConfig():
     edgepf = ppre("FLAGS") / "edges.pp"
     ldllsf = ppre("FLAGS") / "ldlls.pp"
     rdllsf = ppre("FLAGS") / "rdlls.pp"
-    
+
     ldhpf = ppre("FLAGS") / "ldhd.pp"
     rdhpf = ppre("FLAGS") / "rdhd.pp"
     # print("pf's set now")
@@ -302,26 +301,29 @@ def initConfig():
     # op1 = Mkzip(npl1, npl1, {"zipfile": "projects-git.zip"})
     # addArc(op1)
 
-    for cs in ('gd',):
+    for cs in ("gd",):
         for si in ("proj", *codes, "vids", "zips"):
             p1 = src(si).relative_to(ppre("sd"))
-            addTgtDir(cs+"_" + si, ppre(cs) / p1)
-            npl1 = (cs+"_" + si, si)
+            addTgtDir(cs + "_" + si, ppre(cs) / p1)
+            npl1 = (cs + "_" + si, si)
             # op1 = CSRestore(npl1, None, {})
             # addArc(op1)
             op1 = CSCopy(npl1, npl1, {"delete": False})
             addArc(op1)
 
     load_all()
-    
+
     import threading, builtins
+
     l1 = threading.Lock()
     tmp = builtins.print
-    def print(*args,**kwargs):
+
+    def print(*args, **kwargs):
         with l1:
-            return tmp(threading.current_thread().name, *args,**kwargs)
+            return tmp(threading.current_thread().name, *args, **kwargs)
+
     builtins.print = print
-        
+
 
 def ppre(s):
     if s in pres:
