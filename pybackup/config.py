@@ -51,8 +51,7 @@ RDhd: Hdt1 = {}
 
 Hdt2: TypeAlias = Dict[Path, FSe]
 
-# local file md5 hashes
-fmd5hd: Hdt2 = {}
+
 
 # files lists
 LDlls: Dict[NodeTag, List["DE"]] = {}
@@ -69,7 +68,7 @@ RDlls_changed: bool = False
 edgepf: Path = None
 ldllsf: Path = None
 rdllsf: Path = None
-fmd5hf: Path = None
+
 ldhpf: Path = None
 rdhpf: Path = None
 
@@ -112,16 +111,16 @@ def initConfig():
     addPre("FLAGS", home)
     # print("FLAGS=" + str(ppre('FLAGS')))
 
-    global edgepf, ldllsf, rdllsf, fmd5hf, ldhpf, rdhpf
+    global edgepf, ldllsf, rdllsf, ldhpf, rdhpf
 
     edgepf = ppre("FLAGS") / "edges.pp"
     ldllsf = ppre("FLAGS") / "ldlls.pp"
     rdllsf = ppre("FLAGS") / "rdlls.pp"
-    fmd5hf = ppre("FLAGS") / "fmd5h.pp"
+    
     ldhpf = ppre("FLAGS") / "ldhd.pp"
     rdhpf = ppre("FLAGS") / "rdhd.pp"
     # print("pf's set now")
-    # for pf in [edgepf, ldllsf, rdllsf, fmd5hf, ldhpf, rdhpf]:
+    # for pf in [edgepf, ldllsf, rdllsf, ldhpf, rdhpf]:
     #    print(pf.name, str(pf))
 
     addPre("sd", sdcard)

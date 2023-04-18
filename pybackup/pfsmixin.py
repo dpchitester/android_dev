@@ -3,7 +3,7 @@ import json
 from os import walk
 
 import asyncrun as ar
-from de import DE
+from de import DE, FSe
 from fsmixin import FS_Mixin
 
 
@@ -34,7 +34,6 @@ class PFS_Mixin(FS_Mixin):
 
     def getdll(self):  # local-source
         import config as v
-        from fmd5h import fmd5f
 
         v.dl3_cs += 1
         # print('getdll3', si, str(sd))
@@ -47,7 +46,7 @@ class PFS_Mixin(FS_Mixin):
             it3 = fs.st_mtime_ns
             it3 = v.trunc2ms(it3)
             fp = self / it1
-            fse = fmd5f(fp, it2, it3)
+            fse = FSe(it2, it3)
             return DE(it1, fse)
 
         st = list(map(es, l1))

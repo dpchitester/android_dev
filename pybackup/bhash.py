@@ -24,7 +24,7 @@ def bhu(ho, it1):
         set: lambda it: [bhuf[type(it2)](it2) for it2 in it],
         list: lambda it: [bhuf[type(it2)](it2) for it2 in it],
         DE: lambda it: [bhuf[type(it2)](it2) for it2 in (it.nm, it.i)],
-        FSe: lambda it: [bhuf[type(it2)](it2) for it2 in (it.sz, it.mt, it.md5)],
+        FSe: lambda it: [bhuf[type(it2)](it2) for it2 in (it.sz, it.mt)],
     }
     try:
         bhuf[type(it1)](it1)

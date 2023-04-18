@@ -156,23 +156,10 @@ def saveedges():
         print("saveedges failed", e)
 
 
-def loadfmd5h():
-    import config as v
-
-    try:
-        with open(v.fmd5hf, "rb") as fh:
-            v.fmd5hd = pickle.load(fh)
-    except Exception as e:
-        print("loadfmd5h failed", e)
-
 
 def pstats():
     import config as v
 
-    print("hash-dict name hit", v.hf_dh)
-    print("hash-dict name miss", v.hf_dm)
-    print("hash-dict sz-mt hit", v.hf_sth)
-    print("hash-dict sz-mt miss", v.hf_stm)
     print("sfb", v.sfb)
     print("dl0_cs", v.dl0_cs)
     print("dl1_cs", v.dl1_cs)
@@ -182,18 +169,6 @@ def pstats():
     print("dl5_cs", v.dl5_cs)
 
 
-def savefmd5h():
-    import config as v
-
-    if v.hf_dirty:
-        try:
-            with open(v.fmd5hf, "wb") as fh:
-                pickle.dump(v.fmd5hd, fh)
-            v.sfb += v.fmd5hf.stat().st_size
-            pstats()
-            v.hf_dirty = False
-        except Exception as e:
-            print("savefmd5h failed", e)
 
 
 def loadldh():
@@ -240,7 +215,7 @@ def load_all():
     loadrdlls()
     loadldlls()
     loadedges()
-    loadfmd5h()
+
     loadldh()
     loadrdh()
     after_load()
@@ -251,6 +226,6 @@ def save_all():
     saverdlls()
     saveldlls()
     saveedges()
-    savefmd5h()
+
     saveldh()
     saverdh()

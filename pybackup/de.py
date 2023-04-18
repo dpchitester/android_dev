@@ -6,13 +6,10 @@ from pathlib import Path
 class FSe:
     sz: int
     mt: float
-    md5: bytes
 
-    def __init__(self, sz: int, mt: float, md5: bytes):
+    def __init__(self, sz: int, mt: float):
         self.sz = sz
         self.mt = mt
-        self.md5 = md5
-
 
 @dataclass
 class DE:
@@ -26,4 +23,4 @@ class DE:
         return self.nm == other.nm
 
     def __hash__(self):
-        return hash((self.nm, self.i.sz, self.i.mt, self.i.md5))
+        return hash((self.nm, self.i.sz, self.i.mt))

@@ -7,8 +7,8 @@ from threading import Lock
 
 import asyncrun as ar
 import config as v
-from de import DE
-from fmd5h import fmd5f
+from de import DE, FSe
+
 from fsmixin import FS_Mixin
 from status import changed_ops, updatets
 
@@ -26,7 +26,7 @@ def getRemoteDEs(rd: Path, fl: list[str]):
     cmd = 'rclone lsjson "' + str(rd) + '" '
     for fn in fl:
         cmd += '--include "' + fn + '" '
-    cmd += " --recursive --files-only --hash"
+    cmd += " --recursive --files-only"
     rc = ar.run1(cmd)
     if rc == 0:
         if ar.txt == "":
@@ -39,11 +39,8 @@ def getRemoteDEs(rd: Path, fl: list[str]):
             it2 = it["Size"]
             it3 = it["ModTime"][:-1] + "-00:00"
             it3 = datetime.datetime.fromisoformat(it3).timestamp()
-            if "Hashes" in it:
-                it4 = bytes.fromhex(it["Hashes"]["md5"])
-            else:
-                it4 = bytes()
-            fse = fmd5f(rd / it1, it2, it3, it4)
+            
+            fse = FSe(it2, it3)
             nde = DE(it1, fse)
             print("new nde:", nde.nm, nde.i.sz, nde.i.mt)
             delst.append(nde)
@@ -134,12 +131,10 @@ def updateDEs(rd: Path, flst: list[str]):
                         if tde.i.mt != sde.i.mt:
                             print("modtime mismatch")
                             tde.i.mt = sde.i.mt
-                        if tde.i.md5 != sde.i.md5:
-                            print("md5 mismatch")
-                            tde.i.md5 = sde.i.md5
+                        
                     else:
                         print("insert", sde.nm)
-                        fse = fmd5f(fp, sde.i.sz, sde.i.mt, sde.i.md5)
+                        fse = FSe(sde.i.sz, sde.i.mt)
                         tde = DE(rp, fse)
                         dl.insert(i, tde)
                 else:
@@ -166,12 +161,10 @@ def updateDEs(rd: Path, flst: list[str]):
                         if tde.i.mt != sde.i.mt:
                             print("modtime mismatch")
                             tde.i.mt = sde.i.mt
-                        if tde.i.md5 != sde.i.md5:
-                            print("md5 mismatch")
-                            tde.i.md5 = sde.i.md5
+                        
                     else:
                         print("insert", sde.nm)
-                        fse = fmd5f(fp, sde.i.sz, sde.i.mt, sde.i.md5)
+                        fse = FSe(sde.i.sz, sde.i.mt)
                         tde = DE(rp, fse)
                         dl.insert(i, tde)
                 else:

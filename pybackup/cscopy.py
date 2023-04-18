@@ -132,7 +132,7 @@ class BVars:
             for lf in self.f2c.copy():
                 # TODO: use Path
                 if rf.nm == lf.nm:  # names match
-                    if rf.i.md5 == lf.i.md5:  # hashes match
+                    if rf.i.sz == lf.i.sz and rf.i.mt==lf.i.mt:  # hashes match
                         self.f2d.remove(rf)
                         self.f2c.remove(lf)
                     else:

@@ -8,8 +8,8 @@ from pathlib import Path
 
 import asyncrun as ar
 import config as v
-from de import DE
-from fmd5h import fmd5f
+from de import DE, FSe
+
 
 rto1 = 60 * 0
 rto2 = 60 * 0
@@ -54,12 +54,9 @@ def getdll0():  # remote-entire-drive
             it2 = it["Size"]
             it3 = it["ModTime"][:-1] + "-00:00"
             it3 = datetime.datetime.fromisoformat(it3).timestamp()
-            if "Hashes" in it:
-                it4 = bytes.fromhex(it["Hashes"]["md5"])
-            else:
-                it4 = bytes()
+            
             fp = td / it1
-            fse = fmd5f(fp, it2, it3, it4)
+            fse = FSe(it2, it3)
             return DE(it1, fse)
 
         st = list(map(es, l1))
@@ -91,7 +88,7 @@ def sepdlls(dlls):
                 continue
             while fnmatch(de.nm, tds + "*"):
                 fp = v.ppre("gd") / de.nm
-                fse = fmd5f(fp, de.i.sz, de.i.mt, de.i.md5)
+                fse = FSe(de.i.sz, de.i.mt)
                 de2 = DE(de.nm, fse)
                 # TODO: use Path
                 de2.nm = de2.nm.relative_to(rd)
@@ -123,12 +120,9 @@ def getdll1(di):  # remote-target
             it2 = it["Size"]
             it3 = it["ModTime"][:-1] + "-00:00"
             it3 = datetime.datetime.fromisoformat(it3).timestamp()
-            if "Hashes" in it:
-                it4 = bytes.fromhex(it["Hashes"]["md5"])
-            else:
-                it4 = bytes()
+            
             fp = td / it1
-            fse = fmd5f(fp, it2, it3, it4)
+            fse = FSe(it2, it3)
             return DE(it1, fse)
 
         st = list(map(es, l1))
@@ -159,12 +153,9 @@ def getdll5(si):  # remote-source
             it2 = it["Size"]
             it3 = it["ModTime"][:-1] + "-00:00"
             it3 = datetime.datetime.fromisoformat(it3).timestamp()
-            if "Hashes" in it:
-                it4 = bytes.fromhex(it["Hashes"]["md5"])
-            else:
-                it4 = bytes()
+            
             fp = td / it1
-            fse = fmd5f(fp, it2, it3, it4)
+            fse = FSe(it2, it3)
             return DE(it1, fse)
 
         st = list(map(es, l1))
@@ -194,12 +185,9 @@ def getdll2(si):  # remote-source
             it2 = it["Size"]
             it3 = it["ModTime"][:-7] + "-00:00"
             it3 = datetime.datetime.fromisoformat(it3).timestamp()
-            if "Hashes" in it:
-                it4 = bytes.fromhex(it["Hashes"]["md5"])
-            else:
-                it4 = bytes()
+            
             fp = td / it1
-            fse = fmd5f(fp, it2, it3, it4)
+            fse = FSe(it2, it3)
             return DE(it1, fse)
 
         st = list(map(es, l1))
@@ -224,7 +212,7 @@ def getdll3(si):  # local-source
         it3 = fs.st_mtime_ns
         it3 = v.trunc2ms(it3)
         fp = td / it1
-        fse = fmd5f(fp, it2, it3)
+        fse = FSe(it2, it3)
         return DE(it1, fse)
 
     st = list(map(es, l1))
@@ -246,7 +234,7 @@ def getdll4(di):  # local-target
         it3 = fs.st_mtime_ns
         it3 = v.trunc2ms(it3)
         fp = td / it1
-        fse = fmd5f(fp, it2, it3)
+        fse = FSe(it2, it3)
         return DE(it1, fse)
 
     st = list(map(es, l1))

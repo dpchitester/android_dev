@@ -2,7 +2,7 @@ import datetime
 import json
 
 import asyncrun as ar
-from de import DE
+from de import DE, FSe
 from fsmixin import FS_Mixin
 
 
@@ -10,7 +10,7 @@ class CFS_Mixin(FS_Mixin):
     def getfl(self):
         import config as v
 
-        cmd = 'rclone lsjson "' + str(self) + '" --recursive --files-only --hash '
+        cmd = 'rclone lsjson "' + str(self) + '" --recursive --files-only '
         for ex in v.dexs:
             cmd += ' --exclude "**/' + ex + '/*" '
         rc = ar.run1(cmd)
@@ -23,7 +23,6 @@ class CFS_Mixin(FS_Mixin):
 
     def getdll(self):  # remote-source
         import config as v
-        from fmd5h import fmd5f
 
         v.dl5_cs += 1
         pt = type(self)
@@ -37,12 +36,9 @@ class CFS_Mixin(FS_Mixin):
                 it2 = it["Size"]
                 it3 = it["ModTime"][:-1] + "-00:00"
                 it3 = datetime.datetime.fromisoformat(it3).timestamp()
-                if "Hashes" in it:
-                    it4 = bytes.fromhex(it["Hashes"]["md5"])
-                else:
-                    it4 = bytes()
+                
                 fp = self / it1
-                fse = fmd5f(fp, it2, it3, it4)
+                fse = FSe(it2, it3)
                 return DE(it1, fse)
 
             st = list(map(es, l1))
