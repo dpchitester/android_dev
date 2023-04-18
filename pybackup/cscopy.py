@@ -20,7 +20,7 @@ def ts2st(ts):
 
     t2 = v.ts_trunc2ms(ts)
     t2 = dt.datetime.fromtimestamp(t2, tz=dt.timezone.utc)
-    t2 = t2.isoformat()[:-6] + "Z"
+    t2 = t2.isoformat()[:-6]
     return t2
 
 
