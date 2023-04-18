@@ -127,6 +127,8 @@ def initConfig():
     addPre("sd", sdcard)
     addPre("proj", ppre("sd") / "projects")
     addPre("gd", cloud1)
+    addPre("od", cloud2)
+    addPre("db", cloud3)
     addPre("dsblog", Fat32(os.environ["FDB_PATH"]))
 
     addSrcDir("docs", ppre("sd") / "Documents", False)
@@ -301,14 +303,15 @@ def initConfig():
     # op1 = Mkzip(npl1, npl1, {"zipfile": "projects-git.zip"})
     # addArc(op1)
 
-    for si in ("proj", *codes, "vids", "zips"):
-        p1 = src(si).relative_to(ppre("sd"))
-        addTgtDir("gd_" + si, ppre("gd") / p1)
-        npl1 = ("gd_" + si, si)
-        # op1 = CSRestore(npl1, None, {})
-        # addArc(op1)
-        op1 = CSCopy(npl1, npl1, {"delete": True})
-        addArc(op1)
+    for cs in ('gd',):
+        for si in ("proj", *codes, "vids", "zips"):
+            p1 = src(si).relative_to(ppre("sd"))
+            addTgtDir(cs+"_" + si, ppre(cs) / p1)
+            npl1 = (cs+"_" + si, si)
+            # op1 = CSRestore(npl1, None, {})
+            # addArc(op1)
+            op1 = CSCopy(npl1, npl1, {"delete": False})
+            addArc(op1)
 
     load_all()
     
