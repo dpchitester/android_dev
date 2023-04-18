@@ -175,7 +175,7 @@ class BVars:
                         if rf.i.mt > lf.i.mt:
                             if ftouch(self.di, self.si, self.td, lf, self.sfc):
                                 updateDEs(self.td, [str(de.nm) for de in [lf]])
-                        else:
+                        elif rf.i.mt < lf.i.mt:
                             if ftouch(self.di, self.si, self.sd, rf, self.sfc):
                                 updateDEs(self.sd, [str(de.nm) for de in [rf]])
                         

@@ -84,7 +84,7 @@ def proc_events():
                 p = v.src(si)
                 fl = tsis[si]
                 if len(fl):
-                    print("-proc_events-3: updateDEs", p, fl)
+                    print("-procq updateDEs", p, fl)
                     updateDEs(p, fl)
 
     while True:
@@ -95,11 +95,11 @@ def proc_events():
 
             try:
                 si: NodeTag = wdsi[ev1.watch]
-                wp: Path = ev1.watch.path
+                
                 p: Path = ev1.path
-                sip: Path = v.src(si)
+                
 
-                print("wp, p, sip", wp, p, sip)
+                
                 if not ev1.mask & Mask.ISDIR:
                     rfn: Path = p.relative_to(v.src(si))
                     with sislk:
