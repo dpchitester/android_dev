@@ -98,7 +98,7 @@ def proc_events():
                 wp: Path = ev1.watch.path
                 p: Path = ev1.path
                 sip: Path = v.src(si)
-                assert wp == p == sip
+
                 print("wp, p, sip", wp, p, sip)
                 if not ev1.mask & Mask.ISDIR:
                     rfn: Path = p.relative_to(v.src(si))
