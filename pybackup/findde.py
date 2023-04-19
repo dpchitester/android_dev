@@ -17,9 +17,9 @@ ul1 = Lock()
 
 
 def findDE(dl, rp: Path):
-    assert isinstance(dl[0], DE),'findde'
-    assert isinstance(rp, Path),'findde'
-    tde = DE(rp, FSe(0,0))
+    assert isinstance(dl[0], DE), "findde"
+    assert isinstance(rp, Path), "findde"
+    tde = DE(rp, FSe(0, 0))
     i = bisect_left(dl, tde)
     if i < len(dl) and tde.nm == dl[i].nm:
         return (dl[i], i)
@@ -29,7 +29,7 @@ def findDE(dl, rp: Path):
 def getRemoteDEs(rd: Path, fl: list[str]):
     assert isinstance(rd, Path)
     assert isinstance(fl, List)
-    assert isinstance(fl[0],str)
+    assert isinstance(fl[0], str)
     print("getRemoteDEs", rd, fl)
     pt = type(rd)
     cmd = 'rclone lsjson "' + str(rd) + '" '
@@ -39,7 +39,7 @@ def getRemoteDEs(rd: Path, fl: list[str]):
     rc = ar.run1(cmd)
     if rc == 0:
         assert ar.txt != ""
-        
+
         delst = []
         jsl = json.loads(ar.txt)
         for it in jsl:
@@ -118,12 +118,71 @@ def findTDEs(fp: Path):
 
 
 def updateDEs(rd: Path, flst: List[str]):
+    def doSOne(dl, rp, tde, i, si):
+        if tde:
+            sde = [sde for sde in sdel if sde.nm.name == tde.nm.name]
+            if len(sde):
+                sde = sde[0]
+            else:
+                sde = None
+        else:
+            sde = None
+        p = v.src(si)
+        if sde:
+            if tde:
+                print("update", sde.nm, "->", tde.nm)
+                if tde.i.sz != sde.i.sz:
+                    print("size mismatch")
+                    tde.i.sz = sde.i.sz
+                if tde.i.mt != sde.i.mt:
+                    print("modtime mismatch")
+                    tde.i.mt = sde.i.mt
+
+            else:
+                print("insert", sde.nm)
+                fse = FSe(sde.i.sz, sde.i.mt)
+                tde = DE(rp, fse)
+                dl.insert(i, tde)
+        else:
+            if tde:
+                print("would delete", rp)
+                # dl.pop(i)
+
+    def doTOne(dl, rp, tde, i, di):
+        if tde:
+            sde = [sde for sde in sdel if sde.nm.name == tde.nm.name]
+            if len(sde):
+                sde = sde[0]
+            else:
+                sde = None
+        else:
+            sde = None
+        p = v.tgt(di)
+        if sde:
+            if tde:
+                print("update", sde.nm, "->", tde.nm)
+                if tde.i.sz != sde.i.sz:
+                    print("size mismatch")
+                    tde.i.sz = sde.i.sz
+                if tde.i.mt != sde.i.mt:
+                    print("modtime mismatch")
+                    tde.i.mt = sde.i.mt
+
+            else:
+                print("insert", sde.nm)
+                fse = FSe(sde.i.sz, sde.i.mt)
+                tde = DE(rp, fse)
+                dl.insert(i, tde)
+        else:
+            if tde:
+                print("would delete", rp)
+                # dl.pop(i)
+
     assert not ul1.locked()
     with ul1:
         assert ul1.locked()
         sdel = getRemoteDEs(rd, flst)
         assert sdel is not None
-        assert sdel != []
         for fi in flst:
             assert isinstance(fi, str)
             fp = rd / fi
@@ -131,66 +190,6 @@ def updateDEs(rd: Path, flst: List[str]):
             tdes = findTDEs(fp)
             assert sdes is not None
             assert tdes is not None
-
-            def doSOne(dl, rp, tde, i, si):
-                if tde:
-                    sde = [sde for sde in sdel if sde.nm.name == tde.nm.name]
-                    if len(sde):
-                        sde = sde[0]
-                    else:
-                        sde = None
-                else:
-                    sde = None
-                p = v.src(si)
-                if sde:
-                    if tde:
-                        print("update", sde.nm, "->", tde.nm)
-                        if tde.i.sz != sde.i.sz:
-                            print("size mismatch")
-                            tde.i.sz = sde.i.sz
-                        if tde.i.mt != sde.i.mt:
-                            print("modtime mismatch")
-                            tde.i.mt = sde.i.mt
-
-                    else:
-                        print("insert", sde.nm)
-                        fse = FSe(sde.i.sz, sde.i.mt)
-                        tde = DE(rp, fse)
-                        dl.insert(i, tde)
-                else:
-                    if tde:
-                        print("would delete", rp)
-                        # dl.pop(i)
-
-            def doTOne(dl, rp, tde, i, di):
-                if tde:
-                    sde = [sde for sde in sdel if sde.nm.name == tde.nm.name]
-                    if len(sde):
-                        sde = sde[0]
-                    else:
-                        sde = None
-                else:
-                    sde = None
-                p = v.tgt(di)
-                if sde:
-                    if tde:
-                        print("update", sde.nm, "->", tde.nm)
-                        if tde.i.sz != sde.i.sz:
-                            print("size mismatch")
-                            tde.i.sz = sde.i.sz
-                        if tde.i.mt != sde.i.mt:
-                            print("modtime mismatch")
-                            tde.i.mt = sde.i.mt
-
-                    else:
-                        print("insert", sde.nm)
-                        fse = FSe(sde.i.sz, sde.i.mt)
-                        tde = DE(rp, fse)
-                        dl.insert(i, tde)
-                else:
-                    if tde:
-                        print("would delete", rp)
-                        # dl.pop(i)
 
             for it in sdes:
                 doSOne(*it)
