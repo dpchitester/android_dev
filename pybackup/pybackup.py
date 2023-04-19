@@ -83,7 +83,7 @@ def proc_events():
     while True:
         try:
             ev1: WEvent = eq1.get(timeout=0.666)
-            if ev1 not is None:
+            if ev1 is not None:
                 si: NodeTag = wdsi[ev1.watch]
                 p: Path = ev1.path
                 if not ev1.mask & Mask.ISDIR:
