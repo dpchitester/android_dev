@@ -1,2 +1,0 @@
-[DE(nm=CS('Finance.db'), i=FSe(sz=737280, mt=1679194391.816))]
-[DE(nm=Fat32('Finance.db'), i=FSe(sz=737280, mt=1679194391.816))]

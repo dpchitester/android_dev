@@ -1,2 +1,0 @@
-[DE(nm=CS('nic1.asc'), i=FSe(sz=474, mt=1679194392.219))]
-[DE(nm=Fat32('nic1.asc'), i=FSe(sz=474, mt=1679194392.219))]

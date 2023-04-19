@@ -1,2 +1,0 @@
-[DE(nm=CS('2npn-nic'), i=FSe(sz=1005, mt=1679194391.476))]
-[DE(nm=Fat32('2npn-nic'), i=FSe(sz=1005, mt=1679194391.476))]
