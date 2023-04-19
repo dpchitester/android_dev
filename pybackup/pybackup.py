@@ -58,15 +58,8 @@ def cb1():
         try:
             for ev in in1:
                 eq1.put(ev)
-
         except BlockingIOError:
-            pass
-        except KeyboardInterrupt as exc:
-            print(exc)
-            break
-        except Exception as exc:
-            print(exc)
-            break
+            continue
         if qe1.is_set():
             break
 
@@ -102,17 +95,11 @@ def proc_events():
                     rfn = str(rfn)
                     if rfn not in sis[si]:
                         sis[si].append(rfn)
-                eq1.task_done()
+            eq1.task_done()
         except Empty:
             if len(sis):
                 th3 = Thread(target=procq)
                 th3.start()
-        except KeyboardInterrupt as exc:
-            print(exc)
-            break
-        except Exception as exc:
-            print(exc)
-            break
         if qe1.is_set():
             break
 
@@ -149,10 +136,6 @@ def main():
             th2 = Thread(target=proc_events)
             th2.start()
             rt2()
-        except KeyboardInterrupt as exc:
-            print(exc)
-        except Exception as exc:
-            print(exc)
         finally:
             qe1.set()
             for th in [th1, th2]:

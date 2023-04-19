@@ -190,10 +190,16 @@ class BVars:
 
             for lf in cfpl:
                 self.ac2 += 1
-                self.f2c.remove(lf)
+                try:
+                    self.f2c.remove(lf)
+                except KeyError:
+                    pass
                 for rf in self.f2d.copy():
                     if rf.nm == lf.nm:
-                        self.f2d.remove(rf)
+                        try:
+                            self.f2d.remove(rf)
+                        except KeyError:
+                            pass
             updateDEs(self.td, [str(de.nm) for de in cfpl])
 
     def do_deletions(self):
