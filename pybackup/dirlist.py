@@ -283,7 +283,6 @@ def tDlld(di):
         pass
     return p.Dll
 
-fi = 1
 
 def dllcmp(do, dn):
     global fi
@@ -291,10 +290,4 @@ def dllcmp(do, dn):
     dos = set(do)
     tocopy = dns - dos
     todelete = dos - dns
-    with open('dllcmp.log','w' if fi==1 else 'a') as fh:
-        fh.write(repr(do))
-        fh.write('\n')
-        fh.write(repr(dn))
-        fh.write('\n\n')
-        fi += 1
     return (todelete, tocopy)
