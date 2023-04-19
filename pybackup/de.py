@@ -18,10 +18,10 @@ class DE:
     i: FSe
 
     def __lt__(self, other):
-        return self.nm < other.nm
+        return str(self.nm) < str(other.nm)
 
     def __eq__(self, other):
-        return self.nm == other.nm
+        return str(self.nm) == str(other.nm)
 
     def __hash__(self):
         return hash((self.nm, self.i.sz, self.i.mt))

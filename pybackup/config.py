@@ -313,17 +313,6 @@ def initConfig():
 
     load_all()
 
-    import threading, builtins
-
-    l1 = threading.Lock()
-    tmp = builtins.print
-
-    def print(*args, **kwargs):
-        with l1:
-            return tmp(threading.current_thread().name, *args, **kwargs)
-
-    builtins.print = print
-
 
 def ppre(s):
     if s in pres:

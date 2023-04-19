@@ -223,6 +223,6 @@ def save_all():
     saverdlls()
     saveldlls()
     saveedges()
-
     saveldh()
     saverdh()
+    pstats()

@@ -4,6 +4,7 @@ import time
 from bisect import bisect_left
 from pathlib import Path
 from threading import Lock
+from typing import Dict, List, Set, Tuple, TypeAlias
 
 import asyncrun as ar
 import config as v
@@ -16,13 +17,19 @@ ul1 = Lock()
 
 
 def findDE(dl, rp: Path):
-    i = bisect_left(dl, rp, key=lambda de: de.nm)
-    if i < len(dl) and rp.name == dl[i].nm.name:
+    assert isinstance(dl[0], DE),'findde'
+    assert isinstance(rp, Path),'findde'
+    tde = DE(rp, FSe(0,0))
+    i = bisect_left(dl, tde)
+    if i < len(dl) and tde.nm == dl[i].nm:
         return (dl[i], i)
     return (None, i)
 
 
 def getRemoteDEs(rd: Path, fl: list[str]):
+    assert isinstance(rd, Path)
+    assert isinstance(fl, List)
+    assert isinstance(fl[0],str)
     print("getRemoteDEs", rd, fl)
     pt = type(rd)
     cmd = 'rclone lsjson "' + str(rd) + '" '
@@ -31,9 +38,8 @@ def getRemoteDEs(rd: Path, fl: list[str]):
     cmd += " --recursive --files-only"
     rc = ar.run1(cmd)
     if rc == 0:
-        if ar.txt == "":
-            print("lsjson returned empty string", cmd)
-            return
+        assert ar.txt != ""
+        
         delst = []
         jsl = json.loads(ar.txt)
         for it in jsl:
@@ -59,8 +65,9 @@ def findSis(fp1: Path):
             if fp1.parent.is_relative_to(fp2):
                 rp1 = fp1.relative_to(fp2)
                 l1[si] = rp1
-        except:
-            pass
+        except Exception as exc:
+            print(exc)
+            raise exc
     return l1
 
 
@@ -73,16 +80,21 @@ def findDis(fp1: Path):
                 rp1 = fp1.relative_to(fp2)
                 l1[di] = rp1
         except:
-            pass
+            print(exc)
+            raise exc
     return l1
 
 
 def findSDEs(fp: Path):
+    assert isinstance(fp, Path)
     sil = findSis(fp)
+    assert isinstance(sil, Dict)
     de_l = []
     for si in sil:
+        assert isinstance(si, str)
         p = v.src(si)
         rp = sil[si]
+        assert isinstance(rp, Path)
         if isinstance(p, FS_Mixin) and p.Dll:
             de, i = findDE(p.Dll, rp)
             de_l.append((p.Dll, rp, de, i, si))
@@ -90,29 +102,35 @@ def findSDEs(fp: Path):
 
 
 def findTDEs(fp: Path):
+    assert isinstance(fp, Path)
     dil = findDis(fp)
+    assert isinstance(dil, Dict)
     de_l = []
     for di in dil:
+        assert isinstance(di, str)
         p = v.tgt(di)
         rp = dil[di]
+        assert isinstance(rp, Path)
         if isinstance(p, FS_Mixin) and p.Dll:
             de, i = findDE(p.Dll, rp)
             de_l.append((p.Dll, rp, de, i, di))
     return de_l
 
 
-def updateDEs(rd: Path, flst: list[str]):
+def updateDEs(rd: Path, flst: List[str]):
+    assert not ul1.locked()
     with ul1:
+        assert ul1.locked()
         sdel = getRemoteDEs(rd, flst)
-        if sdel is None:
-            print("getRemoteDEs returned None")
-            return
-        elif sdel == []:
-            print("getRemoteDEs returned []")
+        assert sdel is not None
+        assert sdel != []
         for fi in flst:
+            assert isinstance(fi, str)
             fp = rd / fi
             sdes = findSDEs(fp)
             tdes = findTDEs(fp)
+            assert sdes is not None
+            assert tdes is not None
 
             def doSOne(dl, rp, tde, i, si):
                 if tde:
@@ -141,7 +159,7 @@ def updateDEs(rd: Path, flst: list[str]):
                         dl.insert(i, tde)
                 else:
                     if tde:
-                        print("wouldvdelete", rp)
+                        print("would delete", rp)
                         # dl.pop(i)
 
             def doTOne(dl, rp, tde, i, di):
