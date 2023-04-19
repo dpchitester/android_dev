@@ -432,9 +432,5 @@ def ts_trunc2ms(s):
     return floor(s * 1.0e3) / 1.0e3
 
 
-def round2ms(ns):
-    return int(str(ns + 500000)[:-6]) / 1e3
-
-
 def ns_trunc2ms(ns):
     return floor(ns / 1.0e6) / 1.0e3
