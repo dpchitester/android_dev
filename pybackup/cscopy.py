@@ -20,7 +20,7 @@ def ts2st(ts):
 
     t2 = v.ts_trunc2ms(ts)
     t2 = dt.datetime.fromtimestamp(t2, tz=dt.timezone.utc)
-    t2 = t2.isoformat()[:-9]
+    t2 = t2.isoformat()[:-6]
     return t2
 
 
@@ -97,7 +97,9 @@ def fsyncl(di, si, sd, td, fl, sfc):
 
 def fdel(di, si, sd, td, sfc):
     if netup():
-        cmd = 'rclone delete "' + str(td) + '"' + " --progress"
+        cmd = 'rclone delete "'
+        cmd += str(td) 
+        cmd += '" --progress'
         print(cmd)
         rc = ar.run2(cmd)
         if rc == 0:
@@ -109,7 +111,7 @@ def fdel(di, si, sd, td, sfc):
     return False
 
 
-def fdell(di, si, sd, td, fl, sfc):
+def fdell(di, si, td, fl, sfc):
     cmd = 'rclone delete "'
     cmd += str(td) + '" '
     for fn in fl:
@@ -118,7 +120,7 @@ def fdell(di, si, sd, td, fl, sfc):
     # cmd += '--log-file="rclone.log" '
     # cmd += "--use-json-log"
     if netup():
-        print("delete", sd, td, list(map(lambda de: str(de.nm), fl)))
+        print("delete", td, list(map(lambda de: str(de.nm), fl)))
         # print(cmd)
         rc = ar.run2(cmd)
         if rc == 0:
@@ -160,7 +162,6 @@ class BVars:
     def skip_matching(self):
         # handle slip through mismatched on times or more recent
         from findde import updateDEs
-        from status import onestatus
 
         for rf in self.f2d.copy():
             for lf in self.f2c.copy():
@@ -171,11 +172,13 @@ class BVars:
                         self.f2c.remove(lf)
                     elif rf.i.sz == lf.i.sz:
                         if rf.i.mt > lf.i.mt:
-                            if ftouch(self.di, self.si, self.td, lf, self.sfc):
-                                updateDEs(self.td, [str(de.nm) for de in [lf]])
+                            if rf.i.mt-lf.i.mt>=0.001:
+                                if ftouch(self.di, self.si, self.td, lf, self.sfc):
+                                    updateDEs(self.td, [str(de.nm) for de in [lf]])
                         elif rf.i.mt < lf.i.mt:
-                            if ftouch(self.di, self.si, self.sd, rf, self.sfc):
-                                updateDEs(self.sd, [str(de.nm) for de in [rf]])
+                            if rf.i.mt-lf.i.mt<=-0.001:
+                                if ftouch(self.di, self.si, self.sd, rf, self.sfc):
+                                    updateDEs(self.sd, [str(de.nm) for de in [rf]])
 
     def do_copying(self):
         # TODO: use Path
@@ -195,7 +198,7 @@ class BVars:
                 except KeyError:
                     pass
                 for rf in self.f2d.copy():
-                    if rf.nm == lf.nm:
+                    if str(rf.nm) == str(lf.nm):
                         try:
                             self.f2d.remove(rf)
                         except KeyError:
@@ -207,10 +210,13 @@ class BVars:
         from status import onestatus
 
         cfpl = self.f2d.copy()
-        if fdell(self.di, self.si, self.sd, self.td, cfpl, self.sfc):
+        if fdell(self.di, self.si, self.td, cfpl, self.sfc):
             for rf in cfpl:  # do deletions
                 self.ac2 += 1
-                self.f2d.remove(rf)
+                try:
+                    self.f2d.remove(rf)
+                except KeyError:
+                    pass
         updateDEs(self.td, [str(de.nm) for de in cfpl])
 
 

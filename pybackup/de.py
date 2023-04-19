@@ -24,4 +24,4 @@ class DE:
         return str(self.nm) == str(other.nm)
 
     def __hash__(self):
-        return hash((self.nm, self.i.sz, self.i.mt))
+        return hash((str(self.nm), self.i.sz, self.i.mt))

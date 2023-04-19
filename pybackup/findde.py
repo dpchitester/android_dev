@@ -178,7 +178,6 @@ def updateDEs(rd: Path, flst: List[str]):
                 print("would delete", rp)
                 # dl.pop(i)
 
-    assert not ul1.locked()
     with ul1:
         assert ul1.locked()
         sdel = getRemoteDEs(rd, flst)

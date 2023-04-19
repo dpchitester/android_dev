@@ -283,10 +283,17 @@ def tDlld(di):
         pass
     return p.Dll
 
+fi = 1
 
 def dllcmp(do, dn):
+    global fi
     dns = set(dn)
     dos = set(do)
     tocopy = dns - dos
     todelete = dos - dns
+    with open(f'temp{fi}.txt','w') as fh:
+        fh.write(repr(do))
+        fh.write('\n')
+        fh.write(repr(dn))
+        fi += 1
     return (todelete, tocopy)

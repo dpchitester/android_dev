@@ -15,8 +15,7 @@ class CFS_Mixin(FS_Mixin):
             cmd += ' --exclude "**/' + ex + '/*" '
         rc = ar.run1(cmd)
         if rc == 0:
-            l1 = json.loads(ar.txt)
-            return l1
+            return json.loads(ar.txt)
         if rc == 3:
             return []
         return None
@@ -32,7 +31,7 @@ class CFS_Mixin(FS_Mixin):
 
             def es(it: dict):
                 # TODO: use Path
-                it1 = it["Path"]
+                it1 = pt(it["Path"])
                 it2 = it["Size"]
                 it3 = it["ModTime"][:-1] + "-00:00"
                 it3 = datetime.datetime.fromisoformat(it3).timestamp()
