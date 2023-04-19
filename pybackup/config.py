@@ -385,6 +385,9 @@ dexs = {
     ".ropeproject",
     ".mypyproject",
     ".mypy_cache",
+    ".vite",
+    ".idea",
+    ".yarnclean",
 }
 
 def proc_DEs(des):
