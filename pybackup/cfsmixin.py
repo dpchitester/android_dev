@@ -11,8 +11,6 @@ class CFS_Mixin(FS_Mixin):
         import config as v
 
         cmd = 'rclone lsjson "' + str(self) + '" --recursive --files-only '
-        for ex in v.dexs:
-            cmd += ' --exclude "**/' + ex + '/**/*" '
         rc = ar.run1(cmd)
         if rc == 0:
             return json.loads(ar.txt)

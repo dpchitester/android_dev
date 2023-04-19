@@ -387,6 +387,12 @@ dexs = {
     ".mypy_cache",
 }
 
+def proc_DEs(des):
+    des[:] = [de for de in des if not any([sd for sd in de.nm.parent.parts if sd in dexs])]
+
+def proc_files(files, pt):
+    files[:] = [pt(f) for f in files if not any([sd for sd in f.parent.parts if sd in dexs])]
+
 
 def proc_dirs(dirs, pt):
     dirs[:] = [pt(d) for d in dirs if not isbaddir(pt(d))]

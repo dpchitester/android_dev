@@ -12,22 +12,15 @@ class PFS_Mixin(FS_Mixin):
         import config as v
 
         pt = type(self)
-        # print(str(p))
         fl = []
-
         if self.is_file():
             fl.append(self)
             return fl
-        for pth, dirs, files in walk(self, topdown=True):
-            pth = pt(pth)
-            if not v.isbaddir(pth):
-                v.proc_dirs(dirs, pt)
-                for f in files:
-                    rp = pth / f
-                    fl.append(rp)
-            else:
-                dirs = []
-                files = []
+        wl = self.rglob('*')
+        for it in wl:
+            if it.is_file():
+                rp = pt(it)
+                fl.append(rp)
         return fl
 
     def getdll(self):  # local-source

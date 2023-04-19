@@ -148,6 +148,7 @@ class BVars:
         self.ac2 = 0
 
     def init2(self):
+        import config as v
         from dirlist import dllcmp
 
         self.src_dls = self.sd.Dlld()
@@ -157,6 +158,7 @@ class BVars:
         if self.dst_dls is None:
             self.sfc.fc += 1
         if self.src_dls is not None and self.dst_dls is not None:
+            v.proc_DEs(self.src_dls)
             self.f2d, self.f2c = dllcmp(self.dst_dls, self.src_dls)
 
     def skip_matching(self):
