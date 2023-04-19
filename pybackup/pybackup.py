@@ -84,18 +84,17 @@ def proc_events():
         try:
             ev1: WEvent = eq1.get(timeout=0.666)
             if ev1 not is None:
-
-            si: NodeTag = wdsi[ev1.watch]
-            p: Path = ev1.path
-            if not ev1.mask & Mask.ISDIR:
-                rfn: Path = p.relative_to(v.src(si))
-                with sislk:
-                    if si not in sis:
-                        sis[si] = []
-                    rfn = str(rfn)
-                    if rfn not in sis[si]:
-                        sis[si].append(rfn)
-            eq1.task_done()
+                si: NodeTag = wdsi[ev1.watch]
+                p: Path = ev1.path
+                if not ev1.mask & Mask.ISDIR:
+                    rfn: Path = p.relative_to(v.src(si))
+                    with sislk:
+                        if si not in sis:
+                            sis[si] = []
+                        rfn = str(rfn)
+                        if rfn not in sis[si]:
+                            sis[si].append(rfn)
+                eq1.task_done()
         except Empty:
             if len(sis):
                 th3 = Thread(target=procq)
