@@ -59,7 +59,7 @@ def cb1():
             for ev in in1:
                 eq1.put(ev)
         except BlockingIOError:
-            continue
+            pass
         if qe1.is_set():
             break
 
@@ -83,8 +83,8 @@ def proc_events():
     while True:
         try:
             ev1: WEvent = eq1.get(timeout=0.666)
-            if ev1 is None:
-                continue
+            if ev1 not is None:
+
             si: NodeTag = wdsi[ev1.watch]
             p: Path = ev1.path
             if not ev1.mask & Mask.ISDIR:
