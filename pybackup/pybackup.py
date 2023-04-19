@@ -17,7 +17,7 @@ from netup import netup
 from opexec import clean, opExec
 from status import onestatus, updatets
 
-wdsi: dict[Watch, tuple[str, FS_Mixin]] = {}
+wdsi: dict[Watch, v.NodeTag] = {}
 in1 = None
 
 th1 = None
@@ -92,24 +92,16 @@ def proc_events():
             ev1: WEvent = eq1.get(timeout=0.666)
             if ev1 is None:
                 continue
-
-            try:
-                si: NodeTag = wdsi[ev1.watch]
-
-                p: Path = ev1.path
-
-                if not ev1.mask & Mask.ISDIR:
-                    rfn: Path = p.relative_to(v.src(si))
-                    with sislk:
-                        if si not in sis:
-                            sis[si] = []
-                        rfn = str(rfn)
-                        if rfn not in sis[si]:
-                            sis[si].append(rfn)
-            except Exception as exc:
-                print(exc)
-                raise exc
-            finally:
+            si: NodeTag = wdsi[ev1.watch]
+            p: Path = ev1.path
+            if not ev1.mask & Mask.ISDIR:
+                rfn: Path = p.relative_to(v.src(si))
+                with sislk:
+                    if si not in sis:
+                        sis[si] = []
+                    rfn = str(rfn)
+                    if rfn not in sis[si]:
+                        sis[si].append(rfn)
                 eq1.task_done()
         except Empty:
             if len(sis):
