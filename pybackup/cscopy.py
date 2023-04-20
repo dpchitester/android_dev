@@ -56,7 +56,7 @@ def fsync(di, si, sd, td, sfc):
             + str(td.parent)
             + '" --include "'
             + str(td.name)
-            + '" --progress'
+            + '" --progress --no-traverse --error-on-no-transfer --ignore-checksum'
         )
         # cmd += ' --exclude ".git/**" --exclude "__pycache__/**"'
         print(cmd)
