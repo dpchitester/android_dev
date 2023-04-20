@@ -25,7 +25,7 @@ def getfl(p):
         for pth, dirs, files in walk(p, topdown=True):
             pth = pt(pth)
             if not v.isbaddir(pth):
-                v.proc_dirs(dirs, pt)
+                v.cull_dirs(dirs, pt)
                 for f in files:
                     fl.append(pth / f)
             else:
