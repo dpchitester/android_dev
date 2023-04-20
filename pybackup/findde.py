@@ -17,16 +17,8 @@ from os.path import realpath
 def relative_to_either(p1, p2):
     assert isinstance(p1, Path)
     assert isinstance(p2, Path)
-    if issubclass(type(p1), Path):
-        pt1 = type(p1)
-    if issubclass(type(p2), Path):
-        pt2 = type(p2)
-    if issubclass(type(p1), pt2):
-        pt = type(p1)
-    elif issubclass(type(p2), pt1):
-        pt = type(p2)
-    else:
-        pt = pt1
+    pt = type(p1)
+        
     prts1 = Path(realpath(p1)).parts
     prts2 = Path(realpath(p2)).parts
     i = 0
