@@ -76,7 +76,7 @@ def fsyncl(di, si, sd, td, fl, sfc):
     cmd += str(td) + '" '
     for fn in fl:
         cmd += '--include "' + str(fn.nm) + '" '
-    cmd += "--progress "
+    cmd += '--progress --no-traverse --error-on-no-transfer --ignore-checksum'
     # cmd += '--exclude "**/.git/**/*" '
     # cmd += '--exclude "**/__pycache__/**/*" '
     # cmd += '--exclude "**/node_modules/**/*" '
