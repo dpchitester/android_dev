@@ -211,6 +211,8 @@ class BVars:
                         print(rf.i.mt, lf.i.mt, rf.i.mt - lf.i.mt)
                         if rf.i.mt > lf.i.mt:
                             if rf.i.mt - lf.i.mt > 0.0001:
+                                self.f2d.remove(rf)
+                                self.f2c.remove(lf)
                                 self.f2t.add(lf)
                             # if rf.i.mt-lf.i.mt<-0.0001:
                             # if ftouch(self.di, self.si, self.sd, rf, self.sfc):
