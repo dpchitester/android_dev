@@ -71,7 +71,7 @@ def fsync(di, si, sd, td, sfc):
 
 
 def fsyncl(di, si, sd, td, fl, sfc):
-    cmd = 'rclone copy "'
+    cmd = 'rclone symc "'
     cmd += str(sd) + '" "'
     cmd += str(td) + '" '
     for fn in fl:
