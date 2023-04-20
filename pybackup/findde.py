@@ -18,18 +18,19 @@ def relative_to_either(p1, p2):
     assert isinstance(p1, Path)
     assert isinstance(p2, Path)
     pt = type(p1)
-        
+
     prts1 = Path(realpath(p1)).parts
     prts2 = Path(realpath(p2)).parts
     i = 0
-    while i<len(prts1) and i<len(prts2) and prts1[i] == prts2[i]:
+    while i < len(prts1) and i < len(prts2) and prts1[i] == prts2[i]:
         i += 1
-    if i>=len(prts1):
+    if i >= len(prts1):
         return pt(*prts2[i:])
-    elif i>=len(prts2):
+    elif i >= len(prts2):
         return pt(*prts1[i:])
     else:
-        return pt()
+        raise ValueError('relative_to_either', p1, p2)
+
 
 def findDE(dl, rp: Path):
     assert isinstance(dl[0], DE), "findde"
@@ -43,6 +44,7 @@ def findDE(dl, rp: Path):
 
 def getRemoteDEs(rd: Path, fl: list[str]):
     import config as v
+
     assert isinstance(rd, Path)
     assert isinstance(fl, List)
     assert isinstance(fl[0], str)
@@ -75,6 +77,7 @@ def getRemoteDEs(rd: Path, fl: list[str]):
 
 def findSis(fp1: Path):
     import config as v
+
     assert isinstance(fp1, Path)
     l1 = {}
     for si in v.srcs:
@@ -87,6 +90,7 @@ def findSis(fp1: Path):
 
 def findDis(fp1: Path):
     import config as v
+
     assert isinstance(fp1, Path)
     l1 = {}
     for di in v.tgts:
@@ -99,6 +103,7 @@ def findDis(fp1: Path):
 
 def findSDEs(fp: Path):
     import config as v
+
     assert isinstance(fp, Path)
     sil = findSis(fp)
     assert isinstance(sil, Dict)
@@ -117,6 +122,7 @@ def findSDEs(fp: Path):
 
 def findTDEs(fp: Path):
     import config as v
+
     assert isinstance(fp, Path)
     dil = findDis(fp)
     assert isinstance(dil, Dict)
@@ -135,6 +141,7 @@ def findTDEs(fp: Path):
 
 def updateDEs(rd: Path, flst: List[str]):
     import config as v
+
     def doSOne(dl, rp, tde, i, si):
         if tde:
             sde = [sde for sde in sdel if sde.nm.name == tde.nm.name]
@@ -215,6 +222,7 @@ def updateDEs(rd: Path, flst: List[str]):
 
 def test1():
     from status import changed_ops, updatets
+
     v.initConfig()
     updatets(0)
     rd = v.src("pybackup")
