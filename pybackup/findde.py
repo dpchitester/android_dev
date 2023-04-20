@@ -29,7 +29,7 @@ def relative_to_either(p1, p2):
     elif i >= len(prts2):
         return pt(*prts1[i:])
     else:
-        raise ValueError('relative_to_either', p1, p2)
+        raise ValueError("relative_to_either", p1, p2)
 
 
 def findDE(dl, rp: Path):
