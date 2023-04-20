@@ -24,17 +24,17 @@ class FS_Mixin:
         else:
             ch = "l"
         if p.Dll is None or (p.isremote and p.Dll_xt + rto1 <= time.time()):
-            # print("sucking/scanning for", self.tag, ch + "dll...", end="")
+            print("sucking/scanning for", self.tag, ch + "dll...", end="")
             rv = p.getdll()
             if rv is not None:
-                # print("done.")
+                print("done.")
                 p.Dll = rv
                 p.Dll_xt = time.time()
                 p.Dll_changed = True
             else:
-                # print("failed.")
+                print("failed.")
                 pass
         else:
-            # print("fetched", self.tag, ch + "dll from cache.")
+            print("fetched", self.tag, ch + "dll from cache.")
             pass
         return p.Dll
