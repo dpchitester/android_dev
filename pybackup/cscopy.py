@@ -56,7 +56,7 @@ def fsync(di, si, sd, td, sfc):
             + str(td.parent)
             + '" --include "'
             + str(td.name)
-            + '" --progress --no-traverse --error-on-no-transfer --ignore-checksum'
+            + '" --progress --no-traverse'
         )
         # cmd += ' --exclude ".git/**" --exclude "__pycache__/**"'
         print(cmd)
@@ -76,7 +76,7 @@ def fsyncl(di, si, sd, td, fl, sfc):
     cmd += str(td) + '" '
     for fn in fl:
         cmd += '--include "' + str(fn.nm) + '" '
-    cmd += '--progress --no-traverse --ignore-checksum --no-check-dest'
+    cmd += '--progress --no-traverse'
     # cmd += '--exclude "**/.git/**/*" '
     # cmd += '--exclude "**/__pycache__/**/*" '
     # cmd += '--exclude "**/node_modules/**/*" '
@@ -116,7 +116,7 @@ def fdell(di, si, td, fl, sfc):
     cmd += str(td) + '" '
     for fn in fl:
         cmd += '--include "' + str(fn.nm) + '" '
-    cmd += "--progress "
+    cmd += '--progress'
     # cmd += '--log-file="rclone.log" '
     # cmd += "--use-json-log"
     if netup():
@@ -174,10 +174,10 @@ class BVars:
                         self.f2c.remove(lf)
                     elif rf.i.sz == lf.i.sz:
                         print(rf.i.mt, lf.i.mt, rf.i.mt-lf.i.mt)
-                        #if rf.i.mt > lf.i.mt:
-                            #if rf.i.mt-lf.i.mt>0.0001:
-                                #if ftouch(self.di, self.si, self.td, lf, self.sfc):
-                                    #updateDEs(self.td, [str(de.nm) for de in [lf]])
+                        if rf.i.mt > lf.i.mt:
+                            if rf.i.mt-lf.i.mt>0.0001:
+                                if ftouch(self.di, self.si, self.td, lf, self.sfc):
+                                    updateDEs(self.td, [str(de.nm) for de in [lf]])
                         #elif rf.i.mt < lf.i.mt:
                             #if rf.i.mt-lf.i.mt<-0.0001:
                                 #if ftouch(self.di, self.si, self.sd, rf, self.sfc):
