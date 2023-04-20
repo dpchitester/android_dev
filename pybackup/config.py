@@ -386,7 +386,6 @@ dexs = {
     ".mypyproject",
     ".mypy_cache",
     ".vite",
-    ".idea",
     ".yarnclean",
 }
 
