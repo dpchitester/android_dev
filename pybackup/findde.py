@@ -7,14 +7,37 @@ from threading import Lock
 from typing import Dict, List, Set, Tuple, TypeAlias
 
 import asyncrun as ar
-import config as v
 from de import DE, FSe
-
 from fsmixin import FS_Mixin
-from status import changed_ops, updatets
 
 ul1 = Lock()
+from os.path import realpath
 
+
+def relative_to_either(p1, p2):
+    assert isinstance(p1, Path)
+    assert isinstance(p2, Path)
+    if issubclass(type(p1), Path):
+        pt1 = type(p1)
+    if issubclass(type(p2), Path):
+        pt2 = type(p2)
+    if issubclass(type(p1), pt2):
+        pt = type(p1)
+    elif issubclass(type(p2), pt1):
+        pt = type(p2)
+    else:
+        pt = pt1
+    prts1 = Path(realpath(p1)).parts
+    prts2 = Path(realpath(p2)).parts
+    i = 0
+    while i<len(prts1) and i<len(prts2) and prts1[i] == prts2[i]:
+        i += 1
+    if i>=len(prts1):
+        return pt(*prts2[i:])
+    elif i>=len(prts2):
+        return pt(*prts1[i:])
+    else:
+        return pt()
 
 def findDE(dl, rp: Path):
     assert isinstance(dl[0], DE), "findde"
@@ -27,6 +50,7 @@ def findDE(dl, rp: Path):
 
 
 def getRemoteDEs(rd: Path, fl: list[str]):
+    import config as v
     assert isinstance(rd, Path)
     assert isinstance(fl, List)
     assert isinstance(fl[0], str)
@@ -58,34 +82,31 @@ def getRemoteDEs(rd: Path, fl: list[str]):
 
 
 def findSis(fp1: Path):
+    import config as v
+    assert isinstance(fp1, Path)
     l1 = {}
     for si in v.srcs:
         try:
-            fp2 = v.paths[si]
-            if fp1.parent.is_relative_to(fp2):
-                rp1 = fp1.relative_to(fp2)
-                l1[si] = rp1
-        except Exception as exc:
-            print(exc)
-            raise exc
+            l1[si] = relative_to_either(v.src(si), fp1)
+        except ValueError as exc:
+            pass
     return l1
 
 
 def findDis(fp1: Path):
+    import config as v
+    assert isinstance(fp1, Path)
     l1 = {}
     for di in v.tgts:
         try:
-            fp2 = v.paths[di]
-            if fp1.parent.is_relative_to(fp2):
-                rp1 = fp1.relative_to(fp2)
-                l1[di] = rp1
-        except:
-            print(exc)
-            raise exc
+            l1[di] = relative_to_either(v.tgt(di), fp1)
+        except ValueError:
+            pass
     return l1
 
 
 def findSDEs(fp: Path):
+    import config as v
     assert isinstance(fp, Path)
     sil = findSis(fp)
     assert isinstance(sil, Dict)
@@ -94,6 +115,7 @@ def findSDEs(fp: Path):
         assert isinstance(si, str)
         p = v.src(si)
         rp = sil[si]
+        assert isinstance(p, Path)
         assert isinstance(rp, Path)
         if isinstance(p, FS_Mixin) and p.Dll:
             de, i = findDE(p.Dll, rp)
@@ -102,6 +124,7 @@ def findSDEs(fp: Path):
 
 
 def findTDEs(fp: Path):
+    import config as v
     assert isinstance(fp, Path)
     dil = findDis(fp)
     assert isinstance(dil, Dict)
@@ -110,6 +133,7 @@ def findTDEs(fp: Path):
         assert isinstance(di, str)
         p = v.tgt(di)
         rp = dil[di]
+        assert isinstance(p, Path)
         assert isinstance(rp, Path)
         if isinstance(p, FS_Mixin) and p.Dll:
             de, i = findDE(p.Dll, rp)
@@ -118,6 +142,7 @@ def findTDEs(fp: Path):
 
 
 def updateDEs(rd: Path, flst: List[str]):
+    import config as v
     def doSOne(dl, rp, tde, i, si):
         if tde:
             sde = [sde for sde in sdel if sde.nm.name == tde.nm.name]
@@ -197,6 +222,7 @@ def updateDEs(rd: Path, flst: List[str]):
 
 
 def test1():
+    from status import changed_ops, updatets
     v.initConfig()
     updatets(0)
     rd = v.src("pybackup")

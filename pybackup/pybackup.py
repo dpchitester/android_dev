@@ -3,10 +3,11 @@
 from os import environ, walk
 from pathlib import Path
 from queue import Empty, Queue
-from threading import Thread, Event, Lock, Thread
+from threading import Event, Lock, Thread
 from time import sleep
 
-from asyncinotify import Event as WEvent, Inotify, Mask, Watch
+from asyncinotify import Event as WEvent
+from asyncinotify import Inotify, Mask, Watch
 
 import config as v
 import ldsv

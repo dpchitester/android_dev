@@ -1,7 +1,8 @@
+import datetime as dt
+
 import asyncrun as ar
 from netup import netup
 from opbase import OpBase
-import datetime as dt
 
 
 class SFc:
@@ -76,7 +77,7 @@ def fsyncl(di, si, sd, td, fl, sfc):
     cmd += str(td) + '" '
     for fn in fl:
         cmd += '--include "' + str(fn.nm) + '" '
-    cmd += '--progress --no-traverse'
+    cmd += "--progress --no-traverse"
     # cmd += '--exclude "**/.git/**/*" '
     # cmd += '--exclude "**/__pycache__/**/*" '
     # cmd += '--exclude "**/node_modules/**/*" '
@@ -98,7 +99,7 @@ def fsyncl(di, si, sd, td, fl, sfc):
 def fdel(di, si, sd, td, sfc):
     if netup():
         cmd = 'rclone delete "'
-        cmd += str(td) 
+        cmd += str(td)
         cmd += '" --progress'
         print(cmd)
         rc = ar.run2(cmd)
@@ -116,7 +117,7 @@ def fdell(di, si, td, fl, sfc):
     cmd += str(td) + '" '
     for fn in fl:
         cmd += '--include "' + str(fn.nm) + '" '
-    cmd += '--progress'
+    cmd += "--progress"
     # cmd += '--log-file="rclone.log" '
     # cmd += "--use-json-log"
     if netup():
@@ -175,17 +176,18 @@ class BVars:
                         self.f2d.remove(rf)
                         self.f2c.remove(lf)
                     elif rf.i.sz == lf.i.sz:
-                        print(rf.i.mt, lf.i.mt, rf.i.mt-lf.i.mt)
+                        print(rf.i.mt, lf.i.mt, rf.i.mt - lf.i.mt)
                         if rf.i.mt > lf.i.mt:
-                            if rf.i.mt-lf.i.mt>0.0001:
+                            if rf.i.mt - lf.i.mt > 0.0001:
                                 self.f2t.add(lf)
-                            #if rf.i.mt-lf.i.mt<-0.0001:
-                                #if ftouch(self.di, self.si, self.sd, rf, self.sfc):
-                                    #updateDEs(self.sd, [str(de.nm) for de in [rf]])
+                            # if rf.i.mt-lf.i.mt<-0.0001:
+                            # if ftouch(self.di, self.si, self.sd, rf, self.sfc):
+                            # updateDEs(self.sd, [str(de.nm) for de in [rf]])
+
     def do_touching(self):
         # TODO: use Path
-        from status import onestatus
         from findde import updateDEs
+        from status import onestatus
 
         cfpl = self.f2t.copy()
         if len(cfpl) == 0:
@@ -252,8 +254,8 @@ class CSCopy(OpBase):
 
     def __call__(self):
         import config as v
-        from status import onestatus
         from edge import Edge, findEdge
+        from status import onestatus
 
         di, si = self.npl1
         print("CSCopy", si + "->" + di)

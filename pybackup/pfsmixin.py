@@ -16,7 +16,7 @@ class PFS_Mixin(FS_Mixin):
         if self.is_file():
             fl.append(self)
             return fl
-        wl = self.rglob('*')
+        wl = self.rglob("*")
         for it in wl:
             if it.is_file():
                 rp = pt(it)
