@@ -391,19 +391,19 @@ dexs = {
 }
 
 
-def proc_DEs(des):
+def cull_DEs(des):
     des[:] = [
         de for de in des if not any([sd for sd in de.nm.parent.parts if sd in dexs])
     ]
 
 
-def proc_files(files, pt):
+def cull_files(files, pt):
     files[:] = [
         pt(f) for f in files if not any([sd for sd in f.parent.parts if sd in dexs])
     ]
 
 
-def proc_dirs(dirs, pt):
+def cull_dirs(dirs, pt):
     dirs[:] = [pt(d) for d in dirs if not isbaddir(pt(d))]
 
 
@@ -419,7 +419,7 @@ def getDL(p):
         for pth, dirs, files in walk(p, topdown=True):
             pth = pt(pth)
             if not isbaddir(pth):
-                proc_dirs(dirs, pt)
+                cull_dirs(dirs, pt)
                 for d in dirs.copy():
                     fl.append(pth / d)
                     dirs.remove(d)

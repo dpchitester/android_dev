@@ -127,6 +127,22 @@ def fdel(di, si, sd, td, sfc):
     return False
 
 
+def fdellm(di, si, td, fl1, sfc):
+    i = 0
+    j = 0
+    len1 = len(fl1)
+    fl2 = set()
+    for li in fl1:
+        fl2.add(li)
+        i += 1
+        j += 1
+        if j==12 or not i<len1:
+            if not fdell(di, si, td, fl2, sfc):
+                return False
+            fl2 = set()
+            j = 0
+    return True
+
 def fdell(di, si, td, fl, sfc):
     cmd = 'rclone delete "'
     cmd += str(td) + '" '
@@ -175,7 +191,8 @@ class BVars:
         if self.dst_dls is None:
             self.sfc.fc += 1
         if self.src_dls is not None and self.dst_dls is not None:
-            # v.proc_DEs(self.src_dls)
+            v.cull_DEs(self.src_dls)
+            v.cull_DEs(self.dst_dls)
             self.f2d, self.f2c = dllcmp(self.dst_dls, self.src_dls)
         self.f2t = set()
 
@@ -247,7 +264,7 @@ class BVars:
         from status import onestatus
 
         cfpl = self.f2d.copy()
-        if fdell(self.di, self.si, self.td, cfpl, self.sfc):
+        if fdellm(self.di, self.si, self.td, cfpl, self.sfc):
             for rf in cfpl:  # do deletions
                 self.ac2 += 1
                 try:
@@ -293,9 +310,9 @@ class CSCopy(OpBase):
                 print("skip", len(bv.f2d), "todelete", len(bv.f2c), "tocopy")
             if bv.sfc.fc == 0:
                 bv.do_copying()
-            if bv.sfc.fc == 0:
-                if "listdeletions" in self.opts and self.opts["listdeletions"] and len(bv.f2d):
-                    bv.list_deletions()
+            #if bv.sfc.fc == 0:
+                #if "listdeletions" in self.opts and self.opts["listdeletions"] and len(bv.f2d):
+                    #bv.list_deletions()
             if bv.sfc.fc == 0:
                 if "delete" in self.opts and self.opts["delete"] and len(bv.f2d):
                     bv.do_deletions()
