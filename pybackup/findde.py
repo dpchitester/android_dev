@@ -24,12 +24,11 @@ def relative_to_either(p1, p2):
     i = 0
     while i < len(prts1) and i < len(prts2) and prts1[i] == prts2[i]:
         i += 1
-    if i >= len(prts1):
+    if i == len(prts1):
         return pt(*prts2[i:])
-    elif i >= len(prts2):
+    elif i == len(prts2):
         return pt(*prts1[i:])
-    else:
-        raise ValueError("relative_to_either", p1, p2)
+    raise ValueError("relative_to_either", p1, p2)
 
 
 def findDE(dl, rp: Path):
