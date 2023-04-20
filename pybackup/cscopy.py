@@ -240,6 +240,12 @@ class BVars:
                 except KeyError:
                     pass
         updateDEs(self.td, [str(de.nm) for de in cfpl])
+    def list_deletions(self):
+        from findde import updateDEs
+        from status import onestatus
+
+        cfpl = self.f2d.copy()
+        print('potential deletions', cfpl)
 
 
 class CSCopy(OpBase):
@@ -272,6 +278,9 @@ class CSCopy(OpBase):
                 print("skip", len(bv.f2d), "todelete", len(bv.f2c), "tocopy")
             if bv.sfc.fc == 0:
                 bv.do_copying()
+            if bv.sfc.fc == 0:
+                if "listdeletions" in self.opts and self.opts["listdeletions"] and len(bv.f2d):
+                    bv.list_deletions()
             if bv.sfc.fc == 0:
                 if "delete" in self.opts and self.opts["delete"] and len(bv.f2d):
                     bv.do_deletions()
