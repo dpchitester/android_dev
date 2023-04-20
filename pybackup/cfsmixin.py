@@ -21,7 +21,7 @@ class CFS_Mixin(FS_Mixin):
     def getdll(self):  # remote-source
         import config as v
 
-        v.dl5_cs += 1
+        v.dl2_cs += 1
         pt = type(self)
         # print('getdll1', di, str(td))
         l1 = self.getfl()

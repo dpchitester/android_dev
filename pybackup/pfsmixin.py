@@ -26,7 +26,7 @@ class PFS_Mixin(FS_Mixin):
     def getdll(self):  # local-source
         import config as v
 
-        v.dl3_cs += 1
+        v.dl1_cs += 1
         # print('getdll3', si, str(sd))
         l1 = self.getfl()
 
