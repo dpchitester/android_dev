@@ -4,6 +4,15 @@ import asyncrun as ar
 from netup import netup
 from opbase import OpBase
 
+def chunk_from(s1, amt):
+    s2 = set()
+    for it in s1:
+        s2.add(it)
+        if len(s2) == amt:
+            yield s2
+            s2 = set()
+    if len(s2):
+        yield s2
 
 class SFc:
     sc = 0
@@ -71,19 +80,9 @@ def fsync(di, si, sd, td, sfc):
     return False
 
 def fsynclm(di, si, sd, td, fl1, sfc):
-    i = 0
-    j = 0
-    len1 = len(fl1)
-    fl2 = set()
-    for li in fl1:
-        fl2.add(li)
-        i += 1
-        j += 1
-        if j==12 or not i<len1:
-            if not fsyncl(di, si, sd, td, fl2, sfc):
-                return False
-            fl2 = set()
-            j = 0
+    for fl2 in chunk_from(fl1,10):
+        if not fsyncl(di, si, sd, td, fl2, sfc):
+            return False
     return True
 
 def fsyncl(di, si, sd, td, fl, sfc):
@@ -128,19 +127,9 @@ def fdel(di, si, sd, td, sfc):
 
 
 def fdellm(di, si, td, fl1, sfc):
-    i = 0
-    j = 0
-    len1 = len(fl1)
-    fl2 = set()
-    for li in fl1:
-        fl2.add(li)
-        i += 1
-        j += 1
-        if j==12 or not i<len1:
-            if not fdell(di, si, td, fl2, sfc):
-                return False
-            fl2 = set()
-            j = 0
+    for fl2 in chunk_from(fl1,10):
+        if not fdell(di, si, td, fl2, sfc):
+            return False
     return True
 
 def fdell(di, si, td, fl, sfc):
