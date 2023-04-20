@@ -174,10 +174,10 @@ class BVars:
                         self.f2c.remove(lf)
                     elif rf.i.sz == lf.i.sz:
                         print(rf.i.mt, lf.i.mt, rf.i.mt-lf.i.mt)
-                        if rf.i.mt > lf.i.mt:
-                            if rf.i.mt-lf.i.mt>0.0001:
-                                if ftouch(self.di, self.si, self.td, lf, self.sfc):
-                                    updateDEs(self.td, [str(de.nm) for de in [lf]])
+                        #if rf.i.mt > lf.i.mt:
+                            #if rf.i.mt-lf.i.mt>0.0001:
+                                #if ftouch(self.di, self.si, self.td, lf, self.sfc):
+                                    #updateDEs(self.td, [str(de.nm) for de in [lf]])
                         #elif rf.i.mt < lf.i.mt:
                             #if rf.i.mt-lf.i.mt<-0.0001:
                                 #if ftouch(self.di, self.si, self.sd, rf, self.sfc):
