@@ -158,10 +158,11 @@ def saveedges():
 
 def pstats():
     import config as v
-    
+
     print("dl1_cs", v.dl1_cs)
     print("dl2_cs", v.dl2_cs)
     print("sfb", v.sfb)
+
 
 def loadldh():
     import config as v

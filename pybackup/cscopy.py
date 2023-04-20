@@ -4,6 +4,7 @@ import asyncrun as ar
 from netup import netup
 from opbase import OpBase
 
+
 def chunk_from(s1, amt):
     s2 = set()
     for it in s1:
@@ -13,6 +14,7 @@ def chunk_from(s1, amt):
             s2 = set()
     if len(s2):
         yield s2
+
 
 class SFc:
     sc = 0
@@ -79,11 +81,13 @@ def fsync(di, si, sd, td, sfc):
             print(ar.txt)
     return False
 
+
 def fsynclm(di, si, sd, td, fl1, sfc):
-    for fl2 in chunk_from(fl1,10):
+    for fl2 in chunk_from(fl1, 10):
         if not fsyncl(di, si, sd, td, fl2, sfc):
             return False
     return True
+
 
 def fsyncl(di, si, sd, td, fl, sfc):
     cmd = 'rclone copy "'
@@ -127,10 +131,11 @@ def fdel(di, si, sd, td, sfc):
 
 
 def fdellm(di, si, td, fl1, sfc):
-    for fl2 in chunk_from(fl1,10):
+    for fl2 in chunk_from(fl1, 10):
         if not fdell(di, si, td, fl2, sfc):
             return False
     return True
+
 
 def fdell(di, si, td, fl, sfc):
     cmd = 'rclone delete "'
@@ -263,12 +268,13 @@ class BVars:
                 except KeyError:
                     pass
         updateDEs(self.td, [str(de.nm) for de in cfpl])
+
     def list_deletions(self):
         from findde import updateDEs
         from status import onestatus
 
         cfpl = self.f2d.copy()
-        print('potential deletions', cfpl)
+        print("potential deletions", cfpl)
 
 
 class CSCopy(OpBase):
@@ -301,9 +307,9 @@ class CSCopy(OpBase):
                 print("skip", len(bv.f2d), "todelete", len(bv.f2c), "tocopy")
             if bv.sfc.fc == 0:
                 bv.do_copying()
-            #if bv.sfc.fc == 0:
-                #if "listdeletions" in self.opts and self.opts["listdeletions"] and len(bv.f2d):
-                    #bv.list_deletions()
+            # if bv.sfc.fc == 0:
+            # if "listdeletions" in self.opts and self.opts["listdeletions"] and len(bv.f2d):
+            # bv.list_deletions()
             if bv.sfc.fc == 0:
                 if "delete" in self.opts and self.opts["delete"] and len(bv.f2d):
                     bv.do_deletions()
