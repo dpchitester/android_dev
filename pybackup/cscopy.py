@@ -70,6 +70,21 @@ def fsync(di, si, sd, td, sfc):
             print(ar.txt)
     return False
 
+def fsynclm(di, si, sd, td, fl1, sfc):
+    i = 0
+    j = 0
+    len1 = len(fl1)
+    fl2 = set()
+    for li in fl1:
+        fl2.add(li)
+        i += 1
+        j += 1
+        if j==12 or not i<len1:
+            if not fsyncl(di, si, sd, td, fl2, sfc):
+                return False
+            fl2 = set()
+            j = 0
+    return True
 
 def fsyncl(di, si, sd, td, fl, sfc):
     cmd = 'rclone copy "'
@@ -210,7 +225,7 @@ class BVars:
         if len(cfpl) == 0:
             return
         # print(cfp)
-        if fsyncl(self.di, self.si, self.sd, self.td, cfpl, self.sfc):
+        if fsynclm(self.di, self.si, self.sd, self.td, cfpl, self.sfc):
             from findde import updateDEs
 
             for lf in cfpl:
