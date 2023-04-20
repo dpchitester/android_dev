@@ -144,6 +144,7 @@ class BVars:
         self.dst_dls = None
         self.f2d = None
         self.f2c = None
+        self.f2t = None
         self.sfc = sfc
         self.ac2 = 0
 
@@ -160,6 +161,7 @@ class BVars:
         if self.src_dls is not None and self.dst_dls is not None:
             v.proc_DEs(self.src_dls)
             self.f2d, self.f2c = dllcmp(self.dst_dls, self.src_dls)
+        self.f2t = set()
 
     def skip_matching(self):
         # handle slip through mismatched on times or more recent
@@ -176,12 +178,27 @@ class BVars:
                         print(rf.i.mt, lf.i.mt, rf.i.mt-lf.i.mt)
                         if rf.i.mt > lf.i.mt:
                             if rf.i.mt-lf.i.mt>0.0001:
-                                if ftouch(self.di, self.si, self.td, lf, self.sfc):
-                                    updateDEs(self.td, [str(de.nm) for de in [lf]])
-                        #elif rf.i.mt < lf.i.mt:
+                                self.f2t.add(lf)
                             #if rf.i.mt-lf.i.mt<-0.0001:
                                 #if ftouch(self.di, self.si, self.sd, rf, self.sfc):
                                     #updateDEs(self.sd, [str(de.nm) for de in [rf]])
+    def do_touching(self):
+        # TODO: use Path
+        from status import onestatus
+        from findde import updateDEs
+
+        cfpl = self.f2t.copy()
+        if len(cfpl) == 0:
+            return
+        # print(cfp)
+        for lf in cfpl:
+            if ftouch(self.di, self.si, self.td, lf, self.sfc):
+                self.ac2 += 1
+                try:
+                    self.f2t.remove(lf)
+                except KeyError:
+                    pass
+        updateDEs(self.td, [str(de.nm) for de in cfpl])
 
     def do_copying(self):
         # TODO: use Path
@@ -256,6 +273,8 @@ class CSCopy(OpBase):
             if bv.sfc.fc == 0:
                 if "delete" in self.opts and self.opts["delete"] and len(bv.f2d):
                     bv.do_deletions()
+            if bv.sfc.fc == 0:
+                bv.do_touching()
             if bv.ac2:
                 pass
         if self.sfc.fc == 0:
