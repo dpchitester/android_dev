@@ -178,10 +178,10 @@ class BVars:
                             if rf.i.mt-lf.i.mt>0.0001:
                                 if ftouch(self.di, self.si, self.td, lf, self.sfc):
                                     updateDEs(self.td, [str(de.nm) for de in [lf]])
-                        elif rf.i.mt < lf.i.mt:
-                            if rf.i.mt-lf.i.mt<-0.0001:
-                                if ftouch(self.di, self.si, self.sd, rf, self.sfc):
-                                    updateDEs(self.sd, [str(de.nm) for de in [rf]])
+                        #elif rf.i.mt < lf.i.mt:
+                            #if rf.i.mt-lf.i.mt<-0.0001:
+                                #if ftouch(self.di, self.si, self.sd, rf, self.sfc):
+                                    #updateDEs(self.sd, [str(de.nm) for de in [rf]])
 
     def do_copying(self):
         # TODO: use Path
