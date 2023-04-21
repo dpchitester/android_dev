@@ -189,6 +189,8 @@ def initConfig():
     addTgtDir("bash", ppre("proj") / "bash")
     addTgtDir("plaid-node", ppre("proj") / "plaid-node")
 
+    load_all()
+
     npl1 = ("bash", "home")
     op1 = LocalCopy(
         npl1,
@@ -301,7 +303,7 @@ def initConfig():
     # op1 = Mkzip(npl1, npl1, {"zipfile": "projects-git.zip"})
     # addArc(op1)
 
-    for cs in ("gd",):
+    for cs in ("gd","db","od"):
         for si in ("proj", *codes, "vids", "zips"):
             p1 = src(si).relative_to(ppre("sd"))
             addTgtDir(cs + "_" + si, ppre(cs) / p1)
@@ -311,7 +313,6 @@ def initConfig():
             op1 = CSCopy(npl1, npl1, {"delete": False, "listdeletions": True})
             addArc(op1)
 
-    load_all()
 
 
 def ppre(s):
