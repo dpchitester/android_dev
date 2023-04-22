@@ -1,6 +1,6 @@
 import pickle
 
-from fsmixin import FS_Mixin
+from sd import FS_Mixin
 
 
 def prep_save():
@@ -14,31 +14,33 @@ def prep_save():
     v.RDhd = {}
     for si in v.srcs:
         pth = v.src(si)
-        if not pth.isremote:
-            if isinstance(pth, FS_Mixin):
+        if isinstance(pth, FS_Mixin):
+            if not pth.isremote:
                 v.LDlls[si] = None  # pth.Dll
                 v.LDlls_xt[si] = pth.Dll_xt
                 v.LDlls_changed |= pth.Dll_changed
-            v.LDhd[si] = pth.SDh
-        else:
-            if isinstance(pth, FS_Mixin):
+            else:
                 v.RDlls[si] = pth.Dll
                 v.RDlls_xt[si] = pth.Dll_xt
                 v.RDlls_changed |= pth.Dll_changed
+        if not pth.isremote:
+            v.LDhd[si] = pth.SDh
+        else:
             v.RDhd[si] = pth.SDh
     for di in v.tgts:
         pth = v.tgt(di)
-        if not pth.isremote:
-            if isinstance(pth, FS_Mixin):
+        if isinstance(pth, FS_Mixin):
+            if not pth.isremote:
                 v.LDlls[di] = None  # pth.Dll
                 v.LDlls_xt[di] = pth.Dll_xt
                 v.LDlls_changed |= pth.Dll_changed
-            v.LDhd[di] = pth.SDh
-        else:
-            if isinstance(pth, FS_Mixin):
+            else:
                 v.RDlls[di] = pth.Dll
                 v.RDlls_xt[di] = pth.Dll_xt
                 v.RDlls_changed |= pth.Dll_changed
+        if not pth.isremote:
+            v.LDhd[di] = pth.SDh
+        else:
             v.RDhd[di] = pth.SDh
 
 

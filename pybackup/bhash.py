@@ -3,7 +3,7 @@ from pathlib import Path, PosixPath
 from struct import pack, unpack
 
 from de import DE, FSe
-from sd import CS, SD, Ext3, Fat32, Local, Remote
+from sd import CS, SD, Ext3, Fat32
 
 
 def bhu(ho, it1):
@@ -15,8 +15,8 @@ def bhu(ho, it1):
         Path: lambda it: ho.update(str(it).encode()),
         PosixPath: lambda it: ho.update(str(it).encode()),
         SD: lambda it: ho.update(str(it).encode()),
-        Local: lambda it: ho.update(str(it).encode()),
-        Remote: lambda it: ho.update(str(it).encode()),
+        # Local: lambda it: ho.update(str(it).encode()),
+        # Remote: lambda it: ho.update(str(it).encode()),
         Ext3: lambda it: ho.update(str(it).encode()),
         Fat32: lambda it: ho.update(str(it).encode()),
         CS: lambda it: ho.update(str(it).encode()),

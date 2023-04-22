@@ -193,48 +193,6 @@ def getdll2(si):  # remote-source
     return None
 
 
-def getdll3(si):  # local-source
-    v.dl3_cs += 1
-    td = v.src(si)
-    # print('getdll3', si, str(sd))
-    l1 = getfl(td)
-
-    def es(it: Path):
-        # TODO: use Path
-        it1 = it.relative_to(td)
-        fs = it.stat()
-        it2 = fs.st_size
-        it3 = fs.st_mtime_ns
-        it3 = v.ns_trunc2ms(it3)
-        fse = FSe(it2, it3)
-        return DE(it1, fse)
-
-    st = list(map(es, l1))
-    st.sort(key=lambda de: de.nm)
-    return st
-
-
-def getdll4(di):  # local-target
-    v.dl4_cs += 1
-    td = v.tgt(di)
-    # print('getdll4', si, str(sd))
-    l1 = getfl(td)
-
-    def es(it: Path):
-        # TODO: use Path
-        it1 = it.relative_to(td)
-        fs = it.stat()
-        it2 = fs.st_size
-        it3 = fs.st_mtime_ns
-        it3 = v.ns_trunc2ms(it3)
-        fse = FSe(it2, it3)
-        return DE(it1, fse)
-
-    st = list(map(es, l1))
-    st.sort(key=lambda de: de.nm)
-    return st
-
-
 def getrdlls():  # remote entire drive
     t1 = time.time()
     rv = getdll0()
@@ -243,44 +201,6 @@ def getrdlls():  # remote entire drive
         sepdlls(rv)
         t3 = time.time()
         print(round(t2 - t1, 3), round(t3 - t2, 3))
-
-
-def sDlld(si):
-    p = v.src(si)
-    # print('-ldlld', si)
-    print("obtaining", si, "ldll...", end="")
-    if p.Dll is None or p.Dll_xt + rto1 <= time.time():
-        rv = p.getdll()
-        if rv is not None:
-            print("done.")
-            p.Dll = rv
-            p.Dll_xt = time.time()
-            p.Dll_changed = True
-        else:
-            print("failed.")
-    else:
-        print("retrieved.")
-        pass
-    return p.Dll
-
-
-def tDlld(di):
-    p = v.tgt(di)
-    # print('-rdlld', di)
-    print("obtaining", di, "rdll...", end="")
-    if p.Dll is None or p.Dll_xt + rto1 <= time.time():
-        rv = p.getdll()
-        if rv is not None:
-            print("done.")
-            p.Dll = rv
-            p.Dll_xt = time.time()
-            p.Dll_changed = True
-        else:
-            print("failed.")
-    else:
-        print("retrieved.")
-        pass
-    return p.Dll
 
 
 def dllcmp(do, dn):

@@ -13,7 +13,7 @@ import config as v
 import ldsv
 import status as st
 from findde import updateDEs
-from fsmixin import FS_Mixin
+from sd import FS_Mixin
 from netup import netup
 from opexec import clean, opExec
 from status import onestatus, updatets

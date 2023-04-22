@@ -8,15 +8,15 @@ from typing import Dict, List, Set, Tuple, TypeAlias
 
 import asyncrun as ar
 from de import DE, FSe
-from fsmixin import FS_Mixin
+from sd import FS_Mixin
 
 ul1 = Lock()
 from os.path import realpath
 
 
 def relative_to_either(p1, p2):
-    assert isinstance(p1, Path)
-    assert isinstance(p2, Path)
+    # assert isinstance(p1, Path)
+    # assert isinstance(p2, Path)
     pt = type(p1)
 
     prts1 = Path(realpath(p1)).parts
@@ -32,8 +32,8 @@ def relative_to_either(p1, p2):
 
 
 def findDE(dl, rp: Path):
-    assert isinstance(dl[0], DE), "findde"
-    assert isinstance(rp, Path), "findde"
+    # assert isinstance(dl[0], DE), "findde"
+    # assert isinstance(rp, Path), "findde"
     tde = DE(rp, FSe(0, 0))
     i = bisect_left(dl, tde)
     if i < len(dl) and tde.nm == dl[i].nm:
@@ -44,18 +44,18 @@ def findDE(dl, rp: Path):
 def getRemoteDEs(rd: Path, fl: list[str]):
     import config as v
 
-    assert isinstance(rd, Path)
-    assert isinstance(fl, List)
-    assert isinstance(fl[0], str)
+    # assert isinstance(rd, Path)
+    # assert isinstance(fl, List)
+    # assert isinstance(fl[0], str)
     print("getRemoteDEs", rd, fl)
     pt = type(rd)
     cmd = 'rclone lsjson "' + str(rd) + '" '
     for fn in fl:
         cmd += '--include "' + fn + '" '
-    cmd += " --recursive --files-only"
+    cmd += "--files-only"
     rc = ar.run1(cmd)
     if rc == 0:
-        assert ar.txt != ""
+        # assert ar.txt != ""
 
         delst = []
         jsl = json.loads(ar.txt)
@@ -77,7 +77,7 @@ def getRemoteDEs(rd: Path, fl: list[str]):
 def findSis(fp1: Path):
     import config as v
 
-    assert isinstance(fp1, Path)
+    # assert isinstance(fp1, Path)
     l1 = {}
     for si in v.srcs:
         try:
@@ -90,7 +90,7 @@ def findSis(fp1: Path):
 def findDis(fp1: Path):
     import config as v
 
-    assert isinstance(fp1, Path)
+    # assert isinstance(fp1, Path)
     l1 = {}
     for di in v.tgts:
         try:
@@ -103,16 +103,16 @@ def findDis(fp1: Path):
 def findSDEs(fp: Path):
     import config as v
 
-    assert isinstance(fp, Path)
+    # assert isinstance(fp, Path)
     sil = findSis(fp)
-    assert isinstance(sil, Dict)
+    # assert isinstance(sil, Dict)
     de_l = []
     for si in sil:
-        assert isinstance(si, str)
+        # assert isinstance(si, str)
         p = v.src(si)
         rp = sil[si]
-        assert isinstance(p, Path)
-        assert isinstance(rp, Path)
+        # assert isinstance(p, Path)
+        # assert isinstance(rp, Path)
         if isinstance(p, FS_Mixin) and p.Dll:
             de, i = findDE(p.Dll, rp)
             de_l.append((p.Dll, rp, de, i, si))
@@ -122,16 +122,16 @@ def findSDEs(fp: Path):
 def findTDEs(fp: Path):
     import config as v
 
-    assert isinstance(fp, Path)
+    # assert isinstance(fp, Path)
     dil = findDis(fp)
-    assert isinstance(dil, Dict)
+    # assert isinstance(dil, Dict)
     de_l = []
     for di in dil:
-        assert isinstance(di, str)
+        # assert isinstance(di, str)
         p = v.tgt(di)
         rp = dil[di]
-        assert isinstance(p, Path)
-        assert isinstance(rp, Path)
+        # assert isinstance(p, Path)
+        # assert isinstance(rp, Path)
         if isinstance(p, FS_Mixin) and p.Dll:
             de, i = findDE(p.Dll, rp)
             de_l.append((p.Dll, rp, de, i, di))
@@ -202,16 +202,16 @@ def updateDEs(rd: Path, flst: List[str]):
                 # dl.pop(i)
 
     with ul1:
-        assert ul1.locked()
+        # assert ul1.locked()
         sdel = getRemoteDEs(rd, flst)
-        assert sdel is not None
+        # assert sdel is not None
         for fi in flst:
-            assert isinstance(fi, str)
+            # assert isinstance(fi, str)
             fp = rd / fi
             sdes = findSDEs(fp)
             tdes = findTDEs(fp)
-            assert sdes is not None
-            assert tdes is not None
+            # assert sdes is not None
+            # assert tdes is not None
 
             for it in sdes:
                 doSOne(*it)

@@ -1,5 +1,5 @@
 import asyncrun as ar
-from sd import SD, Local, Remote
+from sd import Local_Mixin, Remote_Mixin, SD
 
 
 class GitCmdFailure(Exception):
@@ -13,7 +13,10 @@ def gitcmd(cmd, wt):
     return ar.txt.rstrip()
 
 
-class GitAdd(Local):
+class GitAdd(Local_Mixin, SD):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
     def sdhck(self):
         Dh1 = self.sdh_f()
         cmd = "git status --porcelain --untracked-files=all"
@@ -28,7 +31,10 @@ class GitAdd(Local):
         return (Dh2, rv > 0 and Dh2 != Dh1)
 
 
-class GitCommit(Local):
+class GitCommit(Local_Mixin, SD):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
     def sdhck(self):
         Dh1 = self.sdh_f()
         cmd = "git status --porcelain --untracked-files=all"
@@ -43,8 +49,9 @@ class GitCommit(Local):
         return (Dh2, rv > 0 and Dh2 != Dh1)
 
 
-class GitRepo(Local):
-    rmts = []
+class GitRepo(Local_Mixin, SD):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     def sdhck(self):
         return self.gitck2()
@@ -63,9 +70,9 @@ class GitRepo(Local):
         return (Dh2, rv > 0 and Dh2 != Dh1)
 
 
-class GitRemote(Remote):
-    rmt = None
-    url = None
+class GitRemote(Remote_Mixin, SD):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     def sdhck(self):
         return self.gitremoteck()

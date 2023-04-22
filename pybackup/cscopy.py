@@ -204,13 +204,13 @@ class BVars:
                     elif rf.i.sz == lf.i.sz:
                         print(rf.i.mt, lf.i.mt, rf.i.mt - lf.i.mt)
                         # if rf.i.mt > lf.i.mt:
-                            # if rf.i.mt - lf.i.mt > 0.0001:
-                                # self.f2d.remove(rf)
-                                # self.f2c.remove(lf)
-                                # self.f2t.add(lf)
-                            # if rf.i.mt-lf.i.mt<-0.0001:
-                            # if ftouch(self.di, self.si, self.sd, rf, self.sfc):
-                            # updateDEs(self.sd, [str(de.nm) for de in [rf]])
+                        # if rf.i.mt - lf.i.mt > 0.0001:
+                        # self.f2d.remove(rf)
+                        # self.f2c.remove(lf)
+                        # self.f2t.add(lf)
+                        # if rf.i.mt-lf.i.mt<-0.0001:
+                        # if ftouch(self.di, self.si, self.sd, rf, self.sfc):
+                        # updateDEs(self.sd, [str(de.nm) for de in [rf]])
 
     def do_touching(self):
         # TODO: use Path

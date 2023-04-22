@@ -75,22 +75,14 @@ rdhpf: Path = None
 worktree: Path = None
 
 # directory list hashing stats
-hf_dirty: bool = False
-hf_dm: int = 0
-hf_dh: int = 0
-hf_pm: int = 0
-hf_ph: int = 0
-hf_stm: int = 0
-hf_sth: int = 0
+
 sfb: int = 0
 
 # directory list getting stats
-dl0_cs = 0
+
 dl1_cs = 0
 dl2_cs = 0
-dl3_cs = 0
-dl4_cs = 0
-dl5_cs = 0
+
 
 home: Ext3 = None
 sdcard: Fat32 = None
@@ -112,7 +104,7 @@ def initConfig():
 
     global edgepf, ldllsf, rdllsf, ldhpf, rdhpf
 
-    edgepf = ppre("FLAGS") / "edges.pp"
+    edgepf = ppre("FLAGS"),"edges.pp"
     ldllsf = ppre("FLAGS") / "ldlls.pp"
     rdllsf = ppre("FLAGS") / "rdlls.pp"
 
@@ -152,29 +144,28 @@ def initConfig():
     global worktree
     worktree = ppre("sd") / "projects"
 
-    ga1 = GitAdd(worktree)
-    ga1.tag = "git_add"
-    addSrcDir("git_add", ga1)
+    ga1 = GitAdd(worktree, tag="git_add")
 
-    gc1 = GitCommit(worktree)
-    gc1.tag = "git_commit"
+    gc1 = GitCommit(worktree, tag="git_commit")
     addSrcDir("git_commit", gc1)
 
-    gre1 = GitRepo(worktree)
-    gre1.tag = "git"
-    gre1.rmts = ["bitbucket", "github"]
+    gre1 = GitRepo(worktree, tag="git", rmts=["bitbucket", "github"])
     addSrcDir("git", gre1)
 
-    gre2 = GitRemote(worktree)
-    gre2.url = "https://www.bitbucket.org/dpchitester/android_dev.git"
-    gre2.tag = "bitbucket"
-    gre2.rmt = "bitbucket"
+    gre2 = GitRemote(
+        worktree,
+        url="https://www.bitbucket.org/dpchitester/android_dev.git",
+        tag="bitbucket",
+        rmt="bitbucket",
+    )
     addTgtDir("bitbucket", gre2)
 
-    gre3 = GitRemote(worktree)
-    gre3.url = "https://github.com/dpchitester/android_dev.git"
-    gre3.tag = "github"
-    gre3.rmt = "github"
+    gre3 = GitRemote(
+        worktree,
+        url="https://github.com/dpchitester/android_dev.git",
+        tag="github",
+        rmt="github",
+    )
     addTgtDir("github", gre3)
 
     addTgtDir("home", ppre("FLAGS"))
@@ -314,7 +305,6 @@ def initConfig():
             addArc(op1)
 
 
-
 def ppre(s):
     if s in pres:
         return paths[s]
@@ -345,7 +335,7 @@ def cdir(s):
 
 def addTgtDir(tg, pth):
     if not isinstance(pth, SD):
-        raise Exception("not an SD type")
+        raise Exception("not an SD subclass")
     if tg in paths and paths[tg] != pth:
         raise Exception("path tag collision", tg, pth, paths[tg])
     paths[tg] = pth
@@ -356,7 +346,7 @@ def addTgtDir(tg, pth):
 
 def addSrcDir(tg, pth, iscode=False):
     if not isinstance(pth, SD):
-        raise Exception("not an SD type")
+        raise Exception("not an SD subclass")
     if tg in paths and paths[tg] != pth:
         raise Exception("path tag collision", tg, pth, paths[tg])
     paths[tg] = pth
@@ -369,7 +359,7 @@ def addSrcDir(tg, pth, iscode=False):
 
 def addPre(tg, frag):
     if not isinstance(frag, SD):
-        raise Exception("not an SD type")
+        raise Exception("not an SD subclass")
     if tg in paths and paths[tg] != frag:
         raise Exception("path tag collision", tg, paths[tg])
     paths[tg] = frag
