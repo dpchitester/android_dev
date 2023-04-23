@@ -15,6 +15,8 @@ def gitcmd(cmd, wt):
 
 class GitAdd(SD, Local_Mixin):
     def __init__(self, *args, **kwargs):
+        for k, v in kwargs.items():
+            setattr(self, k, v)
         super().__init__(*args, **kwargs)
 
     def sdhck(self):
@@ -34,6 +36,8 @@ class GitAdd(SD, Local_Mixin):
 
 class GitCommit(SD, Local_Mixin):
     def __init__(self, *args, **kwargs):
+        for k, v in kwargs.items():
+            setattr(self, k, v)
         super().__init__(*args, **kwargs)
 
     def sdhck(self):
@@ -53,6 +57,8 @@ class GitCommit(SD, Local_Mixin):
 
 class GitRepo(SD, Local_Mixin):
     def __init__(self, *args, **kwargs):
+        for k, v in kwargs.items():
+            setattr(self, k, v)
         super().__init__(*args, **kwargs)
 
     def sdhck(self):
@@ -74,6 +80,8 @@ class GitRepo(SD, Local_Mixin):
 
 class GitRemote(SD, Remote_Mixin):
     def __init__(self, *args, **kwargs):
+        for k, v in kwargs.items():
+            setattr(self, k, v)
         super().__init__(*args, **kwargs)
 
     def sdhck(self):

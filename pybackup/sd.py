@@ -17,10 +17,6 @@ class SD(PosixPath):
 
     def __init__(self, *args, **kwargs):
         super(SD, self).__init__(*args, **kwargs)
-        for k, v in kwargs.items():
-            setattr(self, k, v)
-        if not hasattr(self, 'attr'):
-            self.tag = 'error'
 
     def sdh_f(self, dh=None):
         odh = self.SDh
@@ -52,11 +48,10 @@ class Local_Mixin:
 
     @property
     def Dll(self):
-        try:
-            return v.LDlls[self.tag]
-        except KeyError as exc:
-            print(exc, self.tag, type(self))
-            return 0
+        if hasattr(self, 'tag'):
+            if self.tag in v.LDlls:
+                return v.LDlls[self.tag]
+        return None
 
     @Dll.setter
     def Dll(self, val):
@@ -64,7 +59,10 @@ class Local_Mixin:
 
     @property
     def Dll_xt(self):
-        return v.LDlls_xt[self.tag]
+        if hasattr(self, 'tag'):
+            if self.tag in v.LDlls_xt:
+                return v.LDlls_xt[self.tag]
+        return 0
 
     @Dll_xt.setter
     def Dll_xt(self, val):
@@ -80,11 +78,10 @@ class Local_Mixin:
 
     @property
     def SDh(self):
-        if self.tag in v.LDhd:
-            return v.LDhd[self.tag]
-        else:
-            print('LDhd missing', self.tag, type(self))
-            return 0
+        if hasattr(self, 'tag'):
+            if self.tag in v.LDhd:
+                return v.LDhd[self.tag]
+        return 0
 
     @SDh.setter
     def SDh(self, val):
@@ -94,26 +91,28 @@ class Local_Mixin:
 class Remote_Mixin:
     def __init__(self, *args, **kwargs):
         super(Remote_Mixin, self).__init__()
-
+        
     @property
     def isremote(self):
         return True
 
     @property
     def Dll(self):
-        try:
-            return v.RDlls[self.tag]
-        except KeyError as exc:
-            print(exc, self.tag, type(self))
-            return 0
-
+        if hasattr(self, 'tag'):
+            if self.tag in v.RDlls:
+                return v.RDlls[self.tag]
+        return None
+ 
     @Dll.setter
     def Dll(self, val):
         v.RDlls[self.tag] = val
 
     @property
     def Dll_xt(self):
-        return v.RDlls_xt[self.tag]
+        if hasattr(self, 'tag'):
+            if self.tag in v.RDlls_xt:
+                return v.RDlls_xt[self.tag]
+        return 0
 
     @Dll_xt.setter
     def Dll_xt(self, val):
@@ -129,12 +128,10 @@ class Remote_Mixin:
 
     @property
     def SDh(self):
-        return v.RDhd[self.tag]
-        if self.tag in v.RDhd:
-            return v.RDhd[self.tag]
-        else:
-            print('RDhd missing', self.tag, type(self))
-            return 0
+        if hasattr(self, 'tag'):
+            if self.tag in v.RDhd:
+                return v.RDhd[self.tag]
+        return 0
 
     @SDh.setter
     def SDh(self, val):
@@ -265,20 +262,20 @@ class PFS_Mixin(FS_Mixin, Local_Mixin):
 
 class Ext3(PFS_Mixin):
     def __init__(self, *args, **kwargs):
+        for k, v in kwargs.items():
+            setattr(self, k, v)
         super(Ext3, self).__init__(*args, **kwargs)
-        if not hasattr(self, 'attr'):
-            self.tag = 'error'
 
 
 class Fat32(PFS_Mixin):
     def __init__(self, *args, **kwargs):
+        for k, v in kwargs.items():
+            setattr(self, k, v)
         super(Fat32, self).__init__(*args, **kwargs)
-        if not hasattr(self, 'attr'):
-            self.tag = 'error'
 
 
 class CS(CFS_Mixin):
     def __init__(self, *args, **kwargs):
+        for k, v in kwargs.items():
+            setattr(self, k, v)
         super(CS, self).__init__(*args, **kwargs)
-        if not hasattr(self, 'attr'):
-            self.tag = 'error'

@@ -192,11 +192,11 @@ def check_sdhes(i):
 def initConfig():
     check_sdhes(0)
     global home, sdcard, cloud1, cloud2, cloud3
-    home = Ext3(os.environ["HOME"])
-    sdcard = Fat32("/storage/emulated/0")
-    cloud1 = CS("GoogleDrive:")
-    cloud2 = CS("OneDrive:")
-    cloud3 = CS("DropBox:")
+    home = Ext3(os.environ["HOME"], tag='home')
+    sdcard = Fat32("/storage/emulated/0", tag='sdcard')
+    cloud1 = CS("GoogleDrive:", tag='cloud1')
+    cloud2 = CS("OneDrive:", tag='cloud2')
+    cloud3 = CS("DropBox:", tag='cloud3')
 
     addPre("FLAGS", home)
     # print("FLAGS=" + str(ppre('FLAGS')))
@@ -219,7 +219,7 @@ def initConfig():
     addPre("gd", cloud1)
     addPre("od", cloud2)
     addPre("db", cloud3)
-    addPre("dsblog", Fat32(os.environ["FDB_PATH"]))
+    addPre("dsblog", Fat32(os.environ["FDB_PATH"], tag='dsblog'))
     check_sdhes(2)
 
     addSrcDir("home", home, False)
