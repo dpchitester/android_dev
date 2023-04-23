@@ -38,8 +38,18 @@ class SD(PosixPath):
             return (Dh2, Dh1 != Dh2)
         return (None, False)
 
+class RemotePtrs():
+    def __init__(self):
+        self.dlls = v.RDlls
+        self.dlls_xt = v.RDlls_xt
+    @property
+    def dll_changed(self):
+        return v.RDll_changed
+    @dll_changed.setter
+    def dll_changed(self, val):
+        v.RDll_changed = val
 
-class Local_Mixin:
+class Local_Mixin():
     def __init__(self, *args, **kwargs):
         super(Local_Mixin, self).__init__()
 
@@ -59,23 +69,23 @@ class Local_Mixin:
         v.LDlls[self.tag] = val
 
     @property
-    def Dll_xt(self):
+    def Dlls_xt(self):
         if hasattr(self, "tag"):
             if self.tag in v.LDlls_xt:
                 return v.LDlls_xt[self.tag]
         return 0
 
-    @Dll_xt.setter
-    def Dll_xt(self, val):
+    @Dlls_xt.setter
+    def Dlls_xt(self, val):
         v.LDlls_xt[self.tag] = val
 
     @property
-    def Dll_changed(self):
-        return v.LDll_changed
+    def Dlls_changed(self):
+        return v.LDlls_changed
 
-    @Dll_changed.setter
-    def Dll_changed(self, val):
-        v.LDll_changed = val
+    @Dlls_changed.setter
+    def Dlls_changed(self, val):
+        v.LDlls_changed = val
 
     @property
     def SDh(self):
@@ -89,7 +99,7 @@ class Local_Mixin:
         v.LDhd[self.tag] = val
 
 
-class Remote_Mixin:
+class Remote_Mixin():
     def __init__(self, *args, **kwargs):
         super(Remote_Mixin, self).__init__()
 
@@ -109,23 +119,23 @@ class Remote_Mixin:
         v.RDlls[self.tag] = val
 
     @property
-    def Dll_xt(self):
+    def Dlls_xt(self):
         if hasattr(self, "tag"):
             if self.tag in v.RDlls_xt:
                 return v.RDlls_xt[self.tag]
         return 0
 
-    @Dll_xt.setter
-    def Dll_xt(self, val):
+    @Dlls_xt.setter
+    def Dlls_xt(self, val):
         v.RDlls_xt[self.tag] = val
 
     @property
-    def Dll_changed(self):
-        return v.RDll_changed
+    def Dlls_changed(self):
+        return v.RDlls_changed
 
-    @Dll_changed.setter
-    def Dll_changed(self, val):
-        v.RDll_changed = val
+    @Dlls_changed.setter
+    def Dlls_changed(self, val):
+        v.RDlls_changed = val
 
     @property
     def SDh(self):
