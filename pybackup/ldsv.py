@@ -136,7 +136,7 @@ def load_all():
 
 def save_all():
     saverdlls()
-    saveldlls()
+    # saveldlls()
     saveedges()
     saveldh()
     saverdh()
