@@ -32,13 +32,14 @@ def saveldlls():
 
     # print('-saveldlls')
     if v.LDlls_changed:
-        try:
-            with open(v.ldllsf, "wb") as fh:
-                td = {"ldlls": v.LDlls, "ldlls_xt": v.LDlls_xt}
-                pickle.dump(td, fh)
-                v.LDlls_changed = False
-        except Exception as e:
-            print("savedlls failed", e)
+        print('LDlls changed')
+    try:
+        with open(v.ldllsf, "wb") as fh:
+            td = {"ldlls": v.LDlls, "ldlls_xt": v.LDlls_xt}
+            pickle.dump(td, fh)
+            v.LDlls_changed = False
+    except Exception as e:
+        print("savedlls failed", e)
 
 
 def saverdlls():
@@ -46,13 +47,14 @@ def saverdlls():
 
     # print('-saverdlls')
     if v.RDlls_changed:
-        try:
-            with open(v.rdllsf, "wb") as fh:
-                td = {"rdlls": v.RDlls, "rdlls_xt": v.RDlls_xt}
-                pickle.dump(td, fh)
-                v.RDlls_changed = False
-        except Exception as e:
-            print("saverdlls failed", e)
+        print('RDlls changed')
+    try:
+        with open(v.rdllsf, "wb") as fh:
+            td = {"rdlls": v.RDlls, "rdlls_xt": v.RDlls_xt}
+            pickle.dump(td, fh)
+            v.RDlls_changed = False
+    except Exception as e:
+        print("saverdlls failed", e)
 
 
 def loadedges():
