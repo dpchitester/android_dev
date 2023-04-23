@@ -55,7 +55,7 @@ class Local_Mixin:
         try:
             return v.LDlls[self.tag]
         except KeyError as exc:
-            print(exc)
+            print(exc, self.tag, type(self))
             return 0
 
     @Dll.setter
@@ -83,7 +83,7 @@ class Local_Mixin:
         if self.tag in v.LDhd:
             return v.LDhd[self.tag]
         else:
-            print('LDhd missing', self.tag)
+            print('LDhd missing', self.tag, type(self))
             return 0
 
     @SDh.setter
@@ -104,7 +104,7 @@ class Remote_Mixin:
         try:
             return v.RDlls[self.tag]
         except KeyError as exc:
-            print(exc)
+            print(exc, self.tag, type(self))
             return 0
 
     @Dll.setter
@@ -130,6 +130,11 @@ class Remote_Mixin:
     @property
     def SDh(self):
         return v.RDhd[self.tag]
+        if self.tag in v.RDhd:
+            return v.RDhd[self.tag]
+        else:
+            print('RDhd missing', self.tag, type(self))
+            return 0
 
     @SDh.setter
     def SDh(self, val):
