@@ -1,10 +1,12 @@
 import time
 from pathlib import Path, PosixPath
+import datetime
 
 from snoop import pp, snoop
 
 import config as v
 from de import DE, FSe
+import asyncrun as ar
 
 icl = 1
 
@@ -17,7 +19,8 @@ class SD(PosixPath):
         super(SD, self).__init__(*args, **kwargs)
         for k, v in kwargs.items():
             setattr(self, k, v)
-        self.tag = None
+        if not hasattr(self, 'attr'):
+            self.tag = 'error'
 
     def sdh_f(self, dh=None):
         odh = self.SDh
@@ -49,7 +52,11 @@ class Local_Mixin:
 
     @property
     def Dll(self):
-        return v.LDlls[self.tag]
+        try:
+            return v.LDlls[self.tag]
+        except KeyError as exc:
+            print(exc)
+            return 0
 
     @Dll.setter
     def Dll(self, val):
@@ -73,7 +80,11 @@ class Local_Mixin:
 
     @property
     def SDh(self):
-        return v.LDhd[self.tag]
+        if self.tag in v.LDhd:
+            return v.LDhd[self.tag]
+        else:
+            print('LDhd missing', self.tag)
+            return 0
 
     @SDh.setter
     def SDh(self, val):
@@ -90,7 +101,11 @@ class Remote_Mixin:
 
     @property
     def Dll(self):
-        return v.RDlls[self.tag]
+        try:
+            return v.RDlls[self.tag]
+        except KeyError as exc:
+            print(exc)
+            return 0
 
     @Dll.setter
     def Dll(self, val):
@@ -246,13 +261,19 @@ class PFS_Mixin(FS_Mixin, Local_Mixin):
 class Ext3(PFS_Mixin):
     def __init__(self, *args, **kwargs):
         super(Ext3, self).__init__(*args, **kwargs)
+        if not hasattr(self, 'attr'):
+            self.tag = 'error'
 
 
 class Fat32(PFS_Mixin):
     def __init__(self, *args, **kwargs):
         super(Fat32, self).__init__(*args, **kwargs)
+        if not hasattr(self, 'attr'):
+            self.tag = 'error'
 
 
 class CS(CFS_Mixin):
     def __init__(self, *args, **kwargs):
         super(CS, self).__init__(*args, **kwargs)
+        if not hasattr(self, 'attr'):
+            self.tag = 'error'

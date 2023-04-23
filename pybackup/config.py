@@ -30,12 +30,12 @@ class SetDict(dict):
         super(SetDict, self).__init__(*args)
 
     def add(self, tg, sd):
-        self[tg] = sd
+        if not hasattr(sd, 'tag'):
+            setattr(sd, 'tag', tg)
         if tg in self.paths and sd != self.paths[tg]:
             raise ValueError("tag " + tg + " already in paths-dict with different path")
+        self[tg] = sd
         self.paths[tg] = sd
-        sd.tag = tg
-
 
 pres = SetDict()
 srcs = SetDict()
