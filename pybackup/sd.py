@@ -9,7 +9,7 @@ from de import DE, FSe
 import asyncrun as ar
 
 icl = 1
-
+rto1 = 60 * 5
 
 class SD(PosixPath):
     def __new__(cls, *args, **kwargs):
