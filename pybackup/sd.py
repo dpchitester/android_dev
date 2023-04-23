@@ -38,33 +38,39 @@ class SD(PosixPath):
             return (Dh2, Dh1 != Dh2)
         return (None, False)
 
-class LocalPtrs():
+
+class LocalPtrs:
     def __init__(self):
         self.dlls = v.LDlls
         self.dlls_xt = v.LDlls_xt
+
     @property
     def dll_changed(self):
         return v.LDll_changed
+
     @dll_changed.setter
     def dll_changed(self, val):
         v.LDll_changed = val
 
-class RemotePtrs():
+
+class RemotePtrs:
     def __init__(self):
         self.dlls = v.RDlls
         self.dlls_xt = v.RDlls_xt
+
     @property
     def dll_changed(self):
         return v.RDll_changed
+
     @dll_changed.setter
     def dll_changed(self, val):
         v.RDll_changed = val
 
-class Local_Mixin():
+
+class Local_Mixin:
     def __init__(self, *args, **kwargs):
         super(Local_Mixin, self).__init__()
-        self.p = LocalPtrs()
-        
+
     @property
     def isremote(self):
         return False
@@ -111,10 +117,9 @@ class Local_Mixin():
         v.LDhd[self.tag] = val
 
 
-class Remote_Mixin():
+class Remote_Mixin:
     def __init__(self, *args, **kwargs):
         super(Remote_Mixin, self).__init__()
-        self.p = RemotePtrs()
 
     @property
     def isremote(self):

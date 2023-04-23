@@ -1,6 +1,6 @@
 import asyncrun as ar
-from sd import SD, Local_Mixin, Remote_Mixin
-
+from sd import SD
+import config as v
 
 class GitCmdFailure(Exception):
     pass
@@ -13,7 +13,47 @@ def gitcmd(cmd, wt):
     return ar.txt.rstrip()
 
 
-class GitAdd(SD, Local_Mixin):
+class Local_Git_Mixin:
+    def __init__(self, *args, **kwargs):
+        super(Local_Git_Mixin, self).__init__()
+
+    @property
+    def isremote(self):
+        return False
+
+    @property
+    def SDh(self):
+        if hasattr(self, "tag"):
+            if self.tag in v.LDhd:
+                return v.LDhd[self.tag]
+        return 0
+
+    @SDh.setter
+    def SDh(self, val):
+        v.LDhd[self.tag] = val
+
+
+class Remote_Git_Mixin:
+    def __init__(self, *args, **kwargs):
+        super(Remote_Git_Mixin, self).__init__()
+
+    @property
+    def isremote(self):
+        return True
+
+    @property
+    def SDh(self):
+        if hasattr(self, "tag"):
+            if self.tag in v.RDhd:
+                return v.RDhd[self.tag]
+        return 0
+
+    @SDh.setter
+    def SDh(self, val):
+        v.RDhd[self.tag] = val
+
+
+class GitAdd(SD, Local_Git_Mixin):
     def __init__(self, *args, **kwargs):
         for k, v in kwargs.items():
             setattr(self, k, v)
@@ -34,7 +74,7 @@ class GitAdd(SD, Local_Mixin):
         return (Dh2, rv > 0 and Dh2 != Dh1)
 
 
-class GitCommit(SD, Local_Mixin):
+class GitCommit(SD, Local_Git_Mixin):
     def __init__(self, *args, **kwargs):
         for k, v in kwargs.items():
             setattr(self, k, v)
@@ -55,7 +95,7 @@ class GitCommit(SD, Local_Mixin):
         return (Dh2, rv > 0 and Dh2 != Dh1)
 
 
-class GitRepo(SD, Local_Mixin):
+class GitRepo(SD, Local_Git_Mixin):
     def __init__(self, *args, **kwargs):
         for k, v in kwargs.items():
             setattr(self, k, v)
@@ -78,7 +118,7 @@ class GitRepo(SD, Local_Mixin):
         return (Dh2, rv > 0 and Dh2 != Dh1)
 
 
-class GitRemote(SD, Remote_Mixin):
+class GitRemote(SD, Remote_Git_Mixin):
     def __init__(self, *args, **kwargs):
         for k, v in kwargs.items():
             setattr(self, k, v)
