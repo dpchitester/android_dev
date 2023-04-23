@@ -1,14 +1,45 @@
+import time
 from pathlib import Path, PosixPath
+
+from snoop import pp, snoop
+
+from de import DE, FSe
+
+icl = 1
 
 
 class SD(PosixPath):
+    @classmethod
+    def new(cls, *pth, **kwargs):
+        return cls(*pth, **kwargs)
+        
     def __new__(cls, *args, **kwargs):
-        return super().__new__(cls, *args)
+        rv = super(SD, cls).__new__(cls, *args)
+        return rv
 
     def __init__(self, *args, **kwargs):
+        super(SD, self).__init__(*args, **kwargs)
+        self.tag = None
+        self.sdh = None
         for k, v in kwargs.items():
             setattr(self, k, v)
-        self.SDh = None
+
+    @property
+    def SDh(self):
+        # with snoop(watch_explode=["self"]):
+        try:
+            rv = self.sdh
+        except AttributeError as exc:
+            print(exc)
+            print(self)
+            print(vars(self))
+            raise exc
+        return rv
+
+    @SDh.setter
+    def SDh(self, value):
+        # with snoop(watch_explode=["self"]):
+        self.sdh = value
 
     def sdh_f(self, dh=None):
         odh = self.SDh
@@ -30,29 +61,30 @@ class SD(PosixPath):
         return (None, False)
 
 
-class Local_Mixin():
+class Local_Mixin:
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super(Local_Mixin, self).__init__()
 
     @property
     def isremote(self):
         return False
 
-class Remote_Mixin():
+
+class Remote_Mixin:
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super(Remote_Mixin, self).__init__()
 
     @property
     def isremote(self):
         return True
 
+
 class FS_Mixin(SD):
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super(FS_Mixin, self).__init__(*args, **kwargs)
         self.Dll = None
         self.Dll_xt = 0.0
         self.Dll_changed = False
-
 
     def sdh_d(self):
         from bhash import blakeHash
@@ -63,7 +95,6 @@ class FS_Mixin(SD):
         return None
 
     def Dlld(self):
-        p = self
         # print('-ldlld', si)
         if self.isremote:
             ch = "r"
@@ -85,11 +116,14 @@ class FS_Mixin(SD):
             pass
         return self.Dll
 
-class CFS_Mixin(FS_Mixin):
+
+class CFS_Mixin(FS_Mixin, Remote_Mixin):
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super(CFS_Mixin, self).__init__(*args, **kwargs)
 
     def getfl(self):
+        import json
+
         import config as v
 
         cmd = 'rclone lsjson "' + str(self) + '" --recursive --files-only '
@@ -125,14 +159,9 @@ class CFS_Mixin(FS_Mixin):
         return None
 
 
-class CS(CFS_Mixin, Remote_Mixin):
+class PFS_Mixin(FS_Mixin, Local_Mixin):
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-
-class PFS_Mixin(FS_Mixin):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super(PFS_Mixin, self).__init__(*args, **kwargs)
 
     def getfl(self):
         import config as v
@@ -174,11 +203,17 @@ class PFS_Mixin(FS_Mixin):
         st.sort(key=lambda de: de.nm)
         return st
 
-class Ext3(PFS_Mixin, Local_Mixin):
+
+class Ext3(PFS_Mixin):
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super(Ext3, self).__init__(*args, **kwargs)
 
 
-class Fat32(PFS_Mixin, Local_Mixin):
+class Fat32(PFS_Mixin):
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super(Fat32, self).__init__(*args, **kwargs)
+
+
+class CS(CFS_Mixin):
+    def __init__(self, *args, **kwargs):
+        super(CS, self).__init__(*args, **kwargs)

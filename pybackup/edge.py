@@ -62,8 +62,7 @@ def findEdge(di, si) -> Edge:
     import config as v
 
     for e in v.eDep:
-        if (e.di, e.si) not in v.edges:
-            v.edges[e.di, e.si] = e
+        v.edges[e.di, e.si] = e
     return v.edges[di, si]
 
 

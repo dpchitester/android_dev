@@ -20,15 +20,54 @@ from sd import CS, SD, Ext3, Fat32
 NodeTag: TypeAlias = str
 
 # any/all mostly local directory path(s)
-paths: Dict[NodeTag, Path] = {}
+# paths: Dict[NodeTag, Path] = {}
 
+class SetDict(dict):
+    paths = {}
+    def __init__(self, *args):
+        super(SetDict, self).__init__(*args)
+    def add(self, tg, sd):
+        self[tg] = sd
+        if tg in self.paths and sd != self.paths[tg]:
+            raise ValueError('tag ' + tg + ' already in paths-dict with different path')
+        self.paths[tg] = sd
+        sd.tag = tg
 
-# tag attributes/types/classes
-pres: Set[NodeTag] = set()
-# pdirs: Set[NodeTag] = set()
-srcs: Set[NodeTag] = set()
-tgts: Set[NodeTag] = set()
-codes: Set[NodeTag] = set()
+pres = SetDict()
+srcs = SetDict()
+tgts = SetDict()
+codes = SetDict()
+
+def ppre(s):
+    return pres[s]
+
+def src(s):
+    return srcs[s]
+
+def tgt(s):
+    return tgts[s]
+
+def cdir(s):
+    return codes[s]
+
+def addSrcDir(tg, pth, iscode=False):
+    if not isinstance(pth, SD):
+        raise Exception("not an SD subclass")
+    srcs.add(tg, pth)
+    pth.issrc = True
+    if iscode:
+        codes.add(tg, pth)
+
+def addTgtDir(tg, pth):
+    if not isinstance(pth, SD):
+        raise Exception("not an SD subclass")
+    tgts.add(tg, pth)
+    pth.istgt = True
+
+def addPre(tg, frag):
+    if not isinstance(frag, SD):
+        raise Exception("not an SD subclass")
+    pres.add(tg, frag)
 
 
 # operations (function objects)
@@ -90,11 +129,40 @@ cloud1: CS = None
 cloud2: CS = None
 cloud3: CS = None
 
+sdhes = {}
+
+
+def update_sdhes(t, h, nh):
+    global sdhes
+    if t not in sdhes:
+        sdhes[t] = [0, 0]
+    sdhes[t][0] += h
+    sdhes[t][1] += nh
+
+
+def check_sdhes(i):
+    global sdhes
+    return
+    print("check _sdhes (" + str(i) + ")")
+    sdhes = {}
+    ha = 0
+    nha = 0
+    for tg in srcs:
+        it = src(tg)
+        cha = hasattr(it, "_sdh")
+        if cha:
+            update_sdhes(type(it), 1, 0)
+        else:
+            update_sdhes(type(it), 0, 1)
+    for t in sdhes:
+        print(sdhes[t][0], t, "'s have", sdhes[t][1], "don't")
+
 
 def initConfig():
+    check_sdhes(0)
     global home, sdcard, cloud1, cloud2, cloud3
     home = Ext3(os.environ["HOME"])
-    sdcard = Fat32("/sdcard")
+    sdcard = Fat32("/storage/emulated/0")
     cloud1 = CS("GoogleDrive:")
     cloud2 = CS("OneDrive:")
     cloud3 = CS("DropBox:")
@@ -104,7 +172,7 @@ def initConfig():
 
     global edgepf, ldllsf, rdllsf, ldhpf, rdhpf
 
-    edgepf = ppre("FLAGS"),"edges.pp"
+    edgepf = ppre("FLAGS") / "edges.pp"
     ldllsf = ppre("FLAGS") / "ldlls.pp"
     rdllsf = ppre("FLAGS") / "rdlls.pp"
 
@@ -114,12 +182,15 @@ def initConfig():
     # for pf in [edgepf, ldllsf, rdllsf, ldhpf, rdhpf]:
     #    print(pf.name, str(pf))
 
+    check_sdhes(1)
+
     addPre("sd", sdcard)
     addPre("proj", ppre("sd") / "projects")
     addPre("gd", cloud1)
     addPre("od", cloud2)
     addPre("db", cloud3)
     addPre("dsblog", Fat32(os.environ["FDB_PATH"]))
+    check_sdhes(2)
 
     addSrcDir("docs", ppre("sd") / "Documents", False)
     addSrcDir("blogds", ppre("dsblog"), False)
@@ -130,6 +201,7 @@ def initConfig():
     addSrcDir("zips", ppre("sd") / "zips", False)
     addSrcDir(".git", ppre("proj") / ".git", False)
     addSrcDir("proj", ppre("proj"), False)
+    check_sdhes(3)
 
     def f1():
         dl = getDL(ppre("proj"))
@@ -140,11 +212,13 @@ def initConfig():
             addDep("proj", d.name)
 
     f1()
+    check_sdhes(4)
 
     global worktree
     worktree = ppre("sd") / "projects"
 
     ga1 = GitAdd(worktree, tag="git_add")
+    addSrcDir("git_add", ga1)
 
     gc1 = GitCommit(worktree, tag="git_commit")
     addSrcDir("git_commit", gc1)
@@ -167,6 +241,7 @@ def initConfig():
         rmt="github",
     )
     addTgtDir("github", gre3)
+    check_sdhes(5)
 
     addTgtDir("home", ppre("FLAGS"))
     addTgtDir("bin", tgt("home") / "bin")
@@ -179,8 +254,10 @@ def initConfig():
     addTgtDir("termux-backup", ppre("sd") / "backups" / "termux-backup")
     addTgtDir("bash", ppre("proj") / "bash")
     addTgtDir("plaid-node", ppre("proj") / "plaid-node")
+    check_sdhes(6)
 
     load_all()
+    check_sdhes(7)
 
     npl1 = ("bash", "home")
     op1 = LocalCopy(
@@ -293,6 +370,7 @@ def initConfig():
     # npl1 = ("zips", si)
     # op1 = Mkzip(npl1, npl1, {"zipfile": "projects-git.zip"})
     # addArc(op1)
+    check_sdhes(8)
 
     for cs in ("gd",):
         for si in ("proj", *codes, "vids", "zips"):
@@ -303,68 +381,8 @@ def initConfig():
             # addArc(op1)
             op1 = CSCopy(npl1, npl1, {"delete": False, "listdeletions": True})
             addArc(op1)
+    check_sdhes(9)
 
-
-def ppre(s):
-    if s in pres:
-        return paths[s]
-    else:
-        raise KeyError(s + " tag not in pres")
-
-
-def src(s):
-    if s in srcs:
-        return paths[s]
-    else:
-        raise KeyError(s + " tag not in srcs")
-
-
-def tgt(s):
-    if s in tgts:
-        return paths[s]
-    else:
-        raise KeyError(s + " tag not in tgts")
-
-
-def cdir(s):
-    if s in codes:
-        return paths[s]
-    else:
-        raise KeyError(s + " tag not in codes")
-
-
-def addTgtDir(tg, pth):
-    if not isinstance(pth, SD):
-        raise Exception("not an SD subclass")
-    if tg in paths and paths[tg] != pth:
-        raise Exception("path tag collision", tg, pth, paths[tg])
-    paths[tg] = pth
-    pth.tag = tg
-    pth.istgt = True
-    tgts.add(tg)
-
-
-def addSrcDir(tg, pth, iscode=False):
-    if not isinstance(pth, SD):
-        raise Exception("not an SD subclass")
-    if tg in paths and paths[tg] != pth:
-        raise Exception("path tag collision", tg, pth, paths[tg])
-    paths[tg] = pth
-    pth.tag = tg
-    pth.issrc = True
-    srcs.add(tg)
-    if iscode:
-        codes.add(tg)
-
-
-def addPre(tg, frag):
-    if not isinstance(frag, SD):
-        raise Exception("not an SD subclass")
-    if tg in paths and paths[tg] != frag:
-        raise Exception("path tag collision", tg, paths[tg])
-    paths[tg] = frag
-    frag.tag = tg
-    pres.add(tg)
 
 
 dexs = {

@@ -1,5 +1,5 @@
 import asyncrun as ar
-from sd import Local_Mixin, Remote_Mixin, SD
+from sd import SD, Local_Mixin, Remote_Mixin
 
 
 class GitCmdFailure(Exception):
@@ -13,7 +13,7 @@ def gitcmd(cmd, wt):
     return ar.txt.rstrip()
 
 
-class GitAdd(Local_Mixin, SD):
+class GitAdd(SD, Local_Mixin):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -27,11 +27,12 @@ class GitAdd(Local_Mixin, SD):
         if rv == 0:
             self.sdhset(Dh2)
         elif Dh2 != Dh1:
-            print(rv)
+            # print(rv)
+            pass
         return (Dh2, rv > 0 and Dh2 != Dh1)
 
 
-class GitCommit(Local_Mixin, SD):
+class GitCommit(SD, Local_Mixin):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -45,11 +46,12 @@ class GitCommit(Local_Mixin, SD):
         if rv == 0:
             self.sdhset(Dh2)
         elif Dh2 != Dh1:
-            print(rv)
+            # print(rv)
+            pass
         return (Dh2, rv > 0 and Dh2 != Dh1)
 
 
-class GitRepo(Local_Mixin, SD):
+class GitRepo(SD, Local_Mixin):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -70,7 +72,7 @@ class GitRepo(Local_Mixin, SD):
         return (Dh2, rv > 0 and Dh2 != Dh1)
 
 
-class GitRemote(Remote_Mixin, SD):
+class GitRemote(SD, Remote_Mixin):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 

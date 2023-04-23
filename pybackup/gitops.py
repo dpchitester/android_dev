@@ -29,7 +29,7 @@ class GitAdd(OpBase):
             anyd = True
         if not anyd:
             return (tc, fc)
-        rc = ar.run2("git add -A . -v", cwd=v.paths[si])
+        rc = ar.run2("git add -A . -v", cwd=v.src(si))
         if rc == 0:
             tc += 1
         else:

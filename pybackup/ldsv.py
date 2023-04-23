@@ -12,8 +12,7 @@ def prep_save():
     v.RDlls = {}
     v.RDlls_xt = {}
     v.RDhd = {}
-    for si in v.srcs:
-        pth = v.src(si)
+    for si, pth in v.srcs.items():
         if isinstance(pth, FS_Mixin):
             if not pth.isremote:
                 v.LDlls[si] = None  # pth.Dll
@@ -23,12 +22,11 @@ def prep_save():
                 v.RDlls[si] = pth.Dll
                 v.RDlls_xt[si] = pth.Dll_xt
                 v.RDlls_changed |= pth.Dll_changed
-        if not pth.isremote:
-            v.LDhd[si] = pth.SDh
-        else:
-            v.RDhd[si] = pth.SDh
-    for di in v.tgts:
-        pth = v.tgt(di)
+            if not pth.isremote:
+                v.LDhd[si] = pth.SDh
+            else:
+                v.RDhd[si] = pth.SDh
+    for di, pth in v.tgts.items():
         if isinstance(pth, FS_Mixin):
             if not pth.isremote:
                 v.LDlls[di] = None  # pth.Dll
@@ -38,51 +36,37 @@ def prep_save():
                 v.RDlls[di] = pth.Dll
                 v.RDlls_xt[di] = pth.Dll_xt
                 v.RDlls_changed |= pth.Dll_changed
-        if not pth.isremote:
-            v.LDhd[di] = pth.SDh
-        else:
-            v.RDhd[di] = pth.SDh
+            if not pth.isremote:
+                v.LDhd[di] = pth.SDh
+            else:
+                v.RDhd[di] = pth.SDh
 
 
 def after_load():
     import config as v
 
-    for si in v.srcs:
-        pth = v.src(si)
+    for si, pth in v.srcs.items():
         if not pth.isremote:
             if isinstance(pth, FS_Mixin):
-                try:
-                    pth.Dll = None  # v.LDlls[si]
-                    pth.Dll_xt = v.LDlls_xt[si]
-                    pth.SDh = v.LDhd[si]
-                except:
-                    pass
+                pth.Dll = None  # v.LDlls[si]
+                pth.Dll_xt = v.LDlls_xt[si]
+                pth.SDh = v.LDhd[si]
         else:
             if isinstance(pth, FS_Mixin):
-                try:
-                    pth.Dll = v.RDlls[si]
-                    pth.Dlls_xt = v.RDlls_xt[si]
-                    pth.SDh = v.RDhd[si]
-                except:
-                    pass
-    for di in v.tgts:
-        pth = v.tgt(di)
+                pth.Dll = v.RDlls[si]
+                pth.Dlls_xt = v.RDlls_xt[si]
+                pth.SDh = v.RDhd[si]
+    for di, pth in v.tgts.items():
         if not pth.isremote:
             if isinstance(pth, FS_Mixin):
-                try:
-                    pth.Dll = None  # v.LDlls[di]
-                    pth.Dll_xt = v.LDlls_xt[di]
-                    pth.SDh = v.LDhd[di]
-                except:
-                    pass
+                pth.Dll = None  # v.LDlls[di]
+                pth.Dll_xt = v.LDlls_xt[di]
+                pth.SDh = v.LDhd[di]
         else:
             if isinstance(pth, FS_Mixin):
-                try:
-                    pth.Dll = v.RDlls[di]
-                    pth.Dll_xt = v.RDlls_xt[di]
-                    pth.SDh = v.RDhd[di]
-                except:
-                    pass
+                pth.Dll = v.RDlls[di]
+                pth.Dll_xt = v.RDlls_xt[di]
+                pth.SDh = v.RDhd[di]
 
 
 def loadldlls():
@@ -210,14 +194,19 @@ def load_all():
     loadrdlls()
     loadldlls()
     loadedges()
-
     loadldh()
     loadrdh()
-    after_load()
+    try:
+        after_load()
+    except Exception as exc:
+        print(exc)
 
 
 def save_all():
-    prep_save()
+    try:
+        prep_save()
+    except Exception as exc:
+        print(exc)
     saverdlls()
     saveldlls()
     saveedges()
