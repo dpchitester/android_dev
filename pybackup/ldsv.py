@@ -3,72 +3,6 @@ import pickle
 from sd import FS_Mixin
 
 
-def prep_save():
-    import config as v
-
-    v.LDlls = {}
-    v.LDlls_xt = {}
-    v.LDhd = {}
-    v.RDlls = {}
-    v.RDlls_xt = {}
-    v.RDhd = {}
-    for si, pth in v.srcs.items():
-        if isinstance(pth, FS_Mixin):
-            if not pth.isremote:
-                v.LDlls[si] = None  # pth.Dll
-                v.LDlls_xt[si] = pth.Dll_xt
-                v.LDlls_changed |= pth.Dll_changed
-            else:
-                v.RDlls[si] = pth.Dll
-                v.RDlls_xt[si] = pth.Dll_xt
-                v.RDlls_changed |= pth.Dll_changed
-            if not pth.isremote:
-                v.LDhd[si] = pth.SDh
-            else:
-                v.RDhd[si] = pth.SDh
-    for di, pth in v.tgts.items():
-        if isinstance(pth, FS_Mixin):
-            if not pth.isremote:
-                v.LDlls[di] = None  # pth.Dll
-                v.LDlls_xt[di] = pth.Dll_xt
-                v.LDlls_changed |= pth.Dll_changed
-            else:
-                v.RDlls[di] = pth.Dll
-                v.RDlls_xt[di] = pth.Dll_xt
-                v.RDlls_changed |= pth.Dll_changed
-            if not pth.isremote:
-                v.LDhd[di] = pth.SDh
-            else:
-                v.RDhd[di] = pth.SDh
-
-
-def after_load():
-    import config as v
-
-    for si, pth in v.srcs.items():
-        if not pth.isremote:
-            if isinstance(pth, FS_Mixin):
-                pth.Dll = None  # v.LDlls[si]
-                pth.Dll_xt = v.LDlls_xt[si]
-                pth.SDh = v.LDhd[si]
-        else:
-            if isinstance(pth, FS_Mixin):
-                pth.Dll = v.RDlls[si]
-                pth.Dlls_xt = v.RDlls_xt[si]
-                pth.SDh = v.RDhd[si]
-    for di, pth in v.tgts.items():
-        if not pth.isremote:
-            if isinstance(pth, FS_Mixin):
-                pth.Dll = None  # v.LDlls[di]
-                pth.Dll_xt = v.LDlls_xt[di]
-                pth.SDh = v.LDhd[di]
-        else:
-            if isinstance(pth, FS_Mixin):
-                pth.Dll = v.RDlls[di]
-                pth.Dll_xt = v.RDlls_xt[di]
-                pth.SDh = v.RDhd[di]
-
-
 def loadldlls():
     import config as v
 
@@ -196,17 +130,9 @@ def load_all():
     loadedges()
     loadldh()
     loadrdh()
-    try:
-        after_load()
-    except Exception as exc:
-        print(exc)
 
 
 def save_all():
-    try:
-        prep_save()
-    except Exception as exc:
-        print(exc)
     saverdlls()
     saveldlls()
     saveedges()

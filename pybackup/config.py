@@ -22,33 +22,42 @@ NodeTag: TypeAlias = str
 # any/all mostly local directory path(s)
 # paths: Dict[NodeTag, Path] = {}
 
+
 class SetDict(dict):
     paths = {}
+
     def __init__(self, *args):
         super(SetDict, self).__init__(*args)
+
     def add(self, tg, sd):
         self[tg] = sd
         if tg in self.paths and sd != self.paths[tg]:
-            raise ValueError('tag ' + tg + ' already in paths-dict with different path')
+            raise ValueError("tag " + tg + " already in paths-dict with different path")
         self.paths[tg] = sd
         sd.tag = tg
+
 
 pres = SetDict()
 srcs = SetDict()
 tgts = SetDict()
 codes = SetDict()
 
+
 def ppre(s):
     return pres[s]
+
 
 def src(s):
     return srcs[s]
 
+
 def tgt(s):
     return tgts[s]
 
+
 def cdir(s):
     return codes[s]
+
 
 def addSrcDir(tg, pth, iscode=False):
     if not isinstance(pth, SD):
@@ -57,12 +66,34 @@ def addSrcDir(tg, pth, iscode=False):
     pth.issrc = True
     if iscode:
         codes.add(tg, pth)
+    if pth.isremote:
+        RDlls[tg] = None
+        RDlls_xt[tg] = 0
+        RDlls_changed = False
+        RDhd[tg] = 0
+    else:
+        LDlls[tg] = None
+        LDlls_xt[tg] = 0
+        LDlls_changed = False
+        LDhd[tg] = 0
+
 
 def addTgtDir(tg, pth):
     if not isinstance(pth, SD):
         raise Exception("not an SD subclass")
     tgts.add(tg, pth)
     pth.istgt = True
+    if pth.isremote:
+        RDlls[tg] = None
+        RDlls_xt[tg] = 0
+        RDlls_changed = False
+        RDhd[tg] = 0
+    else:
+        LDlls[tg] = None
+        LDlls_xt[tg] = 0
+        LDlls_changed = False
+        LDhd[tg] = 0
+
 
 def addPre(tg, frag):
     if not isinstance(frag, SD):
@@ -172,12 +203,12 @@ def initConfig():
 
     global edgepf, ldllsf, rdllsf, ldhpf, rdhpf
 
-    edgepf = ppre("FLAGS") / "edges.pp"
-    ldllsf = ppre("FLAGS") / "ldlls.pp"
-    rdllsf = ppre("FLAGS") / "rdlls.pp"
+    edgepf = home / "edges.pp"
+    ldllsf = home / "ldlls.pp"
+    rdllsf = home / "rdlls.pp"
 
-    ldhpf = ppre("FLAGS") / "ldhd.pp"
-    rdhpf = ppre("FLAGS") / "rdhd.pp"
+    ldhpf = home / "ldhd.pp"
+    rdhpf = home / "rdhd.pp"
     # print("pf's set now")
     # for pf in [edgepf, ldllsf, rdllsf, ldhpf, rdhpf]:
     #    print(pf.name, str(pf))
@@ -185,26 +216,25 @@ def initConfig():
     check_sdhes(1)
 
     addPre("sd", sdcard)
-    addPre("proj", ppre("sd") / "projects")
     addPre("gd", cloud1)
     addPre("od", cloud2)
     addPre("db", cloud3)
     addPre("dsblog", Fat32(os.environ["FDB_PATH"]))
     check_sdhes(2)
 
-    addSrcDir("docs", ppre("sd") / "Documents", False)
-    addSrcDir("blogds", ppre("dsblog"), False)
-    addSrcDir("backups", ppre("sd") / "backups", False)
     addSrcDir("home", home, False)
-    addSrcDir("bin", src("home") / "bin", False)
-    addSrcDir("vids", ppre("sd") / "VideoDownloader/Download", False)
-    addSrcDir("zips", ppre("sd") / "zips", False)
-    addSrcDir(".git", ppre("proj") / ".git", False)
-    addSrcDir("proj", ppre("proj"), False)
+    addSrcDir("bin", home / "bin", False)
+    addSrcDir("proj", sdcard / "projects", True)
+    addSrcDir("docs", sdcard / "Documents", False)
+    addSrcDir("blogds", ppre("dsblog"), False)
+    addSrcDir("backups", sdcard / "backups", False)
+    addSrcDir("vids", sdcard / "VideoDownloader/Download", False)
+    addSrcDir("zips", sdcard / "zips", False)
+    addSrcDir(".git", src("proj") / ".git", False)
     check_sdhes(3)
 
     def f1():
-        dl = getDL(ppre("proj"))
+        dl = getDL(src("proj"))
         for d in dl:
             addSrcDir(d.name, d, True)
             addDep("git_add", d.name)
@@ -215,7 +245,7 @@ def initConfig():
     check_sdhes(4)
 
     global worktree
-    worktree = ppre("sd") / "projects"
+    worktree = sdcard / "projects"
 
     ga1 = GitAdd(worktree, tag="git_add")
     addSrcDir("git_add", ga1)
@@ -243,17 +273,17 @@ def initConfig():
     addTgtDir("github", gre3)
     check_sdhes(5)
 
-    addTgtDir("home", ppre("FLAGS"))
-    addTgtDir("bin", tgt("home") / "bin")
-    addTgtDir("sh", tgt("home") / "bin/sh")
-    addTgtDir("pl", tgt("home") / "bin/pl")
-    addTgtDir("backups", ppre("sd") / "backups")
-    addTgtDir("zips", ppre("sd") / "zips")
+    addTgtDir("home", home)
+    addTgtDir("bin", home / "bin")
+    addTgtDir("sh", home / "bin/sh")
+    addTgtDir("pl", home / "bin/pl")
+    addTgtDir("backups", sdcard / "backups")
+    addTgtDir("termux-backup", tgt("backups") / "termux-backup")
+    addTgtDir("zips", sdcard / "zips")
     addTgtDir("blogds", ppre("dsblog"))
-    addTgtDir("blog", ppre("proj") / "blog")
-    addTgtDir("termux-backup", ppre("sd") / "backups" / "termux-backup")
-    addTgtDir("bash", ppre("proj") / "bash")
-    addTgtDir("plaid-node", ppre("proj") / "plaid-node")
+    addTgtDir("blog", src("proj") / "blog")
+    addTgtDir("bash", src("proj") / "bash")
+    addTgtDir("plaid-node", src("proj") / "plaid-node")
     check_sdhes(6)
 
     load_all()
@@ -382,7 +412,6 @@ def initConfig():
             op1 = CSCopy(npl1, npl1, {"delete": False, "listdeletions": True})
             addArc(op1)
     check_sdhes(9)
-
 
 
 dexs = {

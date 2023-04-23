@@ -3,43 +3,21 @@ from pathlib import Path, PosixPath
 
 from snoop import pp, snoop
 
+import config as v
 from de import DE, FSe
 
 icl = 1
 
 
 class SD(PosixPath):
-    @classmethod
-    def new(cls, *pth, **kwargs):
-        return cls(*pth, **kwargs)
-        
     def __new__(cls, *args, **kwargs):
-        rv = super(SD, cls).__new__(cls, *args)
-        return rv
+        return super(SD, cls).__new__(cls, *args)
 
     def __init__(self, *args, **kwargs):
         super(SD, self).__init__(*args, **kwargs)
-        self.tag = None
-        self.sdh = None
         for k, v in kwargs.items():
             setattr(self, k, v)
-
-    @property
-    def SDh(self):
-        # with snoop(watch_explode=["self"]):
-        try:
-            rv = self.sdh
-        except AttributeError as exc:
-            print(exc)
-            print(self)
-            print(vars(self))
-            raise exc
-        return rv
-
-    @SDh.setter
-    def SDh(self, value):
-        # with snoop(watch_explode=["self"]):
-        self.sdh = value
+        self.tag = None
 
     def sdh_f(self, dh=None):
         odh = self.SDh
@@ -69,6 +47,38 @@ class Local_Mixin:
     def isremote(self):
         return False
 
+    @property
+    def Dll(self):
+        return v.LDlls[self.tag]
+
+    @Dll.setter
+    def Dll(self, val):
+        v.LDlls[self.tag] = val
+
+    @property
+    def Dll_xt(self):
+        return v.LDlls_xt[self.tag]
+
+    @Dll_xt.setter
+    def Dll_xt(self, val):
+        v.LDlls_xt[self.tag] = val
+
+    @property
+    def Dll_changed(self):
+        return v.LDll_changed
+
+    @Dll_changed.setter
+    def Dll_changed(self, val):
+        v.LDll_changed = val
+
+    @property
+    def SDh(self):
+        return v.LDhd[self.tag]
+
+    @SDh.setter
+    def SDh(self, val):
+        v.LDhd[self.tag] = val
+
 
 class Remote_Mixin:
     def __init__(self, *args, **kwargs):
@@ -78,13 +88,42 @@ class Remote_Mixin:
     def isremote(self):
         return True
 
+    @property
+    def Dll(self):
+        return v.RDlls[self.tag]
+
+    @Dll.setter
+    def Dll(self, val):
+        v.RDlls[self.tag] = val
+
+    @property
+    def Dll_xt(self):
+        return v.RDlls_xt[self.tag]
+
+    @Dll_xt.setter
+    def Dll_xt(self, val):
+        v.RDlls_xt[self.tag] = val
+
+    @property
+    def Dll_changed(self):
+        return v.RDll_changed
+
+    @Dll_changed.setter
+    def Dll_changed(self, val):
+        v.RDll_changed = val
+
+    @property
+    def SDh(self):
+        return v.RDhd[self.tag]
+
+    @SDh.setter
+    def SDh(self, val):
+        v.RDhd[self.tag] = val
+
 
 class FS_Mixin(SD):
     def __init__(self, *args, **kwargs):
         super(FS_Mixin, self).__init__(*args, **kwargs)
-        self.Dll = None
-        self.Dll_xt = 0.0
-        self.Dll_changed = False
 
     def sdh_d(self):
         from bhash import blakeHash

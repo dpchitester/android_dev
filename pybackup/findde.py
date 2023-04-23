@@ -79,9 +79,9 @@ def findSis(fp1: Path):
 
     # assert isinstance(fp1, Path)
     l1 = {}
-    for si in v.srcs:
+    for si, p in v.srcs.items():
         try:
-            l1[si] = relative_to_either(v.src(si), fp1)
+            l1[si] = relative_to_either(p, fp1)
         except ValueError as exc:
             pass
     return l1
@@ -92,9 +92,9 @@ def findDis(fp1: Path):
 
     # assert isinstance(fp1, Path)
     l1 = {}
-    for di in v.tgts:
+    for di, p in v.tgts.items():
         try:
-            l1[di] = relative_to_either(v.tgt(di), fp1)
+            l1[di] = relative_to_either(p, fp1)
         except ValueError:
             pass
     return l1
