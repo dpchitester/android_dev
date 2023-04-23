@@ -136,8 +136,10 @@ def main():
             th2 = Thread(target=proc_events)
             th2.start()
             rt2()
-        except KeyboardInterrupt:
-            pass
+        except KeyboardInterrupt as exc:
+            print(exc)
+        except Exception as exc:
+            print(exc)
         finally:
             qe1.set()
             for th in [th1, th2]:
