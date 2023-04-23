@@ -1,15 +1,16 @@
+import datetime
 import time
 from pathlib import Path, PosixPath
-import datetime
 
 from snoop import pp, snoop
 
+import asyncrun as ar
 import config as v
 from de import DE, FSe
-import asyncrun as ar
 
 icl = 1
 rto1 = 60 * 5
+
 
 class SD(PosixPath):
     def __new__(cls, *args, **kwargs):
@@ -48,7 +49,7 @@ class Local_Mixin:
 
     @property
     def Dll(self):
-        if hasattr(self, 'tag'):
+        if hasattr(self, "tag"):
             if self.tag in v.LDlls:
                 return v.LDlls[self.tag]
         return None
@@ -59,7 +60,7 @@ class Local_Mixin:
 
     @property
     def Dll_xt(self):
-        if hasattr(self, 'tag'):
+        if hasattr(self, "tag"):
             if self.tag in v.LDlls_xt:
                 return v.LDlls_xt[self.tag]
         return 0
@@ -78,7 +79,7 @@ class Local_Mixin:
 
     @property
     def SDh(self):
-        if hasattr(self, 'tag'):
+        if hasattr(self, "tag"):
             if self.tag in v.LDhd:
                 return v.LDhd[self.tag]
         return 0
@@ -91,25 +92,25 @@ class Local_Mixin:
 class Remote_Mixin:
     def __init__(self, *args, **kwargs):
         super(Remote_Mixin, self).__init__()
-        
+
     @property
     def isremote(self):
         return True
 
     @property
     def Dll(self):
-        if hasattr(self, 'tag'):
+        if hasattr(self, "tag"):
             if self.tag in v.RDlls:
                 return v.RDlls[self.tag]
         return None
- 
+
     @Dll.setter
     def Dll(self, val):
         v.RDlls[self.tag] = val
 
     @property
     def Dll_xt(self):
-        if hasattr(self, 'tag'):
+        if hasattr(self, "tag"):
             if self.tag in v.RDlls_xt:
                 return v.RDlls_xt[self.tag]
         return 0
@@ -128,7 +129,7 @@ class Remote_Mixin:
 
     @property
     def SDh(self):
-        if hasattr(self, 'tag'):
+        if hasattr(self, "tag"):
             if self.tag in v.RDhd:
                 return v.RDhd[self.tag]
         return 0

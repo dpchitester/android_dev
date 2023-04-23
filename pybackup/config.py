@@ -30,12 +30,13 @@ class SetDict(dict):
         super(SetDict, self).__init__(*args)
 
     def add(self, tg, sd):
-        if not hasattr(sd, 'tag'):
-            setattr(sd, 'tag', tg)
+        if not hasattr(sd, "tag"):
+            setattr(sd, "tag", tg)
         if tg in self.paths and sd != self.paths[tg]:
             raise ValueError("tag " + tg + " already in paths-dict with different path")
         self[tg] = sd
         self.paths[tg] = sd
+
 
 pres = SetDict()
 srcs = SetDict()
@@ -192,11 +193,11 @@ def check_sdhes(i):
 def initConfig():
     check_sdhes(0)
     global home, sdcard, cloud1, cloud2, cloud3
-    home = Ext3(os.environ["HOME"], tag='home')
-    sdcard = Fat32("/storage/emulated/0", tag='sdcard')
-    cloud1 = CS("GoogleDrive:", tag='cloud1')
-    cloud2 = CS("OneDrive:", tag='cloud2')
-    cloud3 = CS("DropBox:", tag='cloud3')
+    home = Ext3(os.environ["HOME"], tag="home")
+    sdcard = Fat32("/storage/emulated/0", tag="sdcard")
+    cloud1 = CS("GoogleDrive:", tag="cloud1")
+    cloud2 = CS("OneDrive:", tag="cloud2")
+    cloud3 = CS("DropBox:", tag="cloud3")
 
     addPre("FLAGS", home)
     # print("FLAGS=" + str(ppre('FLAGS')))
@@ -219,7 +220,7 @@ def initConfig():
     addPre("gd", cloud1)
     addPre("od", cloud2)
     addPre("db", cloud3)
-    addPre("dsblog", Fat32(os.environ["FDB_PATH"], tag='dsblog'))
+    addPre("dsblog", Fat32(os.environ["FDB_PATH"], tag="dsblog"))
     check_sdhes(2)
 
     addSrcDir("home", home, False)
