@@ -128,7 +128,7 @@ def saverdh():
 
 def load_all():
     loadrdlls()
-    loadldlls()
+    # loadldlls()
     loadedges()
     loadldh()
     loadrdh()
