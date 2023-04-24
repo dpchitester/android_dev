@@ -22,7 +22,7 @@ pushd /sdcard/projects/bash
         echo "pkg install ${i%%/*}" >>$f1
         bl=${#b[@]}
         echo "bl: $bl"
-        if [ "${c}" != "$j" -o $(($bl > 2)) ]
+        if [ $(($bl > 2)) ]
         then
             echo "pkg uninstall ${i%%/*}" >>$f2
         fi
