@@ -183,12 +183,14 @@ class BVars:
         if self.src_dls is None:
             self.sfc.fc += 1
         self.dst_dls = self.td.Dlld()
-        if self.dst_dls is None:
-            self.sfc.fc += 1
         if self.src_dls is not None and self.dst_dls is not None:
             v.cull_DEs(self.src_dls)
             v.cull_DEs(self.dst_dls)
             self.f2d, self.f2c = dllcmp(self.dst_dls, self.src_dls)
+        else:
+            v.cull_DEs(self.src_dls)
+            self.f2d = set()
+            self.f2c = set(self.src_dls)
         self.f2t = set()
 
     def skip_matching(self):
