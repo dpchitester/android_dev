@@ -401,14 +401,14 @@ def initConfig():
     # addArc(op1)
     check_sdhes(8)
 
-    for cs in ("gd",):
+    for cs in ("gd","od","db"):
         for si in ("proj", *codes, "vids", "zips"):
             p1 = src(si).relative_to(ppre("sd"))
             addTgtDir(cs + "_" + si, ppre(cs) / p1)
             npl1 = (cs + "_" + si, si)
             # op1 = CSRestore(npl1, None, {})
             # addArc(op1)
-            op14 = CSCopy(npl1, npl1, {"delete": False, "listdeletions": True})
+            op14 = CSCopy(npl1, npl1, {"delete": True})
             addArc(op14)
     check_sdhes(9)
 
