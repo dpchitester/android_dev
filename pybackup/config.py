@@ -32,7 +32,7 @@ class SetDict(dict):
     def __init__(self, *args):
         super(SetDict, self).__init__(*args)
 
-    def add(self, tg, sd):
+    def add(self, tg:str, sd:SD):
         if not hasattr(sd, "tag"):
             setattr(sd, "tag", tg)
         if tg in self.paths and sd != self.paths[tg]:
@@ -408,8 +408,8 @@ def initConfig():
             npl1 = (cs + "_" + si, si)
             # op1 = CSRestore(npl1, None, {})
             # addArc(op1)
-            op1 = CSCopy(npl1, npl1, {"delete": False, "listdeletions": True})
-            addArc(op1)
+            op14 = CSCopy(npl1, npl1, {"delete": False, "listdeletions": True})
+            addArc(op14)
     check_sdhes(9)
 
 
