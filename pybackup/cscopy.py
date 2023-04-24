@@ -3,6 +3,7 @@ import datetime as dt
 import asyncrun as ar
 from netup import netup
 from opbase import OpBase
+from edge import Edge, findEdge
 
 
 def chunk_from(s1, amt):
@@ -278,7 +279,6 @@ class BVars:
 
 
 class CSCopy(OpBase):
-    from edge import Edge, findEdge
 
     def __init__(self, npl1, npl2, opts={}):
         super(CSCopy, self).__init__(npl1, npl2, opts)

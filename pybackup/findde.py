@@ -219,17 +219,3 @@ def updateDEs(rd: Path, flst: List[str]):
                 doTOne(*it)
 
 
-def test1():
-    from status import changed_ops, updatets
-
-    v.initConfig()
-    updatets(0)
-    rd = v.src("pybackup")
-    f = "findde.py"
-    updateDEs(rd, [f])
-    updatets(1)
-    print(changed_ops())
-
-
-if __name__ == "__main__":
-    test1()

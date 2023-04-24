@@ -18,13 +18,16 @@ from opbase import OpBase
 from sd import CS, SD, Ext3, Fat32
 
 NodeTag: TypeAlias = str
+Hash: TypeAlias = bytes
+Hdt1: TypeAlias = Dict[NodeTag, int]
+Hdt2: TypeAlias = Dict[Path, FSe]
 
 # any/all mostly local directory path(s)
 # paths: Dict[NodeTag, Path] = {}
 
 
 class SetDict(dict):
-    paths = {}
+    paths: Dict[NodeTag, SD] = {}
 
     def __init__(self, *args):
         super(SetDict, self).__init__(*args)
@@ -111,16 +114,11 @@ eDep: Set[Edge] = set()
 # dependencies as stored by di,si
 edges: Dict[Tuple[NodeTag, NodeTag], Edge] = {}
 
-Hash: TypeAlias = bytes
-
-Hdt1: TypeAlias = Dict[NodeTag, Hash]
 
 # directory lists hashes
 
 LDhd: Hdt1 = {}
 RDhd: Hdt1 = {}
-
-Hdt2: TypeAlias = Dict[Path, FSe]
 
 
 # files lists
@@ -311,7 +309,7 @@ def initConfig():
     addArc(op1)
 
     npl1 = ("home", "bash")
-    op1 = LocalCopy(
+    op2 = LocalCopy(
         npl1,
         npl1,
         {
@@ -329,68 +327,68 @@ def initConfig():
             ]
         },
     )
-    addArc(op1)
+    addArc(op2)
 
     npl1 = ("bin", "bash")
-    op1 = LocalCopy(
+    op3 = LocalCopy(
         npl1, npl1, {"files": ["termux-*", "pbu", "rbu", "qe"], "exec": True}
     )
-    addArc(op1)
+    addArc(op3)
 
     npl1 = ("bash", "bin")
-    op1 = LocalCopy(
+    op4 = LocalCopy(
         npl1, npl1, {"files": ["termux-*", "pbu", "rbu", "qe"], "exec": False}
     )
-    addArc(op1)
+    addArc(op4)
 
     npl1 = ("sh", "bash")
-    op1 = LocalCopy(npl1, npl1, {"files": ["*.sh", "*.env"], "exec": True})
-    addArc(op1)
+    op5 = LocalCopy(npl1, npl1, {"files": ["*.sh", "*.env"], "exec": True})
+    addArc(op5)
 
     npl1 = ("blogds", "blog")
-    op1 = LocalCopy(npl1, npl1, {"files": ["blog.js"]})
-    addArc(op1)
+    op6 = LocalCopy(npl1, npl1, {"files": ["blog.js"]})
+    addArc(op6)
 
     npl1 = ("blog", "blogds")
-    op1 = LocalCopy(npl1, npl1, {"files": ["*.db", "blog.js"]})
-    addArc(op1)
+    op7 = LocalCopy(npl1, npl1, {"files": ["*.db", "blog.js"]})
+    addArc(op7)
 
     npl1 = ("plaid-node", "blogds")
-    op1 = LocalCopy(npl1, npl1, {"files": ["*.db"]})
-    addArc(op1)
+    op8 = LocalCopy(npl1, npl1, {"files": ["*.db"]})
+    addArc(op8)
 
     # npl1 = ('termux-backup', 'home')
     # op1 = LocalCopy(npl1, npl1, {'files': ['**/*.*']})
     # addArc(op1)
 
     npl1 = ("backups", "blogds")
-    op1 = LocalCopy(npl1, npl1, {"files": ["*.db"]})
-    addArc(op1)
+    op9 = LocalCopy(npl1, npl1, {"files": ["*.db"]})
+    addArc(op9)
 
     if "NOGIT" not in os.environ:
         npl1 = ("git_commit", "git_add")
-        op1 = opGitAdd(npl1, npl1, {"wt": worktree})
-        addArc(op1)
+        op10 = opGitAdd(npl1, npl1, {"wt": worktree})
+        addArc(op10)
 
         npl1 = ("git", "git_commit")
-        op1 = opGitCommit(npl1, npl1, {"wt": worktree})
-        addArc(op1)
+        op11 = opGitCommit(npl1, npl1, {"wt": worktree})
+        addArc(op11)
 
         npl1 = ("bitbucket", "git")
-        op1 = opGitPush(
+        op12 = opGitPush(
             npl1,
             None,
             {"wt": worktree, "rmt": "bitbucket"},
         )
-        addArc(op1)
+        addArc(op12)
 
         npl1 = ("github", "git")
-        op1 = opGitPush(
+        op13 = opGitPush(
             npl1,
             None,
             {"wt": worktree, "rmt": "github"},
         )
-        addArc(op1)
+        addArc(op13)
 
     # for si in codes:
     # npl1 = ("zips", si)

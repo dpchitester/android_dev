@@ -12,6 +12,7 @@ from asyncinotify import Inotify, Mask, Watch
 import config as v
 import ldsv
 import status as st
+
 from findde import updateDEs
 from netup import netup
 from opexec import clean, opExec
@@ -85,10 +86,10 @@ def proc_events():
         try:
             ev1: WEvent = eq1.get(timeout=0.666)
             if ev1 is not None:
-                si: NodeTag = wdsi[ev1.watch]
+                si: v.NodeTag = wdsi[ev1.watch]
                 p: Path = ev1.path
                 if not ev1.mask & Mask.ISDIR:
-                    rfn: Path = p.relative_to(v.src(si))
+                    rfn: Path|str = p.relative_to(v.src(si))
                     with sislk:
                         if si not in sis:
                             sis[si] = []
