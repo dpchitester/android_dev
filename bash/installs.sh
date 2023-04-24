@@ -83,7 +83,6 @@
 # pkg install llvm
 # pkg install m4
 # pkg install make
-# pkg install man
 # pkg install ncurses-ui-libs
 # pkg install ncurses
 # pkg install ndk-sysroot

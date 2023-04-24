@@ -4,7 +4,6 @@
 # pkg uninstall build-essential
 # pkg uninstall git-crypt
 # pkg uninstall inotify-tools
-# pkg uninstall man
 # pkg uninstall openssl-1.1
 # pkg uninstall rclone
 # pip uninstall ----------------- -------
