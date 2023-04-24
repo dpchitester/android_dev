@@ -1,9 +1,10 @@
 import datetime as dt
 from math import floor
+
 import asyncrun as ar
+from edge import Edge, findEdge
 from netup import netup
 from opbase import OpBase
-from edge import Edge, findEdge
 
 
 def chunk_from(s1, amt):
@@ -205,7 +206,9 @@ class BVars:
                         self.f2d.remove(rf)
                         self.f2c.remove(lf)
                     elif rf.i.sz == lf.i.sz:
-                        if round(rf.i.mt) == round(lf.i.mt) or floor(rf.i.mt) == floor(lf.i.mt):
+                        if round(rf.i.mt) == round(lf.i.mt) or floor(rf.i.mt) == floor(
+                            lf.i.mt
+                        ):
                             self.f2d.remove(rf)
                             self.f2c.remove(lf)
                         # print(rf.i.mt, lf.i.mt, rf.i.mt - lf.i.mt)
@@ -284,7 +287,6 @@ class BVars:
 
 
 class CSCopy(OpBase):
-
     def __init__(self, npl1, npl2, opts={}):
         super(CSCopy, self).__init__(npl1, npl2, opts)
         self.sfc = SFc()
@@ -316,7 +318,7 @@ class CSCopy(OpBase):
                 if "delete" in self.opts and self.opts["delete"] and len(bv.f2d):
                     bv.do_deletions()
             # if bv.sfc.fc == 0:
-                # bv.do_touching()
+            # bv.do_touching()
             if bv.ac2:
                 pass
         if self.sfc.fc == 0:

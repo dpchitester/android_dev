@@ -1,6 +1,6 @@
 import asyncrun as ar
-from sd import SD
 import config as v
+from sd import SD
 
 
 class GitCmdFailure(Exception):

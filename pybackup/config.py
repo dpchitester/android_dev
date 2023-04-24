@@ -32,7 +32,7 @@ class SetDict(dict):
     def __init__(self, *args):
         super(SetDict, self).__init__(*args)
 
-    def add(self, tg:str, sd:SD):
+    def add(self, tg: str, sd: SD):
         if not hasattr(sd, "tag"):
             setattr(sd, "tag", tg)
         if tg in self.paths and sd != self.paths[tg]:
@@ -159,37 +159,8 @@ cloud1: CS = None
 cloud2: CS = None
 cloud3: CS = None
 
-sdhes = {}
-
-
-def update_sdhes(t, h, nh):
-    global sdhes
-    if t not in sdhes:
-        sdhes[t] = [0, 0]
-    sdhes[t][0] += h
-    sdhes[t][1] += nh
-
-
-def check_sdhes(i):
-    global sdhes
-    return
-    print("check _sdhes (" + str(i) + ")")
-    sdhes = {}
-    ha = 0
-    nha = 0
-    for tg in srcs:
-        it = src(tg)
-        cha = hasattr(it, "_sdh")
-        if cha:
-            update_sdhes(type(it), 1, 0)
-        else:
-            update_sdhes(type(it), 0, 1)
-    for t in sdhes:
-        print(sdhes[t][0], t, "'s have", sdhes[t][1], "don't")
-
 
 def initConfig():
-    check_sdhes(0)
     global home, sdcard, cloud1, cloud2, cloud3
     home = Ext3(os.environ["HOME"], tag="home")
     sdcard = Fat32("/storage/emulated/0", tag="sdcard")
@@ -212,14 +183,11 @@ def initConfig():
     # for pf in [edgepf, ldllsf, rdllsf, ldhpf, rdhpf]:
     #    print(pf.name, str(pf))
 
-    check_sdhes(1)
-
     addPre("sd", sdcard)
     addPre("gd", cloud1)
     addPre("od", cloud2)
     addPre("db", cloud3)
     addPre("dsblog", Fat32(os.environ["FDB_PATH"], tag="dsblog"))
-    check_sdhes(2)
 
     addSrcDir("home", home, False)
     addSrcDir("bin", home / "bin", False)
@@ -230,7 +198,6 @@ def initConfig():
     addSrcDir("vids", sdcard / "VideoDownloader/Download", False)
     addSrcDir("zips", sdcard / "zips", False)
     addSrcDir(".git", src("proj") / ".git", False)
-    check_sdhes(3)
 
     def f1():
         dl = getDL(src("proj"))
@@ -241,7 +208,6 @@ def initConfig():
             addDep("proj", d.name)
 
     f1()
-    check_sdhes(4)
 
     global worktree
     worktree = sdcard / "projects"
@@ -270,7 +236,6 @@ def initConfig():
         rmt="github",
     )
     addTgtDir("github", gre3)
-    check_sdhes(5)
 
     addTgtDir("home", home)
     addTgtDir("bin", home / "bin")
@@ -283,10 +248,8 @@ def initConfig():
     addTgtDir("blog", src("proj") / "blog")
     addTgtDir("bash", src("proj") / "bash")
     addTgtDir("plaid-node", src("proj") / "plaid-node")
-    check_sdhes(6)
 
     load_all()
-    check_sdhes(7)
 
     npl1 = ("bash", "home")
     op1 = LocalCopy(
@@ -390,18 +353,17 @@ def initConfig():
         )
         addArc(op13)
 
-    # for si in codes:
-    # npl1 = ("zips", si)
-    # op1 = Mkzip(npl1, npl1, {"zipfile": si + ".zip"})
-    # addArc(op1)
+    for si in codes:
+        npl1 = ("zips", si)
+        op1 = Mkzip(npl1, npl1, {"zipfile": si + ".zip"})
+        addArc(op1)
 
     # for si in (".git",):
     # npl1 = ("zips", si)
     # op1 = Mkzip(npl1, npl1, {"zipfile": "projects-git.zip"})
     # addArc(op1)
-    check_sdhes(8)
 
-    for cs in ("gd","od","db"):
+    for cs in ("gd", "od", "db"):
         for si in ("proj", "vids", "zips"):
             p1 = src(si).relative_to(ppre("sd"))
             addTgtDir(cs + "_" + si, ppre(cs) / p1)
@@ -410,7 +372,6 @@ def initConfig():
             # addArc(op1)
             op14 = CSCopy(npl1, npl1, {"delete": False})
             addArc(op14)
-    check_sdhes(9)
 
 
 dexs = {

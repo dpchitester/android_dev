@@ -217,5 +217,3 @@ def updateDEs(rd: Path, flst: List[str]):
                 doSOne(*it)
             for it in tdes:
                 doTOne(*it)
-
-
