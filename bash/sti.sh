@@ -4,14 +4,29 @@
 pushd /sdcard/projects/bash
     f1=installs.sh
     f2=uninstalls.sh
+    f3=pkgdeps.txt
     cp shebang.txt $f1
     cp shebang.txt $f2
-    il=$(pkg list-installed)
+    il1=$(pkg list-installed)
     a=()
-    mapfile -t a <<<"$il"
+    mapfile -t a <<<"$il1"
     for i in "${a[@]:1}"; do
-        echo "# pkg install ${i%%/*}" >>$f1
-        echo "# pkg uninstall ${i%%/*}" >>$f2
+        echo "====="
+        j="${i%%/*}"
+        echo "j: $j"
+        il2=$(apt-cache rdepends "$j")
+        b=()
+        mapfile -t b <<<"$il2"
+        c="${b[0]}"
+        echo "c: $c"
+        echo "pkg install ${i%%/*}" >>$f1
+        bl=${#b[@]}
+        echo "bl: $bl"
+        if [ "${c}" != "$j" -o $(($bl > 2)) ]
+        then
+            echo "pkg uninstall ${i%%/*}" >>$f2
+        fi
+        echo "***"
     done
     pl=$(pip list)
     a=()
