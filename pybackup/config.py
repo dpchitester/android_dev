@@ -261,8 +261,7 @@ def initConfig():
                 ".bashrc",
                 ".bashrc0",
                 ".profile",
-                ".plaid-cli/*",
-                ".plaid-cli/data/*",
+                ".plaid-cli/**/*",
                 ".plaidrc",
                 ".gitcredentials",
                 ".gitconfig",
@@ -282,8 +281,7 @@ def initConfig():
                 ".bashrc0",
                 ".profile",
                 ".config/rclone/*",
-                ".plaid-cli/*",
-                ".plaid-cli/data/*",
+                ".plaid-cli/**/*",
                 ".plaidrc",
                 ".gitcredentials",
                 ".gitconfig",
@@ -294,17 +292,20 @@ def initConfig():
 
     npl1 = ("bin", "bash")
     op3 = LocalCopy(
-        npl1, npl1, {"files": ["termux-*", "pbu", "rbu", "qe"], "exec": True}
+        npl1, npl1, {"files": ["termux-*", "pbu", "rbu", "qe","ftp*","nt"], "exec": True}
     )
     addArc(op3)
 
     npl1 = ("bash", "bin")
     op4 = LocalCopy(
-        npl1, npl1, {"files": ["termux-*", "pbu", "rbu", "qe"], "exec": False}
+        npl1, npl1, {"files": ["termux-*", "pbu", "rbu", "qe","ftp*","nt"], "exec": False}
     )
     addArc(op4)
 
     npl1 = ("sh", "bash")
+    op5 = LocalCopy(npl1, npl1, {"files": ["*.sh", "*.env"], "exec": True})
+    addArc(op5)
+    npl1 = ("bash", "sh")
     op5 = LocalCopy(npl1, npl1, {"files": ["*.sh", "*.env"], "exec": True})
     addArc(op5)
 

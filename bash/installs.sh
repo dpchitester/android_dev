@@ -35,6 +35,7 @@
 # pkg install flex
 # pkg install fontconfig
 # pkg install freetype
+# pkg install fsmon
 # pkg install gawk
 # pkg install gdbm
 # pkg install giflib
@@ -165,7 +166,7 @@
 # pkg install zstd
 # pip install ----------------- -------
 # pip install asttokens         2.2.1
-# pip install async-to-sync     0.2.3
+# pip install asyncinotify      4.0.1
 # pip install black             23.3.0
 # pip install cheap-repr        0.5.1
 # pip install click             8.1.3
@@ -178,7 +179,9 @@
 # pip install pip               23.0.1
 # pip install platformdirs      3.2.0
 # pip install Pygments          2.15.0
+# pip install quickxorhash      1.0.5
 # pip install setuptools        67.6.1
 # pip install six               1.16.0
+# pip install snoop             0.4.3
 # pip install tarjan            0.2.3.2
 # pip install typing_extensions 4.5.0
