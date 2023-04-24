@@ -205,10 +205,9 @@ class BVars:
                         self.f2d.remove(rf)
                         self.f2c.remove(lf)
                     elif rf.i.sz == lf.i.sz:
-                        if 'db_' in self.di or 'od_' in self.di:
-                            if round(rf.i.mt) == round(lf.i.mt) or floor(rf.i.mt) == floor(lf.i.mt):
-                                self.f2d.remove(rf)
-                                self.f2c.remove(lf)
+                        if round(rf.i.mt) == round(lf.i.mt) or floor(rf.i.mt) == floor(lf.i.mt):
+                            self.f2d.remove(rf)
+                            self.f2c.remove(lf)
                         # print(rf.i.mt, lf.i.mt, rf.i.mt - lf.i.mt)
                         # if rf.i.mt > lf.i.mt:
                         # if rf.i.mt - lf.i.mt > 0.0001:
@@ -312,12 +311,12 @@ class CSCopy(OpBase):
                 bv.skip_matching()
                 print("skip", len(bv.f2d), "todelete", len(bv.f2c), "tocopy")
             if bv.sfc.fc == 0:
-                if "delete" in self.opts and self.opts["delete"] and len(bv.f2d):
-                    bv.do_deletions()
-            if bv.sfc.fc == 0:
                 bv.do_copying()
             if bv.sfc.fc == 0:
-                bv.do_touching()
+                if "delete" in self.opts and self.opts["delete"] and len(bv.f2d):
+                    bv.do_deletions()
+            # if bv.sfc.fc == 0:
+                # bv.do_touching()
             if bv.ac2:
                 pass
         if self.sfc.fc == 0:
