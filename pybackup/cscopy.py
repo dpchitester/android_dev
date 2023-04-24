@@ -209,7 +209,7 @@ class BVars:
                             if round(rf.i.mt) == round(lf.i.mt) or floor(rf.i.mt) == floor(lf.i.mt):
                                 self.f2d.remove(rf)
                                 self.f2c.remove(lf)
-                        print(rf.i.mt, lf.i.mt, rf.i.mt - lf.i.mt)
+                        # print(rf.i.mt, lf.i.mt, rf.i.mt - lf.i.mt)
                         # if rf.i.mt > lf.i.mt:
                         # if rf.i.mt - lf.i.mt > 0.0001:
                         # self.f2d.remove(rf)
