@@ -14,17 +14,17 @@ pushd /sdcard/projects/bash
         echo "====="
         j="${i%%/*}"
         echo "j: $j"
-        il2=$(apt-cache rdepends "$j")
+        il2=$(apt-cache rdepends --installed "$j")
         b=()
         mapfile -t b <<<"$il2"
         c="${b[0]}"
         echo "c: $c"
-        echo "pkg install ${i%%/*}" >>$f1
+        echo "# pkg install ${i%%/*}" >>$f1
         bl=${#b[@]}
         echo "bl: $bl"
-        if [ $(($bl > 2)) ]
+        if [ $bl -le 2 ]
         then
-            echo "pkg uninstall ${i%%/*}" >>$f2
+            echo "# pkg uninstall ${i%%/*}" >>$f2
         fi
         echo "***"
     done
