@@ -1,7 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
 
-# pkg uninstall build-essential
 # pkg uninstall git-crypt
 # pkg uninstall inotify-tools
 # pkg uninstall openssl-1.1
