@@ -2,7 +2,7 @@ import datetime
 import time
 from pathlib import Path, PosixPath
 
-from snoop import pp, snoop
+# from snoop import pp, snoop
 
 import asyncrun as ar
 import config as v
