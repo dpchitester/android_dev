@@ -152,7 +152,7 @@ def save_bp():
                 save_all()
         while True:
             chk_save()
-            if pb.qe1.wait(3):
+            if pb.qe1.is_set():
                 return
     th3 = Thread(target=save_th)
     return th3

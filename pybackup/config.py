@@ -198,6 +198,8 @@ def initConfig():
     addSrcDir("zips", sdcard / "zips", False)
     addSrcDir(".git", src("proj") / ".git", False)
 
+    load_all()
+
     def f1():
         dl = getDL(src("proj"))
         for d in dl:
@@ -377,7 +379,6 @@ def initConfig():
             op14 = CSCopy(npl1, npl1, {"delete": False})
             addArc(op14)
 
-    load_all()
 
 
 dexs = {

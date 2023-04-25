@@ -7,7 +7,7 @@ from pathlib import Path, PosixPath
 import asyncrun as ar
 import config as v
 from de import DE, FSe
-import ldsv
+import ldsv as ls
 
 icl = 1
 rto1 = 60 * 5
@@ -51,55 +51,55 @@ class Local_Mixin:
     @property
     def Dll(self):
         if hasattr(self, "tag"):
-            with ldsv.ul1:
+            with ls.ul1:
                 if self.tag in v.LDlls:
                     return v.LDlls[self.tag]
         return None
 
     @Dll.setter
     def Dll(self, val):
-        with ldsv.ul1:
+        with ls.ul1:
             v.LDlls[self.tag] = val
-            ldsv.sev1.set()
+            ls.sev1.set()
 
     @property
     def Dlls_xt(self):
         if hasattr(self, "tag"):
-            with ldsv.ul1:
+            with ls.ul1:
                 if self.tag in v.LDlls_xt:
                     return v.LDlls_xt[self.tag]
         return 0
 
     @Dlls_xt.setter
     def Dlls_xt(self, val):
-        with ldsv.ul1:
+        with ls.ul1:
             v.LDlls_xt[self.tag] = val
-            ldsv.sev1.set()
+            ls.sev1.set()
 
     @property
     def Dlls_changed(self):
-        with ldsv.ul1:
+        with ls.ul1:
             return v.LDlls_changed
 
     @Dlls_changed.setter
     def Dlls_changed(self, val):
-        with ldsv.ul1:
+        with ls.ul1:
             v.LDlls_changed = val
-            ldsv.sev1.set()
+            ls.sev1.set()
 
     @property
     def SDh(self):
         if hasattr(self, "tag"):
-            with ldsv.ul1:
+            with ls.ul1:
                 if self.tag in v.LDhd:
                     return v.LDhd[self.tag]
         return 0
 
     @SDh.setter
     def SDh(self, val):
-        with ldsv.ul1:
+        with ls.ul1:
             v.LDhd[self.tag] = val
-            ldsv.sev1.set()
+            ls.sev1.set()
 
 
 class Remote_Mixin:
@@ -113,55 +113,55 @@ class Remote_Mixin:
     @property
     def Dll(self):
         if hasattr(self, "tag"):
-            with ldsv.ul1:
+            with ls.ul1:
                 if self.tag in v.RDlls:
                     return v.RDlls[self.tag]
         return None
 
     @Dll.setter
     def Dll(self, val):
-        with ldsv.ul1:
+        with ls.ul1:
             v.RDlls[self.tag] = val
-            ldsv.sev1.set()
+            ls.sev1.set()
 
     @property
     def Dlls_xt(self):
         if hasattr(self, "tag"):
-            with ldsv.ul1:
+            with ls.ul1:
                 if self.tag in v.RDlls_xt:
                     return v.RDlls_xt[self.tag]
         return 0
 
     @Dlls_xt.setter
     def Dlls_xt(self, val):
-        with ldsv.ul1:
+        with ls.ul1:
             v.RDlls_xt[self.tag] = val
-            ldsv.sev1.set()
+            ls.sev1.set()
 
     @property
     def Dlls_changed(self):
-        with ldsv.ul1:
+        with ls.ul1:
             return v.RDlls_changed
 
     @Dlls_changed.setter
     def Dlls_changed(self, val):
-        with ldsv.ul1:
+        with ls.ul1:
             v.RDlls_changed = val
-            ldsv.sev1.set()
+            ls.sev1.set()
 
     @property
     def SDh(self):
         if hasattr(self, "tag"):
-            with ldsv.ul1:
+            with ls.ul1:
                 if self.tag in v.RDhd:
                     return v.RDhd[self.tag]
         return 0
 
     @SDh.setter
     def SDh(self, val):
-        with ldsv.ul1:
+        with ls.ul1:
             v.RDhd[self.tag] = val
-            ldsv.sev1.set()
+            ls.sev1.set()
 
 
 class FS_Mixin(SD):
@@ -171,7 +171,7 @@ class FS_Mixin(SD):
     def sdh_d(self):
         from bhash import blakeHash
 
-        with ldsv.ul1:
+        with ls.ul1:
             Si_dl = self.Dlld()
         if Si_dl is not None:
             return blakeHash(Si_dl)

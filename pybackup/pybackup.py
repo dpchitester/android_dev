@@ -10,7 +10,7 @@ from asyncinotify import Event as WEvent
 from asyncinotify import Inotify, Mask, Watch
 
 import config as v
-import ldsv
+import ldsv as ls
 import status as st
 from findde import updateDEs
 from netup import netup
@@ -136,8 +136,8 @@ def main():
             th1.start()
             th2 = Thread(target=proc_events)
             th2.start()
-            ldsv.sev1.clear()
-            th3 = ldsv.save_bp()
+            ls.sev1.clear()
+            th3 = ls.save_bp()
             th3.start()
             rt2()
         except KeyboardInterrupt as exc:
