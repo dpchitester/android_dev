@@ -23,6 +23,7 @@ in1 = None
 
 th1 = None
 th2 = None
+th3 = None
 
 qe1 = Event()
 dl1 = Lock()
@@ -125,7 +126,7 @@ def rt2():
 
 
 def main():
-    global cel, wdsi, in1, v, th1, th2
+    global cel, wdsi, in1, v, th1, th2, th3
     v.initConfig()
     with Inotify(sync_timeout=0.666) as in1:
         try:
@@ -135,15 +136,17 @@ def main():
             th1.start()
             th2 = Thread(target=proc_events)
             th2.start()
+            th3 = ldsv.save_bp()
+            th3.start()
             rt2()
+            ldsv.ev1.set()
         except KeyboardInterrupt as exc:
             print(exc)
         finally:
             qe1.set()
-            for th in [th1, th2]:
+            for th in [th1, th2, th3]:
                 if th:
                     th.join()
-            ldsv.save_all()
 
 
 if __name__ == "__main__":

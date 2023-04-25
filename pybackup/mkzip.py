@@ -4,7 +4,7 @@ from pathlib import Path
 from shutil import make_archive
 
 import config as v
-from asyncrun import shell_lock
+
 from edge import Edge, findEdge
 from findde import updateDEs
 from opbase import OpBase
@@ -61,12 +61,11 @@ class Mkzip(OpBase):
             zf = self.opts.get("zipfile", "temp.zip")
             zp = td / Path(zf).stem
             try:
-                with shell_lock:
-                    fp = Path(make_archive(zp, "zip", sd, ".", True))
-                    print(fp)
-                    maxt = maxmt(sd)
-                    utime(fp, ns=(maxt, maxt))
-                    sc += 1
+                fp = Path(make_archive(zp, "zip", sd, ".", True))
+                print(fp)
+                maxt = maxmt(sd)
+                utime(fp, ns=(maxt, maxt))
+                sc += 1
                 updateDEs(td, [zf])
             except IOError as er:
                 print(er)

@@ -8,9 +8,9 @@ from typing import Dict, List, Set, Tuple, TypeAlias
 
 import asyncrun as ar
 from de import DE, FSe
+from ldsv import ul1, sev1
 from sd import FS_Mixin
 
-ul1 = Lock()
 from os.path import realpath
 
 
@@ -158,15 +158,17 @@ def updateDEs(rd: Path, flst: List[str]):
                 if tde.i.sz != sde.i.sz:
                     # print("size mismatch")
                     tde.i.sz = sde.i.sz
+                    sev1.set()
                 if tde.i.mt != sde.i.mt:
                     # print("modtime mismatch")
                     tde.i.mt = sde.i.mt
-
+                    sev1.set()
             else:
                 # print("insert", sde.nm)
                 fse = FSe(sde.i.sz, sde.i.mt)
                 tde = DE(rp, fse)
                 dl.insert(i, tde)
+                sev1.set()
         else:
             if tde:
                 # print("would delete", rp)
@@ -189,15 +191,17 @@ def updateDEs(rd: Path, flst: List[str]):
                 if tde.i.sz != sde.i.sz:
                     # print("size mismatch")
                     tde.i.sz = sde.i.sz
+                    sev1.set()
                 if tde.i.mt != sde.i.mt:
                     # print("modtime mismatch")
                     tde.i.mt = sde.i.mt
-
+                    sev1.set()
             else:
                 # print("insert", sde.nm)
                 fse = FSe(sde.i.sz, sde.i.mt)
                 tde = DE(rp, fse)
                 dl.insert(i, tde)
+                sev1.set()
         else:
             if tde:
                 # print("would delete", rp)

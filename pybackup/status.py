@@ -1,7 +1,7 @@
 import config as v
 from edge import Edge, findEdge
 from opbase import OpBase
-
+from ldsv import ul1
 
 def changed_ops(T=None) -> list[OpBase]:
     rv: list[OpBase] = []
@@ -25,23 +25,25 @@ def stsupdate(Si, Dh):
 
 def onestatus(Si):
     # TODO: update as per src_statuses
-    tr = v.src(Si).sdhck()
-    if tr is not None:
-        (Dh, changed) = tr
-        if changed:
-            stsupdate(Si, Dh)
-            print()
+    with ul1:
+        tr = v.src(Si).sdhck()
+        if tr is not None:
+            (Dh, changed) = tr
+            if changed:
+                stsupdate(Si, Dh)
+                print()
 
 
 def src_statuses():
     SDl = []
     for Si in v.srcs:
         # print('calling lckers', Si)
-        tr = v.src(Si).sdhck()
-        if tr is not None:
-            (Dh, changed) = tr
-            if changed:
-                SDl.append((Si, Dh))
+        with ul1:
+            tr = v.src(Si).sdhck()
+            if tr is not None:
+                (Dh, changed) = tr
+                if changed:
+                    SDl.append((Si, Dh))
     return SDl
 
 
