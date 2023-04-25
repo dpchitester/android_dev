@@ -149,17 +149,12 @@ def main():
 
 
 if __name__ == "__main__":
-    import cProfile as profile
-    import pstats
+    import yappi
 
-# Add profiling to a Django view
-
-    p = profile.Profile()
-    p.enable()
-
-    try:
-        main()
-    finally:
-        # End profiling and print out the results
-        p.disable()
-        pstats.Stats(p).sort_stats('cumulative').print_stats(30)
+    
+    yappi.set_clock_type("cpu") # Use set_clock_type("wall") for wall time
+    yappi.start()
+    main()
+    
+    yappi.get_func_stats().print_all()
+    yappi.get_thread_stats().print_all() 
