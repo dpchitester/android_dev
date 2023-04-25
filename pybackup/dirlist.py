@@ -32,7 +32,7 @@ def getfl(p):
                 dirs.clear()
                 files.clear()
         return fl
-    except Exception as e:
+    except IOError as e:
         print(e)
         return fl
 

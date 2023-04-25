@@ -22,7 +22,7 @@ def getfl(p):
             for f in files:
                 fl.append(Path(pth, f))
         return fl
-    except Exception as e:
+    except IOError as e:
         print(e)
         return None
 
@@ -68,7 +68,7 @@ class Mkzip(OpBase):
                     utime(fp, ns=(maxt, maxt))
                     sc += 1
                 updateDEs(td, [zf])
-            except Exception as er:
+            except IOError as er:
                 print(er)
                 fc += 1
             if sc > 0:

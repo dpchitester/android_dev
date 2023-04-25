@@ -7,10 +7,8 @@ from typing import Dict, List, Set, Tuple, TypeAlias
 from cscopy import CSCopy
 from de import DE, FSe
 from edge import Edge, addArc, addDep
-from gitclasses import GitWTStatus, GitIndexStatus, GitRemoteStatus, GitRepoStatus
-from gitops import GitAdd
-from gitops import GitCommit
-from gitops import GitPush
+from gitclasses import GitIndex, GitRemote, GitRepo, GitWT
+from gitops import GitAdd, GitCommit, GitPush
 from ldsv import load_all
 from localcopy import LocalCopy
 from mkzip import Mkzip
@@ -65,7 +63,7 @@ def cdir(s):
 
 def addSrcDir(tg, pth, iscode=False):
     if not isinstance(pth, SD):
-        raise Exception("not an SD subclass")
+        raise ValueError("not an SD subclass")
     srcs.add(tg, pth)
     pth.issrc = True
     if iscode:
@@ -84,7 +82,7 @@ def addSrcDir(tg, pth, iscode=False):
 
 def addTgtDir(tg, pth):
     if not isinstance(pth, SD):
-        raise Exception("not an SD subclass")
+        raise ValueError("not an SD subclass")
     tgts.add(tg, pth)
     pth.istgt = True
     if pth.isremote:
@@ -101,7 +99,7 @@ def addTgtDir(tg, pth):
 
 def addPre(tg, frag):
     if not isinstance(frag, SD):
-        raise Exception("not an SD subclass")
+        raise ValueError("not an SD subclass")
     pres.add(tg, frag)
 
 
@@ -191,6 +189,7 @@ def initConfig():
 
     addSrcDir("home", home, False)
     addSrcDir("bin", home / "bin", False)
+    addSrcDir("sh", home / "bin/sh")
     addSrcDir("proj", sdcard / "projects", True)
     addSrcDir("docs", sdcard / "Documents", False)
     addSrcDir("blogds", ppre("dsblog"), False)
@@ -203,7 +202,7 @@ def initConfig():
         dl = getDL(src("proj"))
         for d in dl:
             addSrcDir(d.name, d, True)
-            addDep("git_add", d.name)
+            addDep("git_worktree", d.name)
             addDep("zips", d.name)
             addDep("proj", d.name)
 
@@ -212,16 +211,16 @@ def initConfig():
     global worktree
     worktree = sdcard / "projects"
 
-    ga1 = GitWTStatus(worktree, tag="git_add")
-    addSrcDir("git_add", ga1)
+    ga1 = GitWT(worktree, tag="git_worktree")
+    addSrcDir("git_worktree", ga1)
 
-    gc1 = GitIndexStatus(worktree, tag="git_commit")
-    addSrcDir("git_commit", gc1)
+    gc1 = GitIndex(worktree, tag="git_index")
+    addSrcDir("git_index", gc1)
 
-    gre1 = GitRepoStatus(worktree, tag="git", rmts=["bitbucket", "github"])
-    addSrcDir("git", gre1)
+    gre1 = GitRepo(worktree, tag="git_repo", rmts=["bitbucket", "github"])
+    addSrcDir("git_repo", gre1)
 
-    gre2 = GitRemoteStatus(
+    gre2 = GitRemote(
         worktree,
         url="https://www.bitbucket.org/dpchitester/android_dev.git",
         tag="bitbucket",
@@ -229,7 +228,7 @@ def initConfig():
     )
     addTgtDir("bitbucket", gre2)
 
-    gre3 = GitRemoteStatus(
+    gre3 = GitRemote(
         worktree,
         url="https://github.com/dpchitester/android_dev.git",
         tag="github",
@@ -248,8 +247,6 @@ def initConfig():
     addTgtDir("blog", src("proj") / "blog")
     addTgtDir("bash", src("proj") / "bash")
     addTgtDir("plaid-node", src("proj") / "plaid-node")
-
-    load_all()
 
     npl1 = ("bash", "home")
     op1 = LocalCopy(
@@ -292,13 +289,17 @@ def initConfig():
 
     npl1 = ("bin", "bash")
     op3 = LocalCopy(
-        npl1, npl1, {"files": ["termux-*", "pbu", "rbu", "qe","ftp*","nt"], "exec": True}
+        npl1,
+        npl1,
+        {"files": ["termux-*", "pbu", "rbu", "qe", "ftp*", "nt"], "exec": True},
     )
     addArc(op3)
 
     npl1 = ("bash", "bin")
     op4 = LocalCopy(
-        npl1, npl1, {"files": ["termux-*", "pbu", "rbu", "qe","ftp*","nt"], "exec": False}
+        npl1,
+        npl1,
+        {"files": ["termux-*", "pbu", "rbu", "qe", "ftp*", "nt"], "exec": False},
     )
     addArc(op4)
 
@@ -330,15 +331,15 @@ def initConfig():
     addArc(op9)
 
     if "NOGIT" not in os.environ:
-        npl1 = ("git_commit", "git_add")
+        npl1 = ("git_index", "git_worktree")
         op10 = GitAdd(npl1, npl1, {"wt": worktree})
         addArc(op10)
 
-        npl1 = ("git", "git_commit")
+        npl1 = ("git_repo", "git_index")
         op11 = GitCommit(npl1, npl1, {"wt": worktree})
         addArc(op11)
 
-        npl1 = ("bitbucket", "git")
+        npl1 = ("bitbucket", "git_repo")
         op12 = GitPush(
             npl1,
             None,
@@ -346,7 +347,7 @@ def initConfig():
         )
         addArc(op12)
 
-        npl1 = ("github", "git")
+        npl1 = ("github", "git_repo")
         op13 = GitPush(
             npl1,
             None,
@@ -373,6 +374,8 @@ def initConfig():
             # addArc(op1)
             op14 = CSCopy(npl1, npl1, {"delete": False})
             addArc(op14)
+
+    load_all()
 
 
 dexs = {
@@ -425,7 +428,7 @@ def getDL(p):
                 dirs.clear()
                 files.clear()
         return fl
-    except Exception as e:
+    except IOError as e:
         print("getDL", e)
         return fl
 

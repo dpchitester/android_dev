@@ -46,7 +46,7 @@ def wsetup():
         except KeyboardInterrupt as exc:
             print(exc)
             break
-        except Exception as exc:
+        except OSError as exc:
             print(exc)
             break
     print(len(wdsi), "watches")
@@ -125,7 +125,7 @@ def rt2():
 
 
 def main():
-    global cel, wdsi, in1, v, th1, th2, th3
+    global cel, wdsi, in1, v, th1, th2
     v.initConfig()
     with Inotify(sync_timeout=0.666) as in1:
         try:
@@ -137,8 +137,6 @@ def main():
             th2.start()
             rt2()
         except KeyboardInterrupt as exc:
-            print(exc)
-        except Exception as exc:
             print(exc)
         finally:
             qe1.set()

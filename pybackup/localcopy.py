@@ -134,7 +134,7 @@ class LocalCopy(OpBase):
             for g in gl:
                 try:
                     fl = sp.glob(g)
-                except Exception as exc:
+                except IOError as exc:
                     print("glob error in localcopy", e)
                     self.sfc.fc += 1
                     return self.sfc.value()
@@ -155,7 +155,7 @@ class LocalCopy(OpBase):
                                 if "exec" in self.opts:
                                     fdf.chmod(496)
                                 updateDEs(dp, [str(rf)])
-                    except Exception as exc:
+                    except IOError as exc:
                         print(exc)
                         self.sfc.fc += 1
             if self.sfc.fc == 0:

@@ -11,7 +11,7 @@ def loadldlls():
             td = pickle.load(fh)
             v.LDlls = td["ldlls"]
             v.LDlls_xt = td["ldlls_xt"]
-    except Exception as e:
+    except IOError as e:
         print("loadldlls failed", e)
 
 
@@ -23,7 +23,7 @@ def loadrdlls():
             td = pickle.load(fh)
             v.RDlls = td["rdlls"]
             v.RDlls_xt = td["rdlls_xt"]
-    except Exception as e:
+    except IOError as e:
         print("loadrdlls failed", e)
 
 
@@ -38,7 +38,7 @@ def saveldlls():
             td = {"ldlls": v.LDlls, "ldlls_xt": v.LDlls_xt}
             pickle.dump(td, fh)
             v.LDlls_changed = False
-    except Exception as e:
+    except IOError as e:
         print("savedlls failed", e)
 
 
@@ -53,7 +53,7 @@ def saverdlls():
             td = {"rdlls": v.RDlls, "rdlls_xt": v.RDlls_xt}
             pickle.dump(td, fh)
             v.RDlls_changed = False
-    except Exception as e:
+    except IOError as e:
         print("saverdlls failed", e)
 
 
@@ -63,7 +63,7 @@ def loadedges():
     try:
         with open(v.edgepf, "rb") as fh:
             v.eDep = pickle.load(fh)
-    except Exception as e:
+    except IOError as e:
         print("loadedges failed", e)
 
 
@@ -74,7 +74,7 @@ def saveedges():
     try:
         with open(v.edgepf, "wb") as fh:
             pickle.dump(v.eDep, fh)
-    except Exception as e:
+    except IOError as e:
         print("saveedges failed", e)
 
 
@@ -92,7 +92,7 @@ def loadldh():
     try:
         with open(v.ldhpf, "rb") as fh:
             v.LDhd = pickle.load(fh)
-    except Exception as e:
+    except IOError as e:
         print("loadldh failed", e)
 
 
@@ -102,7 +102,7 @@ def loadrdh():
     try:
         with open(v.rdhpf, "rb") as fh:
             v.RDhd = pickle.load(fh)
-    except Exception as e:
+    except IOError as e:
         print("loadrdh failed", e)
 
 
@@ -112,7 +112,7 @@ def saveldh():
     try:
         with open(v.ldhpf, "wb") as fh:
             pickle.dump(v.LDhd, fh)
-    except Exception as e:
+    except IOError as e:
         print("saveldh failed", e)
 
 
@@ -122,7 +122,7 @@ def saverdh():
     try:
         with open(v.rdhpf, "wb") as fh:
             pickle.dump(v.RDhd, fh)
-    except Exception as e:
+    except IOError as e:
         print("saverdh failed", e)
 
 
