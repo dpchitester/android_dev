@@ -51,8 +51,9 @@ class Local_Mixin:
     @property
     def Dll(self):
         if hasattr(self, "tag"):
-            if self.tag in v.LDlls:
-                return v.LDlls[self.tag]
+            with ldsv.ul1:
+                if self.tag in v.LDlls:
+                    return v.LDlls[self.tag]
         return None
 
     @Dll.setter
@@ -64,8 +65,9 @@ class Local_Mixin:
     @property
     def Dlls_xt(self):
         if hasattr(self, "tag"):
-            if self.tag in v.LDlls_xt:
-                return v.LDlls_xt[self.tag]
+            with ldsv.ul1:
+                if self.tag in v.LDlls_xt:
+                    return v.LDlls_xt[self.tag]
         return 0
 
     @Dlls_xt.setter
@@ -76,7 +78,8 @@ class Local_Mixin:
 
     @property
     def Dlls_changed(self):
-        return v.LDlls_changed
+        with ldsv.ul1:
+            return v.LDlls_changed
 
     @Dlls_changed.setter
     def Dlls_changed(self, val):
@@ -87,8 +90,9 @@ class Local_Mixin:
     @property
     def SDh(self):
         if hasattr(self, "tag"):
-            if self.tag in v.LDhd:
-                return v.LDhd[self.tag]
+            with ldsv.ul1:
+                if self.tag in v.LDhd:
+                    return v.LDhd[self.tag]
         return 0
 
     @SDh.setter
@@ -109,8 +113,9 @@ class Remote_Mixin:
     @property
     def Dll(self):
         if hasattr(self, "tag"):
-            if self.tag in v.RDlls:
-                return v.RDlls[self.tag]
+            with ldsv.ul1:
+                if self.tag in v.RDlls:
+                    return v.RDlls[self.tag]
         return None
 
     @Dll.setter
@@ -122,8 +127,9 @@ class Remote_Mixin:
     @property
     def Dlls_xt(self):
         if hasattr(self, "tag"):
-            if self.tag in v.RDlls_xt:
-                return v.RDlls_xt[self.tag]
+            with ldsv.ul1:
+                if self.tag in v.RDlls_xt:
+                    return v.RDlls_xt[self.tag]
         return 0
 
     @Dlls_xt.setter
@@ -134,7 +140,8 @@ class Remote_Mixin:
 
     @property
     def Dlls_changed(self):
-        return v.RDlls_changed
+        with ldsv.ul1:
+            return v.RDlls_changed
 
     @Dlls_changed.setter
     def Dlls_changed(self, val):
@@ -145,8 +152,9 @@ class Remote_Mixin:
     @property
     def SDh(self):
         if hasattr(self, "tag"):
-            if self.tag in v.RDhd:
-                return v.RDhd[self.tag]
+            with ldsv.ul1:
+                if self.tag in v.RDhd:
+                    return v.RDhd[self.tag]
         return 0
 
     @SDh.setter

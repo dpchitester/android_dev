@@ -68,6 +68,7 @@ def findEdge(di, si) -> Edge:
         for e in v.eDep:
             if (e.di, e.si) not in v.edges or v.edges[e.di, e.si] != e:
                 v.edges[e.di, e.si] = e
+                ls.sev1.set()
     return v.edges[di, si]
 
 
