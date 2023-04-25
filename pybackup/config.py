@@ -190,7 +190,7 @@ def initConfig():
     addSrcDir("home", home, False)
     addSrcDir("bin", home / "bin", False)
     addSrcDir("sh", home / "bin/sh")
-    addSrcDir("proj", sdcard / "projects", True)
+    addSrcDir("proj", sdcard / "projects", False)
     addSrcDir("docs", sdcard / "Documents", False)
     addSrcDir("blogds", ppre("dsblog"), False)
     addSrcDir("backups", sdcard / "backups", False)
