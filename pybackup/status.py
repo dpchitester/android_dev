@@ -25,7 +25,7 @@ def stsupdate(Si, Dh):
 
 def onestatus(Si):
     # TODO: update as per src_statuses
-    with ls.ul1:
+    with ls.dl:
         tr = v.src(Si).sdhck()
         if tr is not None:
             (Dh, changed) = tr
@@ -36,7 +36,7 @@ def onestatus(Si):
 
 def src_statuses():
     SDl = []
-    with ls.ul1:
+    with ls.dl:
         for Si in v.srcs:
             # print('calling lckers', Si)
             tr = v.src(Si).sdhck()

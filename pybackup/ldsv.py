@@ -1,14 +1,15 @@
 import pickle
 from threading import Thread, RLock, Event
+from queue import SimpleQueue
 
 from sd import FS_Mixin
 
-ul1 = RLock()
-sev1 = Event()
+dl = RLock()
+sev = SimpleQueue()
 
 def loadldlls():
     import config as v
-    with ul1:
+    with dl:
         try:
             with open(v.ldllsf, "rb") as fh:
                 td = pickle.load(fh)
@@ -20,7 +21,7 @@ def loadldlls():
 
 def loadrdlls():
     import config as v
-    with ul1:
+    with dl:
         try:
             with open(v.rdllsf, "rb") as fh:
                 td = pickle.load(fh)
@@ -32,7 +33,7 @@ def loadrdlls():
 
 def saveldlls():
     import config as v
-    with ul1:
+    with dl:
     # print('-saveldlls')
         if v.LDlls_changed:
             print("LDlls changed")
@@ -47,7 +48,7 @@ def saveldlls():
 
 def saverdlls():
     import config as v
-    with ul1:
+    with dl:
         if v.RDlls_changed:
             print("RDlls changed")
         try:
@@ -61,7 +62,7 @@ def saverdlls():
 
 def loadedges():
     import config as v
-    with ul1:
+    with dl:
         try:
             with open(v.edgepf, "rb") as fh:
                 v.eDep = pickle.load(fh)
@@ -71,7 +72,7 @@ def loadedges():
 
 def saveedges():
     import config as v
-    with ul1:
+    with dl:
         try:
             with open(v.edgepf, "wb") as fh:
                 pickle.dump(v.eDep, fh)
@@ -89,7 +90,7 @@ def pstats():
 
 def loadldh():
     import config as v
-    with ul1:
+    with dl:
         try:
             with open(v.ldhpf, "rb") as fh:
                 v.LDhd = pickle.load(fh)
@@ -99,7 +100,7 @@ def loadldh():
 
 def loadrdh():
     import config as v
-    with ul1:
+    with dl:
         try:
             with open(v.rdhpf, "rb") as fh:
                 v.RDhd = pickle.load(fh)
@@ -109,7 +110,7 @@ def loadrdh():
 
 def saveldh():
     import config as v
-    with ul1:
+    with dl:
         try:
             with open(v.ldhpf, "wb") as fh:
                 pickle.dump(v.LDhd, fh)
@@ -119,7 +120,7 @@ def saveldh():
 
 def saverdh():
     import config as v
-    with ul1:
+    with dl:
         try:
             with open(v.rdhpf, "wb") as fh:
                 pickle.dump(v.RDhd, fh)
@@ -135,7 +136,7 @@ def load_all():
     loadrdh()
 
 def save_all():
-    with ul1:
+    with dl:
         saverdlls()
         # saveldlls()
         saveedges()
@@ -147,9 +148,20 @@ def save_bp():
     import pybackup as pb
     def save_th():
         def chk_save():
-            if sev1.set():
-                sev1.clear()
-                save_all()
+            while sev.qsize():
+                qi = sev.get()
+                print("qi: sev", qi)
+                match qi:
+                    case "edges":
+                        saveedges()
+                    case "ldlls":
+                        saveldlls()
+                    case "rdlls":
+                        saverdlls()
+                    case "ldh":
+                        saveldh()
+                    case "rdh":
+                        saverdh()
         while True:
             chk_save()
             if pb.qe1.is_set():

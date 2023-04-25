@@ -136,7 +136,6 @@ def main():
             th1.start()
             th2 = Thread(target=proc_events)
             th2.start()
-            ls.sev1.clear()
             th3 = ls.save_bp()
             th3.start()
             rt2()

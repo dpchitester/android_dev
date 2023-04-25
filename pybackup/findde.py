@@ -158,17 +158,17 @@ def updateDEs(rd: Path, flst: List[str]):
                 if tde.i.sz != sde.i.sz:
                     # print("size mismatch")
                     tde.i.sz = sde.i.sz
-                    ls.sev1.set()
+                    ls.sev.put("ldlls" if not p.isremote else "rdlls")
                 if tde.i.mt != sde.i.mt:
                     # print("modtime mismatch")
                     tde.i.mt = sde.i.mt
-                    ls.sev1.set()
+                    ls.sev.put("ldlls" if not p.isremote else "rdlls")
             else:
                 # print("insert", sde.nm)
                 fse = FSe(sde.i.sz, sde.i.mt)
                 tde = DE(rp, fse)
                 dl.insert(i, tde)
-                ls.sev1.set()
+                ls.sev.put("ldlls" if not p.isremote else "rdlls")
         else:
             if tde:
                 # print("would delete", rp)
@@ -191,25 +191,25 @@ def updateDEs(rd: Path, flst: List[str]):
                 if tde.i.sz != sde.i.sz:
                     # print("size mismatch")
                     tde.i.sz = sde.i.sz
-                    ls.sev1.set()
+                    ls.sev.put("ldlls" if not p.isremote else "rdlls")
                 if tde.i.mt != sde.i.mt:
                     # print("modtime mismatch")
                     tde.i.mt = sde.i.mt
-                    ls.sev1.set()
+                    ls.sev.put("ldlls" if not p.isremote else "rdlls")
             else:
                 # print("insert", sde.nm)
                 fse = FSe(sde.i.sz, sde.i.mt)
                 tde = DE(rp, fse)
                 dl.insert(i, tde)
-                ls.sev1.set()
+                ls.sev.put("ldlls" if not p.isremote else "rdlls")
         else:
             if tde:
                 # print("would delete", rp)
                 # dl.pop(i)
                 pass
 
-    with ls.ul1:
-        # assert ls.ul1.locked()
+    with ls.dl:
+        # assert ls.dl.locked()
         sdel = getRemoteDEs(rd, flst)
         # assert sdel is not None
         for fi in flst:
