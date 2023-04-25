@@ -149,4 +149,17 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import cProfile as profile
+    import pstats
+
+# Add profiling to a Django view
+
+    p = profile.Profile()
+    p.enable()
+
+    try:
+        main()
+    finally:
+        # End profiling and print out the results
+        p.disable()
+        pstats.Stats(p).sort_stats('cumulative').print_stats(30)
