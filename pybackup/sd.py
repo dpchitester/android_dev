@@ -7,6 +7,7 @@ from pathlib import Path, PosixPath
 import asyncrun as ar
 import config as v
 from de import DE, FSe
+import ldsv
 
 icl = 1
 rto1 = 60 * 5
@@ -56,7 +57,9 @@ class Local_Mixin:
 
     @Dll.setter
     def Dll(self, val):
-        v.LDlls[self.tag] = val
+        with ldsv.ul1:
+            v.LDlls[self.tag] = val
+            ldsv.sev1.set()
 
     @property
     def Dlls_xt(self):
@@ -67,7 +70,9 @@ class Local_Mixin:
 
     @Dlls_xt.setter
     def Dlls_xt(self, val):
-        v.LDlls_xt[self.tag] = val
+        with ldsv.ul1:
+            v.LDlls_xt[self.tag] = val
+            ldsv.sev1.set()
 
     @property
     def Dlls_changed(self):
@@ -75,7 +80,9 @@ class Local_Mixin:
 
     @Dlls_changed.setter
     def Dlls_changed(self, val):
-        v.LDlls_changed = val
+        with ldsv.ul1:
+            v.LDlls_changed = val
+            ldsv.sev1.set()
 
     @property
     def SDh(self):
@@ -86,7 +93,9 @@ class Local_Mixin:
 
     @SDh.setter
     def SDh(self, val):
-        v.LDhd[self.tag] = val
+        with ldsv.ul1:
+            v.LDhd[self.tag] = val
+            ldsv.sev1.set()
 
 
 class Remote_Mixin:
@@ -106,7 +115,9 @@ class Remote_Mixin:
 
     @Dll.setter
     def Dll(self, val):
-        v.RDlls[self.tag] = val
+        with ldsv.ul1:
+            v.RDlls[self.tag] = val
+            ldsv.sev1.set()
 
     @property
     def Dlls_xt(self):
@@ -117,7 +128,9 @@ class Remote_Mixin:
 
     @Dlls_xt.setter
     def Dlls_xt(self, val):
-        v.RDlls_xt[self.tag] = val
+        with ldsv.ul1:
+            v.RDlls_xt[self.tag] = val
+            ldsv.sev1.set()
 
     @property
     def Dlls_changed(self):
@@ -125,7 +138,9 @@ class Remote_Mixin:
 
     @Dlls_changed.setter
     def Dlls_changed(self, val):
-        v.RDlls_changed = val
+        with ldsv.ul1:
+            v.RDlls_changed = val
+            ldsv.sev1.set()
 
     @property
     def SDh(self):
@@ -136,7 +151,9 @@ class Remote_Mixin:
 
     @SDh.setter
     def SDh(self, val):
-        v.RDhd[self.tag] = val
+        with ldsv.ul1:
+            v.RDhd[self.tag] = val
+            ldsv.sev1.set()
 
 
 class FS_Mixin(SD):
@@ -146,7 +163,8 @@ class FS_Mixin(SD):
     def sdh_d(self):
         from bhash import blakeHash
 
-        Si_dl = self.Dlld()
+        with ldsv.ul1:
+            Si_dl = self.Dlld()
         if Si_dl is not None:
             return blakeHash(Si_dl)
         return None

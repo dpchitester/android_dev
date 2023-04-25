@@ -136,10 +136,10 @@ def main():
             th1.start()
             th2 = Thread(target=proc_events)
             th2.start()
+            ldsv.sev1.clear()
             th3 = ldsv.save_bp()
             th3.start()
             rt2()
-            ldsv.ev1.set()
         except KeyboardInterrupt as exc:
             print(exc)
         finally:
