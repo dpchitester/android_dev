@@ -54,7 +54,7 @@ class Remote_Git_Mixin:
         v.RDhd[self.tag] = val
 
 
-class GitAdd(SD, Local_Git_Mixin):
+class GitWTStatus(SD, Local_Git_Mixin):
     def __init__(self, *args, **kwargs):
         for k, v in kwargs.items():
             setattr(self, k, v)
@@ -75,7 +75,7 @@ class GitAdd(SD, Local_Git_Mixin):
         return (Dh2, rv > 0 and Dh2 != Dh1)
 
 
-class GitCommit(SD, Local_Git_Mixin):
+class GitIndexStatus(SD, Local_Git_Mixin):
     def __init__(self, *args, **kwargs):
         for k, v in kwargs.items():
             setattr(self, k, v)
@@ -96,7 +96,7 @@ class GitCommit(SD, Local_Git_Mixin):
         return (Dh2, rv > 0 and Dh2 != Dh1)
 
 
-class GitRepo(SD, Local_Git_Mixin):
+class GitRepoStatus(SD, Local_Git_Mixin):
     def __init__(self, *args, **kwargs):
         for k, v in kwargs.items():
             setattr(self, k, v)
@@ -119,7 +119,7 @@ class GitRepo(SD, Local_Git_Mixin):
         return (Dh2, rv > 0 and Dh2 != Dh1)
 
 
-class GitRemote(SD, Remote_Git_Mixin):
+class GitRemoteStatus(SD, Remote_Git_Mixin):
     def __init__(self, *args, **kwargs):
         for k, v in kwargs.items():
             setattr(self, k, v)

@@ -7,10 +7,10 @@ from typing import Dict, List, Set, Tuple, TypeAlias
 from cscopy import CSCopy
 from de import DE, FSe
 from edge import Edge, addArc, addDep
-from gitclasses import GitAdd, GitCommit, GitRemote, GitRepo
-from gitops import GitAdd as opGitAdd
-from gitops import GitCommit as opGitCommit
-from gitops import GitPush as opGitPush
+from gitclasses import GitWTStatus, GitIndexStatus, GitRemoteStatus, GitRepoStatus
+from gitops import GitAdd
+from gitops import GitCommit
+from gitops import GitPush
 from ldsv import load_all
 from localcopy import LocalCopy
 from mkzip import Mkzip
@@ -212,16 +212,16 @@ def initConfig():
     global worktree
     worktree = sdcard / "projects"
 
-    ga1 = GitAdd(worktree, tag="git_add")
+    ga1 = GitWTStatus(worktree, tag="git_add")
     addSrcDir("git_add", ga1)
 
-    gc1 = GitCommit(worktree, tag="git_commit")
+    gc1 = GitIndexStatus(worktree, tag="git_commit")
     addSrcDir("git_commit", gc1)
 
-    gre1 = GitRepo(worktree, tag="git", rmts=["bitbucket", "github"])
+    gre1 = GitRepoStatus(worktree, tag="git", rmts=["bitbucket", "github"])
     addSrcDir("git", gre1)
 
-    gre2 = GitRemote(
+    gre2 = GitRemoteStatus(
         worktree,
         url="https://www.bitbucket.org/dpchitester/android_dev.git",
         tag="bitbucket",
@@ -229,7 +229,7 @@ def initConfig():
     )
     addTgtDir("bitbucket", gre2)
 
-    gre3 = GitRemote(
+    gre3 = GitRemoteStatus(
         worktree,
         url="https://github.com/dpchitester/android_dev.git",
         tag="github",
@@ -331,15 +331,15 @@ def initConfig():
 
     if "NOGIT" not in os.environ:
         npl1 = ("git_commit", "git_add")
-        op10 = opGitAdd(npl1, npl1, {"wt": worktree})
+        op10 = GitAdd(npl1, npl1, {"wt": worktree})
         addArc(op10)
 
         npl1 = ("git", "git_commit")
-        op11 = opGitCommit(npl1, npl1, {"wt": worktree})
+        op11 = GitCommit(npl1, npl1, {"wt": worktree})
         addArc(op11)
 
         npl1 = ("bitbucket", "git")
-        op12 = opGitPush(
+        op12 = GitPush(
             npl1,
             None,
             {"wt": worktree, "rmt": "bitbucket"},
@@ -347,7 +347,7 @@ def initConfig():
         addArc(op12)
 
         npl1 = ("github", "git")
-        op13 = opGitPush(
+        op13 = GitPush(
             npl1,
             None,
             {"wt": worktree, "rmt": "github"},
