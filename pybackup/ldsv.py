@@ -193,7 +193,7 @@ def save_bp():
                             saverdh()
                 return
             else:
-                sleep(2)
+                sleep(5)
 
     th3 = Thread(target=save_th)
     return th3
