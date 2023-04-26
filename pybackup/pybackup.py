@@ -166,4 +166,4 @@ if __name__ == "__main__":
 
     with open("yappi.stats","w") as fh:
         yappi.get_thread_stats().sort("id").print_all(out=fh)
-        yappi.get_func_stats().sort("subtime").print_all(out=fh)
+        yappi.get_func_stats().sort("ncalls").print_all(out=fh)
