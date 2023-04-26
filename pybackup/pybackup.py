@@ -145,6 +145,7 @@ def main():
             qe1.set()
             for th in [th1, th2, th3]:
                 if th:
+                    print("waiting", th.name)
                     th.join()
 
 
