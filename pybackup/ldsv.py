@@ -4,6 +4,7 @@ from queue import SimpleQueue
 from threading import Event
 from threading import RLock
 from threading import Thread
+from time import sleep
 
 from snoop import snoop
 
@@ -42,8 +43,6 @@ def saveldlls():
 
     with dl:
         # print('-saveldlls')
-        if v.LDlls_changed:
-            print("LDlls changed")
         try:
             with open(v.ldllsf, "wb") as fh:
                 td = {"ldlls": v.LDlls, "ldlls_xt": v.LDlls_xt}
@@ -57,8 +56,6 @@ def saverdlls():
     import config as v
 
     with dl:
-        if v.RDlls_changed:
-            print("RDlls changed")
         try:
             with open(v.rdllsf, "wb") as fh:
                 td = {"rdlls": v.RDlls, "rdlls_xt": v.RDlls_xt}
@@ -168,35 +165,39 @@ def save_bp():
 
         def chk_save():
             try:
-                qi = sev.get(timeout=3)
+                qi = sev.get_nowait()
                 if qi is not None:
                     # print("save", qi)
                     if qi not in svs:
                         svs[qi] = 1
                     else:
                         svs[qi] += 1
+                    return True
                 else:
                     print("qi is None")
+                    return False
             except Empty:
-                pass
+                return False
 
         while True:
-            chk_save()
-            if v.quit_ev.is_set():
-                print("saves:", svs)
-                for sv in svs:
-                    match sv:
-                        case "edges":
-                            saveedges()
-                        case "ldlls":
-                            saveldlls()
-                        case "rdlls":
-                            saverdlls()
-                        case "ldh":
-                            saveldh()
-                        case "rdh":
-                            saverdh()
-                return
+            while not chk_save():
+                if v.quit_ev.is_set():
+                    print("saves:", svs)
+                    for sv in svs:
+                        match sv:
+                            case "edges":
+                                saveedges()
+                            case "ldlls":
+                                saveldlls()
+                            case "rdlls":
+                                saverdlls()
+                            case "ldh":
+                                saveldh()
+                            case "rdh":
+                                saverdh()
+                    return
+                else:
+                    sleep(3)
 
     th3 = Thread(target=save_th)
     return th3

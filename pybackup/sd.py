@@ -80,17 +80,6 @@ class Local_Mixin:
             ls.sev.put("ldlls")
 
     @property
-    def Dlls_changed(self):
-        with ls.dl:
-            return v.LDlls_changed
-
-    @Dlls_changed.setter
-    def Dlls_changed(self, val):
-        with ls.dl:
-            v.LDlls_changed = val
-            ls.sev.put("ldlls")
-
-    @property
     def SDh(self):
         if hasattr(self, "tag"):
             with ls.dl:
@@ -142,17 +131,6 @@ class Remote_Mixin:
             ls.sev.put("rdlls")
 
     @property
-    def Dlls_changed(self):
-        with ls.dl:
-            return v.RDlls_changed
-
-    @Dlls_changed.setter
-    def Dlls_changed(self, val):
-        with ls.dl:
-            v.RDlls_changed = val
-            ls.sev.put("rdlls")
-
-    @property
     def SDh(self):
         if hasattr(self, "tag"):
             with ls.dl:
@@ -193,7 +171,6 @@ class FS_Mixin(SD):
                 # print("done.")
                 self.Dll = rv
                 self.Dlls_xt = time.time()
-                self.Dlls_changed = True
             else:
                 # print("failed.")
                 pass
