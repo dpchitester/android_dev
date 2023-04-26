@@ -163,41 +163,37 @@ def save_bp():
     def save_th():
         svs = {}
 
-        def chk_save():
+        def chk_sq():
             try:
                 qi = sev.get_nowait()
-                if qi is not None:
-                    # print("save", qi)
-                    if qi not in svs:
-                        svs[qi] = 1
-                    else:
-                        svs[qi] += 1
-                    return True
-                else:
-                    print("qi is None")
-                    return False
+                try:
+                    svs[qi] += 1
+                except KeyError:
+                    svs[qi] = 1
             except Empty:
-                return False
+                pass
+            return sev.qsize()
 
         while True:
-            while not chk_save():
-                if v.quit_ev.is_set():
-                    print("saves:", svs)
-                    for sv in svs:
-                        match sv:
-                            case "edges":
-                                saveedges()
-                            case "ldlls":
-                                saveldlls()
-                            case "rdlls":
-                                saverdlls()
-                            case "ldh":
-                                saveldh()
-                            case "rdh":
-                                saverdh()
-                    return
-                else:
-                    sleep(3)
+            while chk_sq():
+                pass
+            if v.quit_ev.is_set():
+                print("saves:", svs)
+                for sv in svs:
+                    match sv:
+                        case "edges":
+                            saveedges()
+                        case "ldlls":
+                            saveldlls()
+                        case "rdlls":
+                            saverdlls()
+                        case "ldh":
+                            saveldh()
+                        case "rdh":
+                            saverdh()
+                return
+            else:
+                sleep(2)
 
     th3 = Thread(target=save_th)
     return th3
