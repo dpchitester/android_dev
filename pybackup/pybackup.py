@@ -127,7 +127,7 @@ def rt2():
 
 
 def main():
-    global cel, wdsi, in1, v, th1, th2, th3
+    global cel, wdsi, in1, v, th1, th2, th3, quit_ev
     v.initConfig()
     with Inotify(sync_timeout=0.666) as in1:
         try:
@@ -140,12 +140,13 @@ def main():
             th3 = ls.save_bp()
             th3.start()
             rt2()
+            quit_ev.set()
         except KeyboardInterrupt as exc:
             print(exc)
         finally:
-            quit_ev.set()
             for th in [th1, th2, th3]:
                 if th:
+                    quit_ev.set()
                     print("waiting for", th.name, "shutdown")
                     th.join()
 

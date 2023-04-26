@@ -165,7 +165,7 @@ def save_bp():
                             saverdh()
             except Empty:
                 pass
-        with snoop(depth=2):
+        with snoop():
             while True:
                 chk_save()
                 if pb.quit_ev.is_set():
