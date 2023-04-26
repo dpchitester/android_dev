@@ -2,6 +2,7 @@ import os
 from math import floor
 from os import walk
 from pathlib import Path
+from threading import Event
 from typing import Dict
 from typing import List
 from typing import Set
@@ -29,6 +30,8 @@ from sd import CS
 from sd import SD
 from sd import Ext3
 from sd import Fat32
+
+quit_ev = Event()
 
 NodeTag: TypeAlias = str
 Hash: TypeAlias = bytes
@@ -456,3 +459,4 @@ def ts_trunc2ms(s):
 
 def ns_trunc2ms(ns):
     return floor(ns / 1.0e6) / 1.0e3
+

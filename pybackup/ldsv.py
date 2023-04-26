@@ -161,8 +161,7 @@ def save_all():
 
 
 def save_bp():
-    from pybackup import quit_ev
-
+    import config as v
     def save_th():
         def chk_save():
             try:
@@ -187,7 +186,7 @@ def save_bp():
 
         while True:
             chk_save()
-            if quit_ev.is_set():
+            if v.quit_ev.is_set():
                 return
 
     th3 = Thread(target=save_th)

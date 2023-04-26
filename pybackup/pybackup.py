@@ -5,7 +5,6 @@ from os import walk
 from pathlib import Path
 from queue import Empty
 from queue import Queue
-from threading import Event
 from threading import Lock
 from threading import Thread
 from time import sleep
@@ -25,16 +24,13 @@ from sd import FS_Mixin
 from status import onestatus
 from status import updatets
 
-wdsi: dict[Watch, v.NodeTag] = {}
 in1 = None
+wdsi: dict[Watch, v.NodeTag] = {}
+weq = Queue()
 
 th1 = None
 th2 = None
 th3 = None
-
-quit_ev = Event()
-weq = Queue()
-
 
 def wsetup():
     global wdsi, in1, v
@@ -60,7 +56,7 @@ def wsetup():
 
 
 def cb1():
-    global in1, weq, quit_ev
+    global in1, weq
     print("-cb1 started")
     while True:
         try:
@@ -68,7 +64,7 @@ def cb1():
                 weq.put(ev)
         except BlockingIOError:
             pass
-        if quit_ev.is_set():
+        if v.quit_ev.is_set():
             break
 
 
@@ -109,7 +105,7 @@ def proc_events():
             if len(sis):
                 th3 = Thread(target=procq)
                 th3.start()
-        if quit_ev.is_set():
+        if v.quit_ev.is_set():
             break
 
 
@@ -134,7 +130,7 @@ def rt2():
 
 
 def main():
-    global cel, wdsi, in1, v, th1, th2, th3, quit_ev
+    global cel, wdsi, in1, v, th1, th2, th3
     v.initConfig()
     with Inotify(sync_timeout=0.666) as in1:
         try:
@@ -147,13 +143,13 @@ def main():
             th3 = ls.save_bp()
             th3.start()
             rt2()
-            quit_ev.set()
+            v.quit_ev.set()
         except KeyboardInterrupt as exc:
             print(exc)
         finally:
             for th in [th1, th2, th3]:
                 if th:
-                    quit_ev.set()
+                    v.quit_ev.set()
                     print("waiting for", th.name, "shutdown")
                     th.join()
 
