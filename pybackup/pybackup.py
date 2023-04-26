@@ -166,8 +166,8 @@ if __name__ == "__main__":
     main()
 
     with open("yappi.stats", "w") as fh:
-        yappi.get_thread_stats().sort("id","asc").print_all()
-        yappi.get_func_stats().sort("subtime","desc").print_all(
+        yappi.get_thread_stats().sort("id","asc").print_all(out=fh)
+        yappi.get_func_stats().sort("subtime","desc").print_all(out=fh,
             columns={
                 0: ("name", 36),
                 1: ("ncall", 8),
