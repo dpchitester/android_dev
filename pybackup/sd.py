@@ -61,9 +61,10 @@ class Local_Mixin:
 
     @Dll.setter
     def Dll(self, val):
-        with ls.dl:
-            v.LDlls[self.tag] = val
-            ls.sev.put("ldlls")
+        if hasattr(self, "tag"):
+            with ls.dl:
+                v.LDlls[self.tag] = val
+                ls.sev.put("ldlls")
 
     @property
     def Dlls_xt(self):
@@ -75,9 +76,10 @@ class Local_Mixin:
 
     @Dlls_xt.setter
     def Dlls_xt(self, val):
-        with ls.dl:
-            v.LDlls_xt[self.tag] = val
-            ls.sev.put("ldlls")
+        if hasattr(self, "tag"):
+            with ls.dl:
+                v.LDlls_xt[self.tag] = val
+                ls.sev.put("ldlls")
 
     @property
     def SDh(self):
@@ -89,9 +91,10 @@ class Local_Mixin:
 
     @SDh.setter
     def SDh(self, val):
-        with ls.dl:
-            v.LDhd[self.tag] = val
-            ls.sev.put("ldhd")
+        if hasattr(self, "tag"):
+            with ls.dl:
+                v.LDhd[self.tag] = val
+                ls.sev.put("ldhd")
 
 
 class Remote_Mixin:
@@ -112,9 +115,10 @@ class Remote_Mixin:
 
     @Dll.setter
     def Dll(self, val):
-        with ls.dl:
-            v.RDlls[self.tag] = val
-            ls.sev.put("rdlls")
+        if hasattr(self, "tag"):
+            with ls.dl:
+                v.RDlls[self.tag] = val
+                ls.sev.put("rdlls")
 
     @property
     def Dlls_xt(self):
@@ -126,9 +130,10 @@ class Remote_Mixin:
 
     @Dlls_xt.setter
     def Dlls_xt(self, val):
-        with ls.dl:
-            v.RDlls_xt[self.tag] = val
-            ls.sev.put("rdlls")
+        if hasattr(self, "tag"):
+            with ls.dl:
+                v.RDlls_xt[self.tag] = val
+                ls.sev.put("rdlls")
 
     @property
     def SDh(self):
@@ -140,9 +145,10 @@ class Remote_Mixin:
 
     @SDh.setter
     def SDh(self, val):
-        with ls.dl:
-            v.RDhd[self.tag] = val
-            ls.sev.put("rdhd")
+        if hasattr(self, "tag"):
+            with ls.dl:
+                v.RDhd[self.tag] = val
+                ls.sev.put("rdhd")
 
 
 class FS_Mixin(SD):
