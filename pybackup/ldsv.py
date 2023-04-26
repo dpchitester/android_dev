@@ -163,12 +163,27 @@ def save_all():
 def save_bp():
     import config as v
     def save_th():
+        svs = {}
         def chk_save():
             try:
                 qi = sev.get(timeout=3)
                 if qi is not None:
                     # print("save", qi)
-                    match qi:
+                    if qi not in svs:
+                        svs[qi]=1
+                    else:
+                        svs[qi] += 1
+                else:
+                    print('qi is None')
+            except Empty:
+                pass
+
+        while True:
+            chk_save()
+            if v.quit_ev.is_set():
+                print("saves:", svs)
+                for sv in svs:
+                    match sv:
                         case "edges":
                             saveedges()
                         case "ldlls":
@@ -179,14 +194,6 @@ def save_bp():
                             saveldh()
                         case "rdh":
                             saverdh()
-                else:
-                    print('qi is None')
-            except Empty:
-                pass
-
-        while True:
-            chk_save()
-            if v.quit_ev.is_set():
                 return
 
     th3 = Thread(target=save_th)
