@@ -2,6 +2,7 @@ import pickle
 from threading import Thread, RLock, Event
 from queue import SimpleQueue, Empty
 
+from snoop import snoop
 
 dl = RLock()
 sev = SimpleQueue()
@@ -150,7 +151,7 @@ def save_bp():
             try:
                 qi = sev.get(timeout=3)
                 if qi is not None:
-                    print("save", qi)
+                    # print("save", qi)
                     match qi:
                         case "edges":
                             saveedges()
@@ -164,9 +165,10 @@ def save_bp():
                             saverdh()
             except Empty:
                 pass
-        while True:
-            chk_save()
-            if pb.quit_ev.is_set():
-                return
+        with snoop(depth=2):
+            while True:
+                chk_save()
+                if pb.quit_ev.is_set():
+                    return
     th3 = Thread(target=save_th)
     return th3
