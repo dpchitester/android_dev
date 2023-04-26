@@ -11,7 +11,7 @@ from asyncinotify import Inotify, Mask, Watch
 
 import config as v
 import ldsv as ls
-import status as st
+
 from findde import updateDEs
 from netup import netup
 from opexec import clean, opExec
@@ -25,7 +25,7 @@ th1 = None
 th2 = None
 th3 = None
 
-qe1 = Event()
+quit_ev = Event()
 dl1 = Lock()
 eq1 = Queue()
 
@@ -54,7 +54,7 @@ def wsetup():
 
 
 def cb1():
-    global in1, eq1, qe1
+    global in1, eq1, quit_ev
     print("-cb1 started")
     while True:
         try:
@@ -62,7 +62,7 @@ def cb1():
                 eq1.put(ev)
         except BlockingIOError:
             pass
-        if qe1.is_set():
+        if quit_ev.is_set():
             break
 
 
@@ -101,7 +101,7 @@ def proc_events():
             if len(sis):
                 th3 = Thread(target=procq)
                 th3.start()
-        if qe1.is_set():
+        if quit_ev.is_set():
             break
 
 
@@ -142,10 +142,10 @@ def main():
         except KeyboardInterrupt as exc:
             print(exc)
         finally:
-            qe1.set()
+            quit_ev.set()
             for th in [th1, th2, th3]:
                 if th:
-                    print("waiting", th.name)
+                    print("waiting for", th.name, "shutdown")
                     th.join()
 
 

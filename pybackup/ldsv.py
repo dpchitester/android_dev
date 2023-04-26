@@ -2,7 +2,6 @@ import pickle
 from threading import Thread, RLock, Event
 from queue import SimpleQueue, Empty
 
-from sd import FS_Mixin
 
 dl = RLock()
 sev = SimpleQueue()
@@ -167,7 +166,7 @@ def save_bp():
                 pass
         while True:
             chk_save()
-            if pb.qe1.is_set():
+            if pb.quit_ev.is_set():
                 return
     th3 = Thread(target=save_th)
     return th3
