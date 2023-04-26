@@ -1,0 +1,627 @@
+
+name           id     tid              ttot      scnt        
+_MainThread    0      2985176512       57.45342  115       
+Thread         1      2948702768       0.148711  96        
+Thread         2      2947650096       0.130621  88        
+Thread         3      2946597424       0.754433  55        
+Thread         4      2945544752       0.268672  3         
+
+Clock type: CPU
+Ordered by: subtime, desc
+
+name                                  ncall     tsub      ttot      tavg      
+..ib.py:56 _PosixFlavour.parse_parts  30730     5.509947  9.846278  0.000320
+posix.stat                            27061     5.202747  7.610675  0.000281
+..hon3.11/pathlib.py:590 Ext3.__lt__  87557     2.079110  3.642001  0.000042
+..lib.py:239 _PosixFlavour.splitroot  186483    1.910264  2.345139  0.000013
+..n3.11/pathlib.py:569 Fat32._cparts  215809    1.701986  1.831985  0.000008
+..n3.11/pathlib.py:583 Ext3.__hash__  101673    1.508084  2.191067  0.000022
+..ts/pybackup/bhash.py:33 <listcomp>  67952     1.470243  4.721578  0.000069
+..ts/pybackup/bhash.py:32 <listcomp>  67952     1.404589  10.56158  0.000155
+..on3.11/pathlib.py:536 Ext3.__str__  31795     1.280996  2.119096  0.000067
+..ects/pybackup/bhash.py:27 <lambda>  66616     1.272963  3.361208  0.000050
+..hon3.11/pathlib.py:484 _parse_args  30635     1.157111  11.31862  0.000369
+_struct.pack                          203856    1.034477  1.034477  0.000005
+..method 'append' of 'list' objects>  236838    1.013283  1.013283  0.000004
+..ects/pybackup/bhash.py:18 <lambda>  67952     0.991772  1.645127  0.000024
+..ects/pybackup/bhash.py:19 <lambda>  67952     0.974401  1.606208  0.000024
+..ects/pybackup/bhash.py:32 <lambda>  67952     0.973471  11.53505  0.000170
+..1/pathlib.py:703 Fat32.relative_to  12489     0.972728  5.607222  0.000449
+..ects/pybackup/bhash.py:33 <lambda>  67952     0.967093  5.688672  0.000084
+sys.intern                            177444    0.951275  0.951275  0.000005
+..353 _WildcardSelector._select_from  15100     0.926931  2.295717  0.000152
+builtins.hash                         101996..  0.924004  1.743600  0.000017
+..ate' of '_blake2.blake2b' objects>  204476    0.919342  0.919342  0.000004
+..d/0/projects/pybackup/sd.py:274 es  12351     0.884308  10.41799  0.000843
+builtins.isinstance                   149604    0.683225  0.683225  0.000005
+..ects/pybackup/sd.py:252 Ext3.getfl  55        0.677938  18.67175  0.339486
+..ts/pybackup/sd.py:23 Ext3.__init__  17118     0.662541  0.969170  0.000057
+...<method 'sort' of 'list' objects>  59        0.641612  4.350750  0.073742
+posix.lstat                           4526      0.620243  0.620243  0.000137
+../pathlib.py:515 _from_parsed_parts  38945     0.606919  0.917208  0.000024
+...11/pathlib.py:546 Ext3.__fspath__  31890     0.605007  2.724908  0.000085
+..athlib.py:523 _format_parsed_parts  28808     0.597359  0.839473  0.000029
+_pickle.dump                          3         0.597203  0.688657  0.229552
+..ts/pybackup/bhash.py:31 <listcomp>  440       0.568346  12.10339  0.027508
+..projects/pybackup/sd.py:20 __new__  17125     0.560025  8.489290  0.000496
+builtins.next                         10540     0.557016  0.557016  0.000053
+..hon3.11/pathlib.py:504 _from_parts  17935     0.533750  7.833220  0.000437
+..dcardSelector._iterate_directories  6786/1..  0.484037  0.837236  0.000123
+..ew__ of type object at 0xb1a07a5c>  56958     0.462885  0.462885  0.000008
+../pybackup/config.py:416 <listcomp>  8         0.457984  1.604879  0.200610
+../pybackup/sd.py:301 Fat32.__init__  13175     0.455373  1.571133  0.000119
+..thon3.11/pathlib.py:1008 Ext3.stat  27058     0.431368  8.041604  0.000297
+posix.scandir                         3790      0.428355  0.593214  0.000157
+..rsiveWildcardSelector._select_from  13714     0.427858  5.075008  0.000370
+..jects/pybackup/edge.py:65 findEdge  138       0.415704  0.623839  0.004521
+../python3.11/pathlib.py:868 __new__  17935     0.414131  8.247351  0.000460
+<frozen os>:345 _walk                 5674/1..  0.405797  1.617142  0.000285
+..hon3.11/pathlib.py:745 Fat32.parts  11781     0.386751  0.386751  0.000033
+builtins.len                          82989/..  0.382711  0.382918  0.000005
+..n3.11/pathlib.py:1261 Ext3.is_file  13704     0.373237  4.684367  0.000342
+..ullmatch' of 're.Pattern' objects>  14013     0.358182  0.358182  0.000026
+..on3.11/pathlib.py:777 Fat32.parent  11186     0.314912  0.622942  0.000056
+..s/pybackup/sd.py:171 Ext3.__init__  17093     0.310801  1.278985  0.000075
+..ib.py:877 Ext3._make_child_relpath  15059     0.310454  0.651972  0.000043
+..d/0/projects/pybackup/sd.py:232 es  1932      0.291956  1.865016  0.000965
+..s/pybackup/sd.py:249 Ext3.__init__  13525     0.257677  1.076333  0.000080
+..ts/pybackup/sd.py:47 Ext3.__init__  13525     0.257029  0.257029  0.000019
+../__init__.py:427 Inotify.add_watch  1071      0.249666  0.503503  0.000470
+..y:257 _PosixFlavour.casefold_parts  52990     0.248032  0.248032  0.000005
+.._.<method 'join' of 'str' objects>  28826     0.242231  0.242231  0.000008
+..pybackup/config.py:460 ns_trunc2ms  12351     0.229725  0.318287  0.000026
+..ts/pybackup/edge.py:19 Edge.__eq__  21798     0.207136  0.207136  0.000010
+<frozen posixpath>:71 join            4837      0.199508  0.358946  0.000074
+..<method 'lstrip' of 'str' objects>  26660     0.195973  0.195973  0.000007
+..__.<method 'add' of 'set' objects>  13844     0.185465  0.264515  0.000019
+..cts/pybackup/sd.py:267 Ext3.getdll  55        0.174653  32.88766  0.597957
+..on3.11/pathlib.py:578 Fat32.__eq__  6504      0.160640  0.254742  0.000039
+..thon3.11/pathlib.py:956 Ext3.rglob  13704     0.155832  5.239010  0.000382
+<frozen posixpath>:421 _joinrealpath  760/740   0.152508  0.789278  0.001039
+..ethod 'reverse' of 'list' objects>  30732     0.136689  0.136689  0.000004
+..cts/pybackup/sd.py:308 CS.__init__  3568      0.136023  0.683990  0.000192
+..cts/pybackup/de.py:10 FSe.__init__  14297     0.126303  0.126303  0.000009
+.. _TerminatingSelector._select_from  27506     0.114583  0.114583  0.000004
+../pybackup/config.py:417 <listcomp>  11084     0.110862  0.110862  0.000010
+math.floor                            14287     0.108628  0.108628  0.000008
+.._dir' of 'posix.DirEntry' objects>  23125     0.106085  0.106085  0.000005
+../projects/pybackup/bhash.py:15 bhu  750       0.105113  12.24150  0.016322
+..cts/pybackup/pybackup.py:37 wsetup  1         0.103681  2.970778  2.970778
+<string>:2 DE.__init__                14297     0.102949  0.102949  0.000007
+io.open                               288       0.102523  0.111547  0.000387
+posix.fspath                          18818     0.098631  0.240146  0.000013
+..cts/pybackup/dirlist.py:207 dllcmp  4         0.093067  0.672118  0.168030
+...11/pathlib.py:479 Ext3.__reduce__  9572      0.090656  0.090656  0.000009
+..<method 'items' of 'dict' objects>  17143     0.086127  0.086127  0.000005
+..ects/pybackup/de.py:26 DE.__hash__  6407      0.081671  0.259257  0.000040
+..ojects/pybackup/de.py:23 DE.__eq__  6326      0.077563  0.321530  0.000051
+_stat.S_ISREG                         13704     0.073312  0.073312  0.000005
+posix.read                            449       0.073289  0.073289  0.000163
+..cts/pybackup/sd.py:207 CS.__init__  3568      0.068639  0.528968  0.000148
+..up/findde.py:21 relative_to_either  370       0.068590  1.412654  0.003818
+..process.py:2020 Popen._communicate  38        0.066182  0.292454  0.007696
+<frozen posixpath>:41 _get_sep        6382      0.064488  0.097950  0.000015
+_pickle.load                          4         0.063792  0.749684  0.187421
+..ojects/pybackup/sd.py:289 <lambda>  12351     0.062948  0.062948  0.000005
+builtins.any                          11189     0.061324  0.061324  0.000005
+..' of '_io.BufferedReader' objects>  205       0.059747  0.059747  0.000291
+..oder.py:343 JSONDecoder.raw_decode  6         0.053815  0.053815  0.008969
+..jects/pybackup/sd.py:183 Ext3.Dlld  448       0.053439  35.87378  0.080075
+..p' of 'datetime.datetime' objects>  1932      0.052173  0.052173  0.000027
+...<method 'clear' of 'set' objects>  57        0.051350  0.051350  0.000901
+..hod 'startswith' of 'str' objects>  6344      0.049845  0.049845  0.000008
+..cts/pybackup/sd.py:109 CS.__init__  3568      0.049295  0.049295  0.000014
+...<method 'split' of 'str' objects>  3703      0.044557  0.044557  0.000012
+..pybackup/config.py:456 ts_trunc2ms  1932      0.042983  0.063012  0.000033
+..ects/pybackup/bhash.py:26 <lambda>  1336      0.042134  0.107107  0.000080
+..s/pybackup/status.py:23 <listcomp>  60        0.039450  0.039450  0.000658
+..n3.11/pathlib.py:934 Ext3._scandir  2718      0.038848  0.519576  0.000191
+<frozen posixpath>:60 isabs           1500      0.035592  0.075555  0.000050
+<frozen posixpath>:164 islink         1023      0.034163  0.341071  0.000333
+__builtin__.fromisoformat             1932      0.034011  0.034011  0.000018
+..ects/pybackup/sd.py:174 Ext3.sdh_d  440       0.032095  45.23515  0.102807
+..jects/pybackup/sd.py:223 CS.getdll  3         0.032004  2.889707  0.963236
+..lectors.py:402 PollSelector.select  325       0.031838  0.065059  0.000200
+<frozen os>:806 fsencode              1116      0.031700  0.184340  0.000165
+.._exit__' of '_io._IOBase' objects>  212       0.030703  0.030703  0.000145
+<frozen posixpath>:412 realpath       740       0.030058  0.979395  0.001324
+..cts/pybackup/bhash.py:42 blakeHash  750       0.029375  12.28818  0.016384
+..f 'posix.ScandirIterator' objects>  3790      0.027564  0.027564  0.000007
+<frozen posixpath>:397 abspath        740       0.027560  0.129665  0.000175
+..ethod 'endswith' of 'str' objects>  4527      0.026872  0.026872  0.000006
+..d 'poll' of 'select.poll' objects>  325       0.025987  0.025987  0.000080
+..ib/python3.11/enum.py:688 __call__  1188      0.023770  0.043555  0.000037
+..otify/__init__.py:518 Inotify._get  42        0.023329  0.068801  0.001638
+..ts/pybackup/config.py:415 cull_DEs  8         0.022830  1.627710  0.203464
+time.sleep                            120       0.022698  0.022698  0.000189
+..ocalcopy.py:127 LocalCopy.__call__  10        0.022338  0.849133  0.084913
+..rojects/pybackup/sd.py:54 Ext3.Dll  912       0.022312  0.030706  0.000034
+..p/localcopy.py:25 FileDiff.chkdiff  102       0.022015  0.445476  0.004367
+..thod 'partition' of 'str' objects>  3503      0.021406  0.021406  0.000006
+..ify/__init__.py:171 Watch.__init__  771       0.020868  0.025935  0.000034
+..ybackup/localcopy.py:88 sha256sumf  204       0.020851  0.293218  0.001437
+..rojects/pybackup/sd.py:93 Ext3.SDh  496       0.020518  0.027463  0.000055
+..ojects/pybackup/opexec.py:30 istgt  134       0.019861  0.019861  0.000148
+..' of '_queue.SimpleQueue' objects>  610       0.019833  0.019833  0.000033
+..ib/python3.11/enum.py:1093 __new__  1188      0.019225  0.019785  0.000017
+builtins.print                        145       0.018892  0.018892  0.000130
+..3.11/pathlib.py:555 Ext3.__bytes__  1071      0.018306  0.199419  0.000186
+.. 'poll' of 'select.epoll' objects>  96        0.017238  0.017238  0.000180
+..xit__' of '_thread.RLock' objects>  2624      0.017208  0.017208  0.000007
+..11/pathlib.py:1046 Ext3.read_bytes  204       0.017178  0.197835  0.000970
+_stat.S_ISLNK                         3228      0.016913  0.016913  0.000005
+..1/subprocess.py:807 Popen.__init__  45        0.016905  0.132804  0.002951
+<frozen posixpath>:389 normpath       740       0.016730  0.029879  0.000040
+..cts/pybackup/edge.py:42 Edge.rtset  163       0.016181  0.025326  0.000155
+..y/__init__.py:602 Inotify.sync_get  124       0.016021  0.105828  0.000853
+../python3.11/queue.py:154 Queue.get  68        0.015856  0.053790  0.000791
+..ects/pybackup/ldsv.py:169 chk_save  610       0.015402  0.035235  0.000058
+_posixsubprocess.fork_exec            45        0.015361  0.016959  0.000377
+..ybackup/pybackup.py:74 proc_events  1         0.015352  0.130061  0.130061
+..ocess.py:1756 Popen._execute_child  45        0.015028  0.086558  0.001924
+..n3.11/pathlib.py:1230 Fat32.exists  532       0.014757  0.189189  0.000356
+..jects/pybackup/ldsv.py:166 save_th  1         0.014395  0.754202  0.754202
+..pybackup/status.py:39 src_statuses  8         0.014196  45.51042  5.688802
+..<method 'encode' of 'str' objects>  1739      0.013716  0.013716  0.000008
+..cquire' of '_thread.lock' objects>  267       0.013026  0.013026  0.000049
+..s/pybackup/sd.py:294 Ext3.__init__  352       0.012873  0.040569  0.000115
+..ts/pybackup/status.py:19 stsupdate  60        0.012733  0.101778  0.001696
+..pdate' of '_hashlib.HASH' objects>  204       0.012156  0.012156  0.000060
+..est' of '_blake2.blake2b' objects>  750       0.011932  0.011932  0.000016
+..jects/pybackup/sd.py:38 Ext3.sdhck  440       0.011888  45.27422  0.102896
+..jects/pybackup/sd.py:26 Ext3.sdh_f  543       0.011808  0.047685  0.000088
+posix.waitpid                         45        0.011069  0.011069  0.000246
+_hashlib.openssl_sha256               204       0.010577  0.010577  0.000052
+..ojects/pybackup/pybackup.py:60 cb1  1         0.010572  0.148176  0.148176
+..b/python3.11/subprocess.py:506 run  45        0.010277  0.453697  0.010082
+..on3.11/pathlib.py:1245 Ext3.is_dir  267       0.009938  0.096901  0.000363
+..kages/tarjan/__init__.py:118 visit  134/94    0.009665  0.014706  0.000110
+..e' of '_io.TextIOWrapper' objects>  152       0.009625  0.009625  0.000063
+..ojects/pybackup/sd.py:243 <lambda>  1932      0.009534  0.009534  0.000005
+posix.close                           167       0.009458  0.009458  0.000057
+..yncinotify/_ffi.py:21 check_return  1072      0.009212  0.009212  0.000009
+builtins.hasattr                      1615      0.009169  0.009169  0.000006
+..s/pybackup/status.py:8 changed_ops  53        0.009162  0.538745  0.010165
+..ects/pybackup/bhash.py:20 <lambda>  620       0.009073  0.014276  0.000023
+..11/pathlib.py:530 Ext3._make_child  177       0.008210  0.042092  0.000238
+..cess.py:1280 Popen._close_pipe_fds  45        0.008133  0.028773  0.000639
+..cts/pybackup/asyncrun.py:30 a_run1  38        0.008085  0.449434  0.011827
+..ython3.11/pathlib.py:940 Ext3.glob  144       0.007798  0.133461  0.000927
+posix.getcwd                          311       0.007723  0.007723  0.000025
+..inotify/__init__.py:418 Inotify.fd  1114      0.007654  0.007654  0.000007
+..projects/pybackup/config.py:70 src  674       0.007534  0.007534  0.000011
+..ects/pybackup/bhash.py:31 <lambda>  440       0.007359  12.11075  0.027524
+..11/threading.py:288 Condition.wait  39        0.007141  0.023381  0.000600
+posix._path_normpath                  740       0.007106  0.007106  0.000010
+..ects/pybackup/findde.py:82 findSis  5         0.006969  1.097441  0.219488
+..thon3.11/pathlib.py:1036 Ext3.open  204       0.006842  0.091929  0.000451
+..s/pybackup/config.py:101 addTgtDir  16        0.006794  0.008078  0.000505
+..' of '_queue.SimpleQueue' objects>  587       0.006787  0.006787  0.000012
+..rojects/pybackup/edge.py:81 addDep  152       0.006616  0.045825  0.000301
+time.time                             526       0.006229  0.006229  0.000012
+..ors.py:66 _SelectorMapping.__len__  363       0.006214  0.008738  0.000024
+..3.11/threading.py:568 Event.is_set  739       0.006058  0.006058  0.000008
+..ts/pybackup/bhash.py:29 <listcomp>  310       0.006029  0.020306  0.000066
+..link' of 'posix.DirEntry' objects>  1300      0.005937  0.005937  0.000005
+posix.pipe                            121       0.005795  0.005795  0.000048
+...11/selectors.py:21 _fileobj_to_fd  152       0.005642  0.010885  0.000072
+..y/__init__.py:630 Inotify.__next__  124       0.005525  0.111353  0.000898
+...11/subprocess.py:1979 Popen._wait  128       0.005385  0.021063  0.000165
+..ntextlib.py:509 ExitStack.callback  76        0.005375  0.009607  0.000126
+_struct.unpack                        750       0.005374  0.005374  0.000007
+..method 'replace' of 'str' objects>  152       0.005360  0.005360  0.000035
+..ects/pybackup/bhash.py:29 <lambda>  310       0.005328  0.025633  0.000083
+..inotify/__init__.py:209 Watch.path  771       0.005067  0.005067  0.000007
+...11/pathlib.py:745 PosixPath.parts  148       0.005002  0.005002  0.000034
+../python3.11/queue.py:122 Queue.put  70        0.004953  0.014487  0.000207
+..ython3.11/re/_parser.py:507 _parse  13/7      0.004833  0.012144  0.000934
+..ojects/pybackup/sd.py:101 Ext3.SDh  56        0.004793  0.006519  0.000116
+..reading.py:264 Condition.__enter__  179       0.004761  0.008336  0.000047
+..bprocess.py:1163 Popen.communicate  45        0.004620  0.303820  0.006752
+..calcopy.py:59 FileDiff.should_copy  102       0.004613  0.450089  0.004413
+..ntextlib.py:546 ExitStack.__exit__  45        0.004582  0.009155  0.000203
+..s.py:275 PollSelector._key_from_fd  362       0.004449  0.004449  0.000012
+..ckup/cscopy.py:298 CSCopy.__call__  4         0.004426  6.477367  1.619342
+..kup/toposort.py:4 topological_sort  2         0.004155  0.020983  0.010492
+..igest' of '_hashlib.HASH' objects>  204       0.004131  0.004131  0.000020
+..hod 'sub' of 're.Pattern' objects>  28        0.004080  0.004080  0.000146
+../cscopy.py:198 BVars.skip_matching  4         0.003987  0.012514  0.003128
+..ors.py:365 PollSelector.unregister  76        0.003984  0.016844  0.000222
+..ts/pybackup/sd.py:50 Ext3.isremote  899       0.003950  0.003950  0.000004
+..n3.11/pathlib.py:536 Fat32.__str__  182       0.003874  0.005246  0.000029
+..ctors.py:234 PollSelector.register  76        0.003787  0.012121  0.000159
+../pybackup/edge.py:16 Edge.__hash__  310       0.003680  0.065488  0.000211
+..pybackup/cscopy.py:180 BVars.init2  4         0.003640  5.210703  1.302676
+..s/pybackup/opexec.py:48 proc_nodes  2         0.003622  17.57635  8.788175
+..nter__' of '_thread.lock' objects>  179       0.003575  0.003575  0.000020
+<frozen posixpath>:150 dirname        45        0.003514  0.006277  0.000139
+...py:1083 Popen._translate_newlines  76        0.003447  0.011193  0.000147
+..hreading.py:267 Condition.__exit__  179       0.003421  0.004868  0.000027
+...11/enum.py:1454 Mask.__contains__  140       0.003397  0.004134  0.000030
+..ctors.py:351 PollSelector.register  76        0.003368  0.016398  0.000216
+..:337 _PreciseSelector._select_from  68/62     0.003346  0.039402  0.000579
+..s/pybackup/edge.py:8 Edge.__init__  152       0.003317  0.005087  0.000033
+..11/pathlib.py:765 Ext3.__truediv__  177       0.003309  0.045401  0.000257
+..ts/pybackup/config.py:431 isbaddir  105       0.003278  0.007501  0.000071
+..ethod 'decode' of 'bytes' objects>  148       0.003158  0.003158  0.000021
+..cess.py:1237 Popen._remaining_time  401       0.003121  0.003121  0.000008
+..ursiveWildcardSelector.select_from  95        0.003065  0.026742  0.000281
+..ectors.py:272 PollSelector.get_map  363       0.003061  0.003061  0.000008
+..cts/pybackup/status.py:52 updatets  8         0.003022  45.61853  5.702316
+..o' of '_io.TextIOWrapper' objects>  152       0.002986  0.002986  0.000020
+..projects/pybackup/config.py:221 f1  1         0.002933  0.092767  0.092767
+..y:215 PollSelector._fileobj_lookup  152       0.002894  0.013778  0.000091
+..reading.py:279 Condition._is_owned  147       0.002882  0.005180  0.000035
+..thon3.11/queue.py:209 Queue._qsize  103       0.002856  0.004382  0.000043
+..kup/cscopy.py:243 BVars.do_copying  4         0.002842  1.223782  0.305945
+..on3.11/re/__init__.py:272 _compile  34        0.002740  0.032960  0.000969
+../threading.py:359 Condition.notify  108       0.002738  0.006300  0.000058
+../pybackup/config.py:51 SetDict.add  125       0.002688  0.007446  0.000060
+..ors.py:247 PollSelector.unregister  76        0.002686  0.012188  0.000160
+../pybackup/sd.py:32 GitIndex.sdhset  79        0.002624  0.021900  0.000277
+..rojects/pybackup/sd.py:62 Ext3.Dll  55        0.002499  0.003145  0.000057
+<frozen os>:818 fsdecode              70        0.002499  0.004142  0.000059
+..on3.11/re/_compiler.py:37 _compile  19/7      0.002466  0.004411  0.000232
+..3.11/subprocess.py:1257 Popen.wait  128       0.002419  0.023483  0.000183
+..thon3.11/pathlib.py:622 Fat32.name  180       0.002388  0.003091  0.000017
+..1/pathlib.py:530 Fat32._make_child  34        0.002354  0.010144  0.000298
+time.monotonic                        138       0.002296  0.002296  0.000017
+..ts/pybackup/config.py:82 addSrcDir  58        0.002273  0.008911  0.000154
+..ojects/pybackup/de.py:20 DE.__lt__  147       0.002235  0.009378  0.000064
+..<method 'join' of 'bytes' objects>  76        0.002233  0.002233  0.000029
+..jects/pybackup/edge.py:28 Edge.clr  19        0.002201  0.006723  0.000354
+..:527 ExitStack._push_exit_callback  76        0.002180  0.002893  0.000038
+../decoder.py:332 JSONDecoder.decode  6         0.002154  0.056934  0.009489
+..exit__' of '_thread.lock' objects>  263       0.002153  0.002153  0.000008
+..inotify/__init__.py:309 Event.path  33        0.002090  0.013996  0.000424
+..s>:309 IncrementalDecoder.__init__  76        0.002082  0.002721  0.000036
+..ctors.py:347 PollSelector.__init__  38        0.002080  0.004291  0.000113
+..ocess.py:1245 Popen._check_timeout  325       0.002074  0.002074  0.000006
+../pybackup/config.py:179 initConfig  1         0.002065  0.877618  0.877618
+../pybackup/config.py:428 <listcomp>  1         0.002047  0.027090  0.027090
+../subprocess.py:1090 Popen.__exit__  45        0.002028  0.003697  0.000082
+..process.py:1657 Popen._get_handles  45        0.002026  0.005555  0.000123
+..ects/pybackup/ldsv.py:82 saveedges  1         0.002018  0.019905  0.019905
+..init__.py:398 Inotify.sync_timeout  192       0.002016  0.002016  0.000011
+..94 _PosixFlavour.join_parsed_parts  211       0.001983  0.001983  0.000009
+_bisect.bisect_left                   14        0.001968  0.011346  0.000810
+_stat.S_ISDIR                         267       0.001857  0.001857  0.000007
+..ojects/pybackup/sd.py:210 CS.getfl  3         0.001843  0.265324  0.088441
+..ects/pybackup/findde.py:95 findDis  5         0.001821  0.324057  0.064811
+.._.<method 'get' of 'dict' objects>  324       0.001819  0.001819  0.000006
+..f '_ctypes.PyCStructType' objects>  70        0.001798  0.001798  0.000026
+<string>:1 <lambda>                   76        0.001720  0.002495  0.000033
+..rser.py:162 SubPattern.__getitem__  114       0.001718  0.002547  0.000022
+..subprocess.py:1966 Popen._try_wait  45        0.001657  0.012726  0.000283
+../re/_compiler.py:509 _compile_info  7         0.001643  0.005176  0.000739
+_locale.getencoding                   45        0.001631  0.001631  0.000036
+_thread.allocate_lock                 91        0.001623  0.001623  0.000018
+..3.11/pathlib.py:281 _make_selector  22/20     0.001607  0.036441  0.001656
+..thon3.11/enum.py:1501 Mask.__and__  33        0.001603  0.003501  0.000106
+...py:276 Condition._acquire_restore  39        0.001591  0.002706  0.000069
+..1/subprocess.py:361 _text_encoding  45        0.001584  0.003216  0.000071
+..ts/pybackup/edge.py:22 Edge.chk_ct  138       0.001583  0.001583  0.000011
+.._.<method 'pop' of 'dict' objects>  77        0.001570  0.001570  0.000020
+.._.<method 'pop' of 'list' objects>  204       0.001526  0.001526  0.000007
+..s/pybackup/opexec.py:43 <listcomp>  2         0.001525  0.021386  0.010693
+..ctors.py:209 PollSelector.__init__  38        0.001509  0.001859  0.000049
+..on3.11/queue.py:57 Queue.task_done  33        0.001492  0.003293  0.000100
+..d' of 'collections.deque' objects>  185       0.001490  0.001490  0.000008
+..notify/__init__.py:253 Event.watch  66        0.001490  0.002118  0.000032
+..d 'read' of '_io.BytesIO' objects>  182       0.001465  0.001465  0.000008
+<frozen os>:282 walk                  55        0.001447  0.003527  0.000064
+..s.py:1919 Popen._handle_exitstatus  45        0.001439  0.002542  0.000056
+../python3.11/re/__init__.py:178 sub  28        0.001434  0.008719  0.000311
+..cts/pybackup/sd.py:76 Ext3.Dlls_xt  55        0.001389  0.001853  0.000034
+..3.11/subprocess.py:1231 Popen.poll  45        0.001383  0.001761  0.000039
+..11/contextlib.py:456 _exit_wrapper  76        0.001381  0.003138  0.000041
+..ntextlib.py:454 _create_cb_wrapper  76        0.001339  0.001339  0.000018
+../localcopy.py:21 FileDiff.__init__  102       0.001335  0.001335  0.000013
+..n3.11/re/_parser.py:447 _parse_sub  13/7      0.001318  0.013294  0.001023
+..jects/pybackup/findde.py:38 findDE  14        0.001303  0.013455  0.000961
+..python3.11/queue.py:213 Queue._put  70        0.001302  0.001793  0.000026
+..s/pybackup/gitclasses.py:10 gitcmd  32        0.001274  0.211125  0.006598
+..electors.py:268 PollSelector.close  38        0.001266  0.001546  0.000041
+..ybackup/sd.py:87 Ext3.Dlls_changed  55        0.001260  0.001744  0.000032
+..python3.11/fnmatch.py:74 translate  6         0.001245  0.002678  0.000446
+.._parser.py:172 SubPattern.getwidth  19/7      0.001238  0.001570  0.000083
+..re/_parser.py:231 Tokenizer.__next  77        0.001228  0.001228  0.000016
+sys.audit                             195       0.001225  0.001225  0.000006
+..hon3.11/json/__init__.py:299 loads  6         0.001206  0.058603  0.009767
+..calcopy.py:124 LocalCopy.ischanged  70        0.001201  0.002054  0.000029
+_thread.start_new_thread              4         0.001183  0.001183  0.000296
+..ects/pybackup/pybackup.py:136 main  1         0.001178  57.45240  57.45240
+builtins.sorted                       51        0.001166  0.001166  0.000023
+..on3.11/re/_compiler.py:738 compile  7         0.001154  0.027526  0.003932
+..up/gitops.py:53 GitCommit.__call__  1         0.001118  0.007928  0.007928
+..jects/pybackup/config.py:435 getDL  1         0.001072  0.038775  0.038775
+..python3.11/re/_parser.py:970 parse  7         0.001071  0.015430  0.002204
+..ntextlib.py:460 ExitStack.__init__  45        0.001069  0.001069  0.000024
+..ts/pybackup/findde.py:108 findSDEs  5         0.001064  1.109508  0.221902
+..<method 'remove' of 'set' objects>  164       0.001059  0.002621  0.000016
+..ctors.py:202 PollSelector.__exit__  38        0.001058  0.002604  0.000069
+..ybackup/gitclasses.py:25 GitWT.SDh  47        0.001042  0.001654  0.000035
+..python3.11/queue.py:217 Queue._get  33        0.001041  0.001346  0.000041
+..on3.11/pathlib.py:590 Fat32.__lt__  25        0.001038  0.001719  0.000069
+../pybackup/config.py:432 <listcomp>  105       0.001036  0.001036  0.000010
+..1/subprocess.py:1118 Popen.__del__  45        0.001020  0.001325  0.000029
+..p/gitclasses.py:108 GitRepo.gitck2  8         0.001012  0.108979  0.013622
+..ify/__init__.py:232 Event.__init__  70        0.001007  0.001007  0.000014
+..method 'rfind' of 'bytes' objects>  45        0.001006  0.001006  0.000022
+..hon3.11/subprocess.py:268 _cleanup  45        0.000988  0.000988  0.000022
+..s/pybackup/findde.py:146 updateDEs  3         0.000955  1.477667  0.492556
+..1/threading.py:849 Thread.__init__  4         0.000939  0.002578  0.000645
+..ap_external>:437 cache_from_source  2         0.000913  0.001317  0.000659
+..egister' of 'select.poll' objects>  76        0.000909  0.000909  0.000012
+..3.11/threading.py:938 Thread.start  4         0.000903  0.005793  0.001448
+..ckup/gitops.py:90 GitPush.__call__  3         0.000899  0.026064  0.008688
+..rojects/pybackup/edge.py:91 addArc  17        0.000890  0.007116  0.000419
+..ompiler.py:434 _get_literal_prefix  11/6      0.000861  0.001148  0.000104
+...11/enum.py:1501 RegexFlag.__and__  14        0.000860  0.001836  0.000131
+..thon3.11/re/_compiler.py:571 _code  7         0.000847  0.010463  0.001495
+..n/__init__.py:103 tarjan_recursive  2         0.000836  0.015542  0.007771
+..<method 'find' of 'bytes' objects>  70        0.000818  0.000818  0.000012
+..1/pathlib.py:765 Fat32.__truediv__  34        0.000801  0.010945  0.000322
+posix.WIFSTOPPED                      45        0.000799  0.000799  0.000018
+sys.exc_info                          45        0.000785  0.000785  0.000017
+..11/re/_parser.py:252 Tokenizer.get  58        0.000785  0.001677  0.000029
+builtins.getattr                      54        0.000769  0.000769  0.000014
+builtins.min                          92        0.000751  0.000751  0.000008
+..cts/pybackup/asyncrun.py:48 a_run2  7         0.000746  0.023138  0.003305
+..ackup/gitclasses.py:63 GitWT.sdhck  8         0.000741  0.054660  0.006833
+..projects/pybackup/sd.py:116 CS.Dll  20        0.000724  0.000957  0.000048
+..d 'match' of 're.Pattern' objects>  12        0.000712  0.000712  0.000059
+..ocess.py:1931 Popen._internal_poll  90        0.000683  0.000683  0.000008
+..init__.py:350 _FakeFuture.__init__  42        0.000683  0.000683  0.000016
+..egister' of 'select.poll' objects>  76        0.000672  0.000672  0.000009
+..ing.py:273 Condition._release_save  39        0.000664  0.000889  0.000023
+..p' of 'collections.deque' objects>  76        0.000650  0.000650  0.000009
+..y/__init__.py:623 Inotify.__iter__  54        0.000646  0.000646  0.000012
+..up/gitclasses.py:84 GitIndex.sdhck  8         0.000643  0.053467  0.006683
+..s>:260 IncrementalDecoder.__init__  76        0.000639  0.000639  0.000008
+..kup/cscopy.py:295 CSCopy.ischanged  21        0.000629  0.000910  0.000043
+..ts/pybackup/findde.py:127 findTDEs  5         0.000620  0.329318  0.065864
+posix.readlink                        20        0.000613  0.000613  0.000031
+..RecursiveWildcardSelector.__init__  22/20     0.000610  0.004380  0.000199
+..s.py:481 CompletedProcess.__init__  45        0.000608  0.000608  0.000014
+io.open_code                          1         0.000580  0.000580  0.000580
+..thon3.11/re/_parser.py:367 _escape  12        0.000570  0.000797  0.000066
+..ib/python3.11/threading.py:964 run  4         0.000568  1.301392  0.325348
+..thon3.11/copyreg.py:113 _slotnames  3         0.000557  0.000797  0.000266
+..e/_parser.py:170 SubPattern.append  40        0.000554  0.000756  0.000019
+..ackup/gitops.py:17 GitAdd.__call__  1         0.000544  0.024268  0.024268
+..projects/pybackup/sd.py:124 CS.Dll  3         0.000544  0.000939  0.000313
+..inotify/__init__.py:213 Watch.mask  70        0.000536  0.000536  0.000008
+..thon3.11/re/__init__.py:253 escape  20        0.000535  0.000979  0.000049
+..<method 'count' of 'list' objects>  45        0.000514  0.000514  0.000011
+..y/__init__.py:384 Inotify.__init__  1         0.000513  0.000702  0.000702
+..on3.11/threading.py:604 Event.wait  4         0.000498  0.003627  0.000907
+..pybackup/findde.py:48 getRemoteDEs  3         0.000495  0.035599  0.011866
+..e' of 'collections.deque' objects>  35        0.000475  0.000475  0.000014
+..b.py:333 _PreciseSelector.__init__  15/14     0.000470  0.000982  0.000065
+..:260 _PosixFlavour.compile_pattern  6         0.000459  0.033019  0.005503
+..tclasses.py:123 GitRemote.__init__  12        0.000458  0.001049  0.000087
+..it__.py:353 _FakeFuture.set_result  42        0.000446  0.000446  0.000011
+..tors.py:199 PollSelector.__enter__  38        0.000444  0.000444  0.000012
+../re/_parser.py:247 Tokenizer.match  37        0.000434  0.000622  0.000017
+..hreading.py:236 Condition.__init__  4         0.000432  0.000432  0.000108
+..s/pybackup/edge.py:25 Edge.rchk_ct  45        0.000427  0.000427  0.000009
+..kup/gitops.py:87 GitPush.ischanged  14        0.000424  0.000677  0.000048
+..ib._bootstrap>:1167 _find_and_load  1         0.000419  0.008141  0.008141
+marshal.loads                         1         0.000407  0.000407  0.000407
+..xternal>:1604 FileFinder.find_spec  1         0.000404  0.001425  0.001425
+.._.<method 'copy' of 'set' objects>  44        0.000401  0.000401  0.000009
+../_parser.py:222 Tokenizer.__init__  7         0.000399  0.000580  0.000083
+..jects/pybackup/opexec.py:62 opExec  2         0.000397  17.78038  8.890192
+builtins.setattr                      81        0.000392  0.000392  0.000005
+..ackup/cscopy.py:165 BVars.__init__  4         0.000384  0.000487  0.000122
+...py:349 _WildcardSelector.__init__  6         0.000382  0.033506  0.005584
+..jects/pybackup/cscopy.py:95 fsyncl  2         0.000380  0.009256  0.004628
+..ects/pybackup/cscopy.py:88 fsynclm  2         0.000367  0.010015  0.005008
+..__init__.py:359 _FakeFuture.result  42        0.000358  0.000358  0.000009
+select.poll                           38        0.000352  0.000352  0.000009
+..1/re/_parser.py:284 Tokenizer.tell  25        0.000352  0.000501  0.000020
+..rs.py:63 _SelectorMapping.__init__  38        0.000350  0.000350  0.000009
+..ects/pybackup/ldsv.py:27 loadrdlls  1         0.000348  0.712403  0.712403
+..thod 'translate' of 'str' objects>  20        0.000347  0.000347  0.000017
+..ects/pybackup/ldsv.py:40 saveldlls  1         0.000344  0.588468  0.588468
+..1/threading.py:1071 Thread._delete  4         0.000341  0.000403  0.000101
+..ethod 'rstrip' of 'bytes' objects>  45        0.000340  0.000340  0.000008
+../_parser.py:158 SubPattern.__len__  31        0.000338  0.000474  0.000015
+..ckup/gitops.py:14 GitAdd.ischanged  7         0.000336  0.000523  0.000075
+..textlib.py:543 ExitStack.__enter__  45        0.000334  0.000334  0.000007
+..ortlib._bootstrap>:1056 _find_spec  1         0.000324  0.002467  0.002467
+..pathlib.py:43 _is_wildcard_pattern  21        0.000323  0.000323  0.000015
+..inotify/__init__.py:202 Watch.path  33        0.000322  0.000322  0.000010
+builtins.round                        26        0.000320  0.000320  0.000012
+..<method 'rstrip' of 'str' objects>  46        0.000320  0.000320  0.000007
+..bprocess.py:2122 Popen._save_input  38        0.000317  0.000317  0.000008
+..subprocess.py:1087 Popen.__enter__  45        0.000315  0.000315  0.000007
+..11/re/_parser.py:73 State.__init__  7         0.000308  0.000308  0.000044
+..t' of 'collections.deque' objects>  33        0.000305  0.000305  0.000009
+posix.waitstatus_to_exitcode          45        0.000304  0.000304  0.000007
+..<method 'clear' of 'dict' objects>  38        0.000280  0.000280  0.000007
+..jects/pybackup/ldsv.py:101 loadldh  1         0.000279  0.001536  0.001536
+..inotify/__init__.py:277 Event.mask  33        0.000277  0.000277  0.000008
+..11/threading.py:555 Event.__init__  4         0.000276  0.000779  0.000195
+..1/threading.py:1446 current_thread  7         0.000275  0.000340  0.000049
+.._parser.py:109 SubPattern.__init__  19        0.000274  0.000274  0.000014
+..gitclasses.py:79 GitIndex.__init__  6         0.000267  0.000521  0.000087
+..ects/pybackup/sd.py:138 CS.Dlls_xt  3         0.000266  0.000324  0.000108
+..jects/pybackup/ldsv.py:112 loadrdh  1         0.000265  0.001758  0.001758
+..e' of '_io.TextIOWrapper' objects>  62        0.000260  0.000260  0.000004
+..n3.11/re/_compiler.py:568 isstring  14        0.000258  0.000330  0.000024
+..inotify/__init__.py:300 Event.name  33        0.000257  0.000257  0.000008
+..projects/pybackup/config.py:74 tgt  33        0.000254  0.000254  0.000008
+../python3.11/enum.py:1376 _missing_  2         0.000251  0.000550  0.000275
+..nit__.py:356 _FakeFuture.cancelled  42        0.000244  0.000244  0.000006
+...11/re/_parser.py:894 _parse_flags  6         0.000243  0.000388  0.000065
+..ckup/gitclasses.py:32 GitIndex.SDh  23        0.000242  0.000242  0.000011
+..elease' of '_thread.lock' objects>  42        0.000240  0.000240  0.000006
+..up/gitclasses.py:58 GitWT.__init__  6         0.000233  0.000513  0.000086
+..p/gitops.py:50 GitCommit.ischanged  7         0.000230  0.000377  0.000054
+..projects/pybackup/opexec.py:39 nts  2         0.000230  0.043012  0.021506
+..al>:1007 SourceFileLoader.get_code  1         0.000228  0.002547  0.002547
+..ects/pybackup/ldsv.py:56 saverdlls  1         0.000227  0.091089  0.091089
+..hon3.11/threading.py:583 Event.set  4         0.000221  0.000703  0.000176
+..gitclasses.py:100 GitRepo.__init__  6         0.000221  0.000471  0.000079
+..up/gitclasses.py:18 GitWT.__init__  18        0.000218  0.000218  0.000012
+..method 'remove' of 'list' objects>  45        0.000214  0.000214  0.000005
+..bootstrap_external>:126 _path_join  6         0.000212  0.000455  0.000076
+..s/pybackup/sd.py:23 Fat32.__init__  7         0.000200  0.000283  0.000040
+..s/pybackup/opexec.py:42 <listcomp>  2         0.000199  0.000199  0.000099
+...11/threading.py:1044 Thread._stop  3         0.000197  0.000495  0.000165
+..ler.py:405 _generate_overlap_table  3         0.000196  0.000228  0.000076
+..ects/pybackup/ldsv.py:145 load_all  1         0.000190  0.754813  0.754813
+..ojects/pybackup/sd.py:54 Fat32.Dll  6         0.000189  0.000244  0.000041
+..backup/gitclasses.py:68 <listcomp>  8         0.000187  0.000228  0.000029
+..3.11/_weakrefset.py:85 WeakSet.add  4         0.000184  0.000236  0.000059
+..jects/pybackup/pybackup.py:116 rt2  1         0.000180  17.97095  17.97095
+..up/gitclasses.py:105 GitRepo.sdhck  8         0.000178  0.109157  0.013645
+..:1118 Thread._wait_for_tstate_lock  3         0.000175  0.000842  0.000281
+..ompiler.py:465 _get_charset_prefix  3         0.000171  0.000210  0.000070
+..ojects/pybackup/opexec.py:16 clean  5         0.000170  0.350241  0.070048
+..thon3.11/threading.py:804 _newname  4         0.000170  0.000170  0.000042
+..ethod 'end' of 're.Match' objects>  12        0.000169  0.000169  0.000014
+..1/re/_compiler.py:426 _get_iscased  14        0.000165  0.000165  0.000012
+..init__.py:407 Inotify.sync_timeout  2         0.000163  0.000235  0.000117
+..ocalcopy.py:121 LocalCopy.__init__  10        0.000163  0.000230  0.000023
+..3.11/threading.py:1080 Thread.join  3         0.000158  0.001087  0.000362
+..ects/pybackup/findde.py:182 doTOne  4         0.000155  0.000222  0.000055
+..ects/pybackup/findde.py:149 doSOne  10        0.000155  0.000223  0.000022
+..3.11/re/_parser.py:79 State.groups  14        0.000153  0.000217  0.000015
+..cts/pybackup/dirlist.py:1 <module>  1         0.000153  0.000153  0.000153
+..ects/pybackup/pybackup.py:79 procq  1         0.000153  0.268347  0.268347
+..on3.11/re/_compiler.py:396 _simple  6         0.000152  0.000444  0.000074
+..>:934 SourceFileLoader.exec_module  1         0.000146  0.002906  0.002906
+..itclasses.py:38 GitRemote.__init__  12        0.000145  0.000145  0.000012
+..eading.py:389 Condition.notify_all  5         0.000145  0.000380  0.000076
+..ects/pybackup/edge.py:35 Edge.rclr  4         0.000143  0.000167  0.000042
+..pybackup/sd.py:149 CS.Dlls_changed  3         0.000143  0.000185  0.000062
+..on3.11/re/_parser.py:954 fix_flags  7         0.000142  0.000177  0.000025
+..bootstrap_external>:128 <listcomp>  6         0.000139  0.000208  0.000035
+..bootstrap_external>:1464 _get_spec  1         0.000138  0.001596  0.001596
+..b._bootstrap>:179 _get_module_lock  1         0.000138  0.000221  0.000221
+..up/opbase.py:39 LocalCopy.__init__  17        0.000137  0.000137  0.000008
+builtins.ord                          20        0.000137  0.000137  0.000007
+..s/pybackup/cscopy.py:11 chunk_from  4         0.000135  0.000392  0.000098
+..al>:1127 SourceFileLoader.get_data  1         0.000134  0.001175  0.001175
+..ects/pybackup/config.py:118 addPre  6         0.000132  0.000289  0.000048
+.._bootstrap>:493 _init_module_attrs  1         0.000129  0.001466  0.001466
+..hon3.11/re/__init__.py:225 compile  6         0.000128  0.029882  0.004980
+../re/_compiler.py:31 _combine_flags  14        0.000124  0.000124  0.000009
+..ng.py:1317 _make_invoke_excepthook  4         0.000124  0.000124  0.000031
+..backup/gitclasses.py:89 <listcomp>  8         0.000122  0.000166  0.000021
+_thread.get_ident                     13        0.000117  0.000117  0.000009
+..ects/pybackup/ldsv.py:71 loadedges  1         0.000116  0.038925  0.038925
+..jects/pybackup/ldsv.py:163 save_bp  1         0.000115  0.000545  0.000545
+..lib._bootstrap>:666 _load_unlocked  1         0.000110  0.004634  0.004634
+..num.py:1356 _iter_member_by_value_  5         0.000109  0.000178  0.000036
+..ootstrap_external>:132 _path_split  2         0.000108  0.000239  0.000120
+..ckup/cscopy.py:291 CSCopy.__init__  3         0.000106  0.000147  0.000049
+..ng.py:822 _maintain_shutdown_locks  3         0.000106  0.000247  0.000082
+..y:89 DistutilsMetaFinder.find_spec  1         0.000104  0.000179  0.000179
+..b._bootstrap>:566 module_from_spec  1         0.000103  0.001594  0.001594
+<frozen os>:756 encode                3         0.000101  0.000141  0.000047
+<frozen os>:674 _Environ.__getitem__  3         0.000096  0.000284  0.000095
+..trap>:1122 _find_and_load_unlocked  1         0.000093  0.007212  0.007212
+..method 'extend' of 'list' objects>  12        0.000090  0.000090  0.000008
+..pybackup/localcopy.py:78 SFc.value  10        0.000090  0.000090  0.000009
+..tstrap_external>:84 _unpack_uint32  3         0.000089  0.000118  0.000039
+_sre.compile                          7         0.000089  0.000089  0.000013
+..ap_external>:727 _compile_bytecode  1         0.000082  0.000519  0.000519
+..b._bootstrap>:244 _verbose_message  7         0.000082  0.000082  0.000012
+..d 'get' of 'mappingproxy' objects>  3         0.000081  0.000081  0.000027
+..on3.11/threading.py:832 <listcomp>  3         0.000081  0.000114  0.000038
+..rap>:233 _call_with_frames_removed  2         0.000080  0.000283  0.000141
+..xternal>:1599 FileFinder._get_spec  1         0.000078  0.000218  0.000218
+../pybackup/cscopy.py:266 <listcomp>  2         0.000075  0.000101  0.000051
+..tify/__init__.py:490 Inotify.close  1         0.000072  0.002787  0.002787
+..on3.11/pathlib.py:38 _ignore_error  2         0.000072  0.000258  0.000129
+..ernal>:778 spec_from_file_location  1         0.000072  0.000126  0.000126
+..reading.py:1199 _MainThread.daemon  6         0.000068  0.000068  0.000011
+..ootstrap_external>:567 _get_cached  1         0.000065  0.001179  0.001179
+..projects/pybackup/netup.py:4 netup  9         0.000065  0.000065  0.000007
+_imp.acquire_lock                     6         0.000063  0.000063  0.000010
+..>:169 _ModuleLockManager.__enter__  1         0.000062  0.000340  0.000340
+..y/__init__.py:484 Inotify.__exit__  1         0.000056  0.002842  0.002842
+../pybackup/sd.py:249 Fat32.__init__  2         0.000056  0.000206  0.000103
+builtins.max                          2         0.000055  0.000131  0.000066
+..mportlib._bootstrap>:748 find_spec  1         0.000054  0.000088  0.000088
+../pybackup/sd.py:171 Fat32.__init__  2         0.000053  0.000150  0.000075
+.._bootstrap_external>:134 <genexpr>  4         0.000052  0.000076  0.000019
+..rojects/pybackup/config.py:66 ppre  8         0.000052  0.000052  0.000006
+..<method 'format' of 'str' objects>  1         0.000051  0.000051  0.000051
+..ts/pybackup/cscopy.py:29 SFc.value  4         0.000050  0.000050  0.000013
+..>:1032 _ImportLockContext.__exit__  4         0.000050  0.000074  0.000018
+..bootstrap_external>:140 _path_stat  3         0.000049  0.000488  0.000163
+..hod 'rpartition' of 'str' objects>  5         0.000049  0.000049  0.000010
+..locked' of '_thread.lock' objects>  12        0.000048  0.000048  0.000004
+..:1028 _ImportLockContext.__enter__  4         0.000047  0.000076  0.000019
+..bootstrap>:100 _ModuleLock.acquire  1         0.000046  0.000057  0.000057
+..tstrap_external>:642 _classify_pyc  1         0.000046  0.000124  0.000124
+..python3.11/enum.py:1438 <listcomp>  1         0.000046  0.000224  0.000224
+..rser.py:166 SubPattern.__setitem__  6         0.000045  0.000045  0.000008
+..bootstrap>:125 _ModuleLock.release  1         0.000044  0.000056  0.000056
+..cts/pybackup/sd.py:112 CS.isremote  8         0.000043  0.000043  0.000005
+..'close' of 'select.epoll' objects>  1         0.000040  0.000040  0.000040
+..urceFileLoader._check_name_wrapper  1         0.000040  0.000046  0.000046
+..hon3.11/enum.py:116 _iter_bits_lsb  5         0.000038  0.000050  0.000010
+..p>:173 _ModuleLockManager.__exit__  1         0.000038  0.000094  0.000094
+..s/pybackup/config.py:427 cull_dirs  1         0.000037  0.027126  0.027126
+..bootstrap_external>:1496 find_spec  1         0.000036  0.001632  0.001632
+_imp.release_lock                     6         0.000035  0.000035  0.000006
+_imp.is_builtin                       1         0.000035  0.000035  0.000035
+..ckup/gitops.py:84 GitPush.__init__  2         0.000034  0.000051  0.000026
+..thon3.11/_weakrefset.py:39 _remove  1         0.000033  0.000039  0.000039
+..._bootstrap>:392 ModuleSpec.cached  2         0.000032  0.001211  0.000605
+..bootstrap>:71 _ModuleLock.__init__  1         0.000032  0.000049  0.000049
+builtins.exec                         1         0.000031  0.000184  0.000184
+<frozen os>:760 decode                2         0.000031  0.000046  0.000023
+..RecursiveWildcardSelector.__init__  1         0.000030  0.003790  0.003790
+<frozen importlib._bootstrap>:198 cb  1         0.000030  0.000045  0.000045
+..p_external>:150 _path_is_mode_type  1         0.000030  0.000208  0.000208
+...<method 'keys' of 'dict' objects>  6         0.000029  0.000029  0.000005
+..ects/pybackup/sd.py:130 CS.Dlls_xt  1         0.000029  0.000038  0.000038
+...<method 'lower' of 'str' objects>  7         0.000029  0.000029  0.000004
+..fference_update' of 'set' objects>  3         0.000028  0.000028  0.000009
+..s/pybackup/sd.py:47 Fat32.__init__  2         0.000026  0.000026  0.000013
+..ernal>:675 _validate_timestamp_pyc  1         0.000026  0.000073  0.000073
+..mportlib._bootstrap>:922 find_spec  1         0.000025  0.000095  0.000095
+..gister' of 'select.epoll' objects>  1         0.000024  0.000024  0.000024
+..projects/pybackup/opexec.py:9 incp  2         0.000024  0.000024  0.000012
+...<method 'rfind' of 'str' objects>  2         0.000023  0.000023  0.000012
+..otstrap_external>:159 _path_isfile  1         0.000023  0.000231  0.000231
+../pybackup/findde.py:184 <listcomp>  4         0.000023  0.000023  0.000006
+..3.11/threading.py:1145 Thread.name  3         0.000022  0.000022  0.000007
+..up/gitops.py:47 GitCommit.__init__  1         0.000022  0.000036  0.000036
+..bootstrap>:357 ModuleSpec.__init__  1         0.000021  0.000021  0.000021
+..ons_abc>:778 _Environ.__contains__  1         0.000020  0.000084  0.000084
+_imp.find_frozen                      1         0.000019  0.000019  0.000019
+..p>:165 _ModuleLockManager.__init__  1         0.000019  0.000019  0.000019
+..>:1146 SourceFileLoader.path_stats  1         0.000019  0.000157  0.000157
+..ackup/gitops.py:11 GitAdd.__init__  1         0.000019  0.000031  0.000031
+..._bootstrap>:405 ModuleSpec.parent  1         0.000018  0.000024  0.000024
+__builtin__.from_bytes                3         0.000017  0.000017  0.000006
+..od 'setdefault' of 'dict' objects>  2         0.000016  0.000016  0.000008
+..s>:186 IncrementalEncoder.__init__  1         0.000016  0.000016  0.000016
+..xternal>:1421 _path_importer_cache  1         0.000016  0.000016  0.000016
+..ootstrap_external>:180 _path_isabs  1         0.000015  0.000028  0.000028
+..11/threading.py:1199 Thread.daemon  1         0.000014  0.000014  0.000014
+_imp._fix_co_filename                 1         0.000014  0.000014  0.000014
+..al>:1097 SourceFileLoader.__init__  1         0.000014  0.000014  0.000014
+..portlib._bootstrap>:48 _new_module  1         0.000013  0.000013  0.000013
+..pybackup/cscopy.py:26 SFc.__init__  3         0.000013  0.000013  0.000004
+..__init__.py:514 Inotify.cache_size  1         0.000013  0.000013  0.000013
+..up/gitclasses.py:21 GitWT.isremote  3         0.000013  0.000013  0.000004
+..bootstrap_external>:71 _relax_case  1         0.000011  0.000011  0.000011
+builtins.locals                       1         0.000009  0.000009  0.000009
+..itclasses.py:41 GitRemote.isremote  2         0.000009  0.000009  0.000004
+..1122 SourceFileLoader.get_filename  1         0.000007  0.000007  0.000007
+..method 'discard' of 'set' objects>  1         0.000006  0.000006  0.000006
+...<method 'copy' of 'list' objects>  1         0.000006  0.000006  0.000006
+..strap>:413 ModuleSpec.has_location  1         0.000005  0.000005  0.000005
+builtins.iter                         1         0.000005  0.000005  0.000005
+..931 SourceFileLoader.create_module  1         0.000005  0.000005  0.000005
+../__init__.py:481 Inotify.__enter__  1         0.000005  0.000005  0.000005
+..utils_hack/__init__.py:96 <lambda>  1         0.000005  0.000005  0.000005

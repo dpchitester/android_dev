@@ -169,7 +169,7 @@ if __name__ == "__main__":
         yappi.get_thread_stats().sort("id","asc").print_all(out=fh)
         yappi.get_func_stats().sort("subtime","desc").print_all(out=fh,
             columns={
-                0: ("name", 36),
+                0: ("name", 64),
                 1: ("ncall", 8),
                 2: ("tsub", 8),
                 3: ("ttot", 8),
