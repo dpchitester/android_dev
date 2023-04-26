@@ -64,6 +64,7 @@ class Edge:
 
 def findEdge(di, si) -> Edge:
     import config as v
+
     with ls.dl:
         for e in v.eDep:
             if (e.di, e.si) not in v.edges or v.edges[e.di, e.si] != e:
@@ -79,6 +80,7 @@ def lrtset(di, si):
 
 def addDep(j, i):
     import config as v
+
     with ls.dl:
         e: Edge = Edge(j, i)
         if e not in v.eDep:

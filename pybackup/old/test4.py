@@ -1,4 +1,5 @@
-from orator import DatabaseManager, Model
+from orator import DatabaseManager
+from orator import Model
 
 config = {
     "sqlite": {"driver": "sqlite", "database": "/sdcard/budata.db"},

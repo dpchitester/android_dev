@@ -1,4 +1,5 @@
-from csnetops import init, service
+from csnetops import init
+from csnetops import service
 from pydrive.drive import GoogleDrive
 
 drive = GoogleDrive(

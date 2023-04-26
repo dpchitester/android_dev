@@ -1,7 +1,9 @@
 import config as v
-from edge import Edge, findEdge
-from opbase import OpBase
 import ldsv as ls
+from edge import Edge
+from edge import findEdge
+from opbase import OpBase
+
 
 def changed_ops(T=None) -> list[OpBase]:
     rv: list[OpBase] = []

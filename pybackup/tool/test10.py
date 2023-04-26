@@ -1,4 +1,5 @@
-from campy.graphics.gobjects import GOval, GRect
+from campy.graphics.gobjects import GOval
+from campy.graphics.gobjects import GRect
 from campy.graphics.gwindow import GWindow
 
 window = GWindow()

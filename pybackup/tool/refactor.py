@@ -1,5 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/python
-from sys import argv, exit
+from sys import argv
+from sys import exit
 
 from rope.base.exceptions import RefactoringError
 from rope.base.libutils import analyze_modules

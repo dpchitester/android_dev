@@ -1,14 +1,19 @@
 import pickle
-from threading import Thread, RLock, Event
-from queue import SimpleQueue, Empty
+from queue import Empty
+from queue import SimpleQueue
+from threading import Event
+from threading import RLock
+from threading import Thread
 
 from snoop import snoop
 
 dl = RLock()
 sev = SimpleQueue()
 
+
 def loadldlls():
     import config as v
+
     with dl:
         try:
             with open(v.ldllsf, "rb") as fh:
@@ -21,6 +26,7 @@ def loadldlls():
 
 def loadrdlls():
     import config as v
+
     with dl:
         try:
             with open(v.rdllsf, "rb") as fh:
@@ -33,8 +39,9 @@ def loadrdlls():
 
 def saveldlls():
     import config as v
+
     with dl:
-    # print('-saveldlls')
+        # print('-saveldlls')
         if v.LDlls_changed:
             print("LDlls changed")
         try:
@@ -48,6 +55,7 @@ def saveldlls():
 
 def saverdlls():
     import config as v
+
     with dl:
         if v.RDlls_changed:
             print("RDlls changed")
@@ -62,6 +70,7 @@ def saverdlls():
 
 def loadedges():
     import config as v
+
     with dl:
         try:
             with open(v.edgepf, "rb") as fh:
@@ -72,6 +81,7 @@ def loadedges():
 
 def saveedges():
     import config as v
+
     with dl:
         try:
             with open(v.edgepf, "wb") as fh:
@@ -90,6 +100,7 @@ def pstats():
 
 def loadldh():
     import config as v
+
     with dl:
         try:
             with open(v.ldhpf, "rb") as fh:
@@ -100,6 +111,7 @@ def loadldh():
 
 def loadrdh():
     import config as v
+
     with dl:
         try:
             with open(v.rdhpf, "rb") as fh:
@@ -110,6 +122,7 @@ def loadrdh():
 
 def saveldh():
     import config as v
+
     with dl:
         try:
             with open(v.ldhpf, "wb") as fh:
@@ -120,6 +133,7 @@ def saveldh():
 
 def saverdh():
     import config as v
+
     with dl:
         try:
             with open(v.rdhpf, "wb") as fh:
@@ -135,6 +149,7 @@ def load_all():
     loadldh()
     loadrdh()
 
+
 def save_all():
     with dl:
         saverdlls()
@@ -143,9 +158,11 @@ def save_all():
         saveldh()
         saverdh()
         pstats()
-  
+
+
 def save_bp():
     import pybackup as pb
+
     def save_th():
         def chk_save():
             try:
@@ -163,12 +180,15 @@ def save_bp():
                             saveldh()
                         case "rdh":
                             saverdh()
+                else:
+                    print('qi is None')
             except Empty:
                 pass
-        with snoop():
-            while True:
-                chk_save()
-                if pb.quit_ev.is_set():
-                    return
+
+        while True:
+            chk_save()
+            if pb.quit_ev.is_set():
+                return
+
     th3 = Thread(target=save_th)
     return th3

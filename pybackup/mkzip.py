@@ -1,11 +1,12 @@
 import math
-from os import utime, walk
+from os import utime
+from os import walk
 from pathlib import Path
 from shutil import make_archive
 
 import config as v
-
-from edge import Edge, findEdge
+from edge import Edge
+from edge import findEdge
 from findde import updateDEs
 from opbase import OpBase
 from status import onestatus

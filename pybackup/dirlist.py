@@ -8,7 +8,8 @@ from pathlib import Path
 
 import asyncrun as ar
 import config as v
-from de import DE, FSe
+from de import DE
+from de import FSe
 
 rto1 = 60 * 0
 rto2 = 60 * 0

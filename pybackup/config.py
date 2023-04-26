@@ -2,18 +2,33 @@ import os
 from math import floor
 from os import walk
 from pathlib import Path
-from typing import Dict, List, Set, Tuple, TypeAlias
+from typing import Dict
+from typing import List
+from typing import Set
+from typing import Tuple
+from typing import TypeAlias
 
 from cscopy import CSCopy
-from de import DE, FSe
-from edge import Edge, addArc, addDep
-from gitclasses import GitIndex, GitRemote, GitRepo, GitWT
-from gitops import GitAdd, GitCommit, GitPush
+from de import DE
+from de import FSe
+from edge import Edge
+from edge import addArc
+from edge import addDep
+from gitclasses import GitIndex
+from gitclasses import GitRemote
+from gitclasses import GitRepo
+from gitclasses import GitWT
+from gitops import GitAdd
+from gitops import GitCommit
+from gitops import GitPush
 from ldsv import load_all
 from localcopy import LocalCopy
 from mkzip import Mkzip
 from opbase import OpBase
-from sd import CS, SD, Ext3, Fat32
+from sd import CS
+from sd import SD
+from sd import Ext3
+from sd import Fat32
 
 NodeTag: TypeAlias = str
 Hash: TypeAlias = bytes
@@ -359,10 +374,10 @@ def initConfig():
         )
         addArc(op13)
 
-    #for si in codes:
-        #npl1 = ("zips", si)
-        #op1 = Mkzip(npl1, npl1, {"zipfile": si + ".zip"})
-        #addArc(op1)
+    # for si in codes:
+    # npl1 = ("zips", si)
+    # op1 = Mkzip(npl1, npl1, {"zipfile": si + ".zip"})
+    # addArc(op1)
 
     # for si in (".git",):
     # npl1 = ("zips", si)
@@ -378,7 +393,6 @@ def initConfig():
             # addArc(op1)
             op14 = CSCopy(npl1, npl1, {"delete": False})
             addArc(op14)
-
 
 
 dexs = {

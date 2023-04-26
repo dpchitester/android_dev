@@ -2,7 +2,8 @@ import datetime as dt
 from math import floor
 
 import asyncrun as ar
-from edge import Edge, findEdge
+from edge import Edge
+from edge import findEdge
 from netup import netup
 from opbase import OpBase
 
@@ -296,7 +297,8 @@ class CSCopy(OpBase):
 
     def __call__(self):
         import config as v
-        from edge import Edge, findEdge
+        from edge import Edge
+        from edge import findEdge
         from status import onestatus
 
         di, si = self.npl1
