@@ -165,4 +165,5 @@ if __name__ == "__main__":
     main()
 
     with open("yappi.stats","w") as fh:
-        yappi.print_stats(fh)
+        yappi.get_func_stats().print_stats(fh)
+        yappi.get_thread_stats().print_stats(fh)
