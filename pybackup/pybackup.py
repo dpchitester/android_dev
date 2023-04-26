@@ -26,8 +26,7 @@ th2 = None
 th3 = None
 
 quit_ev = Event()
-dl1 = Lock()
-eq1 = Queue()
+weq = Queue()
 
 
 def wsetup():
@@ -54,12 +53,12 @@ def wsetup():
 
 
 def cb1():
-    global in1, eq1, quit_ev
+    global in1, weq, quit_ev
     print("-cb1 started")
     while True:
         try:
             for ev in in1:
-                eq1.put(ev)
+                weq.put(ev)
         except BlockingIOError:
             pass
         if quit_ev.is_set():
@@ -84,11 +83,11 @@ def proc_events():
 
     while True:
         try:
-            ev1: WEvent = eq1.get(timeout=0.666)
-            if ev1 is not None:
-                si: v.NodeTag = wdsi[ev1.watch]
-                p: Path = ev1.path
-                if not ev1.mask & Mask.ISDIR:
+            we: WEvent = weq.get(timeout=0.666)
+            if we is not None:
+                si: v.NodeTag = wdsi[we.watch]
+                p: Path = we.path
+                if not we.mask & Mask.ISDIR:
                     rfn: Path | str = p.relative_to(v.src(si))
                     with sislk:
                         if si not in sis:
@@ -96,7 +95,9 @@ def proc_events():
                         rfn = str(rfn)
                         if rfn not in sis[si]:
                             sis[si].append(rfn)
-                eq1.task_done()
+                weq.task_done()
+            else:
+                print('watch event is None')
         except Empty:
             if len(sis):
                 th3 = Thread(target=procq)
