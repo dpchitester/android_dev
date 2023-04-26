@@ -13,6 +13,7 @@ from asyncinotify import Event as WEvent
 from asyncinotify import Inotify
 from asyncinotify import Mask
 from asyncinotify import Watch
+from snoop import snoop, pp
 
 import config as v
 import ldsv as ls
@@ -66,6 +67,7 @@ def cb1():
             pass
         if v.quit_ev.is_set():
             break
+        sleep(1)
 
 
 def proc_events():
@@ -107,6 +109,7 @@ def proc_events():
                 th3.start()
         if v.quit_ev.is_set():
             break
+        sleep(1)
 
 
 def rt2():
@@ -161,5 +164,9 @@ if __name__ == "__main__":
     yappi.start()
     main()
 
-    yappi.get_func_stats().print_all()
-    yappi.get_thread_stats().print_all()
+    fs = yappi.get_func_stats()
+    # fs.print_all()
+    pp(fs)
+    ts = yappi.get_thread_stats()
+    # fs.print_all()
+    pp(ts)
