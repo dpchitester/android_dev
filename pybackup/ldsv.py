@@ -148,20 +148,23 @@ def save_bp():
     import pybackup as pb
     def save_th():
         def chk_save():
-            while sev.qsize():
-                qi = sev.get()
-                print("qi: sev", qi)
-                match qi:
-                    case "edges":
-                        saveedges()
-                    case "ldlls":
-                        saveldlls()
-                    case "rdlls":
-                        saverdlls()
-                    case "ldh":
-                        saveldh()
-                    case "rdh":
-                        saverdh()
+            try:
+                qi = sev.get(timeout=3)
+                if qi is not None:
+                    print("save", qi)
+                    match qi:
+                        case "edges":
+                            saveedges()
+                        case "ldlls":
+                            saveldlls()
+                        case "rdlls":
+                            saverdlls()
+                        case "ldh":
+                            saveldh()
+                        case "rdh":
+                            saverdh()
+            except Empty:
+                pass
         while True:
             chk_save()
             if pb.qe1.is_set():
