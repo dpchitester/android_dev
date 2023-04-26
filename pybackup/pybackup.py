@@ -161,9 +161,9 @@ if __name__ == "__main__":
     import yappi
 
     yappi.set_clock_type("cpu")  # Use set_clock_type("wall") for wall time
-    yappi.start()
+    yappi.start(builtins=True)
     main()
 
     with open("yappi.stats","w") as fh:
-        yappi.get_func_stats().print_all(out=fh)
-        yappi.get_thread_stats().print_all(out=fh)
+        yappi.get_thread_stats().sort("id").print_all(out=fh)
+        yappi.get_func_stats().sort("subtime").print_all(out=fh)
