@@ -1,6 +1,6 @@
 import pickle
 from threading import Thread, RLock, Event
-from queue import SimpleQueue
+from queue import SimpleQueue, Empty
 
 from sd import FS_Mixin
 
