@@ -94,7 +94,6 @@ def addArc(op1):
     with ls.dl:
         if op1 not in v.opdep:
             v.opdep.append(op1)
-            ls.sev.put("edges")
         j, i = op1.npl1
         addDep(j, i)
 
