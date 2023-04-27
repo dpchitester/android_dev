@@ -11,33 +11,7 @@ from sd import SD
 from sd import Ext3
 from sd import Fat32
 
-
-def bhu1(ho, it1):
-    bhuf = {
-        bytes: lambda it: ho.update(it),
-        int: lambda it: ho.update(pack("i", it)),
-        float: lambda it: ho.update(pack("f", it)),
-        str: lambda it: ho.update(it.encode()),
-        Path: lambda it: ho.update(bytes(it)),
-        PosixPath: lambda it: ho.update(bytes(it)),
-        SD: lambda it: ho.update(bytes(it)),
-        # Local: lambda it: ho.update(str(it).encode()),
-        # Remote: lambda it: ho.update(str(it).encode()),
-        Ext3: lambda it: ho.update(bytes(it)),
-        Fat32: lambda it: ho.update(bytes(it)),
-        CS: lambda it: ho.update(bytes(it)),
-        tuple: lambda it: [bhuf[type(it2)](it2) for it2 in it],
-        set: lambda it: [bhuf[type(it2)](it2) for it2 in it],
-        list: lambda it: [bhuf[type(it2)](it2) for it2 in it],
-        DE: lambda it: [bhuf[type(it2)](it2) for it2 in (it.nm, it.i)],
-        FSe: lambda it: [bhuf[type(it2)](it2) for it2 in (it.sz, it.mt)],
-    }
-    try:
-        bhuf[type(it1)](it1)
-    except KeyError:
-        print("key error", type(it1), "??")
-
-def bhu2(ho, it):
+def bhu(ho, it):
     match it:
         case bytes():
             ho.update(it)
@@ -51,7 +25,7 @@ def bhu2(ho, it):
             ho.update(bytes(it))
         case tuple() | set() | list():
             for it2 in it:
-                bhu2(ho, it2)
+                bhu(ho, it2)
         case DE():
             ho.update(bytes(it.nm))
             ho.update(pack("i", it.i.sz))
@@ -66,6 +40,6 @@ def bhu2(ho, it):
 # flattened list blake2b with integer result
 def blakeHash(it):
     ho = blake2b(digest_size=4)
-    bhu2(ho, it)
+    bhu(ho, it)
     rv = unpack("i", ho.digest())
     return rv[0]
