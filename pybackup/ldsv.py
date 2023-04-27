@@ -170,7 +170,7 @@ def save_bp():
                     svs[qi] = 1
             except Empty:
                 pass
-            return sev.qsize()
+            return not sev.empty()
 
         while True:
             while chk_sq():
