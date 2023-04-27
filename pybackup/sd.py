@@ -43,7 +43,7 @@ class SD(PosixPath):
         return (None, False)
 
 
-class Local_Mixin:
+class Local_Mixin():
     def __init__(self, *args, **kwargs):
         super(Local_Mixin, self).__init__()
 
@@ -97,7 +97,7 @@ class Local_Mixin:
                 ls.sev.put("ldhd")
 
 
-class Remote_Mixin:
+class Remote_Mixin():
     def __init__(self, *args, **kwargs):
         super(Remote_Mixin, self).__init__()
 
