@@ -1,588 +1,605 @@
 
 name           id     tid              ttot      scnt        
-_MainThread    0      2824723904       56.41768  70        
-Thread         1      2788090416       0.113593  79        
-Thread         2      2787037744       0.127036  65        
-Thread         3      2785985072       0.510669  17        
+_MainThread    0      3009564096       64.53924  103       
+Thread         1      2972353072       0.143385  88        
+Thread         2      2971300400       0.124143  59        
+Thread         3      2970247728       0.709370  15        
 
 Clock type: CPU
 Ordered by: tsub, desc
 
 ncall          tsub         ttot         tavg         name                                                                                                                  
-87701/440      6.319896     15.456665    0.000176   /storage/emulated/0/projects/pybackup/bhash.py:14 bhu                                                                 
-30260          5.179113     9.341330     0.000309   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:56 _PosixFlavour.parse_parts                                
-26787          3.744731     5.917169     0.000221   posix.stat                                                                                                            
-119958         1.990236     2.966831     0.000025   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:536 Fat32.__str__                                           
-88373          1.849847     5.968214     0.000068   <frozen os>:806 fsencode                                                                                              
-189073         1.821867     2.259657     0.000012   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:239 _PosixFlavour.splitroot                                 
-76947          1.784916     3.069887     0.000040   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:590 Ext3.__lt__                                             
-119708         1.701235     4.657922     0.000039   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:546 Fat32.__fspath__                                        
-183962         1.472501     1.597635     0.000009   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:569 Fat32._cparts                                           
-261783         1.382868     1.382868     0.000005   __builtin__.<method 'update' of '_blake2.blake2b' objects>                                                            
-116153         1.131717     3.458833     0.000030   posix.fspath                                                                                                          
-88332          1.049048     7.015113     0.000079   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:555 Ext3.__bytes__                                          
-235668         1.015861     1.015861     0.000004   builtins.isinstance                                                                                                   
-242021         1.014522     1.014522     0.000004   __builtin__.<method 'append' of 'list' objects>                                                                       
-30196          0.969384     10.599570    0.000351   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:484 _parse_args                                             
-174522         0.968927     0.968927     0.000006   _struct.pack                                                                                                          
-15264          0.956721     2.295493     0.000150   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:353 _WildcardSelector._select_from                          
-9371           0.911836     0.911836     0.000097   posix.lstat                                                                                                           
-182141         0.902071     0.902071     0.000005   sys.intern                                                                                                            
-34132          0.862182     1.499313     0.000044   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:583 Ext3.__hash__                                           
-12686          0.803409     4.718090     0.000372   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:703 Fat32.relative_to                                       
-12609          0.709514     8.305463     0.000659   /storage/emulated/0/projects/pybackup/sd.py:257 es                                                                    
-41688          0.682929     0.976665     0.000023   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:523 _format_parsed_parts                                    
-10669          0.677442     0.677442     0.000063   builtins.next                                                                                                         
-55             0.649549     18.071900    0.328580   /storage/emulated/0/projects/pybackup/sd.py:235 Ext3.getfl                                                            
-5674/1127      0.577511     1.830097     0.000323   <frozen os>:345 _walk                                                                                                 
-56             0.537411     3.649664     0.065173   __builtin__.<method 'sort' of 'list' objects>                                                                         
-38864          0.535508     0.798169     0.000021   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:515 _from_parsed_parts                                      
-17353          0.495841     7.721573     0.000445   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:504 _from_parts                                             
-88376          0.482669     0.482669     0.000005   __builtin__.<method 'encode' of 'str' objects>                                                                        
-6781/1405      0.477159     0.822412     0.000121   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:383 _RecursiveWildcardSelector._iterate_directories         
-13447          0.444496     1.589099     0.000118   /storage/emulated/0/projects/pybackup/sd.py:284 Fat32.__init__                                                        
-15508          0.441235     7.759509     0.000500   /storage/emulated/0/projects/pybackup/sd.py:20 __new__                                                                
-10295          0.423133     0.761726     0.000074   <frozen posixpath>:71 join                                                                                            
-13967          0.419039     5.101830     0.000365   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:402 _RecursiveWildcardSelector._select_from                 
-3              0.407397     0.480889     0.160296   _pickle.dump                                                                                                          
-3772           0.400774     0.557051     0.000148   posix.scandir                                                                                                         
-56287          0.400075     0.400075     0.000007   __builtin__.<built-in method __new__ of type object at 0xa815ca5c>                                                    
-15508          0.384791     0.648082     0.000042   /storage/emulated/0/projects/pybackup/sd.py:23 Ext3.__init__                                                          
-92070/92066    0.383499     0.383538     0.000004   builtins.len                                                                                                          
-13913          0.359995     0.359995     0.000026   __builtin__.<method 'fullmatch' of 're.Pattern' objects>                                                              
-17353          0.359179     8.080752     0.000466   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:868 __new__                                                 
-26784          0.358588     6.275519     0.000234   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:1008 Ext3.stat                                              
-13962          0.357559     4.179636     0.000299   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:1261 Ext3.is_file                                           
-1824/1776      0.345781     1.874374     0.001028   <frozen posixpath>:421 _joinrealpath                                                                                  
-4              0.333683     1.117833     0.279458   /storage/emulated/0/projects/pybackup/config.py:416 <listcomp>                                                        
-15216          0.303927     0.643844     0.000042   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:877 Ext3._make_child_relpath                                
-41698          0.293792     0.293792     0.000007   __builtin__.<method 'join' of 'str' objects>                                                                          
-127            0.293684     0.448398     0.003531   /storage/emulated/0/projects/pybackup/edge.py:65 findEdge                                                             
-15443          0.283758     0.929300     0.000060   /storage/emulated/0/projects/pybackup/sd.py:155 Ext3.__init__                                                         
-1071           0.276147     0.576892     0.000539   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:427 Inotify.add_watch           
-12676          0.272157     0.272157     0.000021   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:745 Fat32.parts                                             
-13799          0.262929     1.111984     0.000081   /storage/emulated/0/projects/pybackup/sd.py:232 Ext3.__init__                                                         
-13799          0.247175     0.247175     0.000018   /storage/emulated/0/projects/pybackup/sd.py:47 Ext3.__init__                                                          
-53547          0.228550     0.228550     0.000004   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:257 _PosixFlavour.casefold_parts                            
-10805          0.225285     0.454169     0.000042   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:777 Fat32.parent                                            
-28151          0.199541     0.199541     0.000007   __builtin__.<method 'lstrip' of 'str' objects>                                                                        
-14253          0.184286     0.265461     0.000019   __builtin__.<method 'add' of 'set' objects>                                                                           
-12609          0.182074     0.262952     0.000021   /storage/emulated/0/projects/pybackup/config.py:460 ns_trunc2ms                                                       
-888            0.164718     3.431023     0.003864   /storage/emulated/0/projects/pybackup/findde.py:21 relative_to_either                                                 
-23812/20683    0.163623     0.317954     0.000013   builtins.hash                                                                                                         
-19908          0.152942     0.152942     0.000008   /storage/emulated/0/projects/pybackup/edge.py:19 Edge.__eq__                                                          
-13962          0.152024     5.269515     0.000377   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:956 Ext3.rglob                                              
-6514           0.149889     0.238060     0.000037   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:578 Fat32.__eq__                                            
-23508          0.143838     0.143838     0.000006   __builtin__.<method 'is_dir' of 'posix.DirEntry' objects>                                                             
-55             0.142772     30.169657    0.548539   /storage/emulated/0/projects/pybackup/sd.py:250 Ext3.getdll                                                           
-13936          0.142475     0.214402     0.000015   <frozen posixpath>:41 _get_sep                                                                                        
-30262          0.124582     0.124582     0.000004   __builtin__.<method 'reverse' of 'list' objects>                                                                      
-1              0.116750     3.479243     3.479243   /storage/emulated/0/projects/pybackup/pybackup.py:37 wsetup                                                           
-27836          0.111817     0.111817     0.000004   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:327 _TerminatingSelector._select_from                       
-13898          0.100190     0.100190     0.000007   __builtin__.<method 'startswith' of 'str' objects>                                                                    
-3600           0.085853     0.178586     0.000050   <frozen posixpath>:60 isabs                                                                                           
-2              0.083765     0.692134     0.346067   /storage/emulated/0/projects/pybackup/dirlist.py:207 dllcmp                                                           
-12613          0.080914     0.080914     0.000006   math.floor                                                                                                            
-12645          0.080683     0.080683     0.000006   /storage/emulated/0/projects/pybackup/de.py:10 FSe.__init__                                                           
-10795          0.079861     0.079861     0.000007   /storage/emulated/0/projects/pybackup/config.py:417 <listcomp>                                                        
-6310           0.077372     0.312933     0.000050   /storage/emulated/0/projects/pybackup/de.py:26 DE.__hash__                                                            
-565            0.077175     0.077175     0.000137   builtins.print                                                                                                        
-15535          0.076769     0.076769     0.000005   __builtin__.<method 'items' of 'dict' objects>                                                                        
-12645          0.076717     0.076717     0.000006   <string>:2 DE.__init__                                                                                                
-6212           0.074680     0.298986     0.000048   /storage/emulated/0/projects/pybackup/de.py:23 DE.__eq__                                                              
-1776           0.073224     2.349143     0.001323   <frozen posixpath>:412 realpath                                                                                       
-8072           0.073217     0.073217     0.000009   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:479 Ext3.__reduce__                                         
-13962          0.071868     0.071868     0.000005   _stat.S_ISREG                                                                                                         
-1776           0.070625     0.329178     0.000185   <frozen posixpath>:397 abspath                                                                                        
-4              0.065369     0.728088     0.182022   _pickle.load                                                                                                          
-444            0.058671     30.347468    0.068350   /storage/emulated/0/projects/pybackup/sd.py:167 Ext3.Dlld                                                             
-9372           0.058065     0.058065     0.000006   __builtin__.<method 'endswith' of 'str' objects>                                                                      
-12609          0.057771     0.057771     0.000005   /storage/emulated/0/projects/pybackup/sd.py:272 <lambda>                                                              
-56             0.052264     0.052264     0.000933   __builtin__.<method 'clear' of 'set' objects>                                                                         
-8348           0.051607     0.051607     0.000006   __builtin__.<method 'partition' of 'str' objects>                                                                     
-10900          0.049799     0.049799     0.000005   builtins.any                                                                                                          
-1776           0.040332     0.072883     0.000041   <frozen posixpath>:389 normpath                                                                                       
-440            0.039452     45.884051    0.104282   /storage/emulated/0/projects/pybackup/sd.py:158 Ext3.sdh_d                                                            
-1644           0.038762     0.150851     0.000092   /storage/emulated/0/projects/pybackup/sd.py:291 CS.__init__                                                           
-2700           0.037116     0.487010     0.000180   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:934 Ext3._scandir                                           
-2886           0.035024     0.035024     0.000012   __builtin__.<method 'split' of 'str' objects>                                                                         
-1023           0.032216     0.175636     0.000172   <frozen posixpath>:164 islink                                                                                         
-3772           0.030134     0.030134     0.000008   __builtin__.<method '__exit__' of 'posix.ScandirIterator' objects>                                                    
-956            0.029825     0.039917     0.000042   /storage/emulated/0/projects/pybackup/sd.py:54 Ext3.Dll                                                               
-1208           0.029024     0.050955     0.000042   /data/data/com.termux/files/usr/lib/python3.11/enum.py:688 __call__                                                   
-771            0.028184     0.035395     0.000046   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:171 Watch.__init__              
-5427           0.027992     0.027992     0.000005   _stat.S_ISLNK                                                                                                         
-1644           0.025372     0.105618     0.000064   /storage/emulated/0/projects/pybackup/sd.py:190 CS.__init__                                                           
-440            0.024158     15.496438    0.035219   /storage/emulated/0/projects/pybackup/bhash.py:41 blakeHash                                                           
-96             0.024004     0.025085     0.000261   io.open                                                                                                               
-924            0.021338     0.021338     0.000023   posix.getcwd                                                                                                          
-1208           0.021154     0.021931     0.000018   /data/data/com.termux/files/usr/lib/python3.11/enum.py:1093 __new__                                                   
-111            0.020902     0.020902     0.000188   time.sleep                                                                                                            
-181            0.019626     0.019626     0.000108   posix.read                                                                                                            
-134            0.019575     0.019575     0.000146   /storage/emulated/0/projects/pybackup/opexec.py:30 istgt                                                              
-4              0.018944     1.136777     0.284194   /storage/emulated/0/projects/pybackup/config.py:415 cull_DEs                                                          
-445            0.018886     0.024179     0.000054   /storage/emulated/0/projects/pybackup/sd.py:84 Ext3.SDh                                                               
-48             0.018753     0.054425     0.001134   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:518 Inotify._get                
-1776           0.017410     0.017410     0.000010   posix._path_normpath                                                                                                  
-34             0.017216     0.091742     0.002698   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:2020 Popen._communicate                                  
-352            0.016720     0.053909     0.000153   /storage/emulated/0/projects/pybackup/sd.py:277 Ext3.__init__                                                         
-1              0.016367     0.126752     0.126752   /storage/emulated/0/projects/pybackup/pybackup.py:74 proc_events                                                      
-8              0.016324     46.132025    5.766503   /storage/emulated/0/projects/pybackup/status.py:39 src_statuses                                                       
-1644           0.015265     0.015265     0.000009   /storage/emulated/0/projects/pybackup/sd.py:101 CS.__init__                                                           
-12             0.014893     2.720262     0.226688   /storage/emulated/0/projects/pybackup/findde.py:82 findSis                                                            
-84             0.013581     0.013581     0.000162   __builtin__.<method 'poll' of 'select.epoll' objects>                                                                 
-440            0.013094     45.928145    0.104382   /storage/emulated/0/projects/pybackup/sd.py:38 Ext3.sdhck                                                             
-2343           0.012841     0.012841     0.000005   __builtin__.<method '__exit__' of '_thread.RLock' objects>                                                            
-105            0.012826     0.084066     0.000801   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:602 Inotify.sync_get            
-41             0.011802     0.013108     0.000320   _posixsubprocess.fork_exec                                                                                            
-41             0.011666     0.093487     0.002280   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:807 Popen.__init__                                       
-440            0.011335     0.011335     0.000026   __builtin__.<method 'digest' of '_blake2.blake2b' objects>                                                            
-1072           0.011098     0.011098     0.000010   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/_ffi.py:21 check_return                     
-41             0.010502     0.060802     0.001483   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:1756 Popen._execute_child                                
-1120           0.009725     0.009725     0.000009   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:418 Inotify.fd                  
-456            0.009592     0.014039     0.000031   /storage/emulated/0/projects/pybackup/ldsv.py:164 chk_sq                                                              
-64             0.009428     0.024872     0.000389   /data/data/com.termux/files/usr/lib/python3.11/queue.py:154 Queue.get                                                 
-1739           0.009423     0.009423     0.000005   builtins.hasattr                                                                                                      
-151            0.008411     0.008411     0.000056   posix.close                                                                                                           
-134/94         0.008243     0.013152     0.000098   /data/data/com.termux/files/usr/lib/python3.11/site-packages/tarjan/__init__.py:118 visit                             
-493            0.008136     0.034052     0.000069   /storage/emulated/0/projects/pybackup/sd.py:26 Ext3.sdh_f                                                             
-2              0.008105     3.537116     1.768558   /storage/emulated/0/projects/pybackup/cscopy.py:243 BVars.do_copying                                                  
-60             0.007697     0.007697     0.000128   __builtin__.<method 'poll' of 'select.poll' objects>                                                                  
-771            0.007211     0.007211     0.000009   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:209 Watch.path                  
-691            0.007169     0.007169     0.000010   /storage/emulated/0/projects/pybackup/config.py:70 src                                                                
-1              0.007063     0.113168     0.113168   /storage/emulated/0/projects/pybackup/pybackup.py:60 cb1                                                              
-152            0.006972     0.019178     0.000126   /storage/emulated/0/projects/pybackup/edge.py:81 addDep                                                               
-41             0.006781     0.006781     0.000165   posix.waitpid                                                                                                         
-41             0.006400     0.204143     0.004979   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:506 run                                                  
-136            0.006240     0.006240     0.000046   __builtin__.<method 'close' of '_io.TextIOWrapper' objects>                                                           
-60             0.006093     0.015150     0.000252   /data/data/com.termux/files/usr/lib/python3.11/selectors.py:402 PollSelector.select                                   
-1299           0.005909     0.005909     0.000005   __builtin__.<method 'is_symlink' of 'posix.DirEntry' objects>                                                         
-53             0.005845     0.427493     0.008066   /storage/emulated/0/projects/pybackup/status.py:8 changed_ops                                                         
-21             0.005406     0.005406     0.000257   __builtin__.<method 'read' of '_io.BufferedReader' objects>                                                           
-41             0.005385     0.018155     0.000443   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:1280 Popen._close_pipe_fds                               
-1              0.004854     0.510369     0.510369   /storage/emulated/0/projects/pybackup/ldsv.py:161 save_th                                                             
-462            0.004706     0.006503     0.000014   /storage/emulated/0/projects/pybackup/edge.py:16 Edge.__hash__                                                        
-204            0.004639     0.007976     0.000039   /data/data/com.termux/files/usr/lib/python3.11/threading.py:264 Condition.__enter__                                   
-109            0.004402     0.004402     0.000040   posix.pipe                                                                                                            
-368            0.004393     0.019889     0.000054   /storage/emulated/0/projects/pybackup/de.py:20 DE.__lt__                                                              
-895            0.004300     0.004300     0.000005   /storage/emulated/0/projects/pybackup/sd.py:50 Ext3.isremote                                                          
-440            0.004279     0.004279     0.000010   _struct.unpack                                                                                                        
-136            0.004161     0.006965     0.000051   /data/data/com.termux/files/usr/lib/python3.11/selectors.py:21 _fileobj_to_fd                                         
-2              0.004068     0.019287     0.009643   /storage/emulated/0/projects/pybackup/toposort.py:4 topological_sort                                                  
-12             0.004037     0.729816     0.060818   /storage/emulated/0/projects/pybackup/findde.py:95 findDis                                                            
-28             0.003990     0.003990     0.000142   __builtin__.<method '__exit__' of '_io._IOBase' objects>                                                              
-105            0.003784     0.087850     0.000837   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:630 Inotify.__next__            
-137            0.003714     0.026052     0.000190   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:1245 Ext3.is_dir                                            
-69             0.003687     0.010570     0.000153   /data/data/com.termux/files/usr/lib/python3.11/queue.py:122 Queue.put                                                 
-64             0.003569     0.016264     0.000254   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:530 Fat32._make_child                                       
-105            0.003451     0.007968     0.000076   /storage/emulated/0/projects/pybackup/config.py:431 isbaddir                                                          
-64             0.003382     0.023094     0.000361   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:309 Event.path                  
-34             0.003348     0.194158     0.005711   /storage/emulated/0/projects/pybackup/asyncrun.py:30 a_run1                                                           
-204            0.003336     0.003336     0.000016   __builtin__.<method '__enter__' of '_thread.lock' objects>                                                            
-68             0.003299     0.005737     0.000084   /data/data/com.termux/files/usr/lib/python3.11/contextlib.py:509 ExitStack.callback                                   
-116            0.003204     0.012843     0.000111   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:1979 Popen._wait                                         
-93             0.003166     0.016359     0.000176   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:530 Ext3._make_child                                        
-152            0.003154     0.004926     0.000032   /storage/emulated/0/projects/pybackup/edge.py:8 Edge.__init__                                                         
-68             0.003140     0.009357     0.000138   /data/data/com.termux/files/usr/lib/python3.11/selectors.py:234 PollSelector.register                                 
-204            0.002996     0.004209     0.000021   /data/data/com.termux/files/usr/lib/python3.11/threading.py:267 Condition.__exit__                                    
-55             0.002977     0.004095     0.000074   /storage/emulated/0/projects/pybackup/sd.py:62 Ext3.Dll                                                               
-41             0.002904     0.099638     0.002430   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:1163 Popen.communicate                                   
-41             0.002884     0.005840     0.000142   /data/data/com.termux/files/usr/lib/python3.11/contextlib.py:546 ExitStack.__exit__                                   
-68             0.002877     0.012867     0.000189   /data/data/com.termux/files/usr/lib/python3.11/selectors.py:351 PollSelector.register                                 
-36             0.002822     0.022711     0.000631   _bisect.bisect_left                                                                                                   
-125            0.002813     0.007977     0.000064   /storage/emulated/0/projects/pybackup/config.py:51 SetDict.add                                                        
-2              0.002713     0.011709     0.005855   /storage/emulated/0/projects/pybackup/cscopy.py:198 BVars.skip_matching                                               
-64             0.002653     0.005544     0.000087   /data/data/com.termux/files/usr/lib/python3.11/enum.py:1501 Mask.__and__                                              
-377            0.002643     0.002643     0.000007   time.time                                                                                                             
-1              0.002585     0.071259     0.071259   /storage/emulated/0/projects/pybackup/config.py:220 f1                                                                
-128            0.002516     0.003588     0.000028   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:253 Event.watch                 
-137            0.002495     0.006035     0.000044   /data/data/com.termux/files/usr/lib/python3.11/threading.py:359 Condition.notify                                      
-68             0.002431     0.009285     0.000137   /data/data/com.termux/files/usr/lib/python3.11/selectors.py:365 PollSelector.unregister                               
-41             0.002386     0.004355     0.000106   <frozen posixpath>:150 dirname                                                                                        
-456            0.002384     0.002384     0.000005   __builtin__.<method 'get_nowait' of '_queue.SimpleQueue' objects>                                                     
-12             0.002363     2.743372     0.228614   /storage/emulated/0/projects/pybackup/findde.py:108 findSDEs                                                          
-9              0.002330     0.002330     0.000259   /storage/emulated/0/projects/pybackup/status.py:23 <listcomp>                                                         
-152            0.002308     0.002308     0.000015   __builtin__.<method 'acquire' of '_thread.lock' objects>                                                              
-138            0.002241     0.002804     0.000020   /data/data/com.termux/files/usr/lib/python3.11/enum.py:1454 Mask.__contains__                                         
-180            0.002199     0.002878     0.000016   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:622 Fat32.name                                              
-64             0.002188     0.004891     0.000076   /data/data/com.termux/files/usr/lib/python3.11/queue.py:57 Queue.task_done                                            
-449            0.002135     0.002135     0.000005   __builtin__.<method 'put' of '_queue.SimpleQueue' objects>                                                            
-36             0.002119     0.026981     0.000749   /storage/emulated/0/projects/pybackup/findde.py:38 findDE                                                             
-58             0.002084     0.009246     0.000159   /storage/emulated/0/projects/pybackup/config.py:82 addSrcDir                                                          
-456            0.002063     0.002063     0.000005   __builtin__.<method 'empty' of '_queue.SimpleQueue' objects>                                                          
-1              0.002059     0.028728     0.028728   /storage/emulated/0/projects/pybackup/config.py:428 <listcomp>                                                        
-140            0.002059     0.003630     0.000026   /data/data/com.termux/files/usr/lib/python3.11/threading.py:279 Condition._is_owned                                   
-20             0.002025     0.020012     0.001001   /storage/emulated/0/projects/pybackup/localcopy.py:88 sha256sumf                                                      
-1              0.001985     0.824876     0.824876   /storage/emulated/0/projects/pybackup/config.py:179 initConfig                                                        
-2              0.001974     1.838036     0.919018   /storage/emulated/0/projects/pybackup/cscopy.py:180 BVars.init2                                                       
-314            0.001959     0.001959     0.000006   __builtin__.<method '__exit__' of '_thread.lock' objects>                                                             
-55             0.001954     0.002770     0.000050   /storage/emulated/0/projects/pybackup/sd.py:77 Ext3.Dlls_xt                                                           
-69             0.001949     0.003383     0.000049   <frozen os>:818 fsdecode                                                                                              
-136            0.001849     0.008814     0.000065   /data/data/com.termux/files/usr/lib/python3.11/selectors.py:215 PollSelector._fileobj_lookup                          
-1              0.001802     0.056895     0.056895   /storage/emulated/0/projects/pybackup/localcopy.py:127 LocalCopy.__call__                                             
-174            0.001785     0.004992     0.000029   __builtin__.<method 'remove' of 'set' objects>                                                                        
-68             0.001751     0.006377     0.000094   /data/data/com.termux/files/usr/lib/python3.11/selectors.py:247 PollSelector.unregister                               
-116            0.001731     0.014574     0.000126   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:1257 Popen.wait                                          
-64             0.001707     0.002737     0.000043   /data/data/com.termux/files/usr/lib/python3.11/queue.py:209 Queue._qsize                                              
-68             0.001700     0.002841     0.000042   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:1083 Popen._translate_newlines                           
-55             0.001683     0.003822     0.000069   <frozen os>:282 walk                                                                                                  
-41             0.001637     0.004248     0.000104   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:1657 Popen._get_handles                                  
-64             0.001613     0.011499     0.000180   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:313 _RecursiveWildcardSelector.select_from                  
-1              0.001608     0.008154     0.008154   /storage/emulated/0/projects/pybackup/ldsv.py:77 saveedges                                                            
-2              0.001585     18.790422    9.395211   /storage/emulated/0/projects/pybackup/opexec.py:48 proc_nodes                                                         
-64             0.001574     0.002200     0.000034   /data/data/com.termux/files/usr/lib/python3.11/queue.py:217 Queue._get                                                
-168            0.001562     0.001562     0.000009   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:398 Inotify.sync_timeout        
-2              0.001548     3.511876     1.755938   /storage/emulated/0/projects/pybackup/findde.py:146 updateDEs                                                         
-136            0.001531     0.001531     0.000011   __builtin__.<method 'fileno' of '_io.TextIOWrapper' objects>                                                          
-68             0.001527     0.002011     0.000030   <frozen codecs>:309 IncrementalDecoder.__init__                                                                       
-12             0.001516     0.742772     0.061898   /storage/emulated/0/projects/pybackup/findde.py:127 findTDEs                                                          
-120            0.001509     0.001509     0.000013   /data/data/com.termux/files/usr/lib/python3.11/threading.py:568 Event.is_set                                          
-41             0.001455     0.002659     0.000065   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:1090 Popen.__exit__                                      
-94             0.001418     0.002039     0.000022   /data/data/com.termux/files/usr/lib/python3.11/selectors.py:66 _SelectorMapping.__len__                               
-288            0.001406     0.001406     0.000005   __builtin__.<method 'get' of 'dict' objects>                                                                          
-203            0.001375     0.001375     0.000007   __builtin__.<method 'pop' of 'list' objects>                                                                          
-20             0.001338     0.013641     0.000682   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:1046 Ext3.read_bytes                                        
-157            0.001312     0.001312     0.000008   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:94 _PosixFlavour.join_parsed_parts                          
-64             0.001297     0.017561     0.000274   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:765 Fat32.__truediv__                                       
-2              0.001292     0.020867     0.010434   /storage/emulated/0/projects/pybackup/opexec.py:43 <listcomp>                                                         
-34             0.001280     0.002735     0.000080   /data/data/com.termux/files/usr/lib/python3.11/selectors.py:347 PollSelector.__init__                                 
-64             0.001269     0.001269     0.000020   time.monotonic                                                                                                        
-68             0.001239     0.001630     0.000024   /data/data/com.termux/files/usr/lib/python3.11/contextlib.py:527 ExitStack._push_exit_callback                        
-139            0.001170     0.001170     0.000008   __builtin__.<method 'decode' of 'bytes' objects>                                                                      
-34             0.001162     0.001363     0.000040   /data/data/com.termux/files/usr/lib/python3.11/selectors.py:268 PollSelector.close                                    
-40             0.001157     0.001569     0.000039   /storage/emulated/0/projects/pybackup/sd.py:108 CS.Dll                                                                
-93             0.001157     0.017516     0.000188   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:765 Ext3.__truediv__                                        
-10             0.001152     0.026109     0.002611   /storage/emulated/0/projects/pybackup/localcopy.py:25 FileDiff.chkdiff                                                
-186            0.001148     0.001148     0.000006   __builtin__.<method 'read' of '_io.BytesIO' objects>                                                                  
-105            0.001137     0.001137     0.000011   /storage/emulated/0/projects/pybackup/config.py:432 <listcomp>                                                        
-3              0.001130     0.001893     0.000631   /data/data/com.termux/files/usr/lib/python3.11/threading.py:1044 Thread._stop                                         
-41             0.001112     0.007893     0.000193   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:1966 Popen._try_wait                                     
-26             0.001108     0.002376     0.000091   /storage/emulated/0/projects/pybackup/gitclasses.py:123 GitRemote.__init__                                            
-41             0.001079     0.001739     0.000042   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:361 _text_encoding                                       
-1              0.001075     56.415719    56.415719  /storage/emulated/0/projects/pybackup/pybackup.py:136 main                                                            
-32             0.001054     0.177214     0.005538   /storage/emulated/0/projects/pybackup/gitclasses.py:10 gitcmd                                                         
-48             0.001054     0.001054     0.000022   posix.readlink                                                                                                        
-1              0.001024     0.040593     0.040593   /storage/emulated/0/projects/pybackup/config.py:435 getDL                                                             
-48             0.001023     0.001280     0.000027   /storage/emulated/0/projects/pybackup/gitclasses.py:25 GitWT.SDh                                                      
-20             0.001016     0.012938     0.000647   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:940 Ext3.glob                                               
-69             0.001001     0.001001     0.000015   __builtin__.<method 'from_buffer_copy' of '_ctypes.PyCStructType' objects>                                            
-68             0.000951     0.001615     0.000024   <string>:1 <lambda>                                                                                                   
-41             0.000946     0.001453     0.000035   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:1919 Popen._handle_exitstatus                            
-70             0.000937     0.001466     0.000021   /storage/emulated/0/projects/pybackup/localcopy.py:124 LocalCopy.ischanged                                            
-34             0.000937     0.001174     0.000035   /data/data/com.termux/files/usr/lib/python3.11/selectors.py:209 PollSelector.__init__                                 
-127            0.000927     0.000927     0.000007   /storage/emulated/0/projects/pybackup/edge.py:22 Edge.chk_ct                                                          
-56             0.000908     0.010183     0.000182   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:1230 Fat32.exists                                           
-46             0.000901     0.000901     0.000020   builtins.sorted                                                                                                       
-160            0.000876     0.000876     0.000005   sys.audit                                                                                                             
-69             0.000870     0.001181     0.000017   /data/data/com.termux/files/usr/lib/python3.11/queue.py:213 Queue._put                                                
-68             0.000856     0.002068     0.000030   /data/data/com.termux/files/usr/lib/python3.11/contextlib.py:456 _exit_wrapper                                        
-2              0.000847     5.396250     2.698125   /storage/emulated/0/projects/pybackup/cscopy.py:298 CSCopy.__call__                                                   
-3/2            0.000847     0.001762     0.000587   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:507 _parse                                               
-92             0.000837     0.000837     0.000009   /data/data/com.termux/files/usr/lib/python3.11/selectors.py:275 PollSelector._key_from_fd                             
-2              0.000818     0.013969     0.006985   /data/data/com.termux/files/usr/lib/python3.11/site-packages/tarjan/__init__.py:103 tarjan_recursive                  
-68             0.000807     0.000807     0.000012   /data/data/com.termux/files/usr/lib/python3.11/contextlib.py:454 _create_cb_wrapper                                   
-23             0.000780     0.005540     0.000241   /data/data/com.termux/files/usr/lib/python3.11/re/__init__.py:272 _compile                                            
-48             0.000773     0.000773     0.000016   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:350 _FakeFuture.__init__        
-20             0.000757     0.000757     0.000038   _hashlib.openssl_sha256                                                                                               
-41             0.000744     0.000990     0.000024   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:1118 Popen.__del__                                       
-9              0.000743     0.005155     0.000573   /storage/emulated/0/projects/pybackup/status.py:19 stsupdate                                                          
-69             0.000730     0.000730     0.000011   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:232 Event.__init__              
-3              0.000728     0.000728     0.000243   _thread.start_new_thread                                                                                              
-8              0.000724     0.090866     0.011358   /storage/emulated/0/projects/pybackup/gitclasses.py:108 GitRepo.gitck2                                                
-140            0.000718     0.000718     0.000005   __builtin__.<method 'append' of 'collections.deque' objects>                                                          
-22/20          0.000698     0.008321     0.000378   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:337 _PreciseSelector._select_from                           
-50             0.000696     0.000696     0.000014   _thread.allocate_lock                                                                                                 
-137            0.000692     0.000692     0.000005   _stat.S_ISDIR                                                                                                         
-136            0.000687     0.000687     0.000005   __builtin__.<method 'replace' of 'str' objects>                                                                       
-128            0.000671     0.000671     0.000005   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:1237 Popen._remaining_time                               
-41             0.000668     0.000941     0.000023   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:1231 Popen.poll                                          
-41             0.000661     0.000661     0.000016   _locale.getencoding                                                                                                   
-10             0.000653     0.026762     0.002676   /storage/emulated/0/projects/pybackup/localcopy.py:59 FileDiff.should_copy                                            
-41             0.000648     0.000648     0.000016   /data/data/com.termux/files/usr/lib/python3.11/contextlib.py:460 ExitStack.__init__                                   
-69             0.000646     0.000646     0.000009   __builtin__.<method 'find' of 'bytes' objects>                                                                        
-41             0.000642     0.000642     0.000016   __builtin__.<method 'rfind' of 'bytes' objects>                                                                       
-41             0.000635     0.000635     0.000015   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:268 _cleanup                                             
-68             0.000632     0.000632     0.000009   __builtin__.<method 'register' of 'select.poll' objects>                                                              
-64             0.000625     0.000625     0.000010   __builtin__.<method 'popleft' of 'collections.deque' objects>                                                         
-7              0.000614     0.018054     0.002579   /storage/emulated/0/projects/pybackup/asyncrun.py:48 a_run2                                                           
-8              0.000612     0.042090     0.005261   /storage/emulated/0/projects/pybackup/gitclasses.py:84 GitIndex.sdhck                                                 
-16             0.000607     0.001899     0.000119   /storage/emulated/0/projects/pybackup/config.py:101 addTgtDir                                                         
-17             0.000601     0.002976     0.000175   /storage/emulated/0/projects/pybackup/edge.py:91 addArc                                                               
-16             0.000594     0.000895     0.000056   /storage/emulated/0/projects/pybackup/edge.py:42 Edge.rtset                                                           
-8              0.000581     0.001949     0.000244   /storage/emulated/0/projects/pybackup/edge.py:28 Edge.clr                                                             
-94             0.000572     0.000572     0.000006   /data/data/com.termux/files/usr/lib/python3.11/selectors.py:272 PollSelector.get_map                                  
-8              0.000568     0.049186     0.006148   /storage/emulated/0/projects/pybackup/gitclasses.py:63 GitWT.sdhck                                                    
-8              0.000567     46.139543    5.767443   /storage/emulated/0/projects/pybackup/status.py:52 updatets                                                           
-41             0.000557     0.000557     0.000014   sys.exc_info                                                                                                          
-22             0.000555     0.003117     0.000142   /data/data/com.termux/files/usr/lib/python3.11/re/__init__.py:178 sub                                                 
-20             0.000532     0.000532     0.000027   __builtin__.<method 'update' of '_hashlib.HASH' objects>                                                              
-39             0.000529     0.000529     0.000014   /storage/emulated/0/projects/pybackup/gitclasses.py:18 GitWT.__init__                                                 
-20             0.000527     0.000527     0.000026   __builtin__.<method 'hexdigest' of '_hashlib.HASH' objects>                                                           
-36             0.000522     0.000522     0.000015   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:623 Inotify.__iter__            
-82             0.000519     0.000519     0.000006   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:1931 Popen._internal_poll                                
-13             0.000510     0.001061     0.000082   /storage/emulated/0/projects/pybackup/gitclasses.py:79 GitIndex.__init__                                              
-12/10          0.000506     0.004772     0.000398   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:281 _make_selector                                          
-1              0.000504     0.000676     0.000676   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:384 Inotify.__init__            
-13             0.000492     0.001048     0.000081   /storage/emulated/0/projects/pybackup/gitclasses.py:100 GitRepo.__init__                                              
-34             0.000491     0.001854     0.000055   /data/data/com.termux/files/usr/lib/python3.11/selectors.py:202 PollSelector.__exit__                                 
-22             0.000484     0.000484     0.000022   __builtin__.<method 'sub' of 're.Pattern' objects>                                                                    
-68             0.000483     0.000483     0.000007   <frozen codecs>:260 IncrementalDecoder.__init__                                                                       
-42             0.000479     0.000479     0.000011   __builtin__.<method 'copy' of 'set' objects>                                                                          
-13             0.000479     0.001094     0.000084   /storage/emulated/0/projects/pybackup/gitclasses.py:58 GitWT.__init__                                                 
-68             0.000477     0.000477     0.000007   __builtin__.<method 'unregister' of 'select.poll' objects>                                                            
-29             0.000469     0.002548     0.000088   /storage/emulated/0/projects/pybackup/sd.py:32 GitIndex.sdhset                                                        
-64             0.000467     0.000467     0.000007   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:202 Watch.path                  
-2              0.000466     0.019290     0.009645   /storage/emulated/0/projects/pybackup/findde.py:48 getRemoteDEs                                                       
-41             0.000463     0.000463     0.000011   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:481 CompletedProcess.__init__                            
-3              0.000460     0.001270     0.000423   /data/data/com.termux/files/usr/lib/python3.11/threading.py:849 Thread.__init__                                       
-49             0.000445     0.000445     0.000009   builtins.getattr                                                                                                      
-2              0.000445     0.006984     0.003492   /storage/emulated/0/projects/pybackup/cscopy.py:95 fsyncl                                                             
-64             0.000438     0.000438     0.000007   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:277 Event.mask                  
-3/2            0.000437     0.002216     0.000739   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:447 _parse_sub                                           
-2              0.000426     0.000627     0.000313   /storage/emulated/0/projects/pybackup/cscopy.py:266 <listcomp>                                                        
-69             0.000422     0.000422     0.000006   __builtin__.<method 'pop' of 'dict' objects>                                                                          
-3              0.000414     0.018834     0.006278   /storage/emulated/0/projects/pybackup/gitops.py:90 GitPush.__call__                                                   
-1              0.000411     0.000411     0.000411   marshal.loads                                                                                                         
-64             0.000411     0.000411     0.000006   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:300 Event.name                  
-12             0.000410     0.000593     0.000049   /storage/emulated/0/projects/pybackup/findde.py:182 doTOne                                                            
-3              0.000404     0.002783     0.000928   /data/data/com.termux/files/usr/lib/python3.11/threading.py:938 Thread.start                                          
-69             0.000402     0.000402     0.000006   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:213 Watch.mask                  
-57             0.000401     0.000401     0.000007   builtins.min                                                                                                          
-21             0.000385     0.000618     0.000029   /storage/emulated/0/projects/pybackup/cscopy.py:295 CSCopy.ischanged                                                  
-68             0.000380     0.000380     0.000006   __builtin__.<method 'join' of 'bytes' objects>                                                                        
-81             0.000376     0.000376     0.000005   builtins.setattr                                                                                                      
-41             0.000360     0.000360     0.000009   __builtin__.<method 'count' of 'list' objects>                                                                        
-20             0.000352     0.004626     0.000231   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:1036 Ext3.open                                              
-24             0.000347     0.000508     0.000021   /storage/emulated/0/projects/pybackup/findde.py:149 doSOne                                                            
-52             0.000344     0.000344     0.000007   /storage/emulated/0/projects/pybackup/config.py:74 tgt                                                                
-48             0.000343     0.000343     0.000007   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:353 _FakeFuture.set_result      
-60             0.000338     0.000338     0.000006   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:1245 Popen._check_timeout                                
-68             0.000330     0.000330     0.000005   __builtin__.<method 'pop' of 'collections.deque' objects>                                                             
-26             0.000321     0.000321     0.000012   /storage/emulated/0/projects/pybackup/gitclasses.py:38 GitRemote.__init__                                             
-49             0.000321     0.000321     0.000007   /storage/emulated/0/projects/pybackup/edge.py:25 Edge.rchk_ct                                                         
-1              0.000320     0.720781     0.720781   /storage/emulated/0/projects/pybackup/ldsv.py:28 loadrdlls                                                            
-1              0.000319     0.008622     0.008622   /storage/emulated/0/projects/pybackup/ldsv.py:66 loadedges                                                            
-3              0.000315     0.001171     0.000390   /data/data/com.termux/files/usr/lib/python3.11/threading.py:288 Condition.wait                                        
-52             0.000314     0.000314     0.000006   __builtin__.<method 'write' of '_io.TextIOWrapper' objects>                                                           
-48             0.000310     0.000310     0.000006   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:359 _FakeFuture.result          
-1              0.000301     0.000301     0.000301   io.open_code                                                                                                          
-3              0.000297     0.000346     0.000115   /data/data/com.termux/files/usr/lib/python3.11/threading.py:1071 Thread._delete                                       
-14             0.000297     0.000477     0.000034   /storage/emulated/0/projects/pybackup/gitops.py:87 GitPush.ischanged                                                  
-2              0.000284     0.000767     0.000384   /data/data/com.termux/files/usr/lib/python3.11/enum.py:1376 _missing_                                                 
-34             0.000282     0.000282     0.000008   select.poll                                                                                                           
-41             0.000280     0.000280     0.000007   posix.WIFSTOPPED                                                                                                      
-3              0.000271     0.750560     0.250187   /data/data/com.termux/files/usr/lib/python3.11/threading.py:964 run                                                   
-41             0.000259     0.000259     0.000006   __builtin__.<method 'rstrip' of 'bytes' objects>                                                                      
-3              0.000257     0.001609     0.000536   /data/data/com.termux/files/usr/lib/python3.11/threading.py:604 Event.wait                                            
-3              0.000256     0.002676     0.000892   /data/data/com.termux/files/usr/lib/python3.11/threading.py:1080 Thread.join                                          
-46             0.000256     0.000256     0.000006   __builtin__.<method 'rstrip' of 'str' objects>                                                                        
-4              0.000255     0.000837     0.000209   /data/data/com.termux/files/usr/lib/python3.11/threading.py:583 Event.set                                             
-5              0.000250     0.000344     0.000069   /data/data/com.termux/files/usr/lib/python3.11/enum.py:1356 _iter_member_by_value_                                    
-3              0.000246     0.000601     0.000200   /data/data/com.termux/files/usr/lib/python3.11/threading.py:822 _maintain_shutdown_locks                              
-3              0.000241     0.000241     0.000080   /data/data/com.termux/files/usr/lib/python3.11/threading.py:236 Condition.__init__                                    
-34             0.000237     0.000237     0.000007   /data/data/com.termux/files/usr/lib/python3.11/selectors.py:63 _SelectorMapping.__init__                              
-10/9           0.000234     0.000411     0.000041   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:333 _PreciseSelector.__init__                               
-2              0.000229     0.000602     0.000301   /data/data/com.termux/files/usr/lib/python3.11/re/_compiler.py:509 _compile_info                                      
-41             0.000227     0.000227     0.000006   posix.waitstatus_to_exitcode                                                                                          
-34             0.000225     0.000225     0.000007   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:2122 Popen._save_input                                   
-4/2            0.000224     0.000412     0.000103   /data/data/com.termux/files/usr/lib/python3.11/re/_compiler.py:37 _compile                                            
-2              0.000220     0.002641     0.001320   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:970 parse                                                
-2              0.000219     0.004154     0.002077   /data/data/com.termux/files/usr/lib/python3.11/re/_compiler.py:738 compile                                            
-1              0.000217     0.001867     0.001867   /storage/emulated/0/projects/pybackup/ldsv.py:107 loadrdh                                                             
-4              0.000215     0.000742     0.000185   /storage/emulated/0/projects/pybackup/cscopy.py:11 chunk_from                                                         
-1              0.000214     0.002364     0.002364   <frozen importlib._bootstrap_external>:1007 SourceFileLoader.get_code                                                 
-2              0.000213     0.000406     0.000203   /data/data/com.termux/files/usr/lib/python3.11/json/decoder.py:332 JSONDecoder.decode                                 
-41             0.000212     0.000212     0.000005   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:1087 Popen.__enter__                                     
-48             0.000209     0.000209     0.000004   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:356 _FakeFuture.cancelled       
-1              0.000208     0.001500     0.001500   <frozen importlib._bootstrap>:1056 _find_spec                                                                         
-41             0.000206     0.000206     0.000005   /data/data/com.termux/files/usr/lib/python3.11/contextlib.py:543 ExitStack.__enter__                                  
-34             0.000201     0.000201     0.000006   __builtin__.<method 'clear' of 'dict' objects>                                                                        
-2              0.000199     0.000199     0.000100   /storage/emulated/0/projects/pybackup/opexec.py:42 <listcomp>                                                         
-3              0.000198     0.002323     0.000774   /data/data/com.termux/files/usr/lib/python3.11/threading.py:1118 Thread._wait_for_tstate_lock                         
-3              0.000197     0.000291     0.000097   /data/data/com.termux/files/usr/lib/python3.11/threading.py:832 <listcomp>                                            
-12/10          0.000196     0.004026     0.000336   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:304 _RecursiveWildcardSelector.__init__                     
-24             0.000194     0.000194     0.000008   /storage/emulated/0/projects/pybackup/gitclasses.py:32 GitIndex.SDh                                                   
-3              0.000193     0.000275     0.000092   /data/data/com.termux/files/usr/lib/python3.11/copyreg.py:113 _slotnames                                              
-2              0.000192     0.007919     0.003959   /storage/emulated/0/projects/pybackup/cscopy.py:88 fsynclm                                                            
-7              0.000192     0.000297     0.000042   /storage/emulated/0/projects/pybackup/gitops.py:14 GitAdd.ischanged                                                   
-1              0.000185     0.000822     0.000822   <frozen importlib._bootstrap_external>:1604 FileFinder.find_spec                                                      
-45             0.000184     0.000184     0.000004   __builtin__.<method 'remove' of 'list' objects>                                                                       
-3              0.000182     0.000216     0.000072   /storage/emulated/0/projects/pybackup/cscopy.py:291 CSCopy.__init__                                                   
-1              0.000182     0.002080     0.002080   /storage/emulated/0/projects/pybackup/ldsv.py:118 saveldh                                                             
-14             0.000179     0.000256     0.000018   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:162 SubPattern.__getitem__                               
-12             0.000176     0.000176     0.000015   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:231 Tokenizer.__next                                     
-4/2            0.000172     0.000229     0.000057   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:172 SubPattern.getwidth                                  
-2              0.000172     0.040589     0.020294   /storage/emulated/0/projects/pybackup/opexec.py:39 nts                                                                
-1              0.000171     0.478632     0.478632   /storage/emulated/0/projects/pybackup/ldsv.py:41 saveldlls                                                            
-34             0.000168     0.000168     0.000005   /data/data/com.termux/files/usr/lib/python3.11/selectors.py:199 PollSelector.__enter__                                
-5              0.000166     0.000262     0.000052   /storage/emulated/0/projects/pybackup/sd.py:92 Ext3.SDh                                                               
-1              0.000163     0.008329     0.008329   /storage/emulated/0/projects/pybackup/gitops.py:17 GitAdd.__call__                                                    
-1              0.000163     0.005752     0.005752   <frozen importlib._bootstrap>:1167 _find_and_load                                                                     
-20             0.000162     0.000162     0.000008   builtins.round                                                                                                        
-1              0.000160     0.000220     0.000220   <frozen importlib._bootstrap>:179 _get_module_lock                                                                    
-2              0.000158     0.001179     0.000590   /data/data/com.termux/files/usr/lib/python3.11/re/_compiler.py:571 _code                                              
-7              0.000157     0.000248     0.000035   /storage/emulated/0/projects/pybackup/gitops.py:50 GitCommit.ischanged                                                
-10             0.000155     0.000218     0.000022   /storage/emulated/0/projects/pybackup/localcopy.py:121 LocalCopy.__init__                                             
-2              0.000154     18.950129    9.475064   /storage/emulated/0/projects/pybackup/opexec.py:62 opExec                                                             
-2              0.000154     0.000231     0.000115   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:407 Inotify.sync_timeout        
-5              0.000153     0.301538     0.060308   /storage/emulated/0/projects/pybackup/opexec.py:16 clean                                                              
-10             0.000153     0.000153     0.000015   /storage/emulated/0/projects/pybackup/localcopy.py:21 FileDiff.__init__                                               
-8              0.000151     0.091017     0.011377   /storage/emulated/0/projects/pybackup/gitclasses.py:105 GitRepo.sdhck                                                 
-1              0.000150     0.000150     0.000150   /storage/emulated/0/projects/pybackup/dirlist.py:1 <module>                                                           
-4              0.000150     0.000309     0.000077   /data/data/com.termux/files/usr/lib/python3.11/enum.py:1501 RegexFlag.__and__                                         
-1              0.000149     0.002730     0.002730   <frozen importlib._bootstrap_external>:934 SourceFileLoader.exec_module                                               
-6              0.000146     0.000336     0.000056   /storage/emulated/0/projects/pybackup/config.py:118 addPre                                                            
-1              0.000145     0.732387     0.732387   /storage/emulated/0/projects/pybackup/ldsv.py:140 load_all                                                            
-6              0.000144     0.000186     0.000031   /data/data/com.termux/files/usr/lib/python3.11/threading.py:1446 current_thread                                       
-4              0.000144     0.000352     0.000088   /data/data/com.termux/files/usr/lib/python3.11/threading.py:389 Condition.notify_all                                  
-2              0.000138     0.000591     0.000295   /data/data/com.termux/files/usr/lib/python3.11/json/__init__.py:299 loads                                             
-1              0.000136     0.007367     0.007367   /storage/emulated/0/projects/pybackup/gitops.py:53 GitCommit.__call__                                                 
-3              0.000125     0.000406     0.000135   /data/data/com.termux/files/usr/lib/python3.11/threading.py:555 Event.__init__                                        
-6              0.000125     0.000125     0.000021   /data/data/com.termux/files/usr/lib/python3.11/threading.py:1199 _MainThread.daemon                                   
-11             0.000125     0.000125     0.000011   __builtin__.<method 'locked' of '_thread.lock' objects>                                                               
-3              0.000124     0.000164     0.000055   /data/data/com.termux/files/usr/lib/python3.11/threading.py:276 Condition._acquire_restore                            
-2              0.000122     0.000423     0.000212   <frozen importlib._bootstrap_external>:437 cache_from_source                                                          
-1              0.000119     0.000971     0.000971   /storage/emulated/0/projects/pybackup/ldsv.py:96 loadldh                                                              
-1              0.000118     0.000558     0.000558   <frozen importlib._bootstrap>:493 _init_module_attrs                                                                  
-6              0.000118     0.000176     0.000029   <frozen importlib._bootstrap_external>:128 <listcomp>                                                                 
-17             0.000117     0.000117     0.000007   /storage/emulated/0/projects/pybackup/opbase.py:39 LocalCopy.__init__                                                 
-1              0.000117     0.000960     0.000960   <frozen importlib._bootstrap_external>:1464 _get_spec                                                                 
-1              0.000116     0.000555     0.000555   <frozen importlib._bootstrap_external>:727 _compile_bytecode                                                          
-1              0.000115     19.133271    19.133271  /storage/emulated/0/projects/pybackup/pybackup.py:116 rt2                                                             
-6              0.000114     0.000320     0.000053   <frozen importlib._bootstrap_external>:126 _path_join                                                                 
-3              0.000111     0.000318     0.000106   <frozen os>:674 _Environ.__getitem__                                                                                  
-8              0.000110     0.000150     0.000019   /storage/emulated/0/projects/pybackup/gitclasses.py:89 <listcomp>                                                     
-1              0.000105     0.001065     0.001065   <frozen importlib._bootstrap_external>:1127 SourceFileLoader.get_data                                                 
-2              0.000105     0.000136     0.000068   /storage/emulated/0/projects/pybackup/cscopy.py:165 BVars.__init__                                                    
-3              0.000105     0.000152     0.000051   <frozen os>:756 encode                                                                                                
-3              0.000102     0.000271     0.000090   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:546 Ext3.__fspath__                                         
-8              0.000099     0.000137     0.000017   /storage/emulated/0/projects/pybackup/gitclasses.py:68 <listcomp>                                                     
-3              0.000098     0.000169     0.000056   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:536 Ext3.__str__                                            
-8              0.000096     0.000202     0.000025   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:252 Tokenizer.get                                        
-3              0.000095     0.000117     0.000039   /data/data/com.termux/files/usr/lib/python3.11/_weakrefset.py:85 WeakSet.add                                          
-1              0.000092     0.003496     0.003496   <frozen importlib._bootstrap>:666 _load_unlocked                                                                      
-2              0.000089     0.000135     0.000067   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:222 Tokenizer.__init__                                   
-1              0.000088     0.003597     0.003597   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:490 Inotify.close               
-3              0.000087     0.000087     0.000029   /data/data/com.termux/files/usr/lib/python3.11/threading.py:804 _newname                                              
-1              0.000087     0.003676     0.003676   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:260 _PosixFlavour.compile_pattern                           
-3              0.000084     0.000113     0.000038   <frozen importlib._bootstrap_external>:84 _unpack_uint32                                                              
-11             0.000083     0.000083     0.000008   _thread.get_ident                                                                                                     
-4              0.000082     0.000082     0.000021   __builtin__.<method 'match' of 're.Pattern' objects>                                                                  
-1              0.000081     0.005083     0.005083   <frozen importlib._bootstrap>:1122 _find_and_load_unlocked                                                            
-1              0.000079     0.000349     0.000349   <frozen importlib._bootstrap>:169 _ModuleLockManager.__enter__                                                        
-11             0.000074     0.000074     0.000007   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:43 _is_wildcard_pattern                                     
-1              0.000073     0.000456     0.000456   /storage/emulated/0/projects/pybackup/ldsv.py:158 save_bp                                                             
-1              0.000071     0.000651     0.000651   <frozen importlib._bootstrap>:566 module_from_spec                                                                    
-1              0.000069     0.000095     0.000095   /data/data/com.termux/files/usr/lib/python3.11/fnmatch.py:74 translate                                                
-2              0.000069     0.000069     0.000034   /data/data/com.termux/files/usr/lib/python3.11/json/decoder.py:343 JSONDecoder.raw_decode                             
-5              0.000067     0.000095     0.000019   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:284 Tokenizer.tell                                       
-7              0.000066     0.000066     0.000009   <frozen importlib._bootstrap>:244 _verbose_message                                                                    
-1              0.000066     0.003663     0.003663   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:484 Inotify.__exit__            
-1              0.000065     0.000409     0.000409   /data/data/com.termux/files/usr/lib/python3.11/enum.py:1438 <listcomp>                                                
-1              0.000065     0.000101     0.000101   ..ata/com.termux/files/usr/lib/python3.11/site-packages/_distutils_hack/__init__.py:89 DistutilsMetaFinder.find_spec  
-3              0.000064     0.000064     0.000021   __builtin__.<method 'difference_update' of 'set' objects>                                                             
-5              0.000063     0.000086     0.000017   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:170 SubPattern.append                                    
-1              0.000063     0.000181     0.000181   <frozen importlib._bootstrap_external>:1599 FileFinder._get_spec                                                      
-12             0.000063     0.000063     0.000005   /storage/emulated/0/projects/pybackup/findde.py:184 <listcomp>                                                        
-1              0.000062     0.000107     0.000107   <frozen importlib._bootstrap_external>:778 spec_from_file_location                                                    
-3              0.000061     0.000061     0.000020   /data/data/com.termux/files/usr/lib/python3.11/threading.py:1317 _make_invoke_excepthook                              
-7              0.000060     0.000060     0.000009   /storage/emulated/0/projects/pybackup/sd.py:104 CS.isremote                                                           
-7              0.000059     0.000091     0.000013   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:247 Tokenizer.match                                      
-6              0.000059     0.000084     0.000014   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:158 SubPattern.__len__                                   
-2              0.000057     0.000156     0.000078   <frozen importlib._bootstrap_external>:132 _path_split                                                                
-2              0.000057     0.000251     0.000125   <frozen importlib._bootstrap>:233 _call_with_frames_removed                                                           
-2              0.000055     0.000074     0.000037   /storage/emulated/0/projects/pybackup/sd.py:123 CS.Dlls_xt                                                            
-1              0.000054     0.003746     0.003746   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:349 _WildcardSelector.__init__                              
-5              0.000050     0.000067     0.000013   /data/data/com.termux/files/usr/lib/python3.11/enum.py:116 _iter_bits_lsb                                             
-8              0.000050     0.000050     0.000006   /storage/emulated/0/projects/pybackup/config.py:66 ppre                                                               
-3              0.000050     0.000074     0.000025   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:367 _escape                                              
-3              0.000050     0.000066     0.000022   /data/data/com.termux/files/usr/lib/python3.11/threading.py:273 Condition._release_save                               
-4              0.000048     0.000065     0.000016   /data/data/com.termux/files/usr/lib/python3.11/re/_compiler.py:568 isstring                                           
-1              0.000046     0.000046     0.000046   __builtin__.<method 'close' of 'select.epoll' objects>                                                                
-1              0.000045     0.000298     0.000298   <frozen importlib._bootstrap_external>:567 _get_cached                                                                
-2              0.000043     0.000099     0.000049   builtins.max                                                                                                          
-1              0.000042     0.000056     0.000056   <frozen importlib._bootstrap>:125 _ModuleLock.release                                                                 
-4              0.000041     0.000059     0.000015   <frozen importlib._bootstrap>:1032 _ImportLockContext.__exit__                                                        
-2              0.000041     0.000051     0.000026   /storage/emulated/0/projects/pybackup/edge.py:35 Edge.rclr                                                            
-1              0.000041     0.000113     0.000113   <frozen importlib._bootstrap_external>:642 _classify_pyc                                                              
-4              0.000040     0.000055     0.000014   <frozen importlib._bootstrap_external>:134 <genexpr>                                                                  
-1              0.000040     0.000050     0.000050   <frozen importlib._bootstrap>:100 _ModuleLock.acquire                                                                 
-7              0.000039     0.000039     0.000006   __builtin__.<method 'lower' of 'str' objects>                                                                         
-4              0.000039     0.000057     0.000014   <frozen importlib._bootstrap>:1028 _ImportLockContext.__enter__                                                       
-4              0.000039     0.000039     0.000010   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:109 SubPattern.__init__                                  
-1              0.000039     0.000094     0.000094   <frozen importlib._bootstrap>:173 _ModuleLockManager.__exit__                                                         
-4              0.000038     0.000054     0.000013   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:79 State.groups                                          
-2              0.000037     0.000055     0.000028   <frozen os>:760 decode                                                                                                
-3              0.000035     0.000274     0.000091   <frozen importlib._bootstrap_external>:140 _path_stat                                                                 
-7              0.000034     0.000034     0.000005   /storage/emulated/0/projects/pybackup/netup.py:4 netup                                                                
-6              0.000034     0.000034     0.000006   _imp.acquire_lock                                                                                                     
-1              0.000033     0.000039     0.000039   <frozen importlib._bootstrap_external>:599 SourceFileLoader._check_name_wrapper                                       
-6              0.000033     0.000033     0.000006   __builtin__.<method 'release' of '_thread.lock' objects>                                                              
-1              0.000033     0.000046     0.000046   /data/data/com.termux/files/usr/lib/python3.11/re/_compiler.py:434 _get_literal_prefix                                
-1              0.000033     0.003870     0.003870   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:380 _RecursiveWildcardSelector.__init__                     
-1              0.000033     0.003495     0.003495   /data/data/com.termux/files/usr/lib/python3.11/re/__init__.py:225 compile                                             
-1              0.000032     0.000183     0.000183   builtins.exec                                                                                                         
-1              0.000032     0.028760     0.028760   /storage/emulated/0/projects/pybackup/config.py:427 cull_dirs                                                         
-2              0.000032     0.000032     0.000016   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:73 State.__init__                                        
-1              0.000031     0.000050     0.000050   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:894 _parse_flags                                         
-2              0.000030     0.000038     0.000019   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:954 fix_flags                                            
+113228/552     8.230243     20.009292    0.000177   /storage/emulated/0/projects/pybackup/bhash.py:14 bhu                                                                 
+31165          5.626789     10.105611    0.000324   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:56 _PosixFlavour.parse_parts                                
+27231          5.206794     7.642952     0.000281   posix.stat                                                                                                            
+113799         2.416209     7.498365     0.000066   <frozen os>:806 fsencode                                                                                              
+144761         2.231429     3.292833     0.000023   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:536 Fat32.__str__                                           
+144648         2.058529     5.344826     0.000037   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:546 Fat32.__fspath__                                        
+87456          2.043512     3.546041     0.000041   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:590 Ext3.__lt__                                             
+190070         2.019137     2.470392     0.000013   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:239 _PosixFlavour.splitroot                                 
+338028         1.809965     1.809965     0.000005   __builtin__.<method 'update' of '_blake2.blake2b' objects>                                                            
+204676         1.585598     1.711583     0.000008   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:569 Fat32._cparts                                           
+113747         1.391631     8.887380     0.000078   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:555 Ext3.__bytes__                                          
+131714         1.347310     4.089576     0.000031   posix.fspath                                                                                                          
+225352         1.274931     1.274931     0.000006   _struct.pack                                                                                                          
+262835         1.171646     1.171646     0.000004   builtins.isinstance                                                                                                   
+31083          1.115438     11.537783    0.000371   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:484 _parse_args                                             
+241058         1.047440     1.047440     0.000004   __builtin__.<method 'append' of 'list' objects>                                                                       
+12737          0.997818     5.757130     0.000452   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:703 Fat32.relative_to                                       
+15322          0.950378     2.348875     0.000153   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:353 _WildcardSelector._select_from                          
+180741         0.949116     0.949116     0.000005   sys.intern                                                                                                            
+12617          0.902073     10.801206    0.000856   /storage/emulated/0/projects/pybackup/sd.py:257 es                                                                    
+34132          0.885885     1.484143     0.000043   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:583 Ext3.__hash__                                           
+41853          0.733527     1.061458     0.000025   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:523 _format_parsed_parts                                    
+55             0.727379     19.223080    0.349511   /storage/emulated/0/projects/pybackup/sd.py:235 Ext3.getfl                                                            
+113802         0.628656     0.628656     0.000006   __builtin__.<method 'encode' of 'str' objects>                                                                        
+4748           0.622482     0.622482     0.000131   posix.lstat                                                                                                           
+57             0.616705     4.223228     0.074092   __builtin__.<method 'sort' of 'list' objects>                                                                         
+4              0.594666     0.681785     0.170446   _pickle.dump                                                                                                          
+39374          0.582021     0.874390     0.000022   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:515 _from_parsed_parts                                      
+10673          0.574011     0.574011     0.000054   builtins.next                                                                                                         
+18153          0.528433     7.929644     0.000437   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:504 _from_parts                                             
+17323          0.511349     8.436319     0.000487   /storage/emulated/0/projects/pybackup/sd.py:20 __new__                                                                
+6786/1408      0.482394     0.836501     0.000123   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:383 _RecursiveWildcardSelector._iterate_directories         
+13439          0.463608     1.624211     0.000121   /storage/emulated/0/projects/pybackup/sd.py:284 Fat32.__init__                                                        
+5674/1127      0.458755     1.670940     0.000294   <frozen os>:345 _walk                                                                                                 
+57619          0.439867     0.439867     0.000008   __builtin__.<built-in method __new__ of type object at 0xb3160a5c>                                                    
+27228          0.437485     8.080109     0.000297   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:1008 Ext3.stat                                              
+13980          0.432057     5.201411     0.000372   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:402 _RecursiveWildcardSelector._select_from                 
+17323          0.422225     0.719331     0.000042   /storage/emulated/0/projects/pybackup/sd.py:23 Ext3.__init__                                                          
+3783           0.406003     0.568037     0.000150   posix.scandir                                                                                                         
+13971          0.392029     4.772932     0.000342   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:1261 Ext3.is_file                                           
+83766/83750    0.388528     0.388679     0.000005   builtins.len                                                                                                          
+18153          0.367843     8.297486     0.000457   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:868 __new__                                                 
+14192          0.363227     0.363227     0.000026   __builtin__.<method 'fullmatch' of 're.Pattern' objects>                                                              
+4              0.341241     1.158642     0.289661   /storage/emulated/0/projects/pybackup/config.py:416 <listcomp>                                                        
+41869          0.328030     0.328030     0.000008   __builtin__.<method 'join' of 'str' objects>                                                                          
+15282          0.326804     0.681241     0.000045   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:877 Ext3._make_child_relpath                                
+17298          0.312128     1.030497     0.000060   /storage/emulated/0/projects/pybackup/sd.py:155 Ext3.__init__                                                         
+130            0.292928     0.445111     0.003424   /storage/emulated/0/projects/pybackup/edge.py:65 findEdge                                                             
+13793          0.263087     0.263087     0.000019   /storage/emulated/0/projects/pybackup/sd.py:47 Ext3.__init__                                                          
+13793          0.263076     1.119484     0.000081   /storage/emulated/0/projects/pybackup/sd.py:232 Ext3.__init__                                                         
+1071           0.243923     0.493861     0.000461   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:427 Inotify.add_watch           
+53950          0.243321     0.243321     0.000005   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:257 _PosixFlavour.casefold_parts                            
+11947          0.239624     0.239624     0.000020   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:745 Fat32.parts                                             
+11162          0.238302     0.477722     0.000043   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:777 Ext3.parent                                             
+5059           0.235451     0.421610     0.000083   <frozen posixpath>:71 join                                                                                            
+12617          0.232212     0.325971     0.000026   /storage/emulated/0/projects/pybackup/config.py:460 ns_trunc2ms                                                       
+27174          0.197571     0.197571     0.000007   __builtin__.<method 'lstrip' of 'str' objects>                                                                        
+14268          0.194601     0.283228     0.000020   __builtin__.<method 'add' of 'set' objects>                                                                           
+55             0.184056     33.848126    0.615420   /storage/emulated/0/projects/pybackup/sd.py:250 Ext3.getdll                                                           
+760/740        0.177266     0.913273     0.001202   <frozen posixpath>:421 _joinrealpath                                                                                  
+23800/20671    0.164973     0.282485     0.000012   builtins.hash                                                                                                         
+13970          0.164851     5.378869     0.000385   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:956 Ext3.rglob                                              
+20382          0.150387     0.150387     0.000007   /storage/emulated/0/projects/pybackup/edge.py:19 Edge.__eq__                                                          
+6356           0.143828     0.230626     0.000036   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:578 Fat32.__eq__                                            
+31167          0.140954     0.140954     0.000005   __builtin__.<method 'reverse' of 'list' objects>                                                                      
+1869           0.136335     0.866011     0.000463   /storage/emulated/0/projects/pybackup/sd.py:215 es                                                                    
+23524          0.122098     0.122098     0.000005   __builtin__.<method 'is_dir' of 'posix.DirEntry' objects>                                                             
+14500          0.121697     0.121697     0.000008   /storage/emulated/0/projects/pybackup/de.py:10 FSe.__init__                                                           
+27952          0.118803     0.118803     0.000004   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:327 _TerminatingSelector._select_from                       
+14500          0.108214     0.108214     0.000007   <string>:2 DE.__init__                                                                                                
+1              0.106935     3.077571     3.077571   /storage/emulated/0/projects/pybackup/pybackup.py:37 wsetup                                                           
+14486          0.103895     0.103895     0.000007   math.floor                                                                                                            
+695            0.095578     0.095578     0.000138   builtins.print                                                                                                        
+3505           0.090371     0.335825     0.000096   /storage/emulated/0/projects/pybackup/sd.py:291 CS.__init__                                                           
+9705           0.086346     0.086346     0.000009   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:479 Ext3.__reduce__                                         
+17340          0.086010     0.086010     0.000005   __builtin__.<method 'items' of 'dict' objects>                                                                        
+11102          0.084660     0.084660     0.000008   /storage/emulated/0/projects/pybackup/config.py:417 <listcomp>                                                        
+2              0.081893     0.643775     0.321887   /storage/emulated/0/projects/pybackup/dirlist.py:207 dllcmp                                                           
+13971          0.081037     0.081037     0.000006   _stat.S_ISREG                                                                                                         
+6611           0.075859     0.114855     0.000017   <frozen posixpath>:41 _get_sep                                                                                        
+4              0.074836     0.773762     0.193440   _pickle.load                                                                                                          
+370            0.074772     1.628487     0.004401   /storage/emulated/0/projects/pybackup/findde.py:21 relative_to_either                                                 
+6286           0.073269     0.268679     0.000043   /storage/emulated/0/projects/pybackup/de.py:26 DE.__hash__                                                            
+556            0.071810     35.761129    0.064319   /storage/emulated/0/projects/pybackup/sd.py:167 Ext3.Dlld                                                             
+6228           0.071171     0.294503     0.000047   /storage/emulated/0/projects/pybackup/de.py:23 DE.__eq__                                                              
+532            0.070099     0.070099     0.000132   posix.read                                                                                                            
+45             0.069422     0.287142     0.006381   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:2020 Popen._communicate                                  
+12617          0.058583     0.058583     0.000005   /storage/emulated/0/projects/pybackup/sd.py:272 <lambda>                                                              
+217            0.056247     0.059536     0.000274   io.open                                                                                                               
+3505           0.056004     0.230093     0.000066   /storage/emulated/0/projects/pybackup/sd.py:190 CS.__init__                                                           
+6564           0.055235     0.055235     0.000008   __builtin__.<method 'startswith' of 'str' objects>                                                                    
+57             0.052689     0.052689     0.000924   __builtin__.<method 'clear' of 'set' objects>                                                                         
+552            0.051507     54.174916    0.098143   /storage/emulated/0/projects/pybackup/sd.py:158 Ext3.sdh_d                                                            
+11207          0.051440     0.051440     0.000005   builtins.any                                                                                                          
+4              0.046897     0.046897     0.011724   /data/data/com.termux/files/usr/lib/python3.11/json/decoder.py:343 JSONDecoder.raw_decode                             
+1500           0.042817     0.088645     0.000059   <frozen posixpath>:60 isabs                                                                                           
+2711           0.039756     0.507751     0.000187   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:934 Ext3._scandir                                           
+1138           0.037150     0.049915     0.000044   /storage/emulated/0/projects/pybackup/sd.py:54 Ext3.Dll                                                               
+3707           0.036601     0.036601     0.000010   __builtin__.<method 'split' of 'str' objects>                                                                         
+378            0.034118     0.068254     0.000181   /data/data/com.termux/files/usr/lib/python3.11/selectors.py:402 PollSelector.select                                   
+3505           0.033697     0.033697     0.000010   /storage/emulated/0/projects/pybackup/sd.py:101 CS.__init__                                                           
+740            0.033600     1.131275     0.001529   <frozen posixpath>:412 realpath                                                                                       
+740            0.032003     0.151098     0.000204   <frozen posixpath>:397 abspath                                                                                        
+4749           0.031377     0.031377     0.000007   __builtin__.<method 'endswith' of 'str' objects>                                                                      
+1023           0.030854     0.313965     0.000307   <frozen posixpath>:164 islink                                                                                         
+552            0.030402     20.059200    0.036339   /storage/emulated/0/projects/pybackup/bhash.py:41 blakeHash                                                           
+3783           0.028457     0.028457     0.000008   __builtin__.<method '__exit__' of 'posix.ScandirIterator' objects>                                                    
+3725           0.026339     0.026339     0.000007   __builtin__.<method 'partition' of 'str' objects>                                                                     
+57             0.025700     0.075598     0.001326   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:518 Inotify._get                
+378            0.025590     0.025590     0.000068   __builtin__.<method 'poll' of 'select.poll' objects>                                                                  
+119            0.025189     0.025189     0.000212   __builtin__.<method 'read' of '_io.BufferedReader' objects>                                                           
+1231           0.024691     0.043408     0.000035   /data/data/com.termux/files/usr/lib/python3.11/enum.py:688 __call__                                                   
+558            0.023828     0.030800     0.000055   /storage/emulated/0/projects/pybackup/sd.py:84 Ext3.SDh                                                               
+1869           0.022240     0.032376     0.000017   /storage/emulated/0/projects/pybackup/config.py:456 ts_trunc2ms                                                       
+771            0.022084     0.027401     0.000036   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:171 Watch.__init__              
+10             0.020826     54.460686    5.446069   /storage/emulated/0/projects/pybackup/status.py:39 src_statuses                                                       
+101            0.020582     0.020582     0.000204   time.sleep                                                                                                            
+134            0.020572     0.020572     0.000154   /storage/emulated/0/projects/pybackup/opexec.py:30 istgt                                                              
+740            0.019968     0.035223     0.000048   <frozen posixpath>:389 normpath                                                                                       
+3376           0.018299     0.018299     0.000005   _stat.S_ISLNK                                                                                                         
+1231           0.018198     0.018718     0.000015   /data/data/com.termux/files/usr/lib/python3.11/enum.py:1093 __new__                                                   
+1869           0.018026     0.018026     0.000010   __builtin__.<method 'timestamp' of 'datetime.datetime' objects>                                                       
+4              0.018002     1.176644     0.294161   /storage/emulated/0/projects/pybackup/config.py:415 cull_DEs                                                          
+552            0.017611     54.232655    0.098248   /storage/emulated/0/projects/pybackup/sd.py:38 Ext3.sdhck                                                             
+1              0.016332     0.123773     0.123773   /storage/emulated/0/projects/pybackup/pybackup.py:74 proc_events                                                      
+2747           0.015492     0.015492     0.000006   __builtin__.<method '__exit__' of '_thread.RLock' objects>                                                            
+52             0.015028     0.016432     0.000316   _posixsubprocess.fork_exec                                                                                            
+52             0.014949     0.119072     0.002290   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:807 Popen.__init__                                       
+123            0.014918     0.109129     0.000887   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:602 Inotify.sync_get            
+127            0.014758     0.014758     0.000116   __builtin__.<method '__exit__' of '_io._IOBase' objects>                                                              
+90             0.014591     0.014591     0.000162   __builtin__.<method 'poll' of 'select.epoll' objects>                                                                 
+1              0.014228     1.686887     1.686887   /storage/emulated/0/projects/pybackup/sd.py:206 CS.getdll                                                             
+552            0.014161     0.014161     0.000026   __builtin__.<method 'digest' of '_blake2.blake2b' objects>                                                            
+354            0.013499     0.042856     0.000121   /storage/emulated/0/projects/pybackup/sd.py:277 Ext3.__init__                                                         
+52             0.013412     0.077220     0.001485   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:1756 Popen._execute_child                                
+1869           0.012958     0.012958     0.000007   __builtin__.fromisoformat                                                                                             
+2023           0.011760     0.011760     0.000006   builtins.hasattr                                                                                                      
+616            0.010885     0.043554     0.000071   /storage/emulated/0/projects/pybackup/sd.py:26 Ext3.sdh_f                                                             
+118            0.010409     0.118087     0.001001   /storage/emulated/0/projects/pybackup/localcopy.py:88 sha256sumf                                                      
+195            0.009385     0.009385     0.000048   posix.close                                                                                                           
+464            0.009360     0.013650     0.000029   /storage/emulated/0/projects/pybackup/ldsv.py:164 chk_sq                                                              
+1072           0.008930     0.008930     0.000008   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/_ffi.py:21 check_return                     
+423            0.008920     0.012519     0.000030   /data/data/com.termux/files/usr/lib/python3.11/selectors.py:66 _SelectorMapping.__len__                               
+4              0.008641     0.603033     0.150758   /storage/emulated/0/projects/pybackup/localcopy.py:127 LocalCopy.__call__                                             
+1869           0.008617     0.008617     0.000005   /storage/emulated/0/projects/pybackup/sd.py:226 <lambda>                                                              
+58             0.008560     0.022209     0.000383   /data/data/com.termux/files/usr/lib/python3.11/queue.py:154 Queue.get                                                 
+311            0.008396     0.008396     0.000027   posix.getcwd                                                                                                          
+753            0.008035     0.008035     0.000011   /storage/emulated/0/projects/pybackup/config.py:70 src                                                                
+134/96         0.008019     0.012812     0.000096   /data/data/com.termux/files/usr/lib/python3.11/site-packages/tarjan/__init__.py:118 visit                             
+1129           0.008016     0.008016     0.000007   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:418 Inotify.fd                  
+59             0.007929     0.170590     0.002891   /storage/emulated/0/projects/pybackup/localcopy.py:25 FileDiff.chkdiff                                                
+740            0.007845     0.007845     0.000011   posix._path_normpath                                                                                                  
+180            0.007552     0.007552     0.000042   __builtin__.<method 'close' of '_io.TextIOWrapper' objects>                                                           
+52             0.007515     0.427487     0.008221   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:506 run                                                  
+52             0.007273     0.007273     0.000140   posix.waitpid                                                                                                         
+152            0.007201     0.019715     0.000130   /storage/emulated/0/projects/pybackup/edge.py:81 addDep                                                               
+118            0.007094     0.081935     0.000694   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:1046 Fat32.read_bytes                                       
+5              0.006993     1.333382     0.266676   /storage/emulated/0/projects/pybackup/findde.py:82 findSis                                                            
+1              0.006796     0.143047     0.143047   /storage/emulated/0/projects/pybackup/pybackup.py:60 cb1                                                              
+52             0.006312     0.023083     0.000444   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:1280 Popen._close_pipe_fds                               
+1              0.006273     0.006312     0.006312   /storage/emulated/0/projects/pybackup/sd.py:116 CS.Dll                                                                
+53             0.006045     0.415197     0.007834   /storage/emulated/0/projects/pybackup/status.py:8 changed_ops                                                         
+45             0.006023     0.426752     0.009483   /storage/emulated/0/projects/pybackup/asyncrun.py:30 a_run1                                                           
+311            0.005898     0.064310     0.000207   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:1230 Ext3.exists                                            
+211            0.005802     0.048467     0.000230   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:1245 Ext3.is_dir                                            
+180            0.005652     0.005652     0.000031   __builtin__.<method 'replace' of 'str' objects>                                                                       
+142            0.005604     0.005604     0.000039   posix.pipe                                                                                                            
+1300           0.005447     0.005447     0.000004   __builtin__.<method 'is_symlink' of 'posix.DirEntry' objects>                                                         
+552            0.005345     0.005345     0.000010   _struct.unpack                                                                                                        
+771            0.005316     0.005316     0.000007   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:209 Watch.path                  
+90             0.005316     0.015591     0.000173   /data/data/com.termux/files/usr/lib/python3.11/queue.py:122 Queue.put                                                 
+180            0.005252     0.008661     0.000048   /data/data/com.termux/files/usr/lib/python3.11/selectors.py:21 _fileobj_to_fd                                         
+1119           0.005150     0.005150     0.000005   /storage/emulated/0/projects/pybackup/sd.py:50 Ext3.isremote                                                          
+423            0.004913     0.004913     0.000012   /data/data/com.termux/files/usr/lib/python3.11/selectors.py:275 PollSelector._key_from_fd                             
+462            0.004789     0.006656     0.000014   /storage/emulated/0/projects/pybackup/edge.py:16 Edge.__hash__                                                        
+135            0.004724     0.022616     0.000168   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:530 Ext3._make_child                                        
+213            0.004607     0.007949     0.000037   /data/data/com.termux/files/usr/lib/python3.11/threading.py:264 Condition.__enter__                                   
+90             0.004279     0.007520     0.000084   /data/data/com.termux/files/usr/lib/python3.11/contextlib.py:509 ExitStack.callback                                   
+423            0.004150     0.004150     0.000010   /data/data/com.termux/files/usr/lib/python3.11/selectors.py:272 PollSelector.get_map                                  
+1              0.004052     0.709151     0.709151   /storage/emulated/0/projects/pybackup/ldsv.py:161 save_th                                                             
+118            0.004003     0.004003     0.000034   _hashlib.openssl_sha256                                                                                               
+2              0.003971     0.018801     0.009401   /storage/emulated/0/projects/pybackup/toposort.py:4 topological_sort                                                  
+105            0.003965     0.009341     0.000089   /storage/emulated/0/projects/pybackup/config.py:431 isbaddir                                                          
+90             0.003917     0.011726     0.000130   /data/data/com.termux/files/usr/lib/python3.11/selectors.py:234 PollSelector.register                                 
+52             0.003824     0.006565     0.000126   <frozen posixpath>:150 dirname                                                                                        
+52             0.003796     0.007736     0.000149   /data/data/com.termux/files/usr/lib/python3.11/contextlib.py:546 ExitStack.__exit__                                   
+149            0.003770     0.014629     0.000098   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:1979 Popen._wait                                         
+468            0.003765     0.003765     0.000008   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:1237 Popen._remaining_time                               
+123            0.003722     0.112852     0.000917   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:630 Inotify.__next__            
+90             0.003674     0.016180     0.000180   /data/data/com.termux/files/usr/lib/python3.11/selectors.py:351 PollSelector.register                                 
+52             0.003644     0.295323     0.005679   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:1163 Popen.communicate                                   
+58             0.003560     0.015746     0.000271   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:530 Fat32._make_child                                       
+88             0.003559     0.061377     0.000697   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:940 Fat32.glob                                              
+180            0.003414     0.004317     0.000024   /data/data/com.termux/files/usr/lib/python3.11/enum.py:1454 Mask.__contains__                                         
+213            0.003342     0.003342     0.000016   __builtin__.<method '__enter__' of '_thread.lock' objects>                                                            
+213            0.003336     0.004638     0.000022   /data/data/com.termux/files/usr/lib/python3.11/threading.py:267 Condition.__exit__                                    
+32             0.003315     0.003315     0.000104   __builtin__.<method 'sub' of 're.Pattern' objects>                                                                    
+58             0.003180     0.022334     0.000385   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:309 Event.path                  
+182            0.003158     0.003158     0.000017   __builtin__.<method 'decode' of 'bytes' objects>                                                                      
+378            0.003141     0.003141     0.000008   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:1245 Popen._check_timeout                                
+152            0.003108     0.005051     0.000033   /storage/emulated/0/projects/pybackup/edge.py:8 Edge.__init__                                                         
+55             0.003044     0.004342     0.000079   /storage/emulated/0/projects/pybackup/sd.py:62 Ext3.Dll                                                               
+152            0.003007     0.007669     0.000050   /data/data/com.termux/files/usr/lib/python3.11/threading.py:359 Condition.notify                                      
+90             0.003006     0.011731     0.000130   /data/data/com.termux/files/usr/lib/python3.11/selectors.py:365 PollSelector.unregister                               
+11/6           0.002985     0.007596     0.000691   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:507 _parse                                               
+1              0.002898     0.036803     0.036803   /storage/emulated/0/projects/pybackup/config.py:428 <listcomp>                                                        
+155            0.002781     0.004751     0.000031   /data/data/com.termux/files/usr/lib/python3.11/threading.py:279 Condition._is_owned                                   
+90             0.002780     0.004697     0.000052   <frozen os>:818 fsdecode                                                                                              
+384            0.002764     0.002764     0.000007   time.time                                                                                                             
+58             0.002724     0.005477     0.000094   /data/data/com.termux/files/usr/lib/python3.11/enum.py:1501 Mask.__and__                                              
+167            0.002682     0.002682     0.000016   __builtin__.<method 'acquire' of '_thread.lock' objects>                                                              
+125            0.002626     0.007796     0.000062   /storage/emulated/0/projects/pybackup/config.py:51 SetDict.add                                                        
+180            0.002625     0.011286     0.000063   /data/data/com.termux/files/usr/lib/python3.11/selectors.py:215 PollSelector._fileobj_lookup                          
+59             0.002621     0.173211     0.002936   /storage/emulated/0/projects/pybackup/localcopy.py:59 FileDiff.should_copy                                            
+1              0.002530     0.087857     0.087857   /storage/emulated/0/projects/pybackup/config.py:220 f1                                                                
+116            0.002514     0.003618     0.000031   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:253 Event.watch                 
+118            0.002479     0.036479     0.000309   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:1036 Fat32.open                                             
+58             0.002466     0.005217     0.000090   /data/data/com.termux/files/usr/lib/python3.11/queue.py:57 Queue.task_done                                            
+461            0.002379     0.002379     0.000005   __builtin__.<method 'put' of '_queue.SimpleQueue' objects>                                                            
+1              0.002362     0.889858     0.889858   /storage/emulated/0/projects/pybackup/config.py:179 initConfig                                                        
+187            0.002361     0.003086     0.000017   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:622 Fat32.name                                              
+118            0.002352     0.002352     0.000020   __builtin__.<method 'hexdigest' of '_hashlib.HASH' objects>                                                           
+90             0.002265     0.010140     0.000113   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:1083 Popen._translate_newlines                           
+464            0.002213     0.002213     0.000005   __builtin__.<method 'get_nowait' of '_queue.SimpleQueue' objects>                                                     
+2              0.002188     3.533816     1.766908   /storage/emulated/0/projects/pybackup/cscopy.py:180 BVars.init2                                                       
+10             0.002160     0.002160     0.000216   /storage/emulated/0/projects/pybackup/status.py:23 <listcomp>                                                         
+55             0.002143     0.002992     0.000054   /storage/emulated/0/projects/pybackup/sd.py:77 Ext3.Dlls_xt                                                           
+58             0.002131     0.009065     0.000156   /storage/emulated/0/projects/pybackup/config.py:82 addSrcDir                                                          
+328            0.002102     0.002102     0.000006   __builtin__.<method '__exit__' of '_thread.lock' objects>                                                             
+149            0.002091     0.016720     0.000112   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:1257 Popen.wait                                          
+464            0.002077     0.002077     0.000004   __builtin__.<method 'empty' of '_queue.SimpleQueue' objects>                                                          
+82             0.002058     0.016190     0.000197   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:313 _RecursiveWildcardSelector.select_from                  
+90             0.002039     0.008125     0.000090   /data/data/com.termux/files/usr/lib/python3.11/selectors.py:247 PollSelector.unregister                               
+180            0.001907     0.001907     0.000011   __builtin__.<method 'fileno' of '_io.TextIOWrapper' objects>                                                          
+90             0.001887     0.002514     0.000028   <frozen codecs>:309 IncrementalDecoder.__init__                                                                       
+52             0.001839     0.005224     0.000100   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:1657 Popen._get_handles                                  
+5              0.001822     0.303980     0.060796   /storage/emulated/0/projects/pybackup/findde.py:95 findDis                                                            
+135            0.001808     0.024424     0.000181   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:765 Ext3.__truediv__                                        
+138            0.001800     0.008603     0.000062   /storage/emulated/0/projects/pybackup/de.py:20 DE.__lt__                                                              
+237            0.001769     0.001769     0.000007   __builtin__.<method 'read' of '_io.BytesIO' objects>                                                                  
+348            0.001742     0.001742     0.000005   __builtin__.<method 'get' of 'dict' objects>                                                                          
+2              0.001707     0.022279     0.011140   /storage/emulated/0/projects/pybackup/opexec.py:43 <listcomp>                                                         
+56/50          0.001705     0.020621     0.000368   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:337 _PreciseSelector._select_from                           
+180            0.001698     0.001698     0.000009   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:398 Inotify.sync_timeout        
+52             0.001659     0.003161     0.000061   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:1090 Popen.__exit__                                      
+118            0.001639     0.001639     0.000014   __builtin__.<method 'update' of '_hashlib.HASH' objects>                                                              
+37             0.001579     0.019406     0.000524   /data/data/com.termux/files/usr/lib/python3.11/re/__init__.py:272 _compile                                            
+90             0.001577     0.001577     0.000018   __builtin__.<method 'join' of 'bytes' objects>                                                                        
+45             0.001575     0.003287     0.000073   /data/data/com.termux/files/usr/lib/python3.11/selectors.py:347 PollSelector.__init__                                 
+224            0.001573     0.001573     0.000007   __builtin__.<method 'pop' of 'list' objects>                                                                          
+90             0.001558     0.001558     0.000017   __builtin__.<method 'from_buffer_copy' of '_ctypes.PyCStructType' objects>                                            
+90             0.001537     0.002175     0.000024   /data/data/com.termux/files/usr/lib/python3.11/contextlib.py:527 ExitStack._push_exit_callback                        
+193            0.001526     0.001526     0.000008   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:94 _PosixFlavour.join_parsed_parts                          
+58             0.001524     0.002061     0.000036   /data/data/com.termux/files/usr/lib/python3.11/queue.py:217 Queue._get                                                
+2              0.001488     1.447654     0.723827   /storage/emulated/0/projects/pybackup/cscopy.py:243 BVars.do_copying                                                  
+52             0.001436     0.008709     0.000167   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:1966 Popen._try_wait                                     
+2              0.001426     23.564151    11.782075  /storage/emulated/0/projects/pybackup/opexec.py:48 proc_nodes                                                         
+45             0.001422     0.001682     0.000037   /data/data/com.termux/files/usr/lib/python3.11/selectors.py:268 PollSelector.close                                    
+58             0.001417     0.002110     0.000036   /data/data/com.termux/files/usr/lib/python3.11/queue.py:209 Queue._qsize                                              
+55             0.001373     0.003710     0.000067   <frozen os>:282 walk                                                                                                  
+2              0.001371     0.005475     0.002737   /storage/emulated/0/projects/pybackup/cscopy.py:198 BVars.skip_matching                                               
+52             0.001358     0.002186     0.000042   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:361 _text_encoding                                       
+40             0.001346     0.219367     0.005484   /storage/emulated/0/projects/pybackup/gitclasses.py:10 gitcmd                                                         
+14             0.001295     0.009898     0.000707   _bisect.bisect_left                                                                                                   
+90             0.001289     0.002074     0.000023   <string>:1 <lambda>                                                                                                   
+16/6           0.001274     0.002649     0.000166   /data/data/com.termux/files/usr/lib/python3.11/re/_compiler.py:37 _compile                                            
+105            0.001265     0.001265     0.000012   /storage/emulated/0/projects/pybackup/config.py:432 <listcomp>                                                        
+90             0.001258     0.001703     0.000019   /data/data/com.termux/files/usr/lib/python3.11/queue.py:213 Queue._put                                                
+52             0.001229     0.001814     0.000035   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:1919 Popen._handle_exitstatus                            
+58             0.001187     0.016932     0.000292   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:765 Fat32.__truediv__                                       
+90             0.001171     0.002785     0.000031   /data/data/com.termux/files/usr/lib/python3.11/contextlib.py:456 _exit_wrapper                                        
+110            0.001133     0.001133     0.000010   /data/data/com.termux/files/usr/lib/python3.11/threading.py:568 Event.is_set                                          
+211            0.001127     0.001127     0.000005   _stat.S_ISDIR                                                                                                         
+57             0.001117     0.001117     0.000020   builtins.sorted                                                                                                       
+183            0.001098     0.001098     0.000006   __builtin__.<method 'append' of 'collections.deque' objects>                                                          
+5              0.001097     1.343878     0.268776   /storage/emulated/0/projects/pybackup/findde.py:108 findSDEs                                                          
+189            0.001092     0.001092     0.000006   sys.audit                                                                                                             
+90             0.001087     0.001087     0.000012   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:232 Event.__init__              
+96             0.001086     0.001566     0.000016   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:162 SubPattern.__getitem__                               
+58             0.001074     0.001395     0.000024   /storage/emulated/0/projects/pybackup/gitclasses.py:25 GitWT.SDh                                                      
+1              0.001071     0.008009     0.008009   /storage/emulated/0/projects/pybackup/ldsv.py:77 saveedges                                                            
+45             0.001068     0.001361     0.000030   /data/data/com.termux/files/usr/lib/python3.11/selectors.py:209 PollSelector.__init__                                 
+90             0.001066     0.001066     0.000012   /data/data/com.termux/files/usr/lib/python3.11/contextlib.py:454 _create_cb_wrapper                                   
+1              0.001049     0.056873     0.056873   /storage/emulated/0/projects/pybackup/config.py:435 getDL                                                             
+57             0.001048     0.001048     0.000018   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:350 _FakeFuture.__init__        
+1              0.001027     64.538087    64.538087  /storage/emulated/0/projects/pybackup/pybackup.py:136 main                                                            
+58             0.001025     0.001025     0.000018   time.monotonic                                                                                                        
+90             0.001010     0.001010     0.000011   __builtin__.<method 'find' of 'bytes' objects>                                                                        
+14             0.001003     0.011699     0.000836   /storage/emulated/0/projects/pybackup/findde.py:38 findDE                                                             
+158            0.000978     0.002147     0.000014   __builtin__.<method 'remove' of 'set' objects>                                                                        
+20/18          0.000956     0.020933     0.001047   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:281 _make_selector                                          
+52             0.000951     0.001279     0.000025   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:1231 Popen.poll                                          
+130            0.000947     0.000947     0.000007   /storage/emulated/0/projects/pybackup/edge.py:22 Edge.chk_ct                                                          
+70             0.000939     0.001461     0.000021   /storage/emulated/0/projects/pybackup/localcopy.py:124 LocalCopy.ischanged                                            
+10             0.000923     0.107534     0.010753   /storage/emulated/0/projects/pybackup/gitclasses.py:108 GitRepo.gitck2                                                
+2              0.000915     4.996314     2.498157   /storage/emulated/0/projects/pybackup/cscopy.py:298 CSCopy.__call__                                                   
+32             0.000912     0.006769     0.000212   /data/data/com.termux/files/usr/lib/python3.11/re/__init__.py:178 sub                                                 
+6              0.000901     0.000901     0.000150   _imp.acquire_lock                                                                                                     
+52             0.000894     0.001177     0.000023   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:1118 Popen.__del__                                       
+5              0.000888     0.001795     0.000359   /data/data/com.termux/files/usr/lib/python3.11/fnmatch.py:74 translate                                                
+52             0.000862     0.000862     0.000017   __builtin__.<method 'rfind' of 'bytes' objects>                                                                       
+1              0.000839     0.000839     0.000839   marshal.loads                                                                                                         
+52             0.000828     0.000828     0.000016   _locale.getencoding                                                                                                   
+11/6           0.000826     0.008404     0.000764   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:447 _parse_sub                                           
+1              0.000820     0.000820     0.000820   io.open_code                                                                                                          
+1              0.000813     0.000813     0.000813   __builtin__.<method 'format' of 'str' objects>                                                                        
+65             0.000784     0.000784     0.000012   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:231 Tokenizer.__next                                     
+90             0.000780     0.000780     0.000009   __builtin__.<method 'register' of 'select.poll' objects>                                                              
+2              0.000774     0.013586     0.006793   /data/data/com.termux/files/usr/lib/python3.11/site-packages/tarjan/__init__.py:103 tarjan_recursive                  
+61             0.000770     0.000770     0.000013   _thread.allocate_lock                                                                                                 
+11             0.000749     0.002614     0.000238   /storage/emulated/0/projects/pybackup/edge.py:28 Edge.clr                                                             
+3              0.000748     1.685153     0.561718   /storage/emulated/0/projects/pybackup/findde.py:146 updateDEs                                                         
+52             0.000745     0.000745     0.000014   /data/data/com.termux/files/usr/lib/python3.11/contextlib.py:460 ExitStack.__init__                                   
+52             0.000727     0.000727     0.000014   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:268 _cleanup                                             
+10             0.000721     0.052698     0.005270   /storage/emulated/0/projects/pybackup/gitclasses.py:84 GitIndex.sdhck                                                 
+6              0.000707     0.002565     0.000428   /data/data/com.termux/files/usr/lib/python3.11/re/_compiler.py:509 _compile_info                                      
+52             0.000706     0.000706     0.000014   sys.exc_info                                                                                                          
+10             0.000696     0.065186     0.006519   /storage/emulated/0/projects/pybackup/gitclasses.py:63 GitWT.sdhck                                                    
+22             0.000688     0.001043     0.000047   /storage/emulated/0/projects/pybackup/edge.py:42 Edge.rtset                                                           
+16/6           0.000686     0.000912     0.000057   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:172 SubPattern.getwidth                                  
+10             0.000656     54.468562    5.446856   /storage/emulated/0/projects/pybackup/status.py:52 updatets                                                           
+17             0.000653     0.003109     0.000183   /storage/emulated/0/projects/pybackup/edge.py:91 addArc                                                               
+10             0.000646     0.005012     0.000501   /storage/emulated/0/projects/pybackup/status.py:19 stsupdate                                                          
+12             0.000645     0.001215     0.000101   /data/data/com.termux/files/usr/lib/python3.11/enum.py:1501 RegexFlag.__and__                                         
+45             0.000644     0.002326     0.000052   /data/data/com.termux/files/usr/lib/python3.11/selectors.py:202 PollSelector.__exit__                                 
+49             0.000637     0.001173     0.000024   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:252 Tokenizer.get                                        
+90             0.000637     0.000637     0.000007   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:213 Watch.mask                  
+6              0.000636     0.015989     0.002665   /data/data/com.termux/files/usr/lib/python3.11/re/_compiler.py:738 compile                                            
+61             0.000631     0.000631     0.000010   builtins.getattr                                                                                                      
+90             0.000627     0.000627     0.000007   <frozen codecs>:260 IncrementalDecoder.__init__                                                                       
+3              0.000619     0.000773     0.000258   /data/data/com.termux/files/usr/lib/python3.11/copyreg.py:113 _slotnames                                              
+104            0.000610     0.000610     0.000006   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:1931 Popen._internal_poll                                
+16             0.000606     0.001917     0.000120   /storage/emulated/0/projects/pybackup/config.py:101 addTgtDir                                                         
+3              0.000600     0.000600     0.000200   _thread.start_new_thread                                                                                              
+90             0.000600     0.000600     0.000007   __builtin__.<method 'unregister' of 'select.poll' objects>                                                            
+1              0.000597     0.001660     0.001660   <frozen importlib._bootstrap>:179 _get_module_lock                                                                    
+5              0.000568     0.308950     0.061790   /storage/emulated/0/projects/pybackup/findde.py:127 findTDEs                                                          
+83             0.000556     0.000556     0.000007   builtins.min                                                                                                          
+16             0.000549     0.000549     0.000034   builtins.round                                                                                                        
+91             0.000544     0.000544     0.000006   __builtin__.<method 'pop' of 'dict' objects>                                                                          
+58             0.000537     0.000537     0.000009   __builtin__.<method 'popleft' of 'collections.deque' objects>                                                         
+1              0.000530     0.011628     0.011628   <frozen importlib._bootstrap>:1167 _find_and_load                                                                     
+16             0.000520     0.000679     0.000042   /storage/emulated/0/projects/pybackup/sd.py:108 CS.Dll                                                                
+6              0.000508     0.009457     0.001576   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:970 parse                                                
+20             0.000496     0.000496     0.000025   posix.readlink                                                                                                        
+7              0.000490     0.015194     0.002171   /storage/emulated/0/projects/pybackup/asyncrun.py:48 a_run2                                                           
+59             0.000487     0.000487     0.000008   /storage/emulated/0/projects/pybackup/localcopy.py:21 FileDiff.__init__                                               
+58             0.000483     0.000483     0.000008   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:202 Watch.path                  
+34             0.000461     0.002765     0.000081   /storage/emulated/0/projects/pybackup/sd.py:32 GitIndex.sdhset                                                        
+57             0.000460     0.000460     0.000008   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:353 _FakeFuture.set_result      
+1              0.000455     0.000634     0.000634   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:384 Inotify.__init__            
+52             0.000454     0.000454     0.000009   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:481 CompletedProcess.__init__                            
+90             0.000449     0.000449     0.000005   __builtin__.<method 'pop' of 'collections.deque' objects>                                                             
+3              0.000446     0.020070     0.006690   /storage/emulated/0/projects/pybackup/gitops.py:90 GitPush.__call__                                                   
+33             0.000435     0.000435     0.000013   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:623 Inotify.__iter__            
+1              0.000435     0.003853     0.003853   <frozen importlib._bootstrap>:1056 _find_spec                                                                         
+52             0.000434     0.000434     0.000008   __builtin__.<method 'count' of 'list' objects>                                                                        
+58             0.000427     0.000427     0.000007   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:277 Event.mask                  
+57             0.000424     0.000424     0.000007   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:356 _FakeFuture.cancelled       
+10             0.000408     0.000875     0.000088   /storage/emulated/0/projects/pybackup/gitclasses.py:123 GitRemote.__init__                                            
+57             0.000402     0.000402     0.000007   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:359 _FakeFuture.result          
+3              0.000398     0.001069     0.000356   /data/data/com.termux/files/usr/lib/python3.11/threading.py:849 Thread.__init__                                       
+58             0.000393     0.000393     0.000007   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:300 Event.name                  
+81             0.000391     0.000391     0.000005   builtins.setattr                                                                                                      
+1              0.000388     0.007273     0.007273   /storage/emulated/0/projects/pybackup/ldsv.py:66 loadedges                                                            
+21             0.000383     0.000619     0.000029   /storage/emulated/0/projects/pybackup/cscopy.py:295 CSCopy.ischanged                                                  
+4              0.000379     0.047561     0.011890   /data/data/com.termux/files/usr/lib/python3.11/json/decoder.py:332 JSONDecoder.decode                                 
+34             0.000371     0.000511     0.000015   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:170 SubPattern.append                                    
+45             0.000369     0.000369     0.000008   /data/data/com.termux/files/usr/lib/python3.11/selectors.py:199 PollSelector.__enter__                                
+14             0.000362     0.000549     0.000039   /storage/emulated/0/projects/pybackup/gitops.py:87 GitPush.ischanged                                                  
+9/5            0.000360     0.000500     0.000056   /data/data/com.termux/files/usr/lib/python3.11/re/_compiler.py:434 _get_literal_prefix                                
+49             0.000357     0.000357     0.000007   /storage/emulated/0/projects/pybackup/edge.py:25 Edge.rchk_ct                                                         
+45             0.000351     0.000351     0.000008   select.poll                                                                                                           
+52             0.000349     0.000349     0.000007   __builtin__.<method 'rstrip' of 'bytes' objects>                                                                      
+54             0.000338     0.000338     0.000006   __builtin__.<method 'rstrip' of 'str' objects>                                                                        
+4              0.000326     0.047979     0.011995   /data/data/com.termux/files/usr/lib/python3.11/json/__init__.py:299 loads                                             
+17             0.000319     0.000563     0.000033   /data/data/com.termux/files/usr/lib/python3.11/re/__init__.py:253 escape                                              
+1              0.000317     0.768852     0.768852   /storage/emulated/0/projects/pybackup/ldsv.py:28 loadrdlls                                                            
+5              0.000315     0.019071     0.003814   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:260 _PosixFlavour.compile_pattern                           
+1              0.000313     0.000577     0.000577   <frozen importlib._bootstrap>:748 find_spec                                                                           
+45             0.000312     0.000312     0.000007   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:2122 Popen._save_input                                   
+52             0.000309     0.000309     0.000006   posix.WIFSTOPPED                                                                                                      
+6              0.000302     0.005538     0.000923   /data/data/com.termux/files/usr/lib/python3.11/re/_compiler.py:571 _code                                              
+3              0.000300     0.002356     0.000785   /data/data/com.termux/files/usr/lib/python3.11/threading.py:938 Thread.start                                          
+4              0.000294     0.000774     0.000193   /data/data/com.termux/files/usr/lib/python3.11/threading.py:583 Event.set                                             
+45             0.000293     0.000293     0.000007   /data/data/com.termux/files/usr/lib/python3.11/selectors.py:63 _SelectorMapping.__init__                              
+3              0.000289     0.029271     0.009757   /storage/emulated/0/projects/pybackup/findde.py:48 getRemoteDEs                                                       
+3              0.000287     0.001047     0.000349   /data/data/com.termux/files/usr/lib/python3.11/threading.py:288 Condition.wait                                        
+14/13          0.000284     0.000489     0.000035   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:333 _PreciseSelector.__init__                               
+52             0.000280     0.000280     0.000005   __builtin__.<method 'write' of '_io.TextIOWrapper' objects>                                                           
+3              0.000279     0.001422     0.000474   /data/data/com.termux/files/usr/lib/python3.11/threading.py:1080 Thread.join                                          
+52             0.000278     0.000278     0.000005   /data/data/com.termux/files/usr/lib/python3.11/subprocess.py:1087 Popen.__enter__                                     
+52             0.000277     0.000277     0.000005   /data/data/com.termux/files/usr/lib/python3.11/contextlib.py:543 ExitStack.__enter__                                  
+52             0.000275     0.000275     0.000005   posix.waitstatus_to_exitcode                                                                                          
+20/18          0.000275     0.004424     0.000221   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:304 _RecursiveWildcardSelector.__init__                     
+1              0.000274     0.004109     0.004109   <frozen importlib._bootstrap_external>:934 SourceFileLoader.exec_module                                               
+21             0.000272     0.000380     0.000018   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:284 Tokenizer.tell                                       
+1              0.000265     0.003461     0.003461   <frozen importlib._bootstrap_external>:1007 SourceFileLoader.get_code                                                 
+1              0.000264     0.000264     0.000264   _imp.is_builtin                                                                                                       
+45             0.000260     0.000260     0.000006   __builtin__.<method 'clear' of 'dict' objects>                                                                        
+2              0.000255     0.004770     0.002385   /storage/emulated/0/projects/pybackup/cscopy.py:95 fsyncl                                                             
+31             0.000253     0.000413     0.000013   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:247 Tokenizer.match                                      
+3              0.000253     0.001018     0.000339   /data/data/com.termux/files/usr/lib/python3.11/threading.py:1118 Thread._wait_for_tstate_lock                         
+26             0.000252     0.000353     0.000014   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:158 SubPattern.__len__                                   
+3              0.000251     0.000289     0.000096   /data/data/com.termux/files/usr/lib/python3.11/threading.py:1071 Thread._delete                                       
+3              0.000251     0.000566     0.000189   /data/data/com.termux/files/usr/lib/python3.11/threading.py:1044 Thread._stop                                         
+1              0.000250     0.000250     0.000250   /storage/emulated/0/projects/pybackup/dirlist.py:1 <module>                                                           
+10             0.000241     0.000349     0.000035   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:367 _escape                                              
+1              0.000235     0.001046     0.001046   <frozen importlib._bootstrap_external>:1604 FileFinder.find_spec                                                      
+28             0.000234     0.000234     0.000008   /storage/emulated/0/projects/pybackup/gitclasses.py:32 GitIndex.SDh                                                   
+10             0.000232     0.000304     0.000030   /storage/emulated/0/projects/pybackup/gitclasses.py:89 <listcomp>                                                     
+3              0.000228     0.001422     0.000474   /data/data/com.termux/files/usr/lib/python3.11/threading.py:604 Event.wait                                            
+6              0.000226     0.000338     0.000056   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:222 Tokenizer.__init__                                   
+3              0.000221     0.976192     0.325397   /data/data/com.termux/files/usr/lib/python3.11/threading.py:964 run                                                   
+2              0.000219     0.000512     0.000256   /data/data/com.termux/files/usr/lib/python3.11/enum.py:1376 _missing_                                                 
+5              0.000218     0.000442     0.000088   /storage/emulated/0/projects/pybackup/gitclasses.py:100 GitRepo.__init__                                              
+1              0.000213     0.001064     0.001064   ..ata/com.termux/files/usr/lib/python3.11/site-packages/_distutils_hack/__init__.py:89 DistutilsMetaFinder.find_spec  
+5              0.000203     0.000451     0.000090   /storage/emulated/0/projects/pybackup/gitclasses.py:58 GitWT.__init__                                                 
+12             0.000200     0.000261     0.000022   /data/data/com.termux/files/usr/lib/python3.11/re/_compiler.py:568 isstring                                           
+3              0.000198     0.000198     0.000066   /data/data/com.termux/files/usr/lib/python3.11/threading.py:236 Condition.__init__                                    
+15             0.000197     0.000197     0.000013   /storage/emulated/0/projects/pybackup/gitclasses.py:18 GitWT.__init__                                                 
+8              0.000194     0.000194     0.000024   __builtin__.<method 'match' of 're.Pattern' objects>                                                                  
+1              0.000194     0.001861     0.001861   /storage/emulated/0/projects/pybackup/ldsv.py:96 loadldh                                                              
+1              0.000193     23.897673    23.897673  /storage/emulated/0/projects/pybackup/pybackup.py:116 rt2                                                             
+45             0.000190     0.000190     0.000004   __builtin__.<method 'remove' of 'list' objects>                                                                       
+5              0.000190     0.000400     0.000080   /storage/emulated/0/projects/pybackup/gitclasses.py:79 GitIndex.__init__                                              
+26             0.000189     0.000189     0.000007   __builtin__.<method 'copy' of 'set' objects>                                                                          
+1              0.000186     0.001928     0.001928   /storage/emulated/0/projects/pybackup/ldsv.py:107 loadrdh                                                             
+2              0.000185     0.041564     0.020782   /storage/emulated/0/projects/pybackup/opexec.py:39 nts                                                                
+5              0.000181     0.019317     0.003863   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:349 _WildcardSelector.__init__                              
+2              0.000178     0.000178     0.000089   /storage/emulated/0/projects/pybackup/opexec.py:42 <listcomp>                                                         
+10             0.000178     0.107712     0.010771   /storage/emulated/0/projects/pybackup/gitclasses.py:105 GitRepo.sdhck                                                 
+7              0.000177     0.000273     0.000039   /storage/emulated/0/projects/pybackup/gitops.py:14 GitAdd.ischanged                                                   
+10             0.000174     0.000245     0.000024   /storage/emulated/0/projects/pybackup/gitclasses.py:68 <listcomp>                                                     
+1              0.000174     0.002118     0.002118   /storage/emulated/0/projects/pybackup/ldsv.py:118 saveldh                                                             
+2              0.000171     23.721944    11.860972  /storage/emulated/0/projects/pybackup/opexec.py:62 opExec                                                             
+6              0.000169     0.000208     0.000035   /data/data/com.termux/files/usr/lib/python3.11/threading.py:1446 current_thread                                       
+1              0.000168     0.001046     0.001046   <frozen importlib._bootstrap_external>:727 _compile_bytecode                                                          
+17             0.000168     0.000168     0.000010   __builtin__.<method 'translate' of 'str' objects>                                                                     
+1              0.000167     0.001245     0.001245   <frozen importlib._bootstrap_external>:1464 _get_spec                                                                 
+25             0.000165     0.000165     0.000007   /storage/emulated/0/projects/pybackup/config.py:74 tgt                                                                
+7              0.000164     0.000300     0.000043   /storage/emulated/0/projects/pybackup/gitops.py:50 GitCommit.ischanged                                                
+9              0.000164     0.000231     0.000026   /storage/emulated/0/projects/pybackup/findde.py:149 doSOne                                                            
+5              0.000162     0.000234     0.000047   /storage/emulated/0/projects/pybackup/findde.py:182 doTOne                                                            
+6              0.000161     0.000241     0.000040   /storage/emulated/0/projects/pybackup/sd.py:92 Ext3.SDh                                                               
+2              0.000159     0.000237     0.000118   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:407 Inotify.sync_timeout        
+1              0.000155     0.780071     0.780071   /storage/emulated/0/projects/pybackup/ldsv.py:140 load_all                                                            
+10             0.000155     0.000219     0.000022   /storage/emulated/0/projects/pybackup/localcopy.py:121 LocalCopy.__init__                                             
+5              0.000154     0.291201     0.058240   /storage/emulated/0/projects/pybackup/opexec.py:16 clean                                                              
+6              0.000154     0.000339     0.000057   /storage/emulated/0/projects/pybackup/config.py:118 addPre                                                            
+2              0.000152     0.000505     0.000253   <frozen importlib._bootstrap_external>:437 cache_from_source                                                          
+1              0.000150     0.000304     0.000304   <frozen importlib._bootstrap_external>:1599 FileFinder._get_spec                                                      
+4              0.000148     0.000305     0.000076   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:546 Ext3.__fspath__                                         
+2              0.000145     0.000483     0.000241   <frozen importlib._bootstrap>:233 _call_with_frames_removed                                                           
+1              0.000145     0.084646     0.084646   /storage/emulated/0/projects/pybackup/ldsv.py:54 saverdlls                                                            
+1              0.000145     0.223336     0.223336   /storage/emulated/0/projects/pybackup/sd.py:193 CS.getfl                                                              
+5              0.000144     0.000247     0.000049   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:894 _parse_flags                                         
+1              0.000143     0.001865     0.001865   <frozen importlib._bootstrap>:169 _ModuleLockManager.__enter__                                                        
+1              0.000138     0.594201     0.594201   /storage/emulated/0/projects/pybackup/ldsv.py:41 saveldlls                                                            
+16             0.000132     0.000132     0.000008   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:109 SubPattern.__init__                                  
+2              0.000132     0.005201     0.002600   /storage/emulated/0/projects/pybackup/cscopy.py:88 fsynclm                                                            
+19             0.000130     0.000130     0.000007   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:43 _is_wildcard_pattern                                     
+3              0.000129     0.000262     0.000087   /data/data/com.termux/files/usr/lib/python3.11/threading.py:822 _maintain_shutdown_locks                              
+1              0.000128     0.001504     0.001504   <frozen importlib._bootstrap_external>:1127 SourceFileLoader.get_data                                                 
+1              0.000126     0.000651     0.000651   <frozen importlib._bootstrap>:493 _init_module_attrs                                                                  
+3              0.000126     0.000176     0.000059   <frozen os>:756 encode                                                                                                
+10             0.000125     0.000125     0.000013   /storage/emulated/0/projects/pybackup/gitclasses.py:38 GitRemote.__init__                                             
+6              0.000125     0.000187     0.000031   <frozen importlib._bootstrap_external>:128 <listcomp>                                                                 
+1              0.000125     0.005020     0.005020   <frozen importlib._bootstrap>:666 _load_unlocked                                                                      
+6              0.000125     0.000341     0.000057   <frozen importlib._bootstrap_external>:126 _path_join                                                                 
+4              0.000123     0.000160     0.000040   <frozen importlib._bootstrap>:1032 _ImportLockContext.__exit__                                                        
+1              0.000123     0.005906     0.005906   /storage/emulated/0/projects/pybackup/gitops.py:17 GitAdd.__call__                                                    
+3              0.000122     0.000348     0.000116   <frozen os>:674 _Environ.__getitem__                                                                                  
+4              0.000121     0.000308     0.000077   /data/data/com.termux/files/usr/lib/python3.11/threading.py:389 Condition.notify_all                                  
+17             0.000121     0.000121     0.000007   /storage/emulated/0/projects/pybackup/opbase.py:39 LocalCopy.__init__                                                 
+6              0.000119     0.000119     0.000020   _imp.release_lock                                                                                                     
+12             0.000118     0.000164     0.000014   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:79 State.groups                                          
+1              0.000116     0.006107     0.006107   /storage/emulated/0/projects/pybackup/gitops.py:53 GitCommit.__call__                                                 
+1              0.000116     0.000174     0.000174   <frozen importlib._bootstrap>:71 _ModuleLock.__init__                                                                 
+5              0.000113     0.000181     0.000036   /data/data/com.termux/files/usr/lib/python3.11/enum.py:1356 _iter_member_by_value_                                    
+2              0.000110     0.000146     0.000073   /storage/emulated/0/projects/pybackup/cscopy.py:165 BVars.__init__                                                    
+3              0.000105     0.000335     0.000112   /data/data/com.termux/files/usr/lib/python3.11/threading.py:555 Event.__init__                                        
+5              0.000105     0.000361     0.000072   /data/data/com.termux/files/usr/lib/python3.11/re/_compiler.py:396 _simple                                            
+3              0.000103     0.000139     0.000046   /storage/emulated/0/projects/pybackup/cscopy.py:291 CSCopy.__init__                                                   
+4              0.000102     0.000157     0.000039   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:536 Ext3.__str__                                            
+2              0.000101     0.025045     0.012523   /storage/emulated/0/projects/pybackup/status.py:28 onestatus                                                          
+5              0.000097     0.016962     0.003392   /data/data/com.termux/files/usr/lib/python3.11/re/__init__.py:225 compile                                             
+4              0.000097     0.000300     0.000075   /storage/emulated/0/projects/pybackup/cscopy.py:11 chunk_from                                                         
+3              0.000096     0.000118     0.000039   /data/data/com.termux/files/usr/lib/python3.11/re/_compiler.py:405 _generate_overlap_table                            
+1              0.000095     0.008981     0.008981   <frozen importlib._bootstrap>:1122 _find_and_load_unlocked                                                            
+6              0.000094     0.000094     0.000016   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:73 State.__init__                                        
+3              0.000094     0.000123     0.000041   <frozen importlib._bootstrap_external>:84 _unpack_uint32                                                              
+1              0.000090     0.005364     0.005364   /storage/emulated/0/projects/pybackup/localcopy.py:97 copy2                                                           
+6              0.000090     0.000113     0.000019   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:954 fix_flags                                            
+4              0.000086     0.000167     0.000042   <frozen importlib._bootstrap>:1028 _ImportLockContext.__enter__                                                       
+2              0.000083     0.000193     0.000097   <frozen importlib._bootstrap_external>:132 _path_split                                                                
+1              0.000083     0.000137     0.000137   <frozen importlib._bootstrap_external>:778 spec_from_file_location                                                    
+7              0.000078     0.000078     0.000011   <frozen importlib._bootstrap>:244 _verbose_message                                                                    
+1              0.000076     0.000753     0.000753   <frozen importlib._bootstrap>:566 module_from_spec                                                                    
+17             0.000076     0.000076     0.000004   builtins.ord                                                                                                          
+11             0.000075     0.000075     0.000007   _thread.get_ident                                                                                                     
+3              0.000074     0.000104     0.000035   /data/data/com.termux/files/usr/lib/python3.11/threading.py:832 <listcomp>                                            
+3              0.000073     0.000091     0.000030   /data/data/com.termux/files/usr/lib/python3.11/_weakrefset.py:85 WeakSet.add                                          
+2              0.000072     0.000093     0.000047   /storage/emulated/0/projects/pybackup/sd.py:123 CS.Dlls_xt                                                            
+3              0.000070     0.000070     0.000023   /data/data/com.termux/files/usr/lib/python3.11/threading.py:804 _newname                                              
+11             0.000069     0.000069     0.000006   /data/data/com.termux/files/usr/lib/python3.11/re/_compiler.py:31 _combine_flags                                      
+2              0.000069     0.000091     0.000045   /data/data/com.termux/files/usr/lib/python3.11/re/_compiler.py:465 _get_charset_prefix                                
+6              0.000063     0.000063     0.000010   _sre.compile                                                                                                          
+8              0.000062     0.000062     0.000008   __builtin__.<method 'end' of 're.Match' objects>                                                                      
+1              0.000062     0.003447     0.003447   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:490 Inotify.close               
+3              0.000062     0.000062     0.000021   __builtin__.<method 'get' of 'mappingproxy' objects>                                                                  
+2              0.000060     0.000080     0.000040   /storage/emulated/0/projects/pybackup/cscopy.py:266 <listcomp>                                                        
+1              0.000057     0.000307     0.000307   builtins.exec                                                                                                         
+1              0.000057     0.000074     0.000074   <frozen importlib._bootstrap>:125 _ModuleLock.release                                                                 
+11             0.000057     0.000057     0.000005   /data/data/com.termux/files/usr/lib/python3.11/re/_compiler.py:426 _get_iscased                                       
+11             0.000054     0.000054     0.000005   __builtin__.<method 'extend' of 'list' objects>                                                                       
+8              0.000053     0.000053     0.000007   /storage/emulated/0/projects/pybackup/config.py:66 ppre                                                               
+3              0.000052     0.000052     0.000017   /data/data/com.termux/files/usr/lib/python3.11/threading.py:1317 _make_invoke_excepthook                              
+1              0.000050     0.000062     0.000062   <frozen importlib._bootstrap>:100 _ModuleLock.acquire                                                                 
+1              0.000050     0.001295     0.001295   <frozen importlib._bootstrap_external>:1496 find_spec                                                                 
+1              0.000049     0.000363     0.000363   <frozen importlib._bootstrap_external>:567 _get_cached                                                                
+1              0.000049     0.000065     0.000065   /storage/emulated/0/projects/pybackup/sd.py:131 CS.Dlls_xt                                                            
+1              0.000048     0.000130     0.000130   <frozen importlib._bootstrap_external>:642 _classify_pyc                                                              
+1              0.000048     0.000229     0.000229   /data/data/com.termux/files/usr/lib/python3.11/enum.py:1438 <listcomp>                                                
+1              0.000048     0.000121     0.000121   <frozen importlib._bootstrap>:173 _ModuleLockManager.__exit__                                                         
+1              0.000047     0.003494     0.003494   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:484 Inotify.__exit__            
+6              0.000047     0.000047     0.000008   /data/data/com.termux/files/usr/lib/python3.11/threading.py:1199 _MainThread.daemon                                   
+2              0.000047     0.000110     0.000055   builtins.max                                                                                                          
+1              0.000047     0.000047     0.000047   __builtin__.<method 'close' of 'select.epoll' objects>                                                                
+1              0.000046     0.000155     0.000155   <frozen importlib._bootstrap>:922 find_spec                                                                           
+3              0.000045     0.000076     0.000025   /data/data/com.termux/files/usr/lib/python3.11/threading.py:276 Condition._acquire_restore                            
+4              0.000045     0.000063     0.000016   <frozen importlib._bootstrap_external>:134 <genexpr>                                                                  
+1              0.000045     0.000045     0.000045   <frozen importlib._bootstrap>:165 _ModuleLockManager.__init__                                                         
+11             0.000044     0.000044     0.000004   __builtin__.<method 'locked' of '_thread.lock' objects>                                                               
+1              0.000044     0.000311     0.000311   /storage/emulated/0/projects/pybackup/ldsv.py:158 save_bp                                                             
+3              0.000042     0.000055     0.000018   /data/data/com.termux/files/usr/lib/python3.11/threading.py:273 Condition._release_save                               
+1              0.000041     0.036845     0.036845   /storage/emulated/0/projects/pybackup/config.py:427 cull_dirs                                                         
+3              0.000041     0.000370     0.000123   <frozen importlib._bootstrap_external>:140 _path_stat                                                                 
+2              0.000041     0.000050     0.000025   /storage/emulated/0/projects/pybackup/edge.py:35 Edge.rclr                                                            
+5              0.000040     0.000040     0.000008   __builtin__.<method 'rpartition' of 'str' objects>                                                                    
+5              0.000039     0.000049     0.000010   /data/data/com.termux/files/usr/lib/python3.11/enum.py:116 _iter_bits_lsb                                             
+1              0.000038     0.000044     0.000044   <frozen importlib._bootstrap_external>:599 SourceFileLoader._check_name_wrapper                                       
+7              0.000037     0.000037     0.000005   __builtin__.<method 'lower' of 'str' objects>                                                                         
+1              0.000036     0.004194     0.004194   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:380 _RecursiveWildcardSelector.__init__                     
+1              0.000035     0.000053     0.000053   <frozen importlib._bootstrap>:198 cb                                                                                  
+5              0.000034     0.000034     0.000007   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:166 SubPattern.__setitem__                               
+7              0.000033     0.000033     0.000005   /storage/emulated/0/projects/pybackup/netup.py:4 netup                                                                
+2              0.000033     0.000050     0.000025   <frozen os>:760 decode                                                                                                
+7              0.000033     0.000033     0.000005   /storage/emulated/0/projects/pybackup/sd.py:104 CS.isremote                                                           
+2              0.000031     0.000394     0.000197   <frozen importlib._bootstrap>:392 ModuleSpec.cached                                                                   
+1              0.000031     0.000031     0.000031   _imp.find_frozen                                                                                                      
+3              0.000030     0.000030     0.000010   /data/data/com.termux/files/usr/lib/python3.11/threading.py:1145 Thread.name                                          
 5              0.000030     0.000030     0.000006   __builtin__.<method 'keys' of 'dict' objects>                                                                         
-3              0.000030     0.000030     0.000010   __builtin__.<method 'get' of 'mappingproxy' objects>                                                                  
-6              0.000029     0.000029     0.000005   _imp.release_lock                                                                                                     
-2              0.000029     0.000043     0.000022   /storage/emulated/0/projects/pybackup/gitops.py:84 GitPush.__init__                                                   
-1              0.000029     0.000044     0.000044   <frozen importlib._bootstrap>:71 _ModuleLock.__init__                                                                 
-5              0.000028     0.000028     0.000006   __builtin__.<method 'rpartition' of 'str' objects>                                                                    
-1              0.000028     0.000044     0.000044   <frozen importlib._bootstrap>:198 cb                                                                                  
-1              0.000028     0.000035     0.000035   /data/data/com.termux/files/usr/lib/python3.11/re/_compiler.py:405 _generate_overlap_table                            
-4              0.000028     0.000028     0.000007   __builtin__.<method 'end' of 're.Match' objects>                                                                      
-2              0.000027     0.000325     0.000162   <frozen importlib._bootstrap>:392 ModuleSpec.cached                                                                   
-1              0.000027     0.000987     0.000987   <frozen importlib._bootstrap_external>:1496 find_spec                                                                 
-3              0.000027     0.000027     0.000009   /data/data/com.termux/files/usr/lib/python3.11/threading.py:1145 Thread.name                                          
-1              0.000025     0.000072     0.000072   <frozen importlib._bootstrap_external>:675 _validate_timestamp_pyc                                                    
-1              0.000025     0.000025     0.000025   <frozen codecs>:186 IncrementalEncoder.__init__                                                                       
-1              0.000024     0.000038     0.000038   <frozen importlib._bootstrap>:748 find_spec                                                                           
+6              0.000030     0.000030     0.000005   __builtin__.<method 'release' of '_thread.lock' objects>                                                              
+4              0.000030     0.000030     0.000007   /storage/emulated/0/projects/pybackup/localcopy.py:78 SFc.value                                                       
+2              0.000029     0.000044     0.000022   /storage/emulated/0/projects/pybackup/gitops.py:84 GitPush.__init__                                                   
+3              0.000029     0.000029     0.000010   __builtin__.<method 'difference_update' of 'set' objects>                                                             
+2              0.000028     0.000044     0.000022   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:38 _ignore_error                                            
+1              0.000027     0.000076     0.000076   <frozen importlib._bootstrap_external>:675 _validate_timestamp_pyc                                                    
+1              0.000026     0.000181     0.000181   <frozen importlib._bootstrap_external>:1146 SourceFileLoader.path_stats                                               
+5              0.000025     0.000025     0.000005   /storage/emulated/0/projects/pybackup/findde.py:184 <listcomp>                                                        
 1              0.000024     0.000024     0.000024   __builtin__.<method 'register' of 'select.epoll' objects>                                                             
-2              0.000023     0.000023     0.000012   /storage/emulated/0/projects/pybackup/opexec.py:9 incp                                                                
-1              0.000022     0.000091     0.000091   <frozen _collections_abc>:778 _Environ.__contains__                                                                   
-1              0.000021     0.000059     0.000059   /data/data/com.termux/files/usr/lib/python3.11/re/_compiler.py:396 _simple                                            
-2              0.000018     0.000018     0.000009   _sre.compile                                                                                                          
-1              0.000018     0.000098     0.000098   <frozen importlib._bootstrap_external>:159 _path_isfile                                                               
-1              0.000018     0.000018     0.000018   <frozen importlib._bootstrap>:357 ModuleSpec.__init__                                                                 
-1              0.000018     0.000113     0.000113   <frozen importlib._bootstrap_external>:1146 SourceFileLoader.path_stats                                               
-1              0.000018     0.000051     0.000051   <frozen importlib._bootstrap>:922 find_spec                                                                           
-1              0.000017     0.000025     0.000025   /storage/emulated/0/projects/pybackup/gitops.py:11 GitAdd.__init__                                                    
-3              0.000017     0.000017     0.000006   __builtin__.from_bytes                                                                                                
+2              0.000024     0.000024     0.000012   /storage/emulated/0/projects/pybackup/opexec.py:9 incp                                                                
+1              0.000022     0.000093     0.000093   <frozen _collections_abc>:778 _Environ.__contains__                                                                   
+1              0.000021     0.000021     0.000021   <frozen importlib._bootstrap>:357 ModuleSpec.__init__                                                                 
+1              0.000020     0.000020     0.000020   <frozen codecs>:186 IncrementalEncoder.__init__                                                                       
+1              0.000018     0.000119     0.000119   <frozen importlib._bootstrap_external>:159 _path_isfile                                                               
+1              0.000018     0.000025     0.000025   <frozen importlib._bootstrap>:405 ModuleSpec.parent                                                                   
+3              0.000018     0.000018     0.000006   __builtin__.from_bytes                                                                                                
+1              0.000018     0.000018     0.000018   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:514 Inotify.cache_size          
+2              0.000018     0.000018     0.000009   __builtin__.<method 'rfind' of 'str' objects>                                                                         
+1              0.000017     0.000017     0.000017   <frozen importlib._bootstrap_external>:1097 SourceFileLoader.__init__                                                 
+1              0.000016     0.000016     0.000016   <frozen importlib._bootstrap_external>:1421 _path_importer_cache                                                      
+1              0.000016     0.000101     0.000101   <frozen importlib._bootstrap_external>:150 _path_is_mode_type                                                         
+1              0.000016     0.000025     0.000025   /storage/emulated/0/projects/pybackup/gitops.py:11 GitAdd.__init__                                                    
 2              0.000016     0.000016     0.000008   __builtin__.<method 'setdefault' of 'dict' objects>                                                                   
-1              0.000016     0.000016     0.000016   __builtin__.<method 'format' of 'str' objects>                                                                        
-3              0.000015     0.000015     0.000005   __builtin__.<method 'extend' of 'list' objects>                                                                       
-1              0.000015     0.000015     0.000015   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:514 Inotify.cache_size          
-2              0.000015     0.000015     0.000008   __builtin__.<method 'rfind' of 'str' objects>                                                                         
-1              0.000015     0.000080     0.000080   <frozen importlib._bootstrap_external>:150 _path_is_mode_type                                                         
-1              0.000015     0.000024     0.000024   /storage/emulated/0/projects/pybackup/gitops.py:47 GitCommit.__init__                                                 
-1              0.000015     0.000020     0.000020   <frozen importlib._bootstrap>:405 ModuleSpec.parent                                                                   
-1              0.000014     0.000024     0.000024   /data/data/com.termux/files/usr/lib/python3.11/pathlib.py:38 _ignore_error                                            
+1              0.000015     0.000023     0.000023   /storage/emulated/0/projects/pybackup/gitops.py:47 GitCommit.__init__                                                 
 2              0.000014     0.000014     0.000007   /storage/emulated/0/projects/pybackup/cscopy.py:29 SFc.value                                                          
-1              0.000014     0.000014     0.000014   _imp.is_builtin                                                                                                       
+1              0.000014     0.000027     0.000027   <frozen importlib._bootstrap_external>:180 _path_isabs                                                                
 3              0.000013     0.000013     0.000004   /storage/emulated/0/projects/pybackup/gitclasses.py:21 GitWT.isremote                                                 
+1              0.000013     0.000013     0.000013   <frozen importlib._bootstrap>:48 _new_module                                                                          
 3              0.000013     0.000013     0.000004   /storage/emulated/0/projects/pybackup/cscopy.py:26 SFc.__init__                                                       
-1              0.000012     0.000022     0.000022   <frozen importlib._bootstrap_external>:180 _path_isabs                                                                
-1              0.000012     0.000012     0.000012   <frozen importlib._bootstrap>:48 _new_module                                                                          
-1              0.000011     0.000011     0.000011   _imp.find_frozen                                                                                                      
-1              0.000011     0.000011     0.000011   <frozen importlib._bootstrap_external>:1097 SourceFileLoader.__init__                                                 
-1              0.000010     0.000010     0.000010   <frozen importlib._bootstrap_external>:1421 _path_importer_cache                                                      
-1              0.000009     0.000009     0.000009   <frozen importlib._bootstrap>:165 _ModuleLockManager.__init__                                                         
+1              0.000012     0.000012     0.000012   _imp._fix_co_filename                                                                                                 
 1              0.000009     0.000009     0.000009   builtins.locals                                                                                                       
-1              0.000008     0.000008     0.000008   /storage/emulated/0/projects/pybackup/localcopy.py:78 SFc.value                                                       
-2              0.000008     0.000008     0.000004   /storage/emulated/0/projects/pybackup/gitclasses.py:41 GitRemote.isremote                                             
-1              0.000007     0.000007     0.000007   /data/data/com.termux/files/usr/lib/python3.11/re/_parser.py:166 SubPattern.__setitem__                               
+2              0.000009     0.000009     0.000004   /storage/emulated/0/projects/pybackup/gitclasses.py:41 GitRemote.isremote                                             
 1              0.000007     0.000007     0.000007   builtins.iter                                                                                                         
-1              0.000007     0.000007     0.000007   /data/data/com.termux/files/usr/lib/python3.11/re/_compiler.py:31 _combine_flags                                      
-1              0.000007     0.000007     0.000007   _imp._fix_co_filename                                                                                                 
+1              0.000006     0.000006     0.000006   /data/data/com.termux/files/usr/lib/python3.11/site-packages/_distutils_hack/__init__.py:96 <lambda>                  
+1              0.000006     0.000006     0.000006   /storage/emulated/0/projects/pybackup/findde.py:151 <listcomp>                                                        
+1              0.000006     0.000006     0.000006   <frozen importlib._bootstrap_external>:1122 SourceFileLoader.get_filename                                             
 1              0.000006     0.000006     0.000006   <frozen importlib._bootstrap>:413 ModuleSpec.has_location                                                             
-1              0.000005     0.000005     0.000005   <frozen importlib._bootstrap_external>:1122 SourceFileLoader.get_filename                                             
-1              0.000005     0.000005     0.000005   /data/data/com.termux/files/usr/lib/python3.11/re/_compiler.py:426 _get_iscased                                       
 1              0.000005     0.000005     0.000005   __builtin__.<method 'copy' of 'list' objects>                                                                         
 1              0.000005     0.000005     0.000005   <frozen importlib._bootstrap_external>:71 _relax_case                                                                 
 1              0.000005     0.000005     0.000005   /data/data/com.termux/files/usr/lib/python3.11/site-packages/asyncinotify/__init__.py:481 Inotify.__enter__           
 1              0.000005     0.000005     0.000005   <frozen importlib._bootstrap_external>:931 SourceFileLoader.create_module                                             
-1              0.000005     0.000005     0.000005   /data/data/com.termux/files/usr/lib/python3.11/site-packages/_distutils_hack/__init__.py:96 <lambda>                  

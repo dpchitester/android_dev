@@ -1,4 +1,4 @@
-from hashlib import blake2b
+from xxhash import xxh64
 from pathlib import Path
 from pathlib import PosixPath
 from struct import pack
@@ -39,7 +39,6 @@ def bhu(ho, it):
 
 # flattened list blake2b with integer result
 def blakeHash(it):
-    ho = blake2b(digest_size=4)
+    ho = xxh64()
     bhu(ho, it)
-    rv = unpack("i", ho.digest())
-    return rv[0]
+    return ho.intdigest()
