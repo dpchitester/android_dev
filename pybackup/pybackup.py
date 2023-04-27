@@ -163,10 +163,10 @@ if __name__ == "__main__":
         yappi.get_func_stats().sort("tsub", "desc").print_all(
             out=fh,
             columns={
-                0: ("ncall", 8 + 5),
+                0: ("ttot", 8 + 3),
                 1: ("tsub", 8 + 3),
-                2: ("ttot", 8 + 3),
-                3: ("tavg", 8 + 3),
+                2: ("tavg", 8 + 3),
+                3: ("ncall", 8 + 5),
                 4: ("name", 64 + 68 - 16),
             },
         )
