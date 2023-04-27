@@ -1,29 +1,22 @@
 #!/data/data/com.termux/files/usr/bin/env python
 
-from os import environ
-from os import walk
+from os import environ, walk
 from pathlib import Path
-from queue import Empty
-from queue import Queue
-from threading import Lock
-from threading import Thread
+from queue import Empty, Queue
+from threading import Lock, Thread
 from time import sleep
 
 from asyncinotify import Event as WEvent
-from asyncinotify import Inotify
-from asyncinotify import Mask
-from asyncinotify import Watch
-from snoop import snoop, pp
+from asyncinotify import Inotify, Mask, Watch
+from snoop import pp, snoop
 
 import config as v
 import ldsv as ls
 from findde import updateDEs
 from netup import netup
-from opexec import clean
-from opexec import opExec
+from opexec import clean, opExec
 from sd import FS_Mixin
-from status import onestatus
-from status import updatets
+from status import onestatus, updatets
 
 in1 = None
 wdsi: dict[Watch, v.NodeTag] = {}
@@ -166,13 +159,14 @@ if __name__ == "__main__":
     main()
 
     with open("yappi.stats", "w") as fh:
-        yappi.get_thread_stats().sort("id","asc").print_all(out=fh)
-        yappi.get_func_stats().sort("tsub","desc").print_all(out=fh,
+        yappi.get_thread_stats().sort("id", "asc").print_all(out=fh)
+        yappi.get_func_stats().sort("tsub", "desc").print_all(
+            out=fh,
             columns={
-                0: ("ncall", 8+5),
-                1: ("tsub", 8+3),
-                2: ("ttot", 8+3),
-                3: ("tavg", 8+3),
-                4: ("name", 64+68-16),
-            }
+                0: ("ncall", 8 + 5),
+                1: ("tsub", 8 + 3),
+                2: ("ttot", 8 + 3),
+                3: ("tavg", 8 + 3),
+                4: ("name", 64 + 68 - 16),
+            },
         )

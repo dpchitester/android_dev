@@ -1,15 +1,7 @@
 from glob import glob
-from os import fsdecode
-from os import getenv
-from os import lstat
-from os import mkdir
-from os import rmdir
-from os import utime
-from os.path import exists
-from os.path import isdir
-from subprocess import PIPE
-from subprocess import Popen
-from subprocess import run
+from os import fsdecode, getenv, lstat, mkdir, rmdir, utime
+from os.path import exists, isdir
+from subprocess import PIPE, Popen, run
 from sys import stdout
 
 from gb_env import *

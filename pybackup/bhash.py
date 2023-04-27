@@ -1,15 +1,11 @@
-from xxhash import xxh64
-from pathlib import Path
-from pathlib import PosixPath
-from struct import pack
-from struct import unpack
+from pathlib import Path, PosixPath
+from struct import pack, unpack
 
-from de import DE
-from de import FSe
-from sd import CS
-from sd import SD
-from sd import Ext3
-from sd import Fat32
+from xxhash import xxh64
+
+from de import DE, FSe
+from sd import CS, SD, Ext3, Fat32
+
 
 def bhu(ho, it):
     match it:

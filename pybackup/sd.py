@@ -1,13 +1,11 @@
 import datetime
 import time
-from pathlib import Path
-from pathlib import PosixPath
+from pathlib import Path, PosixPath
 
 import asyncrun as ar
 import config as v
 import ldsv as ls
-from de import DE
-from de import FSe
+from de import DE, FSe
 
 # from snoop import pp, snoop
 
@@ -43,7 +41,7 @@ class SD(PosixPath):
         return (None, False)
 
 
-class Local_Mixin():
+class Local_Mixin:
     def __init__(self, *args, **kwargs):
         super(Local_Mixin, self).__init__()
 
@@ -97,7 +95,7 @@ class Local_Mixin():
                 ls.sev.put("ldhd")
 
 
-class Remote_Mixin():
+class Remote_Mixin:
     def __init__(self, *args, **kwargs):
         super(Remote_Mixin, self).__init__()
 

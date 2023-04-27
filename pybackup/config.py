@@ -3,33 +3,18 @@ from math import floor
 from os import walk
 from pathlib import Path
 from threading import Event
-from typing import Dict
-from typing import List
-from typing import Set
-from typing import Tuple
-from typing import TypeAlias
+from typing import Dict, List, Set, Tuple, TypeAlias
 
 from cscopy import CSCopy
-from de import DE
-from de import FSe
-from edge import Edge
-from edge import addArc
-from edge import addDep
-from gitclasses import GitIndex
-from gitclasses import GitRemote
-from gitclasses import GitRepo
-from gitclasses import GitWT
-from gitops import GitAdd
-from gitops import GitCommit
-from gitops import GitPush
+from de import DE, FSe
+from edge import Edge, addArc, addDep
+from gitclasses import GitIndex, GitRemote, GitRepo, GitWT
+from gitops import GitAdd, GitCommit, GitPush
 from ldsv import load_all
 from localcopy import LocalCopy
 from mkzip import Mkzip
 from opbase import OpBase
-from sd import CS
-from sd import SD
-from sd import Ext3
-from sd import Fat32
+from sd import CS, SD, Ext3, Fat32
 
 quit_ev = Event()
 
@@ -216,7 +201,6 @@ def initConfig():
     addSrcDir("zips", sdcard / "zips", False)
     addSrcDir(".git", src("proj") / ".git", False)
 
-
     def f1():
         dl = getDL(src("proj"))
         for d in dl:
@@ -397,6 +381,7 @@ def initConfig():
             addArc(op14)
 
     load_all()
+
 
 dexs = {
     ".cargo",
