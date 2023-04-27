@@ -187,9 +187,9 @@ def save_bp():
                             saveldlls()
                         case "rdlls":
                             saverdlls()
-                        case "ldh":
+                        case "ldhd":
                             saveldh()
-                        case "rdh":
+                        case "rdhd":
                             saverdh()
                 return
             else:
