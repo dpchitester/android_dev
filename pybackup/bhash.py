@@ -1,13 +1,11 @@
 from struct import pack, unpack
+import pickle
 
 from xxhash import xxh64
 
-
-
 def bhu(ho, it):
-    from pathlib import Path, PosixPath
+    from pathlib import Path
     from de import DE, FSe
-    from sd import CS, SD, Ext3, Fat32
     match it:
         case bytes():
             ho.update(it)
@@ -17,18 +15,9 @@ def bhu(ho, it):
             ho.update(pack("f", it))
         case str():
             ho.update(it.encode())
-        case Path() | PosixPath() | SD() | Ext3() | Fat32() | CS():
-            ho.update(bytes(it))
-        case tuple() | set() | list():
-            for it2 in it:
-                bhu(ho, it2)
-        case DE():
-            ho.update(bytes(it.nm))
-            ho.update(pack("i", it.i.sz))
-            ho.update(pack("f", it.i.mt))
-        case FSe():
-            ho.update(pack("i", it.sz))
-            ho.update(pack("f", it.mt))
+        case Path() | tuple() | set() | list() | DE() | FSe():
+            bs = pickle.dumps(it)
+            ho.update(bs)
         case _:
             print("key error", type(it), "??")
 
