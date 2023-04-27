@@ -192,6 +192,7 @@ def save_bp():
                             saveldh()
                         case "rdhd":
                             saverdh()
+                pstats()
                 return
             else:
                 sleep(5)
