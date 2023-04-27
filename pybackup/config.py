@@ -394,6 +394,7 @@ dexs = {
     ".mypy_cache",
     ".vite",
     ".yarnclean",
+    "storage",
 }
 
 
