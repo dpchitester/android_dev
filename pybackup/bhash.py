@@ -22,7 +22,7 @@ def bhu(ho, it):
             bs = pickle.dumps(it)
             ho.update(bs)
         case _:
-            print("key error", type(it), "??")
+            print("bhash type error", type(it), "??")
 
 
 # flattened list blake2b with integer result
