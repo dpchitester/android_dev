@@ -8,6 +8,14 @@ from snoop import snoop
 dl = RLock()
 sev = SimpleQueue()
 
+def pstats():
+    import config as v
+
+    print("dl1_cs", v.dl1_cs)
+    print("dl2_cs", v.dl2_cs)
+    print("sfb", v.sfb)
+
+
 
 def loadldlls():
     import config as v
@@ -37,27 +45,27 @@ def loadrdlls():
 
 def saveldlls():
     import config as v
-    global sfb
+
     with dl:
         # print('-saveldlls')
         try:
             with open(v.ldllsf, "wb") as fh:
                 td = {"ldlls": v.LDlls, "ldlls_xt": v.LDlls_xt}
                 pickle.dump(td, fh)
-                sfb += fh.tell()
+                v.sfb += fh.tell()
         except IOError as e:
             print("savedlls failed", e)
 
 
 def saverdlls():
     import config as v
-    global sfb
+
     with dl:
         try:
             with open(v.rdllsf, "wb") as fh:
                 td = {"rdlls": v.RDlls, "rdlls_xt": v.RDlls_xt}
                 pickle.dump(td, fh)
-                sfb += fh.tell()
+                v.sfb += fh.tell()
         except IOError as e:
             print("saverdlls failed", e)
 
@@ -75,22 +83,15 @@ def loadedges():
 
 def saveedges():
     import config as v
-    global sfb
+
     with dl:
         try:
             with open(v.edgepf, "wb") as fh:
                 pickle.dump(v.eDep, fh)
-                sfb += fh.tell()
+                v.sfb += fh.tell()
         except IOError as e:
             print("saveedges failed", e)
 
-
-def pstats():
-    import config as v
-
-    print("dl1_cs", v.dl1_cs)
-    print("dl2_cs", v.dl2_cs)
-    print("sfb", v.sfb)
 
 
 def loadldh():
@@ -117,24 +118,24 @@ def loadrdh():
 
 def saveldh():
     import config as v
-    global sfb
+
     with dl:
         try:
             with open(v.ldhpf, "wb") as fh:
                 pickle.dump(v.LDhd, fh)
-                sfb += fh.tell()
+                v.sfb += fh.tell()
         except IOError as e:
             print("saveldh failed", e)
 
 
 def saverdh():
     import config as v
-    global sfb
+
     with dl:
         try:
             with open(v.rdhpf, "wb") as fh:
                 pickle.dump(v.RDhd, fh)
-                sfb += fh.tell()
+                v.sfb += fh.tell()
         except IOError as e:
             print("saverdh failed", e)
 
