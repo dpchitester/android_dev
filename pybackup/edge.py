@@ -14,7 +14,7 @@ class Edge:
         self.rudt = self.rcdt - 10
 
     def __hash__(self):
-        return blakeHash((self.di, self.si))
+        return hash((self.di, self.si))
 
     def __eq__(self, other):
         return (self.di, self.si) == (other.di, other.si)
@@ -67,10 +67,10 @@ def findEdge(di, si) -> Edge:
 
     with ls.dl:
         for e in v.eDep:
-            if (e.di, e.si) not in v.edges or v.edges[e.di, e.si] != e:
-                v.edges[e.di, e.si] = e
+            if (e.di, e.si) not in v.edges or v.edges[(e.di, e.si)] != e:
+                v.edges[(e.di, e.si)] = e
                 ls.sev.put("edges")
-    return v.edges[di, si]
+    return v.edges[(di, si)]
 
 
 def lrtset(di, si):

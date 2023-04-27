@@ -13,7 +13,7 @@ from de import FSe
 
 
 icl = 1
-rto1 = 60 * 5
+rto1 = 60 * 60
 
 
 class SD(PosixPath):
