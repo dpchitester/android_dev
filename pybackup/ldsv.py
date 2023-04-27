@@ -44,6 +44,7 @@ def saveldlls():
             with open(v.ldllsf, "wb") as fh:
                 td = {"ldlls": v.LDlls, "ldlls_xt": v.LDlls_xt}
                 pickle.dump(td, fh)
+                sfb += fh.tell()
         except IOError as e:
             print("savedlls failed", e)
 
@@ -56,6 +57,7 @@ def saverdlls():
             with open(v.rdllsf, "wb") as fh:
                 td = {"rdlls": v.RDlls, "rdlls_xt": v.RDlls_xt}
                 pickle.dump(td, fh)
+                sfb += fh.tell()
         except IOError as e:
             print("saverdlls failed", e)
 
@@ -78,6 +80,7 @@ def saveedges():
         try:
             with open(v.edgepf, "wb") as fh:
                 pickle.dump(v.eDep, fh)
+                sfb += fh.tell()
         except IOError as e:
             print("saveedges failed", e)
 
@@ -119,6 +122,7 @@ def saveldh():
         try:
             with open(v.ldhpf, "wb") as fh:
                 pickle.dump(v.LDhd, fh)
+                sfb += fh.tell()
         except IOError as e:
             print("saveldh failed", e)
 
@@ -130,6 +134,7 @@ def saverdh():
         try:
             with open(v.rdhpf, "wb") as fh:
                 pickle.dump(v.RDhd, fh)
+                sfb += fh.tell()
         except IOError as e:
             print("saverdh failed", e)
 
