@@ -152,21 +152,21 @@ def main():
 
 
 if __name__ == "__main__":
-    import yappi
+    #import yappi
 
-    yappi.set_clock_type("cpu")  # Use set_clock_type("wall") for wall time
-    yappi.start(builtins=True)
+    #yappi.set_clock_type("cpu")  # Use set_clock_type("wall") for wall time
+    #yappi.start(builtins=True)
     main()
 
-    with open("yappi.stats", "w") as fh:
-        yappi.get_thread_stats().sort("id", "asc").print_all(out=fh)
-        yappi.get_func_stats().sort("tsub", "desc").print_all(
-            out=fh,
-            columns={
-                0: ("ncall", 8 + 5),
-                1: ("tsub", 8 + 3),
-                2: ("ttot", 8 + 3),
-                3: ("tavg", 8 + 3),
-                4: ("name", 64 + 68 - 16),
-            },
-        )
+    #with open("yappi.stats", "w") as fh:
+        #yappi.get_thread_stats().sort("id", "asc").print_all(out=fh)
+        #yappi.get_func_stats().sort("tsub", "desc").print_all(
+            #out=fh,
+            #columns={
+                #0: ("ncall", 8 + 5),
+                #1: ("tsub", 8 + 3),
+                #2: ("ttot", 8 + 3),
+                #3: ("tavg", 8 + 3),
+                #4: ("name", 64 + 68 - 16),
+            #},
+        #)
