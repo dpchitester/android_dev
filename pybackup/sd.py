@@ -3,7 +3,6 @@ import time
 from pathlib import Path, PosixPath
 
 import asyncrun as ar
-import config as v
 import ldsv as ls
 from de import DE, FSe
 
@@ -51,6 +50,7 @@ class Local_Mixin:
 
     @property
     def Dll(self):
+        import config as v
         if hasattr(self, "tag"):
             with ls.dl:
                 if self.tag in v.LDlls:
@@ -59,6 +59,7 @@ class Local_Mixin:
 
     @Dll.setter
     def Dll(self, val):
+        import config as v
         if hasattr(self, "tag"):
             with ls.dl:
                 v.LDlls[self.tag] = val
@@ -66,6 +67,7 @@ class Local_Mixin:
 
     @property
     def Dlls_xt(self):
+        import config as v
         if hasattr(self, "tag"):
             with ls.dl:
                 if self.tag in v.LDlls_xt:
@@ -74,6 +76,7 @@ class Local_Mixin:
 
     @Dlls_xt.setter
     def Dlls_xt(self, val):
+        import config as v
         if hasattr(self, "tag"):
             with ls.dl:
                 v.LDlls_xt[self.tag] = val
@@ -81,6 +84,7 @@ class Local_Mixin:
 
     @property
     def SDh(self):
+        import config as v
         if hasattr(self, "tag"):
             with ls.dl:
                 if self.tag in v.LDhd:
@@ -89,6 +93,7 @@ class Local_Mixin:
 
     @SDh.setter
     def SDh(self, val):
+        import config as v
         if hasattr(self, "tag"):
             with ls.dl:
                 v.LDhd[self.tag] = val
@@ -105,6 +110,7 @@ class Remote_Mixin:
 
     @property
     def Dll(self):
+        import config as v
         if hasattr(self, "tag"):
             with ls.dl:
                 if self.tag in v.RDlls:
@@ -113,6 +119,7 @@ class Remote_Mixin:
 
     @Dll.setter
     def Dll(self, val):
+        import config as v
         if hasattr(self, "tag"):
             with ls.dl:
                 v.RDlls[self.tag] = val
@@ -120,6 +127,7 @@ class Remote_Mixin:
 
     @property
     def Dlls_xt(self):
+        import config as v
         if hasattr(self, "tag"):
             with ls.dl:
                 if self.tag in v.RDlls_xt:
@@ -128,6 +136,7 @@ class Remote_Mixin:
 
     @Dlls_xt.setter
     def Dlls_xt(self, val):
+        import config as v
         if hasattr(self, "tag"):
             with ls.dl:
                 v.RDlls_xt[self.tag] = val
@@ -135,6 +144,7 @@ class Remote_Mixin:
 
     @property
     def SDh(self):
+        import config as v
         if hasattr(self, "tag"):
             with ls.dl:
                 if self.tag in v.RDhd:
@@ -143,6 +153,7 @@ class Remote_Mixin:
 
     @SDh.setter
     def SDh(self, val):
+        import config as v
         if hasattr(self, "tag"):
             with ls.dl:
                 v.RDhd[self.tag] = val
@@ -163,6 +174,7 @@ class FS_Mixin(SD):
         return None
 
     def Dlld(self):
+        from filelist import FileList
         # print('-ldlld', si)
         if self.isremote:
             ch = "r"
@@ -170,7 +182,8 @@ class FS_Mixin(SD):
             ch = "l"
         if self.Dll is None or (self.isremote and self.Dlls_xt + rto1 <= time.time()):
             print("sucking/scanning for", self.tag, ch + "dll...", end="")
-            rv = self.getdll()
+            rv = FileList(self).getdll()
+            # rv = self.getdll()
             if rv is not None:
                 print("done.")
                 self.Dll = rv

@@ -1,3 +1,47 @@
+import datetime
+import time
+
+import asyncrun as ar
+import config as v
+import ldsv as ls
+from de import DE, FSe
+
+dexs = {
+    ".cargo",
+    ".cache",
+    ".git",
+    "node_modules",
+    "__pycache__",
+    ".ropeproject",
+    ".mypyproject",
+    ".mypy_cache",
+    ".vite",
+    ".yarnclean",
+    "storage",
+}
+
+
+def cull_DEs(des):
+    des[:] = [
+        de for de in des if not any([sd for sd in de.nm.parent.parts if sd in dexs])
+    ]
+
+
+def cull_files(files, pt):
+    files[:] = [
+        pt(f) for f in files if not any([sd for sd in f.parent.parts if sd in dexs])
+    ]
+
+
+def cull_dirs(dirs, pt):
+    dirs[:] = [pt(d) for d in dirs if not isbaddir(pt(d))]
+
+
+def isbaddir(dir):
+    return dir in dexs
+
+
+
 class FileList:
     def __new__(cls, sd, **kwargs):
         if sd.isremote:
@@ -7,39 +51,46 @@ class FileList:
         self = object.__new__(cls)
         return self
 
-    def __init__(self, sd, **kwargs):
-        self._sd = sd
+    def __init__(self, sd):
+        self.sd = sd
         super(FileList, self).__init__()
 
 
 class LocalFileList(FileList):
     def __init__(self, sd, **kwargs):
-        super(LocalFileList, self).__init__(*args, **kwargs)
+        super(LocalFileList, self).__init__(sd)
 
-    def getfl(self):
+    def getfl(self, sd):
         import config as v
 
-        pt = type(self._sd)
-        fl = []
-        if self._sd.is_file():
-            fl.append(self._sd)
-            return fl
-        wl = self._sd.rglob("*")
-        for it in wl:
+        pt = type(sd)
+        fl1 = []
+        if sd.is_file():
+            fl1.append(sd)
+            return fl1
+        if isbaddir(str(sd.name)):
+            return fl1
+        fdi = sd.iterdir()
+        for it in fdi:
             if it.is_file():
                 rp = pt(it)
-                fl.append(rp)
-        return fl
+                fl1.append(rp)
+            else:
+                if not isbaddir(str(it.name)):
+                    rp = pt(it)
+                    fl2 = self.getfl(rp)
+                    fl1.extend(fl2)
+        return fl1
 
     def getdll(self):  # local-source
         import config as v
 
         v.dl1_cs += 1
         # print('getdll3', si, str(sd))
-        l1 = self.getfl()
+        l1 = self.getfl(self.sd)
 
         def es(it):
-            it1 = it.relative_to(self._sd)
+            it1 = it.relative_to(self.sd)
             try:
                 fs = it.stat()
                 it2 = fs.st_size
@@ -58,15 +109,15 @@ class LocalFileList(FileList):
 
 
 class RemoteFileList(FileList):
-    def __init__(self, sd, *args, **kwargs):
-        super(RemoteFileList, self).__init__(*args, **kwargs)
+    def __init__(self, sd, **kwargs):
+        super(RemoteFileList, self).__init__(sd, **kwargs)
 
-    def getfl(self):
+    def getfl(self, sd):
         import json
 
         import config as v
 
-        cmd = 'rclone lsjson "' + str(self._sd) + '" --recursive --files-only '
+        cmd = 'rclone lsjson "' + str(sd) + '" --recursive --files-only '
         rc = ar.run1(cmd)
         if rc == 0:
             return json.loads(ar.txt)
@@ -78,9 +129,9 @@ class RemoteFileList(FileList):
         import config as v
 
         v.dl2_cs += 1
-        pt = type(self._sd)
+        pt = type(self.sd)
         # print('getdll1', di, str(td))
-        l1 = self.getfl()
+        l1 = self.getfl(self.sd)
         if l1:
 
             def es(it: dict):

@@ -1,13 +1,13 @@
-from pathlib import Path, PosixPath
 from struct import pack, unpack
 
 from xxhash import xxh64
 
-from de import DE, FSe
-from sd import CS, SD, Ext3, Fat32
 
 
 def bhu(ho, it):
+    from pathlib import Path, PosixPath
+    from de import DE, FSe
+    from sd import CS, SD, Ext3, Fat32
     match it:
         case bytes():
             ho.update(it)
