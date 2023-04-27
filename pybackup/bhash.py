@@ -12,20 +12,20 @@ from sd import Ext3
 from sd import Fat32
 
 
-def bhu(ho, it1):
+def bhu1(ho, it1):
     bhuf = {
         bytes: lambda it: ho.update(it),
         int: lambda it: ho.update(pack("i", it)),
         float: lambda it: ho.update(pack("f", it)),
         str: lambda it: ho.update(it.encode()),
-        Path: lambda it: ho.update(pack("i", hash(it))),
-        PosixPath: lambda it: ho.update(pack("i", hash(it))),
-        SD: lambda it: ho.update(pack("i", hash(it))),
+        Path: lambda it: ho.update(bytes(it)),
+        PosixPath: lambda it: ho.update(bytes(it)),
+        SD: lambda it: ho.update(bytes(it)),
         # Local: lambda it: ho.update(str(it).encode()),
         # Remote: lambda it: ho.update(str(it).encode()),
-        Ext3: lambda it: ho.update(pack("i", hash(it))),
-        Fat32: lambda it: ho.update(pack("i", hash(it))),
-        CS: lambda it: ho.update(pack("i", hash(it))),
+        Ext3: lambda it: ho.update(bytes(it)),
+        Fat32: lambda it: ho.update(bytes(it)),
+        CS: lambda it: ho.update(bytes(it)),
         tuple: lambda it: [bhuf[type(it2)](it2) for it2 in it],
         set: lambda it: [bhuf[type(it2)](it2) for it2 in it],
         list: lambda it: [bhuf[type(it2)](it2) for it2 in it],
@@ -38,25 +38,25 @@ def bhu(ho, it1):
         print("key error", type(it1), "??")
 
 def bhu2(ho, it):
-    match type(it):
-        case 'bytes':
+    match it:
+        case bytes():
             ho.update(it)
-        case 'int':
+        case int():
             ho.update(pack("i", it))
-        case 'float':
+        case float():
             ho.update(pack("f", it))
-        case 'str':
+        case str():
             ho.update(it.encode())
-        case 'Path' | 'PosixPath' | 'SD' | 'Ext3' | 'Fat32' | 'CS':
+        case Path() | PosixPath() | SD() | Ext3() | Fat32() | CS():
             ho.update(bytes(it))
-        case 'tuple' | 'set' | 'list':
+        case tuple() | set() | list():
             for it2 in it:
-                bhu(ho, it2)
-        case 'DE':
+                bhu2(ho, it2)
+        case DE():
             ho.update(bytes(it.nm))
             ho.update(pack("i", it.i.sz))
             ho.update(pack("f", it.i.mt))
-        case 'FSe':
+        case FSe():
             ho.update(pack("i", it.sz))
             ho.update(pack("f", it.mt))
         case _:
@@ -66,6 +66,6 @@ def bhu2(ho, it):
 # flattened list blake2b with integer result
 def blakeHash(it):
     ho = blake2b(digest_size=4)
-    bhu(ho, it)
+    bhu2(ho, it)
     rv = unpack("i", ho.digest())
     return rv[0]
