@@ -37,7 +37,7 @@ def loadrdlls():
 
 def saveldlls():
     import config as v
-
+    global sfb
     with dl:
         # print('-saveldlls')
         try:
@@ -51,7 +51,7 @@ def saveldlls():
 
 def saverdlls():
     import config as v
-
+    global sfb
     with dl:
         try:
             with open(v.rdllsf, "wb") as fh:
@@ -75,7 +75,7 @@ def loadedges():
 
 def saveedges():
     import config as v
-
+    global sfb
     with dl:
         try:
             with open(v.edgepf, "wb") as fh:
@@ -117,7 +117,7 @@ def loadrdh():
 
 def saveldh():
     import config as v
-
+    global sfb
     with dl:
         try:
             with open(v.ldhpf, "wb") as fh:
@@ -129,7 +129,7 @@ def saveldh():
 
 def saverdh():
     import config as v
-
+    global sfb
     with dl:
         try:
             with open(v.rdhpf, "wb") as fh:
