@@ -8,13 +8,13 @@ from snoop import snoop
 dl = RLock()
 sev = SimpleQueue()
 
+
 def pstats():
     import config as v
 
     print("dl1_cs", v.dl1_cs)
     print("dl2_cs", v.dl2_cs)
     print("sfb", v.sfb)
-
 
 
 def loadldlls():
@@ -91,7 +91,6 @@ def saveedges():
                 v.sfb += fh.tell()
         except IOError as e:
             print("saveedges failed", e)
-
 
 
 def loadldh():

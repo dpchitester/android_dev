@@ -51,6 +51,7 @@ class Local_Mixin:
     @property
     def Dll(self):
         import config as v
+
         if hasattr(self, "tag"):
             with ls.dl:
                 if self.tag in v.LDlls:
@@ -60,6 +61,7 @@ class Local_Mixin:
     @Dll.setter
     def Dll(self, val):
         import config as v
+
         if hasattr(self, "tag"):
             with ls.dl:
                 v.LDlls[self.tag] = val
@@ -68,6 +70,7 @@ class Local_Mixin:
     @property
     def Dlls_xt(self):
         import config as v
+
         if hasattr(self, "tag"):
             with ls.dl:
                 if self.tag in v.LDlls_xt:
@@ -77,6 +80,7 @@ class Local_Mixin:
     @Dlls_xt.setter
     def Dlls_xt(self, val):
         import config as v
+
         if hasattr(self, "tag"):
             with ls.dl:
                 v.LDlls_xt[self.tag] = val
@@ -85,6 +89,7 @@ class Local_Mixin:
     @property
     def SDh(self):
         import config as v
+
         if hasattr(self, "tag"):
             with ls.dl:
                 if self.tag in v.LDhd:
@@ -94,6 +99,7 @@ class Local_Mixin:
     @SDh.setter
     def SDh(self, val):
         import config as v
+
         if hasattr(self, "tag"):
             with ls.dl:
                 v.LDhd[self.tag] = val
@@ -111,6 +117,7 @@ class Remote_Mixin:
     @property
     def Dll(self):
         import config as v
+
         if hasattr(self, "tag"):
             with ls.dl:
                 if self.tag in v.RDlls:
@@ -120,6 +127,7 @@ class Remote_Mixin:
     @Dll.setter
     def Dll(self, val):
         import config as v
+
         if hasattr(self, "tag"):
             with ls.dl:
                 v.RDlls[self.tag] = val
@@ -128,6 +136,7 @@ class Remote_Mixin:
     @property
     def Dlls_xt(self):
         import config as v
+
         if hasattr(self, "tag"):
             with ls.dl:
                 if self.tag in v.RDlls_xt:
@@ -137,6 +146,7 @@ class Remote_Mixin:
     @Dlls_xt.setter
     def Dlls_xt(self, val):
         import config as v
+
         if hasattr(self, "tag"):
             with ls.dl:
                 v.RDlls_xt[self.tag] = val
@@ -145,6 +155,7 @@ class Remote_Mixin:
     @property
     def SDh(self):
         import config as v
+
         if hasattr(self, "tag"):
             with ls.dl:
                 if self.tag in v.RDhd:
@@ -154,6 +165,7 @@ class Remote_Mixin:
     @SDh.setter
     def SDh(self, val):
         import config as v
+
         if hasattr(self, "tag"):
             with ls.dl:
                 v.RDhd[self.tag] = val
@@ -175,6 +187,7 @@ class FS_Mixin(SD):
 
     def Dlld(self):
         from filelist import FileList
+
         # print('-ldlld', si)
         if self.isremote:
             ch = "r"
@@ -201,87 +214,10 @@ class CFS_Mixin(FS_Mixin, Remote_Mixin):
     def __init__(self, *args, **kwargs):
         super(CFS_Mixin, self).__init__(*args, **kwargs)
 
-    def getfl(self):
-        import json
-
-        import config as v
-
-        cmd = 'rclone lsjson "' + str(self) + '" --recursive --files-only '
-        rc = ar.run1(cmd)
-        if rc == 0:
-            return json.loads(ar.txt)
-        if rc == 3:
-            return []
-        return None
-
-    def getdll(self):  # remote-source
-        import config as v
-
-        v.dl2_cs += 1
-        pt = type(self)
-        # print('getdll1', di, str(td))
-        l1 = self.getfl()
-        if l1:
-
-            def es(it: dict):
-                # TODO: use Path
-                it1 = pt(it["Path"])
-                it2 = it["Size"]
-                it3 = it["ModTime"][:-1] + "-00:00"
-                it3 = datetime.datetime.fromisoformat(it3).timestamp()
-                it3 = v.ts_trunc2ms(it3)
-                fse = FSe(it2, it3)
-                return DE(it1, fse)
-
-            st = list(map(es, l1))
-            st.sort(key=lambda de: de.nm)
-            return st
-        return None
-
 
 class PFS_Mixin(FS_Mixin, Local_Mixin):
     def __init__(self, *args, **kwargs):
         super(PFS_Mixin, self).__init__(*args, **kwargs)
-
-    def getfl(self):
-        import config as v
-
-        pt = type(self)
-        fl = []
-        if self.is_file():
-            fl.append(self)
-            return fl
-        wl = self.rglob("*")
-        for it in wl:
-            if it.is_file():
-                rp = pt(it)
-                fl.append(rp)
-        return fl
-
-    def getdll(self):  # local-source
-        import config as v
-
-        v.dl1_cs += 1
-        # print('getdll3', si, str(sd))
-        l1 = self.getfl()
-
-        def es(it):
-            it1 = it.relative_to(self)
-            try:
-                fs = it.stat()
-                it2 = fs.st_size
-                it3 = fs.st_mtime_ns
-                it3 = v.ns_trunc2ms(it3)
-            except FileNotFoundError as exc:
-                print(exc)
-                it2 = 0
-                it3 = 0
-            fse = FSe(it2, it3)
-            return DE(it1, fse)
-
-        st = list(map(es, l1))
-        st.sort(key=lambda de: de.nm)
-        return st
 
 
 class Ext3(PFS_Mixin):
