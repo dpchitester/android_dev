@@ -311,7 +311,6 @@ class CSCopy(OpBase):
             if bv.sfc.fc == 0:
                 if "delete" in self.opts and self.opts["delete"] and len(bv.f2d):
                     bv.do_deletions()
-
             if bv.ac2:
                 pass
         if self.sfc.fc == 0:
