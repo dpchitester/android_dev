@@ -77,7 +77,10 @@ class LocalFileList(FileList):
                 fl1.append(rp)
             else:
                 if not isbaddir(str(it.name)):
-                    rp = pt(it)
+                    if not isinstance(it, pt):
+                        rp = pt(it)
+                    else:
+                        rp = it
                     fl2 = self.getfl(rp)
                     fl1.extend(fl2)
         return fl1
