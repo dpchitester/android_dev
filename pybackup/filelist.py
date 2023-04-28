@@ -61,7 +61,8 @@ class LocalFileList(FileList):
     def __init__(self, sd, **kwargs):
         super(LocalFileList, self).__init__(sd)
 
-    def getfl_str_fp(self, fp:str):
+    @classmethod
+    def getfl_str_fp(cls, fp:str):
         import config as v
         
         fl1 = []
@@ -76,21 +77,20 @@ class LocalFileList(FileList):
                 fl1.append(fp2)
             else:
                 if not isbaddir(os.path.split(fp2)[1]):
-                    fl2 = self.getfl_str_fp(fp2)
-                    for it2 in fl2:
-                        fl1.append(it2)
+                    fl2 = cls.getfl_str_fp(fp2)
+                    fl1.extend(fl2)
         return fl1
 
-    def getfl(self, sd):
+    def getfl(self):
         import config as v
-        return self.getfl_str_fp(str(sd))
+        return self.getfl_str_fp(str(self.sd))
 
     def getdll(self):  # local-source
         import config as v
 
         v.dl1_cs += 1
         # print('getdll3', si, str(sd))
-        l1 = self.getfl(self.sd)
+        l1 = self.getfl()
 
         def es(it):
             it1 = Path(os.path.relpath(it, start = self.sd))
