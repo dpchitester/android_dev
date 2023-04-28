@@ -194,7 +194,7 @@ def save_bp():
                 pstats()
                 return
             else:
-                sleep(5)
+                sleep(2)
 
     th3 = Thread(target=save_th)
     return th3
