@@ -23,13 +23,13 @@ dexs = {
 
 def cull_DEs(des):
     des[:] = [
-        de for de in des if not any([sd for sd in de.nm.parent.parts if sd in dexs])
+        de for de in des if not any([sd for sd in de.nm.parent.parts if sd in v.dexs])
     ]
 
 
 def cull_files(files, pt):
     files[:] = [
-        pt(f) for f in files if not any([sd for sd in f.parent.parts if sd in dexs])
+        pt(f) for f in files if not any([sd for sd in f.parent.parts if sd in v.dexs])
     ]
 
 
@@ -38,7 +38,7 @@ def cull_dirs(dirs, pt):
 
 
 def isbaddir(dir):
-    return dir in dexs
+    return dir in v.dexs
 
 
 class FileList:
