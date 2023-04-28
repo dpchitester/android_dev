@@ -42,11 +42,10 @@ def ftouch(di, si, td, lf, sfc):
     if netup():
         nt = ts2st(lf.i.mt)
         cmd = (
-            'rclone touch "'
+            'rclone touch -t"'
+            + nt + '" "'
             + str(td / lf.nm)
-            + '" --timestamp "'
-            + nt
-            + '" --progress --no-create'
+            + '" --progress --no-create -vv'
         )
         # cmd += ' --exclude ".git/**" --exclude "__pycache__/**"'
         print(cmd)
