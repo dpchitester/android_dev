@@ -1,7 +1,7 @@
 import asyncrun as ar
 import config as v
 from sd import SD
-
+import ldsv as ls
 
 class GitCmdFailure(Exception):
     pass
@@ -25,14 +25,17 @@ class Local_Git_Mixin:
     @property
     def SDh(self):
         if hasattr(self, "tag"):
-            if self.tag in v.LDhd:
-                return v.LDhd[self.tag]
+            with ls.dl:
+                if self.tag in v.LDhd:
+                    return v.LDhd[self.tag]
         return 0
 
     @SDh.setter
     def SDh(self, val):
-        v.LDhd[self.tag] = val
-
+        if hasattr(self, "tag"):
+            with ls.dl:
+                v.LDhd[self.tag] = val
+                ls.sev.put("ldhd")
 
 class Remote_Git_Mixin:
     def __init__(self, *args, **kwargs):
@@ -51,7 +54,10 @@ class Remote_Git_Mixin:
 
     @SDh.setter
     def SDh(self, val):
-        v.RDhd[self.tag] = val
+        if hasattr(self, "tag"):
+            with ls.dl:
+                v.RDhd[self.tag] = val
+                ls.sev.put("rdhd")
 
 
 class GitWT(SD, Local_Git_Mixin):
