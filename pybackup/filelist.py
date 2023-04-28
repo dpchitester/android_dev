@@ -82,7 +82,6 @@ class LocalFileList(FileList):
         return fl1
 
     def getfl(self):
-        import config as v
         return self.getfl_str_fp(str(self.sd))
 
     def getdll(self):  # local-source
