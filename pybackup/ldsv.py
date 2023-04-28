@@ -162,39 +162,30 @@ def save_bp():
 
     def save_th():
         svs = {}
-
-        def chk_sq():
+        while not v.quit_ev.is_set():
             try:
                 qi = sev.get_nowait()
                 try:
                     svs[qi] += 1
                 except KeyError:
                     svs[qi] = 1
+                continue
             except Empty:
-                pass
-            return not sev.empty()
-
-        while True:
-            while chk_sq():
-                pass
-            if v.quit_ev.is_set():
-                print("saves:", svs)
-                for sv in svs:
-                    match sv:
-                        case "edges":
-                            saveedges()
-                        case "ldlls":
-                            saveldlls()
-                        case "rdlls":
-                            saverdlls()
-                        case "ldhd":
-                            saveldh()
-                        case "rdhd":
-                            saverdh()
-                pstats()
-                return
-            else:
-                sleep(2)
+                sleep(0.05)
+        print("saves:", svs)
+        for sv in svs:
+            match sv:
+                case "edges":
+                    saveedges()
+                case "ldlls":
+                    saveldlls()
+                case "rdlls":
+                    saverdlls()
+                case "ldhd":
+                    saveldh()
+                case "rdhd":
+                    saverdh()
+        pstats()
 
     th3 = Thread(target=save_th)
     return th3
