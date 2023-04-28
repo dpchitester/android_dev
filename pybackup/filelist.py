@@ -1,6 +1,7 @@
 import datetime
 import time
 from pathlib import Path
+import os
 
 import asyncrun as ar
 import config as v
@@ -39,7 +40,7 @@ def cull_dirs(dirs, pt):
 
 
 def isbaddir(dir):
-    return dir in v.dexs
+    return dir in v.dexs or dir in dexs
 
 
 class FileList:
@@ -60,30 +61,29 @@ class LocalFileList(FileList):
     def __init__(self, sd, **kwargs):
         super(LocalFileList, self).__init__(sd)
 
+    def getfl_str_fp(self, fp:str):
+        import config as v
+        
+        fl1 = []
+        if os.path.isfile(fp):
+            fl1.append(fp)
+            return fl1
+        if isbaddir(os.path.split(fp)[1]):
+            return fl1
+        for it in os.listdir(fp):
+            fp2 = os.path.join(fp, it)
+            if os.path.isfile(fp2):
+                fl1.append(fp2)
+            else:
+                if not isbaddir(os.path.split(fp2)[1]):
+                    fl2 = self.getfl_str_fp(fp2)
+                    for it2 in fl2:
+                        fl1.append(it2)
+        return fl1
+
     def getfl(self, sd):
         import config as v
-
-        pt = Path
-        fl1 = []
-        if sd.is_file():
-            fl1.append(sd)
-            return fl1
-        if isbaddir(str(sd.name)):
-            return fl1
-        fdi = sd.iterdir()
-        for it in fdi:
-            if it.is_file():
-                rp = pt(it)
-                fl1.append(rp)
-            else:
-                if not isbaddir(str(it.name)):
-                    if not isinstance(it, pt):
-                        rp = pt(it)
-                    else:
-                        rp = it
-                    fl2 = self.getfl(rp)
-                    fl1.extend(fl2)
-        return fl1
+        return self.getfl_str_fp(str(sd))
 
     def getdll(self):  # local-source
         import config as v
@@ -93,9 +93,9 @@ class LocalFileList(FileList):
         l1 = self.getfl(self.sd)
 
         def es(it):
-            it1 = it.relative_to(self.sd)
+            it1 = Path(os.path.relpath(it, start = self.sd))
             try:
-                fs = it.stat()
+                fs = os.lstat(it)
                 it2 = fs.st_size
                 it3 = fs.st_mtime_ns
                 it3 = v.ns_trunc2ms(it3)
@@ -151,3 +151,16 @@ class RemoteFileList(FileList):
             st.sort(key=lambda de: de.nm)
             return st
         return None
+
+if __name__ == "__main__":
+    from sd import Fat32
+    
+    sd1 = Fat32('/sdcard/projects/pybackup')
+    print('sd1', sd1, end='\n\n')
+    fl1 = FileList(sd1)
+    print('fl1', fl1, end='\n\n')
+    fl2 = fl1.getfl_str_fp(str(sd1))
+    print('getfl_str_fp(str(sd1))', fl2, end='\n\n')
+    dll1 = fl1.getdll()
+    print('fl1.getdll()', dll1, end='\n\n')
+    
