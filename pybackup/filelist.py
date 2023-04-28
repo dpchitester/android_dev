@@ -154,13 +154,4 @@ class RemoteFileList(FileList):
 
 if __name__ == "__main__":
     from sd import Fat32
-    
-    sd1 = Fat32('/sdcard/projects/pybackup')
-    print('sd1', sd1, end='\n\n')
-    fl1 = FileList(sd1)
-    print('fl1', fl1, end='\n\n')
-    fl2 = fl1.getfl_str_fp(str(sd1))
-    print('getfl_str_fp(str(sd1))', fl2, end='\n\n')
-    dll1 = fl1.getdll()
-    print('fl1.getdll()', dll1, end='\n\n')
-    
+    pass
