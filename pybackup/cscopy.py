@@ -211,15 +211,7 @@ class BVars:
                         ):
                             self.f2d.remove(rf)
                             self.f2c.remove(lf)
-                        # print(rf.i.mt, lf.i.mt, rf.i.mt - lf.i.mt)
-                        # if rf.i.mt > lf.i.mt:
-                        # if rf.i.mt - lf.i.mt > 0.0001:
-                        # self.f2d.remove(rf)
-                        # self.f2c.remove(lf)
-                        # self.f2t.add(lf)
-                        # if rf.i.mt-lf.i.mt<-0.0001:
-                        # if ftouch(self.di, self.si, self.sd, rf, self.sfc):
-                        # updateDEs(self.sd, [str(de.nm) for de in [rf]])
+                            self.f2t.add(lf)
 
     def do_touching(self):
         # TODO: use Path
@@ -317,8 +309,8 @@ class CSCopy(OpBase):
             if bv.sfc.fc == 0:
                 if "delete" in self.opts and self.opts["delete"] and len(bv.f2d):
                     bv.do_deletions()
-            # if bv.sfc.fc == 0:
-            # bv.do_touching()
+            if bv.sfc.fc == 0:
+                bv.do_touching()
             if bv.ac2:
                 pass
         if self.sfc.fc == 0:
