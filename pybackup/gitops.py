@@ -34,11 +34,9 @@ class GitAdd(OpBase):
             tc += 1
         else:
             fc += 1
-        if fc == 0 and tc > 0:
-            if "l" in s:
-                e.clr()
-            if "r" in s:
-                e.rclr()
+        if fc == 0:
+            e.clr()
+            e.rclr()
         return (tc, fc)
 
 
@@ -107,9 +105,7 @@ class GitPush(OpBase):
                 tc += 1
             else:
                 fc += 1
-        if fc == 0 and tc > 0:
-            if "l" in s:
-                e.clr()
-            if "r" in s:
-                e.rclr()
+        if fc == 0:
+            e.clr()
+            e.rclr()
         return (tc, fc)
