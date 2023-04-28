@@ -172,4 +172,4 @@ def profiled_main():
         )
         
 if __name__ == "__main__":
-    main()
+    profiled_main()
