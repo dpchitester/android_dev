@@ -199,7 +199,7 @@ def initConfig():
     addSrcDir("backups", sdcard / "backups", False)
     addSrcDir("vids", sdcard / "VideoDownloader/Download", False)
     addSrcDir("zips", sdcard / "zips", False)
-    addSrcDir(".git", src("proj") / ".git", False)
+    # addSrcDir(".git", src("proj") / ".git", False)
 
     def f1():
         dl = getDL(src("proj"))
