@@ -1,8 +1,6 @@
 from time import time
 
 import ldsv as ls
-from bhash import blakeHash
-
 
 class Edge:
     def __init__(self, di, si):

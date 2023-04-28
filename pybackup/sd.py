@@ -177,12 +177,12 @@ class FS_Mixin(SD):
         super(FS_Mixin, self).__init__(*args, **kwargs)
 
     def sdh_d(self):
-        from bhash import blakeHash
+        from bhash import xxh64Hash
 
         with ls.dl:
             Si_dl = self.Dlld()
         if Si_dl is not None:
-            return blakeHash(Si_dl)
+            return xxh64Hash(Si_dl)
         return None
 
     def Dlld(self):

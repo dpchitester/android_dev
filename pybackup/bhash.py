@@ -25,8 +25,8 @@ def bhu(ho, it):
             print("bhash type error", type(it), "??")
 
 
-# flattened list blake2b with integer result
-def blakeHash(it):
+# flattened list xxh64 with integer result
+def xxh64Hash(it):
     ho = xxh64()
     bhu(ho, it)
     return ho.intdigest()
