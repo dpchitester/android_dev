@@ -71,11 +71,9 @@ class GitCommit(OpBase):
         else:
             print("git commit rc:", rc)
             fc += 1
-        if fc == 0 and tc > 0:
-            if "l" in s:
-                e.clr()
-            if "r" in s:
-                e.rclr()
+        if fc == 0:
+            e.clr()
+            e.rclr()
         return (tc, fc)
 
 
@@ -104,7 +102,7 @@ class GitPush(OpBase):
         if not anyd:
             return (tc, fc)
         if rmt == "local" or (netup()):
-            rc = ar.run2("git push " + rmt + " master -v", cwd=self.opts["wt"])
+            rc = ar.run2("git push " + rmt + " master", cwd=self.opts["wt"])
             if rc == 0:
                 tc += 1
             else:
