@@ -1,5 +1,6 @@
 import datetime
 import time
+from pathlib import Path
 
 import asyncrun as ar
 import config as v
@@ -62,7 +63,7 @@ class LocalFileList(FileList):
     def getfl(self, sd):
         import config as v
 
-        pt = type(sd)
+        pt = Path
         fl1 = []
         if sd.is_file():
             fl1.append(sd)
@@ -128,7 +129,7 @@ class RemoteFileList(FileList):
         import config as v
 
         v.dl2_cs += 1
-        pt = type(self.sd)
+        pt = Path
         # print('getdll1', di, str(td))
         l1 = self.getfl(self.sd)
         if l1:
