@@ -43,7 +43,8 @@ def ftouch(di, si, td, lf, sfc):
         nt = ts2st(lf.i.mt)
         cmd = (
             'rclone touch -t"'
-            + nt + '" "'
+            + nt
+            + '" "'
             + str(td / lf.nm)
             + '" --progress --no-create -vv'
         )
@@ -304,12 +305,13 @@ class CSCopy(OpBase):
                 bv.skip_matching()
                 print("skip", len(bv.f2d), "todelete", len(bv.f2c), "tocopy")
             if bv.sfc.fc == 0:
+                bv.do_touching()
+            if bv.sfc.fc == 0:
                 bv.do_copying()
             if bv.sfc.fc == 0:
                 if "delete" in self.opts and self.opts["delete"] and len(bv.f2d):
                     bv.do_deletions()
-            if bv.sfc.fc == 0:
-                bv.do_touching()
+
             if bv.ac2:
                 pass
         if self.sfc.fc == 0:

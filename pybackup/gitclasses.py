@@ -3,6 +3,7 @@ import config as v
 from sd import SD
 import ldsv as ls
 
+
 class GitCmdFailure(Exception):
     pass
 
@@ -36,6 +37,7 @@ class Local_Git_Mixin:
             with ls.dl:
                 v.LDhd[self.tag] = val
                 ls.sev.put("ldhd")
+
 
 class Remote_Git_Mixin:
     def __init__(self, *args, **kwargs):
