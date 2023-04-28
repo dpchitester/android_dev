@@ -151,7 +151,7 @@ def main():
                     th.join()
 
 
-if __name__ == "__main__":
+def profiled_main():
     import yappi
 
     yappi.set_clock_type("cpu")  # Use set_clock_type("wall") for wall time
@@ -170,3 +170,6 @@ if __name__ == "__main__":
                 4: ("name", 64 + 68 - 16),
             },
         )
+        
+if __name__ == "__main__":
+    main()
