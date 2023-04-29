@@ -311,54 +311,55 @@ def initConfig():
     npl1 = ("sh", "bash")
     op5 = LocalCopy(npl1, npl1, {"files": ["*.sh", "*.env"], "exec": True})
     addArc(op5)
+    
     npl1 = ("bash", "sh")
-    op5 = LocalCopy(npl1, npl1, {"files": ["*.sh", "*.env"], "exec": True})
-    addArc(op5)
-
-    npl1 = ("blogds", "blog")
-    op6 = LocalCopy(npl1, npl1, {"files": ["blog.js"]})
+    op6 = LocalCopy(npl1, npl1, {"files": ["*.sh", "*.env"], "exec": True})
     addArc(op6)
 
-    npl1 = ("blog", "blogds")
-    op7 = LocalCopy(npl1, npl1, {"files": ["*.db", "blog.js"]})
+    npl1 = ("blogds", "blog")
+    op7 = LocalCopy(npl1, npl1, {"files": ["blog.js"]})
     addArc(op7)
 
-    npl1 = ("plaid-node", "blogds")
-    op8 = LocalCopy(npl1, npl1, {"files": ["*.db"]})
+    npl1 = ("blog", "blogds")
+    op8 = LocalCopy(npl1, npl1, {"files": ["*.db", "blog.js"]})
     addArc(op8)
+
+    npl1 = ("plaid-node", "blogds")
+    op9 = LocalCopy(npl1, npl1, {"files": ["*.db"]})
+    addArc(op9)
 
     # npl1 = ('termux-backup', 'home')
     # op1 = LocalCopy(npl1, npl1, {'files': ['**/*.*']})
     # addArc(op1)
 
     npl1 = ("backups", "blogds")
-    op9 = LocalCopy(npl1, npl1, {"files": ["*.db"]})
-    addArc(op9)
+    op10 = LocalCopy(npl1, npl1, {"files": ["*.db"]})
+    addArc(op10)
 
     if "NOGIT" not in os.environ:
         npl1 = ("git_index", "git_worktree")
-        op10 = GitAdd(npl1, npl1, {"wt": worktree})
-        addArc(op10)
-
-        npl1 = ("git_repo", "git_index")
-        op11 = GitCommit(npl1, npl1, {"wt": worktree})
+        op11 = GitAdd(npl1, npl1, {"wt": worktree})
         addArc(op11)
 
+        npl1 = ("git_repo", "git_index")
+        op12 = GitCommit(npl1, npl1, {"wt": worktree})
+        addArc(op12)
+
         npl1 = ("bitbucket", "git_repo")
-        op12 = GitPush(
+        op13 = GitPush(
             npl1,
             None,
             {"wt": worktree, "rmt": "bitbucket"},
         )
-        addArc(op12)
+        addArc(op13)
 
         npl1 = ("github", "git_repo")
-        op13 = GitPush(
+        op14 = GitPush(
             npl1,
             None,
             {"wt": worktree, "rmt": "github"},
         )
-        addArc(op13)
+        addArc(op14)
 
     # for si in codes:
     # npl1 = ("zips", si)
@@ -375,10 +376,10 @@ def initConfig():
             p1 = src(si).relative_to(ppre("sd"))
             addTgtDir(cs + "_" + si, ppre(cs) / p1)
             npl1 = (cs + "_" + si, si)
-            # op1 = CSRestore(npl1, None, {})
-            # addArc(op1)
-            op14 = CSCopy(npl1, npl1, {"delete": True})
-            addArc(op14)
+            # op15 = CSRestore(npl1, None, {})
+            # addArc(op15)
+            op16 = CSCopy(npl1, npl1, {"delete": True})
+            addArc(op16)
 
     load_all()
 
