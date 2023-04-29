@@ -66,14 +66,14 @@ class LocalFileList(FileList):
         import config as v
         
         fl1 = []
-        
-        for it1 in os.scandir(fp):
-            if it1.is_file():
-                fl1.append(it1)
-            elif not it1.is_symlink():
-                if not isbaddir(it1.name):
-                    fl2 = cls.getfl_str_fp(it1.path)
-                    fl1.extend(fl2)
+        with os.scandir(fp) as di:
+            for it1 in di:
+                if it1.is_file():
+                    fl1.append(it1)
+                elif not it1.is_symlink():
+                    if not isbaddir(it1.name):
+                        fl2 = cls.getfl_str_fp(it1.path)
+                        fl1.extend(fl2)
         return fl1
 
     def getfl(self):
