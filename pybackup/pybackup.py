@@ -160,7 +160,7 @@ def pmain():
 
     with open("yappi.stats", "w") as fh:
         yappi.get_thread_stats().sort("id", "asc").print_all(out=fh)
-        yappi.get_func_stats().sort("tsub", "desc").print_all(
+        yappi.get_func_stats().sort("ncall", "desc").print_all(
             out=fh,
             columns={
                 0: ("ttot", 8 + 3),
