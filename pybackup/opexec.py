@@ -46,16 +46,18 @@ def nts():
 
 def proc_nodes(L):
     n = 1
+    sc = 0
+    fc = 0
     for node in L:
-        # print("node:", node)
+        print("node:", node)
         ss = changed_ops(node)
         for op in ss:
-            tc, _ = op()
-            if tc:
+            sc, fc = op()
+            if sc:
                 updatets(n)
                 # rupdatets(n)
                 n += 1
-    return True
+    return fc == 0
 
 
 def opExec():
