@@ -129,7 +129,7 @@ class LocalCopy(OpBase):
         if e.chk_ct():
             print("LocalCopy", self.npl1, self.npl2)
             sp = v.src(self.npl2[1])
-            dp = v.tgt(self.npl2[0])
+            tp = v.tgt(self.npl2[0])
             gl = self.opts.get("files", ["**/*"])
             for g in gl:
                 try:
@@ -142,11 +142,10 @@ class LocalCopy(OpBase):
                     if fsf.is_dir():
                         continue
                     rf = fsf.relative_to(sp)
-                    fdf = dp / rf
-                    pd = fdf.parent
+                    fdf = tp / rf
                     try:
-                        if not pd.exists():
-                            makedirs(pd, exist_ok=True)
+                        if not tp.exists():
+                            makedirs(tp, exist_ok=True)
                         fdiff = FileDiff(fsf, fdf)
                         if fdiff.should_copy():
                             rv = copy2(di, si, fsf, fdf, self.sfc)
