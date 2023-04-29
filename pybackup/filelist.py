@@ -66,18 +66,13 @@ class LocalFileList(FileList):
         import config as v
         
         fl1 = []
-        if os.path.isfile(fp):
-            fl1.append(fp)
-            return fl1
-        if isbaddir(os.path.split(fp)[1]):
-            return fl1
-        for it in os.listdir(fp):
-            fp2 = os.path.join(fp, it)
-            if os.path.isfile(fp2):
-                fl1.append(fp2)
-            else:
-                if not isbaddir(os.path.split(fp2)[1]):
-                    fl2 = cls.getfl_str_fp(fp2)
+        
+        for it1 in os.scandir(fp):
+            if it1.is_file():
+                fl1.append(it1)
+            elif not it1.is_symlink():
+                if not isbaddir(it1.name):
+                    fl2 = cls.getfl_str_fp(it1.path)
                     fl1.extend(fl2)
         return fl1
 
@@ -94,7 +89,7 @@ class LocalFileList(FileList):
         def es(it):
             it1 = Path(os.path.relpath(it, start = self.sd))
             try:
-                fs = os.lstat(it)
+                fs = it.stat()
                 it2 = fs.st_size
                 it3 = fs.st_mtime_ns
                 it3 = v.ns_trunc2ms(it3)
