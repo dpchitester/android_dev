@@ -63,8 +63,6 @@ class LocalFileList(FileList):
 
     @classmethod
     def getfl_str_fp(cls, fp:str):
-        import config as v
-        
         fl1 = []
         with os.scandir(fp) as di:
             for it1 in di:
