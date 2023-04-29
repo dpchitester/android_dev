@@ -147,5 +147,4 @@ class RemoteFileList(FileList):
         return None
 
 if __name__ == "__main__":
-    from sd import Fat32
     pass
