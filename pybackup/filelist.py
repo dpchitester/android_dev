@@ -79,12 +79,10 @@ class LocalFileList(FileList):
 
     def getdll(self):  # local-source
         import config as v
-
         v.dl1_cs += 1
-        # print('getdll3', si, str(sd))
         l1 = self.getfl()
-
-        def es(it):
+        st = []
+        for it in l1:
             it1 = Path(os.path.relpath(it, start=self.sd))
             try:
                 fs = it.stat()
@@ -96,9 +94,7 @@ class LocalFileList(FileList):
                 it2 = 0
                 it3 = 0
             fse = FSe(it2, it3)
-            return DE(it1, fse)
-
-        st = list(map(es, l1))
+            st.append(DE(it1, fse))
         st.sort(key=lambda de: de.nm)
         return st
 
