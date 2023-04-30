@@ -21,8 +21,12 @@ def findDE(dl, rp: Path):
     assert isinstance(rp, Path), "findde"
     tde = DE(rp, FSe(0, 0))
     i = bisect_left(dl, tde)
-    if i < len(dl) and tde.nm == dl[i].nm:
-        return (dl[i], i)
+    if i < len(dl):
+        pp('tde', tde)
+        pp('dl[i]', dl[i])
+        pp('tde.nm==dl[i].nm',tde.nm == dl[i].nm)
+        if tde.nm == dl[i].nm:
+            return (dl[i], i)
     return (None, i)
 
 @snoop
