@@ -47,7 +47,7 @@ def getRemoteDEs(rd: Path, fl: list[str]):
     # assert isinstance(fl, List)
     # assert isinstance(fl[0], str)
     # print("getRemoteDEs", rd, fl)
-    pt = type(rd)
+    pt = Path
     cmd = 'rclone lsjson "' + str(rd) + '" '
     for fn in fl:
         cmd += '--include "' + fn + '" '
