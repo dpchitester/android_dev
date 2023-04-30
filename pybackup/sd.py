@@ -194,18 +194,18 @@ class FS_Mixin(SD):
         else:
             ch = "l"
         if self.Dll is None or (self.isremote and self.Dlls_xt + rto1 <= time.time()):
-            print("sucking/scanning for", self.tag, ch + "dll...", end="")
+            # print("sucking/scanning for", self.tag, ch + "dll...", end="")
             rv = FileList(self).getdll()
             # rv = self.getdll()
             if rv is not None:
-                print("done.")
+                # print("done.")
                 self.Dll = rv
                 self.Dlls_xt = time.time()
             else:
-                print("failed.")
+                # print("failed.")
                 pass
         else:
-            print("fetched", self.tag, ch + "dll from cache.")
+            # print("fetched", self.tag, ch + "dll from cache.")
             pass
         return self.Dll
 
