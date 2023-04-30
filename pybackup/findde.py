@@ -86,6 +86,7 @@ def findSis(fp1: Path):
             l1[si] = relative_to_either(p, fp1)
         except ValueError as exc:
             pass
+    pp(l1)
     return l1
 
 
@@ -99,6 +100,7 @@ def findDis(fp1: Path):
             l1[di] = relative_to_either(p, fp1)
         except ValueError:
             pass
+    pp(l1)
     return l1
 
 
@@ -216,7 +218,6 @@ def updateDEs(rd: Path, flst: List[str]):
         for fi in flst:
             # assert isinstance(fi, str)
             fp = rd / fi
-            pp(fp)
             sdes = findSDEs(fp)
             tdes = findTDEs(fp)
             # assert sdes is not None
