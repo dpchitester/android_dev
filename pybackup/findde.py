@@ -24,42 +24,49 @@ def findDE(dl, rp: Path):
         return (dl[i], i)
     return (None, i)
 
-
-def getRemoteDEs(rd: Path, fl: list[str]):
-    import config as v
-
-    assert isinstance(rd, Path)
-    assert isinstance(fl, List)
-    assert isinstance(fl[0], str)
-    pp("getRemoteDEs", rd, fl)
-    pt = Path
+def f12(rd:Path, fn):
     cmd = 'rclone lsjson "' + str(rd) + '" '
-    for fn in fl:
-        cmd += ' --include="' + fn + '"'
+    cmd += ' --include="' + fn + '"'
     cmd += " --files-only"
-    pp('cmd',cmd)
+    pp('cmd', cmd)
     rc = ar.run1(cmd)
     pp(rc, ar.txt)
     if rc == 0:
         assert ar.txt != ""
-
-        delst = []
         jsl = json.loads(ar.txt)
-        pp(jsl)
-        for it in jsl:
-            it1 = pt(it["Path"])
-            it2 = it["Size"]
-            it3 = it["ModTime"][:-1] + "-00:00"
-            it3 = datetime.datetime.fromisoformat(it3).timestamp()
-            it3 = v.ts_trunc2ms(it3)
-            fse = FSe(it2, it3)
-            nde = DE(it1, fse)
-            pp("new nde:", nde.nm, nde.i.sz, nde.i.mt)
-            delst.append(nde)
-        return delst
     else:
-        print("getRemoteDE returned", rc)
-        pass
+        jsl = []
+    return jsl
+
+@snoop
+def getRemoteDE(rd:Path, fn:str):
+    fp = rd / fn
+    it = f12(fp.parent, fn)[0]
+    it["Path"] = str(fp.relative_to(rd))
+    return [it]
+    
+@snoop
+def getRemoteDEs(rd: Path, fl: list[str]):
+    import config as v
+
+    pp("getRemoteDEs", rd, fl)
+    jsl = []
+    for fn in fl:
+        jsl.extend(getRemoteDE(rd, fn))
+    pt = Path
+    pp(jsl)
+    delst = []
+    for it in jsl:
+        it1 = pt(it["Path"])
+        it2 = it["Size"]
+        it3 = it["ModTime"][:-1] + "-00:00"
+        it3 = datetime.datetime.fromisoformat(it3).timestamp()
+        it3 = v.ts_trunc2ms(it3)
+        fse = FSe(it2, it3)
+        nde = DE(it1, fse)
+        pp("new nde:", nde.nm, nde.i.sz, nde.i.mt)
+        delst.append(nde)
+    return delst
 
 
 def findSis(fp1: Path):
