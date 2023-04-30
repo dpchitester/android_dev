@@ -140,7 +140,7 @@ def findTDEs(fp: Path):
             de_l.append((p.Dll, rp, de, i, di))
     return de_l
 
-@snoop(depth=5)
+@snoop(depth=3)
 def updateDEs(rd: Path, flst: List[str]):
     import config as v
 
