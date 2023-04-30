@@ -42,7 +42,7 @@ def findDE(dl, rp: Path):
         return (dl[i], i)
     return (None, i)
 
-
+@snoop()
 def getRemoteDEs(rd: Path, fl: list[str]):
     import config as v
 
@@ -140,7 +140,7 @@ def findTDEs(fp: Path):
             de_l.append((p.Dll, rp, de, i, di))
     return de_l
 
-@snoop(depth=3)
+@snoop()
 def updateDEs(rd: Path, flst: List[str]):
     import config as v
 
