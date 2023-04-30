@@ -7,7 +7,7 @@ from pathlib import Path
 from threading import Lock
 from typing import Dict, List, Set, Tuple, TypeAlias
 
-from snoop import snoop, pp
+# from snoop import snoop, pp
 
 import asyncrun as ar
 import ldsv as ls
@@ -41,7 +41,7 @@ def findDE(dl, rp: Path):
         return (dl[i], i)
     return (None, i)
 
-@snoop()
+
 def getRemoteDEs(rd: Path, fl: list[str]):
     import config as v
 
@@ -139,7 +139,7 @@ def findTDEs(fp: Path):
             de_l.append((p.Dll, rp, de, i, di))
     return de_l
 
-@snoop()
+
 def updateDEs(rd: Path, flst: List[str]):
     import config as v
 
