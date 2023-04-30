@@ -38,7 +38,7 @@ def wsetup():
                 # TODO: not up to date
                 for pth, dirs, files in walk(p, topdown=True):
                     pth = pt(pth)
-                    # v.cull_dirs(dirs, pt)
+                    v.cull_dirs(dirs, pt)
                     wa: Watch = in1.add_watch(pth, Mask(0x306))
                     wdsi[wa] = si
         except KeyboardInterrupt as exc:
