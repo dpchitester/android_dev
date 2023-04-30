@@ -43,7 +43,7 @@ def isbaddir(dir):
     return dir in v.dexs or dir in dexs
 
 
-class FileList:
+class FileList():
     def __new__(cls, sd, **kwargs):
         if sd.isremote:
             cls = RemoteFileList
