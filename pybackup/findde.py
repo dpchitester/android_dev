@@ -7,14 +7,15 @@ from pathlib import Path
 from threading import Lock
 from typing import Dict, List, Set, Tuple, TypeAlias
 
-# from snoop import snoop, pp
+from snoop import snoop, pp
+snoop.install(out='snoop.log')
 
 import asyncrun as ar
 import ldsv as ls
 from de import DE, FSe
 from sd import FS_Mixin
 
-
+@snoop
 def relative_to_either(p1, p2):
     # assert isinstance(p1, Path)
     # assert isinstance(p2, Path)
