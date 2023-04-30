@@ -45,6 +45,7 @@ def getRemoteDEs(rd: Path, fl: list[str]):
 
         delst = []
         jsl = json.loads(ar.txt)
+        pp(jsl)
         for it in jsl:
             it1 = pt(it["Path"])
             it2 = it["Size"]
