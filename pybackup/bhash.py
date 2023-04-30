@@ -18,7 +18,9 @@ def bhu(ho, it):
             ho.update(pack("f", it))
         case str():
             ho.update(it.encode())
-        case Path() | tuple() | set() | list() | DE() | FSe():
+        case Path():
+            ho.update(bytes(it))
+        case tuple() | set() | list() | DE() | FSe():
             bs = pickle.dumps(it)
             ho.update(bs)
         case _:
