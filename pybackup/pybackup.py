@@ -77,7 +77,7 @@ def proc_events():
                 p = v.src(si)
                 fl = tsis[si]
                 if len(fl):
-                    # print("-procq updateDEs", p, fl)
+                    print("-procq updateDEs", p, fl)
                     updateDEs(p, fl)
 
     while True:
