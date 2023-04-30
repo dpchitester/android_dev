@@ -43,8 +43,9 @@ def f12(rd:Path, fn):
 @snoop
 def getRemoteDE(rd:Path, fn:str):
     fp = rd / fn
-    l1 = f12(fp.parent, fn)
+    l1 = f12(fp.parent, fp.name)
     if len(l1):
+        it = l1[0]
         it["Path"] = str(fp.relative_to(rd))
         return [it]
     else:
