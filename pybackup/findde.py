@@ -26,7 +26,7 @@ def findDE(dl, rp: Path):
     return (None, i)
 
 @snoop
-def f12(rd:Path, fn):
+def getJSde(rd:Path, fn):
     cmd = 'rclone lsjson "' + str(rd) + '" '
     cmd += ' --include="' + fn + '"'
     cmd += " --files-only"
@@ -43,7 +43,7 @@ def f12(rd:Path, fn):
 @snoop
 def getRemoteDE(rd:Path, fn:str):
     fp = rd / fn
-    l1 = f12(fp.parent, fp.name)
+    l1 = getJSde(fp.parent, fp.name)
     if len(l1):
         it = l1[0]
         it["Path"] = str(fp.relative_to(rd))
