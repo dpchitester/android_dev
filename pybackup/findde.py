@@ -16,8 +16,8 @@ from de import DE, FSe
 from sd import FS_Mixin
 
 def findDE(dl, rp: Path):
-    # assert isinstance(dl[0], DE), "findde"
-    # assert isinstance(rp, Path), "findde"
+    assert isinstance(dl[0], DE), "findde"
+    assert isinstance(rp, Path), "findde"
     tde = DE(rp, FSe(0, 0))
     i = bisect_left(dl, tde)
     if i < len(dl) and tde.nm == dl[i].nm:
@@ -28,9 +28,9 @@ def findDE(dl, rp: Path):
 def getRemoteDEs(rd: Path, fl: list[str]):
     import config as v
 
-    # assert isinstance(rd, Path)
-    # assert isinstance(fl, List)
-    # assert isinstance(fl[0], str)
+    assert isinstance(rd, Path)
+    assert isinstance(fl, List)
+    assert isinstance(fl[0], str)
     pp("getRemoteDEs", rd, fl)
     pt = Path
     cmd = 'rclone lsjson "' + str(rd) + '" '
@@ -41,7 +41,7 @@ def getRemoteDEs(rd: Path, fl: list[str]):
     rc = ar.run1(cmd)
     pp(rc, ar.txt)
     if rc == 0:
-        # assert ar.txt != ""
+        assert ar.txt != ""
 
         delst = []
         jsl = json.loads(ar.txt)
@@ -65,7 +65,7 @@ def getRemoteDEs(rd: Path, fl: list[str]):
 def findSis(fp1: Path):
     import config as v
 
-    # assert isinstance(fp1, Path)
+    assert isinstance(fp1, Path)
     l1 = {}
     for si, p in v.srcs.items():
         if isinstance(p, FS_Mixin):
@@ -79,7 +79,7 @@ def findSis(fp1: Path):
 def findDis(fp1: Path):
     import config as v
 
-    # assert isinstance(fp1, Path)
+    assert isinstance(fp1, Path)
     l1 = {}
     for di, p in v.tgts.items():
         if isinstance(p, FS_Mixin):
@@ -93,16 +93,16 @@ def findDis(fp1: Path):
 def findSDEs(fp: Path):
     import config as v
 
-    # assert isinstance(fp, Path)
+    assert isinstance(fp, Path)
     sil = findSis(fp)
-    # assert isinstance(sil, Dict)
+    assert isinstance(sil, Dict)
     de_l = []
     for si in sil:
-        # assert isinstance(si, str)
+        assert isinstance(si, str)
         p = v.src(si)
         rp = sil[si]
-        # assert isinstance(p, Path)
-        # assert isinstance(rp, Path)
+        assert isinstance(p, Path)
+        assert isinstance(rp, Path)
         if isinstance(p, FS_Mixin) and p.Dll:
             de, i = findDE(p.Dll, rp)
             de_l.append((p.Dll, rp, de, i, si))
@@ -112,16 +112,16 @@ def findSDEs(fp: Path):
 def findTDEs(fp: Path):
     import config as v
 
-    # assert isinstance(fp, Path)
+    assert isinstance(fp, Path)
     dil = findDis(fp)
-    # assert isinstance(dil, Dict)
+    assert isinstance(dil, Dict)
     de_l = []
     for di in dil:
-        # assert isinstance(di, str)
+        assert isinstance(di, str)
         p = v.tgt(di)
         rp = dil[di]
-        # assert isinstance(p, Path)
-        # assert isinstance(rp, Path)
+        assert isinstance(p, Path)
+        assert isinstance(rp, Path)
         if isinstance(p, FS_Mixin) and p.Dll:
             de, i = findDE(p.Dll, rp)
             de_l.append((p.Dll, rp, de, i, di))
@@ -198,16 +198,16 @@ def updateDEs(rd: Path, flst: List[str]):
                 pass
 
     with ls.dl:
-        # assert ls.dl.locked()
+        assert ls.dl.locked()
         sdel = getRemoteDEs(rd, flst)
-        # assert sdel is not None
+        assert sdel is not None
         for fi in flst:
-            # assert isinstance(fi, str)
+            assert isinstance(fi, str)
             fp = rd / fi
             sdes = findSDEs(fp)
             tdes = findTDEs(fp)
-            # assert sdes is not None
-            # assert tdes is not None
+            assert sdes is not None
+            assert tdes is not None
 
             for it in sdes:
                 doSOne(*it)
