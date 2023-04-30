@@ -2,6 +2,7 @@ from time import time
 
 import ldsv as ls
 
+
 class Edge:
     def __init__(self, di, si):
         self.di = di

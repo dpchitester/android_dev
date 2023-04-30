@@ -1,7 +1,7 @@
 import datetime
+import os
 import time
 from pathlib import Path
-import os
 
 import asyncrun as ar
 import config as v
@@ -43,7 +43,7 @@ def isbaddir(dir):
     return dir in v.dexs or dir in dexs
 
 
-class FileList():
+class FileList:
     def __new__(cls, sd, **kwargs):
         if sd.isremote:
             cls = RemoteFileList
@@ -62,7 +62,7 @@ class LocalFileList(FileList):
         super(LocalFileList, self).__init__(sd)
 
     @classmethod
-    def getfl_str_fp(cls, fp:str):
+    def getfl_str_fp(cls, fp: str):
         fl1 = []
         with os.scandir(fp) as di:
             for it1 in di:
@@ -85,7 +85,7 @@ class LocalFileList(FileList):
         l1 = self.getfl()
 
         def es(it):
-            it1 = Path(os.path.relpath(it, start = self.sd))
+            it1 = Path(os.path.relpath(it, start=self.sd))
             try:
                 fs = it.stat()
                 it2 = fs.st_size
@@ -143,6 +143,7 @@ class RemoteFileList(FileList):
             st.sort(key=lambda de: de.nm)
             return st
         return None
+
 
 if __name__ == "__main__":
     pass
