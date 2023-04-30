@@ -15,21 +15,18 @@ import ldsv as ls
 from de import DE, FSe
 from sd import FS_Mixin
 
-@snoop
+
 def findDE(dl, rp: Path):
     assert isinstance(dl[0], DE), "findde"
     assert isinstance(rp, Path), "findde"
     tde = DE(rp, FSe(0, 0))
     i = bisect_left(dl, tde)
     if i < len(dl):
-        pp('tde', tde)
-        pp('dl[i]', dl[i])
-        pp('tde.nm==dl[i].nm',tde.nm == dl[i].nm)
         if tde.nm == dl[i].nm:
             return (dl[i], i)
     return (None, i)
 
-@snoop
+
 def getJSde(rd:Path, fn):
     cmd = 'rclone lsjson "' + str(rd) + '" '
     cmd += ' --include="' + fn + '"'
@@ -44,7 +41,6 @@ def getJSde(rd:Path, fn):
         jsl = []
     return jsl
 
-@snoop
 def getRemoteDE(rd:Path, fn:str):
     fp = rd / fn
     l1 = getJSde(fp.parent, fp.name)
@@ -55,7 +51,6 @@ def getRemoteDE(rd:Path, fn:str):
     else:
         return []
     
-@snoop
 def getRemoteDEs(rd: Path, fl: list[str]):
     import config as v
 
