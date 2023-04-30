@@ -64,12 +64,7 @@ def opExec():
     print("-opexec")
     g1 = nts()
     incp()
-    if not proc_nodes(g1):
-        return False
-    if clean():
-        return True
-    return False
-
+    return proc_nodes(g1) and clean()
 
 if __name__ == "__main__":
     import config

@@ -5,6 +5,8 @@ from pathlib import Path
 from threading import Event
 from typing import Dict, List, Set, Tuple, TypeAlias
 
+from snoop import snoop, pp
+
 from cscopy import CSCopy
 from de import DE, FSe
 from edge import Edge, addArc, addDep
@@ -164,7 +166,7 @@ cloud3: CS = None
 def initConfig():
     global home, sdcard, cloud1, cloud2, cloud3
     home = Ext3(os.environ["HOME"], tag="home")
-    sdcard = Fat32("/storage/emulated/0", tag="sdcard")
+    sdcard = Fat32("/sdcard", tag="sdcard")
     cloud1 = CS("GoogleDrive:", tag="cloud1")
     cloud2 = CS("OneDrive:", tag="cloud2")
     cloud3 = CS("DropBox:", tag="cloud3")
@@ -372,7 +374,7 @@ def initConfig():
     # addArc(op1)
 
     for cs in ("gd",):
-        for si in ("proj", *codes, "vids", "zips"):
+        for si in ("proj", "vids", "zips"):
             p1 = src(si).relative_to(ppre("sd"))
             addTgtDir(cs + "_" + si, ppre(cs) / p1)
             npl1 = (cs + "_" + si, si)
@@ -425,15 +427,12 @@ def getDL(p):
     fl = []
     try:
         for pth, dirs, files in walk(p, topdown=True):
-            pth = pt(pth)
-            if not isbaddir(pth):
-                cull_dirs(dirs, pt)
-                for d in dirs.copy():
-                    fl.append(pth / d)
-                    dirs.remove(d)
-            else:
-                dirs.clear()
-                files.clear()
+            if not isinstance(pth, pt):
+                pth = pt(pth)
+            cull_dirs(dirs, pt)
+            for d in dirs:
+                fl.append(pth / d)
+            dirs.clear()
         return fl
     except IOError as e:
         print("getDL", e)
