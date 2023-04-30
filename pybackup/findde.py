@@ -83,7 +83,7 @@ def findSis(fp1: Path):
     l1 = {}
     for si, p in v.srcs.items():
         try:
-            l1[si] = relative_to_either(p, fp1)
+            l1[si] = fp1.relative_to(p)
         except ValueError as exc:
             pass
     pp(l1)
@@ -97,7 +97,7 @@ def findDis(fp1: Path):
     l1 = {}
     for di, p in v.tgts.items():
         try:
-            l1[di] = relative_to_either(p, fp1)
+            l1[di] = fp1.relative_to(p)
         except ValueError:
             pass
     pp(l1)
