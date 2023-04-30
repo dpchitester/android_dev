@@ -66,6 +66,7 @@ def opExec():
     incp()
     return proc_nodes(g1) and clean()
 
+
 if __name__ == "__main__":
     import config
 

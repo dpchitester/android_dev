@@ -5,7 +5,7 @@ from pathlib import Path
 from threading import Event
 from typing import Dict, List, Set, Tuple, TypeAlias
 
-from snoop import snoop, pp
+from snoop import pp, snoop
 
 from cscopy import CSCopy
 from de import DE, FSe
