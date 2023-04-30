@@ -48,7 +48,7 @@ def getRemoteDEs(rd: Path, fl: list[str]):
     # assert isinstance(rd, Path)
     # assert isinstance(fl, List)
     # assert isinstance(fl[0], str)
-    print("getRemoteDEs", rd, fl)
+    pp("getRemoteDEs", rd, fl)
     pt = Path
     cmd = 'rclone lsjson "' + str(rd) + '" '
     for fn in fl:
@@ -68,11 +68,11 @@ def getRemoteDEs(rd: Path, fl: list[str]):
             it3 = v.ts_trunc2ms(it3)
             fse = FSe(it2, it3)
             nde = DE(it1, fse)
-            print("new nde:", nde.nm, nde.i.sz, nde.i.mt)
+            pp("new nde:", nde.nm, nde.i.sz, nde.i.mt)
             delst.append(nde)
         return delst
     else:
-        print("getRemoteDE returned", rc)
+        pp("getRemoteDE returned", rc)
         pass
 
 
@@ -87,7 +87,6 @@ def findSis(fp1: Path):
                 l1[si] = fp1.relative_to(p)
             except ValueError as exc:
                 pass
-    pp(l1)
     return l1
 
 
@@ -102,7 +101,6 @@ def findDis(fp1: Path):
                 l1[di] = fp1.relative_to(p)
             except ValueError:
                 pass
-    pp(l1)
     return l1
 
 
@@ -159,24 +157,24 @@ def updateDEs(rd: Path, flst: List[str]):
         p = v.src(si)
         if sde:
             if tde:
-                print("update", sde.nm, "->", tde.nm)
+                pp("update", sde.nm, "->", tde.nm)
                 if tde.i.sz != sde.i.sz:
-                    print("size mismatch")
+                    pp("size mismatch")
                     tde.i.sz = sde.i.sz
                     ls.sev.put("ldlls" if not p.isremote else "rdlls")
                 if tde.i.mt != sde.i.mt:
-                    print("modtime mismatch")
+                    pp("modtime mismatch")
                     tde.i.mt = sde.i.mt
                     ls.sev.put("ldlls" if not p.isremote else "rdlls")
             else:
-                print("insert", sde.nm)
+                pp("insert", sde.nm)
                 fse = FSe(sde.i.sz, sde.i.mt)
                 tde = DE(rp, fse)
                 dl.insert(i, tde)
                 ls.sev.put("ldlls" if not p.isremote else "rdlls")
         else:
             if tde:
-                print("would delete", rp)
+                pp("would delete", rp)
                 # dl.pop(i)
                 pass
 
@@ -192,24 +190,24 @@ def updateDEs(rd: Path, flst: List[str]):
         p = v.tgt(di)
         if sde:
             if tde:
-                print("update", sde.nm, "->", tde.nm)
+                pp("update", sde.nm, "->", tde.nm)
                 if tde.i.sz != sde.i.sz:
-                    print("size mismatch")
+                    pp("size mismatch")
                     tde.i.sz = sde.i.sz
                     ls.sev.put("ldlls" if not p.isremote else "rdlls")
                 if tde.i.mt != sde.i.mt:
-                    print("modtime mismatch")
+                    pp("modtime mismatch")
                     tde.i.mt = sde.i.mt
                     ls.sev.put("ldlls" if not p.isremote else "rdlls")
             else:
-                print("insert", sde.nm)
+                pp("insert", sde.nm)
                 fse = FSe(sde.i.sz, sde.i.mt)
                 tde = DE(rp, fse)
                 dl.insert(i, tde)
                 ls.sev.put("ldlls" if not p.isremote else "rdlls")
         else:
             if tde:
-                print("would delete", rp)
+                pp("would delete", rp)
                 # dl.pop(i)
                 pass
 
