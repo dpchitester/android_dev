@@ -8,13 +8,14 @@ from threading import Lock
 from typing import Dict, List, Set, Tuple, TypeAlias
 
 from snoop import snoop, pp
-snoop.install(out='snoop.log')
+snoop.install(out='snoop.log',overwrite=True)
 
 import asyncrun as ar
 import ldsv as ls
 from de import DE, FSe
 from sd import FS_Mixin
 
+@snoop
 def findDE(dl, rp: Path):
     assert isinstance(dl[0], DE), "findde"
     assert isinstance(rp, Path), "findde"
@@ -24,6 +25,7 @@ def findDE(dl, rp: Path):
         return (dl[i], i)
     return (None, i)
 
+@snoop
 def f12(rd:Path, fn):
     cmd = 'rclone lsjson "' + str(rd) + '" '
     cmd += ' --include="' + fn + '"'
@@ -41,9 +43,12 @@ def f12(rd:Path, fn):
 @snoop
 def getRemoteDE(rd:Path, fn:str):
     fp = rd / fn
-    it = f12(fp.parent, fn)[0]
-    it["Path"] = str(fp.relative_to(rd))
-    return [it]
+    l1 = f12(fp.parent, fn)
+    if len(l1):
+        it["Path"] = str(fp.relative_to(rd))
+        return [it]
+    else:
+        return []
     
 @snoop
 def getRemoteDEs(rd: Path, fl: list[str]):
