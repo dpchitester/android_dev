@@ -20,7 +20,6 @@ def a_run(shell_command, cwd=None):
     )
     so = p.stdout
     if so:
-        so = re.sub(r"\r\n", "\n", so)
         txt = so
         if txt:
             print(txt)
@@ -40,7 +39,6 @@ def a_run1(shell_command, cwd=None):
     )
     so = p.stdout
     if so:
-        so = re.sub(r"\r\n", "\n", so)
         txt = so
     return p.returncode
 
