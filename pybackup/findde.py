@@ -15,7 +15,6 @@ import ldsv as ls
 from de import DE, FSe
 from sd import FS_Mixin
 
-@snoop
 def relative_to_either(p1, p2):
     # assert isinstance(p1, Path)
     # assert isinstance(p2, Path)
@@ -87,6 +86,7 @@ def findSis(fp1: Path):
             l1[si] = relative_to_either(p, fp1)
         except ValueError as exc:
             pass
+    pp(l1)
     return l1
 
 
@@ -100,6 +100,7 @@ def findDis(fp1: Path):
             l1[di] = relative_to_either(p, fp1)
         except ValueError:
             pass
+    pp(l1)
     return l1
 
 
