@@ -14,7 +14,6 @@ import ldsv as ls
 from de import DE, FSe
 from sd import FS_Mixin
 
-snoop.install(out='snoop.log')
 
 def relative_to_either(p1, p2):
     # assert isinstance(p1, Path)
