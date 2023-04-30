@@ -15,23 +15,6 @@ import ldsv as ls
 from de import DE, FSe
 from sd import FS_Mixin
 
-def relative_to_either(p1, p2):
-    # assert isinstance(p1, Path)
-    # assert isinstance(p2, Path)
-    pt = type(p1)
-
-    prts1 = Path(realpath(p1)).parts
-    prts2 = Path(realpath(p2)).parts
-    i = 0
-    while i < len(prts1) and i < len(prts2) and prts1[i] == prts2[i]:
-        i += 1
-    if i == len(prts1):
-        return pt(*prts2[i:])
-    elif i == len(prts2):
-        return pt(*prts1[i:])
-    raise ValueError("relative_to_either", p1, p2)
-
-
 def findDE(dl, rp: Path):
     # assert isinstance(dl[0], DE), "findde"
     # assert isinstance(rp, Path), "findde"
@@ -54,7 +37,9 @@ def getRemoteDEs(rd: Path, fl: list[str]):
     for fn in fl:
         cmd += '--include "' + fn + '" '
     cmd += "--files-only"
+    pp('cmd',cmd)
     rc = ar.run1(cmd)
+    pp(rc, ar.txt)
     if rc == 0:
         # assert ar.txt != ""
 
@@ -72,7 +57,7 @@ def getRemoteDEs(rd: Path, fl: list[str]):
             delst.append(nde)
         return delst
     else:
-        pp("getRemoteDE returned", rc)
+        print("getRemoteDE returned", rc)
         pass
 
 
