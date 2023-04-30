@@ -198,7 +198,6 @@ def updateDEs(rd: Path, flst: List[str]):
                 pass
 
     with ls.dl:
-        assert ls.dl.locked()
         sdel = getRemoteDEs(rd, flst)
         assert sdel is not None
         for fi in flst:
