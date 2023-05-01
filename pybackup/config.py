@@ -155,6 +155,9 @@ sfb: int = 0
 dl1_cs = 0
 dl2_cs = 0
 
+# hashing stats
+h_hits = 0
+h_miss = 0
 
 home: Ext3 = None
 sdcard: Fat32 = None

@@ -180,7 +180,6 @@ class FS_Mixin(SD):
     def __init__(self, *args, **kwargs):
         super(FS_Mixin, self).__init__(*args, **kwargs)
 
-    @snoop
     def sdh_d(self):
         import config as v
         from bhash import xxh64Hash
@@ -190,11 +189,13 @@ class FS_Mixin(SD):
             if Si_dl is not None:
                 if v.Dhdd[self.tag].is_set():
                     rv = xxh64Hash(Si_dl)
+                    v.h_miss += 1
                 else:
                     if self.isremote:
                         rv = v.RDhd[self.tag]
                     else:
                         rv = v.LDhd[self.tag]
+                    v.h_hits += 1
                 return rv
         return None
 
