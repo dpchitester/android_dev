@@ -1,9 +1,9 @@
 import pickle
 from struct import pack
 from struct import unpack
+from hashlib import blake2b
 
 from xxhash import xxh64
-
 
 def bhu(ho, it):
     from pathlib import Path
