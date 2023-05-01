@@ -1,5 +1,6 @@
 import config as v
-from status import changed_ops, updatets
+from status import changed_ops
+from status import updatets
 from toposort import topological_sort
 
 _pass = 1

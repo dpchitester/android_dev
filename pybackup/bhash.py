@@ -1,5 +1,6 @@
 import pickle
-from struct import pack, unpack
+from struct import pack
+from struct import unpack
 
 from xxhash import xxh64
 
@@ -7,7 +8,8 @@ from xxhash import xxh64
 def bhu(ho, it):
     from pathlib import Path
 
-    from de import DE, FSe
+    from de import DE
+    from de import FSe
 
     match it:
         case bytes():

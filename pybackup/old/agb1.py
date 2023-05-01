@@ -1,7 +1,8 @@
 #!/data/data/com.termux/files/usr/bin/env python
 print("-- agb1.py --")
 
-from sys import exit, modules
+from sys import exit
+from sys import modules
 
 from csbackups import *
 from fdbackup import *

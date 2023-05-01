@@ -1,7 +1,14 @@
 from tstamp import rtset
 
-from config import path, pdirs, srcs, tag, tagid, tags, tdirs
-from dirlist import getdll1, getdll2
+from config import path
+from config import pdirs
+from config import srcs
+from config import tag
+from config import tagid
+from config import tags
+from config import tdirs
+from dirlist import getdll1
+from dirlist import getdll2
 
 
 def init():

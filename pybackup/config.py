@@ -3,20 +3,36 @@ from math import floor
 from os import walk
 from pathlib import Path
 from threading import Event
-from typing import Dict, List, Set, Tuple, TypeAlias
+from typing import Dict
+from typing import List
+from typing import Set
+from typing import Tuple
+from typing import TypeAlias
 
-from snoop import pp, snoop
+from snoop import pp
+from snoop import snoop
 
 from cscopy import CSCopy
-from de import DE, FSe
-from edge import Edge, addArc, addDep
-from gitclasses import GitIndex, GitRemote, GitRepo, GitWT
-from gitops import GitAdd, GitCommit, GitPush
+from de import DE
+from de import FSe
+from edge import Edge
+from edge import addArc
+from edge import addDep
+from gitclasses import GitIndex
+from gitclasses import GitRemote
+from gitclasses import GitRepo
+from gitclasses import GitWT
+from gitops import GitAdd
+from gitops import GitCommit
+from gitops import GitPush
 from ldsv import load_all
 from localcopy import LocalCopy
 from mkzip import Mkzip
 from opbase import OpBase
-from sd import CS, SD, Ext3, Fat32
+from sd import CS
+from sd import SD
+from sd import Ext3
+from sd import Fat32
 
 quit_ev = Event()
 
@@ -78,7 +94,6 @@ def addSrcDir(tg, pth, iscode=False):
         RDlls[tg] = None
         RDlls_xt[tg] = 0
         RDhd[tg] = 0
-
     else:
         LDlls[tg] = None
         LDlls_xt[tg] = 0
@@ -176,6 +191,7 @@ def initConfig():
     cloud1 = CS("GoogleDrive:", tag="cloud1")
     cloud2 = CS("OneDrive:", tag="cloud2")
     cloud3 = CS("DropBox:", tag="cloud3")
+    dsblog = Fat32(os.environ["FDB_PATH"])
 
     addPre("FLAGS", home)
     # print("FLAGS=" + str(ppre('FLAGS')))
@@ -202,7 +218,7 @@ def initConfig():
     addSrcDir("sh", home / "bin/sh")
     addSrcDir("proj", sdcard / "projects", False)
     addSrcDir("docs", sdcard / "Documents", False)
-    addSrcDir("blogds", Fat32(os.environ["FDB_PATH"]), False)
+    addSrcDir("blogds", dsblog, False)
     addSrcDir("backups", sdcard / "backups", False)
     addSrcDir("vids", sdcard / "VideoDownloader/Download", False)
     addSrcDir("zips", sdcard / "zips", False)
@@ -253,7 +269,7 @@ def initConfig():
     addTgtDir("backups", sdcard / "backups")
     addTgtDir("termux-backup", tgt("backups") / "termux-backup")
     addTgtDir("zips", sdcard / "zips")
-    addTgtDir("blogds", Fat32(os.environ["FDB_PATH"]))
+    addTgtDir("blogds", dsblog)
     addTgtDir("blog", src("proj") / "blog")
     addTgtDir("bash", src("proj") / "bash")
     addTgtDir("plaid-node", src("proj") / "plaid-node")

@@ -1,22 +1,30 @@
 #!/data/data/com.termux/files/usr/bin/env python
 
-from os import environ, walk
+from os import environ
+from os import walk
 from pathlib import Path
-from queue import Empty, Queue
-from threading import Lock, Thread
+from queue import Empty
+from queue import Queue
+from threading import Lock
+from threading import Thread
 from time import sleep
 
 from asyncinotify import Event as WEvent
-from asyncinotify import Inotify, Mask, Watch
-from snoop import pp, snoop
+from asyncinotify import Inotify
+from asyncinotify import Mask
+from asyncinotify import Watch
+from snoop import pp
+from snoop import snoop
 
 import config as v
 import ldsv as ls
 from findde import updateDEs
 from netup import netup
-from opexec import clean, opExec
+from opexec import clean
+from opexec import opExec
 from sd import FS_Mixin
-from status import onestatus, updatets
+from status import onestatus
+from status import updatets
 
 in1 = None
 wdsi: dict[Watch, v.NodeTag] = {}
