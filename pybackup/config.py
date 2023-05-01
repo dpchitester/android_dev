@@ -106,7 +106,6 @@ def addPre(tg, frag):
     pres.add(tg, frag)
     Dhdd[tg] = Event()
 
-
 # operations (function objects)
 opdep: List[OpBase] = []
 
@@ -191,7 +190,7 @@ def initConfig():
     addPre("gd", cloud1)
     addPre("od", cloud2)
     addPre("db", cloud3)
-    addPre("dsblog", Fat32(os.environ["FDB_PATH"], tag="dsblog"))
+    addPre("dsblog", Fat32(os.environ["FDB_PATH"]))
 
     addSrcDir("home", home, False)
     addSrcDir("bin", home / "bin", False)
