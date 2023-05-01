@@ -186,20 +186,31 @@ class FS_Mixin(SD):
         import config as v
         from bhash import xxh64Hash
 
+        rv = None
         with ls.dl:
-            Si_dl = self.Dlld()
-            if Si_dl is not None:
-                if v.Dhdd[self.tag].is_set():
-                    rv = xxh64Hash(Si_dl)
-                    v.h_miss += 1
-                else:
+            match self.Dll_status():
+                case 0:
                     if self.isremote:
                         rv = v.RDhd[self.tag]
                     else:
                         rv = v.LDhd[self.tag]
                     v.h_hits += 1
-                return rv
-        return None
+                case 1 | 2 | 3:
+                    Si_dl = self.Dlld()
+                    if Si_dl is not None:
+                        rv = xxh64Hash(Si_dl)
+                        v.h_miss += 1
+        return rv
+
+    def Dll_status(self):
+        import config as v
+        if self.Dll is None:
+            return 3
+        elif (self.isremote and self.Dlls_xt + rto1 <= time.time()):
+            return 2
+        elif v.Dhdd[self.tag].is_set():
+            return 1
+        return 0
 
     def Dlld(self):
         from filelist import FileList
@@ -209,19 +220,18 @@ class FS_Mixin(SD):
             ch = "r"
         else:
             ch = "l"
-        if self.Dll is None or (self.isremote and self.Dlls_xt + rto1 <= time.time()):
-            # print("sucking/scanning for", self.tag, ch + "dll...", end="")
+        if self.Dll_status() > 1:
+            print("sucking/scanning for", self.tag, ch + "dll...", end="")
             rv = FileList(self).getdll()
-            # rv = self.getdll()
             if rv is not None:
-                # print("done.")
+                print("done.")
                 self.Dll = rv
                 self.Dlls_xt = time.time()
             else:
-                # print("failed.")
+                print("failed.")
                 pass
         else:
-            # print("fetched", self.tag, ch + "dll from cache.")
+            print("fetched", self.tag, ch + "dll from cache.")
             pass
         return self.Dll
 

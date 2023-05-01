@@ -3,6 +3,7 @@ from math import floor
 from os import walk
 from pathlib import Path
 from threading import Event
+from time import time
 from typing import Dict
 from typing import List
 from typing import Set
