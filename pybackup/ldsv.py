@@ -16,7 +16,7 @@ def pstats():
     print("dl2_cs", v.dl2_cs)
     print("sfb", v.sfb)
     print("h_hits", v.h_hits)
-    prinr("h_miss", v.h_miss)
+    print("h_miss", v.h_miss)
 
 
 def loadldlls():
