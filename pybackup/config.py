@@ -183,10 +183,10 @@ sdcard: Fat32 = None
 cloud1: CS = None
 cloud2: CS = None
 cloud3: CS = None
-
+dsbog: Fat32 = None
 
 def initConfig():
-    global home, sdcard, cloud1, cloud2, cloud3
+    global home, sdcard, cloud1, cloud2, cloud3, dsblog
     home = Ext3(os.environ["HOME"], tag="home")
     sdcard = Fat32("/sdcard", tag="sdcard")
     cloud1 = CS("GoogleDrive:", tag="cloud1")
