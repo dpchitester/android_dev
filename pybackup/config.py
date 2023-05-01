@@ -78,12 +78,13 @@ def addSrcDir(tg, pth, iscode=False):
         RDlls[tg] = None
         RDlls_xt[tg] = 0
         RDhd[tg] = 0
-        
+
     else:
         LDlls[tg] = None
         LDlls_xt[tg] = 0
         LDhd[tg] = 0
     Dhdd[tg] = Event()
+
 
 def addTgtDir(tg, pth):
     if not isinstance(pth, SD):
@@ -100,11 +101,13 @@ def addTgtDir(tg, pth):
         LDhd[tg] = 0
     Dhdd[tg] = Event()
 
+
 def addPre(tg, frag):
     if not isinstance(frag, SD):
         raise ValueError("not an SD subclass")
     pres.add(tg, frag)
     Dhdd[tg] = Event()
+
 
 # operations (function objects)
 opdep: List[OpBase] = []
@@ -193,7 +196,7 @@ def initConfig():
     addPre("gd", cloud1)
     addPre("od", cloud2)
     addPre("db", cloud3)
-    
+
     addSrcDir("home", home, False)
     addSrcDir("bin", home / "bin", False)
     addSrcDir("sh", home / "bin/sh")
@@ -205,7 +208,6 @@ def initConfig():
     addSrcDir("zips", sdcard / "zips", False)
     # addSrcDir(".git", src("proj") / ".git", False)
 
-  
     def f1():
         dl = getDL(src("proj"))
         for d in dl:
