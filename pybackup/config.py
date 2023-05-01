@@ -193,19 +193,19 @@ def initConfig():
     addPre("gd", cloud1)
     addPre("od", cloud2)
     addPre("db", cloud3)
-    addPre("dsblog", Fat32(os.environ["FDB_PATH"]))
-
+    
     addSrcDir("home", home, False)
     addSrcDir("bin", home / "bin", False)
     addSrcDir("sh", home / "bin/sh")
     addSrcDir("proj", sdcard / "projects", False)
     addSrcDir("docs", sdcard / "Documents", False)
-    addSrcDir("blogds", ppre("dsblog"), False)
+    addSrcDir("blogds", Fat32(os.environ["FDB_PATH"]), False)
     addSrcDir("backups", sdcard / "backups", False)
     addSrcDir("vids", sdcard / "VideoDownloader/Download", False)
     addSrcDir("zips", sdcard / "zips", False)
     # addSrcDir(".git", src("proj") / ".git", False)
 
+  
     def f1():
         dl = getDL(src("proj"))
         for d in dl:
@@ -251,7 +251,7 @@ def initConfig():
     addTgtDir("backups", sdcard / "backups")
     addTgtDir("termux-backup", tgt("backups") / "termux-backup")
     addTgtDir("zips", sdcard / "zips")
-    addTgtDir("blogds", ppre("dsblog"))
+    addTgtDir("blogds", Fat32(os.environ["FDB_PATH"]))
     addTgtDir("blog", src("proj") / "blog")
     addTgtDir("bash", src("proj") / "bash")
     addTgtDir("plaid-node", src("proj") / "plaid-node")
