@@ -6,7 +6,7 @@ import asyncrun as ar
 import ldsv as ls
 from de import DE, FSe
 
-# from snoop import pp, snoop
+from snoop import pp, snoop
 
 
 icl = 1
@@ -180,6 +180,7 @@ class FS_Mixin(SD):
     def __init__(self, *args, **kwargs):
         super(FS_Mixin, self).__init__(*args, **kwargs)
 
+    @snoop
     def sdh_d(self):
         import config as v
         from bhash import xxh64Hash
