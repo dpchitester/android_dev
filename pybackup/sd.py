@@ -65,6 +65,7 @@ class Local_Mixin:
         if hasattr(self, "tag"):
             with ls.dl:
                 v.LDlls[self.tag] = val
+                v.Dhdd[self.tag].set()
                 ls.sev.put("ldlls")
 
     @property
@@ -103,6 +104,7 @@ class Local_Mixin:
         if hasattr(self, "tag"):
             with ls.dl:
                 v.LDhd[self.tag] = val
+                v.Dhdd[self.tag].clear()
                 ls.sev.put("ldhd")
 
 
@@ -131,6 +133,7 @@ class Remote_Mixin:
         if hasattr(self, "tag"):
             with ls.dl:
                 v.RDlls[self.tag] = val
+                v.Dhdd[self.tag].set()
                 ls.sev.put("rdlls")
 
     @property
@@ -169,6 +172,7 @@ class Remote_Mixin:
         if hasattr(self, "tag"):
             with ls.dl:
                 v.RDhd[self.tag] = val
+                v.Dhdd[self.tag].clear()
                 ls.sev.put("rdhd")
 
 
@@ -177,12 +181,20 @@ class FS_Mixin(SD):
         super(FS_Mixin, self).__init__(*args, **kwargs)
 
     def sdh_d(self):
+        import config as v
         from bhash import xxh64Hash
 
         with ls.dl:
             Si_dl = self.Dlld()
-        if Si_dl is not None:
-            return xxh64Hash(Si_dl)
+            if Si_dl is not None:
+                if v.Dhdd[self.tag].is_set():
+                    rv = xxh64Hash(Si_dl)
+                else:
+                    if self.isremote:
+                        rv = v.RDhd[self.tag]
+                    else:
+                        rv = v.LDhd[self.tag]
+                return rv
         return None
 
     def Dlld(self):

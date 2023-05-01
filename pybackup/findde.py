@@ -138,15 +138,30 @@ def updateDEs(rd: Path, flst: List[str]):
             if tde:
                 if tde.i.sz != sde.i.sz:
                     tde.i.sz = sde.i.sz
-                    ls.sev.put("ldlls" if not p.isremote else "rdlls")
+                    if p.isremote:
+                        ls.sev.put("rdlls")
+                        v.Dhdd[si].set()
+                    else:
+                        ls.sev.put("ldlls")
+                        v.Dhdd[si].set()
                 if tde.i.mt != sde.i.mt:
                     tde.i.mt = sde.i.mt
-                    ls.sev.put("ldlls" if not p.isremote else "rdlls")
+                    if p.isremote:
+                        ls.sev.put("rdlls")
+                        v.Dhdd[si].set()
+                    else:
+                        ls.sev.put("ldlls")
+                        v.Dhdd[si].set()
             else:
                 fse = FSe(sde.i.sz, sde.i.mt)
                 tde = DE(rp, fse)
                 dl.insert(i, tde)
-                ls.sev.put("ldlls" if not p.isremote else "rdlls")
+                if p.isremote:
+                    ls.sev.put("rdlls")
+                    v.Dhdd[si].set()
+                else:
+                    ls.sev.put("ldlls")
+                    v.Dhdd[si].set()
         else:
             if tde:
                 # dl.pop(i)
@@ -166,15 +181,30 @@ def updateDEs(rd: Path, flst: List[str]):
             if tde:
                 if tde.i.sz != sde.i.sz:
                     tde.i.sz = sde.i.sz
-                    ls.sev.put("ldlls" if not p.isremote else "rdlls")
+                    if p.isremote:
+                        ls.sev.put("rdlls")
+                        v.Dhdd[di].set()
+                    else:
+                        ls.sev.put("ldlls")
+                        v.Dhdd[di].set()
                 if tde.i.mt != sde.i.mt:
                     tde.i.mt = sde.i.mt
-                    ls.sev.put("ldlls" if not p.isremote else "rdlls")
+                    if p.isremote:
+                        ls.sev.put("rdlls")
+                        v.Dhdd[di].set()
+                    else:
+                        ls.sev.put("ldlls")
+                        v.Dhdd[di].set()
             else:
                 fse = FSe(sde.i.sz, sde.i.mt)
                 tde = DE(rp, fse)
                 dl.insert(i, tde)
-                ls.sev.put("ldlls" if not p.isremote else "rdlls")
+                if p.isremote:
+                    ls.sev.put("rdlls")
+                    v.Dhdd[di].set()
+                else:
+                    ls.sev.put("ldlls")
+                    v.Dhdd[di].set()
         else:
             if tde:
                 # dl.pop(i)

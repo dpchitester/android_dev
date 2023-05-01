@@ -24,6 +24,7 @@ NodeTag: TypeAlias = str
 Hash: TypeAlias = bytes
 Hdt1: TypeAlias = Dict[NodeTag, int]
 Hdt2: TypeAlias = Dict[Path, FSe]
+Hdt3: TypeAlias = Dict[NodeTag, Event]
 
 # any/all mostly local directory path(s)
 # paths: Dict[NodeTag, Path] = {}
@@ -76,14 +77,13 @@ def addSrcDir(tg, pth, iscode=False):
     if pth.isremote:
         RDlls[tg] = None
         RDlls_xt[tg] = 0
-        RDlls_changed = False
         RDhd[tg] = 0
+        
     else:
         LDlls[tg] = None
         LDlls_xt[tg] = 0
-        LDlls_changed = False
         LDhd[tg] = 0
-
+    Dhdd[tg] = Event()
 
 def addTgtDir(tg, pth):
     if not isinstance(pth, SD):
@@ -93,19 +93,18 @@ def addTgtDir(tg, pth):
     if pth.isremote:
         RDlls[tg] = None
         RDlls_xt[tg] = 0
-        RDlls_changed = False
         RDhd[tg] = 0
     else:
         LDlls[tg] = None
         LDlls_xt[tg] = 0
-        LDlls_changed = False
         LDhd[tg] = 0
-
+    Dhdd[tg] = Event()
 
 def addPre(tg, frag):
     if not isinstance(frag, SD):
         raise ValueError("not an SD subclass")
     pres.add(tg, frag)
+    Dhdd[tg] = Event()
 
 
 # operations (function objects)
@@ -122,6 +121,8 @@ edges: Dict[Tuple[NodeTag, NodeTag], Edge] = {}
 
 LDhd: Hdt1 = {}
 RDhd: Hdt1 = {}
+
+Dhdd: Hdt3 = {}
 
 
 # files lists
