@@ -77,7 +77,7 @@ class ContinuousSubprocess:
             self.__command_string,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
-            universal_newlines=True,
+            # universal_newlines=True,
             shell=shell,
             cwd=path,
             *args,
