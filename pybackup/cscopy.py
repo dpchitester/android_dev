@@ -97,7 +97,7 @@ def fsyncl(di, si, sd, td, fl, sfc):
     cmd += str(td) + '" '
     for fn in fl:
         cmd += '--include "' + str(fn.nm) + '" '
-    cmd += '--progress --no-traverse -v --use-json-log'
+    cmd += "--progress --no-traverse -v --use-json-log"
     # cmd += '--exclude "**/.git/**/*" '
     # cmd += '--exclude "**/__pycache__/**/*" '
     # cmd += '--exclude "**/node_modules/**/*" '
@@ -144,7 +144,7 @@ def fdell(di, si, td, fl, sfc):
     cmd += str(td) + '" '
     for fn in fl:
         cmd += '--include "' + str(fn.nm) + '" '
-    cmd += '--progress -v --use-json-log'
+    cmd += "--progress -v --use-json-log"
     # cmd += '--log-file="rclone.log" '
     # cmd += "--use-json-log"
     if netup():
