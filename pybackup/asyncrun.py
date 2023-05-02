@@ -83,7 +83,7 @@ def a_run3(shell_command, cwd=None):
     pp('cc', cc)
     cc = cc.items()
     pp('cc.items', cc)
-    cc = sort(list(cc))
+    cc = sorted(list(cc))
     pp('sorted(list(cc))', cc)
     return 0
 
