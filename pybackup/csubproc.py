@@ -77,7 +77,7 @@ class ContinuousSubprocess:
             self.__command_string,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
-            # universal_newlines=True,
+            universal_newlines=True,
             shell=shell,
             cwd=path,
             *args,
@@ -163,8 +163,8 @@ class ContinuousSubprocess:
     @staticmethod
     def __read_stream(stream: IO[AnyStr], queue: Queue):
         try:
-            for line in iter(stream.readline, b''):
-                if line != b'':
+            for line in iter(stream.readline, ''):
+                if line != '':
                     queue.put(line)
         # It is possible to receive: ValueError: I/O operation on closed file.
         except ValueError:
