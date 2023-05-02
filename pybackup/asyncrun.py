@@ -3,6 +3,8 @@ import subprocess
 import sys
 from threading import Lock
 
+from snoop import snoop, pp
+
 from csubproc import ContinuousSubprocess
 
 txt = ""
@@ -78,7 +80,11 @@ def a_run3(shell_command, cwd=None):
         print(message)
         print(trace)
         return exc.returncode
-    print(list(cc.items()).sort())
+    pp('cc', cc)
+    cc = cc.items()
+    pp('cc.items', cc)
+    cc = cc.sort()
+    pp('cc.items.sort', cc)
     return 0
 
 
