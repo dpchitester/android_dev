@@ -11,8 +11,9 @@ from typing import Generator, Optional, IO, AnyStr, TypeVar
 
 logger = logging.getLogger(__name__)
 
-Qi1:TypeVar = AnyStr
-Qi2:TypeVar = AnyStr
+Qi1: TypeVar = AnyStr
+Qi2: TypeVar = AnyStr
+
 
 class ContinuousSubprocess:
     """
