@@ -78,7 +78,7 @@ def a_run3(shell_command, cwd=None):
         print(message)
         print(trace)
         return exc.returncode
-    print(cc)
+    print(list(cc.items()).sort())
     return 0
 
 
