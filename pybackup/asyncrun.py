@@ -61,7 +61,7 @@ def a_run2(shell_command, cwd=None):
 
 def a_run3(shell_command, cwd=None):
     csp = ContinuousSubprocess(shell_command)
-    olg = csp.execute(path=cwd)
+    olg = csp.execute(path=cwd, text=False, universal_newlines=False)
     txt = ""
     cc = {}
     try:
