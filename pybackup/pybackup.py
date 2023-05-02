@@ -162,4 +162,4 @@ if __name__ == "__main__":
     
     profiler.stop()
     
-    profiler.open_in_browser()
+    profiler.output_html()
