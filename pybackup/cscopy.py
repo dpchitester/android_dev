@@ -46,7 +46,7 @@ def ftouch(di, si, td, lf, sfc):
             + nt
             + '" "'
             + str(td / lf.nm)
-            + '" --progress --no-create -vv'
+            + '" --progress --no-create -v --use-json-log'
         )
         # cmd += ' --exclude ".git/**" --exclude "__pycache__/**"'
         print(cmd)
@@ -70,7 +70,7 @@ def fsync(di, si, sd, td, sfc):
             + str(td.parent)
             + '" --include "'
             + str(td.name)
-            + '" --progress --no-traverse'
+            + '" --progress --no-traverse -v --use-json-log'
         )
         # cmd += ' --exclude ".git/**" --exclude "__pycache__/**"'
         print(cmd)
@@ -97,7 +97,7 @@ def fsyncl(di, si, sd, td, fl, sfc):
     cmd += str(td) + '" '
     for fn in fl:
         cmd += '--include "' + str(fn.nm) + '" '
-    cmd += "--progress --no-traverse"
+    cmd += '--progress --no-traverse -v --use-json-log'
     # cmd += '--exclude "**/.git/**/*" '
     # cmd += '--exclude "**/__pycache__/**/*" '
     # cmd += '--exclude "**/node_modules/**/*" '
@@ -120,7 +120,7 @@ def fdel(di, si, sd, td, sfc):
     if netup():
         cmd = 'rclone delete "'
         cmd += str(td)
-        cmd += '" --progress'
+        cmd += '" --progress -v --use-json-log'
         print(cmd)
         rc = ar.run3(cmd)
         if rc == 0:
@@ -144,7 +144,7 @@ def fdell(di, si, td, fl, sfc):
     cmd += str(td) + '" '
     for fn in fl:
         cmd += '--include "' + str(fn.nm) + '" '
-    cmd += "--progress"
+    cmd += '--progress -v --use-json-log'
     # cmd += '--log-file="rclone.log" '
     # cmd += "--use-json-log"
     if netup():
