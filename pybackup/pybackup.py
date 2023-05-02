@@ -161,6 +161,6 @@ if __name__ == "__main__":
     main()
     
     profiler.stop()
-    
-    with open("pyinst.html","w") as fh:
-        fh.write(profiler.output_html())
+    profiler.print()
+    #with open("pyinst.html","w") as fh:
+        #fh.write(profiler.output_html())
