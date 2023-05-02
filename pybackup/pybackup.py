@@ -154,7 +154,7 @@ def main():
 if __name__ == "__main__":
     from pyinstrument import Profiler
     
-    profiler = Profiler(interval=1/3.0*1/1000.0)
+    profiler = Profiler()
     profiler.start()
     
     # code you want to profile
