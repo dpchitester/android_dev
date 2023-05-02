@@ -61,14 +61,24 @@ def a_run3(shell_command, cwd=None):
     csp = ContinuousSubprocess(shell_command)
     olg = csp.execute(path=cwd)
     txt = ""
+    cc = {}
     try:
         for ln in olg:
             print(ln, end="")
+            for c in ln:
+                if c in cc:
+                    cc[c]+=1
+                else:
+                    cc[c] = 1
             txt += ln
     except subprocess.CalledProcessError as exc:
-        print(exc.output.message)
-        print(exc.output.trace)
+        error_output = json.loads(ex.output) 
+        message = error_output['message'] 
+        trace = error_output['trace'] 
+        print(message)
+        print(trace)
         return exc.returncode
+    print(cc)
     return 0
 
 
