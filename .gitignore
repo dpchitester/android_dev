@@ -5,6 +5,7 @@
 *.diff
 *.err
 *.gdf
+*.gv
 *.jar
 *.log
 *.log
