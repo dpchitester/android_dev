@@ -4,15 +4,16 @@ Module for continuous subprocess management.
 import json
 import logging
 import subprocess
+import types
 from collections import deque
 from queue import Queue, Empty
 from threading import Thread
-from typing import Generator, Optional, IO, AnyStr, TypeVar
+from typing import Generator, Optional, IO, AnyStr, TypeVar, NewType
 
 logger = logging.getLogger(__name__)
 
-Qi1: TypeVar = AnyStr
-Qi2: TypeVar = AnyStr
+Qi1 = types.new_class('Qi1', bases=(str,))
+Qi2 = types.new_class('Qi2', bases=(str,))
 
 
 class ContinuousSubprocess:
