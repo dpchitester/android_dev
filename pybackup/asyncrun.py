@@ -74,9 +74,9 @@ def a_run3(shell_command, cwd=None):
         for ln in olg:
             match ln:
                 case Qi1():
-                    print(colored(127, 255, 127, ln))
+                    print(colored(0, 255, 0, ln))
                 case Qi2():
-                    print(colored(255, 127, 127, ln))
+                    print(colored(255, 0, 0, ln))
             "".join([txt, ln])
     except subprocess.CalledProcessError as exc:
         error_output = json.loads(exc.output)
