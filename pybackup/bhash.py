@@ -1,15 +1,14 @@
 import pickle
-from struct import pack
-from struct import unpack
 from hashlib import blake2b
+from struct import pack, unpack
 
 from xxhash import xxh64
+
 
 def bhu(ho, it):
     from pathlib import Path
 
-    from de import DE
-    from de import FSe
+    from de import DE, FSe
 
     match it:
         case bytes():

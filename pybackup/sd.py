@@ -1,15 +1,12 @@
 import datetime
 import time
-from pathlib import Path
-from pathlib import PosixPath
+from pathlib import Path, PosixPath
 
-from snoop import pp
-from snoop import snoop
+from snoop import pp, snoop
 
 import asyncrun as ar
 import ldsv as ls
-from de import DE
-from de import FSe
+from de import DE, FSe
 
 icl = 1
 rto1 = 60 * 60
@@ -204,9 +201,10 @@ class FS_Mixin(SD):
 
     def Dll_status(self):
         import config as v
+
         if self.Dll is None:
             return 3
-        elif (self.isremote and self.Dlls_xt + rto1 <= time.time()):
+        elif self.isremote and self.Dlls_xt + rto1 <= time.time():
             return 2
         elif v.Dllc[self.tag].is_set():
             return 1

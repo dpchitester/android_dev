@@ -1,9 +1,7 @@
 from os import walk
 from pathlib import Path
 
-from config import path
-from config import srcs
-from config import tagid
+from config import path, srcs, tagid
 
 si = tagid("js-tools")
 

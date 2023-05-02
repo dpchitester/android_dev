@@ -1,7 +1,6 @@
 import asyncrun as ar
 import config as v
-from edge import Edge
-from edge import findEdge
+from edge import Edge, findEdge
 from gitclasses import gitcmd
 from netup import netup
 from opbase import OpBase

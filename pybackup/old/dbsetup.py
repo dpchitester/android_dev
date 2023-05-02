@@ -3,11 +3,7 @@ import parser
 from datetime import datetime
 
 from opclasses import *
-from pyswip import Atom
-from pyswip import Functor
-from pyswip import Prolog
-from pyswip import Query
-from pyswip import Variable
+from pyswip import Atom, Functor, Prolog, Query, Variable
 
 import config as e
 

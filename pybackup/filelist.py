@@ -6,8 +6,7 @@ from pathlib import Path
 import asyncrun as ar
 import config as v
 import ldsv as ls
-from de import DE
-from de import FSe
+from de import DE, FSe
 
 dexs = {
     ".cargo",

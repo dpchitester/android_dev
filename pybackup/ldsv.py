@@ -1,9 +1,6 @@
 import pickle
-from queue import Empty
-from queue import SimpleQueue
-from threading import Event
-from threading import RLock
-from threading import Thread
+from queue import Empty, SimpleQueue
+from threading import Event, RLock, Thread
 from time import sleep
 
 from snoop import snoop

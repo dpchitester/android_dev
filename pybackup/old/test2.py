@@ -1,5 +1,4 @@
-from tinydb import Query
-from tinydb import TinyDB
+from tinydb import Query, TinyDB
 
 db = TinyDB("test2.json", sort_keys=False, indent=4, separators=(",", ": "))
 db.purge_table("opdep")

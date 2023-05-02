@@ -4,36 +4,20 @@ from os import walk
 from pathlib import Path
 from threading import Event
 from time import time
-from typing import Dict
-from typing import List
-from typing import Set
-from typing import Tuple
-from typing import TypeAlias
+from typing import Dict, List, Set, Tuple, TypeAlias, Optional
 
-from snoop import pp
-from snoop import snoop
+from snoop import pp, snoop
 
 from cscopy import CSCopy
-from de import DE
-from de import FSe
-from edge import Edge
-from edge import addArc
-from edge import addDep
-from gitclasses import GitIndex
-from gitclasses import GitRemote
-from gitclasses import GitRepo
-from gitclasses import GitWT
-from gitops import GitAdd
-from gitops import GitCommit
-from gitops import GitPush
+from de import DE, FSe
+from edge import Edge, addArc, addDep
+from gitclasses import GitIndex, GitRemote, GitRepo, GitWT
+from gitops import GitAdd, GitCommit, GitPush
 from ldsv import load_all
 from localcopy import LocalCopy
 from mkzip import Mkzip
 from opbase import OpBase
-from sd import CS
-from sd import SD
-from sd import Ext3
-from sd import Fat32
+from sd import CS, SD, Ext3, Fat32
 
 quit_ev = Event()
 
@@ -155,15 +139,15 @@ LDlls_changed: bool = False
 RDlls_changed: bool = False
 
 # pickle file filenames
-edgepf: Path = None
-ldllsf: Path = None
-rdllsf: Path = None
+edgepf: Optional[Path] = None
+ldllsf: Optional[Path] = None
+rdllsf: Optional[Path] = None
 
-ldhpf: Path = None
-rdhpf: Path = None
+ldhpf: Path
+rdhpf: Path
 
 # worktree of git repo
-worktree: Path = None
+worktree: Path
 
 # directory list hashing stats
 
@@ -184,6 +168,7 @@ cloud1: CS = None
 cloud2: CS = None
 cloud3: CS = None
 dsbog: Fat32 = None
+
 
 def initConfig():
     global home, sdcard, cloud1, cloud2, cloud3, dsblog

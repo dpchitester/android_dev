@@ -3,8 +3,7 @@ from os import makedirs
 
 import asyncrun as ar
 import config as v
-from edge import Edge
-from edge import findEdge
+from edge import Edge, findEdge
 from findde import updateDEs
 from opbase import OpBase
 from status import onestatus
