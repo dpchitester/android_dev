@@ -99,7 +99,7 @@ def addSrcDir(tg, pth, iscode=False):
         LDlls[tg] = None
         LDlls_xt[tg] = 0
         LDhd[tg] = 0
-    Dhdd[tg] = Event()
+    Dllc[tg] = Event()
 
 
 def addTgtDir(tg, pth):
@@ -115,14 +115,14 @@ def addTgtDir(tg, pth):
         LDlls[tg] = None
         LDlls_xt[tg] = 0
         LDhd[tg] = 0
-    Dhdd[tg] = Event()
+    Dllc[tg] = Event()
 
 
 def addPre(tg, frag):
     if not isinstance(frag, SD):
         raise ValueError("not an SD subclass")
     pres.add(tg, frag)
-    Dhdd[tg] = Event()
+    Dllc[tg] = Event()
 
 
 # operations (function objects)
@@ -140,7 +140,7 @@ edges: Dict[Tuple[NodeTag, NodeTag], Edge] = {}
 LDhd: Hdt1 = {}
 RDhd: Hdt1 = {}
 
-Dhdd: Hdt3 = {}
+Dllc: Hdt3 = {}
 
 
 # files lists

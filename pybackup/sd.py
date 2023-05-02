@@ -67,7 +67,7 @@ class Local_Mixin:
         if hasattr(self, "tag"):
             with ls.dl:
                 v.LDlls[self.tag] = val
-                v.Dhdd[self.tag].set()
+                v.Dllc[self.tag].set()
                 ls.sev.put("ldlls")
 
     @property
@@ -106,7 +106,7 @@ class Local_Mixin:
         if hasattr(self, "tag"):
             with ls.dl:
                 v.LDhd[self.tag] = val
-                v.Dhdd[self.tag].clear()
+                v.Dllc[self.tag].clear()
                 ls.sev.put("ldhd")
 
 
@@ -135,7 +135,7 @@ class Remote_Mixin:
         if hasattr(self, "tag"):
             with ls.dl:
                 v.RDlls[self.tag] = val
-                v.Dhdd[self.tag].set()
+                v.Dllc[self.tag].set()
                 ls.sev.put("rdlls")
 
     @property
@@ -174,7 +174,7 @@ class Remote_Mixin:
         if hasattr(self, "tag"):
             with ls.dl:
                 v.RDhd[self.tag] = val
-                v.Dhdd[self.tag].clear()
+                v.Dllc[self.tag].clear()
                 ls.sev.put("rdhd")
 
 
@@ -208,7 +208,7 @@ class FS_Mixin(SD):
             return 3
         elif (self.isremote and self.Dlls_xt + rto1 <= time.time()):
             return 2
-        elif v.Dhdd[self.tag].is_set():
+        elif v.Dllc[self.tag].is_set():
             return 1
         return 0
 
