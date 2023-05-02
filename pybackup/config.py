@@ -88,7 +88,7 @@ def addSrcDir(tg, pth, iscode=False):
     if not isinstance(pth, SD):
         raise ValueError("not an SD subclass")
     srcs.add(tg, pth)
-    pth.issrc = True
+    setattr(pth, "issrc", True)
     if iscode:
         codes.add(tg, pth)
     if pth.isremote:
@@ -106,7 +106,7 @@ def addTgtDir(tg, pth):
     if not isinstance(pth, SD):
         raise ValueError("not an SD subclass")
     tgts.add(tg, pth)
-    pth.istgt = True
+    setattr(pth, "istgt", True)
     if pth.isremote:
         RDlls[tg] = None
         RDlls_xt[tg] = 0
