@@ -62,7 +62,7 @@ def a_run2(shell_command, cwd=None):
 def a_run3(shell_command, cwd=None):
     csp = ContinuousSubprocess(shell_command)
     olg = csp.execute(path=cwd, text=False, universal_newlines=False)
-    txt = ""
+    txt = b''
     cc = {}
     try:
         for ln in olg:
@@ -72,7 +72,7 @@ def a_run3(shell_command, cwd=None):
                     cc[c]+=1
                 else:
                     cc[c] = 1
-            txt += ln
+            b''.join([txt, ln])
     except subprocess.CalledProcessError as exc:
         error_output = json.loads(ex.output) 
         message = error_output['message'] 
