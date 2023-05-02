@@ -163,8 +163,8 @@ class ContinuousSubprocess:
     @staticmethod
     def __read_stream(stream: IO[AnyStr], queue: Queue):
         try:
-            for line in iter(stream.readline, ""):
-                if line != "" and line != b'':
+            for line in iter(stream.readline, b''):
+                if line != b'':
                     queue.put(line)
         # It is possible to receive: ValueError: I/O operation on closed file.
         except ValueError:
