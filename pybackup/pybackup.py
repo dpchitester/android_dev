@@ -152,4 +152,14 @@ def main():
 
 
 if __name__ == "__main__":
+    from pyinstrument import Profiler
+    
+    profiler = Profiler()
+    profiler.start()
+    
+    # code you want to profile
     main()
+    
+    profiler.stop()
+    
+    profiler.open_in_browser()
