@@ -153,14 +153,14 @@ def main():
 
 if __name__ == "__main__":
     from pyinstrument import Profiler
-    
+
     profiler = Profiler()
     profiler.start()
-    
+
     # code you want to profile
     main()
-    
+
     profiler.stop()
-    
-    with open("pyinst.html","w") as fh:
+
+    with open("pyinst.html", "w") as fh:
         fh.write(profiler.output_html(timeline=True))

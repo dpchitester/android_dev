@@ -50,7 +50,7 @@ def ftouch(di, si, td, lf, sfc):
         )
         # cmd += ' --exclude ".git/**" --exclude "__pycache__/**"'
         print(cmd)
-        rc = ar.run2(cmd)
+        rc = ar.run3(cmd)
         if rc == 0:
             sfc.sc += 1
             return True
@@ -74,7 +74,7 @@ def fsync(di, si, sd, td, sfc):
         )
         # cmd += ' --exclude ".git/**" --exclude "__pycache__/**"'
         print(cmd)
-        rc = ar.run2(cmd)
+        rc = ar.run3(cmd)
         if rc == 0:
             sfc.sc += 1
             return True
@@ -106,7 +106,7 @@ def fsyncl(di, si, sd, td, fl, sfc):
     if netup():
         # print("copy", sd, td, list(map(lambda de: str(de.nm), fl)))
         print(cmd)
-        rc = ar.run2(cmd)
+        rc = ar.run3(cmd)
         if rc == 0:
             sfc.sc += len(fl)
             return True
@@ -122,7 +122,7 @@ def fdel(di, si, sd, td, sfc):
         cmd += str(td)
         cmd += '" --progress'
         print(cmd)
-        rc = ar.run2(cmd)
+        rc = ar.run3(cmd)
         if rc == 0:
             sfc.sc += 1
             return True
@@ -150,7 +150,7 @@ def fdell(di, si, td, fl, sfc):
     if netup():
         # print("delete", td, list(map(lambda de: str(de.nm), fl)))
         print(cmd)
-        rc = ar.run2(cmd)
+        rc = ar.run3(cmd)
         if rc == 0:
             sfc.sc += 1
             return True
