@@ -12,8 +12,8 @@ from typing import Generator, Optional, IO, AnyStr, TypeVar, NewType
 
 # logger = logging.getLogger(__name__)
 
-Qi1 = types.new_class('Qi1', bases=(str,))
-Qi2 = types.new_class('Qi2', bases=(str,))
+Qi1 = types.new_class("Qi1", bases=(str,))
+Qi2 = types.new_class("Qi2", bases=(str,))
 
 
 class ContinuousSubprocess:
@@ -83,9 +83,9 @@ class ContinuousSubprocess:
             *args,
             **kwargs,
         ) as process:
-            #logger.info(
+            # logger.info(
             #    f'Successfully started the process to run "{self.__command_string}" command.'
-            #)
+            # )
 
             # Indicate that the process has started and is now running.
             self.__process = process
@@ -110,7 +110,7 @@ class ContinuousSubprocess:
 
             # logger.info(
             #    "Successfully started threads to capture stdout and stderr streams."
-            #)
+            # )
 
             # Run this block as long as our main process is alive or std streams queue is not empty.
             while (process.poll() is None) or (not q1.empty() or not q2.empty()):
@@ -163,8 +163,8 @@ class ContinuousSubprocess:
     @staticmethod
     def __read_stream(stream: IO[AnyStr], queue: Queue):
         try:
-            for line in iter(stream.readline, ''):
-                if line != '':
+            for line in iter(stream.readline, ""):
+                if line != "":
                     queue.put(line)
                 else:
                     break
@@ -172,4 +172,3 @@ class ContinuousSubprocess:
         except ValueError:
             # logger.exception("Got error while reading from a process stream.")
             pass
-

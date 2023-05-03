@@ -6,21 +6,25 @@ from edge import Edge, findEdge
 from netup import netup
 from opbase import OpBase
 
+
 def colored(r, g, b, text):
     return f"\033[38;2;{r};{g};{b}m{text}\033[0m"
 
+
 opmsg = []
 statmsg = []
+
 
 def ar_run3(cmd):
     global opmsg, statmsg
     rc = ar.run3(cmd)
     for m in ar.msglst:
-        if 'operations' in m['source']:
+        if "operations" in m["source"]:
             opmsg.append(m)
-        elif 'stats' in m['source']:
+        elif "stats" in m["source"]:
             statmsg.append(m)
     return rc
+
 
 def chunk_from(s1, amt):
     s2 = set()
@@ -334,7 +338,7 @@ class CSCopy(OpBase):
         if self.sfc.sc > 0:
             if di in v.srcs:
                 onestatus(di)
-        print(len(opmsg), 'opmsgs', len(statmsg), 'statmsgs')
-        print('opmsg:', colored(0,255,0,opmsg))
-        print('statmsg:', colored(0,0,255,statmsg))
+        print(len(opmsg), "opmsgs", len(statmsg), "statmsgs")
+        print("opmsg:", colored(0, 255, 0, opmsg))
+        print("statmsg:", colored(0, 0, 255, statmsg))
         return self.sfc.value()
