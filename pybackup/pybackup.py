@@ -151,7 +151,7 @@ def main():
                     th.join()
 
 def pmain():
-    pf = Path("pyinst.html")
+    pf = Path("/sdcard/pyinst.html")
     if pf.exists():
         pf.unlink("pyinst.html")
     from pyinstrument import Profiler
