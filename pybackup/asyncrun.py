@@ -104,10 +104,10 @@ def a_run4(shell_command, cwd=None):
             match ln:
                 case Qi1():
                     "".join([txt1, ln])
-                    print(colored(0, 255, 0, ln), end='')
+                    # print(colored(0, 255, 0, ln), end='')
                 case Qi2():
                     "".join([txt2, ln])
-                    print(colored(255, 0, 0, ln), end='')
+                    # print(colored(255, 0, 0, ln), end='')
     except subprocess.CalledProcessError as exc:
         error_output = json.loads(exc.output)
         message = error_output["message"]

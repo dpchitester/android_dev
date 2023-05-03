@@ -6,6 +6,9 @@ from edge import Edge, findEdge
 from netup import netup
 from opbase import OpBase
 
+def colored(r, g, b, text):
+    return f"\033[38;2;{r};{g};{b}m{text}\033[0m"
+
 opmsg = []
 statmsg = []
 
@@ -332,6 +335,6 @@ class CSCopy(OpBase):
             if di in v.srcs:
                 onestatus(di)
         print(len(opmsg), 'opmsgs', len(statmsg), 'statmsgs')
-        print('opmsg:', opmsg)
-        print('statmsg:', statmsg)
+        print('opmsg:', colored(0,255,0,opmsg))
+        print('statmsg:', colored(0,0,255,statmsg))
         return self.sfc.value()
