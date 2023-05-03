@@ -26,7 +26,7 @@ th1 = None
 th2 = None
 th3 = None
 
-
+@profile
 def wsetup():
     global wdsi, in1, v
     print("-wsetup")
@@ -49,7 +49,7 @@ def wsetup():
             break
     print(len(wdsi), "watches")
 
-
+@profile
 def cb1():
     global in1, weq
     print("-cb1 started")
@@ -63,7 +63,7 @@ def cb1():
             break
         sleep(1)
 
-
+@profile
 def proc_events():
     print("-proc_events started")
     sis: dict[v.NodeTag, list[str]] = {}
@@ -105,7 +105,7 @@ def proc_events():
             break
         sleep(1)
 
-
+@profile
 def rt2():
     global th1
     # print("-rt2-1")

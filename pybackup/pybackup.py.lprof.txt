@@ -1,0 +1,33 @@
+Timer unit: 1e-06 s
+
+Total time: 3.0246 s
+File: pybackup.py
+Function: main at line 128
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+   128                                           @profile
+   129                                           def main():
+   130                                               global cel, wdsi, in1, v, th1, th2, th3
+   131         1     415055.3 415055.3     13.7      v.initConfig()
+   132         1       1570.6   1570.6      0.1      with Inotify(sync_timeout=0.666) as in1:
+   133         1          4.5      4.5      0.0          try:
+   134         1    1275502.4 1275502.4     42.2              wsetup()
+   135         1    -639190.7 -639190.7    -21.1              updatets(0)
+   136         1        447.7    447.7      0.0              th1 = Thread(target=cb1)
+   137         1       1443.1   1443.1      0.0              th1.start()
+   138         1        339.8    339.8      0.0              th2 = Thread(target=proc_events)
+   139         1        954.4    954.4      0.0              th2.start()
+   140         1        387.5    387.5      0.0              th3 = ls.save_bp()
+   141         1       1656.4   1656.4      0.1              th3.start()
+   142         1     904306.4 904306.4     29.9              rt2()
+   143         1        401.2    401.2      0.0              v.quit_ev.set()
+   144                                                   except KeyboardInterrupt as exc:
+   145                                                       print(exc)
+   146                                                   finally:
+   147         3         46.5     15.5      0.0              for th in [th1, th2, th3]:
+   148         3         25.9      8.6      0.0                  if th:
+   149         3        423.8    141.3      0.0                      v.quit_ev.set()
+   150         3        560.9    187.0      0.0                      print("waiting for", th.name, "shutdown")
+   151         3    1060669.2 353556.4     35.1                      th.join()
+
