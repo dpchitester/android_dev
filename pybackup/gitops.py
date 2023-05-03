@@ -29,7 +29,7 @@ class GitAdd(OpBase):
             anyd = True
         if not anyd:
             return (tc, fc)
-        rc = ar.run2("git add -A . -v", cwd=v.src(si))
+        rc = ar.run4("git add -A . -v", cwd=v.src(si))
         if rc == 0:
             tc += 1
         else:
@@ -63,7 +63,7 @@ class GitCommit(OpBase):
             anyd = True
         if not anyd:
             return (tc, fc)
-        rc = ar.run2("git commit -a -m pybak -v", cwd=self.opts["wt"])
+        rc = ar.run4("git commit -a -m pybak -v", cwd=self.opts["wt"])
         if rc in (0, 1):
             tc += 1
         else:
@@ -100,7 +100,7 @@ class GitPush(OpBase):
         if not anyd:
             return (tc, fc)
         if rmt == "local" or (netup()):
-            rc = ar.run2("git push " + rmt + " master", cwd=self.opts["wt"])
+            rc = ar.run4("git push " + rmt + " master", cwd=self.opts["wt"])
             if rc == 0:
                 tc += 1
             else:

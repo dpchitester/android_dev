@@ -14,6 +14,8 @@ def colored(r, g, b, text):
 
 
 txt = ""
+txt1 = ""
+txt2 = ""
 js = []
 idel = 1
 
@@ -91,8 +93,33 @@ def a_run3(shell_command, cwd=None):
         return exc.returncode
     return 0
 
+def a_run4(shell_command, cwd=None):
+    global txt, js
+    csp = ContinuousSubprocess(shell_command)
+    olg = csp.execute(path=cwd)
+    txt1 = ""
+    txt2 = ""
+    try:
+        for ln in olg:
+            match ln:
+                case Qi1():
+                    print(colored(0, 255, 0, ln))
+                    "".join([txt1, ln])
+                case Qi2():
+                    "".join([txt2, ln])
+                    print(colored(255, 0, 0, ln))
+    except subprocess.CalledProcessError as exc:
+        error_output = json.loads(exc.output)
+        message = error_output["message"]
+        trace = error_output["trace"]
+        print(message)
+        print(trace)
+        return exc.returncode
+    return 0
+
 
 run = a_run
 run1 = a_run1
 run2 = a_run2
 run3 = a_run3
+run4 = a_run4
