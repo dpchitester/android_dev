@@ -6,6 +6,18 @@ from edge import Edge, findEdge
 from netup import netup
 from opbase import OpBase
 
+opmsg = []
+statmsg = []
+
+def ar_run3(cmd):
+    global opmsg, statmsg
+    rc = ar.run3(cmd)
+    for m in ar.msglst:
+        if 'operations' in m['source']:
+            opmsg.append(m)
+        elif 'stats' in m['source']:
+            statmsg.append(m)
+    return rc
 
 def chunk_from(s1, amt):
     s2 = set()
@@ -50,7 +62,7 @@ def ftouch(di, si, td, lf, sfc):
         )
         # cmd += ' --exclude ".git/**" --exclude "__pycache__/**"'
         print(cmd)
-        rc = ar.run3(cmd)
+        rc = ar_run3(cmd)
         if rc == 0:
             sfc.sc += 1
             return True
@@ -74,7 +86,7 @@ def fsync(di, si, sd, td, sfc):
         )
         # cmd += ' --exclude ".git/**" --exclude "__pycache__/**"'
         print(cmd)
-        rc = ar.run3(cmd)
+        rc = ar_run3(cmd)
         if rc == 0:
             sfc.sc += 1
             return True
@@ -106,7 +118,7 @@ def fsyncl(di, si, sd, td, fl, sfc):
     if netup():
         # print("copy", sd, td, list(map(lambda de: str(de.nm), fl)))
         print(cmd)
-        rc = ar.run3(cmd)
+        rc = ar_run3(cmd)
         if rc == 0:
             sfc.sc += len(fl)
             return True
@@ -122,7 +134,7 @@ def fdel(di, si, sd, td, sfc):
         cmd += str(td)
         cmd += '" --progress -v --use-json-log'
         print(cmd)
-        rc = ar.run3(cmd)
+        rc = ar_run3(cmd)
         if rc == 0:
             sfc.sc += 1
             return True
@@ -150,7 +162,7 @@ def fdell(di, si, td, fl, sfc):
     if netup():
         # print("delete", td, list(map(lambda de: str(de.nm), fl)))
         print(cmd)
-        rc = ar.run3(cmd)
+        rc = ar_run3(cmd)
         if rc == 0:
             sfc.sc += 1
             return True
@@ -319,4 +331,7 @@ class CSCopy(OpBase):
         if self.sfc.sc > 0:
             if di in v.srcs:
                 onestatus(di)
+        print(len(opmsg), 'opmsgs', len(statmsg), 'statmsgs')
+        print('opmsg:', opmsg)
+        print('statmsg:', statmsg)
         return self.sfc.value()
