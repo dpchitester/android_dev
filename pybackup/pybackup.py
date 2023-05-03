@@ -163,4 +163,4 @@ if __name__ == "__main__":
     profiler.stop()
 
     with open("pyinst.html", "w") as fh:
-        fh.write(profiler.output_html(timeline=True))
+        fh.write(profiler.output_html(timeline=False))
