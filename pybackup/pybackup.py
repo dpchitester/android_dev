@@ -155,7 +155,7 @@ def pmain():
     if pf.exists():
         pf.unlink("pyinst.html")
     from pyinstrument import Profiler
-    profiler = Profiler(interval=0.01)
+    profiler = Profiler(interval=0.0035)
     profiler.start()
     # code you want to profile
     main()
