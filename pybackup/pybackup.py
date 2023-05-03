@@ -160,7 +160,7 @@ def pmain():
     # code you want to profile
     main()
     profiler.stop()
-    with pf.open("w") as fh:
+    with pf.open(mode="w") as fh:
         fh.write(profiler.output_html(timeline=True))
 
 if __name__ == "__main__":
