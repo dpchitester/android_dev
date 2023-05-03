@@ -83,7 +83,7 @@ def a_run3(shell_command, cwd=None):
                 case Qi2():
                     msg = json.loads(ln)
                     msglst.append(msg)
-                    print(colored(255, 0, 0, msg), end='')
+                    print(colored(255, 0, 0, msg))
     except subprocess.CalledProcessError as exc:
         error_output = json.loads(exc.output)
         message = error_output["message"]
