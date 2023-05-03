@@ -16,7 +16,7 @@ def colored(r, g, b, text):
 txt = ""
 txt1 = ""
 txt2 = ""
-js = []
+msglst = []
 idel = 1
 
 
@@ -69,11 +69,11 @@ def a_run2(shell_command, cwd=None):
 
 
 def a_run3(shell_command, cwd=None):
-    global txt, js
+    global txt, msglst
     csp = ContinuousSubprocess(shell_command)
     olg = csp.execute(path=cwd)
     txt = ""
-    js = []
+    msglst = []
     try:
         for ln in olg:
             match ln:
@@ -81,9 +81,9 @@ def a_run3(shell_command, cwd=None):
                     print(colored(0, 255, 0, ln))
                     "".join([txt, ln])
                 case Qi2():
-                    jsln = json.loads(ln)
-                    js.append(jsln)
-                    print(colored(255, 0, 0, jsln))
+                    msg = json.loads(ln)
+                    msglst.append(msg)
+                    print(colored(255, 0, 0, msg))
     except subprocess.CalledProcessError as exc:
         error_output = json.loads(exc.output)
         message = error_output["message"]
@@ -94,7 +94,7 @@ def a_run3(shell_command, cwd=None):
     return 0
 
 def a_run4(shell_command, cwd=None):
-    global txt, js
+    global txt1, txt2
     csp = ContinuousSubprocess(shell_command)
     olg = csp.execute(path=cwd)
     txt1 = ""
