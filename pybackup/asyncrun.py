@@ -103,8 +103,8 @@ def a_run4(shell_command, cwd=None):
         for ln in olg:
             match ln:
                 case Qi1():
-                    print(colored(0, 255, 0, ln), end='')
                     "".join([txt1, ln])
+                    print(colored(0, 255, 0, ln), end='')
                 case Qi2():
                     "".join([txt2, ln])
                     print(colored(255, 0, 0, ln), end='')
