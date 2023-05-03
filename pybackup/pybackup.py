@@ -125,7 +125,7 @@ def rt2():
             rv1 = opExec()
         # print("-rt2-5")
 
-
+@profile
 def main():
     global cel, wdsi, in1, v, th1, th2, th3
     v.initConfig()
@@ -150,17 +150,16 @@ def main():
                     print("waiting for", th.name, "shutdown")
                     th.join()
 
-
-if __name__ == "__main__":
+def pmain():
+    os.unlink("pyinst.html")
     from pyinstrument import Profiler
-
     profiler = Profiler(interval=0.003)
     profiler.start()
-
     # code you want to profile
     main()
-
     profiler.stop()
-
     with open("pyinst.html", "w") as fh:
         fh.write(profiler.output_html(timeline=True))
+
+if __name__ == "__main__":
+    main()
