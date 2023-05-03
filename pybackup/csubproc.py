@@ -10,7 +10,7 @@ from queue import Queue, Empty
 from threading import Thread
 from typing import Generator, Optional, IO, AnyStr, TypeVar, NewType
 
-logger = logging.getLogger(__name__)
+# logger = logging.getLogger(__name__)
 
 Qi1 = types.new_class('Qi1', bases=(str,))
 Qi2 = types.new_class('Qi2', bases=(str,))
@@ -83,9 +83,9 @@ class ContinuousSubprocess:
             *args,
             **kwargs,
         ) as process:
-            logger.info(
-                f'Successfully started the process to run "{self.__command_string}" command.'
-            )
+            #logger.info(
+            #    f'Successfully started the process to run "{self.__command_string}" command.'
+            #)
 
             # Indicate that the process has started and is now running.
             self.__process = process
@@ -108,20 +108,20 @@ class ContinuousSubprocess:
             )
             stderr_thread.start()
 
-            logger.info(
-                "Successfully started threads to capture stdout and stderr streams."
-            )
+            # logger.info(
+            #    "Successfully started threads to capture stdout and stderr streams."
+            #)
 
             # Run this block as long as our main process is alive or std streams queue is not empty.
             while (process.poll() is None) or (not q1.empty() or not q2.empty()):
                 try:
                     # Rad messages produced by stdout and stderr threads.
                     if not q1.empty():
-                        item = q1.get(block=True, timeout=0.01)
+                        item = q1.get(block=True)
                         dq.append(item)
                         yield Qi1(item)
                     if not q2.empty():
-                        item = q2.get(block=True, timeout=0.01)
+                        item = q2.get(block=True)
                         dq.append(item)
                         yield Qi2(item)
                 except Empty:
@@ -134,11 +134,11 @@ class ContinuousSubprocess:
             return_code = process.wait()
 
         # Make sure both threads have finished.
-        stdout_thread.join(timeout=5)
+        stdout_thread.join()
         if stdout_thread.is_alive():
             raise RuntimeError("Stdout thread is still alive!")
 
-        stderr_thread.join(timeout=5)
+        stderr_thread.join()
         if stderr_thread.is_alive():
             raise RuntimeError("Stderr thread is still alive!")
 
@@ -170,5 +170,6 @@ class ContinuousSubprocess:
                     break
         # It is possible to receive: ValueError: I/O operation on closed file.
         except ValueError:
-            logger.exception("Got error while reading from a process stream.")
+            # logger.exception("Got error while reading from a process stream.")
+            pass
 
