@@ -6,9 +6,9 @@ import logging
 import subprocess
 import types
 from collections import deque
-from queue import Queue, Empty
+from queue import Empty, Queue
 from threading import Thread
-from typing import Generator, Optional, IO, AnyStr, TypeVar, NewType
+from typing import IO, AnyStr, Generator, NewType, Optional, TypeVar
 
 # logger = logging.getLogger(__name__)
 

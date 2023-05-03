@@ -1,10 +1,10 @@
+import json
 import re
 import subprocess
 import sys
 from threading import Lock
-import json
 
-from snoop import snoop, pp
+from snoop import pp, snoop
 
 from csubproc import ContinuousSubprocess, Qi1, Qi2
 

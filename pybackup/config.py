@@ -4,7 +4,7 @@ from os import walk
 from pathlib import Path
 from threading import Event
 from time import time
-from typing import Dict, List, Set, Tuple, TypeAlias, Optional
+from typing import Dict, List, Optional, Set, Tuple, TypeAlias
 
 from snoop import pp, snoop
 

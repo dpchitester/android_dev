@@ -150,11 +150,13 @@ def main():
                     print("waiting for", th.name, "shutdown")
                     th.join()
 
+
 def pmain():
     pf = Path("/sdcard/pyinst.html")
     if pf.exists():
         pf.unlink("pyinst.html")
     from pyinstrument import Profiler
+
     profiler = Profiler(interval=0.0035)
     profiler.start()
     # code you want to profile
@@ -162,6 +164,7 @@ def pmain():
     profiler.stop()
     with pf.open(mode="w") as fh:
         fh.write(profiler.output_html(timeline=True))
+
 
 if __name__ == "__main__":
     pmain()
