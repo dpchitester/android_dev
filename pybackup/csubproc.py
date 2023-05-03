@@ -166,7 +166,9 @@ class ContinuousSubprocess:
             for line in iter(stream.readline, ''):
                 if line != '':
                     queue.put(line)
+                else:
+                    break
         # It is possible to receive: ValueError: I/O operation on closed file.
         except ValueError:
             logger.exception("Got error while reading from a process stream.")
-            return
+
