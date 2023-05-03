@@ -26,7 +26,7 @@ th1 = None
 th2 = None
 th3 = None
 
-@profile
+
 def wsetup():
     global wdsi, in1, v
     print("-wsetup")
@@ -49,7 +49,7 @@ def wsetup():
             break
     print(len(wdsi), "watches")
 
-@profile
+
 def cb1():
     global in1, weq
     print("-cb1 started")
@@ -63,7 +63,7 @@ def cb1():
             break
         sleep(1)
 
-@profile
+
 def proc_events():
     print("-proc_events started")
     sis: dict[v.NodeTag, list[str]] = {}
@@ -105,7 +105,7 @@ def proc_events():
             break
         sleep(1)
 
-@profile
+
 def rt2():
     global th1
     # print("-rt2-1")
@@ -125,7 +125,7 @@ def rt2():
             rv1 = opExec()
         # print("-rt2-5")
 
-@profile
+
 def main():
     global cel, wdsi, in1, v, th1, th2, th3
     v.initConfig()
@@ -151,15 +151,17 @@ def main():
                     th.join()
 
 def pmain():
-    os.unlink("pyinst.html")
+    pf = Path("pyinst.html")
+    if pf.exists():
+        pf.unlink("pyinst.html")
     from pyinstrument import Profiler
-    profiler = Profiler(interval=0.003)
+    profiler = Profiler(interval=0.01)
     profiler.start()
     # code you want to profile
     main()
     profiler.stop()
-    with open("pyinst.html", "w") as fh:
+    with pf.open("w") as fh:
         fh.write(profiler.output_html(timeline=True))
 
 if __name__ == "__main__":
-    main()
+    pmain()
