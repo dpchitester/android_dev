@@ -154,7 +154,7 @@ def main():
 if __name__ == "__main__":
     from pyinstrument import Profiler
 
-    profiler = Profiler()
+    profiler = Profiler(interval=.003)
     profiler.start()
 
     # code you want to profile
@@ -163,4 +163,4 @@ if __name__ == "__main__":
     profiler.stop()
 
     with open("pyinst.html", "w") as fh:
-        fh.write(profiler.output_html(timeline=False))
+        fh.write(profiler.output_html(timeline=True))
