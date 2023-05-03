@@ -81,9 +81,9 @@ def a_run3(shell_command, cwd=None):
                     print(colored(0, 255, 0, ln))
                     "".join([txt, ln])
                 case Qi2():
-                    js.append(json.loads(ln))
-                    print(colored(255, 0, 0, ln))
-            
+                    jsln = json.loads(ln)
+                    js.append(jsln)
+                    print(colored(255, 0, 0, jsln))
     except subprocess.CalledProcessError as exc:
         error_output = json.loads(exc.output)
         message = error_output["message"]
