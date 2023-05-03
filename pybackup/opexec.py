@@ -49,7 +49,7 @@ def proc_nodes(L):
     sc = 0
     fc = 0
     for node in L:
-        print("node:", node)
+        # print("node:", node)
         ss = changed_ops(node)
         for op in ss:
             sc, fc = op()
