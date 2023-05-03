@@ -2,7 +2,7 @@ import re
 import subprocess
 import sys
 from threading import Lock
-
+import json
 
 from snoop import snoop, pp
 
@@ -14,6 +14,7 @@ def colored(r, g, b, text):
 
 
 txt = ""
+js = []
 idel = 1
 
 
@@ -66,18 +67,21 @@ def a_run2(shell_command, cwd=None):
 
 
 def a_run3(shell_command, cwd=None):
-    global txt
+    global txt, js
     csp = ContinuousSubprocess(shell_command)
     olg = csp.execute(path=cwd)
     txt = ""
+    js = []
     try:
         for ln in olg:
             match ln:
                 case Qi1():
                     print(colored(0, 255, 0, ln))
+                    "".join([txt, ln])
                 case Qi2():
+                    js.append(json.loads(ln))
                     print(colored(255, 0, 0, ln))
-            "".join([txt, ln])
+            
     except subprocess.CalledProcessError as exc:
         error_output = json.loads(exc.output)
         message = error_output["message"]
