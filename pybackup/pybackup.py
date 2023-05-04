@@ -154,14 +154,13 @@ def main():
 def pmain():
     import yappi
     try:
-        Path('pybackup.pstats').unlink()
-        Path('pybackup.png').unlink()
+        Path('pybackup.pstat').unlink()
     except FileNotFoundError:
         pass
     yappi.start()
     main()
     func_stats = yappi.get_func_stats()
-    func_stats.save('pybackup.pstats', 'pstat')
+    func_stats.save('pybackup.pstat', 'pstat')
     yappi.stop()
     yappi.clear_stats()
 
