@@ -1,3 +1,3 @@
-python -m cProfile -o pybackup.pstats pybackup.py
-gprof2dot -z pybackup:129:main -n0 -e0 -f pstats pybackup.pstats | dot -Tpng -o pybackup.png
+python -m pybackup
+gprof2dot -n0 -e0 -f callgrind pybackup.cg | dot -Tpng -o pybackup.png
 

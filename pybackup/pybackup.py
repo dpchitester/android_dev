@@ -152,19 +152,13 @@ def main():
 
 
 def pmain():
-    pf = Path("/sdcard/pyinst.html")
-    if pf.exists():
-        pf.unlink("pyinst.html")
-    from pyinstrument import Profiler
-
-    profiler = Profiler(interval=0.0035)
-    profiler.start()
-    # code you want to profile
+    import yappi
+    yappi.start()
     main()
-    profiler.stop()
-    with pf.open(mode="w") as fh:
-        fh.write(profiler.output_html(timeline=True))
-
+    func_stats = yappi.get_func_stats()
+    func_stats.save('pybackup.cg', 'CALLGRIND')
+    yappi.stop()
+    yappi.clear_stats()
 
 if __name__ == "__main__":
-    main()
+    pmain()
