@@ -1,17 +1,15 @@
 from datetime import datetime
 
-from pyswip import (
-    Atom,
-    Functor,
-    Prolog,
-    Query,
-    Term,
-    Variable,
-    getList,
-    putList,
-    putTerm,
-    registerForeign,
-)
+from pyswip import Atom
+from pyswip import Functor
+from pyswip import Prolog
+from pyswip import Query
+from pyswip import Term
+from pyswip import Variable
+from pyswip import getList
+from pyswip import putList
+from pyswip import putTerm
+from pyswip import registerForeign
 
 from toposort import topological_sort
 

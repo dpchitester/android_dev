@@ -4,20 +4,37 @@ from os import walk
 from pathlib import Path
 from threading import Event
 from time import time
-from typing import Dict, List, Optional, Set, Tuple, TypeAlias
+from typing import Dict
+from typing import List
+from typing import Optional
+from typing import Set
+from typing import Tuple
+from typing import TypeAlias
 
-from snoop import pp, snoop
+from snoop import pp
+from snoop import snoop
 
 from cscopy import CSCopy
-from de import DE, FSe
-from edge import Edge, addArc, addDep
-from gitclasses import GitIndex, GitRemote, GitRepo, GitWT
-from gitops import GitAdd, GitCommit, GitPush
+from de import DE
+from de import FSe
+from edge import Edge
+from edge import addArc
+from edge import addDep
+from gitclasses import GitIndex
+from gitclasses import GitRemote
+from gitclasses import GitRepo
+from gitclasses import GitWT
+from gitops import GitAdd
+from gitops import GitCommit
+from gitops import GitPush
 from ldsv import load_all
 from localcopy import LocalCopy
 from mkzip import Mkzip
 from opbase import OpBase
-from sd import CS, SD, Ext3, Fat32
+from sd import CS
+from sd import SD
+from sd import Ext3
+from sd import Fat32
 
 quit_ev = Event()
 
