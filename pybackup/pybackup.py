@@ -153,6 +153,11 @@ def main():
 
 def pmain():
     import yappi
+    try:
+        Path('pybackup.pstats').unlink()
+        Path('pybackup.svg').unlink()
+    except FileNotFoundError:
+        pass
     yappi.start()
     main()
     func_stats = yappi.get_func_stats()
