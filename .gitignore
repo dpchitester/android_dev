@@ -13,9 +13,11 @@
 *.out
 *.pl.rf
 *.png
+*.pstats
 *.pyc
 *.rej
 *.sass-cache
+*.svg
 *.swo
 *.swp
 *.tf
