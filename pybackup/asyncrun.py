@@ -4,8 +4,8 @@ import subprocess
 import sys
 from threading import Lock
 
-from snoop import pp
-from snoop import snoop
+#from snoop import pp
+#from snoop import snoop
 
 from csubproc import ContinuousSubprocess
 from csubproc import Qi1

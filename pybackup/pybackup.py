@@ -13,8 +13,8 @@ from asyncinotify import Event as WEvent
 from asyncinotify import Inotify
 from asyncinotify import Mask
 from asyncinotify import Watch
-from snoop import pp
-from snoop import snoop
+#from snoop import pp
+#from snoop import snoop
 
 import config as v
 import ldsv as ls

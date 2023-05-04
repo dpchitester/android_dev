@@ -11,8 +11,8 @@ from typing import Set
 from typing import Tuple
 from typing import TypeAlias
 
-from snoop import pp
-from snoop import snoop
+#from snoop import pp
+#from snoop import snoop
 
 from cscopy import CSCopy
 from de import DE
