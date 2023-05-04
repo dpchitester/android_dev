@@ -155,7 +155,7 @@ def pmain():
     import yappi
     try:
         Path('pybackup.pstats').unlink()
-        Path('pybackup.svg').unlink()
+        Path('pybackup.png').unlink()
     except FileNotFoundError:
         pass
     yappi.start()
@@ -166,4 +166,4 @@ def pmain():
     yappi.clear_stats()
 
 if __name__ == "__main__":
-    pmain()
+    main()
