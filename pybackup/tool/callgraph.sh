@@ -1,6 +1,6 @@
 rm pybackup.svg
 python -m pybackup
-gprof2dot -Kneato -z pybackup:129:main -f pstats -o pybackup.gv pybackup.pstats
+gprof2dot -z pybackup:129:main -f pstats -o pybackup.gv pybackup.pstats
 rm pybackup.pstats
-dot -Tsvg -o pybackup.svg pybackup.gv
+dot -Tsvg -Kneato -o pybackup.svg pybackup.gv
 rm pybackup.gv
