@@ -156,7 +156,7 @@ def pmain():
     yappi.start()
     main()
     func_stats = yappi.get_func_stats()
-    func_stats.save('pybackup.cg', 'CALLGRIND')
+    func_stats.save('pybackup.pstats', 'PSTATS')
     yappi.stop()
     yappi.clear_stats()
 
