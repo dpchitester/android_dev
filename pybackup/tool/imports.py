@@ -1,13 +1,23 @@
-import pathlib
-from import_deps import ModuleSet
+from modulefinder import ModuleFinder
 
-# First initialise a ModuleSet instance with a list str of modules to track
-pkg_paths = pathlib.Path('/sdcard/projects/pybackup').glob('pybackup.py')
-module_set = ModuleSet([str(p) for p in pkg_paths])
+finder = ModuleFinder()
+finder.run_script("pybackup.py")
 
-# then you can get the set of imports
-for imported in module_set.mod_imports('pybackup.pybackup'):
-    print(imported)
+moduleslist = {}
+for name, mod in finder.modules.iteritems():
+    filename = mod.__file__
+    if filename is None:
+        continue
+    if '__' in name:
+        continue
+    #if "python" in filename.lower():
+    #    continue
+    moduleslist[name.split(".")[0]] = True
+    #print '%s: %s' % (name, filename)
+    #print ','.join(mod.globalnames.keys()[:3])
 
-# foo.foo_c
-# foo.foo_b
+print( 'Loaded modules:')
+for name, dummy in moduleslist.iteritems():
+    print(name)
+
+#input("Press Enter to continue...")

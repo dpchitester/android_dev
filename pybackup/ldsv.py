@@ -6,7 +6,7 @@ from threading import RLock
 from threading import Thread
 from time import sleep
 
-#from snoop import snoop
+# from snoop import snoop
 
 dl = RLock()
 sev = SimpleQueue()
