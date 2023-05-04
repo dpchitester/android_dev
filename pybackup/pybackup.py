@@ -166,4 +166,4 @@ def pmain():
     yappi.clear_stats()
 
 if __name__ == "__main__":
-    main()
+    pmain()
