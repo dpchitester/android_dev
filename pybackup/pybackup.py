@@ -156,7 +156,7 @@ def pmain():
     yappi.start()
     main()
     func_stats = yappi.get_func_stats()
-    func_stats.save('pybackup.pstats', 'pstats')
+    func_stats.save('pybackup.pstats', 'pstat')
     yappi.stop()
     yappi.clear_stats()
 
