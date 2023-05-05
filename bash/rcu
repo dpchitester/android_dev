@@ -1,8 +1,8 @@
-export sp=$(realpath .)
-echo ${sp}
-export rp=$(echo ${sp} | sed 's/^\/storage\/emulated\/0//')
-echo ${rp}
-export tp="GoogleDrive:${rp}"
-echo ${tp}
-export cmd="rclone sync \"${sp}\" \"${tp}\" --exclude \"__pycache__/\" --exclude \"node_modules/\" --exclude \".git/\" --progress -v --use-json-log"
-echo ${cmd}
+export sp1=$(realpath .)
+echo ${sp1}
+export rp1=$(echo ${sp1} | sed 's/^\/storage\/emulated\/0//')
+echo ${rp1}
+export tp1="GoogleDrive:${rp1}"
+echo ${tp1}
+export cmd1="rclone sync \"${sp1}\" \"${tp1}\" --exclude \"__pycache__/\" --exclude \"node_modules/\" --exclude \".git/\" --progress -v --use-json-log"
+echo ${cmd1}
