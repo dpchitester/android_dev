@@ -1,0 +1,2 @@
+tp="GoogleDrive:/$(realpath . | sed 's/\/storage\/emulated\/0\///')"
+rclone sync . $tp --exclude "__pycache__/" --exclude "node_modules/" --exclude ".git/"
