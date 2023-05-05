@@ -1,6 +1,6 @@
 export sp=$(realpath .)
 echo ${sp}
-export rp=$(echo ${sp} | sed 's/\/storage\/emulated\/0\///')
+export rp=$(echo ${sp} | sed 's/^\/storage\/emulated\/0\///')
 echo ${rp}
 export tp="GoogleDrive:/${rp}"
 echo ${tp}
