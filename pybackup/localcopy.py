@@ -1,6 +1,8 @@
 from hashlib import sha256
 from os import makedirs
 
+from snoop import snoop, pp
+
 import asyncrun as ar
 import config as v
 from edge import Edge
@@ -123,7 +125,7 @@ class LocalCopy(OpBase):
 
     def ischanged(self, e: Edge):
         return e.chk_ct()
-
+    @snoop
     def __call__(self):
         di, si = self.npl1
         e: Edge = findEdge(di, si)
