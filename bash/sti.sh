@@ -32,8 +32,8 @@ pushd /sdcard/projects/bash
     a=()
     mapfile -t a <<<"$pl"
     for i in "${a[@]:1}"; do
-        echo "# pip install ${i%%/*}" >>$f1
-        echo "# pip uninstall ${i%%/*}" >>$f2
+        echo "# pip install ${i%% *}" >>$f1
+        echo "# pip uninstall ${i%% *}" >>$f2
     done
 popd
 
