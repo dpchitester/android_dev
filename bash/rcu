@@ -1,2 +1,6 @@
-tp="GoogleDrive:/$(realpath . | sed 's/\/storage\/emulated\/0\///')"
-rclone sync . $tp --exclude "__pycache__/" --exclude "node_modules/" --exclude ".git/" --progress -v --use-json-log
+sp=$(realpath .)
+tp="GoogleDrive:/$($sp | sed 's/\/storage\/emulated\/0\///')"
+cmd="rclone sync $sp $tp --exclude "__pycache__/" --exclude "node_modules/" --exclude ".git/" --progress -v --use-json-log"
+echo $sp
+echo $tp
+echo $cmd
