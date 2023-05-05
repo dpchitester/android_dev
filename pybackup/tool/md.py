@@ -4,13 +4,14 @@ from pprint import pprint
 
 from module_dependencies import Source
 
-fn = sys.argv[1]
-# This creates a Source instance for this file itself
-src = Source(fn)
 
-print(f"Module imports for '{fn}'")
+# This creates a Source instance for this file itself
+src = Source.from_file('pybackup.py')
+
+print(f"Module imports")
 pprint(src.imports())
 print()
 
-print(f"Module dependencies for '{fn}'")
+print(f"Module dependencies")
 pprint(src.dependencies())
+    
