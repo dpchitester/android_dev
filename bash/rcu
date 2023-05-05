@@ -1,6 +1,8 @@
 export sp=$(realpath .)
 echo ${sp}
-export tp="GoogleDrive:/$(echo $sp | sed 's/\/storage\/emulated\/0\///')"
+export rp=$(echo ${sp} | sed 's/\/storage\/emulated\/0\///')
+echo ${rp}
+export tp="GoogleDrive:/${rp}"
 echo ${tp}
 export cmd="rclone sync \"${sp}\" \"${tp}\" --exclude \"__pycache__/\" --exclude \"node_modules/\" --exclude \".git/\" --progress -v --use-json-log"
 echo ${cmd}
