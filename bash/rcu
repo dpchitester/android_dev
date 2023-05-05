@@ -4,6 +4,6 @@ export rp1=$(echo ${sp1} | sed 's/^\/storage\/emulated\/0//')
 echo ${rp1}
 export tp1=GoogleDrive:${rp1}
 echo ${tp1}
-export cmd1="rclone sync '${sp1}' '${tp1}' --exclude '__pycache__/' --exclude 'node_modules/' --exclude '.git/' --progress -v --use-json-log"
+export cmd1="rclone sync ${sp1} ${tp1} --exclude '__pycache__/' --exclude 'node_modules/' --exclude '.git/' --progress -v --use-json-log"
 echo ${cmd1}
 ${cmd1}
