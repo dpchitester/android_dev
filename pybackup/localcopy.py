@@ -147,11 +147,9 @@ class LocalCopy(OpBase):
                     rf = fsf.relative_to(sp)
                     fdf = tp / rf
                     try:
-                        if not tp.exists():
-                            rv = makedirs(tp, exist_ok=True)
-                            if rv:
-                                self.sfc.fc += 1
-                        if tp.exists():
+                        if not fdf.parent.exists():
+                            fdf.parent.mkdir(parents=True, exist_ok=True)
+                        if fdf.parent.exists():
                             fdiff = FileDiff(fsf, fdf)
                             if fdiff.should_copy():
                                 rv = copy2(di, si, fsf, fdf, self.sfc)
@@ -159,9 +157,7 @@ class LocalCopy(OpBase):
                                     print(" ...copied.")
                                     self.sfc.sc += 1
                                     if "exec" in self.opts:
-                                        rv = fdf.chmod(496)
-                                        if rv:
-                                            self.sfc.fc += 1
+                                        fdf.chmod(496)
                                     updateDEs(tp, [str(rf)])
                     except IOError as exc:
                         print(exc)
