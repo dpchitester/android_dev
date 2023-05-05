@@ -1,6 +1,6 @@
 sp=$(realpath .)
 tp="GoogleDrive:/$(echo $sp | sed 's/\/storage\/emulated\/0\///')"
-cmd=rclone sync $sp $tp --exclude \"__pycache__/\" --exclude \"node_modules/\" --exclude \".git/\" --progress -v --use-json-log
+cmd='rclone sync $sp $tp --exclude \"__pycache__/\" --exclude \"node_modules/\" --exclude \".git/\" --progress -v --use-json-log'
 echo $sp
 echo $tp
 echo $cmd
