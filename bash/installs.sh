@@ -98,8 +98,8 @@
 # pkg install zlib
 # pkg install zstd
 # pip install ------------ -------
-# pip install asyncinotify 4.0.1
+ pip install asyncinotify 4.0.1
 # pip install pip          23.1.1
-# pip install setuptools   67.7.2
-# pip install tarjan       0.2.4
-# pip install xxhash       3.2.0
+ pip install setuptools   67.7.2
+ pip install tarjan       0.2.4
+ pip install xxhash       3.2.0
