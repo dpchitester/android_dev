@@ -1,22 +1,17 @@
 from time import time
+from dataclasses import dataclass, field
 
 import ldsv as ls
 
-
+@dataclass(order=True, unsafe_hash=True)
 class Edge:
-    def __init__(self, di, si):
-        self.di = di
-        self.si = si
-        self.cdt = time()
-        self.udt = self.cdt - 10
-        self.rcdt = time()
-        self.rudt = self.rcdt - 10
+    di: str = field(compare=True, hash=True)
+    si: str = field(compare=True, hash=True)
+    cdt: float = field(default=time(), init=False, repr=True, hash=False, compare=False)
+    udt: float = field(default=time()-10, init=False, repr=True, hash=False, compare=False)
+    rcdt: float = field(default=time(), init=False, repr=True, hash=False, compare=False)
+    rudt: float = field(default=time()-10, init=False, repr=True, hash=False, compare=False)
 
-    def __hash__(self):
-        return hash((self.di, self.si))
-
-    def __eq__(self, other):
-        return (self.di, self.si) == (other.di, other.si)
 
     def chk_ct(self):
         return self.cdt > self.udt
