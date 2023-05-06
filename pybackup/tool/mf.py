@@ -8,16 +8,17 @@ for name, mod in finder.modules.items():
     filename = mod.__file__
     if filename is None:
         continue
-    if "__" in name:
+    if "__" in filename:
+        continue
+    if 'python3.11' in filename:
         continue
     # if "python" in filename.lower():
     #    continue
-    moduleslist[name.split(".")[0]] = True
+    moduleslist[name] = mod
     # print '%s: %s' % (name, filename)
     # print ','.join(mod.globalnames.keys()[:3])
 
 print("Loaded modules:")
-for name, dummy in sorted(moduleslist.items()):
+for name, val in sorted(moduleslist.items()):
     print(name)
 
-input("Press Enter to continue...")
