@@ -1,9 +1,20 @@
 import config as v
-from status import changed_ops
 from status import updatets
 from toposort import topological_sort
+from opbase import OpBase
+from edge import findEdge
 
 _pass = 1
+
+def changed_ops(T=None) -> list[OpBase]:
+    rv: list[OpBase] = []
+    for Op in v.opdep:
+        di, si = Op.npl1
+        if T is None or T == di:
+            e: Edge = findEdge(di, si)
+            if Op.ischanged(e):
+                rv.append(Op)
+    return rv
 
 
 def incp():

@@ -1,19 +1,6 @@
 import config as v
 import ldsv as ls
 from edge import Edge
-from edge import findEdge
-from opbase import OpBase
-
-
-def changed_ops(T=None) -> list[OpBase]:
-    rv: list[OpBase] = []
-    for Op in v.opdep:
-        di, si = Op.npl1
-        if T is None or T == di:
-            e: Edge = findEdge(di, si)
-            if Op.ischanged(e):
-                rv.append(Op)
-    return rv
 
 
 def stsupdate(Si, Dh):
@@ -59,6 +46,3 @@ def updatets(N):
         print()
 
 
-if __name__ == "__main__":
-    updatets(1)
-    print(changed_ops())
