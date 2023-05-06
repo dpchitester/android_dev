@@ -5,13 +5,10 @@ from stdlib_list import stdlib_list
 import graphviz
 from findimports import ModuleGraph
 
+
 def graphpack(
-        path,
-        package_name,
-        ignore_packages=None,
-        ignore_modules=None,
-        color_rules= None
-    ):
+    path, package_name, ignore_packages=None, ignore_modules=None, color_rules=None
+):
     """Plot a graph from the imports of your package
 
     Args:
@@ -25,28 +22,26 @@ def graphpack(
 
     Returns:
         writes down a {package_name}.svg image.
-        """
+    """
 
     if ignore_modules is None:
-        ignore_modules=[]
+        ignore_modules = []
     if ignore_packages is None:
-        ignore_modules=[]
-
+        ignore_modules = []
 
     modgraph = ModuleGraph()
     modgraph.external_dependencies = True
-    modgraph.parsePathname(path+"/"+package_name+'.py')
-    #modgraph.printImports()
+    modgraph.parsePathname(path + "/" + package_name + ".py")
+    # modgraph.printImports()
 
-    _del_modules(modgraph,ignore_modules)
+    _del_modules(modgraph, ignore_modules)
     _del_inits(modgraph)
     internal_modules = set(module.label for module in modgraph.listModules())
-    _del_external_packages(modgraph,internal_modules,ignore_packages)
-    _create_graph(modgraph, internal_modules, package_name+'.dot', color_rules)
+    _del_external_packages(modgraph, internal_modules, ignore_packages)
+    _create_graph(modgraph, internal_modules, package_name + ".dot", color_rules)
 
 
-
-def _del_modules(modgraph,ignore_modules):
+def _del_modules(modgraph, ignore_modules):
     """Remove the ingorme module list"""
 
     to_delete = []
@@ -65,19 +60,20 @@ def _del_inits(modgraph):
 
     for module in modgraph.listModules():
         # Simplify labes of a module  if __init__ in inside
-        if module.label.split('.')[-1] == '__init__':
-            module.label = '.'.join(module.label.split('.')[:-1])
+        if module.label.split(".")[-1] == "__init__":
+            module.label = ".".join(module.label.split(".")[:-1])
 
         # enleve les imports de ce module termines par INIT et les remplace par le nom au dessus
         for import_ in module.imports.copy():
-            if import_.split('.')[-1] == '__init__':
+            if import_.split(".")[-1] == "__init__":
                 module.imports.remove(import_)
-                module.imports.add('.'.join(import_.split('.')[:-1]))
+                module.imports.add(".".join(import_.split(".")[:-1]))
+
 
 def _del_external_packages(modgraph, internal_modules, ignore_packages):
     """Remove stdlib packages and user defined ignore-packages list"""
 
-    stdlib = set(stdlib_list('3.9'))
+    stdlib = set(stdlib_list("3.9"))
     for module in modgraph.listModules():
         for import_ in module.imports.copy():
             # do not accept standard library
@@ -86,12 +82,13 @@ def _del_external_packages(modgraph, internal_modules, ignore_packages):
             # simplify external dependencies
             elif import_ not in internal_modules:
                 module.imports.remove(import_)
-                import_ = import_.split('.')[0]
+                import_ = import_.split(".")[0]
 
                 if import_ not in ignore_packages:
                     module.imports.add(import_)
 
-def _create_graph(modgraph, internal_modules,filename, color_rules):
+
+def _create_graph(modgraph, internal_modules, filename, color_rules):
     """Create the graph with  graphiz"""
     node_names = set()
     for module in modgraph.listModules():
@@ -101,34 +98,30 @@ def _create_graph(modgraph, internal_modules,filename, color_rules):
     if color_rules is None:
         color_rules = {}
 
-
     dot = graphviz.Digraph(filename, engine="dot")
     # create nodes
     for name in node_names:
-        style = "" if name in internal_modules else 'dashed'
-        color="black"
-        for key in  color_rules:
+        style = "" if name in internal_modules else "dashed"
+        color = "black"
+        for key in color_rules:
             if key in name:
-                style="filled"
+                style = "filled"
                 color = color_rules[key]
-        dot.node(name, style=style, color=color , shape='record')
+        dot.node(name, style=style, color=color, shape="record")
     # add edges
     for module in modgraph.listModules():
         for import_ in module.imports:
             dot.edge(module.label, import_)
 
-    dot.render(filename, format='svg')
+    dot.render(filename, format="svg")
+
 
 graphpack(
     path="/sdcard/projects/pybackup",
     package_name="pybackup",
-    ignore_packages = [
-        
-    ],
-    ignore_modules = [
-        
-    ],
-    color_rules= {
+    ignore_packages=[],
+    ignore_modules=[],
+    color_rules={
         "avbtp": "purple",
         "tavbp": "blue",
         "avtp": "red",
@@ -136,5 +129,5 @@ graphpack(
         "tools": "green",
         "postproc": "green",
         "mesh2curve": "green",
-    }
+    },
 )

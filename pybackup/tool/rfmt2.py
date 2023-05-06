@@ -2,8 +2,8 @@
 from glob import glob
 from sys import exit
 
-#from funcs import srun
-#from gb_env import pdir
+# from funcs import srun
+# from gb_env import pdir
 from pygments import highlight
 from pygments.formatters import HtmlFormatter
 from pygments.lexers import PythonLexer

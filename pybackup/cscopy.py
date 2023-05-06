@@ -325,8 +325,8 @@ class CSCopy(OpBase):
                 print("raw", len(bv.f2d), "todelete", len(bv.f2c), "tocopy")
                 bv.skip_matching()
                 print("skip", len(bv.f2d), "todelete", len(bv.f2c), "tocopy")
-            #if bv.sfc.fc == 0:
-                #bv.do_touching()
+            # if bv.sfc.fc == 0:
+            # bv.do_touching()
             if bv.sfc.fc == 0:
                 bv.do_copying()
             if bv.sfc.fc == 0:
@@ -340,9 +340,9 @@ class CSCopy(OpBase):
         if self.sfc.sc > 0:
             if di in v.srcs:
                 onestatus(di)
-        #print(len(opmsg), "opmsgs", len(statmsg), "statmsgs")
-        #print("opmsg:", colored(0, 255, 0, opmsg))
-        #print("statmsg:", colored(0, 0, 255, statmsg))
+        # print(len(opmsg), "opmsgs", len(statmsg), "statmsgs")
+        # print("opmsg:", colored(0, 255, 0, opmsg))
+        # print("statmsg:", colored(0, 0, 255, statmsg))
         opmsg.clear()
         statmsg.clear()
         return self.sfc.value()

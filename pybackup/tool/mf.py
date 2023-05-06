@@ -13,4 +13,3 @@ for name, mod in finder.modules.items():
 print("Loaded modules:")
 for name, val in sorted(moduleslist.items()):
     print(name)
-

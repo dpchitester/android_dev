@@ -3,8 +3,6 @@ from status import changed_ops
 from status import updatets
 from toposort import topological_sort
 
-from snoop import snoop, pp
-
 _pass = 1
 
 
@@ -37,7 +35,7 @@ def istgt(T, dep2=None):
             return True
     return False
 
-@snoop
+
 def nts():
     print("-nts")
     p1 = topological_sort(v.eDep)

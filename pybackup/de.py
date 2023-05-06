@@ -3,12 +3,12 @@ from pathlib import Path
 
 
 @dataclass(order=True, unsafe_hash=True)
-class FSe():
+class FSe:
     sz: int
     mt: float
 
+
 @dataclass(order=True, unsafe_hash=True)
-class DE():
+class DE:
     nm: Path
     i: FSe
-

@@ -120,8 +120,10 @@ class LocalCopy(OpBase):
 
     def __init__(self, npl1, npl2, opts={}):
         super(LocalCopy, self).__init__(npl1, npl2, opts)
+
     def ischanged(self, e: Edge):
         return e.chk_ct()
+
     def __call__(self):
         di, si = self.npl1
         e: Edge = findEdge(di, si)
