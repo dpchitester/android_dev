@@ -81,9 +81,17 @@ def loadedges():
     with dl:
         try:
             with open(v.edgepf, "rb") as fh:
-                v.eDep = pickle.load(fh)
+                leDep = pickle.load(fh)
         except IOError as e:
             print("loadedges failed", e)
+            return
+        for e in v.eDep:
+            for le in leDep:
+                if le == e:
+                    e.cdt = le.cdt
+                    e.udt = le.udt
+                    e.rcdt = le.rcdt
+                    e.rudt = le.rudt
 
 
 def saveedges():
