@@ -325,8 +325,8 @@ class CSCopy(OpBase):
                 print("raw", len(bv.f2d), "todelete", len(bv.f2c), "tocopy")
                 bv.skip_matching()
                 print("skip", len(bv.f2d), "todelete", len(bv.f2c), "tocopy")
-            if bv.sfc.fc == 0:
-                bv.do_touching()
+            #if bv.sfc.fc == 0:
+                #bv.do_touching()
             if bv.sfc.fc == 0:
                 bv.do_copying()
             if bv.sfc.fc == 0:
