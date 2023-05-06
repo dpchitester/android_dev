@@ -164,7 +164,7 @@ def pmain():
     import yappi
 
     try:
-        Path("pybackup.pstat").unlink()
+        Path("pybackup.txt").unlink()
     except FileNotFoundError:
         pass
     yappi.start()
@@ -172,10 +172,11 @@ def pmain():
     yappi.stop()
     func_stats = yappi.get_func_stats()
     func_stats = func_stats.sort('tsub','desc')
+    func_stats = func_stats.strip_paths()
     thread_stats = yappi.get_thread_stats()
     with open('pybackup.txt', 'w') as fh:
-        func_stats.print_all(fh)
-        thread_stats.print_all(fh)
+        func_stats.debug_print(fh)
+        thread_stats.debug_print(fh)
     
     yappi.clear_stats()
 
