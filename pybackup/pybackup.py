@@ -169,9 +169,14 @@ def pmain():
         pass
     yappi.start()
     main()
-    func_stats = yappi.get_func_stats()
-    func_stats.save("pybackup.pstat", "pstat")
     yappi.stop()
+    func_stats = yappi.get_func_stats()
+    func_stats = func_stats.sort('tsub','desc')
+    thread_stats = yappi.get_thread_stats()
+    with open('pybackup.txt', 'w') as fh:
+        func_stats.print_all(fh)
+        thread_stats.print_all(fh)
+    
     yappi.clear_stats()
 
 
