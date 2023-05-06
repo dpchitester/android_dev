@@ -29,10 +29,19 @@ def loadldlls():
         try:
             with open(v.ldllsf, "rb") as fh:
                 td = pickle.load(fh)
-                v.LDlls = td["ldlls"]
-                v.LDlls_xt = td["ldlls_xt"]
+                LDlls = td["ldlls"]
+                LDlls_xt = td["ldlls_xt"]
         except IOError as e:
             print("loadldlls failed", e)
+            return
+        for si in v.srcs:
+            if si in LDlls:
+                v.LDlls[si] = LDlls[si]
+                v.LDlls_xt[si] = LDlls_xt[si]
+        for di in v.tgts:
+            if di in LDlls:
+                v.LDlls[di] = LDlls[di]
+                v.LDlls_xt[di] = LDlls_xt[di]
 
 
 def loadrdlls():
@@ -42,11 +51,19 @@ def loadrdlls():
         try:
             with open(v.rdllsf, "rb") as fh:
                 td = pickle.load(fh)
-                v.RDlls = td["rdlls"]
-                v.RDlls_xt = td["rdlls_xt"]
+                RDlls = td["rdlls"]
+                RDlls_xt = td["rdlls_xt"]
         except IOError as e:
             print("loadrdlls failed", e)
-
+            return
+        for si in v.srcs:
+            if si in RDlls:
+                v.RDlls[si] = RDlls[si]
+                v.RDlls_xt[si] = RDlls_xt[si]
+        for di in v.tgts:
+            if di in RDlls:
+                v.RDlls[di] = RDlls[di]
+                v.RDlls_xt[di] = RDlls_xt[di]
 
 def saveldlls():
     import config as v
