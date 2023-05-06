@@ -17,7 +17,7 @@ for name, mod in finder.modules.items():
     # print ','.join(mod.globalnames.keys()[:3])
 
 print("Loaded modules:")
-for name, dummy in moduleslist.items():
+for name, dummy in sorted(moduleslist.items()):
     print(name)
 
 input("Press Enter to continue...")

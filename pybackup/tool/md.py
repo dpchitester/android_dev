@@ -6,7 +6,7 @@ from module_dependencies import Source
 
 
 # This creates a Source instance for this file itself
-src = Source.from_file('pybackup.py')
+src = Source.from_file('ldsv.py')
 
 print(f"Module imports")
 pprint(src.imports())
