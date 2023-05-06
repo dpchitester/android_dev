@@ -340,7 +340,9 @@ class CSCopy(OpBase):
         if self.sfc.sc > 0:
             if di in v.srcs:
                 onestatus(di)
-        print(len(opmsg), "opmsgs", len(statmsg), "statmsgs")
-        print("opmsg:", colored(0, 255, 0, opmsg))
-        print("statmsg:", colored(0, 0, 255, statmsg))
+        #print(len(opmsg), "opmsgs", len(statmsg), "statmsgs")
+        #print("opmsg:", colored(0, 255, 0, opmsg))
+        #print("statmsg:", colored(0, 0, 255, statmsg))
+        opmsg.clear()
+        statmsg.clear()
         return self.sfc.value()
