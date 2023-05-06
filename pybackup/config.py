@@ -398,7 +398,7 @@ def initConfig():
     # addArc(op1)
 
     for cs in ("gd","db","od"):
-        for si in ("proj", "vids", "zips", *codes):
+        for si in ("vids", "zips", *codes):
             p1 = src(si).relative_to(ppre("sd"))
             addTgtDir(cs + "_" + si, ppre(cs) / p1)
             npl1 = (cs + "_" + si, si)
