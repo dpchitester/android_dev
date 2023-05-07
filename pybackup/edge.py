@@ -4,7 +4,7 @@ from dataclasses import dataclass, field
 import ldsv as ls
 
 
-@dataclass(order=True, unsafe_hash=True)
+@dataclass(order=True)
 class Edge:
     di: str = field(compare=True, hash=True)
     si: str = field(compare=True, hash=True)
@@ -21,6 +21,9 @@ class Edge:
 
     def __eq__(self, other):
         return self.si == other.si and self.di == other.di
+
+    def __hash__(self):
+        return hash((self.si, self.di))
 
     def chk_ct(self):
         return self.cdt > self.udt
