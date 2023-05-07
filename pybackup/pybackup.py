@@ -175,8 +175,8 @@ def pmain():
     func_stats = func_stats.strip_dirs()
     thread_stats = yappi.get_thread_stats()
     with open('pybackup.txt', 'w') as fh:
-        func_stats.debug_print(fh)
-        thread_stats.debug_print(fh)
+        func_stats.debug_print()
+        thread_stats.debug_print()
     
     yappi.clear_stats()
 
