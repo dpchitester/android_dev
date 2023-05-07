@@ -170,7 +170,7 @@ def pmain():
     main()
     yappi.stop()
     func_stats = yappi.get_func_stats()
-    func_stats = func_stats.sort("tsub", "desc")
+    func_stats = func_stats.sort("ttot", "desc")
     func_stats = func_stats.strip_dirs()
     thread_stats = yappi.get_thread_stats()
     with open(gobn + ".prof", "w") as fh:
