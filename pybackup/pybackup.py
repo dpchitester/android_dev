@@ -180,16 +180,14 @@ def pmain():
     yappi.clear_stats()
     cmd = "python -m gprof2dot -n2 -e5 -f pstats -o pybackup.dot pybackup.pstat"
     ar.run1(cmd)
-    cmd = "dot -Tsvg -o pybackup.svg pybackup.dot"
+    cmd = "dot -Tsvg -Kfdp -o pybackup.svg pybackup.dot"
     ar.run1(cmd)
 
 
 if __name__ == "__main__":
-    try:
-        Path("pybackup.txt").unlink()
-        Path("pybackup.pstat").unlink()
-        Path("pybackup.dot").unlink()
-        Path("pybackup.svg").unlink()
-    except FileNotFoundError:
-        pass
-    main()
+    for ex in ['.txt', '.pstat','.dot','.svg']:
+        try:
+            Path("pybackup"+ex).unlink()
+        except FileNotFoundError:
+            pass
+    pmain()
