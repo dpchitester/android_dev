@@ -180,7 +180,7 @@ def pmain():
 
     yappi.clear_stats()
 
-    cmd = "gprof2dot -n.05 -e1 -z filelist:81:LocalFileList.getdll -f pstats -o "+gobn+".gv "+gobn+".pstat"
+    cmd = "gprof2dot -n.05 -e1 -z pybackup:140:main -f pstats -o "+gobn+".gv "+gobn+".pstat"
     ar.run1(cmd)
     cmd = "dot -Tsvg -Kfdp -o "+gobn+".svg "+gobn+".gv"
     ar.run1(cmd)
