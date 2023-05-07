@@ -8,7 +8,8 @@ class FSe:
     mt: float
     def __hash__(self):
         return hash((self.sz,self.mt))
-
+    def __eq__(self, other):
+        return self.sz == other.sz and round(self.mt) == round(other.mt)
 
 @dataclass(order=True)
 class DE:
@@ -16,3 +17,5 @@ class DE:
     i: FSe
     def __hash__(self):
         return hash((self.nm,self.i.sz,self.i.mt))
+    def __eq__(self, other):
+        return self.nm == other.nm and self.i == other.i

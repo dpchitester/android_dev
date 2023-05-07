@@ -29,36 +29,36 @@ def graphpack(
     if ignore_packages is None:
         ignore_modules = []
 
-    modgraph = ModuleGraph()
-    modgraph.external_dependencies = True
-    modgraph.parsePathname(path + "/" + package_name + ".py")
-    # modgraph.printImports()
+    mg = ModuleGraph()
+    mg.external_dependencies = True
+    mg.parsePathname(path + "/" + package_name + ".py")
+    # mg.printImports()
 
-    _del_modules(modgraph, ignore_modules)
-    _del_inits(modgraph)
-    internal_modules = set(module.label for module in modgraph.listModules())
-    _del_external_packages(modgraph, internal_modules, ignore_packages)
-    _create_graph(modgraph, internal_modules, path + "/" + package_name + ".gv", color_rules)
+    _del_modules(mg, ignore_modules)
+    _del_inits(mg)
+    internal_modules = set(module.label for module in mg.listModules())
+    _del_external_packages(mg, internal_modules, ignore_packages)
+    _create_graph(mg, internal_modules, path + "/inspect/" + package_name + ".gv", color_rules)
 
 
-def _del_modules(modgraph, ignore_modules):
+def _del_modules(mg, ignore_modules):
     """Remove the ingnore module list"""
 
     to_delete = []
     for module_name in ignore_modules:
-        for act_module in modgraph.modules:
+        for act_module in mg.modules:
             if fnmatch.fnmatch(act_module, module_name):
                 to_delete.append(act_module)
 
     for del_mod in to_delete:
         print(f"skipping module: {del_mod}")
-        del modgraph.modules[del_mod]
+        del mg.modules[del_mod]
 
 
-def _del_inits(modgraph):
+def _del_inits(mg):
     """Remove the __inits__"""
 
-    for module in modgraph.listModules():
+    for module in mg.listModules():
         # Simplify labes of a module  if __init__ in inside
         if module.label.split(".")[-1] == "__init__":
             module.label = ".".join(module.label.split(".")[:-1])
@@ -70,11 +70,11 @@ def _del_inits(modgraph):
                 module.imports.add(".".join(import_.split(".")[:-1]))
 
 
-def _del_external_packages(modgraph, internal_modules, ignore_packages):
+def _del_external_packages(mg, internal_modules, ignore_packages):
     """Remove stdlib packages and user defined ignore-packages list"""
 
     stdlib = set(stdlib_list("3.9"))
-    for module in modgraph.listModules():
+    for module in mg.listModules():
         for import_ in module.imports.copy():
             # do not accept standard library
             if import_ in stdlib:
@@ -88,10 +88,10 @@ def _del_external_packages(modgraph, internal_modules, ignore_packages):
                     module.imports.add(import_)
 
 
-def _create_graph(modgraph, internal_modules, filename, color_rules):
+def _create_graph(mg, internal_modules, filename, color_rules):
     """Create the graph with  graphiz"""
     node_names = set()
-    for module in modgraph.listModules():
+    for module in mg.listModules():
         node_names.add(module.label)
         node_names |= module.imports
 
@@ -109,7 +109,7 @@ def _create_graph(modgraph, internal_modules, filename, color_rules):
                 color = color_rules[key]
         dot.node(name, style=style, color=color, shape="record")
     # add edges
-    for module in modgraph.listModules():
+    for module in mg.listModules():
         for import_ in module.imports:
             dot.edge(module.label, import_)
 
