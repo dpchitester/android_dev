@@ -24,7 +24,9 @@ for pf in p.glob('*.py'):
         if sink:
             graph.add_edge(source, sink)
 
-graph.write('temp.gv')
+gobn = "md2"
 
-cmd='dot -Tsvg -Kfdp -o temp.svg temp.gv'
+graph.write(gobn+'.gv')
+
+cmd='dot -Tsvg -Kfdp -o '+gobn+'.svg '+gobn+'.gv'
 ar.run1(cmd)
