@@ -274,7 +274,7 @@ async function lts() {
 }
 function maxdl_calc() {
     let cashd = dl(4, 28);
-    let dxd = dl(4, 3);
+    let dxd = dl(5, 3);
     maxdl.te.SetText(ncs(Math.max(cashd, dxd)));
     maxdl.num = ncs(Math.max(cashd, dxd));
 }
