@@ -124,6 +124,8 @@ class ContinuousSubprocess:
                     if q2.empty():
                         if process.poll() is not None:
                             break
+                        else:
+                            continue
                     else:
                         try:
                             item = q2.get(False)
