@@ -38,11 +38,11 @@ def graphpack(
     _del_inits(modgraph)
     internal_modules = set(module.label for module in modgraph.listModules())
     _del_external_packages(modgraph, internal_modules, ignore_packages)
-    _create_graph(modgraph, internal_modules, package_name + ".dot", color_rules)
+    _create_graph(modgraph, internal_modules, path + "/" + package_name + ".gv", color_rules)
 
 
 def _del_modules(modgraph, ignore_modules):
-    """Remove the ingorme module list"""
+    """Remove the ingnore module list"""
 
     to_delete = []
     for module_name in ignore_modules:

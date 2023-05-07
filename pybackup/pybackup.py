@@ -161,7 +161,7 @@ def main():
                     print("waiting for", th.name, "shutdown")
                     th.join()
 
-gobn = "callgraph"
+gobn = "inspect/callgraph"
 
 def pmain():
     import yappi
