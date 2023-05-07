@@ -161,6 +161,7 @@ def main():
                     print("waiting for", th.name, "shutdown")
                     th.join()
 
+gobn = "callgraph"
 
 def pmain():
     import yappi
@@ -172,23 +173,23 @@ def pmain():
     func_stats = func_stats.sort("tsub", "desc")
     func_stats = func_stats.strip_dirs()
     thread_stats = yappi.get_thread_stats()
-    with open("temp.prof", "w") as fh:
+    with open(gobn + ".prof", "w") as fh:
         func_stats.print_all(fh)
         thread_stats.print_all(fh)
-    func_stats.save("temp.pstat", type="pstat")
+    func_stats.save(gobn + ".pstat", type="pstat")
 
     yappi.clear_stats()
 
-    cmd = "gprof2dot -n.05 -e1 -z pybackup:140:main -f pstats -o temp.gv temp.pstat"
+    cmd = "gprof2dot -n.05 -e1 -z pybackup:140:main -f pstats -o "+gobn+".gv "+gobn+".pstat"
     ar.run1(cmd)
-    cmd = "dot -Tsvg -Kfdp -o temp.svg temp.gv"
+    cmd = "dot -Tsvg -Kfdp -o "+gobn+".svg "+gobn+".gv"
     ar.run1(cmd)
 
 
 if __name__ == "__main__":
     for ex in ['.prof', '.pstat','.gv','.svg']:
         try:
-            Path("temp"+ex).unlink()
+            Path(gobn+ex).unlink()
         except FileNotFoundError:
             pass
     pmain()
