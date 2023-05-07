@@ -133,6 +133,7 @@ class ContinuousSubprocess:
                             item = q2.get(False)
                             dq.append(item)
                             yield Qi2(item)
+                            continue
                         except Empty:
                             pass
                 else:
@@ -140,10 +141,9 @@ class ContinuousSubprocess:
                         item = q1.get(False)
                         dq.append(item)
                         yield Qi1(item)
+                        continue
                     except Empty:
                         pass
-                if process.poll() is not None:
-                    break
 
             # Close streams.
             process.stdout.close()
