@@ -190,4 +190,4 @@ if __name__ == "__main__":
             Path("pybackup"+ex).unlink()
         except FileNotFoundError:
             pass
-    pmain()
+    main()
