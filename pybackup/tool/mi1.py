@@ -1,16 +1,15 @@
 from pathlib import Path
 
-import pygraphviz
-
 import asyncrun as ar
+import pygraphviz
 
 graph = pygraphviz.AGraph(strict=False, directed=True)
 
 p = Path.cwd()
 
-for pf in p.glob('*.py'):
+for pf in p.glob("*.py"):
     source = pf.stem
-    cmd=f'python -m import_deps {p / pf}'
+    cmd = f"python -m import_deps {p / pf}"
     print(cmd)
     ar.run1(cmd)
     deps = ar.txt.splitlines()
@@ -21,8 +20,8 @@ for pf in p.glob('*.py'):
         if sink:
             graph.add_edge(source, sink)
 
-gobn = "md1"
+gobn = "inspect/mi1"
 
-graph.write(gobn+'.dot')
-cmd='dot -Tsvg -Kfdp -o '+gobn+'.svg '+gobn+'.dot'
+graph.write(gobn + ".gv")
+cmd = "dot -Tsvg -Kfdp -o " + gobn + ".svg " + gobn + ".gv"
 ar.run1(cmd)

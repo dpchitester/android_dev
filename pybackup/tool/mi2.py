@@ -1,11 +1,9 @@
 from pathlib import Path
 from pprint import pprint
 
-import module_dependencies as md
+import asyncrun as ar
 import pygraphviz
 from module_dependencies import Source
-
-import asyncrun as ar
 
 # This creates a Source instance for this file itself
 
@@ -13,7 +11,7 @@ graph = pygraphviz.AGraph(strict=False, directed=True)
 
 p = Path.cwd()
 
-for pf in p.glob('*.py'):
+for pf in p.glob("*.py"):
     src = Source.from_file(pf.name)
     source = pf.stem
     deps = src.imports()
@@ -24,9 +22,9 @@ for pf in p.glob('*.py'):
         if sink:
             graph.add_edge(source, sink)
 
-gobn = "md2"
+gobn = "inspect/mi2"
 
-graph.write(gobn+'.gv')
+graph.write(gobn + ".gv")
 
-cmd='dot -Tsvg -Kfdp -o '+gobn+'.svg '+gobn+'.gv'
+cmd = "dot -Tsvg -Kfdp -o " + gobn + ".svg " + gobn + ".gv"
 ar.run1(cmd)

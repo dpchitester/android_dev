@@ -7,9 +7,9 @@ moduleslist = {}
 for name, mod in finder.modules.items():
     filename = mod.__file__
     moduleslist[name] = mod
-    # print '%s: %s' % (name, filename)
-    # print ','.join(mod.globalnames.keys()[:3])
+    print("%s: %s" % (name, filename))
+    print(",".join(mod.globalnames.keys()))
 
 print("Loaded modules:")
 for name, val in sorted(moduleslist.items()):
-    print(name)
+    print(name, val)
