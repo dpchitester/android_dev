@@ -6,6 +6,7 @@ from edge import findEdge
 
 _pass = 1
 
+
 def changed_ops(T=None) -> list[OpBase]:
     rv: list[OpBase] = []
     for Op in v.opdep:

@@ -165,6 +165,26 @@ def main():
 def pmain():
     import yappi
 
+    yappi.start()
+    main()
+    yappi.stop()
+    func_stats = yappi.get_func_stats()
+    func_stats = func_stats.sort("tsub", "desc")
+    func_stats = func_stats.strip_dirs()
+    thread_stats = yappi.get_thread_stats()
+    with open("pybackup.txt", "w") as fh:
+        func_stats.print_all(fh)
+        thread_stats.print_all(fh)
+    func_stats.save("pybackup.pstat", type="pstat")
+
+    yappi.clear_stats()
+    cmd = "python -m gprof2dot -n2 -e5 -f pstats -o pybackup.dot pybackup.pstat"
+    ar.run1(cmd)
+    cmd = "dot -Tsvg -o pybackup.svg pybackup.dot"
+    ar.run1(cmd)
+
+
+if __name__ == "__main__":
     try:
         Path("pybackup.txt").unlink()
         Path("pybackup.pstat").unlink()
@@ -172,24 +192,4 @@ def pmain():
         Path("pybackup.svg").unlink()
     except FileNotFoundError:
         pass
-    yappi.start()
     main()
-    yappi.stop()
-    func_stats = yappi.get_func_stats()
-    func_stats = func_stats.sort('tsub','desc')
-    func_stats = func_stats.strip_dirs()
-    thread_stats = yappi.get_thread_stats()
-    with open('pybackup.txt', 'w') as fh:
-        func_stats.print_all(fh)
-        thread_stats.print_all(fh)
-    func_stats.save('pybackup.pstat',type='pstat')
-    
-    yappi.clear_stats()
-    cmd='python -m gprof2dot -f pstats -o pybackup.dot pybackup.pstat'
-    ar.run1(cmd)
-    cmd='dot -Tsvg -o pybackup.svg pybackup.dot'
-    ar.run1(cmd)
-
-
-if __name__ == "__main__":
-    pmain()

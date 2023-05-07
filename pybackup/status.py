@@ -44,5 +44,3 @@ def updatets(N):
         for Si, Dh in Sl:
             stsupdate(Si, Dh)
         print()
-
-
