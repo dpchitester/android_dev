@@ -119,19 +119,27 @@ class ContinuousSubprocess:
             # )
 
             # Run this block as long as our main process is alive or std streams queue is not empty.
-            while (process.poll() is None) or (not q1.empty() or not q2.empty()):
-                try:
-                    # Rad messages produced by stdout and stderr threads.
-                    if not q1.empty():
-                        item = q1.get(block=True)
+            while True:
+                if q1.empty():
+                    if q2.empty():
+                        if process.poll() is not None:
+                            break
+                    else:
+                        try:
+                            item = q2.get(False)
+                            dq.append(item)
+                            yield Qi2(item)
+                        except Empty:
+                            pass
+                else:
+                    try:
+                        item = q1.get(False)
                         dq.append(item)
                         yield Qi1(item)
-                    if not q2.empty():
-                        item = q2.get(block=True)
-                        dq.append(item)
-                        yield Qi2(item)
-                except Empty:
-                    pass
+                    except Empty:
+                        pass
+                if process.poll() is not None:
+                    break
 
             # Close streams.
             process.stdout.close()
