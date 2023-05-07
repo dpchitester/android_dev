@@ -9,6 +9,7 @@ from collections import deque
 from queue import Empty
 from queue import Queue
 from threading import Thread
+from time import sleep
 from typing import IO
 from typing import AnyStr
 from typing import Generator
@@ -125,6 +126,7 @@ class ContinuousSubprocess:
                         if process.poll() is not None:
                             break
                         else:
+                            sleep(0.02)
                             continue
                     else:
                         try:
