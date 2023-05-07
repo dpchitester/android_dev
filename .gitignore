@@ -3,6 +3,7 @@
 *.class
 *.db
 *.diff
+*.dot
 *.err
 *.gdf
 *.gv

@@ -172,22 +172,22 @@ def pmain():
     func_stats = func_stats.sort("tsub", "desc")
     func_stats = func_stats.strip_dirs()
     thread_stats = yappi.get_thread_stats()
-    with open("pybackup.txt", "w") as fh:
+    with open("temp.txt", "w") as fh:
         func_stats.print_all(fh)
         thread_stats.print_all(fh)
-    func_stats.save("pybackup.pstat", type="pstat")
+    func_stats.save("temp.pstat", type="pstat")
 
     yappi.clear_stats()
-    cmd = "python -m gprof2dot -n.01 -e1 -f pstats -o pybackup.dot pybackup.pstat"
+    cmd = "python -m gprof2dot -n.05 -e1 -f pstats -o temp.dot temp.pstat"
     ar.run1(cmd)
-    cmd = "dot -Tsvg -Kfdp -o pybackup.svg pybackup.dot"
+    cmd = "dot -Tsvg -Kfdp -o temp.svg temp.dot"
     ar.run1(cmd)
 
 
 if __name__ == "__main__":
     for ex in ['.txt', '.pstat','.dot','.svg']:
         try:
-            Path("pybackup"+ex).unlink()
+            Path("temp"+ex).unlink()
         except FileNotFoundError:
             pass
-    main()
+    pmain()
