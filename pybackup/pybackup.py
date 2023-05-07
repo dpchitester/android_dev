@@ -178,7 +178,7 @@ def pmain():
     func_stats.save("pybackup.pstat", type="pstat")
 
     yappi.clear_stats()
-    cmd = "python -m gprof2dot -n2 -e5 -f pstats -o pybackup.dot pybackup.pstat"
+    cmd = "python -m gprof2dot -n.01 -e1 -f pstats -o pybackup.dot pybackup.pstat"
     ar.run1(cmd)
     cmd = "dot -Tsvg -Kfdp -o pybackup.svg pybackup.dot"
     ar.run1(cmd)
