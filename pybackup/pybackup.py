@@ -14,9 +14,11 @@ from asyncinotify import Inotify
 from asyncinotify import Mask
 from asyncinotify import Watch
 
+
 # from snoop import pp
 # from snoop import snoop
 
+import asyncrun as ar
 import config as v
 import ldsv as ls
 from findde import updateDEs
@@ -165,6 +167,9 @@ def pmain():
 
     try:
         Path("pybackup.txt").unlink()
+        Path("pybackup.pstat").unlink()
+        Path("pybackup.dot").unlink()
+        Path("pybackup.svg").unlink()
     except FileNotFoundError:
         pass
     yappi.start()
@@ -177,8 +182,13 @@ def pmain():
     with open('pybackup.txt', 'w') as fh:
         func_stats.print_all(fh)
         thread_stats.print_all(fh)
+    func_stats.save('pybackup.pstat',type='pstat')
     
     yappi.clear_stats()
+    cmd='python -m gprof2dot -f pstats -o pybackup.dot pybackup.pstat'
+    ar.run1(cmd)
+    cmd='dot -Tsvg -o pybackup.svg pybackup.dot'
+    ar.run1(cmd)
 
 
 if __name__ == "__main__":
