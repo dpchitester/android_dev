@@ -185,7 +185,7 @@ def pmain():
 
 
 if __name__ == "__main__":
-    for ex in ['.txt', '.pstat','.dot','.svg']:
+    for ex in ['.prof', '.pstat','.dot','.svg']:
         try:
             Path("temp"+ex).unlink()
         except FileNotFoundError:
