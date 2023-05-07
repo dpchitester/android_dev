@@ -19,6 +19,9 @@ class Edge:
         default=time() - 10, init=False, repr=True, hash=False, compare=False
     )
 
+    def __eq__(self, other):
+        return self.si == other.si and self.di == other.di
+
     def chk_ct(self):
         return self.cdt > self.udt
 
