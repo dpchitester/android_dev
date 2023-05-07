@@ -16,7 +16,7 @@ p = Path.cwd()
 for pf in p.glob('*.py'):
     src = Source.from_file(pf.name)
     source = pf.stem
-    deps = src.dependencies()
+    deps = src.imports()
     print(source, deps)
     for dep in deps:
         print(source, dep)
@@ -24,7 +24,7 @@ for pf in p.glob('*.py'):
         if sink:
             graph.add_edge(source, sink)
 
-graph.write('temp.dot')
+graph.write('temp.gv')
 
-cmd='dot -Tsvg -Kfdp -o temp.svg temp.dot'
+cmd='dot -Tsvg -Kfdp -o temp.svg temp.gv'
 ar.run1(cmd)
