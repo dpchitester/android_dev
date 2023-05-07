@@ -7,7 +7,7 @@ class FSe:
     sz: int
     mt: float
     def __hash__(self):
-        return hash((self.sz,self.mt))
+        return hash((self.sz,round(self.mt)))
     def __eq__(self, other):
         return self.sz == other.sz and round(self.mt) == round(other.mt)
 
@@ -16,6 +16,6 @@ class DE:
     nm: Path
     i: FSe
     def __hash__(self):
-        return hash((self.nm,self.i.sz,self.i.mt))
+        return hash((self.nm,self.i.sz,round(self.i.mt)))
     def __eq__(self, other):
         return self.nm == other.nm and self.i == other.i
