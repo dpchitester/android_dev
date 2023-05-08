@@ -15,7 +15,7 @@ p = Path.cwd()
 for pf in p.glob("*.py"):
     src = Source.from_file(pf.name)
     source = pf.stem
-    deps = src.imports()
+    deps = src.dependencies()
     print(source, deps)
     for dep in deps:
         print(source, dep)
@@ -27,5 +27,5 @@ gobn = "inspect/mi2"
 
 graph.write(gobn + ".gv")
 
-cmd = "dot -Tsvg -Kfdp -o " + gobn + ".svg " + gobn + ".gv"
+cmd = "dot -Tsvg -Kneato -o " + gobn + ".svg " + gobn + ".gv"
 ar.run1(cmd)

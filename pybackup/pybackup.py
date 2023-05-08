@@ -170,7 +170,7 @@ def pmain():
     yappi.clear_stats()
 
     cmd = (
-        "gprof2dot -n.05 -e1 -z pybackup:127:main -f pstats -o "
+        "gprof2dot -n.02 -e.1 -z pybackup:127:main -f pstats -o "
         + gobn
         + ".gv "
         + gobn
