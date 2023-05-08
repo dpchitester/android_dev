@@ -1,4 +1,5 @@
 gobn = "inspect/callgraph"
+from pathlib import Path
 
 import pybackup
 
@@ -6,7 +7,7 @@ def pmain():
     import yappi
 
     yappi.start()
-    main()
+    pybackup.main()
     yappi.stop()
     func_stats = yappi.get_func_stats()
     func_stats = func_stats.sort("ttot", "desc")
