@@ -1,15 +1,10 @@
 import json
-import re
 import subprocess
-import sys
-from threading import Lock
+
+from csubproc import ContinuousSubprocess, Qi1, Qi2
 
 # from snoop import pp
 # from snoop import snoop
-
-from csubproc import ContinuousSubprocess
-from csubproc import Qi1
-from csubproc import Qi2
 
 
 def colored(r, g, b, text):

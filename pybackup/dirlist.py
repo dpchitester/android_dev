@@ -8,8 +8,7 @@ from pathlib import Path
 
 import asyncrun as ar
 import config as v
-from de import DE
-from de import FSe
+from de import DE, FSe
 
 rto1 = 60 * 0
 rto2 = 60 * 0
@@ -86,7 +85,7 @@ def sepdlls(dlls):
                 # TODO: apply panic procedure
                 continue
             while fnmatch(de.nm, tds + "*"):
-                fp = v.ppre("gd") / de.nm
+                v.ppre("gd") / de.nm
                 fse = FSe(de.i.sz, de.i.mt)
                 de2 = DE(de.nm, fse)
                 # TODO: use Path

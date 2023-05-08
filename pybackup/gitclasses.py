@@ -64,8 +64,8 @@ class Remote_Git_Mixin:
 
 class GitWT(SD, Local_Git_Mixin):
     def __init__(self, *args, **kwargs):
-        for k, v in kwargs.items():
-            setattr(self, k, v)
+        for k, v2 in kwargs.items():
+            setattr(self, k, v2)
         super().__init__(*args, **kwargs)
 
     def sdhck(self):
@@ -85,8 +85,8 @@ class GitWT(SD, Local_Git_Mixin):
 
 class GitIndex(SD, Local_Git_Mixin):
     def __init__(self, *args, **kwargs):
-        for k, v in kwargs.items():
-            setattr(self, k, v)
+        for k, v2 in kwargs.items():
+            setattr(self, k, v2)
         super().__init__(*args, **kwargs)
 
     def sdhck(self):
@@ -106,8 +106,8 @@ class GitIndex(SD, Local_Git_Mixin):
 
 class GitRepo(SD, Local_Git_Mixin):
     def __init__(self, *args, **kwargs):
-        for k, v in kwargs.items():
-            setattr(self, k, v)
+        for k, v2 in kwargs.items():
+            setattr(self, k, v2)
         super().__init__(*args, **kwargs)
 
     def sdhck(self):
@@ -129,8 +129,8 @@ class GitRepo(SD, Local_Git_Mixin):
 
 class GitRemote(SD, Remote_Git_Mixin):
     def __init__(self, *args, **kwargs):
-        for k, v in kwargs.items():
-            setattr(self, k, v)
+        for k, v2 in kwargs.items():
+            setattr(self, k, v2)
         super().__init__(*args, **kwargs)
 
     def sdhck(self):

@@ -38,7 +38,9 @@ def graphpack(
     _del_inits(mg)
     internal_modules = set(module.label for module in mg.listModules())
     _del_external_packages(mg, internal_modules, ignore_packages)
-    _create_graph(mg, internal_modules, path + "/inspect/" + package_name + ".gv", color_rules)
+    _create_graph(
+        mg, internal_modules, path + "/inspect/" + package_name + ".gv", color_rules
+    )
 
 
 def _del_modules(mg, ignore_modules):

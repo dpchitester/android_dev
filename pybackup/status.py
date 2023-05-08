@@ -1,6 +1,5 @@
 import config as v
 import ldsv as ls
-from edge import Edge
 
 
 def stsupdate(Si, Dh):

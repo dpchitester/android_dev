@@ -3,7 +3,6 @@ from math import floor
 
 import asyncrun as ar
 from edge import Edge
-from edge import findEdge
 from netup import netup
 from opbase import OpBase
 
@@ -216,7 +215,6 @@ class BVars:
 
     def skip_matching(self):
         # handle slip through mismatched on times or more recent
-        from findde import updateDEs
 
         for rf in self.f2d.copy():
             for lf in self.f2c.copy():
@@ -236,7 +234,6 @@ class BVars:
     def do_touching(self):
         # TODO: use Path
         from findde import updateDEs
-        from status import onestatus
 
         cfpl = self.f2t.copy()
         if len(cfpl) == 0:
@@ -253,7 +250,6 @@ class BVars:
 
     def do_copying(self):
         # TODO: use Path
-        from status import onestatus
 
         cfpl = self.f2c.copy()
         if len(cfpl) == 0:
@@ -278,7 +274,6 @@ class BVars:
 
     def do_deletions(self):
         from findde import updateDEs
-        from status import onestatus
 
         cfpl = self.f2d.copy()
         if fdellm(self.di, self.si, self.td, cfpl, self.sfc):
@@ -291,9 +286,6 @@ class BVars:
         updateDEs(self.td, [str(de.nm) for de in cfpl])
 
     def list_deletions(self):
-        from findde import updateDEs
-        from status import onestatus
-
         cfpl = self.f2d.copy()
         print("potential deletions", cfpl)
 
@@ -308,8 +300,7 @@ class CSCopy(OpBase):
 
     def __call__(self):
         import config as v
-        from edge import Edge
-        from edge import findEdge
+        from edge import Edge, findEdge
         from status import onestatus
 
         di, si = self.npl1

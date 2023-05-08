@@ -1,10 +1,8 @@
 from hashlib import sha256
-from os import makedirs
 
 import asyncrun as ar
 import config as v
-from edge import Edge
-from edge import findEdge
+from edge import Edge, findEdge
 from findde import updateDEs
 from opbase import OpBase
 from status import onestatus
@@ -135,7 +133,7 @@ class LocalCopy(OpBase):
             for g in gl:
                 try:
                     fl = sp.glob(g)
-                except IOError as exc:
+                except IOError:
                     print("glob error in localcopy", e)
                     self.sfc.fc += 1
                     return self.sfc.value()

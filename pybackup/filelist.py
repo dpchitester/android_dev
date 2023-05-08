@@ -1,13 +1,10 @@
 import datetime
 import os
-import time
 from pathlib import Path
 
 import asyncrun as ar
 import config as v
-import ldsv as ls
-from de import DE
-from de import FSe
+from de import DE, FSe
 
 dexs = {
     ".cargo",
@@ -16,6 +13,7 @@ dexs = {
     "node_modules",
     "__pycache__",
     ".ropeproject",
+    ".ruff_cache",
     ".mypyproject",
     ".mypy_cache",
     ".vite",
@@ -107,8 +105,6 @@ class RemoteFileList(FileList):
 
     def getfl(self, sd):
         import json
-
-        import config as v
 
         cmd = 'rclone lsjson "' + str(sd) + '" --recursive --files-only '
         rc = ar.run1(cmd)

@@ -1,15 +1,11 @@
-import datetime
 import time
-from pathlib import Path
 from pathlib import PosixPath
+
+import ldsv as ls
 
 # from snoop import pp
 # from snoop import snoop
 
-import asyncrun as ar
-import ldsv as ls
-from de import DE
-from de import FSe
 
 icl = 1
 rto1 = 60 * 60
@@ -217,10 +213,10 @@ class FS_Mixin(SD):
         from filelist import FileList
 
         # print('-ldlld', si)
-        if self.isremote:
-            ch = "r"
-        else:
-            ch = "l"
+        # if self.isremote:
+        # ch = "r"
+        # else:
+        # ch = "l"
         if self.Dll_status() > 1:
             # print("sucking/scanning for", self.tag, ch + "dll...", end="")
             rv = FileList(self).getdll()

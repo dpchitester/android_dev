@@ -2,20 +2,13 @@
 Module for continuous subprocess management. 
 """
 import json
-import logging
 import subprocess
 import types
 from collections import deque
-from queue import Empty
-from queue import Queue
+from queue import Empty, Queue
 from threading import Thread
 from time import sleep
-from typing import IO
-from typing import AnyStr
-from typing import Generator
-from typing import NewType
-from typing import Optional
-from typing import TypeVar
+from typing import IO, AnyStr, Generator, Optional
 
 # logger = logging.getLogger(__name__)
 
@@ -73,7 +66,8 @@ class ContinuousSubprocess:
 
         :return: A generator which yields output strings from an opened process.
         """
-        # Check if the process is already running (if it's set, then it means it is running).
+        # Check if the process is already running
+        # (if it's set, then it means it is running).
         if self.__process:
             raise RuntimeError(
                 "Process is already running. "
@@ -90,10 +84,6 @@ class ContinuousSubprocess:
             *args,
             **kwargs,
         ) as process:
-            # logger.info(
-            #    f'Successfully started the process to run "{self.__command_string}" command.'
-            # )
-
             # Indicate that the process has started and is now running.
             self.__process = process
 
@@ -119,7 +109,6 @@ class ContinuousSubprocess:
             #    "Successfully started threads to capture stdout and stderr streams."
             # )
 
-            # Run this block as long as our main process is alive or std streams queue is not empty.
             while True:
                 if q1.empty():
                     if q2.empty():

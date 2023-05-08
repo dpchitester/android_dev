@@ -1,33 +1,26 @@
 #!/data/data/com.termux/files/usr/bin/env python
 
-from os import environ
+
 from os import walk
 from pathlib import Path
-from queue import Empty
-from queue import Queue
-from threading import Lock
-from threading import Thread
+from queue import Empty, Queue
+from threading import Lock, Thread
 from time import sleep
 
 from asyncinotify import Event as WEvent
-from asyncinotify import Inotify
-from asyncinotify import Mask
-from asyncinotify import Watch
-
-
-# from snoop import pp
-# from snoop import snoop
+from asyncinotify import Inotify, Mask, Watch
 
 import asyncrun as ar
 import config as v
 import ldsv as ls
 from findde import updateDEs
-from netup import netup
-from opexec import clean
-from opexec import opExec
+from opexec import clean, opExec
 from sd import FS_Mixin
-from status import onestatus
 from status import updatets
+
+# from snoop import pp
+# from snoop import snoop
+
 
 in1 = None
 wdsi: dict[Watch, v.NodeTag] = {}
@@ -119,22 +112,16 @@ def proc_events():
 
 def rt2():
     global th1
-    # print("-rt2-1")
     itc = 0
     while True:
         itc += 1
-        # print("-rt2-2")
         cl = clean()
         if cl:
-            # print("-rt2-3")
             print("no backups appear pending")
-            rv1 = False
             break
         else:
-            # print("-rt2-4")
             print("backups appear pending")
-            rv1 = opExec()
-        # print("-rt2-5")
+            opExec()
 
 
 def main():
@@ -161,7 +148,9 @@ def main():
                     print("waiting for", th.name, "shutdown")
                     th.join()
 
+
 gobn = "inspect/callgraph"
+
 
 def pmain():
     import yappi
@@ -180,16 +169,22 @@ def pmain():
 
     yappi.clear_stats()
 
-    cmd = "gprof2dot -n.05 -e1 -z pybackup:140:main -f pstats -o "+gobn+".gv "+gobn+".pstat"
+    cmd = (
+        "gprof2dot -n.05 -e1 -z pybackup:140:main -f pstats -o "
+        + gobn
+        + ".gv "
+        + gobn
+        + ".pstat"
+    )
     ar.run1(cmd)
-    cmd = "dot -Tsvg -Kfdp -o "+gobn+".svg "+gobn+".gv"
+    cmd = "dot -Tsvg -Kfdp -o " + gobn + ".svg " + gobn + ".gv"
     ar.run1(cmd)
 
 
 if __name__ == "__main__":
-    for ex in ['.prof', '.pstat','.gv','.svg']:
+    for ex in [".prof", ".pstat", ".gv", ".svg"]:
         try:
-            Path(gobn+ex).unlink()
+            Path(gobn + ex).unlink()
         except FileNotFoundError:
             pass
     pmain()

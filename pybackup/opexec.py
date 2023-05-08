@@ -1,8 +1,8 @@
 import config as v
+from edge import Edge, findEdge
+from opbase import OpBase
 from status import updatets
 from toposort import topological_sort
-from opbase import OpBase
-from edge import findEdge
 
 _pass = 1
 
@@ -77,7 +77,7 @@ def opExec():
     print("-opexec")
     g1 = nts()
     incp()
-    return proc_nodes(g1) and clean()
+    return proc_nodes(g1)
 
 
 if __name__ == "__main__":

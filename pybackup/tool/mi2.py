@@ -1,9 +1,10 @@
 from pathlib import Path
 from pprint import pprint
 
-import asyncrun as ar
 import pygraphviz
 from module_dependencies import Source
+
+import asyncrun as ar
 
 # This creates a Source instance for this file itself
 

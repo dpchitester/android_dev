@@ -1,7 +1,8 @@
 from pathlib import Path
 
-import asyncrun as ar
 import pygraphviz
+
+import asyncrun as ar
 
 graph = pygraphviz.AGraph(strict=False, directed=True)
 
