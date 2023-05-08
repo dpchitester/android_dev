@@ -305,7 +305,7 @@ def initConfig():
     op3 = LocalCopy(
         npl1,
         npl1,
-        {"files": ["termux-*", "pbu", "rbu", "rcu", "qe", "ftp*", "nt"], "exec": True},
+        {"files": ["termux-*", "pbu", "ppc", "rbu", "rcu", "qe", "ftp*", "nt"], "exec": True},
     )
     addArc(op3)
 
@@ -313,7 +313,7 @@ def initConfig():
     op4 = LocalCopy(
         npl1,
         npl1,
-        {"files": ["termux-*", "pbu", "rcu", "rbu", "qe", "ftp*", "nt"], "exec": False},
+        {"files": ["termux-*", "pbu", "ppc", "rcu", "rbu", "qe", "ftp*", "nt"], "exec": False},
     )
     addArc(op4)
 
