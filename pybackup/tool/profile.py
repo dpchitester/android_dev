@@ -6,6 +6,7 @@ import asyncrun as ar
 
 def pmain():
     import yappi
+    import snakeviz
 
     yappi.start()
     pybackup.main()
@@ -21,16 +22,8 @@ def pmain():
 
     yappi.clear_stats()
 
-    cmd = (
-        "gprof2dot -n.02 -e.1 -z pybackup:127:main -f pstats -o "
-        + gobn
-        + ".gv "
-        + gobn
-        + ".pstat"
-    )
-    ar.run1(cmd)
-    # cmd = "dot -Tsvg -Kfdp -o " + gobn + ".svg " + gobn + ".gv"
-    # ar.run1(cmd)
+    snakeviz.cli([gobn + ".pstat"])
+    
 
 
 if __name__ == "__main__":
