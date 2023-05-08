@@ -2,6 +2,7 @@ gobn = "inspect/callgraph"
 from pathlib import Path
 
 import pybackup
+import asyncrun as ar
 
 def pmain():
     import yappi
@@ -28,8 +29,8 @@ def pmain():
         + ".pstat"
     )
     ar.run1(cmd)
-    cmd = "dot -Tsvg -Kfdp -o " + gobn + ".svg " + gobn + ".gv"
-    ar.run1(cmd)
+    # cmd = "dot -Tsvg -Kfdp -o " + gobn + ".svg " + gobn + ".gv"
+    # ar.run1(cmd)
 
 
 if __name__ == "__main__":
