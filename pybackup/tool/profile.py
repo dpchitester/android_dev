@@ -22,7 +22,7 @@ def pmain():
 
     yappi.clear_stats()
 
-    snakeviz.cli.main([gobn + ".pstat"])
+    snakeviz.main([gobn + ".pstat"])
     
 
 
