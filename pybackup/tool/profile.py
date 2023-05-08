@@ -1,5 +1,6 @@
 gobn = "inspect/callgraph"
 
+import pybackup
 
 def pmain():
     import yappi
