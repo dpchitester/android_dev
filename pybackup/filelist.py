@@ -85,7 +85,7 @@ class LocalFileList(FileList):
         l1 = self.getfl()
         st = []
         for it in l1:
-            it1 = Path(os.path.relpath(it, start=self.sd))
+            it1 = Path(it.path).relative_to(self.sd)
             try:
                 fs = it.stat()
                 it2 = fs.st_size
