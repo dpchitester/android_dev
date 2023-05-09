@@ -9,7 +9,8 @@ import config
 def bhu(ho, it):
     from pathlib import Path
 
-    from de import DE, FSe
+    from de import DE
+    from de import FSe
 
     match it:
         case bytes():

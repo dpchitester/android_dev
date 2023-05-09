@@ -5,10 +5,14 @@ import json
 import subprocess
 import types
 from collections import deque
-from queue import Empty, Queue
+from queue import Empty
+from queue import Queue
 from threading import Thread
 from time import sleep
-from typing import IO, AnyStr, Generator, Optional
+from typing import IO
+from typing import AnyStr
+from typing import Generator
+from typing import Optional
 
 import config
 

@@ -2,7 +2,9 @@ import json
 import subprocess
 
 import config
-from csubproc import ContinuousSubprocess, Qi1, Qi2
+from csubproc import ContinuousSubprocess
+from csubproc import Qi1
+from csubproc import Qi2
 
 # from snoop import pp
 # from snoop import snoop

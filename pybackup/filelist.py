@@ -4,7 +4,8 @@ from pathlib import Path
 
 import asyncrun as ar
 import config
-from de import DE, FSe
+from de import DE
+from de import FSe
 
 dexs = {
     ".cargo",
