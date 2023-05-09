@@ -60,8 +60,7 @@ class LocalFileList(FileList):
     def __init__(self, sd, **kwargs):
         super(LocalFileList, self).__init__(sd)
 
-    @classmethod
-    def getfl_str_fp(cls, fp: str):
+    def getfl_str_fp(self, fp: str):
         fl1 = []
         with os.scandir(fp) as di:
             for it1 in di:
@@ -69,7 +68,7 @@ class LocalFileList(FileList):
                     fl1.append(it1)
                 elif not it1.is_symlink():
                     if not isbaddir(it1.name):
-                        fl2 = cls.getfl_str_fp(it1.path)
+                        fl2 = self.getfl_str_fp(it1.path)
                         fl1.extend(fl2)
         return fl1
 
