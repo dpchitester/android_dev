@@ -70,7 +70,6 @@ class Edge:
 
 
 def findEdge(di, si) -> Edge:
-
     with ls.dl:
         for e in config.eDep:
             if (e.di, e.si) not in config.edges or config.edges[(e.di, e.si)] != e:
@@ -85,7 +84,6 @@ def lrtset(di, si):
 
 
 def addDep(j, i):
-
     with ls.dl:
         e: Edge = Edge(j, i)
         if e not in config.eDep:
@@ -94,7 +92,6 @@ def addDep(j, i):
 
 
 def addArc(op1):
-
     with ls.dl:
         if op1 not in config.opdep:
             config.opdep.append(op1)

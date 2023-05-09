@@ -24,13 +24,17 @@ dexs = {
 
 def cull_DEs(des):
     des[:] = [
-        de for de in des if not any([sd for sd in de.nm.parent.parts if sd in config.dexs])
+        de
+        for de in des
+        if not any([sd for sd in de.nm.parent.parts if sd in config.dexs])
     ]
 
 
 def cull_files(files, pt):
     files[:] = [
-        pt(f) for f in files if not any([sd for sd in f.parent.parts if sd in config.dexs])
+        pt(f)
+        for f in files
+        if not any([sd for sd in f.parent.parts if sd in config.dexs])
     ]
 
 

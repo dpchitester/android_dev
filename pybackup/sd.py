@@ -49,8 +49,6 @@ class Local_Mixin:
 
     @property
     def Dll(self):
-        
-
         if hasattr(self, "tag"):
             with ls.dl:
                 if self.tag in config.LDlls:
@@ -59,8 +57,6 @@ class Local_Mixin:
 
     @Dll.setter
     def Dll(self, val):
-        
-
         if hasattr(self, "tag"):
             with ls.dl:
                 config.LDlls[self.tag] = val
@@ -69,8 +65,6 @@ class Local_Mixin:
 
     @property
     def Dlls_xt(self):
-        
-
         if hasattr(self, "tag"):
             with ls.dl:
                 if self.tag in config.LDlls_xt:
@@ -79,8 +73,6 @@ class Local_Mixin:
 
     @Dlls_xt.setter
     def Dlls_xt(self, val):
-        
-
         if hasattr(self, "tag"):
             with ls.dl:
                 config.LDlls_xt[self.tag] = val
@@ -88,8 +80,6 @@ class Local_Mixin:
 
     @property
     def SDh(self):
-        
-
         if hasattr(self, "tag"):
             with ls.dl:
                 if self.tag in config.LDhd:
@@ -98,8 +88,6 @@ class Local_Mixin:
 
     @SDh.setter
     def SDh(self, val):
-        
-
         if hasattr(self, "tag"):
             with ls.dl:
                 config.LDhd[self.tag] = val
@@ -117,8 +105,6 @@ class Remote_Mixin:
 
     @property
     def Dll(self):
-        
-
         if hasattr(self, "tag"):
             with ls.dl:
                 if self.tag in config.RDlls:
@@ -127,8 +113,6 @@ class Remote_Mixin:
 
     @Dll.setter
     def Dll(self, val):
-        
-
         if hasattr(self, "tag"):
             with ls.dl:
                 config.RDlls[self.tag] = val
@@ -137,8 +121,6 @@ class Remote_Mixin:
 
     @property
     def Dlls_xt(self):
-        
-
         if hasattr(self, "tag"):
             with ls.dl:
                 if self.tag in config.RDlls_xt:
@@ -147,8 +129,6 @@ class Remote_Mixin:
 
     @Dlls_xt.setter
     def Dlls_xt(self, val):
-        
-
         if hasattr(self, "tag"):
             with ls.dl:
                 config.RDlls_xt[self.tag] = val
@@ -156,8 +136,6 @@ class Remote_Mixin:
 
     @property
     def SDh(self):
-        
-
         if hasattr(self, "tag"):
             with ls.dl:
                 if self.tag in config.RDhd:
@@ -166,8 +144,6 @@ class Remote_Mixin:
 
     @SDh.setter
     def SDh(self, val):
-        
-
         if hasattr(self, "tag"):
             with ls.dl:
                 config.RDhd[self.tag] = val
@@ -180,7 +156,6 @@ class FS_Mixin(SD):
         super(FS_Mixin, self).__init__(*args, **kwargs)
 
     def sdh_d(self):
-        
         from bhash import xxh64Hash
 
         rv = None
@@ -200,8 +175,6 @@ class FS_Mixin(SD):
         return rv
 
     def Dll_status(self):
-        
-
         if self.Dll is None:
             return 3
         elif self.isremote and self.Dlls_xt + rto1 <= time.time():
