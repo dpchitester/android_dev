@@ -218,8 +218,10 @@ def initConfig():
             addDep("zips", d.name)
             addDep("proj", d.name)
 
-    f1()
+    #f1()
 
+    addDep("git_worktree", "proj")
+    
     global worktree
     worktree = sdcard / "projects"
 
