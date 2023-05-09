@@ -6,7 +6,7 @@ import asyncrun as ar
 
 def pmain():
     import yappi
-    import snakeviz
+    import snakeviz.cli as cli
 
     yappi.start()
     pybackup.main()
@@ -22,7 +22,7 @@ def pmain():
 
     yappi.clear_stats()
 
-    snakeviz.main([gobn + ".pstat"])
+    cli.main([gobn + ".pstat",'-s'])
     
 
 
