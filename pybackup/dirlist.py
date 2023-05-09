@@ -203,10 +203,3 @@ def getrdlls():  # remote entire drive
         print(round(t2 - t1, 3), round(t3 - t2, 3))
 
 
-def dllcmp(do, dn):
-    global fi
-    dns = set(dn)
-    dos = set(do)
-    tocopy = dns - dos
-    todelete = dos - dns
-    return (todelete, tocopy)
