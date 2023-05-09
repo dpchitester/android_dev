@@ -151,19 +151,16 @@ RDlls: Dict[NodeTag, List["DE"]] = {}
 LDlls_xt: Dict[NodeTag, float] = {}
 RDlls_xt: Dict[NodeTag, float] = {}
 
-LDlls_changed: bool = False
-RDlls_changed: bool = False
-
 # pickle file filenames
 edgepf: Optional[Path] = None
 ldllsf: Optional[Path] = None
 rdllsf: Optional[Path] = None
 
-ldhpf: Path
-rdhpf: Path
+ldhpf: Optional[Path] = None
+rdhpf: Optional[Path] = None
 
 # worktree of git repo
-worktree: Path
+worktree: Optional[Path] = None
 
 # directory list hashing stats
 
@@ -178,12 +175,12 @@ dl2_cs = 0
 h_hits = 0
 h_miss = 0
 
-home: Ext3 = None
-sdcard: Fat32 = None
-cloud1: CS = None
-cloud2: CS = None
-cloud3: CS = None
-dsbog: Fat32 = None
+home: Optional[Ext3] = None
+sdcard: Optional[Fat32] = None
+cloud1: Optional[CS] = None
+cloud2: Optional[CS] = None
+cloud3: Optional[CS] = None
+dsbog: Optional[Fat32] = None
 
 
 def initConfig():
