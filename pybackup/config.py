@@ -462,6 +462,7 @@ def ts_trunc2ms(s):
 def ns_trunc2ms(ns):
     return floor(ns / 1.0e6) / 1.0e3
 
+
 def dllcmp(do, dn):
     global fi
     dns = set(dn)

@@ -50,8 +50,6 @@ class SFc:
 
 
 def ts2st(ts):
-    
-
     t2 = config.ts_trunc2ms(ts)
     t2 = dt.datetime.fromtimestamp(t2, tz=dt.timezone.utc)
     t2 = t2.isoformat()[:-6]
@@ -182,8 +180,6 @@ def fdell(di, si, td, fl, sfc):
 
 class BVars:
     def __init__(self, di, si, sfc):
-        
-
         self.si = si
         self.di = di
         self.sd = config.src(si)
@@ -197,8 +193,6 @@ class BVars:
         self.ac2 = 0
 
     def init2(self):
-        
-
         self.src_dls = self.sd.Dlld()
         if self.src_dls is None:
             self.sfc.fc += 1
@@ -299,7 +293,6 @@ class CSCopy(OpBase):
         return e.chk_ct() or e.rchk_ct()
 
     def __call__(self):
-        
         from edge import Edge, findEdge
         from status import onestatus
 

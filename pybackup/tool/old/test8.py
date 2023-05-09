@@ -1,7 +1,7 @@
+from dirlist import getdll1, getdll2
 from tstamp import rtset
 
 from config import path, pdirs, srcs, tag, tagid, tags, tdirs
-from dirlist import getdll1, getdll2
 
 
 def init():

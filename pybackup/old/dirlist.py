@@ -201,5 +201,3 @@ def getrdlls():  # remote entire drive
         sepdlls(rv)
         t3 = time.time()
         print(round(t2 - t1, 3), round(t3 - t2, 3))
-
-
