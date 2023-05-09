@@ -61,20 +61,23 @@ class LocalFileList(FileList):
         super(LocalFileList, self).__init__(sd)
 
     def getfl_str_fp(self, fp: str):
-        from queue import Queue
-        q = Queue()
-        q.put(fp)
+        from collections import deque
+        q = deque()
+        q.append(fp)
         
         fl1 = []
-        while not q.empty():
-            fp2 = q.get()
-            with os.scandir(fp2) as di:
-                for it1 in di:
-                    if it1.is_file():
-                        fl1.append(it1)
-                    elif not it1.is_symlink():
-                        if not isbaddir(it1.name):
-                            q.put(it1.path)
+        while True:
+            try:
+                fp2 = q.popleft()
+                with os.scandir(fp2) as di:
+                    for it1 in di:
+                        if it1.is_file():
+                            fl1.append(it1)
+                        elif not it1.is_symlink():
+                            if not isbaddir(it1.name):
+                                q.append(it1.path)
+            except IndexError:
+                break
         return fl1
 
     def getfl(self):
