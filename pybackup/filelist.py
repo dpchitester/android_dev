@@ -69,7 +69,7 @@ class LocalFileList(FileList):
         while True:
             try:
                 fp2 = q.popleft()
-                print(fp2)
+                # print(fp2)
                 with os.scandir(fp2) as di:
                     for it1 in di:
                         if it1.is_file():
