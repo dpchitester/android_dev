@@ -50,9 +50,9 @@ class SFc:
 
 
 def ts2st(ts):
-    import config as v
+    import config
 
-    t2 = v.ts_trunc2ms(ts)
+    t2 = config.ts_trunc2ms(ts)
     t2 = dt.datetime.fromtimestamp(t2, tz=dt.timezone.utc)
     t2 = t2.isoformat()[:-6]
     return t2
@@ -182,12 +182,12 @@ def fdell(di, si, td, fl, sfc):
 
 class BVars:
     def __init__(self, di, si, sfc):
-        import config as v
+        import config
 
         self.si = si
         self.di = di
-        self.sd = v.src(si)
-        self.td = v.tgt(di)
+        self.sd = config.src(si)
+        self.td = config.tgt(di)
         self.src_dls = None
         self.dst_dls = None
         self.f2d = None
@@ -197,7 +197,7 @@ class BVars:
         self.ac2 = 0
 
     def init2(self):
-        import config as v
+        import config
         from dirlist import dllcmp
 
         self.src_dls = self.sd.Dlld()
@@ -205,11 +205,11 @@ class BVars:
             self.sfc.fc += 1
         self.dst_dls = self.td.Dlld()
         if self.src_dls is not None and self.dst_dls is not None:
-            v.cull_DEs(self.src_dls)
-            v.cull_DEs(self.dst_dls)
+            config.cull_DEs(self.src_dls)
+            config.cull_DEs(self.dst_dls)
             self.f2d, self.f2c = dllcmp(self.dst_dls, self.src_dls)
         else:
-            v.cull_DEs(self.src_dls)
+            config.cull_DEs(self.src_dls)
             self.f2d = set()
             self.f2c = set(self.src_dls)
         self.f2t = set()
@@ -300,7 +300,7 @@ class CSCopy(OpBase):
         return e.chk_ct() or e.rchk_ct()
 
     def __call__(self):
-        import config as v
+        import config
         from edge import Edge, findEdge
         from status import onestatus
 
@@ -330,7 +330,7 @@ class CSCopy(OpBase):
             e.clr()
             e.rclr()
         if self.sfc.sc > 0:
-            if di in v.srcs:
+            if di in config.srcs:
                 onestatus(di)
         # print(len(opmsg), "opmsgs", len(statmsg), "statmsgs")
         # print("opmsg:", colored(0, 255, 0, opmsg))

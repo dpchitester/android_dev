@@ -44,7 +44,7 @@ def getRemoteJSde(rd: Path, fn: str):
 
 
 def getRemoteDEs(rd: Path, fl: list[str]):
-    import config as v
+    import config
 
     jsl = []
     for fn in fl:
@@ -56,7 +56,7 @@ def getRemoteDEs(rd: Path, fl: list[str]):
         it2 = it["Size"]
         it3 = it["ModTime"][:-1] + "-00:00"
         it3 = datetime.datetime.fromisoformat(it3).timestamp()
-        it3 = v.ts_trunc2ms(it3)
+        it3 = config.ts_trunc2ms(it3)
         fse = FSe(it2, it3)
         nde = DE(it1, fse)
         delst.append(nde)
@@ -64,10 +64,10 @@ def getRemoteDEs(rd: Path, fl: list[str]):
 
 
 def findSis(fp1: Path):
-    import config as v
+    import config
 
     l1 = {}
-    for si, p in v.srcs.items():
+    for si, p in config.srcs.items():
         if isinstance(p, FS_Mixin):
             try:
                 l1[si] = fp1.relative_to(p)
@@ -77,10 +77,10 @@ def findSis(fp1: Path):
 
 
 def findDis(fp1: Path):
-    import config as v
+    import config
 
     l1 = {}
-    for di, p in v.tgts.items():
+    for di, p in config.tgts.items():
         if isinstance(p, FS_Mixin):
             try:
                 l1[di] = fp1.relative_to(p)
@@ -90,12 +90,12 @@ def findDis(fp1: Path):
 
 
 def findSDEs(fp: Path):
-    import config as v
+    import config
 
     sil = findSis(fp)
     de_l = []
     for si in sil:
-        p = v.src(si)
+        p = config.src(si)
         rp = sil[si]
 
         if isinstance(p, FS_Mixin) and p.Dll:
@@ -105,12 +105,12 @@ def findSDEs(fp: Path):
 
 
 def findTDEs(fp: Path):
-    import config as v
+    import config
 
     dil = findDis(fp)
     de_l = []
     for di in dil:
-        p = v.tgt(di)
+        p = config.tgt(di)
         rp = dil[di]
 
         if isinstance(p, FS_Mixin) and p.Dll:
@@ -120,7 +120,7 @@ def findTDEs(fp: Path):
 
 
 def updateDEs(rd: Path, flst: List[str]):
-    import config as v
+    import config
 
     def doSOne(dl, rp, tde, i, si):
         if tde:
@@ -131,35 +131,35 @@ def updateDEs(rd: Path, flst: List[str]):
                 sde = None
         else:
             sde = None
-        p = v.src(si)
+        p = config.src(si)
         if sde:
             if tde:
                 if tde.i.sz != sde.i.sz:
                     tde.i.sz = sde.i.sz
                     if p.isremote:
                         ls.sev.put("rdlls")
-                        v.Dllc[si].set()
+                        config.Dllc[si].set()
                     else:
                         ls.sev.put("ldlls")
-                        v.Dllc[si].set()
+                        config.Dllc[si].set()
                 if tde.i.mt != sde.i.mt:
                     tde.i.mt = sde.i.mt
                     if p.isremote:
                         ls.sev.put("rdlls")
-                        v.Dllc[si].set()
+                        config.Dllc[si].set()
                     else:
                         ls.sev.put("ldlls")
-                        v.Dllc[si].set()
+                        config.Dllc[si].set()
             else:
                 fse = FSe(sde.i.sz, sde.i.mt)
                 tde = DE(rp, fse)
                 dl.insert(i, tde)
                 if p.isremote:
                     ls.sev.put("rdlls")
-                    v.Dllc[si].set()
+                    config.Dllc[si].set()
                 else:
                     ls.sev.put("ldlls")
-                    v.Dllc[si].set()
+                    config.Dllc[si].set()
         else:
             if tde:
                 # dl.pop(i)
@@ -174,35 +174,35 @@ def updateDEs(rd: Path, flst: List[str]):
                 sde = None
         else:
             sde = None
-        p = v.tgt(di)
+        p = config.tgt(di)
         if sde:
             if tde:
                 if tde.i.sz != sde.i.sz:
                     tde.i.sz = sde.i.sz
                     if p.isremote:
                         ls.sev.put("rdlls")
-                        v.Dllc[di].set()
+                        config.Dllc[di].set()
                     else:
                         ls.sev.put("ldlls")
-                        v.Dllc[di].set()
+                        config.Dllc[di].set()
                 if tde.i.mt != sde.i.mt:
                     tde.i.mt = sde.i.mt
                     if p.isremote:
                         ls.sev.put("rdlls")
-                        v.Dllc[di].set()
+                        config.Dllc[di].set()
                     else:
                         ls.sev.put("ldlls")
-                        v.Dllc[di].set()
+                        config.Dllc[di].set()
             else:
                 fse = FSe(sde.i.sz, sde.i.mt)
                 tde = DE(rp, fse)
                 dl.insert(i, tde)
                 if p.isremote:
                     ls.sev.put("rdlls")
-                    v.Dllc[di].set()
+                    config.Dllc[di].set()
                 else:
                     ls.sev.put("ldlls")
-                    v.Dllc[di].set()
+                    config.Dllc[di].set()
         else:
             if tde:
                 # dl.pop(i)

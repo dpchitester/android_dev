@@ -1,6 +1,6 @@
 import asyncrun as ar
 import config
-import config as v
+import config
 from edge import Edge, findEdge
 from netup import netup
 from opbase import OpBase
@@ -29,7 +29,7 @@ class GitAdd(OpBase):
             anyd = True
         if not anyd:
             return (tc, fc)
-        rc = ar.run4("git add -A . -v", cwd=v.src(si))
+        rc = ar.run4("git add -A . -v", cwd=config.src(si))
         if rc == 0:
             tc += 1
         else:

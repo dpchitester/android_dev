@@ -17,7 +17,7 @@ def md5sumf(Fn):
 
 
 def fmd5f(fp, sz, mt, nh=None):
-    import config as v
+    import config
     from de import FSe
 
     d1 = v.fmd5hd

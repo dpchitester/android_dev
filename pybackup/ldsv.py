@@ -12,97 +12,97 @@ sev = SimpleQueue()
 
 
 def pstats():
-    import config as v
+    import config
 
-    print("dl1_cs", v.dl1_cs)
-    print("dl2_cs", v.dl2_cs)
-    print("sfb", v.sfb)
-    print("h_hits", v.h_hits)
-    print("h_miss", v.h_miss)
+    print("dl1_cs", config.dl1_cs)
+    print("dl2_cs", config.dl2_cs)
+    print("sfb", config.sfb)
+    print("h_hits", config.h_hits)
+    print("h_miss", config.h_miss)
 
 
 def loadldlls():
-    import config as v
+    import config
 
     with dl:
         try:
-            with open(v.ldllsf, "rb") as fh:
+            with open(config.ldllsf, "rb") as fh:
                 td = pickle.load(fh)
                 LDlls = td["ldlls"]
                 LDlls_xt = td["ldlls_xt"]
         except IOError as e:
             print("loadldlls failed", e)
             return
-        for si in v.srcs:
+        for si in config.srcs:
             if si in LDlls:
-                v.LDlls[si] = LDlls[si]
-                v.LDlls_xt[si] = LDlls_xt[si]
-        for di in v.tgts:
+                config.LDlls[si] = LDlls[si]
+                config.LDlls_xt[si] = LDlls_xt[si]
+        for di in config.tgts:
             if di in LDlls:
-                v.LDlls[di] = LDlls[di]
-                v.LDlls_xt[di] = LDlls_xt[di]
+                config.LDlls[di] = LDlls[di]
+                config.LDlls_xt[di] = LDlls_xt[di]
 
 
 def loadrdlls():
-    import config as v
+    import config
 
     with dl:
         try:
-            with open(v.rdllsf, "rb") as fh:
+            with open(config.rdllsf, "rb") as fh:
                 td = pickle.load(fh)
                 RDlls = td["rdlls"]
                 RDlls_xt = td["rdlls_xt"]
         except IOError as e:
             print("loadrdlls failed", e)
             return
-        for si in v.srcs:
+        for si in config.srcs:
             if si in RDlls:
-                v.RDlls[si] = RDlls[si]
-                v.RDlls_xt[si] = RDlls_xt[si]
-        for di in v.tgts:
+                config.RDlls[si] = RDlls[si]
+                config.RDlls_xt[si] = RDlls_xt[si]
+        for di in config.tgts:
             if di in RDlls:
-                v.RDlls[di] = RDlls[di]
-                v.RDlls_xt[di] = RDlls_xt[di]
+                config.RDlls[di] = RDlls[di]
+                config.RDlls_xt[di] = RDlls_xt[di]
 
 
 def saveldlls():
-    import config as v
+    import config
 
     with dl:
         # print('-saveldlls')
         try:
-            with open(v.ldllsf, "wb") as fh:
-                td = {"ldlls": v.LDlls, "ldlls_xt": v.LDlls_xt}
+            with open(config.ldllsf, "wb") as fh:
+                td = {"ldlls": config.LDlls, "ldlls_xt": config.LDlls_xt}
                 pickle.dump(td, fh)
-                v.sfb += fh.tell()
+                config.sfb += fh.tell()
         except IOError as e:
             print("savedlls failed", e)
 
 
 def saverdlls():
-    import config as v
+    import config
 
     with dl:
         try:
-            with open(v.rdllsf, "wb") as fh:
-                td = {"rdlls": v.RDlls, "rdlls_xt": v.RDlls_xt}
+            with open(config.rdllsf, "wb") as fh:
+                td = {"rdlls": config.RDlls, "rdlls_xt": config.RDlls_xt}
                 pickle.dump(td, fh)
-                v.sfb += fh.tell()
+                config.sfb += fh.tell()
         except IOError as e:
             print("saverdlls failed", e)
 
 
 def loadedges():
-    import config as v
+    import config
 
     with dl:
         try:
-            with open(v.edgepf, "rb") as fh:
+            with open(config.edgepf, "rb") as fh:
                 leDep = pickle.load(fh)
         except IOError as e:
             print("loadedges failed", e)
             return
-        for e in v.eDep:
+        for e in config.eDep:
             for le in leDep:
                 if le == e:
                     e.cdt = le.cdt
@@ -112,59 +112,59 @@ def loadedges():
 
 
 def saveedges():
-    import config as v
+    import config
 
     with dl:
         try:
-            with open(v.edgepf, "wb") as fh:
-                pickle.dump(v.eDep, fh)
-                v.sfb += fh.tell()
+            with open(config.edgepf, "wb") as fh:
+                pickle.dump(config.eDep, fh)
+                config.sfb += fh.tell()
         except IOError as e:
             print("saveedges failed", e)
 
 
 def loadldh():
-    import config as v
+    import config
 
     with dl:
         try:
-            with open(v.ldhpf, "rb") as fh:
-                v.LDhd = pickle.load(fh)
+            with open(config.ldhpf, "rb") as fh:
+                config.LDhd = pickle.load(fh)
         except IOError as e:
             print("loadldh failed", e)
 
 
 def loadrdh():
-    import config as v
+    import config
 
     with dl:
         try:
-            with open(v.rdhpf, "rb") as fh:
-                v.RDhd = pickle.load(fh)
+            with open(config.rdhpf, "rb") as fh:
+                config.RDhd = pickle.load(fh)
         except IOError as e:
             print("loadrdh failed", e)
 
 
 def saveldh():
-    import config as v
+    import config
 
     with dl:
         try:
-            with open(v.ldhpf, "wb") as fh:
-                pickle.dump(v.LDhd, fh)
-                v.sfb += fh.tell()
+            with open(config.ldhpf, "wb") as fh:
+                pickle.dump(config.LDhd, fh)
+                config.sfb += fh.tell()
         except IOError as e:
             print("saveldh failed", e)
 
 
 def saverdh():
-    import config as v
+    import config
 
     with dl:
         try:
-            with open(v.rdhpf, "wb") as fh:
-                pickle.dump(v.RDhd, fh)
-                v.sfb += fh.tell()
+            with open(config.rdhpf, "wb") as fh:
+                pickle.dump(config.RDhd, fh)
+                config.sfb += fh.tell()
         except IOError as e:
             print("saverdh failed", e)
 
@@ -188,11 +188,11 @@ def save_all():
 
 
 def save_bp():
-    import config as v
+    import config
 
     def save_th():
         svs = {}
-        while not v.quit_ev.is_set():
+        while not config.quit_ev.is_set():
             try:
                 qi = sev.get_nowait()
                 try:

@@ -86,7 +86,7 @@ class LocalFileList(FileList):
         return self.getfl_str_fp(str(self.sd))
 
     def getdll(self):  # local-source
-        import config as v
+        import config
 
         config.dl1_cs += 1
         l1 = self.getfl()
@@ -124,7 +124,7 @@ class RemoteFileList(FileList):
         return None
 
     def getdll(self):  # remote-source
-        import config as v
+        import config
 
         config.dl2_cs += 1
         pt = Path

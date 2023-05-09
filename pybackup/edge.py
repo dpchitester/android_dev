@@ -70,14 +70,13 @@ class Edge:
 
 
 def findEdge(di, si) -> Edge:
-    import config as v
 
     with ls.dl:
-        for e in v.eDep:
-            if (e.di, e.si) not in v.edges or v.edges[(e.di, e.si)] != e:
-                v.edges[(e.di, e.si)] = e
+        for e in config.eDep:
+            if (e.di, e.si) not in config.edges or config.edges[(e.di, e.si)] != e:
+                config.edges[(e.di, e.si)] = e
                 ls.sev.put("edges")
-    return v.edges[(di, si)]
+    return config.edges[(di, si)]
 
 
 def lrtset(di, si):
@@ -86,21 +85,19 @@ def lrtset(di, si):
 
 
 def addDep(j, i):
-    import config as v
 
     with ls.dl:
         e: Edge = Edge(j, i)
-        if e not in v.eDep:
-            v.eDep.add(e)
+        if e not in config.eDep:
+            config.eDep.add(e)
             ls.sev.put("edges")
 
 
 def addArc(op1):
-    import config as v
 
     with ls.dl:
-        if op1 not in v.opdep:
-            v.opdep.append(op1)
+        if op1 not in config.opdep:
+            config.opdep.append(op1)
         j, i = op1.npl1
         addDep(j, i)
 

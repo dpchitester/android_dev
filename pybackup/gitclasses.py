@@ -1,6 +1,6 @@
 import asyncrun as ar
 import config
-import config as v
+
 import ldsv as ls
 from sd import SD
 
@@ -28,15 +28,15 @@ class Local_Git_Mixin:
     def SDh(self):
         if hasattr(self, "tag"):
             with ls.dl:
-                if self.tag in v.LDhd:
-                    return v.LDhd[self.tag]
+                if self.tag in config.LDhd:
+                    return config.LDhd[self.tag]
         return 0
 
     @SDh.setter
     def SDh(self, val):
         if hasattr(self, "tag"):
             with ls.dl:
-                v.LDhd[self.tag] = val
+                config.LDhd[self.tag] = val
                 ls.sev.put("ldhd")
 
 
@@ -51,15 +51,15 @@ class Remote_Git_Mixin:
     @property
     def SDh(self):
         if hasattr(self, "tag"):
-            if self.tag in v.RDhd:
-                return v.RDhd[self.tag]
+            if self.tag in config.RDhd:
+                return config.RDhd[self.tag]
         return 0
 
     @SDh.setter
     def SDh(self, val):
         if hasattr(self, "tag"):
             with ls.dl:
-                v.RDhd[self.tag] = val
+                config.RDhd[self.tag] = val
                 ls.sev.put("rdhd")
 
 

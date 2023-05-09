@@ -49,61 +49,61 @@ class Local_Mixin:
 
     @property
     def Dll(self):
-        import config as v
+        
 
         if hasattr(self, "tag"):
             with ls.dl:
-                if self.tag in v.LDlls:
-                    return v.LDlls[self.tag]
+                if self.tag in config.LDlls:
+                    return config.LDlls[self.tag]
         return None
 
     @Dll.setter
     def Dll(self, val):
-        import config as v
+        
 
         if hasattr(self, "tag"):
             with ls.dl:
-                v.LDlls[self.tag] = val
-                v.Dllc[self.tag].set()
+                config.LDlls[self.tag] = val
+                config.Dllc[self.tag].set()
                 ls.sev.put("ldlls")
 
     @property
     def Dlls_xt(self):
-        import config as v
+        
 
         if hasattr(self, "tag"):
             with ls.dl:
-                if self.tag in v.LDlls_xt:
-                    return v.LDlls_xt[self.tag]
+                if self.tag in config.LDlls_xt:
+                    return config.LDlls_xt[self.tag]
         return 0
 
     @Dlls_xt.setter
     def Dlls_xt(self, val):
-        import config as v
+        
 
         if hasattr(self, "tag"):
             with ls.dl:
-                v.LDlls_xt[self.tag] = val
+                config.LDlls_xt[self.tag] = val
                 ls.sev.put("ldlls")
 
     @property
     def SDh(self):
-        import config as v
+        
 
         if hasattr(self, "tag"):
             with ls.dl:
-                if self.tag in v.LDhd:
-                    return v.LDhd[self.tag]
+                if self.tag in config.LDhd:
+                    return config.LDhd[self.tag]
         return 0
 
     @SDh.setter
     def SDh(self, val):
-        import config as v
+        
 
         if hasattr(self, "tag"):
             with ls.dl:
-                v.LDhd[self.tag] = val
-                v.Dllc[self.tag].clear()
+                config.LDhd[self.tag] = val
+                config.Dllc[self.tag].clear()
                 ls.sev.put("ldhd")
 
 
@@ -117,61 +117,61 @@ class Remote_Mixin:
 
     @property
     def Dll(self):
-        import config as v
+        
 
         if hasattr(self, "tag"):
             with ls.dl:
-                if self.tag in v.RDlls:
-                    return v.RDlls[self.tag]
+                if self.tag in config.RDlls:
+                    return config.RDlls[self.tag]
         return None
 
     @Dll.setter
     def Dll(self, val):
-        import config as v
+        
 
         if hasattr(self, "tag"):
             with ls.dl:
-                v.RDlls[self.tag] = val
-                v.Dllc[self.tag].set()
+                config.RDlls[self.tag] = val
+                config.Dllc[self.tag].set()
                 ls.sev.put("rdlls")
 
     @property
     def Dlls_xt(self):
-        import config as v
+        
 
         if hasattr(self, "tag"):
             with ls.dl:
-                if self.tag in v.RDlls_xt:
-                    return v.RDlls_xt[self.tag]
+                if self.tag in config.RDlls_xt:
+                    return config.RDlls_xt[self.tag]
         return 0
 
     @Dlls_xt.setter
     def Dlls_xt(self, val):
-        import config as v
+        
 
         if hasattr(self, "tag"):
             with ls.dl:
-                v.RDlls_xt[self.tag] = val
+                config.RDlls_xt[self.tag] = val
                 ls.sev.put("rdlls")
 
     @property
     def SDh(self):
-        import config as v
+        
 
         if hasattr(self, "tag"):
             with ls.dl:
-                if self.tag in v.RDhd:
-                    return v.RDhd[self.tag]
+                if self.tag in config.RDhd:
+                    return config.RDhd[self.tag]
         return 0
 
     @SDh.setter
     def SDh(self, val):
-        import config as v
+        
 
         if hasattr(self, "tag"):
             with ls.dl:
-                v.RDhd[self.tag] = val
-                v.Dllc[self.tag].clear()
+                config.RDhd[self.tag] = val
+                config.Dllc[self.tag].clear()
                 ls.sev.put("rdhd")
 
 
@@ -180,7 +180,7 @@ class FS_Mixin(SD):
         super(FS_Mixin, self).__init__(*args, **kwargs)
 
     def sdh_d(self):
-        import config as v
+        
         from bhash import xxh64Hash
 
         rv = None
@@ -188,25 +188,25 @@ class FS_Mixin(SD):
             match self.Dll_status():
                 case 0:
                     if self.isremote:
-                        rv = v.RDhd[self.tag]
+                        rv = config.RDhd[self.tag]
                     else:
-                        rv = v.LDhd[self.tag]
-                    v.h_hits += 1
+                        rv = config.LDhd[self.tag]
+                    config.h_hits += 1
                 case 1 | 2 | 3:
                     Si_dl = self.Dlld()
                     if Si_dl is not None:
                         rv = xxh64Hash(Si_dl)
-                        v.h_miss += 1
+                        config.h_miss += 1
         return rv
 
     def Dll_status(self):
-        import config as v
+        
 
         if self.Dll is None:
             return 3
         elif self.isremote and self.Dlls_xt + rto1 <= time.time():
             return 2
-        elif v.Dllc[self.tag].is_set():
+        elif config.Dllc[self.tag].is_set():
             return 1
         return 0
 
