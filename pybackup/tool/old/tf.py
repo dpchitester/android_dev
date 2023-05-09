@@ -4,6 +4,7 @@ from collections import defaultdict
 from keyword import iskeyword
 from tokenize import tokenize
 
+gobn = "inspect/tf"
 
 class _Ni:
     def __init__(self):
@@ -54,5 +55,5 @@ def _dumptf(tf):
         fh.write("\n")
 
 
-with open("index.tf", "w") as fh:
+with open(gobn + ".txt", "w") as fh:
     _dumptf(TF)
