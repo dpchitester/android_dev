@@ -1,5 +1,5 @@
-from modulefinder import ModuleFinder
 import json
+from modulefinder import ModuleFinder
 
 gobn = "inspect/imports1"
 
@@ -25,5 +25,5 @@ for name, mod in moduleslist.items():
     if mod.__file__ is not None and "python3" not in mod.__file__:
         ml[name] = sorted(list(mod.globalnames.keys()))
 
-with open(gobn+".json", "w") as fh:
+with open(gobn + ".json", "w") as fh:
     json.dump(ml, fh, sort_keys=True, indent=4)

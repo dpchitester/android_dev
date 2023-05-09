@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 
 import asyncrun as ar
-import config as v
+import config
 from de import DE, FSe
 
 dexs = {
@@ -24,13 +24,13 @@ dexs = {
 
 def cull_DEs(des):
     des[:] = [
-        de for de in des if not any([sd for sd in de.nm.parent.parts if sd in v.dexs])
+        de for de in des if not any([sd for sd in de.nm.parent.parts if sd in config.dexs])
     ]
 
 
 def cull_files(files, pt):
     files[:] = [
-        pt(f) for f in files if not any([sd for sd in f.parent.parts if sd in v.dexs])
+        pt(f) for f in files if not any([sd for sd in f.parent.parts if sd in config.dexs])
     ]
 
 
@@ -39,7 +39,7 @@ def cull_dirs(dirs, pt):
 
 
 def isbaddir(dir):
-    return dir in v.dexs or dir in dexs
+    return dir in config.dexs or dir in dexs
 
 
 class FileList:
@@ -62,9 +62,10 @@ class LocalFileList(FileList):
 
     def getfl_str_fp(self, fp: str):
         from collections import deque
+
         q = deque()
         q.append(fp)
-        
+
         fl1 = []
         while True:
             try:
@@ -87,7 +88,7 @@ class LocalFileList(FileList):
     def getdll(self):  # local-source
         import config as v
 
-        v.dl1_cs += 1
+        config.dl1_cs += 1
         l1 = self.getfl()
         st = []
         for it in l1:
@@ -96,7 +97,7 @@ class LocalFileList(FileList):
                 fs = it.stat()
                 it2 = fs.st_size
                 it3 = fs.st_mtime_ns
-                it3 = v.ns_trunc2ms(it3)
+                it3 = config.ns_trunc2ms(it3)
             except FileNotFoundError as exc:
                 print(exc)
                 it2 = 0
@@ -125,7 +126,7 @@ class RemoteFileList(FileList):
     def getdll(self):  # remote-source
         import config as v
 
-        v.dl2_cs += 1
+        config.dl2_cs += 1
         pt = Path
         # print('getdll1', di, str(td))
         l1 = self.getfl(self.sd)
@@ -137,7 +138,7 @@ class RemoteFileList(FileList):
                 it2 = it["Size"]
                 it3 = it["ModTime"][:-1] + "-00:00"
                 it3 = datetime.datetime.fromisoformat(it3).timestamp()
-                it3 = v.ts_trunc2ms(it3)
+                it3 = config.ts_trunc2ms(it3)
                 fse = FSe(it2, it3)
                 return DE(it1, fse)
 

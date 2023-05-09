@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 from time import time
 
+import config
 import ldsv as ls
 
 
@@ -20,7 +21,7 @@ class Edge:
     )
 
     def __eq__(self, other):
-        return self.si==other.si and self.di==other.di
+        return self.si == other.si and self.di == other.di
 
     def __hash__(self):
         return hash((self.si, self.di))

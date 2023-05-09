@@ -1,20 +1,20 @@
-import config as v
+import config
 import ldsv as ls
 
 
 def stsupdate(Si, Dh):
     # print(Si, end=' ')
     print(Si, end=" ")
-    # N1 = v.srcts[Si]
-    for e in [e for e in v.eDep if e.si == Si]:
+    # N1 = config.srcts[Si]
+    for e in [e for e in config.eDep if e.si == Si]:
         e.rtset()
-    v.src(Si).sdhset(Dh)
+    config.src(Si).sdhset(Dh)
 
 
 def onestatus(Si):
     # TODO: update as per src_statuses
     with ls.dl:
-        tr = v.src(Si).sdhck()
+        tr = config.src(Si).sdhck()
         if tr is not None:
             (Dh, changed) = tr
             if changed:
@@ -25,9 +25,9 @@ def onestatus(Si):
 def src_statuses():
     SDl = []
     with ls.dl:
-        for Si in v.srcs:
+        for Si in config.srcs:
             # print('calling lckers', Si)
-            tr = v.src(Si).sdhck()
+            tr = config.src(Si).sdhck()
             if tr is not None:
                 (Dh, changed) = tr
                 if changed:

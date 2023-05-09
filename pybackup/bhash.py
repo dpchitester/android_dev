@@ -3,6 +3,8 @@ from struct import pack
 
 from xxhash import xxh64
 
+import config
+
 
 def bhu(ho, it):
     from pathlib import Path

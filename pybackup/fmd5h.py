@@ -1,5 +1,7 @@
 from hashlib import md5
 
+import config
+
 
 def md5sumf(Fn):
     if Fn.exists():

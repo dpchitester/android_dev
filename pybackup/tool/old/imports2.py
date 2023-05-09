@@ -1,11 +1,12 @@
+import fnmatch
 import sys
 
-import fnmatch
-from stdlib_list import stdlib_list
 import graphviz
 from findimports import ModuleGraph
+from stdlib_list import stdlib_list
 
 gobn = "inspect/imports2"
+
 
 def graphpack(
     path, package_name, ignore_packages=None, ignore_modules=None, color_rules=None

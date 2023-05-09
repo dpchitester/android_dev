@@ -1,12 +1,13 @@
 gobn = "inspect/callgraph"
 from pathlib import Path
 
-import pybackup
 import asyncrun as ar
+import pybackup
+
 
 def pmain():
-    import yappi
     import snakeviz.cli as cli
+    import yappi
 
     yappi.start()
     pybackup.main()
@@ -22,8 +23,7 @@ def pmain():
 
     yappi.clear_stats()
 
-    cli.main([gobn + ".pstat",'-s'])
-    
+    cli.main([gobn + ".pstat", "-s"])
 
 
 if __name__ == "__main__":

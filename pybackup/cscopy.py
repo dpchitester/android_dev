@@ -2,6 +2,7 @@ import datetime as dt
 from math import floor
 
 import asyncrun as ar
+import config
 from edge import Edge
 from netup import netup
 from opbase import OpBase

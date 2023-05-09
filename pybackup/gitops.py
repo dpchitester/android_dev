@@ -1,4 +1,5 @@
 import asyncrun as ar
+import config
 import config as v
 from edge import Edge, findEdge
 from netup import netup

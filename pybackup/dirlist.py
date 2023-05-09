@@ -7,7 +7,7 @@ from os import walk
 from pathlib import Path
 
 import asyncrun as ar
-import config as v
+import config
 from de import DE, FSe
 
 rto1 = 60 * 0

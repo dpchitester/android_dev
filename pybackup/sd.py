@@ -1,6 +1,7 @@
 import time
 from pathlib import PosixPath
 
+import config
 import ldsv as ls
 
 # from snoop import pp

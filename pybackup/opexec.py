@@ -1,4 +1,4 @@
-import config as v
+import config
 from edge import Edge, findEdge
 from opbase import OpBase
 from status import updatets
@@ -9,7 +9,7 @@ _pass = 1
 
 def changed_ops(T=None) -> list[OpBase]:
     rv: list[OpBase] = []
-    for Op in v.opdep:
+    for Op in config.opdep:
         di, si = Op.npl1
         if T is None or T == di:
             e: Edge = findEdge(di, si)
@@ -33,7 +33,7 @@ def clean():
 
 
 def nodeps(T):
-    for e in v.eDep:
+    for e in config.eDep:
         if e.si == T:
             return False
     return True
@@ -41,7 +41,7 @@ def nodeps(T):
 
 def istgt(T, dep2=None):
     if dep2 is None:
-        dep2 = v.eDep
+        dep2 = config.eDep
     for e in dep2:
         if e.di == T:
             return True
@@ -50,7 +50,7 @@ def istgt(T, dep2=None):
 
 def nts():
     print("-nts")
-    p1 = topological_sort(v.eDep)
+    p1 = topological_sort(config.eDep)
     ts = [t for elem in p1 for t in elem]
     ts = [d for d in ts if istgt(d)]
     ts.reverse()

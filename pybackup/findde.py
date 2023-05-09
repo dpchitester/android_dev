@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import List
 
 import asyncrun as ar
+import config
 import ldsv as ls
 from de import DE, FSe
 from sd import FS_Mixin

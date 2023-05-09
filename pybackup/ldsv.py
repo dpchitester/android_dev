@@ -3,6 +3,8 @@ from queue import Empty, SimpleQueue
 from threading import RLock, Thread
 from time import sleep
 
+import config
+
 # from snoop import snoop
 
 dl = RLock()

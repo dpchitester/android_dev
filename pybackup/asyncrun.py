@@ -1,6 +1,7 @@
 import json
 import subprocess
 
+import config
 from csubproc import ContinuousSubprocess, Qi1, Qi2
 
 # from snoop import pp

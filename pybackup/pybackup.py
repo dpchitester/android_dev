@@ -11,7 +11,7 @@ from asyncinotify import Event as WEvent
 from asyncinotify import Inotify, Mask, Watch
 
 import asyncrun as ar
-import config as v
+import config
 import ldsv as ls
 from findde import updateDEs
 from opexec import clean, opExec
@@ -23,7 +23,7 @@ from status import updatets
 
 
 in1 = None
-wdsi: dict[Watch, v.NodeTag] = {}
+wdsi: dict[Watch, config.NodeTag] = {}
 weq = Queue()
 
 th1 = None
@@ -34,15 +34,15 @@ th3 = None
 def wsetup():
     global wdsi, in1, v
     print("-wsetup")
-    for si in v.srcs:
+    for si in config.srcs:
         try:
-            p = v.src(si)
+            p = config.src(si)
             pt = type(p)
-            if p.is_dir() and not v.isbaddir(p) and isinstance(p, FS_Mixin):
+            if p.is_dir() and not config.isbaddir(p) and isinstance(p, FS_Mixin):
                 # TODO: not up to date
                 for pth, dirs, files in walk(p, topdown=True):
                     pth = pt(pth)
-                    v.cull_dirs(dirs, pt)
+                    config.cull_dirs(dirs, pt)
                     wa: Watch = in1.add_watch(pth, Mask(0x306))
                     wdsi[wa] = si
         except KeyboardInterrupt as exc:
@@ -63,14 +63,14 @@ def cb1():
                 weq.put(ev)
         except BlockingIOError:
             pass
-        if v.quit_ev.is_set():
+        if config.quit_ev.is_set():
             break
         sleep(1)
 
 
 def proc_events():
     print("-proc_events started")
-    sis: dict[v.NodeTag, list[str]] = {}
+    sis: dict[config.NodeTag, list[str]] = {}
     sislk = Lock()
 
     def procq():
@@ -78,7 +78,7 @@ def proc_events():
         with sislk:
             tsis, sis = sis, {}
             for si in tsis:
-                p = v.src(si)
+                p = config.src(si)
                 fl = tsis[si]
                 if len(fl):
                     print("-procq updateDEs", p, fl)
@@ -88,10 +88,10 @@ def proc_events():
         try:
             we: WEvent = weq.get(timeout=0.666)
             if we is not None:
-                si: v.NodeTag = wdsi[we.watch]
+                si: config.NodeTag = wdsi[we.watch]
                 p: Path = we.path
                 if not we.mask & Mask.ISDIR:
-                    rfn: Path | str = p.relative_to(v.src(si))
+                    rfn: Path | str = p.relative_to(config.src(si))
                     with sislk:
                         if si not in sis:
                             sis[si] = []
@@ -105,7 +105,7 @@ def proc_events():
             if len(sis):
                 th3 = Thread(target=procq)
                 th3.start()
-        if v.quit_ev.is_set():
+        if config.quit_ev.is_set():
             break
         sleep(1)
 
@@ -126,7 +126,7 @@ def rt2():
 
 def main():
     global cel, wdsi, in1, v, th1, th2, th3
-    v.initConfig()
+    config.initConfig()
     with Inotify(sync_timeout=0.666) as in1:
         try:
             wsetup()
@@ -138,13 +138,13 @@ def main():
             th3 = ls.save_bp()
             th3.start()
             rt2()
-            v.quit_ev.set()
+            config.quit_ev.set()
         except KeyboardInterrupt as exc:
             print(exc)
         finally:
             for th in [th1, th2, th3]:
                 if th:
-                    v.quit_ev.set()
+                    config.quit_ev.set()
                     print("waiting for", th.name, "shutdown")
                     th.join()
 

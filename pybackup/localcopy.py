@@ -1,7 +1,7 @@
 from hashlib import sha256
 
 import asyncrun as ar
-import config as v
+import config
 from edge import Edge, findEdge
 from findde import updateDEs
 from opbase import OpBase
@@ -127,8 +127,8 @@ class LocalCopy(OpBase):
         e: Edge = findEdge(di, si)
         if e.chk_ct():
             print("LocalCopy", self.npl1, self.npl2)
-            sp = v.src(self.npl2[1])
-            tp = v.tgt(self.npl2[0])
+            sp = config.src(self.npl2[1])
+            tp = config.tgt(self.npl2[0])
             gl = self.opts.get("files", ["**/*"])
             for g in gl:
                 try:
@@ -161,6 +161,6 @@ class LocalCopy(OpBase):
             if self.sfc.fc == 0:
                 e.clr()
             if self.sfc.sc > 0:
-                if di in v.srcs:
+                if di in config.srcs:
                     onestatus(di)
         return self.sfc.value()

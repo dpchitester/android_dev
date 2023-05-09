@@ -1,6 +1,8 @@
 import json
 from pathlib import PosixPath
 
+import config
+
 
 class OpBaseEncoder(json.JSONEncoder):
     def default(self, obj):

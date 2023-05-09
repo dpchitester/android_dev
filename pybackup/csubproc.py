@@ -10,6 +10,8 @@ from threading import Thread
 from time import sleep
 from typing import IO, AnyStr, Generator, Optional
 
+import config
+
 # logger = logging.getLogger(__name__)
 
 Qi1 = types.new_class("Qi1", bases=(str,))

@@ -3,7 +3,7 @@ from os import utime, walk
 from pathlib import Path
 from shutil import make_archive
 
-import config as v
+import config
 from edge import Edge, findEdge
 from findde import updateDEs
 from opbase import OpBase
