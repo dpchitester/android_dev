@@ -12,7 +12,7 @@ sev = SimpleQueue()
 
 
 def pstats():
-    print(f"dl1_cs {config.dl1_cs:6d}")
+    print(f"{'dl1_cs':7} {config.dl1_cs:6d}")
     print("dl2_cs", config.dl2_cs)
     print("sfb", config.sfb)
     print("h_hits", config.h_hits)
