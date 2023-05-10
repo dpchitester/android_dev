@@ -24,6 +24,7 @@ def getOneJSde(rd: Path, fn):
     cmd = 'rclone lsjson "' + str(rd) + '" '
     cmd += ' --include="' + fn + '"'
     cmd += " --files-only"
+    print(cmd)
     rc = ar.run1(cmd)
     if rc == 0:
         jsl = json.loads(ar.txt)
