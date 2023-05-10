@@ -13,11 +13,11 @@ sev = SimpleQueue()
 
 def pstats():
     print(f"{'dl1_cs':7} {config.dl1_cs:6d}")
-    print("dl2_cs", config.dl2_cs)
-    print("sfb", config.sfb)
-    print("h_hits", config.h_hits)
-    print("h_miss", config.h_miss)
-    print("upd_cs", config.upd_cs)
+    print(f"{'dl2_cs':7} {config.dl2_cs:6d}")
+    print(f"{'sfb':7} {config.sfb:6d}")
+    print(f"{'h_hits':7} {config.h_hits:6d}")
+    print(f"{'h_miss':7} {config.h_miss:6d}")
+    print(f"{'upd_cs':7} {config.upd_cs:6d}")
 
 def loadldlls():
     with dl:
