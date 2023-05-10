@@ -17,7 +17,7 @@ def pstats():
     print("sfb", config.sfb)
     print("h_hits", config.h_hits)
     print("h_miss", config.h_miss)
-
+    print("upd_cs", config.upd_cs)
 
 def loadldlls():
     with dl:

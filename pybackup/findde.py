@@ -130,6 +130,7 @@ def updateDEs(rd: Path, flst: List[str]):
                     else:
                         ls.sev.put("ldlls")
                         config.Dllc[si].set()
+                    config.upd_cs += 1
                 if tde.i.mt != sde.i.mt:
                     tde.i.mt = sde.i.mt
                     if p.isremote:
@@ -138,6 +139,7 @@ def updateDEs(rd: Path, flst: List[str]):
                     else:
                         ls.sev.put("ldlls")
                         config.Dllc[si].set()
+                    config.upd_cs += 1
             else:
                 fse = FSe(sde.i.sz, sde.i.mt)
                 tde = DE(rp, fse)
@@ -148,6 +150,7 @@ def updateDEs(rd: Path, flst: List[str]):
                 else:
                     ls.sev.put("ldlls")
                     config.Dllc[si].set()
+                config.upd_cs += 1
         else:
             if tde:
                 # dl.pop(i)
@@ -173,6 +176,7 @@ def updateDEs(rd: Path, flst: List[str]):
                     else:
                         ls.sev.put("ldlls")
                         config.Dllc[di].set()
+                    config.upd_cs += 1
                 if tde.i.mt != sde.i.mt:
                     tde.i.mt = sde.i.mt
                     if p.isremote:
@@ -181,6 +185,7 @@ def updateDEs(rd: Path, flst: List[str]):
                     else:
                         ls.sev.put("ldlls")
                         config.Dllc[di].set()
+                    config.upd_cs += 1
             else:
                 fse = FSe(sde.i.sz, sde.i.mt)
                 tde = DE(rp, fse)
@@ -191,6 +196,7 @@ def updateDEs(rd: Path, flst: List[str]):
                 else:
                     ls.sev.put("ldlls")
                     config.Dllc[di].set()
+                config.upd_cs += 1
         else:
             if tde:
                 # dl.pop(i)

@@ -159,6 +159,8 @@ dl2_cs = 0
 h_hits = 0
 h_miss = 0
 
+upd_cs = 0
+
 home: Optional[Ext3] = None
 sdcard: Optional[Fat32] = None
 cloud1: Optional[CS] = None
