@@ -1,32 +1,51 @@
+from bisect import insort_right
 from pathlib import Path
-from pprint import pprint
 
-import module_dependencies as md
-import pygraphviz
 from module_dependencies import Source
-
-import asyncrun as ar
 
 # This creates a Source instance for this file itself
 
+
 gobn = "inspect/md2"
 
-graph = pygraphviz.AGraph(strict=False, directed=True)
 
 p = Path.cwd()
+
+
+class graph(dict):
+    def add_edge(self, i1, i2):
+        if i1 not in self:
+            self[i1] = []
+        insort_right(self[i1], i2)
+
+    def write(self, fn):
+        with open(fn, "w") as fh:
+            fh.write("digraph md2 {\n")
+            for n1 in sorted(self.keys()):
+                fh.write('    "' + n1 + '" -> {')
+                first=True
+                for n2 in self[n1]:
+                    if first:
+                        fh.write('"' + n2 + '"')
+                        first=False
+                    else:
+                        fh.write(', "' + n2 + '"')
+                fh.write('}\n')
+            fh.write("}\n")
+
+
+g = graph()
 
 for pf in p.glob("*.py"):
     src = Source.from_file(pf.name)
     source = pf.stem
     deps = src.imports()
-    print(source, deps)
     for dep in deps:
-        print(source, dep)
         sink = dep.strip()
         if sink:
-            graph.add_edge(source, sink)
+            g.add_edge(source, sink)
 
-graph.write(gobn + ".gv")
+g.write(gobn + ".gv")
 
 # cmd='dot -Tsvg -Kfdp -o '+gobn+'.svg '+gobn+'.gv'
 # ar.run1(cmd)
