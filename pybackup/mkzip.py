@@ -1,12 +1,10 @@
 import math
-from os import utime
-from os import walk
+from os import utime, walk
 from pathlib import Path
 from shutil import make_archive
 
 import config
-from edge import Edge
-from edge import findEdge
+from edge import Edge, findEdge
 from findde import updateDEs
 from opbase import OpBase
 from status import onestatus
@@ -57,8 +55,8 @@ class Mkzip(OpBase):
         e: Edge = findEdge(di1, si1)
         if e.chk_ct():
             di2, si2 = self.npl2
-            sd = v.src(si2)
-            td = v.tgt(di2)
+            sd = config.src(si2)
+            td = config.tgt(di2)
             zf = self.opts.get("zipfile", "temp.zip")
             zp = td / Path(zf).stem
             try:

@@ -7,8 +7,7 @@ from typing import List
 import asyncrun as ar
 import config
 import ldsv as ls
-from de import DE
-from de import FSe
+from de import DE, FSe
 from sd import FS_Mixin
 
 
@@ -45,8 +44,6 @@ def getRemoteJSde(rd: Path, fn: str):
 
 
 def getRemoteDEs(rd: Path, fl: list[str]):
-    import config
-
     jsl = []
     for fn in fl:
         jsl.extend(getRemoteJSde(rd, fn))
@@ -65,8 +62,6 @@ def getRemoteDEs(rd: Path, fl: list[str]):
 
 
 def findSis(fp1: Path):
-    import config
-
     l1 = {}
     for si, p in config.srcs.items():
         if isinstance(p, FS_Mixin):
@@ -78,8 +73,6 @@ def findSis(fp1: Path):
 
 
 def findDis(fp1: Path):
-    import config
-
     l1 = {}
     for di, p in config.tgts.items():
         if isinstance(p, FS_Mixin):
@@ -91,8 +84,6 @@ def findDis(fp1: Path):
 
 
 def findSDEs(fp: Path):
-    import config
-
     sil = findSis(fp)
     de_l = []
     for si in sil:
@@ -106,8 +97,6 @@ def findSDEs(fp: Path):
 
 
 def findTDEs(fp: Path):
-    import config
-
     dil = findDis(fp)
     de_l = []
     for di in dil:
@@ -121,8 +110,6 @@ def findTDEs(fp: Path):
 
 
 def updateDEs(rd: Path, flst: List[str]):
-    import config
-
     def doSOne(dl, rp, tde, i, si):
         if tde:
             sde = [sde for sde in sdel if sde.nm.name == tde.nm.name]

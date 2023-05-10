@@ -3,23 +3,17 @@
 
 from os import walk
 from pathlib import Path
-from queue import Empty
-from queue import Queue
-from threading import Lock
-from threading import Thread
+from queue import Empty, Queue
+from threading import Lock, Thread
 from time import sleep
 
 from asyncinotify import Event as WEvent
-from asyncinotify import Inotify
-from asyncinotify import Mask
-from asyncinotify import Watch
+from asyncinotify import Inotify, Mask, Watch
 
-import asyncrun as ar
 import config
 import ldsv as ls
 from findde import updateDEs
-from opexec import clean
-from opexec import opExec
+from opexec import clean, opExec
 from sd import FS_Mixin
 from status import updatets
 

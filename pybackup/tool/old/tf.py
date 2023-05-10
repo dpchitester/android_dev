@@ -6,6 +6,7 @@ from tokenize import tokenize
 
 gobn = "inspect/tf"
 
+
 class _Ni:
     def __init__(self):
         self.lns = defaultdict(list)

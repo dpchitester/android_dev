@@ -1,8 +1,6 @@
 import pickle
-from queue import Empty
-from queue import SimpleQueue
-from threading import RLock
-from threading import Thread
+from queue import Empty, SimpleQueue
+from threading import RLock, Thread
 from time import sleep
 
 import config
@@ -14,8 +12,6 @@ sev = SimpleQueue()
 
 
 def pstats():
-    import config
-
     print("dl1_cs", config.dl1_cs)
     print("dl2_cs", config.dl2_cs)
     print("sfb", config.sfb)
@@ -24,8 +20,6 @@ def pstats():
 
 
 def loadldlls():
-    import config
-
     with dl:
         try:
             with open(config.ldllsf, "rb") as fh:
@@ -46,8 +40,6 @@ def loadldlls():
 
 
 def loadrdlls():
-    import config
-
     with dl:
         try:
             with open(config.rdllsf, "rb") as fh:
@@ -68,8 +60,6 @@ def loadrdlls():
 
 
 def saveldlls():
-    import config
-
     with dl:
         # print('-saveldlls')
         try:
@@ -82,8 +72,6 @@ def saveldlls():
 
 
 def saverdlls():
-    import config
-
     with dl:
         try:
             with open(config.rdllsf, "wb") as fh:
@@ -95,8 +83,6 @@ def saverdlls():
 
 
 def loadedges():
-    import config
-
     with dl:
         try:
             with open(config.edgepf, "rb") as fh:
@@ -114,8 +100,6 @@ def loadedges():
 
 
 def saveedges():
-    import config
-
     with dl:
         try:
             with open(config.edgepf, "wb") as fh:
@@ -126,8 +110,6 @@ def saveedges():
 
 
 def loadldh():
-    import config
-
     with dl:
         try:
             with open(config.ldhpf, "rb") as fh:
@@ -137,8 +119,6 @@ def loadldh():
 
 
 def loadrdh():
-    import config
-
     with dl:
         try:
             with open(config.rdhpf, "rb") as fh:
@@ -148,8 +128,6 @@ def loadrdh():
 
 
 def saveldh():
-    import config
-
     with dl:
         try:
             with open(config.ldhpf, "wb") as fh:
@@ -160,8 +138,6 @@ def saveldh():
 
 
 def saverdh():
-    import config
-
     with dl:
         try:
             with open(config.rdhpf, "wb") as fh:
@@ -190,8 +166,6 @@ def save_all():
 
 
 def save_bp():
-    import config
-
     def save_th():
         svs = {}
         while not config.quit_ev.is_set():

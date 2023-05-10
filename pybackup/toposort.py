@@ -1,8 +1,5 @@
 from tarjan import tarjan_recursive
 
-import config
-
-
 def topological_sort(dependency_pairs):
     "Sort values subject to dependency constraints"
     nodes = {}

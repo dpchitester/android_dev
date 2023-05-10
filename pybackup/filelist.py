@@ -1,11 +1,11 @@
+import bisect
 import datetime
 import os
 from pathlib import Path
 
 import asyncrun as ar
 import config
-from de import DE
-from de import FSe
+from de import DE, FSe
 
 dexs = {
     ".cargo",
@@ -71,7 +71,6 @@ class LocalFileList(FileList):
         q = deque()
         q.append(fp)
 
-        fl1 = []
         while True:
             try:
                 fp2 = q.popleft()
@@ -79,13 +78,12 @@ class LocalFileList(FileList):
                 with os.scandir(fp2) as di:
                     for it1 in di:
                         if it1.is_file():
-                            fl1.append(it1)
+                            yield it1
                         elif not it1.is_symlink():
                             if not isbaddir(it1.name):
                                 q.append(it1.path)
             except IndexError:
                 break
-        return fl1
 
     def getfl(self):
         return self.getfl_str_fp(str(self.sd))
@@ -94,9 +92,8 @@ class LocalFileList(FileList):
         import config
 
         config.dl1_cs += 1
-        l1 = self.getfl()
         st = []
-        for it in l1:
+        for it in self.getfl():
             it1 = Path(it.path).relative_to(self.sd)
             try:
                 fs = it.stat()
@@ -108,8 +105,7 @@ class LocalFileList(FileList):
                 it2 = 0
                 it3 = 0
             fse = FSe(it2, it3)
-            st.append(DE(it1, fse))
-        st.sort(key=lambda de: de.nm)
+            bisect.insort(st, DE(it1, fse), key=lambda de: de.nm)
         return st
 
 
@@ -132,25 +128,18 @@ class RemoteFileList(FileList):
         import config
 
         config.dl2_cs += 1
-        pt = Path
         # print('getdll1', di, str(td))
-        l1 = self.getfl(self.sd)
-        if l1:
-
-            def es(it: dict):
-                # TODO: use Path
-                it1 = pt(it["Path"])
-                it2 = it["Size"]
-                it3 = it["ModTime"][:-1] + "-00:00"
-                it3 = datetime.datetime.fromisoformat(it3).timestamp()
-                it3 = config.ts_trunc2ms(it3)
-                fse = FSe(it2, it3)
-                return DE(it1, fse)
-
-            st = list(map(es, l1))
-            st.sort(key=lambda de: de.nm)
-            return st
-        return None
+        st = []
+        for it in self.getfl(self.sd):
+            # TODO: use Path
+            it1 = Path(it["Path"])
+            it2 = it["Size"]
+            it3 = it["ModTime"][:-1] + "-00:00"
+            it3 = datetime.datetime.fromisoformat(it3).timestamp()
+            it3 = config.ts_trunc2ms(it3)
+            fse = FSe(it2, it3)
+            bisect.insort(st, DE(it1, fse), key=lambda de: de.nm)
+        return st
 
 
 if __name__ == "__main__":

@@ -1,12 +1,12 @@
 import json
 from pathlib import PosixPath
 
-import config
+from edge import Edge
 
 
 class OpBaseEncoder(json.JSONEncoder):
     def default(self, obj):
-        from edge import Edge
+
 
         if isinstance(obj, PosixPath):
             # print(1, obj.__class__)
@@ -36,7 +36,6 @@ class OpBaseEncoder(json.JSONEncoder):
 
 
 class OpBase:
-    from edge import Edge
 
     def __init__(self, npl1, npl2, opts={}):
         self.npl1 = npl1

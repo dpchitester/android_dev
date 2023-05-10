@@ -1,7 +1,6 @@
 import asyncrun as ar
 import config
-from edge import Edge
-from edge import findEdge
+from edge import Edge, findEdge
 from netup import netup
 from opbase import OpBase
 

@@ -3,14 +3,11 @@ from struct import pack
 
 from xxhash import xxh64
 
-import config
-
 
 def bhu(ho, it):
     from pathlib import Path
 
-    from de import DE
-    from de import FSe
+    from de import DE, FSe
 
     match it:
         case bytes():

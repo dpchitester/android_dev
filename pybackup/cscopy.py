@@ -293,8 +293,7 @@ class CSCopy(OpBase):
         return e.chk_ct() or e.rchk_ct()
 
     def __call__(self):
-        from edge import Edge
-        from edge import findEdge
+        from edge import Edge, findEdge
         from status import onestatus
 
         di, si = self.npl1

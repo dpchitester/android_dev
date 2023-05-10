@@ -1,6 +1,5 @@
 import config
-from edge import Edge
-from edge import findEdge
+from edge import Edge, findEdge
 from opbase import OpBase
 from status import updatets
 from toposort import topological_sort
@@ -82,6 +81,4 @@ def opExec():
 
 
 if __name__ == "__main__":
-    import config
-
     print(opExec())
