@@ -26,8 +26,6 @@ def ar_run(cmd):
                 opmsg.append(m)
             elif "stats" in m["source"]:
                 statmsg.append(m)
-        for m in opmsg:
-            print(json.dumps(m, indent=4))
     f1()
     return rc
 
@@ -76,11 +74,15 @@ def ftouch(di, si, td, lf, sfc):
         rc = ar_run(cmd)
         if rc == 0:
             sfc.sc += 1
+            for m in opmsg:
+                print(json.dumps(m, indent=4))
             opmsg.clear()
             statmsg.clear()
             return True
         else:
             sfc.fc += 1
+            opmsg.clear()
+            statmsg.clear()
             print(ar.txt)
     return False
 
@@ -102,6 +104,8 @@ def fsync(di, si, sd, td, sfc):
         rc = ar_run(cmd)
         if rc == 0:
             sfc.sc += 1
+            for m in opmsg:
+                print(json.dumps(m, indent=4))
             opmsg.clear()
             statmsg.clear()
             return True
@@ -109,6 +113,7 @@ def fsync(di, si, sd, td, sfc):
             sfc.fc += 1
             opmsg.clear()
             statmsg.clear()
+            print(ar.txt)
     return False
 
 
@@ -137,6 +142,8 @@ def fsyncl(di, si, sd, td, fl, sfc):
         rc = ar_run(cmd)
         if rc == 0:
             sfc.sc += len(fl)
+            for m in opmsg:
+                print(json.dumps(m, indent=4))
             opmsg.clear()
             statmsg.clear()
             return True
@@ -144,6 +151,7 @@ def fsyncl(di, si, sd, td, fl, sfc):
             sfc.fc += 1
             opmsg.clear()
             statmsg.clear()
+            print(ar.txt)
     return False
 
 
@@ -156,6 +164,8 @@ def fdel(di, si, sd, td, sfc):
         rc = ar_run(cmd)
         if rc == 0:
             sfc.sc += 1
+            for m in opmsg:
+                print(json.dumps(m, indent=4))
             opmsg.clear()
             statmsg.clear()
             return True
@@ -163,6 +173,7 @@ def fdel(di, si, sd, td, sfc):
             sfc.fc += 1
             opmsg.clear()
             statmsg.clear()
+            print(ar.txt)
     return False
 
 
@@ -187,6 +198,8 @@ def fdell(di, si, td, fl, sfc):
         rc = ar_run(cmd)
         if rc == 0:
             sfc.sc += 1
+            for m in opmsg:
+                print(json.dumps(m, indent=4))
             opmsg.clear()
             statmsg.clear()
             return True
@@ -194,6 +207,7 @@ def fdell(di, si, td, fl, sfc):
             sfc.fc += 1
             opmsg.clear()
             statmsg.clear()
+            print(ar.txt)
     return False
 
 
