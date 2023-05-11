@@ -187,22 +187,22 @@ class FS_Mixin(SD):
         from filelist import FileList
 
         # print('-ldlld', si)
-        # if self.isremote:
-        # ch = "r"
-        # else:
-        # ch = "l"
+        if self.isremote:
+            ch = "r"
+        else:
+            ch = "l"
         if self.Dll_status() > 1:
-            # print("sucking/scanning for", self.tag, ch + "dll...", end="")
+            print("sucking/scanning for", self.tag, ch + "dll...", end="")
             rv = FileList(self).getdll()
             if rv is not None:
-                # print("done.")
+                print("done.")
                 self.Dll = rv
                 self.Dlls_xt = time.time()
             else:
-                # print("failed.")
+                print("failed.")
                 pass
         else:
-            # print("fetched", self.tag, ch + "dll from cache.")
+            print("fetched", self.tag, ch + "dll from cache.")
             pass
         return self.Dll
 
