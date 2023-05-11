@@ -110,29 +110,24 @@ class ContinuousSubprocess:
             # )
 
             while True:
-                if q1.empty():
-                    if q2.empty():
-                        if process.poll() is not None:
-                            break
-                        else:
-                            sleep(0.02)
-                            continue
-                    else:
-                        try:
-                            item = q2.get(False)
-                            dq.append(item)
-                            yield Qi2(item)
-                            continue
-                        except Empty:
-                            pass
-                else:
+                while not q1.empty():
                     try:
                         item = q1.get(False)
                         dq.append(item)
                         yield Qi1(item)
-                        continue
                     except Empty:
                         pass
+                while not q2.empty():
+                    try:
+                        item = q2.get(False)
+                        dq.append(item)
+                        yield Qi2(item)
+                    except Empty:
+                        pass
+                if process.poll() is None:
+                    sleep(0.02)
+                else:
+                    break
 
             # Close streams.
             process.stdout.close()
