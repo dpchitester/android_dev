@@ -1,5 +1,6 @@
 import datetime as dt
 from math import floor
+import json
 
 import asyncrun as ar
 import config
@@ -18,13 +19,16 @@ statmsg = []
 
 def ar_run(cmd):
     global opmsg, statmsg
-    rc = ar.run2(cmd)
+    rc = ar.run3(cmd)
     def f1(): # for ar_run3
         for m in ar.msglst:
             if "operations" in m["source"]:
-               opmsg.append(m)
+                opmsg.append(m)
             elif "stats" in m["source"]:
                 statmsg.append(m)
+        for m in opmsg:
+            print(json.dumps(m, indent=4))
+    f1()
     return rc
 
 
@@ -72,6 +76,8 @@ def ftouch(di, si, td, lf, sfc):
         rc = ar_run(cmd)
         if rc == 0:
             sfc.sc += 1
+            opmsg.clear()
+            statmsg.clear()
             return True
         else:
             sfc.fc += 1
@@ -96,10 +102,13 @@ def fsync(di, si, sd, td, sfc):
         rc = ar_run(cmd)
         if rc == 0:
             sfc.sc += 1
+            opmsg.clear()
+            statmsg.clear()
             return True
         else:
             sfc.fc += 1
-            print(ar.txt)
+            opmsg.clear()
+            statmsg.clear()
     return False
 
 
@@ -128,10 +137,13 @@ def fsyncl(di, si, sd, td, fl, sfc):
         rc = ar_run(cmd)
         if rc == 0:
             sfc.sc += len(fl)
+            opmsg.clear()
+            statmsg.clear()
             return True
         else:
             sfc.fc += 1
-            print(ar.txt)
+            opmsg.clear()
+            statmsg.clear()
     return False
 
 
@@ -144,10 +156,13 @@ def fdel(di, si, sd, td, sfc):
         rc = ar_run(cmd)
         if rc == 0:
             sfc.sc += 1
+            opmsg.clear()
+            statmsg.clear()
             return True
         else:
             sfc.fc += 1
-            print(ar.txt)
+            opmsg.clear()
+            statmsg.clear()
     return False
 
 
@@ -172,10 +187,13 @@ def fdell(di, si, td, fl, sfc):
         rc = ar_run(cmd)
         if rc == 0:
             sfc.sc += 1
+            opmsg.clear()
+            statmsg.clear()
             return True
         else:
             sfc.fc += 1
-            print(ar.txt)
+            opmsg.clear()
+            statmsg.clear()
     return False
 
 
@@ -325,9 +343,4 @@ class CSCopy(OpBase):
         if self.sfc.sc > 0:
             if di in config.srcs:
                 onestatus(di)
-        print(len(opmsg), "opmsgs", len(statmsg), "statmsgs")
-        print("opmsg:", colored(0, 255, 0, opmsg))
-        print("statmsg:", colored(0, 0, 255, statmsg))
-        opmsg.clear()
-        statmsg.clear()
         return self.sfc.value()

@@ -68,10 +68,10 @@ def a_run2(shell_command, cwd=None):
 
 def a_run3(shell_command, cwd=None):
     global txt, msglst
-    csp = ContinuousSubprocess(shell_command)
-    olg = csp.execute(path=cwd)
     txt = ""
     msglst = []
+    csp = ContinuousSubprocess(shell_command)
+    olg = csp.execute(path=cwd)
     try:
         for ln in olg:
             match ln:
