@@ -107,7 +107,7 @@ def fsync(di, si, sd, td, sfc):
         if rc == 0:
             for m in opmsg:
                 print(json.dumps(m, indent=4))
-                if str(td) == m['object']:
+                if str(td.name) == m['object']:
                     if m['msg'].startswith('Copied'):
                         sfc.sc += 1
             opmsg.clear()
@@ -165,14 +165,15 @@ def fsyncl(di, si, sd, td, fl, sfc):
 def fdel(di, si, sd, td, sfc):
     if netup():
         cmd = 'rclone delete "'
-        cmd += str(td)
+        cmd += str(td.parent)
+        cmd += '" --include="' + td.name
         cmd += '" --progress -v --use-json-log'
         print(cmd)
         rc = ar_run(cmd)
         if rc == 0:
             for m in opmsg:
                 print(json.dumps(m, indent=4))
-                if str(td) == m['object']:
+                if str(td.name) == m['object']:
                     if m['msg'].startswith('Deleted'):
                         sfc.sc += 1
             opmsg.clear()
