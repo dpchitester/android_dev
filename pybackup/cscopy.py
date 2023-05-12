@@ -79,6 +79,9 @@ def ftouch(di, si, td, lf, sfc):
                     if m['msg'].startswith('Updated modification time'):
                         sfc.sc += 1
             opmsg.clear()
+            for m in statmsg:
+                print(json.dumps(m, indent=4))
+                sfc.sc += m['stats']['checks']
             statmsg.clear()
             return True
         else:
@@ -113,6 +116,10 @@ def fsync(di, si, sd, td, sfc):
                     elif m['msg'].startswith['Updated modification time']:
                         sfc.sc += 1
             opmsg.clear()
+            for m in statmsg:
+                print(json.dumps(m, indent=4))
+                sfc.sc += m['stats']['checks']
+                sfc.sc += m['stats']['transfers']
             statmsg.clear()
             return True
         else:
@@ -156,6 +163,10 @@ def fsyncl(di, si, sd, td, fl, sfc):
                     elif m['msg'].startswith['Updated modification time']:
                         sfc.sc += 1
             opmsg.clear()
+            for m in statmsg:
+                print(json.dumps(m, indent=4))
+                sfc.sc += m['stats']['checks']
+                sfc.sc += m['stats']['transfers']
             statmsg.clear()
             return True
         else:
@@ -181,6 +192,10 @@ def fdel(di, si, sd, td, sfc):
                     if m['msg'].startswith('Deleted'):
                         sfc.sc += 1
             opmsg.clear()
+            for m in statmsg:
+                print(json.dumps(m, indent=4))
+                sfc.sc += m['stats']['checks']
+                sfc.sc += m['stats']['deletes']
             statmsg.clear()
             return True
         else:
@@ -218,6 +233,10 @@ def fdell(di, si, td, fl, sfc):
                         if m['msg'].startswith('Deleted'):
                             sfc.sc += 1
             opmsg.clear()
+            for m in statmsg:
+                print(json.dumps(m, indent=4))
+                sfc.sc += m['stats']['checks']
+                sfc.sc += m['stats']['deletes']
             statmsg.clear()
             return True
         else:
