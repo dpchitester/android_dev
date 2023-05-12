@@ -3,6 +3,8 @@ from pathlib import Path
 
 from module_dependencies import Source
 
+import asyncrun as ar
+
 # This creates a Source instance for this file itself
 
 
@@ -47,5 +49,5 @@ for pf in p.glob("*.py"):
 
 g.write(gobn + ".gv")
 
-# cmd='dot -Tsvg -Kfdp -o '+gobn+'.svg '+gobn+'.gv'
-# ar.run1(cmd)
+cmd='dot -Tsvg -Kfdp -o '+gobn+'.svg '+gobn+'.gv'
+ar.run1(cmd)
