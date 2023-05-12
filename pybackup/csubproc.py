@@ -109,7 +109,7 @@ class ContinuousSubprocess:
             #    "Successfully started threads to capture stdout and stderr streams."
             # )
 
-            while True:
+            while process.poll() is None:
                 while not q1.empty():
                     try:
                         item = q1.get(False)
@@ -117,6 +117,7 @@ class ContinuousSubprocess:
                         yield Qi1(item)
                     except Empty:
                         pass
+                    sleep(0.02)
                 while not q2.empty():
                     try:
                         item = q2.get(False)
@@ -124,10 +125,7 @@ class ContinuousSubprocess:
                         yield Qi2(item)
                     except Empty:
                         pass
-                if process.poll() is None:
                     sleep(0.02)
-                else:
-                    break
 
             # Close streams.
             process.stdout.close()
