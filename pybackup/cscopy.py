@@ -73,9 +73,11 @@ def ftouch(di, si, td, lf, sfc):
         print(cmd)
         rc = ar_run(cmd)
         if rc == 0:
-            sfc.sc += 1
             for m in opmsg:
                 print(json.dumps(m, indent=4))
+                if str(lf) == m['object']:
+                    if m['msg'].startswith('Touched'):
+                        sfc.sc += 1
             opmsg.clear()
             statmsg.clear()
             return True
@@ -103,9 +105,11 @@ def fsync(di, si, sd, td, sfc):
         print(cmd)
         rc = ar_run(cmd)
         if rc == 0:
-            sfc.sc += 1
             for m in opmsg:
                 print(json.dumps(m, indent=4))
+                if str(td) == m['object']:
+                    if m['msg'].startswith('Copied'):
+                        sfc.sc += 1
             opmsg.clear()
             statmsg.clear()
             return True
@@ -141,9 +145,14 @@ def fsyncl(di, si, sd, td, fl, sfc):
         print(cmd)
         rc = ar_run(cmd)
         if rc == 0:
-            sfc.sc += len(fl)
+            sfc.fc = len(fl)
             for m in opmsg:
                 print(json.dumps(m, indent=4))
+                for f in fl:
+                    if str(f.nm) == m['object']:
+                        if m['msg'].startswith('Copied'):
+                            sfc.sc += 1
+                            sfc.fc -= 1
             opmsg.clear()
             statmsg.clear()
             return True
@@ -163,9 +172,13 @@ def fdel(di, si, sd, td, sfc):
         print(cmd)
         rc = ar_run(cmd)
         if rc == 0:
-            sfc.sc += 1
+            sfc.fc = 1
             for m in opmsg:
                 print(json.dumps(m, indent=4))
+                if str(td) == m['object']:
+                    if m['msg'].startswith('Deleted'):
+                        sfc.sc += 1
+                        sfc.fc -= 1
             opmsg.clear()
             statmsg.clear()
             return True
@@ -197,14 +210,19 @@ def fdell(di, si, td, fl, sfc):
         print(cmd)
         rc = ar_run(cmd)
         if rc == 0:
-            sfc.sc += 1
+            sfc.fc = len(fl)
             for m in opmsg:
                 print(json.dumps(m, indent=4))
+                for f in fl:
+                    if str(f.nm) == m['object']:
+                        if m['msg'].startswith('Deleted'):
+                            sfc.sc += 1
+                            sfc.fc -= 1
             opmsg.clear()
             statmsg.clear()
             return True
         else:
-            sfc.fc += 1
+            sfc.fc = len(fl)
             opmsg.clear()
             statmsg.clear()
             print(ar.txt)
