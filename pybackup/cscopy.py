@@ -145,14 +145,12 @@ def fsyncl(di, si, sd, td, fl, sfc):
         print(cmd)
         rc = ar_run(cmd)
         if rc == 0:
-            sfc.fc = len(fl)
             for m in opmsg:
                 print(json.dumps(m, indent=4))
                 for f in fl:
                     if str(f.nm) == m['object']:
                         if m['msg'].startswith('Copied'):
                             sfc.sc += 1
-                            sfc.fc -= 1
             opmsg.clear()
             statmsg.clear()
             return True
@@ -172,13 +170,11 @@ def fdel(di, si, sd, td, sfc):
         print(cmd)
         rc = ar_run(cmd)
         if rc == 0:
-            sfc.fc = 1
             for m in opmsg:
                 print(json.dumps(m, indent=4))
                 if str(td) == m['object']:
                     if m['msg'].startswith('Deleted'):
                         sfc.sc += 1
-                        sfc.fc -= 1
             opmsg.clear()
             statmsg.clear()
             return True
@@ -210,14 +206,12 @@ def fdell(di, si, td, fl, sfc):
         print(cmd)
         rc = ar_run(cmd)
         if rc == 0:
-            sfc.fc = len(fl)
             for m in opmsg:
                 print(json.dumps(m, indent=4))
                 for f in fl:
                     if str(f.nm) == m['object']:
                         if m['msg'].startswith('Deleted'):
                             sfc.sc += 1
-                            sfc.fc -= 1
             opmsg.clear()
             statmsg.clear()
             return True
