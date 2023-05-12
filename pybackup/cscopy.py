@@ -76,7 +76,7 @@ def ftouch(di, si, td, lf, sfc):
             for m in opmsg:
                 print(json.dumps(m, indent=4))
                 if str(lf) == m['object']:
-                    if m['msg'].startswith('Touched'):
+                    if m['msg'].startswith('Updated modification time'):
                         sfc.sc += 1
             opmsg.clear()
             statmsg.clear()
@@ -109,6 +109,8 @@ def fsync(di, si, sd, td, sfc):
                 print(json.dumps(m, indent=4))
                 if str(td.name) == m['object']:
                     if m['msg'].startswith('Copied'):
+                        sfc.sc += 1
+                    elif m['msg'].startswith['Updated modification time']:
                         sfc.sc += 1
             opmsg.clear()
             statmsg.clear()
@@ -151,6 +153,8 @@ def fsyncl(di, si, sd, td, fl, sfc):
                     if str(f.nm) == m['object']:
                         if m['msg'].startswith('Copied'):
                             sfc.sc += 1
+                    elif m['msg'].startswith['Updated modification time']:
+                        sfc.sc += 1
             opmsg.clear()
             statmsg.clear()
             return True
