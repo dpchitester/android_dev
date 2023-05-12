@@ -113,7 +113,7 @@ def fsync(di, si, sd, td, sfc):
                 if str(td.name) == m['object']:
                     if m['msg'].startswith('Copied'):
                         sfc.sc += 1
-                    elif m['msg'].startswith['Updated modification time']:
+                    elif m['msg'].startswith('Updated modification time'):
                         sfc.sc += 1
             opmsg.clear()
             for m in statmsg:
@@ -160,7 +160,7 @@ def fsyncl(di, si, sd, td, fl, sfc):
                     if str(f.nm) == m['object']:
                         if m['msg'].startswith('Copied'):
                             sfc.sc += 1
-                    elif m['msg'].startswith['Updated modification time']:
+                    elif m['msg'].startswith('Updated modification time'):
                         sfc.sc += 1
             opmsg.clear()
             for m in statmsg:
