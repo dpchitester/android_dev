@@ -7,22 +7,14 @@
 # pkg uninstall openssl-1.1
 # pkg uninstall rclone
 # pkg uninstall ruff
-# pip uninstall -------------------
+# pip uninstall ----------------------
+ pip uninstall antlr4-python3-runtime
 # pip uninstall asyncinotify
-pip uninstall certifi
-pip uninstall charset-normalizer
-pip uninstall findimports
-pip uninstall idna
-pip uninstall module-dependencies
+ pip uninstall hydra-core
+ pip uninstall omegaconf
 pip uninstall packaging
 # pip uninstall pip
-pip uninstall plotly
-pip uninstall requests
-pip uninstall snakeviz
+ pip uninstall PyYAML
 # pip uninstall tarjan
-pip uninstall tenacity
-pip uninstall tornado
-pip uninstall tqdm
-pip uninstall urllib3
 # pip uninstall xxhash
 # pip uninstall yappi
