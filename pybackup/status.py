@@ -47,3 +47,5 @@ def updatets(N):
 if __name__ == "__main__":
     config.initConfig()
     updatets(1)
+    ls.saveedges()
+    
