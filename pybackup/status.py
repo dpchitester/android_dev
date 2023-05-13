@@ -43,3 +43,7 @@ def updatets(N):
         for Si, Dh in Sl:
             stsupdate(Si, Dh)
         print()
+
+if __name__ == "__main__":
+    config.initConfig()
+    updatets(1)

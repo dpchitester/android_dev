@@ -81,4 +81,5 @@ def opExec():
 
 
 if __name__ == "__main__":
+    config.initConfig()
     print(opExec())
