@@ -153,7 +153,8 @@ class ContinuousSubprocess:
                 cmd=self.__command_string,
                 output=json.dumps(
                     {
-                        "message": "An error has occurred while running the specified command.",
+                        "message":
+                            "An error has occurred while running the specified command.",
                         "trace": error_trace,
                         "trace_size": len(error_trace),
                         "max_trace_size": max_error_trace_lines,
