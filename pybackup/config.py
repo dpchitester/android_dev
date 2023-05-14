@@ -227,7 +227,7 @@ def initConfig():
             addDep("zips", dn)
             addDep("proj", dn)
 
-    f1()
+    #f1()
 
     addDep("git_worktree", "proj")
 
