@@ -198,14 +198,7 @@ def initConfig():
     addPre("od", cloud2)
     addPre("db", cloud3)
 
-    {
-        'tag': "home",
-        'path': "~",
-        'iscode': False,
-        'issrc': True,
-        'istgt': True
-    }
-    
+
     addSrcDir("home", home, False)
     addSrcDir("bin", home / "bin", False)
     addSrcDir("sh", home / "bin/sh")
@@ -221,7 +214,7 @@ def initConfig():
     def f1():
         dl = getDL(src("proj"))
         for d in dl:
-            dn = 'proj'+'.'+d.name
+            dn = 'proj'+'/'+d.name
             addSrcDir(dn, d, True)
             addDep("git_worktree", dn)
             addDep("zips", dn)
