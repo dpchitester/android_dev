@@ -277,7 +277,6 @@ def initConfig():
                 ".plaidrc",
                 ".gitcredentials",
                 ".gitconfig",
-                ".config/rclone/*",
             ]
         },
     )
@@ -298,7 +297,6 @@ def initConfig():
                 ".plaidrc",
                 ".gitcredentials",
                 ".gitconfig",
-                ".config/rclone/*",
             ]
         },
     )
