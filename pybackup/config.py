@@ -389,14 +389,13 @@ def initConfig():
 
     for cs in ("gd", "db", "od"):
         for si in ("proj", "vids", "zips"):
-            try:
+            if src(si).is_relative_to(ppre('sd')):
                 p1 = src(si).relative_to(ppre("sd"))
-            except:
-                try:
-                   p1 = src(si).relative_to(src("home").parent)
-                except:
-                    print('relative dir not found')
-                    raise
+            elif src(si).is_relative_to(src("home").parent):
+                p1 = src(si).relative_to(src("home").parent)
+            else:
+                print('relative dir not found')
+                raise ValueError()
             addTgtDir(cs + "_" + si, ppre(cs) / p1)
             npl1 = (cs + "_" + si, si)
             # op15 = CSRestore(npl1, None, {})
