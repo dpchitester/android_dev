@@ -388,8 +388,15 @@ def initConfig():
     # addArc(op1)
 
     for cs in ("gd", "db", "od"):
-        for si in ("proj", "vids", "zips"):
-            p1 = src(si).relative_to(ppre("sd"))
+        for si in ("proj", "vids", "zips", "home"):
+            try:
+                p1 = src(si).relative_to(ppre("sd"))
+            except:
+                try:
+                   p1 = src(si).relative_to(src("home").parent)
+                except:
+                    print('relative not found')
+                    raise
             addTgtDir(cs + "_" + si, ppre(cs) / p1)
             npl1 = (cs + "_" + si, si)
             # op15 = CSRestore(npl1, None, {})
