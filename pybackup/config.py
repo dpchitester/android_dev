@@ -388,7 +388,7 @@ def initConfig():
     # addArc(op1)
 
     for cs in ("gd", "db", "od"):
-        for si in ("proj", "vids", "zips", "home"):
+        for si in ("proj", "vids", "zips"):
             try:
                 p1 = src(si).relative_to(ppre("sd"))
             except:
