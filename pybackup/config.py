@@ -395,7 +395,7 @@ def initConfig():
                 try:
                    p1 = src(si).relative_to(src("home").parent)
                 except:
-                    print('relative not found')
+                    print('relative dir not found')
                     raise
             addTgtDir(cs + "_" + si, ppre(cs) / p1)
             npl1 = (cs + "_" + si, si)
