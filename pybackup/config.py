@@ -3,7 +3,7 @@ from math import floor
 from os import walk
 from pathlib import Path
 from threading import Event
-from typing import Dict, List, Optional, Set, Tuple, TypeAlias
+from typing import TypeAlias
 
 from cscopy import CSCopy
 from de import DE, FSe
@@ -23,23 +23,23 @@ quit_ev = Event()
 
 NodeTag: TypeAlias = str
 Hash: TypeAlias = bytes
-Hdt1: TypeAlias = Dict[NodeTag, int]
-Hdt2: TypeAlias = Dict[Path, FSe]
-Hdt3: TypeAlias = Dict[NodeTag, Event]
+Hdt1: TypeAlias = dict[NodeTag, int]
+Hdt2: TypeAlias = dict[Path, FSe]
+Hdt3: TypeAlias = dict[NodeTag, Event]
 
 # any/all mostly local directory path(s)
 # paths: Dict[NodeTag, Path] = {}
 
 
 class SetDict(dict):
-    paths: Dict[NodeTag, SD] = {}
+    paths: dict[NodeTag, SD] = {}
 
-    def __init__(self, *args):
-        super(SetDict, self).__init__(*args)
+    def __init__(self, *args) -> None:
+        super().__init__(*args)
 
     def add(self, tg: str, sd: SD):
         if not hasattr(sd, "tag"):
-            setattr(sd, "tag", tg)
+            sd.tag = tg
         if tg in self.paths and sd != self.paths[tg]:
             raise ValueError("tag " + tg + " already in paths-dict with different path")
         self[tg] = sd
@@ -72,7 +72,7 @@ def addSrcDir(tg, pth, iscode=False):
     if not isinstance(pth, SD):
         raise ValueError("not an SD subclass")
     srcs.add(tg, pth)
-    setattr(pth, "issrc", True)
+    pth.issrc = True
     if iscode:
         codes.add(tg, pth)
     if pth.isremote:
@@ -90,7 +90,7 @@ def addTgtDir(tg, pth):
     if not isinstance(pth, SD):
         raise ValueError("not an SD subclass")
     tgts.add(tg, pth)
-    setattr(pth, "istgt", True)
+    pth.istgt = True
     if pth.isremote:
         RDlls[tg] = None
         RDlls_xt[tg] = 0
@@ -110,13 +110,13 @@ def addPre(tg, frag):
 
 
 # operations (function objects)
-opdep: List[OpBase] = []
+opdep: list[OpBase] = []
 
 # dependencies as edge set
-eDep: Set[Edge] = set()
+eDep: set[Edge] = set()
 
 # dependencies as stored by di,si
-edges: Dict[Tuple[NodeTag, NodeTag], Edge] = {}
+edges: dict[tuple[NodeTag, NodeTag], Edge] = {}
 
 
 # directory lists hashes
@@ -128,23 +128,23 @@ Dllc: Hdt3 = {}
 
 
 # files lists
-LDlls: Dict[NodeTag, List["DE"]] = {}
-RDlls: Dict[NodeTag, List["DE"]] = {}
+LDlls: dict[NodeTag, list["DE"]] = {}
+RDlls: dict[NodeTag, list["DE"]] = {}
 
 # update times of directory lists
-LDlls_xt: Dict[NodeTag, float] = {}
-RDlls_xt: Dict[NodeTag, float] = {}
+LDlls_xt: dict[NodeTag, float] = {}
+RDlls_xt: dict[NodeTag, float] = {}
 
 # pickle file filenames
-edgepf: Optional[Path] = None
-ldllsf: Optional[Path] = None
-rdllsf: Optional[Path] = None
+edgepf: Path | None = None
+ldllsf: Path | None = None
+rdllsf: Path | None = None
 
-ldhpf: Optional[Path] = None
-rdhpf: Optional[Path] = None
+ldhpf: Path | None = None
+rdhpf: Path | None = None
 
 # worktree of git repo
-worktree: Optional[Path] = None
+worktree: Path | None = None
 
 # directory list hashing stats
 
@@ -161,12 +161,12 @@ h_miss = 0
 
 upd_cs = 0
 
-home: Optional[Ext3] = None
-sdcard: Optional[Fat32] = None
-cloud1: Optional[CS] = None
-cloud2: Optional[CS] = None
-cloud3: Optional[CS] = None
-dsbog: Optional[Fat32] = None
+home: Ext3 | None = None
+sdcard: Fat32 | None = None
+cloud1: CS | None = None
+cloud2: CS | None = None
+cloud3: CS | None = None
+dsbog: Fat32 | None = None
 
 
 def initConfig():
@@ -198,7 +198,6 @@ def initConfig():
     addPre("od", cloud2)
     addPre("db", cloud3)
 
-
     addSrcDir("home", home, False)
     addSrcDir("bin", home / "bin", False)
     addSrcDir("sh", home / "bin/sh")
@@ -214,13 +213,13 @@ def initConfig():
     def f1():
         dl = getDL(src("proj"))
         for d in dl:
-            dn = 'proj'+'/'+d.name
+            dn = "proj" + "/" + d.name
             addSrcDir(dn, d, True)
             addDep("git_worktree", dn)
             addDep("zips", dn)
             addDep("proj", dn)
 
-    #f1()
+    # f1()
 
     addDep("git_worktree", "proj")
 
@@ -390,7 +389,7 @@ def initConfig():
     # op1 = Mkzip(npl1, npl1, {"zipfile": "projects-git.zip"})
     # addArc(op1)
 
-    for cs in ("gd","db", "od"):
+    for cs in ("gd", "db", "od"):
         for si in ("proj", "vids", "zips"):
             p1 = src(si).relative_to(ppre("sd"))
             addTgtDir(cs + "_" + si, ppre(cs) / p1)
@@ -421,13 +420,13 @@ dexs = {
 
 def cull_DEs(des):
     des[:] = [
-        de for de in des if not any([sd for sd in de.nm.parent.parts if sd in dexs])
+        de for de in des if not any(sd for sd in de.nm.parent.parts if sd in dexs)
     ]
 
 
 def cull_files(files, pt):
     files[:] = [
-        pt(f) for f in files if not any([sd for sd in f.parent.parts if sd in dexs])
+        pt(f) for f in files if not any(sd for sd in f.parent.parts if sd in dexs)
     ]
 
 
@@ -436,7 +435,7 @@ def cull_dirs(dirs, pt):
 
 
 def isbaddir(dir):
-    return any([dp for dp in dir.parts if dp in dexs])
+    return any(dp for dp in dir.parts if dp in dexs)
 
 
 def getDL(p):
@@ -444,7 +443,7 @@ def getDL(p):
     # print(str(p))
     fl = []
     try:
-        for pth, dirs, files in walk(p, topdown=True):
+        for pth, dirs, _files in walk(p, topdown=True):
             if not isinstance(pth, pt):
                 pth = pt(pth)
             cull_dirs(dirs, pt)
@@ -452,7 +451,7 @@ def getDL(p):
                 fl.append(pth / d)
             dirs.clear()
         return fl
-    except IOError as e:
+    except OSError as e:
         print("getDL", e)
         return fl
 

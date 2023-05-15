@@ -17,11 +17,11 @@ def getfl(p):
         if p.is_file():
             fl.append(p)
             return fl
-        for pth, dirs, files in walk(p, topdown=True):
+        for pth, _dirs, files in walk(p, topdown=True):
             for f in files:
                 fl.append(Path(pth, f))
         return fl
-    except IOError as e:
+    except OSError as e:
         print(e)
         return None
 
@@ -41,8 +41,8 @@ def maxmt(sd):
 
 
 class Mkzip(OpBase):
-    def __init__(self, npl1, npl2, opts={}):
-        super(Mkzip, self).__init__(npl1, npl2, opts)
+    def __init__(self, npl1, npl2, opts={}) -> None:
+        super().__init__(npl1, npl2, opts)
 
     def ischanged(self, e: Edge):
         return e.chk_ct()
@@ -66,7 +66,7 @@ class Mkzip(OpBase):
                 utime(fp, ns=(maxt, maxt))
                 sc += 1
                 updateDEs(td, [zf])
-            except IOError as er:
+            except OSError as er:
                 print(er)
                 fc += 1
             if sc > 0:

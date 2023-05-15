@@ -6,8 +6,8 @@ from opbase import OpBase
 
 
 class GitAdd(OpBase):
-    def __init__(self, npl1, npl2, opts={}):
-        super(GitAdd, self).__init__(npl1, npl2, opts)
+    def __init__(self, npl1, npl2, opts={}) -> None:
+        super().__init__(npl1, npl2, opts)
 
     def ischanged(self, e: Edge):
         return e.chk_ct() | e.rchk_ct()
@@ -40,8 +40,8 @@ class GitAdd(OpBase):
 
 
 class GitCommit(OpBase):
-    def __init__(self, npl1, npl2, opts={}):
-        super(GitCommit, self).__init__(npl1, npl2, opts)
+    def __init__(self, npl1, npl2, opts={}) -> None:
+        super().__init__(npl1, npl2, opts)
 
     def ischanged(self, e: Edge):
         return e.chk_ct() | e.rchk_ct()
@@ -75,8 +75,8 @@ class GitCommit(OpBase):
 
 
 class GitPush(OpBase):
-    def __init__(self, npl1, npl2, opts={}):
-        super(GitPush, self).__init__(npl1, npl2, opts)
+    def __init__(self, npl1, npl2, opts={}) -> None:
+        super().__init__(npl1, npl2, opts)
 
     def ischanged(self, e: Edge):
         return e.chk_ct() | e.rchk_ct()

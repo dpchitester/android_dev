@@ -27,7 +27,7 @@ def cull_DEs(des):
     des[:] = [
         de
         for de in des
-        if not any([sd for sd in de.nm.parent.parts if sd in config.dexs])
+        if not any(sd for sd in de.nm.parent.parts if sd in config.dexs)
     ]
 
 
@@ -35,7 +35,7 @@ def cull_files(files, pt):
     files[:] = [
         pt(f)
         for f in files
-        if not any([sd for sd in f.parent.parts if sd in config.dexs])
+        if not any(sd for sd in f.parent.parts if sd in config.dexs)
     ]
 
 
@@ -49,21 +49,18 @@ def isbaddir(dir):
 
 class FileList:
     def __new__(cls, sd, **kwargs):
-        if sd.isremote:
-            cls = RemoteFileList
-        else:
-            cls = LocalFileList
+        cls = RemoteFileList if sd.isremote else LocalFileList
         self = object.__new__(cls)
         return self
 
-    def __init__(self, sd):
+    def __init__(self, sd) -> None:
         self.sd = sd
-        super(FileList, self).__init__()
+        super().__init__()
 
 
 class LocalFileList(FileList):
-    def __init__(self, sd, **kwargs):
-        super(LocalFileList, self).__init__(sd)
+    def __init__(self, sd, **kwargs) -> None:
+        super().__init__(sd)
 
     def getfl_str_fp(self, fp: str):
         from collections import deque
@@ -79,9 +76,8 @@ class LocalFileList(FileList):
                     for it1 in di:
                         if it1.is_file():
                             yield it1
-                        elif not it1.is_symlink():
-                            if not isbaddir(it1.name):
-                                q.append(it1.path)
+                        elif not it1.is_symlink() and not isbaddir(it1.name):
+                            q.append(it1.path)
             except IndexError:
                 break
 
@@ -110,8 +106,8 @@ class LocalFileList(FileList):
 
 
 class RemoteFileList(FileList):
-    def __init__(self, sd, **kwargs):
-        super(RemoteFileList, self).__init__(sd, **kwargs)
+    def __init__(self, sd, **kwargs) -> None:
+        super().__init__(sd, **kwargs)
 
     def getfl(self, sd):
         import json

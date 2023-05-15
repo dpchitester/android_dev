@@ -11,7 +11,7 @@ def changed_ops(T=None) -> list[OpBase]:
     rv: list[OpBase] = []
     for Op in config.opdep:
         di, si = Op.npl1
-        if T is None or T == di:
+        if T is None or di == T:
             e: Edge = findEdge(di, si)
             if Op.ischanged(e):
                 rv.append(Op)
@@ -33,19 +33,13 @@ def clean():
 
 
 def nodeps(T):
-    for e in config.eDep:
-        if e.si == T:
-            return False
-    return True
+    return all(e.si != T for e in config.eDep)
 
 
 def istgt(T, dep2=None):
     if dep2 is None:
         dep2 = config.eDep
-    for e in dep2:
-        if e.di == T:
-            return True
-    return False
+    return any(e.di == T for e in dep2)
 
 
 def nts():

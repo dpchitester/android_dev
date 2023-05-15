@@ -16,8 +16,8 @@ def gitcmd(cmd, wt):
 
 
 class Local_Git_Mixin:
-    def __init__(self, *args, **kwargs):
-        super(Local_Git_Mixin, self).__init__()
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__()
 
     @property
     def isremote(self):
@@ -40,8 +40,8 @@ class Local_Git_Mixin:
 
 
 class Remote_Git_Mixin:
-    def __init__(self, *args, **kwargs):
-        super(Remote_Git_Mixin, self).__init__()
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__()
 
     @property
     def isremote(self):
@@ -49,9 +49,8 @@ class Remote_Git_Mixin:
 
     @property
     def SDh(self):
-        if hasattr(self, "tag"):
-            if self.tag in config.RDhd:
-                return config.RDhd[self.tag]
+        if hasattr(self, "tag") and self.tag in config.RDhd:
+            return config.RDhd[self.tag]
         return 0
 
     @SDh.setter
@@ -63,7 +62,7 @@ class Remote_Git_Mixin:
 
 
 class GitWT(SD, Local_Git_Mixin):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         for k, v2 in kwargs.items():
             setattr(self, k, v2)
         super().__init__(*args, **kwargs)
@@ -84,7 +83,7 @@ class GitWT(SD, Local_Git_Mixin):
 
 
 class GitIndex(SD, Local_Git_Mixin):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         for k, v2 in kwargs.items():
             setattr(self, k, v2)
         super().__init__(*args, **kwargs)
@@ -105,7 +104,7 @@ class GitIndex(SD, Local_Git_Mixin):
 
 
 class GitRepo(SD, Local_Git_Mixin):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         for k, v2 in kwargs.items():
             setattr(self, k, v2)
         super().__init__(*args, **kwargs)
@@ -128,7 +127,7 @@ class GitRepo(SD, Local_Git_Mixin):
 
 
 class GitRemote(SD, Remote_Git_Mixin):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         for k, v2 in kwargs.items():
             setattr(self, k, v2)
         super().__init__(*args, **kwargs)

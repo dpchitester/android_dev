@@ -1,8 +1,8 @@
+import contextlib
 import datetime
 import json
 from bisect import bisect_left
 from pathlib import Path
-from typing import List
 
 import asyncrun as ar
 import config
@@ -14,9 +14,8 @@ from sd import FS_Mixin
 def findDE(dl, rp: Path):
     tde = DE(rp, FSe(0, 0))
     i = bisect_left(dl, tde)
-    if i < len(dl):
-        if tde.nm == dl[i].nm:
-            return (dl[i], i)
+    if i < len(dl) and tde.nm == dl[i].nm:
+        return (dl[i], i)
     return (None, i)
 
 
@@ -26,10 +25,7 @@ def getOneJSde(rd: Path, fn):
     cmd += " --files-only"
     print(cmd)
     rc = ar.run1(cmd)
-    if rc == 0:
-        jsl = json.loads(ar.txt)
-    else:
-        jsl = []
+    jsl = json.loads(ar.txt) if rc == 0 else []
     return jsl
 
 
@@ -66,10 +62,9 @@ def findSis(fp1: Path):
     l1 = {}
     for si, p in config.srcs.items():
         if isinstance(p, FS_Mixin):
-            try:
+            with contextlib.suppress(ValueError):
                 l1[si] = fp1.relative_to(p)
-            except ValueError:
-                pass
+
     return l1
 
 
@@ -77,10 +72,9 @@ def findDis(fp1: Path):
     l1 = {}
     for di, p in config.tgts.items():
         if isinstance(p, FS_Mixin):
-            try:
+            with contextlib.suppress(ValueError):
                 l1[di] = fp1.relative_to(p)
-            except ValueError:
-                pass
+
     return l1
 
 
@@ -110,14 +104,11 @@ def findTDEs(fp: Path):
     return de_l
 
 
-def updateDEs(rd: Path, flst: List[str]):
+def updateDEs(rd: Path, flst: list[str]):
     def doSOne(dl, rp, tde, i, si):
         if tde:
             sde = [sde for sde in sdel if sde.nm.name == tde.nm.name]
-            if len(sde):
-                sde = sde[0]
-            else:
-                sde = None
+            sde = sde[0] if len(sde) else None
         else:
             sde = None
         p = config.src(si)
@@ -160,10 +151,7 @@ def updateDEs(rd: Path, flst: List[str]):
     def doTOne(dl, rp, tde, i, di):
         if tde:
             sde = [sde for sde in sdel if sde.nm.name == tde.nm.name]
-            if len(sde):
-                sde = sde[0]
-            else:
-                sde = None
+            sde = sde[0] if len(sde) else None
         else:
             sde = None
         p = config.tgt(di)

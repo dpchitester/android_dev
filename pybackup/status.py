@@ -44,8 +44,8 @@ def updatets(N):
             stsupdate(Si, Dh)
         print()
 
+
 if __name__ == "__main__":
     config.initConfig()
     updatets(1)
     ls.saveedges()
-    

@@ -62,7 +62,7 @@ class Edge:
                 self.rcdt = mt
             ls.sev.put("edges")
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return repr((self.di, self.si, self.cdt, self.udt, self.rcdt, self.rudt))
 
 

@@ -16,7 +16,7 @@ class FileDiff:
     mt = 0
     hd = False
 
-    def __init__(self, sf, df):
+    def __init__(self, sf, df) -> None:
         self.sf = sf
         self.df = df
 
@@ -69,7 +69,7 @@ class FileDiff:
 
 
 class SFc:
-    def __init__(self, sc=0, fc=0):
+    def __init__(self, sc=0, fc=0) -> None:
         self.sc = sc
         self.fc = fc
 
@@ -94,10 +94,7 @@ def sha256sumf(Fn):
 
 def copy2(di, si, sd, td, sfc):
     # print('copying ', f1, 'to', f2)
-    if td.is_file():
-        td2 = td.parent
-    else:
-        td2 = td
+    td2 = td.parent if td.is_file() else td
     cmd = "cp -u -p " + str(sd) + " " + str(td2)
     print("copying", sd.name)
     rv = ar.run1(cmd)
@@ -116,8 +113,8 @@ def copy2(di, si, sd, td, sfc):
 class LocalCopy(OpBase):
     sfc = SFc()
 
-    def __init__(self, npl1, npl2, opts={}):
-        super(LocalCopy, self).__init__(npl1, npl2, opts)
+    def __init__(self, npl1, npl2, opts={}) -> None:
+        super().__init__(npl1, npl2, opts)
 
     def ischanged(self, e: Edge):
         return e.chk_ct()
@@ -133,7 +130,7 @@ class LocalCopy(OpBase):
             for g in gl:
                 try:
                     fl = sp.glob(g)
-                except IOError:
+                except OSError:
                     print("glob error in localcopy", e)
                     self.sfc.fc += 1
                     return self.sfc.value()
@@ -155,12 +152,11 @@ class LocalCopy(OpBase):
                                     if "exec" in self.opts:
                                         fdf.chmod(496)
                                     updateDEs(tp, [str(rf)])
-                    except IOError as exc:
+                    except OSError as exc:
                         print(exc)
                         self.sfc.fc += 1
             if self.sfc.fc == 0:
                 e.clr()
-            if self.sfc.sc > 0:
-                if di in config.srcs:
-                    onestatus(di)
+            if self.sfc.sc > 0 and di in config.srcs:
+                onestatus(di)
         return self.sfc.value()

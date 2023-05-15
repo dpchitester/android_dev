@@ -25,14 +25,14 @@ class graph(dict):
             fh.write("digraph md2 {\n")
             for n1 in sorted(self.keys()):
                 fh.write('    "' + n1 + '" -> {')
-                first=True
+                first = True
                 for n2 in self[n1]:
                     if first:
                         fh.write('"' + n2 + '"')
-                        first=False
+                        first = False
                     else:
                         fh.write(', "' + n2 + '"')
-                fh.write('}\n')
+                fh.write("}\n")
             fh.write("}\n")
 
 
@@ -49,5 +49,5 @@ for pf in p.glob("*.py"):
 
 g.write(gobn + ".gv")
 
-cmd='dot -Tsvg -Kfdp -o '+gobn+'.svg '+gobn+'.gv'
+cmd = "dot -Tsvg -Kfdp -o " + gobn + ".svg " + gobn + ".gv"
 ar.run1(cmd)

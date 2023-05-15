@@ -6,8 +6,6 @@ from edge import Edge
 
 class OpBaseEncoder(json.JSONEncoder):
     def default(self, obj):
-
-
         if isinstance(obj, PosixPath):
             # print(1, obj.__class__)
             return str(obj)
@@ -36,8 +34,7 @@ class OpBaseEncoder(json.JSONEncoder):
 
 
 class OpBase:
-
-    def __init__(self, npl1, npl2, opts={}):
+    def __init__(self, npl1, npl2, opts={}) -> None:
         self.npl1 = npl1
         self.npl2 = npl2
         self.opts = opts
@@ -45,7 +42,7 @@ class OpBase:
     def ischanged(self, e: Edge):
         return e.chk_ct()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return (
             str(self.__class__)
             + ": \n"

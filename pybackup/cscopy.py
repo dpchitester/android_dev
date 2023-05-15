@@ -1,6 +1,7 @@
+import contextlib
 import datetime as dt
-from math import floor
 import json
+from math import floor
 
 import asyncrun as ar
 import config
@@ -20,12 +21,14 @@ statmsg = []
 def ar_run(cmd):
     global opmsg, statmsg
     rc = ar.run3(cmd)
-    def f1(): # for ar_run3
+
+    def f1():  # for ar_run3
         for m in ar.msglst:
             if "operations" in m["source"]:
                 opmsg.append(m)
             elif "stats" in m["source"]:
                 statmsg.append(m)
+
     f1()
     return rc
 
@@ -45,7 +48,7 @@ class SFc:
     sc = 0
     fc = 0
 
-    def __init__(self):
+    def __init__(self) -> None:
         pass
 
     def value(self):
@@ -75,13 +78,13 @@ def ftouch(di, si, td, lf, sfc):
         if rc == 0:
             for m in opmsg:
                 print(json.dumps(m, indent=4))
-                if str(lf) == m['object']:
-                    if m['msg'].startswith('Updated modification time'):
+                if str(lf) == m["object"]:
+                    if m["msg"].startswith("Updated modification time"):
                         sfc.sc += 1
             opmsg.clear()
             for m in statmsg:
                 print(json.dumps(m, indent=4))
-                sfc.sc += m['stats']['checks']
+                sfc.sc += m["stats"]["checks"]
             statmsg.clear()
             return True
         else:
@@ -110,16 +113,16 @@ def fsync(di, si, sd, td, sfc):
         if rc == 0:
             for m in opmsg:
                 print(json.dumps(m, indent=4))
-                if str(td.name) == m['object']:
-                    if m['msg'].startswith('Copied'):
+                if str(td.name) == m["object"]:
+                    if m["msg"].startswith("Copied"):
                         sfc.sc += 1
-                    elif m['msg'].startswith('Updated modification time'):
+                    elif m["msg"].startswith("Updated modification time"):
                         sfc.sc += 1
             opmsg.clear()
             for m in statmsg:
                 print(json.dumps(m, indent=4))
-                sfc.sc += m['stats']['checks']
-                sfc.sc += m['stats']['transfers']
+                sfc.sc += m["stats"]["checks"]
+                sfc.sc += m["stats"]["transfers"]
             statmsg.clear()
             return True
         else:
@@ -131,10 +134,7 @@ def fsync(di, si, sd, td, sfc):
 
 
 def fsynclm(di, si, sd, td, fl1, sfc):
-    for fl2 in chunk_from(fl1, 10):
-        if not fsyncl(di, si, sd, td, fl2, sfc):
-            return False
-    return True
+    return all(fsyncl(di, si, sd, td, fl2, sfc) for fl2 in chunk_from(fl1, 10))
 
 
 def fsyncl(di, si, sd, td, fl, sfc):
@@ -157,16 +157,16 @@ def fsyncl(di, si, sd, td, fl, sfc):
             for m in opmsg:
                 print(json.dumps(m, indent=4))
                 for f in fl:
-                    if str(f.nm) == m['object']:
-                        if m['msg'].startswith('Copied'):
+                    if str(f.nm) == m["object"]:
+                        if m["msg"].startswith("Copied"):
                             sfc.sc += 1
-                    elif m['msg'].startswith('Updated modification time'):
+                    elif m["msg"].startswith("Updated modification time"):
                         sfc.sc += 1
             opmsg.clear()
             for m in statmsg:
                 print(json.dumps(m, indent=4))
-                sfc.sc += m['stats']['checks']
-                sfc.sc += m['stats']['transfers']
+                sfc.sc += m["stats"]["checks"]
+                sfc.sc += m["stats"]["transfers"]
             statmsg.clear()
             return True
         else:
@@ -188,14 +188,13 @@ def fdel(di, si, sd, td, sfc):
         if rc == 0:
             for m in opmsg:
                 print(json.dumps(m, indent=4))
-                if str(td.name) == m['object']:
-                    if m['msg'].startswith('Deleted'):
-                        sfc.sc += 1
+                if str(td.name) == m["object"] and m["msg"].startswith("Deleted"):
+                    sfc.sc += 1
             opmsg.clear()
             for m in statmsg:
                 print(json.dumps(m, indent=4))
-                sfc.sc += m['stats']['checks']
-                sfc.sc += m['stats']['deletes']
+                sfc.sc += m["stats"]["checks"]
+                sfc.sc += m["stats"]["deletes"]
             statmsg.clear()
             return True
         else:
@@ -207,10 +206,7 @@ def fdel(di, si, sd, td, sfc):
 
 
 def fdellm(di, si, td, fl1, sfc):
-    for fl2 in chunk_from(fl1, 10):
-        if not fdell(di, si, td, fl2, sfc):
-            return False
-    return True
+    return all(fdell(di, si, td, fl2, sfc) for fl2 in chunk_from(fl1, 10))
 
 
 def fdell(di, si, td, fl, sfc):
@@ -229,14 +225,13 @@ def fdell(di, si, td, fl, sfc):
             for m in opmsg:
                 print(json.dumps(m, indent=4))
                 for f in fl:
-                    if str(f.nm) == m['object']:
-                        if m['msg'].startswith('Deleted'):
-                            sfc.sc += 1
+                    if str(f.nm) == m["object"] and m["msg"].startswith("Deleted"):
+                        sfc.sc += 1
             opmsg.clear()
             for m in statmsg:
                 print(json.dumps(m, indent=4))
-                sfc.sc += m['stats']['checks']
-                sfc.sc += m['stats']['deletes']
+                sfc.sc += m["stats"]["checks"]
+                sfc.sc += m["stats"]["deletes"]
             statmsg.clear()
             return True
         else:
@@ -248,7 +243,7 @@ def fdell(di, si, td, fl, sfc):
 
 
 class BVars:
-    def __init__(self, di, si, sfc):
+    def __init__(self, di, si, sfc) -> None:
         self.si = si
         self.di = di
         self.sd = config.src(si)
@@ -305,10 +300,9 @@ class BVars:
         for lf in cfpl:
             if ftouch(self.di, self.si, self.td, lf, self.sfc):
                 self.ac2 += 1
-                try:
+                with contextlib.suppress(KeyError):
                     self.f2t.remove(lf)
-                except KeyError:
-                    pass
+
         updateDEs(self.td, [str(de.nm) for de in cfpl])
 
     def do_copying(self):
@@ -323,16 +317,14 @@ class BVars:
 
             for lf in cfpl:
                 self.ac2 += 1
-                try:
+                with contextlib.suppress(KeyError):
                     self.f2c.remove(lf)
-                except KeyError:
-                    pass
+
                 for rf in self.f2d.copy():
                     if str(rf.nm) == str(lf.nm):
-                        try:
+                        with contextlib.suppress(KeyError):
                             self.f2d.remove(rf)
-                        except KeyError:
-                            pass
+
             updateDEs(self.td, [str(de.nm) for de in cfpl])
 
     def do_deletions(self):
@@ -342,10 +334,9 @@ class BVars:
         if fdellm(self.di, self.si, self.td, cfpl, self.sfc):
             for rf in cfpl:  # do deletions
                 self.ac2 += 1
-                try:
+                with contextlib.suppress(KeyError):
                     self.f2d.remove(rf)
-                except KeyError:
-                    pass
+
         updateDEs(self.td, [str(de.nm) for de in cfpl])
 
     def list_deletions(self):
@@ -354,8 +345,8 @@ class BVars:
 
 
 class CSCopy(OpBase):
-    def __init__(self, npl1, npl2, opts={}):
-        super(CSCopy, self).__init__(npl1, npl2, opts)
+    def __init__(self, npl1, npl2, opts={}) -> None:
+        super().__init__(npl1, npl2, opts)
         self.sfc = SFc()
 
     def ischanged(self, e: Edge):
@@ -390,7 +381,6 @@ class CSCopy(OpBase):
         if self.sfc.fc == 0:
             e.clr()
             e.rclr()
-        if self.sfc.sc > 0:
-            if di in config.srcs:
-                onestatus(di)
+        if self.sfc.sc > 0 and di in config.srcs:
+            onestatus(di)
         return self.sfc.value()

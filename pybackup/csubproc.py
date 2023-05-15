@@ -1,15 +1,15 @@
-"""
-Module for continuous subprocess management.
-modified by phil
+"""Module for continuous subprocess management.
+modified by phil.
 """
 import json
 import subprocess
 import types
 from collections import deque
+from collections.abc import Generator
 from queue import Empty, Queue
 from threading import Thread
 from time import sleep
-from typing import IO, AnyStr, Generator, Optional
+from typing import IO, AnyStr
 
 # logger = logging.getLogger(__name__)
 
@@ -18,24 +18,21 @@ Qi2 = types.new_class("Qi2", bases=(str,))
 
 
 class ContinuousSubprocess:
-    """
-    Creates a process to execute a wanted command and
+    """Creates a process to execute a wanted command and
     yields a continuous output stream for consumption.
     """
 
     def __init__(self, command_string: str) -> None:
-        """
-        Constructor.
+        """Constructor.
 
         :param command_string: A command to execute in a separate process.
         """
         self.__command_string = command_string
-        self.__process: Optional[subprocess.Popen] = None
+        self.__process: subprocess.Popen | None = None
 
     @property
     def command_string(self) -> str:
-        """
-        Property for command string.
+        """Property for command string.
 
         :return: Command string.
         """
@@ -50,13 +47,12 @@ class ContinuousSubprocess:
     def execute(
         self,
         shell: bool = True,
-        path: Optional[str] = None,
+        path: str | None = None,
         max_error_trace_lines: int = 1000,
         *args,
         **kwargs,
     ) -> Generator[str, None, None]:
-        """
-        Executes a command and yields a continuous output from the process.
+        """Executes a command and yields a continuous output from the process.
 
         :param shell: Boolean value to specify whether to
         execute command in a new shell.
@@ -153,8 +149,7 @@ class ContinuousSubprocess:
                 cmd=self.__command_string,
                 output=json.dumps(
                     {
-                        "message":
-                            "An error has occurred while running the specified command.",
+                        "message": "An error has occurred while running the specified command.",
                         "trace": error_trace,
                         "trace_size": len(error_trace),
                         "max_trace_size": max_error_trace_lines,

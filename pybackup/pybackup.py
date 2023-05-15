@@ -39,7 +39,7 @@ def wsetup():
             pt = type(p)
             if p.is_dir() and not config.isbaddir(p) and isinstance(p, FS_Mixin):
                 # TODO: not up to date
-                for pth, dirs, files in walk(p, topdown=True):
+                for pth, dirs, _files in walk(p, topdown=True):
                     pth = pt(pth)
                     config.cull_dirs(dirs, pt)
                     wa: Watch = in1.add_watch(pth, Mask(0x306))

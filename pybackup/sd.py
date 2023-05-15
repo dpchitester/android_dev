@@ -14,10 +14,10 @@ rto1 = 60 * 60
 
 class SD(PosixPath):
     def __new__(cls, *args, **kwargs):
-        return super(SD, cls).__new__(cls, *args)
+        return super().__new__(cls, *args)
 
-    def __init__(self, *args, **kwargs):
-        super(SD, self).__init__(*args, **kwargs)
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
 
     def sdh_f(self, dh=None):
         odh = self.SDh
@@ -40,8 +40,8 @@ class SD(PosixPath):
 
 
 class Local_Mixin:
-    def __init__(self, *args, **kwargs):
-        super(Local_Mixin, self).__init__()
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__()
 
     @property
     def isremote(self):
@@ -96,8 +96,8 @@ class Local_Mixin:
 
 
 class Remote_Mixin:
-    def __init__(self, *args, **kwargs):
-        super(Remote_Mixin, self).__init__()
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__()
 
     @property
     def isremote(self):
@@ -152,8 +152,8 @@ class Remote_Mixin:
 
 
 class FS_Mixin(SD):
-    def __init__(self, *args, **kwargs):
-        super(FS_Mixin, self).__init__(*args, **kwargs)
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
 
     def sdh_d(self):
         from bhash import xxh64Hash
@@ -187,10 +187,7 @@ class FS_Mixin(SD):
         from filelist import FileList
 
         # print('-ldlld', si)
-        if self.isremote:
-            ch = "r"
-        else:
-            ch = "l"
+        ch = "r" if self.isremote else "l"
         if self.Dll_status() > 1:
             print("sucking/scanning for", self.tag, ch + "dll...", end="")
             rv = FileList(self).getdll()
@@ -208,31 +205,31 @@ class FS_Mixin(SD):
 
 
 class CFS_Mixin(FS_Mixin, Remote_Mixin):
-    def __init__(self, *args, **kwargs):
-        super(CFS_Mixin, self).__init__(*args, **kwargs)
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
 
 
 class PFS_Mixin(FS_Mixin, Local_Mixin):
-    def __init__(self, *args, **kwargs):
-        super(PFS_Mixin, self).__init__(*args, **kwargs)
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
 
 
 class Ext3(PFS_Mixin):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         for k, v in kwargs.items():
             setattr(self, k, v)
-        super(Ext3, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
 
 class Fat32(PFS_Mixin):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         for k, v in kwargs.items():
             setattr(self, k, v)
-        super(Fat32, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
 
 class CS(CFS_Mixin):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         for k, v in kwargs.items():
             setattr(self, k, v)
-        super(CS, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)

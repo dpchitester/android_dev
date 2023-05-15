@@ -26,7 +26,6 @@ def a_run(shell_command, cwd=None):
         shell=True,
         cwd=cwd,
         text=True,
-        universal_newlines=True,
         capture_output=True,
     )
     so = p.stdout
@@ -45,7 +44,6 @@ def a_run1(shell_command, cwd=None):
         shell=True,
         cwd=cwd,
         text=True,
-        universal_newlines=True,
         capture_output=True,
     )
     so = p.stdout
@@ -61,7 +59,6 @@ def a_run2(shell_command, cwd=None):
         shell=True,
         cwd=cwd,
         text=True,
-        universal_newlines=True,
     )
     return p.returncode
 
@@ -76,7 +73,7 @@ def a_run3(shell_command, cwd=None):
         for ln in olg:
             match ln:
                 case Qi1():
-                    "".join([txt, ln])
+                    txt += ln
                     print(colored(0, 255, 255, ln), end="")
                 case Qi2():
                     if ln and len(ln):
@@ -103,10 +100,10 @@ def a_run4(shell_command, cwd=None):
         for ln in olg:
             match ln:
                 case Qi1():
-                    "".join([txt1, ln])
+                    txt1 += ln
                     print(colored(0, 255, 0, ln), end="")
                 case Qi2():
-                    "".join([txt2, ln])
+                    txt2 += ln
                     print(colored(255, 0, 0, ln), end="")
     except subprocess.CalledProcessError as exc:
         error_output = json.loads(exc.output)

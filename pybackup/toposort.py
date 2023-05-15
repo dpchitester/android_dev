@@ -1,7 +1,8 @@
 from tarjan import tarjan_recursive
 
+
 def topological_sort(dependency_pairs):
-    "Sort values subject to dependency constraints"
+    "Sort values subject to dependency constraints."
     nodes = {}
     for e in dependency_pairs:
         if e.di not in nodes:
