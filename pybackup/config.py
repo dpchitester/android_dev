@@ -420,12 +420,18 @@ dexs = {
     ".vite",
     ".yarnclean",
     "storage",
+    "ldlls.pp",
+    "rdlls.pp",
+    "rdhd.pp",
+    "ldhd.pp",
+    "edges.pp",
+    "rclone.conf",
 }
 
 
 def cull_DEs(des):
     des[:] = [
-        de for de in des if not any(sd for sd in de.nm.parent.parts if sd in dexs)
+        de for de in des if not any(sd for sd in de.nm.parts if sd in dexs)
     ]
 
 
