@@ -64,12 +64,9 @@ def proc_nodes(L):
             def f1():
                 nonlocal n
                 sc, fc = op()
-                if fc:
-                    pass
-                else:
-                    updatets(n)
-                    # rupdatets(n)
-                    n += 1
+                updatets(n)
+                # rupdatets(n)
+                n += 1
 
             th = Thread(target=f1)
             th.start()
