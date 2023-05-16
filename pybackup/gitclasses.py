@@ -1,8 +1,8 @@
 import asyncrun as ar
 import config
+import gitops as go
 import ldsv as ls
 from sd import SD
-import gitops as go
 
 
 class GitCmdFailure(Exception):

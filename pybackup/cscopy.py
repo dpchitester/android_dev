@@ -2,7 +2,6 @@ import contextlib
 import datetime as dt
 from math import floor
 
-
 import asyncrun as ar
 import config
 from edge import Edge

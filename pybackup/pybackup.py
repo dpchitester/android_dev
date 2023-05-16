@@ -6,10 +6,8 @@ from snoop import snoop
 
 import config
 import ldsv as ls
-
 from opexec import clean, opExec
 from status import updatets
-
 
 th1 = None
 th2 = None
