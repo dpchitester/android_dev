@@ -2,7 +2,6 @@
 
 from threading import Thread
 
-from snoop import snoop
 
 import config
 import ldsv as ls
@@ -46,7 +45,8 @@ def main():
         print(exc)
     finally:
         print("-main-6")
-        th3.join()
+        if not th3.cancelled():
+            th3.join()
 
 
 if __name__ == "__main__":

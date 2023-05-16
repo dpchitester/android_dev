@@ -20,7 +20,7 @@ def ar_run(cmd):
         rc, txt, msglst = ar.run3(cmd)
 
     def f1():  # for ar_run3
-        for m in ar.msglst:
+        for m in msglst:
             if "operations" in m["source"]:
                 opmsg.append(m)
             elif "stats" in m["source"]:

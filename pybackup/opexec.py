@@ -1,4 +1,3 @@
-from threading import Thread
 
 import config
 from edge import Edge, findEdge
