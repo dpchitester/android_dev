@@ -45,7 +45,7 @@ def main():
         print(exc)
     finally:
         print("-main-6")
-        if not th3.cancelled():
+        if th3.is_alive():
             th3.join()
 
 
