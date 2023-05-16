@@ -42,8 +42,14 @@ def getRemoteJSde(rd: Path, fn: str):
 
 def getRemoteDEs(rd: Path, fl: list[str]):
     jsl = []
+    jstl = []
     for fn in fl:
-        jsl.extend(getRemoteJSde(rd, fn))
+        def f1(fn):
+            jsl.extend(getRemoteJSde(rd, fn))
+        th = Thread(target=f1,args=(fn,))
+        jstl.append(th)
+    for th in jstl:
+        th.join()
     pt = Path
     delst = []
     for it in jsl:
