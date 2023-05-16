@@ -14,12 +14,9 @@ def colored(r, g, b, text):
     return f"\033[38;2;{r};{g};{b}m{text}\033[0m"
 
 
-opmsg = []
-statmsg = []
-
-
 def ar_run(cmd):
-    global opmsg, statmsg
+    opmsg = []
+    statmsg = []
     with config.rclk:
         rc = ar.run3(cmd)
 
@@ -31,7 +28,7 @@ def ar_run(cmd):
                 statmsg.append(m)
 
     f1()
-    return rc
+    return rc, opmsg, statmsg
 
 
 def chunk_from(s1, amt):
@@ -75,7 +72,7 @@ def ftouch(di, si, td, lf, sfc):
         )
         # cmd += ' --exclude ".git/**" --exclude "__pycache__/**"'
         print(cmd)
-        rc = ar_run(cmd)
+        rc, opmsg, statmsg = ar_run(cmd)
         if rc == 0:
             for m in opmsg:
                 # print(json.dumps(m, indent=4))
@@ -110,7 +107,7 @@ def fsync(di, si, sd, td, sfc):
         )
         # cmd += ' --exclude ".git/**" --exclude "__pycache__/**"'
         print(cmd)
-        rc = ar_run(cmd)
+        rc, opmsg, statmsg = ar_run(cmd)
         if rc == 0:
             for m in opmsg:
                 # print(json.dumps(m, indent=4))
@@ -153,7 +150,7 @@ def fsyncl(di, si, sd, td, fl, sfc):
     if netup():
         # print("copy", sd, td, list(map(lambda de: str(de.nm), fl)))
         print(cmd)
-        rc = ar_run(cmd)
+        rc, opmsg, statmsg = ar_run(cmd)
         if rc == 0:
             for m in opmsg:
                 # print(json.dumps(m, indent=4))
@@ -185,7 +182,7 @@ def fdel(di, si, sd, td, sfc):
         cmd += '" --include="' + td.name
         cmd += '" --progress -v --use-json-log'
         print(cmd)
-        rc = ar_run(cmd)
+        rc, opmsg, statmsg = ar_run(cmd)
         if rc == 0:
             for m in opmsg:
                 # print(json.dumps(m, indent=4))
@@ -221,7 +218,7 @@ def fdell(di, si, td, fl, sfc):
     if netup():
         # print("delete", td, list(map(lambda de: str(de.nm), fl)))
         print(cmd)
-        rc = ar_run(cmd)
+        rc, opmsg, statmsg = ar_run(cmd)
         if rc == 0:
             for m in opmsg:
                 # print(json.dumps(m, indent=4))

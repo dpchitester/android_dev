@@ -8,6 +8,7 @@ from opbase import OpBase
 
 rl = RLock()
 
+
 class GitAdd(OpBase):
     def __init__(self, npl1, npl2, opts={}) -> None:
         super().__init__(npl1, npl2, opts)

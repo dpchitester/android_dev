@@ -29,7 +29,7 @@ def getOneJSde(rd: Path, fn):
     with config.rclk:
         rc = ar.run1(cmd)
     sleep(0)
-    jsl = json.loads(ar.txt) if rc == 0 and ar.txt!='' else []
+    jsl = json.loads(ar.txt) if rc == 0 and ar.txt != "" else []
     return jsl
 
 
@@ -54,18 +54,18 @@ def getRemoteDEs(rd: Path, fl: list[str]):
     for fn in fl:
         th = Thread(target=f1, args=(fn,))
         th.start()
-        print(th, 'started')
+        print(th, "started")
         jstl.append(th)
         while len(jstl) > 5:
             sleep(0)
             th = jstl.pop()
             th.join()
-            print(th, 'joined')
+            print(th, "joined")
     while len(jstl):
         sleep(0)
         th = jstl.pop()
         th.join()
-        print(th, 'joined')
+        print(th, "joined")
     pt = Path
     delst = []
     for it in jsl:
@@ -213,7 +213,6 @@ def updateDEs(rd: Path, flst: list[str]):
                 # dl.pop(i)
                 pass
 
-    
     sdel = getRemoteDEs(rd, flst)
     with ls.dl:
         for fi in flst:
