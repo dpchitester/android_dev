@@ -212,8 +212,9 @@ def updateDEs(rd: Path, flst: list[str]):
                 # dl.pop(i)
                 pass
 
+    
+    sdel = getRemoteDEs(rd, flst)
     with ls.dl:
-        sdel = getRemoteDEs(rd, flst)
         for fi in flst:
             fp = rd / fi
             sdes = findSDEs(fp)
