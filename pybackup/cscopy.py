@@ -79,13 +79,13 @@ def ftouch(di, si, td, lf, sfc):
         rc = ar_run(cmd)
         if rc == 0:
             for m in opmsg:
-                print(json.dumps(m, indent=4))
+                # print(json.dumps(m, indent=4))
                 if str(lf) == m["object"]:
                     if m["msg"].startswith("Updated modification time"):
                         sfc.sc += 1
             opmsg.clear()
             for m in statmsg:
-                print(json.dumps(m, indent=4))
+                # print(json.dumps(m, indent=4))
                 sfc.sc += m["stats"]["checks"]
             statmsg.clear()
             return True
@@ -114,7 +114,7 @@ def fsync(di, si, sd, td, sfc):
         rc = ar_run(cmd)
         if rc == 0:
             for m in opmsg:
-                print(json.dumps(m, indent=4))
+                # print(json.dumps(m, indent=4))
                 if str(td.name) == m["object"]:
                     if m["msg"].startswith("Copied"):
                         sfc.sc += 1
@@ -122,7 +122,7 @@ def fsync(di, si, sd, td, sfc):
                         sfc.sc += 1
             opmsg.clear()
             for m in statmsg:
-                print(json.dumps(m, indent=4))
+                # print(json.dumps(m, indent=4))
                 sfc.sc += m["stats"]["checks"]
                 sfc.sc += m["stats"]["transfers"]
             statmsg.clear()
@@ -157,7 +157,7 @@ def fsyncl(di, si, sd, td, fl, sfc):
         rc = ar_run(cmd)
         if rc == 0:
             for m in opmsg:
-                print(json.dumps(m, indent=4))
+                # print(json.dumps(m, indent=4))
                 for f in fl:
                     if str(f.nm) == m["object"]:
                         if m["msg"].startswith("Copied"):
@@ -166,7 +166,7 @@ def fsyncl(di, si, sd, td, fl, sfc):
                             sfc.sc += 1
             opmsg.clear()
             for m in statmsg:
-                print(json.dumps(m, indent=4))
+                # print(json.dumps(m, indent=4))
                 sfc.sc += m["stats"]["checks"]
                 sfc.sc += m["stats"]["transfers"]
             statmsg.clear()
@@ -189,12 +189,12 @@ def fdel(di, si, sd, td, sfc):
         rc = ar_run(cmd)
         if rc == 0:
             for m in opmsg:
-                print(json.dumps(m, indent=4))
+                # print(json.dumps(m, indent=4))
                 if str(td.name) == m["object"] and m["msg"].startswith("Deleted"):
                     sfc.sc += 1
             opmsg.clear()
             for m in statmsg:
-                print(json.dumps(m, indent=4))
+                # print(json.dumps(m, indent=4))
                 sfc.sc += m["stats"]["checks"]
                 sfc.sc += m["stats"]["deletes"]
             statmsg.clear()
@@ -225,13 +225,13 @@ def fdell(di, si, td, fl, sfc):
         rc = ar_run(cmd)
         if rc == 0:
             for m in opmsg:
-                print(json.dumps(m, indent=4))
+                # print(json.dumps(m, indent=4))
                 for f in fl:
                     if str(f.nm) == m["object"] and m["msg"].startswith("Deleted"):
                         sfc.sc += 1
             opmsg.clear()
             for m in statmsg:
-                print(json.dumps(m, indent=4))
+                # print(json.dumps(m, indent=4))
                 sfc.sc += m["stats"]["checks"]
                 sfc.sc += m["stats"]["deletes"]
             statmsg.clear()
@@ -338,7 +338,6 @@ class BVars:
                 resolve()
 
             Promise(f1)
-            # updateDEs(self.td, [str(de.nm) for de in cfpl])
 
     def do_deletions(self):
         from findde import updateDEs
