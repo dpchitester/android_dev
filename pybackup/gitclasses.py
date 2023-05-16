@@ -2,14 +2,15 @@ import asyncrun as ar
 import config
 import ldsv as ls
 from sd import SD
-
+import gitops as go
 
 class GitCmdFailure(Exception):
     pass
 
 
 def gitcmd(cmd, wt):
-    rc = ar.run1(cmd, cwd=wt)
+    with go.rl:
+        rc = ar.run1(cmd, cwd=wt)
     if rc != 0:
         raise GitCmdFailure("gitcmd rc: " + str(rc) + cmd)
     return ar.txt.rstrip()
