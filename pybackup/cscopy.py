@@ -3,6 +3,8 @@ import datetime as dt
 import json
 from math import floor
 
+from promise import Promise
+
 import asyncrun as ar
 import config
 from edge import Edge
@@ -302,8 +304,10 @@ class BVars:
                 self.ac2 += 1
                 with contextlib.suppress(KeyError):
                     self.f2t.remove(lf)
-
-        updateDEs(self.td, [str(de.nm) for de in cfpl])
+        def f1(resolve, reject):
+            updateDEs(self.td, [str(de.nm) for de in cfpl])
+            resolve()
+        Promise(f1)
 
     def do_copying(self):
         # TODO: use Path
@@ -324,8 +328,11 @@ class BVars:
                     if str(rf.nm) == str(lf.nm):
                         with contextlib.suppress(KeyError):
                             self.f2d.remove(rf)
-
-            updateDEs(self.td, [str(de.nm) for de in cfpl])
+            def f1(resolve, reject):
+                updateDEs(self.td, [str(de.nm) for de in cfpl])
+                resolve()
+            Promise(f1)
+            # updateDEs(self.td, [str(de.nm) for de in cfpl])
 
     def do_deletions(self):
         from findde import updateDEs
@@ -336,8 +343,10 @@ class BVars:
                 self.ac2 += 1
                 with contextlib.suppress(KeyError):
                     self.f2d.remove(rf)
-
-        updateDEs(self.td, [str(de.nm) for de in cfpl])
+        def f1(resolve, reject):
+            updateDEs(self.td, [str(de.nm) for de in cfpl])
+            resolve()
+        Promise(f1)
 
     def list_deletions(self):
         cfpl = self.f2d.copy()
