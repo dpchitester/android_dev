@@ -307,7 +307,7 @@ class BVars:
 
         def f1(resolve, reject):
             updateDEs(self.td, [str(de.nm) for de in cfpl])
-            print('309 complete')
+            print("309 complete")
             resolve()
 
         Promise(f1)
@@ -334,7 +334,7 @@ class BVars:
 
             def f1(resolve, reject):
                 updateDEs(self.td, [str(de.nm) for de in cfpl])
-                print('336 complete')
+                print("336 complete")
                 resolve()
 
             Promise(f1)
@@ -351,7 +351,7 @@ class BVars:
 
         def f1(resolve, reject):
             updateDEs(self.td, [str(de.nm) for de in cfpl])
-            print('354 complete')
+            print("354 complete")
             resolve()
 
         Promise(f1)

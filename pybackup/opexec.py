@@ -4,6 +4,8 @@ from opbase import OpBase
 from status import updatets
 from toposort import topological_sort
 
+from promise import Promise
+
 _pass = 1
 
 
@@ -59,11 +61,22 @@ def proc_nodes(L):
         # print("node:", node)
         ss = changed_ops(node)
         for op in ss:
-            sc, fc = op()
-            if sc:
-                updatets(n)
-                # rupdatets(n)
-                n += 1
+
+            def f1(resolve, reject):
+                nonlocal sc, fc, n
+                sc, fc = op()
+                if fc:
+                    reject((sc, fc))
+                else:
+                    updatets(n)
+                    # rupdatets(n)
+                    n += 1
+                    resolve(sc)
+
+            p1 = Promise(f1)
+            if not nodeps(op.npl1[1]):
+                p1.get()
+
     return fc == 0
 
 
