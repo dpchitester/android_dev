@@ -1,9 +1,12 @@
+from threading import RLock
+
 import asyncrun as ar
 import config
 from edge import Edge, findEdge
 from netup import netup
 from opbase import OpBase
 
+rl = RLock()
 
 class GitAdd(OpBase):
     def __init__(self, npl1, npl2, opts={}) -> None:
@@ -28,7 +31,8 @@ class GitAdd(OpBase):
             anyd = True
         if not anyd:
             return (tc, fc)
-        rc = ar.run4("git add -A . -v", cwd=config.src(si))
+        with rl:
+            rc = ar.run4("git add -A . -v", cwd=config.src(si))
         if rc == 0:
             tc += 1
         else:
@@ -62,7 +66,8 @@ class GitCommit(OpBase):
             anyd = True
         if not anyd:
             return (tc, fc)
-        rc = ar.run4("git commit -a -m pybak -v", cwd=self.opts["wt"])
+        with rl:
+            rc = ar.run4("git commit -a -m pybak -v", cwd=self.opts["wt"])
         if rc in (0, 1):
             tc += 1
         else:
@@ -99,7 +104,8 @@ class GitPush(OpBase):
         if not anyd:
             return (tc, fc)
         if rmt == "local" or (netup()):
-            rc = ar.run4("git push " + rmt + " master", cwd=self.opts["wt"])
+            with rl:
+                rc = ar.run4("git push " + rmt + " master", cwd=self.opts["wt"])
             if rc == 0:
                 tc += 1
             else:
