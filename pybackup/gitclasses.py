@@ -11,10 +11,10 @@ class GitCmdFailure(Exception):
 
 def gitcmd(cmd, wt):
     with go.rl:
-        rc = ar.run1(cmd, cwd=wt)
+        rc, txt = ar.run1(cmd, cwd=wt)
     if rc != 0:
         raise GitCmdFailure("gitcmd rc: " + str(rc) + cmd)
-    return ar.txt.rstrip()
+    return txt.rstrip()
 
 
 class Local_Git_Mixin:

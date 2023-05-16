@@ -97,12 +97,12 @@ def copy2(di, si, sd, td, sfc):
     td2 = td.parent if td.is_file() else td
     cmd = "cp -u -p " + str(sd) + " " + str(td2)
     print("copying", sd.name)
-    rv = ar.run1(cmd)
+    rv, txt = ar.run1(cmd)
     if rv == 0:
         sfc.sc += 1
     else:
         sfc.fc -= 1
-        print(ar.txt)
+        print(txt)
     return rv
 
 

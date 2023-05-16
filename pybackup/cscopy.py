@@ -18,7 +18,7 @@ def ar_run(cmd):
     opmsg = []
     statmsg = []
     with config.rclk:
-        rc = ar.run3(cmd)
+        rc, txt, msglst = ar.run3(cmd)
 
     def f1():  # for ar_run3
         for m in ar.msglst:
@@ -28,7 +28,7 @@ def ar_run(cmd):
                 statmsg.append(m)
 
     f1()
-    return rc, opmsg, statmsg
+    return rc, txt, opmsg, statmsg
 
 
 def chunk_from(s1, amt):
@@ -72,7 +72,7 @@ def ftouch(di, si, td, lf, sfc):
         )
         # cmd += ' --exclude ".git/**" --exclude "__pycache__/**"'
         print(cmd)
-        rc, opmsg, statmsg = ar_run(cmd)
+        rc, txt, opmsg, statmsg = ar_run(cmd)
         if rc == 0:
             for m in opmsg:
                 # print(json.dumps(m, indent=4))
@@ -89,7 +89,7 @@ def ftouch(di, si, td, lf, sfc):
             sfc.fc += 1
             opmsg.clear()
             statmsg.clear()
-            print(ar.txt)
+            print(txt)
     return False
 
 
@@ -107,7 +107,7 @@ def fsync(di, si, sd, td, sfc):
         )
         # cmd += ' --exclude ".git/**" --exclude "__pycache__/**"'
         print(cmd)
-        rc, opmsg, statmsg = ar_run(cmd)
+        rc, txt, opmsg, statmsg = ar_run(cmd)
         if rc == 0:
             for m in opmsg:
                 # print(json.dumps(m, indent=4))
@@ -127,7 +127,7 @@ def fsync(di, si, sd, td, sfc):
             sfc.fc += 1
             opmsg.clear()
             statmsg.clear()
-            print(ar.txt)
+            print(txt)
     return False
 
 
@@ -150,7 +150,7 @@ def fsyncl(di, si, sd, td, fl, sfc):
     if netup():
         # print("copy", sd, td, list(map(lambda de: str(de.nm), fl)))
         print(cmd)
-        rc, opmsg, statmsg = ar_run(cmd)
+        rc, txt, opmsg, statmsg = ar_run(cmd)
         if rc == 0:
             for m in opmsg:
                 # print(json.dumps(m, indent=4))
@@ -171,7 +171,7 @@ def fsyncl(di, si, sd, td, fl, sfc):
             sfc.fc += 1
             opmsg.clear()
             statmsg.clear()
-            print(ar.txt)
+            print(txt)
     return False
 
 
@@ -182,7 +182,7 @@ def fdel(di, si, sd, td, sfc):
         cmd += '" --include="' + td.name
         cmd += '" --progress -v --use-json-log'
         print(cmd)
-        rc, opmsg, statmsg = ar_run(cmd)
+        rc, txt, opmsg, statmsg = ar_run(cmd)
         if rc == 0:
             for m in opmsg:
                 # print(json.dumps(m, indent=4))
@@ -199,7 +199,7 @@ def fdel(di, si, sd, td, sfc):
             sfc.fc += 1
             opmsg.clear()
             statmsg.clear()
-            print(ar.txt)
+            print(txt)
     return False
 
 
@@ -218,7 +218,7 @@ def fdell(di, si, td, fl, sfc):
     if netup():
         # print("delete", td, list(map(lambda de: str(de.nm), fl)))
         print(cmd)
-        rc, opmsg, statmsg = ar_run(cmd)
+        rc, txt, opmsg, statmsg = ar_run(cmd)
         if rc == 0:
             for m in opmsg:
                 # print(json.dumps(m, indent=4))
@@ -236,7 +236,7 @@ def fdell(di, si, td, fl, sfc):
             sfc.fc = len(fl)
             opmsg.clear()
             statmsg.clear()
-            print(ar.txt)
+            print(txt)
     return False
 
 
@@ -301,7 +301,7 @@ class BVars:
                 with contextlib.suppress(KeyError):
                     self.f2t.remove(lf)
         updateDEs(self.td, [str(de.nm) for de in cfpl])
-        print("306 complete")
+        print("303 complete")
 
     def do_copying(self):
         # TODO: use Path
@@ -323,7 +323,7 @@ class BVars:
                         with contextlib.suppress(KeyError):
                             self.f2d.remove(rf)
             updateDEs(self.td, [str(de.nm) for de in cfpl])
-            print("328 complete")
+            print("325 complete")
 
     def do_deletions(self):
         from findde import updateDEs
@@ -336,7 +336,7 @@ class BVars:
                     self.f2d.remove(rf)
 
         updateDEs(self.td, [str(de.nm) for de in cfpl])
-        print("344 complete")
+        print("338 complete")
 
     def list_deletions(self):
         cfpl = self.f2d.copy()

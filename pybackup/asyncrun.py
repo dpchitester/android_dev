@@ -19,7 +19,6 @@ idel = 1
 
 
 def a_run(shell_command, cwd=None):
-    global txt
     txt = ""
     p = subprocess.run(
         shell_command,
@@ -33,11 +32,10 @@ def a_run(shell_command, cwd=None):
         txt = so
         if txt:
             print(txt)
-    return p.returncode
+    return p.returncode, txt
 
 
 def a_run1(shell_command, cwd=None):
-    global txt
     txt = ""
     p = subprocess.run(
         shell_command,
@@ -49,11 +47,10 @@ def a_run1(shell_command, cwd=None):
     so = p.stdout
     if so:
         txt = so
-    return p.returncode
+    return p.returncode, txt
 
 
 def a_run2(shell_command, cwd=None):
-    global txt
     p = subprocess.run(
         shell_command,
         shell=True,
@@ -64,7 +61,6 @@ def a_run2(shell_command, cwd=None):
 
 
 def a_run3(shell_command, cwd=None):
-    global txt, msglst
     txt = ""
     msglst = []
     csp = ContinuousSubprocess(shell_command)
@@ -86,12 +82,11 @@ def a_run3(shell_command, cwd=None):
         trace = error_output["trace"]
         print(message)
         print(trace)
-        return exc.returncode
-    return 0
+        return exc.returncode, txt, msglst
+    return 0, txt, msglst
 
 
 def a_run4(shell_command, cwd=None):
-    global txt1, txt2
     csp = ContinuousSubprocess(shell_command)
     olg = csp.execute(path=cwd)
     txt1 = ""
@@ -111,8 +106,8 @@ def a_run4(shell_command, cwd=None):
         trace = error_output["trace"]
         print(message)
         print(trace)
-        return exc.returncode
-    return 0
+        return exc.returncode, txt1, txt2
+    return 0, txt1, txt2
 
 
 run = a_run

@@ -113,9 +113,9 @@ class RemoteFileList(FileList):
         import json
 
         cmd = 'rclone lsjson "' + str(sd) + '" --recursive --files-only '
-        rc = ar.run1(cmd)
+        rc, txt = ar.run1(cmd)
         if rc == 0:
-            return json.loads(ar.txt)
+            return json.loads(txt)
         if rc == 3:
             return []
         return None
