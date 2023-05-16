@@ -1,6 +1,6 @@
 import pickle
 from queue import Empty, SimpleQueue
-from threading import RLock, Thread
+from threading import RLock
 from time import sleep
 
 import config
@@ -167,32 +167,29 @@ def save_all():
 
 
 def save_bp():
-    def save_th():
-        svs = {}
-        while not config.quit_ev.is_set():
+    print("-savebp")
+    svs = {}
+    while not config.quit_ev.is_set():
+        try:
+            qi = sev.get_nowait()
             try:
-                qi = sev.get_nowait()
-                try:
-                    svs[qi] += 1
-                except KeyError:
-                    svs[qi] = 1
-                continue
-            except Empty:
-                sleep(0.05)
-        print("saves:", svs)
-        for sv in svs:
-            match sv:
-                case "edges":
-                    saveedges()
-                case "ldlls":
-                    saveldlls()
-                case "rdlls":
-                    saverdlls()
-                case "ldhd":
-                    saveldh()
-                case "rdhd":
-                    saverdh()
-        pstats()
-
-    th3 = Thread(target=save_th)
-    return th3
+                svs[qi] += 1
+            except KeyError:
+                svs[qi] = 1
+            continue
+        except Empty:
+            sleep(0.05)
+    print("saves:", svs)
+    for sv in svs:
+        match sv:
+            case "edges":
+                saveedges()
+            case "ldlls":
+                saveldlls()
+            case "rdlls":
+                saverdlls()
+            case "ldhd":
+                saveldh()
+            case "rdhd":
+                saverdh()
+    pstats()

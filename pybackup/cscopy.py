@@ -2,7 +2,6 @@ import contextlib
 import datetime as dt
 from math import floor
 
-from promise import Promise
 
 import asyncrun as ar
 import config
@@ -303,13 +302,8 @@ class BVars:
                 self.ac2 += 1
                 with contextlib.suppress(KeyError):
                     self.f2t.remove(lf)
-
-        def f1(resolve, reject):
-            updateDEs(self.td, [str(de.nm) for de in cfpl])
-            print("309 complete")
-            resolve()
-
-        Promise(f1)
+        updateDEs(self.td, [str(de.nm) for de in cfpl])
+        print("306 complete")
 
     def do_copying(self):
         # TODO: use Path
@@ -330,13 +324,8 @@ class BVars:
                     if str(rf.nm) == str(lf.nm):
                         with contextlib.suppress(KeyError):
                             self.f2d.remove(rf)
-
-            def f1(resolve, reject):
-                updateDEs(self.td, [str(de.nm) for de in cfpl])
-                print("336 complete")
-                resolve()
-
-            Promise(f1)
+            updateDEs(self.td, [str(de.nm) for de in cfpl])
+            print("328 complete")
 
     def do_deletions(self):
         from findde import updateDEs
@@ -348,12 +337,8 @@ class BVars:
                 with contextlib.suppress(KeyError):
                     self.f2d.remove(rf)
 
-        def f1(resolve, reject):
-            updateDEs(self.td, [str(de.nm) for de in cfpl])
-            print("354 complete")
-            resolve()
-
-        Promise(f1)
+        updateDEs(self.td, [str(de.nm) for de in cfpl])
+        print("344 complete")
 
     def list_deletions(self):
         cfpl = self.f2d.copy()

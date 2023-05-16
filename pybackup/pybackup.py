@@ -1,7 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/env python
 
+from threading import Thread
 
-from promise import Promise
 from snoop import snoop
 
 import config
@@ -16,7 +16,6 @@ th2 = None
 th3 = None
 
 
-@snoop
 def rt2():
     global th1
     itc = 0
@@ -31,7 +30,6 @@ def rt2():
             opExec()
 
 
-@snoop
 def main():
     global cel, wdsi, in1, v, th1, th2, th3
     print("-main")
@@ -40,7 +38,7 @@ def main():
         print("-main-2")
         updatets(0)
         print("-main-3")
-        th3 = Promise(ls.save_bp)
+        th3 = Thread(target=ls.save_bp)
         print("-main-4")
         rt2()
         print("-main-5")
@@ -49,8 +47,7 @@ def main():
         print(exc)
     finally:
         print("-main-6")
-        res = Promise.all([th3]).get()
-        print(res)
+        th3.join()
 
 
 if __name__ == "__main__":
