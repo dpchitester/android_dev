@@ -4,6 +4,7 @@ import json
 from bisect import bisect_left
 from pathlib import Path
 from threading import Thread
+from time import sleep
 
 import asyncrun as ar
 import config
@@ -26,6 +27,7 @@ def getOneJSde(rd: Path, fn):
     cmd += " --files-only"
     print(cmd)
     rc = ar.run1(cmd)
+    sleep(0)
     jsl = json.loads(ar.txt) if rc == 0 else []
     return jsl
 
@@ -51,6 +53,7 @@ def getRemoteDEs(rd: Path, fl: list[str]):
         th.start()
         jstl.append(th)
     for th in jstl:
+        sleep(0)
         th.join()
     pt = Path
     delst = []
