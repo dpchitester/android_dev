@@ -35,7 +35,7 @@ def clean():
 
 
 def nodeps(T):
-    return all(e.si != T for e in config.eDep)
+    return not any(e.si == T for e in config.eDep)
 
 
 def istgt(T, dep2=None):
