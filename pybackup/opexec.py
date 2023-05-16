@@ -66,7 +66,7 @@ def proc_nodes(L):
                 nonlocal sc, fc, n
                 sc, fc = op()
                 if fc:
-                    reject((sc, fc))
+                    reject(fc)
                 else:
                     updatets(n)
                     # rupdatets(n)
@@ -74,7 +74,7 @@ def proc_nodes(L):
                     resolve(sc)
 
             p1 = Promise(f1)
-            if not nodeps(op.npl1[1]):
+            if not nodeps(op.npl1[0]):
                 p1.get()
 
     return fc == 0
