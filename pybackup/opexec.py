@@ -72,10 +72,10 @@ def proc_nodes(L):
 
             th = Thread(target=f1)
             th.start()
-            if nodeps(op.npl1[0]):
-                pass
-            else:
-                th.join()
+            # if nodeps(op.npl1[0]):
+                # pass
+            # else:
+            th.join()
 
 
 def opExec():
