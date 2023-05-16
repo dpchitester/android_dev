@@ -46,14 +46,21 @@ def getRemoteJSde(rd: Path, fn: str):
 def getRemoteDEs(rd: Path, fl: list[str]):
     jsl = []
     jstl = []
+
+    def f1(fn):
+        jsl.extend(getRemoteJSde(rd, fn))
+
     for fn in fl:
-        def f1(fn):
-            jsl.extend(getRemoteJSde(rd, fn))
-        th = Thread(target=f1,args=(fn,))
+        th = Thread(target=f1, args=(fn,))
         th.start()
         jstl.append(th)
-    for th in jstl:
+        while len(jstl) > 5:
+            sleep(0)
+            th = jstl.pop()
+            th.join()
+    while len(jstl):
         sleep(0)
+        th = jstl.pop()
         th.join()
     pt = Path
     delst = []

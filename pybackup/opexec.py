@@ -55,12 +55,11 @@ def nts():
 
 def proc_nodes(L):
     n = 1
-    sc = 0
-    fc = 0
     for node in L:
         # print("node:", node)
         ss = changed_ops(node)
         for op in ss:
+
             def f1():
                 nonlocal n
                 sc, fc = op()
@@ -70,8 +69,9 @@ def proc_nodes(L):
                     updatets(n)
                     # rupdatets(n)
                     n += 1
+
             th = Thread(target=f1)
-            th.start()  
+            th.start()
             if nodeps(op.npl1[0]):
                 pass
             else:
