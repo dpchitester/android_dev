@@ -68,7 +68,7 @@ class GitCommit(OpBase):
         if not anyd:
             return (tc, fc)
         with rl:
-            rc = ar.run4("git commit -a -m pybak -v", cwd=self.opts["wt"])
+            rc, txt1, txt2 = ar.run4("git commit -a -m pybak -v", cwd=self.opts["wt"])
         if rc in (0, 1):
             tc += 1
         else:
