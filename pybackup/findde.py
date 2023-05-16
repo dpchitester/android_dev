@@ -53,15 +53,18 @@ def getRemoteDEs(rd: Path, fl: list[str]):
     for fn in fl:
         th = Thread(target=f1, args=(fn,))
         th.start()
+        print(th, 'started')
         jstl.append(th)
         while len(jstl) > 5:
             sleep(0)
             th = jstl.pop()
             th.join()
+            print(th, 'joined')
     while len(jstl):
         sleep(0)
         th = jstl.pop()
         th.join()
+        print(th, 'joined')
     pt = Path
     delst = []
     for it in jsl:
