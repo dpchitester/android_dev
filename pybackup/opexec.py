@@ -77,8 +77,6 @@ def proc_nodes(L):
             else:
                 th.join()
 
-    return fc == 0
-
 
 def opExec():
     print("-opexec")
