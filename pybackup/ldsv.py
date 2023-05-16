@@ -178,7 +178,7 @@ def save_bp():
                 svs[qi] = 1
             continue
         except Empty:
-            sleep(0.05)
+            sleep(0.5)
     print("saves:", svs)
     for sv in svs:
         match sv:

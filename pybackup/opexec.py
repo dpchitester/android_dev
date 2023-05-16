@@ -1,10 +1,10 @@
+from threading import Thread
+
 import config
 from edge import Edge, findEdge
 from opbase import OpBase
 from status import updatets
 from toposort import topological_sort
-
-from promise import Promise
 
 _pass = 1
 
@@ -61,21 +61,21 @@ def proc_nodes(L):
         # print("node:", node)
         ss = changed_ops(node)
         for op in ss:
-
-            def f1(resolve, reject):
-                nonlocal sc, fc, n
+            def f1():
+                nonlocal n
                 sc, fc = op()
                 if fc:
-                    reject(fc)
+                    pass
                 else:
                     updatets(n)
                     # rupdatets(n)
                     n += 1
-                    resolve(sc)
-
-            p1 = Promise(f1)
-            if not nodeps(op.npl1[0]):
-                p1.get()
+            th = Thread(target=f1)
+            th.start()  
+            if nodeps(op.npl1[0]):
+                pass
+            else:
+                th.join()
 
     return fc == 0
 
