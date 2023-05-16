@@ -300,7 +300,7 @@ class BVars:
                 with contextlib.suppress(KeyError):
                     self.f2t.remove(lf)
         updateDEs(self.td, [str(de.nm) for de in cfpl])
-        print("303 complete")
+        print("302 complete")
 
     def do_copying(self):
         # TODO: use Path
@@ -322,7 +322,7 @@ class BVars:
                         with contextlib.suppress(KeyError):
                             self.f2d.remove(rf)
             updateDEs(self.td, [str(de.nm) for de in cfpl])
-            print("325 complete")
+            print("324 complete")
 
     def do_deletions(self):
         from findde import updateDEs
@@ -335,7 +335,7 @@ class BVars:
                     self.f2d.remove(rf)
 
         updateDEs(self.td, [str(de.nm) for de in cfpl])
-        print("338 complete")
+        print("337 complete")
 
     def list_deletions(self):
         cfpl = self.f2d.copy()
