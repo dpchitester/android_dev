@@ -46,6 +46,7 @@ def main():
     finally:
         print("-main-6")
         if th3.is_alive():
+            config.quit_ev.set()
             th3.join()
 
 
