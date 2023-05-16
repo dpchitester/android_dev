@@ -39,6 +39,7 @@ def main():
         updatets(0)
         print("-main-3")
         th3 = Thread(target=ls.save_bp)
+        th3.start()
         print("-main-4")
         rt2()
         print("-main-5")
