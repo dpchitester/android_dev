@@ -54,6 +54,7 @@ def nts():
 
 
 def proc_nodes(L):
+    thl = []
     n = 1
     for node in L:
         # print("node:", node)
@@ -72,10 +73,16 @@ def proc_nodes(L):
 
             th = Thread(target=f1)
             th.start()
+            print(th)
             if nodeps(op.npl1[0]):
-                pass
+                thl.append(th)
             else:
                 th.join()
+                print(th)
+    while len(thl):
+        th = thl.pop()
+        th.join()
+        print(th)
 
 
 def opExec():
