@@ -20,7 +20,8 @@ statmsg = []
 
 def ar_run(cmd):
     global opmsg, statmsg
-    rc = ar.run3(cmd)
+    with config.rclk:
+        rc = ar.run3(cmd)
 
     def f1():  # for ar_run3
         for m in ar.msglst:

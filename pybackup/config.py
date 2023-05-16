@@ -2,7 +2,7 @@ import os
 from math import floor
 from os import walk
 from pathlib import Path
-from threading import Event
+from threading import Event, RLock
 from typing import TypeAlias
 
 from cscopy import CSCopy
@@ -20,6 +20,7 @@ from sd import CS, SD, Ext3, Fat32
 
 
 quit_ev = Event()
+rclk = RLock()
 
 NodeTag: TypeAlias = str
 Hash: TypeAlias = bytes

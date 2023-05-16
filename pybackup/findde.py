@@ -26,7 +26,8 @@ def getOneJSde(rd: Path, fn):
     cmd += ' --include="' + fn + '"'
     cmd += " --files-only"
     print(cmd)
-    rc = ar.run1(cmd)
+    with config.rclk:
+        rc = ar.run1(cmd)
     sleep(0)
     jsl = json.loads(ar.txt) if rc == 0 else []
     return jsl
