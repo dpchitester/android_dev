@@ -1,6 +1,5 @@
 import contextlib
 import datetime as dt
-import json
 from math import floor
 
 from promise import Promise
