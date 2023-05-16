@@ -106,7 +106,9 @@ class GitPush(OpBase):
             return (tc, fc)
         if rmt == "local" or (netup()):
             with rl:
-                rc, txt1, txt2 = ar.run4("git push " + rmt + " master", cwd=self.opts["wt"])
+                rc, txt1, txt2 = ar.run4(
+                    "git push " + rmt + " master", cwd=self.opts["wt"]
+                )
             if rc == 0:
                 tc += 1
             else:

@@ -78,6 +78,7 @@ def proc_nodes(L):
         th = thl.pop()
         th.join()
 
+
 def opExec():
     print("-opexec")
     g1 = nts()
