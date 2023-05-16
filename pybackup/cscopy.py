@@ -304,9 +304,12 @@ class BVars:
                 self.ac2 += 1
                 with contextlib.suppress(KeyError):
                     self.f2t.remove(lf)
+
         def f1(resolve, reject):
             updateDEs(self.td, [str(de.nm) for de in cfpl])
+            print('309 complete')
             resolve()
+
         Promise(f1)
 
     def do_copying(self):
@@ -328,9 +331,12 @@ class BVars:
                     if str(rf.nm) == str(lf.nm):
                         with contextlib.suppress(KeyError):
                             self.f2d.remove(rf)
+
             def f1(resolve, reject):
                 updateDEs(self.td, [str(de.nm) for de in cfpl])
+                print('336 complete')
                 resolve()
+
             Promise(f1)
             # updateDEs(self.td, [str(de.nm) for de in cfpl])
 
@@ -343,9 +349,12 @@ class BVars:
                 self.ac2 += 1
                 with contextlib.suppress(KeyError):
                     self.f2d.remove(rf)
+
         def f1(resolve, reject):
             updateDEs(self.td, [str(de.nm) for de in cfpl])
+            print('354 complete')
             resolve()
+
         Promise(f1)
 
     def list_deletions(self):

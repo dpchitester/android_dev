@@ -389,12 +389,12 @@ def initConfig():
 
     for cs in ("gd", "db", "od"):
         for si in ("proj", "vids", "zips"):
-            if src(si).is_relative_to(ppre('sd')):
+            if src(si).is_relative_to(ppre("sd")):
                 p1 = src(si).relative_to(ppre("sd"))
             elif src(si).is_relative_to(src("home").parent):
                 p1 = src(si).relative_to(src("home").parent)
             else:
-                print('relative dir not found')
+                print("relative dir not found")
                 raise ValueError()
             addTgtDir(cs + "_" + si, ppre(cs) / p1)
             npl1 = (cs + "_" + si, si)
@@ -429,9 +429,7 @@ dexs = {
 
 
 def cull_DEs(des):
-    des[:] = [
-        de for de in des if not any(sd for sd in de.nm.parts if sd in dexs)
-    ]
+    des[:] = [de for de in des if not any(sd for sd in de.nm.parts if sd in dexs)]
 
 
 def cull_files(files, pt):
