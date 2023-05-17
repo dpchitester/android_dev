@@ -80,6 +80,7 @@ class LocalFileList(FileList):
                             sleep(0)
                         elif not it1.is_symlink() and not isbaddir(it1.name):
                             q.append(it1.path)
+                            sleep(0)
             except IndexError:
                 break
 
