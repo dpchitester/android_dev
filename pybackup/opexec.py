@@ -75,7 +75,7 @@ def proc_nodes(L):
             else:
                 f1(op)
     while len(thl):
-        th = thl.pop()
+        th = thl.pop(0)
         th.join()
 
 
