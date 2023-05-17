@@ -26,14 +26,13 @@ def onestatus(Si):
 
 def src_statuses():
     SDl = []
-    with ls.dl:
-        for Si in config.srcs:
-            # print('calling lckers', Si)
-            tr = config.src(Si).sdhck()
-            if tr is not None:
-                (Dh, changed) = tr
-                if changed:
-                    SDl.append((Si, Dh))
+    for Si in config.srcs:
+        # print('calling lckers', Si)
+        tr = config.src(Si).sdhck()
+        if tr is not None:
+            (Dh, changed) = tr
+            if changed:
+                SDl.append((Si, Dh))
     return SDl
 
 
@@ -64,7 +63,7 @@ def src_statuses2():
 
 def updatets(N):
     print("Status", N)
-    Sl = src_statuses2()
+    Sl = src_statuses()
     if len(Sl):
         print("changed: ", end="")
         for Si, Dh in Sl:
