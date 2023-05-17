@@ -2,7 +2,6 @@
 
 from threading import Thread
 
-
 import config
 import ldsv as ls
 from opexec import clean, opExec
@@ -45,7 +44,7 @@ def main():
         print(exc)
     finally:
         print("-main-6")
-        if th3.is_alive():
+        if th3 and th3.is_alive():
             config.quit_ev.set()
             th3.join()
 
