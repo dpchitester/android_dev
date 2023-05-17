@@ -114,7 +114,7 @@ class ContinuousSubprocess:
                         yield Qi1(item)
                     except Empty:
                         pass
-                    sleep(0.02)
+                    sleep(0.0)
                 while not q2.empty():
                     try:
                         item = q2.get(False)
@@ -122,7 +122,7 @@ class ContinuousSubprocess:
                         yield Qi2(item)
                     except Empty:
                         pass
-                    sleep(0.02)
+                    sleep(0.0)
 
             # Close streams.
             process.stdout.close()

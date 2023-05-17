@@ -1,4 +1,5 @@
 from threading import Thread
+from time import sleep
 
 import config
 import ldsv as ls
@@ -48,16 +49,17 @@ def src_statuses2():
                 (Dh, changed) = tr
                 if changed:
                     SDl.append((Si, Dh))
+            sleep(0)
 
         th = Thread(target=f1, args=(Si,))
         th.start()
         thl.append(th)
-        #print(th)
+        # print(th)
     while len(thl):
         th = thl.pop(0)
         if th.is_alive():
             th.join()
-        #print(th)
+        # print(th)
     return SDl
 
 

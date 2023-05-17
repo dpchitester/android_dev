@@ -1,5 +1,6 @@
 import json
 import subprocess
+from time import sleep
 
 from csubproc import ContinuousSubprocess, Qi1, Qi2
 
@@ -96,6 +97,7 @@ def a_run4(shell_command, cwd=None):
                 case Qi2():
                     txt2 += ln
                     print(colored(255, 0, 0, ln), end="")
+            sleep(0)
     except subprocess.CalledProcessError as exc:
         error_output = json.loads(exc.output)
         message = error_output["message"]
