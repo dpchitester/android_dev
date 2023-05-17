@@ -53,12 +53,12 @@ def src_statuses2():
         th = Thread(target=f1, args=(Si,))
         th.start()
         thl.append(th)
-        print(th)
+        #print(th)
     while len(thl):
         th = thl.pop(0)
         if th.is_alive():
             th.join()
-        print(th)
+        #print(th)
     return SDl
 
 
