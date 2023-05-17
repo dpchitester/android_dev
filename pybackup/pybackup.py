@@ -7,8 +7,6 @@ import ldsv as ls
 from opexec import clean, opExec
 from status import updatets
 
-th1 = None
-th2 = None
 th3 = None
 
 
@@ -27,7 +25,7 @@ def rt2():
 
 
 def main():
-    global cel, wdsi, in1, v, th1, th2, th3
+    global th3
     print("-main")
     config.initConfig()
     try:
