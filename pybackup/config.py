@@ -402,7 +402,7 @@ def initConfig():
             npl1 = (cs + "_" + si, si)
             # op15 = CSRestore(npl1, None, {})
             # addArc(op15)
-            op16 = CSCopy(npl1, npl1, {"delete": True})
+            op16 = CSCopy(npl1, npl1, {"delete": False})
             addArc(op16)
 
     load_all()
