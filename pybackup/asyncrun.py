@@ -73,6 +73,7 @@ def a_run3(shell_command, cwd=None):
                         msg = json.loads(ln)
                         msglst.append(msg)
                     # print(colored(255, 0, 0, msg))
+            sleep(0)
     except subprocess.CalledProcessError as exc:
         error_output = json.loads(exc.output)
         message = error_output["message"]
