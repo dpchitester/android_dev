@@ -55,7 +55,7 @@ def getRemoteDEs(rd: Path, fl: list[str]):
         th.start()
         #print(th)
         jstl.append(th)
-        while len(jstl) > 5:
+        while len(jstl) > 10:
             sleep(0)
             th = jstl.pop(0)
             th.join()
