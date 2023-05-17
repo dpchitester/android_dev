@@ -56,6 +56,7 @@ def src_statuses2():
         thl.append(th)
         # print(th)
     while len(thl):
+        sleep(0)
         th = thl.pop(0)
         if th.is_alive():
             th.join()
@@ -65,7 +66,7 @@ def src_statuses2():
 
 def updatets(N):
     print("Status", N)
-    Sl = src_statuses()
+    Sl = src_statuses2()
     if len(Sl):
         print("changed: ", end="")
         for Si, Dh in Sl:
