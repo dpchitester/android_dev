@@ -55,7 +55,7 @@ def src_statuses2():
         thl.append(th)
         print(th)
     while len(thl):
-        th = thl.pop()
+        th = thl.pop(0)
         if th.is_alive():
             th.join()
         print(th)

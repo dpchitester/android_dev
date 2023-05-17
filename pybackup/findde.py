@@ -26,8 +26,7 @@ def getOneJSde(rd: Path, fn):
     cmd += ' --include="' + fn + '"'
     cmd += " --files-only"
     print(cmd)
-    with config.rclk:
-        rc, txt = ar.run1(cmd)
+    rc, txt = ar.run1(cmd)
     sleep(0)
     jsl = json.loads(txt) if rc == 0 and txt != "" else []
     return jsl
@@ -58,12 +57,12 @@ def getRemoteDEs(rd: Path, fl: list[str]):
         jstl.append(th)
         while len(jstl) > 5:
             sleep(0)
-            th = jstl.pop()
+            th = jstl.pop(0)
             th.join()
             print(th)
     while len(jstl):
         sleep(0)
-        th = jstl.pop()
+        th = jstl.pop(0)
         th.join()
         print(th)
     pt = Path
