@@ -2,6 +2,7 @@ import bisect
 import datetime
 import os
 from pathlib import Path
+from time import sleep
 
 import asyncrun as ar
 import config
@@ -76,6 +77,7 @@ class LocalFileList(FileList):
                     for it1 in di:
                         if it1.is_file():
                             yield it1
+                            sleep(0)
                         elif not it1.is_symlink() and not isbaddir(it1.name):
                             q.append(it1.path)
             except IndexError:
@@ -102,6 +104,7 @@ class LocalFileList(FileList):
                 it3 = 0
             fse = FSe(it2, it3)
             bisect.insort(st, DE(it1, fse), key=lambda de: de.nm)
+            sleep(0)
         return st
 
 
@@ -135,6 +138,7 @@ class RemoteFileList(FileList):
             it3 = config.ts_trunc2ms(it3)
             fse = FSe(it2, it3)
             bisect.insort(st, DE(it1, fse), key=lambda de: de.nm)
+            sleep(0)
         return st
 
 
