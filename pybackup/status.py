@@ -1,5 +1,4 @@
 from threading import Thread
-from time import sleep
 
 import config
 import ldsv as ls
@@ -27,13 +26,14 @@ def onestatus(Si):
 
 def src_statuses():
     SDl = []
-    for Si in config.srcs:
-        # print('calling lckers', Si)
-        tr = config.src(Si).sdhck()
-        if tr is not None:
-            (Dh, changed) = tr
-            if changed:
-                SDl.append((Si, Dh))
+    with ls.dl:
+        for Si in config.srcs:
+            # print('calling lckers', Si)
+            tr = config.src(Si).sdhck()
+            if tr is not None:
+                (Dh, changed) = tr
+                if changed:
+                    SDl.append((Si, Dh))
     return SDl
 
 
@@ -49,14 +49,12 @@ def src_statuses2():
                 (Dh, changed) = tr
                 if changed:
                     SDl.append((Si, Dh))
-            sleep(0)
 
         th = Thread(target=f1, args=(Si,))
         th.start()
         thl.append(th)
         # print(th)
     while len(thl):
-        sleep(0)
         th = thl.pop(0)
         if th.is_alive():
             th.join()

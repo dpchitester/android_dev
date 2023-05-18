@@ -14,7 +14,7 @@ When finished, close it
     rclone.close()
 """
 
-__all__ = ('Rclone', 'RcloneException')
+__all__ = ("Rclone", "RcloneException")
 
 import json
 import os
@@ -31,14 +31,17 @@ class RcloneRPCString(c_char_p):
     RcloneFreeString. Subclassing prevents it, while the string
     can still be retrieved from attribute value.
     """
+
     pass
+
 
 class RcloneRPCResult(Structure):
     """
     This is returned from the C API when calling RcloneRPC
     """
-    _fields_ = [("Output", RcloneRPCString),
-                ("Status", c_int)]
+
+    _fields_ = [("Output", RcloneRPCString), ("Status", c_int)]
+
 
 class RcloneException(Exception):
     """
@@ -49,19 +52,25 @@ class RcloneException(Exception):
     output - a dictionary from the call
     status - a status number
     """
+
     def __init__(self, output, status):
         self.output = output
         self.status = status
-        message = self.output.get('error', 'Unknown rclone error')
+        message = self.output.get("error", "Unknown rclone error")
         super().__init__(message)
 
-class Rclone():
+
+class Rclone:
     """
     Interface to Rclone via librclone.so
 
     Initialise with shared_object as the file path of librclone.so
     """
-    def __init__(self, shared_object=f"{os.environ['LD_LIBRARY_PATH']}/librclone{'.dll' if os.name == 'nt' else '.so'}"):
+
+    def __init__(
+        self,
+        shared_object=f"{os.environ['LD_LIBRARY_PATH']}/librclone{'.dll' if os.name == 'nt' else '.so'}",
+    ):
         self.rclone = CDLL(shared_object)
         self.rclone.RcloneRPC.restype = RcloneRPCResult
         self.rclone.RcloneRPC.argtypes = (c_char_p, c_char_p)
@@ -72,6 +81,7 @@ class Rclone():
         self.rclone.RcloneFinalize.restype = None
         self.rclone.RcloneFinalize.argtypes = ()
         self.rclone.RcloneInitialize()
+
     def rpc(self, method, **kwargs):
         """
         Call an rclone RC API call with the kwargs given.
@@ -90,12 +100,14 @@ class Rclone():
         if status != 200:
             raise RcloneException(output, status)
         return output
+
     def close(self):
         """
         Call to finish with the rclone connection
         """
         self.rclone.RcloneFinalize()
         self.rclone = None
+
     @classmethod
     def build(cls, shared_object):
         """
@@ -105,5 +117,14 @@ class Rclone():
         """
         if os.path.exists(shared_object):
             return
-        print("Building "+shared_object)
-        subprocess.check_call(["go", "build", "--buildmode=c-shared", "-o", shared_object, "github.com/rclone/rclone/librclone"])
+        print("Building " + shared_object)
+        subprocess.check_call(
+            [
+                "go",
+                "build",
+                "--buildmode=c-shared",
+                "-o",
+                shared_object,
+                "github.com/rclone/rclone/librclone",
+            ]
+        )

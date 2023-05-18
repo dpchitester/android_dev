@@ -8,7 +8,6 @@ from collections import deque
 from collections.abc import Generator
 from queue import Empty, Queue
 from threading import Thread
-from time import sleep
 from typing import IO, AnyStr
 
 # logger = logging.getLogger(__name__)
@@ -114,7 +113,7 @@ class ContinuousSubprocess:
                         yield Qi1(item)
                     except Empty:
                         pass
-                    sleep(0.0)
+
                 while not q2.empty():
                     try:
                         item = q2.get(False)
@@ -122,7 +121,6 @@ class ContinuousSubprocess:
                         yield Qi2(item)
                     except Empty:
                         pass
-                    sleep(0.0)
 
             # Close streams.
             process.stdout.close()

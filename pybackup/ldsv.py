@@ -1,7 +1,6 @@
 import pickle
 from queue import Empty, SimpleQueue
 from threading import RLock
-from time import sleep
 
 import config
 
@@ -178,7 +177,7 @@ def save_bp():
                 svs[qi] = 1
             continue
         except Empty:
-            sleep(0)
+            pass
     print("saves:", svs)
     for sv in svs:
         match sv:

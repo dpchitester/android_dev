@@ -412,6 +412,7 @@ dexs = {
     ".cargo",
     ".cache",
     ".git",
+    "go",
     "node_modules",
     "__pycache__",
     ".ropeproject",
