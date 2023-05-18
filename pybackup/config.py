@@ -264,7 +264,8 @@ def initConfig():
     addTgtDir("blog", src("proj") / "blog")
     addTgtDir("bash", src("proj") / "bash")
     addTgtDir("plaid-node", src("proj") / "plaid-node")
-
+    addTgtDir("docs", sdcard / "Documents")
+    
     npl1 = ("bash", "home")
     op1 = LocalCopy(
         npl1,

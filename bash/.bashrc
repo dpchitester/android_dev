@@ -15,6 +15,7 @@ export PYTHONDEBUG=1
 export PYTHONASYNCIODEBUG=1
 export PYTHONDEVMODE=1
 export RCLONE_CONFIG=$HOME/.config/rclone/rclone.conf
+export XDG_CONFIG_HOME=$HOME/.config
 
 alias pb='cd /sdcard/projects/pybackup'
 alias pp='cd $PYTHON_SITE_PACKAGES'

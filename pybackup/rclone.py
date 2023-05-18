@@ -81,7 +81,8 @@ class Rclone:
         self.rclone.RcloneFinalize.restype = None
         self.rclone.RcloneFinalize.argtypes = ()
         self.rclone.RcloneInitialize()
-
+        self.rpc('config/setpath', path = os.environ['HOME']+'/.config/rclone/rclone.conf')
+        
     def rpc(self, method, **kwargs):
         """
         Call an rclone RC API call with the kwargs given.
