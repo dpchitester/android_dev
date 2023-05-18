@@ -2,11 +2,9 @@
 
 
 # pkg uninstall git-crypt
-# pkg uninstall inotify-tools
 # pkg uninstall openssl-1.1
 # pkg uninstall rclone
 # pkg uninstall ruff
-# pkg uninstall which
 # pip uninstall ---------------
 # pip uninstall asttokens
 # pip uninstall black
