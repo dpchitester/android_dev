@@ -160,6 +160,8 @@ class ContinuousSubprocess:
         try:
             for line in iter(stream.readline, ""):
                 if line != "":
+                    if line[len(line)-1]==b'':
+                        print('-zero-')
                     queue.put(line)
                 else:
                     break
