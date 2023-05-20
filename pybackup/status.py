@@ -55,8 +55,7 @@ def src_statuses2():
         th.start()
         thl.append(th)
         # print(th)
-    while any(th for th in thl if th.is_alive()):
-        sleep(0.1)
+    [th.join() for th in thl if th.is_alive()]
     return SDl
 
 
