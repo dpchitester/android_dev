@@ -1,4 +1,4 @@
-from threading import Thread
+from threading import Thread, RLock
 
 import config
 from edge import Edge, findEdge
@@ -54,6 +54,7 @@ def nts():
 
 
 def proc_nodes(L):
+    slk = RLock()
     thl = []
     n = 1
     for node in L:
@@ -64,7 +65,8 @@ def proc_nodes(L):
             def f1(op):
                 nonlocal n
                 sc, fc = op()
-                updatets(n)
+                with slk:
+                    updatets(n)
                 # rupdatets(n)
                 n += 1
 
