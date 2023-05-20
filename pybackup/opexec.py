@@ -65,8 +65,7 @@ def proc_nodes(L):
             def f1(op):
                 nonlocal n
                 sc, fc = op()
-                with slk:
-                    updatets(n)
+                
                 # rupdatets(n)
                 n += 1
 
@@ -79,7 +78,7 @@ def proc_nodes(L):
     while len(thl):
         th = thl.pop(0)
         th.join()
-
+    updatets(n)
 
 def opExec():
     print("-opexec")
