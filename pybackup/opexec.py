@@ -62,6 +62,7 @@ def proc_nodes(L):
             sc, fc = op()
             # rupdatets(n)
             updatets(n)
+            n += 1
 
 def opExec():
     print("-opexec")
