@@ -61,7 +61,7 @@ def proc_nodes(L):
         for op in ss:
             sc, fc = op()
             # rupdatets(n)
-    updatets(n)
+            updatets(n)
 
 def opExec():
     print("-opexec")
