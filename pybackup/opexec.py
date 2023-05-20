@@ -54,30 +54,13 @@ def nts():
 
 
 def proc_nodes(L):
-    slk = RLock()
-    thl = []
     n = 1
     for node in L:
         # print("node:", node)
         ss = changed_ops(node)
         for op in ss:
-
-            def f1(op):
-                nonlocal n
-                sc, fc = op()
-                
-                # rupdatets(n)
-                n += 1
-
-            if nodeps(op.npl1[0]):
-                th = Thread(target=f1, args=(op,))
-                thl.append(th)
-                th.start()
-            else:
-                f1(op)
-    while len(thl):
-        th = thl.pop(0)
-        th.join()
+            sc, fc = op()
+            # rupdatets(n)
     updatets(n)
 
 def opExec():
