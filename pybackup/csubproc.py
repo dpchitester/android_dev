@@ -79,6 +79,7 @@ class ContinuousSubprocess:
             cwd=path,
             *args,
             **kwargs,
+            bufsize=1,
         ) as process:
             # Indicate that the process has started and is now running.
             self.__process = process
