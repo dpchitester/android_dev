@@ -10,6 +10,7 @@ import asyncio
 import sys
 import typing as T
 
+
 async def enqueue(values: T.Iterable[bytes], stream: asyncio.StreamWriter):
 
     for line in values:

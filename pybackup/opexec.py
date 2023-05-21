@@ -1,4 +1,3 @@
-from threading import Thread, RLock
 
 import config
 from edge import Edge, findEdge

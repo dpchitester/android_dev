@@ -1,5 +1,3 @@
-from threading import Thread
-from time import sleep
 
 import config
 import ldsv as ls
