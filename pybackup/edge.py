@@ -1,5 +1,4 @@
 from dataclasses import dataclass, field
-from time import time
 
 import config
 import ldsv as ls
@@ -9,17 +8,8 @@ import ldsv as ls
 class Edge:
     di: str = field(compare=True, hash=True)
     si: str = field(compare=True, hash=True)
-    cdt: float = field(default=time(), init=False, repr=True, hash=False, compare=False)
-    udt: float = field(
-        default=time() - 10, init=False, repr=True, hash=False, compare=False
-    )
-    rcdt: float = field(
-        default=time(), init=False, repr=True, hash=False, compare=False
-    )
-    rudt: float = field(
-        default=time() - 10, init=False, repr=True, hash=False, compare=False
-    )
-
+    ss: bool = field(default=True, init=False, repr=True, hash=False, compare=False)
+    ts: bool = field(default=True, init=False, repr=True, hash=False, compare=False)
     def __eq__(self, other):
         return self.si == other.si and self.di == other.di
 
@@ -27,39 +17,33 @@ class Edge:
         return hash((self.si, self.di))
 
     def chk_ct(self):
-        return self.cdt > self.udt
+        return self.ss
 
     def rchk_ct(self):
-        return self.rcdt > self.rudt
+        return self.ts
 
     def clr(self):
         with ls.dl:
-            if self.udt < self.cdt:
+            if self.ss:
                 print("-clr", self.di, self.si)
-                self.udt = self.cdt
+                self.ss = False
                 ls.sev.put("edges")
 
     def rclr(self):
         with ls.dl:
-            if self.rudt < self.rcdt:
+            if self.ts:
                 print("-rclr", self.di, self.si)
-                self.rudt = self.rcdt
+                self.ts = False
                 ls.sev.put("edges")
 
-    def rtset(self, mt=None):
+    def rtset(self):
         with ls.dl:
-            if mt is None:
-                self.cdt = time()
-            else:
-                self.cdt = mt
+            self.ss = True
             ls.sev.put("edges")
 
-    def rrtset(self, mt=None):
+    def rrtset(self):
         with ls.dl:
-            if mt is None:
-                self.rcdt = time()
-            else:
-                self.rcdt = mt
+            self.ts = True
             ls.sev.put("edges")
 
     def __repr__(self) -> str:
