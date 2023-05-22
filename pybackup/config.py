@@ -477,7 +477,6 @@ def ns_trunc2ms(ns):
 
 
 def dllcmp(do, dn):
-    global fi
     dns = set(dn)
     dos = set(do)
     tocopy = dns - dos

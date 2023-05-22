@@ -8,7 +8,7 @@ export HISTCONTROL=ignoreboth:erasedups
 #export PYTHONPATH=/sdcard/projects/pybackup
 
 export LD_LIBRARY_PATH=$PREFIX/lib
-export PATH=$PATH:$LD_LIBRARY_PATH
+export PATH=$PATH:$LD_LIBRARY_PATH:~/.nimble/bin
 export NODE_PATH=$PREFIX/lib/node_modules
 export FDB_PATH=/sdcard/Android/data/com.smartphoneremote.androidscriptfree/files/Droidscript/blog
 export PYTHONDEBUG=1

@@ -1,3 +1,4 @@
+from threading import Thread
 
 import config
 from edge import Edge, findEdge
@@ -54,14 +55,26 @@ def nts():
 
 def proc_nodes(L):
     n = 1
+    thl=[]
     for node in L:
         # print("node:", node)
         ss = changed_ops(node)
         for op in ss:
-            sc, fc = op()
+            def f1(op):
+                nonlocal n
+                sc, fc = op()
             # rupdatets(n)
-            updatets(n)
-            n += 1
+                updatets(n)
+                n += 1
+            if nodeps(op.npl1[0]):
+                th=Thread(target=f1,args=(op,))
+                th.start()
+                thl.append(th)
+            else:
+                f1(op)
+    for th in thl:
+        if th.is_alive():
+            th.join()
 
 def opExec():
     print("-opexec")
