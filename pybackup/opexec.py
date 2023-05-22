@@ -1,5 +1,3 @@
-from threading import Thread
-
 import config
 from edge import Edge, findEdge
 from opbase import OpBase
@@ -54,27 +52,23 @@ def nts():
 
 
 def proc_nodes(L):
+    import concurrent.futures as cf
+    tpe = cf.ThreadPoolExecutor(max_workers=4)
     n = 1
-    thl=[]
     for node in L:
         # print("node:", node)
         ss = changed_ops(node)
+        def f1(op):
+            nonlocal n
+            sc, fc = op()
+            updatets(n)
+            n += 1
         for op in ss:
-            def f1(op):
-                nonlocal n
-                sc, fc = op()
-            # rupdatets(n)
-                updatets(n)
-                n += 1
             if nodeps(op.npl1[0]):
-                th=Thread(target=f1,args=(op,))
-                th.start()
-                thl.append(th)
+                tpe.submit(f1, op)
             else:
                 f1(op)
-    for th in thl:
-        if th.is_alive():
-            th.join()
+    tpe.shutdown()
 
 def opExec():
     print("-opexec")
