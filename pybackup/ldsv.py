@@ -1,4 +1,6 @@
 import pickle
+from time import sleep
+
 from queue import Empty, SimpleQueue
 from threading import RLock
 
@@ -166,16 +168,18 @@ def save_all():
 def save_bp():
     print("-savebp")
     svs = {}
-    while not config.quit_ev.is_set():
+    while True:
         try:
             qi = sev.get_nowait()
             try:
                 svs[qi] += 1
             except KeyError:
                 svs[qi] = 1
-            continue
         except Empty:
-            pass
+            if config.quit_ev.is_set():
+                break
+            else:
+                sleep(0.1)
     print("saves:", svs)
     for sv in svs:
         match sv:
