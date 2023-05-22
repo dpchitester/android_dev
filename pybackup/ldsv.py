@@ -93,10 +93,8 @@ def loadedges():
         for e in config.eDep:
             for le in leDep:
                 if le == e:
-                    e.cdt = le.cdt
-                    e.udt = le.udt
-                    e.rcdt = le.rcdt
-                    e.rudt = le.rudt
+                    e.ss = le.ss
+                    e.ts = le.ts
 
 
 def saveedges():
