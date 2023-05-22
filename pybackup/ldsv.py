@@ -1,8 +1,7 @@
 import pickle
-from time import sleep
-
 from queue import Empty, SimpleQueue
 from threading import RLock
+from time import sleep
 
 import config
 
