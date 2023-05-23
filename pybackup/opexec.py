@@ -2,7 +2,7 @@ import config
 from edge import Edge, findEdge
 from opbase import OpBase
 from status import updatets
-from toposort import topological_sort
+from toposort2 import topological_sort
 
 _pass = 1
 
