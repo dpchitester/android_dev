@@ -69,6 +69,7 @@ def proc_nodes(L):
             else:
                 f1(op)
     tpe.shutdown()
+    updatets(n)
 
 def opExec():
     print("-opexec")
