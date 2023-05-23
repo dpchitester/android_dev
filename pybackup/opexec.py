@@ -55,14 +55,14 @@ def proc_nodes(L):
     import concurrent.futures as cf
     tpe = cf.ThreadPoolExecutor(max_workers=4)
     n = 1
+    def f1(op):
+        nonlocal n
+        sc, fc = op()
+        updatets(n)
+        n += 1
     for node in L:
         # print("node:", node)
         ss = changed_ops(node)
-        def f1(op):
-            nonlocal n
-            sc, fc = op()
-            updatets(n)
-            n += 1
         for op in ss:
             if nodeps(op.npl1[0]):
                 tpe.submit(f1, op)
