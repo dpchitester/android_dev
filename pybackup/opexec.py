@@ -50,13 +50,14 @@ def nts():
     ts.reverse()
     return ts
 
+n = 1
 
 def proc_nodes(L):
     import concurrent.futures as cf
+    global n
     tpe = cf.ThreadPoolExecutor(max_workers=4)
-    n = 1
     def f1(op):
-        nonlocal n
+        global n
         sc, fc = op()
         updatets(n)
         n += 1
