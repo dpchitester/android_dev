@@ -2,7 +2,6 @@
 
 
 # pkg install apt
-# pkg install autoconf
 # pkg install bash-completion
 # pkg install bash
 # pkg install binutils-bin
@@ -66,7 +65,6 @@
 # pkg install libxml2
 # pkg install lld
 # pkg install llvm
-# pkg install m4
 # pkg install make
 # pkg install ncurses-ui-libs
 # pkg install ncurses
@@ -102,8 +100,9 @@
 # pkg install xz-utils
 # pkg install zlib
 # pkg install zstd
-# pip install -------
+# pip install ----------
 # pip install pip
+# pip install setuptools
 # pip install tarjan
 # pip install xxhash
 # pip install yappi
