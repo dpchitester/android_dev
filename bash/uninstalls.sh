@@ -8,6 +8,7 @@
 # pip uninstall ----------
 # pip uninstall pip
 # pip uninstall setuptools
+ pip uninstall six
 # pip uninstall tarjan
 # pip uninstall xxhash
 # pip uninstall yappi

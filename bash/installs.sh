@@ -103,6 +103,7 @@
 # pip install ----------
 # pip install pip
 # pip install setuptools
+# pip install six
 # pip install tarjan
 # pip install xxhash
 # pip install yappi
