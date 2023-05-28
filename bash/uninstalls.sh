@@ -10,3 +10,4 @@
 # pip uninstall setuptools
 # pip uninstall tarjan
 # pip uninstall xxhash
+# pip uninstall zipp
