@@ -66,7 +66,7 @@ def a_run3(shell_command, cwd=None):
             match ln:
                 case Qi1():
                     txt += ln
-                    print(colored(0, 255, 255, ln), end="")
+                    print(colored(0, 255, 0, ln), end="")
                 case Qi2():
                     if ln and len(ln):
                         msg = json.loads(ln)
@@ -96,7 +96,7 @@ def a_run4(shell_command, cwd=None):
                     print(colored(0, 255, 0, ln), end="")
                 case Qi2():
                     txt2 += ln
-                    print(colored(255, 0, 0, ln), end="")
+                    print(colored(0, 0, 255, ln), end="")
 
     except subprocess.CalledProcessError as exc:
         error_output = json.loads(exc.output)
