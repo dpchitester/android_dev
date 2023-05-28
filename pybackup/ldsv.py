@@ -15,8 +15,8 @@ def pstats():
     print(f"{'dl1_cs':6} {config.dl1_cs:6d}")
     print(f"{'dl2_cs':6} {config.dl2_cs:6d}")
     print(f"{'sfb':6} {config.sfb:6d}")
-    print(f"{'h_hits':6} {config.h_hits:6d}")
     print(f"{'h_miss':6} {config.h_miss:6d}")
+    print(f"{'h_hits':6} {config.h_hits:6d}")
     print(f"{'upd_cs':6} {config.upd_cs:6d}")
 
 
