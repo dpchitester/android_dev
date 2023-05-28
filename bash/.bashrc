@@ -16,6 +16,7 @@ export FDB_PATH=/sdcard/Android/data/com.smartphoneremote.androidscriptfree/file
 #export PYTHONDEVMODE=1
 export RCLONE_CONFIG=$HOME/.config/rclone/rclone.conf
 export XDG_CONFIG_HOME=$HOME/.config
+export CDPATH=/sdcard/projects
 
 alias pb='cd /sdcard/projects/pybackup'
 alias pp='cd $PYTHON_SITE_PACKAGES'
