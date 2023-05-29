@@ -78,12 +78,19 @@ function main() {
     dotrans(ast);
     var txt3 = JSON.stringify(ast, null, 4);
     fs.writeFileSync("blog-ast2.json", txt3);
-    var tjs = esc.generate(ast);
-    var ftjs = prettier.format(tjs, {
-        parser: "acorn",
-        tabWidth: 4,
-    });
-    fs.writeFileSync("blog-sorted.js", ftjs);
+    n=1
+    for (sn of ast.body) {
+       stream = fs.createWriteStream("blog-split"+n+".js");
+       var tjs = esc.generate(sn);
+       var ftjs = prettier.format(tjs, {
+          parser: "acorn",
+          tabWidth: 4,
+       });
+       stream.write(ftjs);
+       stream.write('\n');
+       stream.end();
+       n += 1;
+    }
 }
 
 main();

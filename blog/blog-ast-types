@@ -39,10 +39,10 @@
         "UpdateExpression": 8
     },
     {
-        "ArrayExpression": 10
+        "FunctionExpression": 9
     },
     {
-        "FunctionExpression": 11
+        "ArrayExpression": 10
     },
     {
         "UnaryExpression": 16
@@ -51,16 +51,16 @@
         "LogicalExpression": 17
     },
     {
-        "ArrowFunctionExpression": 19
+        "ArrowFunctionExpression": 18
     },
     {
         "ReturnStatement": 21
     },
     {
-        "NewExpression": 36
+        "FunctionDeclaration": 36
     },
     {
-        "FunctionDeclaration": 36
+        "NewExpression": 37
     },
     {
         "ThisExpression": 37
@@ -69,36 +69,36 @@
         "IfStatement": 39
     },
     {
-        "AwaitExpression": 51
+        "AwaitExpression": 45
     },
     {
-        "AssignmentExpression": 79
+        "AssignmentExpression": 78
     },
     {
-        "BlockStatement": 113
+        "BlockStatement": 110
     },
     {
-        "VariableDeclaration": 131
+        "VariableDeclaration": 130
     },
     {
-        "VariableDeclarator": 132
+        "VariableDeclarator": 131
     },
     {
         "BinaryExpression": 140
     },
     {
-        "ExpressionStatement": 231
+        "ExpressionStatement": 222
     },
     {
-        "Literal": 263
+        "Literal": 261
     },
     {
-        "CallExpression": 283
+        "CallExpression": 275
     },
     {
-        "MemberExpression": 337
+        "MemberExpression": 334
     },
     {
-        "Identifier": 927
+        "Identifier": 916
     }
 ]

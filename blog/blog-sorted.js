@@ -1,30 +1,54 @@
 var app;
+
 var b2ot;
+
 var b3ot;
+
 var bsz = 0.125;
+
 var cashb;
+
 var dallow;
+
 var davg;
+
 var db = null;
+
 var dbfn = "Finance.db";
+
 var dirty2 = false;
+
 var dirty3 = false;
+
 var dirty4 = false;
+
 var dtbl_cs =
     "CREATE TABLE daily (ts TIMESTAMP PRIMARY KEY,cash_recd REAL,fs_recd REAL,dx_recd REAL,cash_spent REAL,fs_spent REAL,dx_spent REAL)";
+
 var dtot;
+
 var dxb;
+
 var et = new EventTarget();
+
 var fsb;
+
 var ietbl_cs =
     "CREATE TABLE inc_exp (bts TIMESTAMP NOT NULL,ets TIMESTAMP NOT NULL PRIMARY KEY,cash_recd REAL,fs_recd REAL,dx_recd REAL,cash_spent REAL,fs_spent REAL,dx_spent REAL)";
+
 var inec;
+
 var losz = 0.075;
+
 var lts;
+
 var maxdl;
+
 var mtbl_cs =
     "CREATE TABLE monthly (ts TIMESTAMP PRIMARY KEY,cash_recd REAL,fs_recd REAL,dx_recd REAL,cash_spent REAL,fs_spent REAL,dx_spent REAL)";
+
 var rcb;
+
 var set_handler = {
     set: function (obj, prop, val) {
         let oval = obj[prop];
@@ -35,28 +59,36 @@ var set_handler = {
         return true;
     },
 };
+
 var tesz = 0.066;
+
 var tleft;
+
 var tsz = 0.045;
+
 var uc = 0;
+
 var updated = false;
+
 var uspop = 324459463;
-document.addEventListener("DOMContentLoaded", function () {});
-window.addEventListener("load", function () {});
+
 app.UpdateProgressBar = function (percent, options) {
     prompt("#", "App.UpdateProgressBar(\f" + percent + "\f" + options);
 };
+
 function d2t(dv) {
     let d = Math.floor(dv);
     let h = Math.floor((dv * 24) % 24);
     let m = Math.round((dv * (24 * 60)) % 60);
     return d + "d," + h + "h," + m + "m";
 }
+
 function dallow_calc() {
     let da = (cashb.num + dxb.num) / maxdl.num;
     dallow.te.SetText(ncs(da));
     dallow.save();
 }
+
 async function davg_dtot_calc() {
     let res = await sql(
         "SELECT * FROM daily WHERE 'ts' IS NOT NULL ORDER BY 'ts' ASC;"
@@ -82,6 +114,7 @@ async function davg_dtot_calc() {
     davg.te.SetText(tmp);
     davg.save();
 }
+
 function dbbackup() {
     try {
         var fe1 = app.FileExists(fn1);
@@ -105,6 +138,7 @@ function dbbackup() {
         app.Alert(e);
     }
 }
+
 function dbinstall() {
     try {
         var fe1 = app.FileExists(fn1);
@@ -129,6 +163,7 @@ function dbinstall() {
         app.Alert(e);
     }
 }
+
 function dbps() {
     var fn1 = app.GetPrivateFolder("") + "/../databases";
     if (fn1.length != 0) fn1 += "/";
@@ -137,9 +172,11 @@ function dbps() {
     if (fn2.length != 0) fn2 += "/";
     fn2 += dbfn;
 }
+
 async function de() {
     return await tblexists("daily");
 }
+
 function dl(m, dom) {
     let cd = new Date();
     let nd = new Date();
@@ -161,6 +198,7 @@ function dl(m, dom) {
     let days = (t2 - t1) / 86400000;
     return days;
 }
+
 async function dtbl() {
     let dex = await de();
     if (dex && dirty3) {
@@ -172,6 +210,7 @@ async function dtbl() {
     }
     return dex;
 }
+
 async function fixtbl() {
     let sqlt1 =
         "CREATE TABLE IF NOT EXISTS tmpc (ts TIMESTAMP PRIMARY KEY NOT NULL,cash REAL,fs REAL,dx REAL)";
@@ -189,6 +228,7 @@ async function fixtbl() {
     }
     app.Exit();
 }
+
 async function ib() {
     let ft = app.ReadFile(app.GetPath() + "/blog2.csv");
     let lna = ft.split("\n");
@@ -205,9 +245,11 @@ async function ib() {
     }
     app.Exit();
 }
+
 async function iee() {
     return await tblexists("inc_exp");
 }
+
 async function ietbl() {
     let iex = await iee();
     if (iex && dirty2) {
@@ -219,11 +261,13 @@ async function ietbl() {
     }
     return iex;
 }
+
 function inec_calc() {
     let res1 = davg.num - dallow.num;
     inec.te.SetText(ncs(res1 * maxdl.num));
     inec.save();
 }
+
 async function loadnums() {
     db.transaction(function (tx) {
         async function load(mv) {
@@ -260,6 +304,7 @@ async function loadnums() {
         load(tleft);
     });
 }
+
 async function log_balances() {
     await sql("INSERT INTO currentc (ts, cash, fs, dx) VALUES (?,?,?,?)", [
         new Date().toISOString(),
@@ -270,19 +315,23 @@ async function log_balances() {
     dirty2 = true;
     uc++;
 }
+
 async function lts() {
     let res = await sql("SELECT ts FROM currentc ORDER BY ts DESC");
     return res.rows.item(uc).ts;
 }
+
 function maxdl_calc() {
-    let cashd = dl(2, 28);
-    let dxd = dl(3, 3);
+    let cashd = dl(5, 28);
+    let dxd = dl(5, 3);
     maxdl.te.SetText(ncs(Math.max(cashd, dxd)));
-    maxdl.num = Math.max(cashd, dxd);
+    maxdl.num = ncs(Math.max(cashd, dxd));
 }
+
 async function me() {
     return await tblexists("monthly");
 }
+
 async function mtbl() {
     let mex = await me();
     if (mex && dirty4) {
@@ -294,15 +343,18 @@ async function mtbl() {
     }
     return mex;
 }
+
 function nc(d) {
     return Math.round(d * 100) / 100;
 }
+
 function ncs(d) {
     return nc(d).toLocaleString(undefined, {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
     });
 }
+
 async function OnStart() {
     db = app.OpenDatabase(dbfn);
     cashb = new Mvar("Cash", "");
@@ -330,25 +382,16 @@ async function OnStart() {
             await cashb.save();
             await fsb.save();
             await dxb.save();
+            await davg.save();
+            await dallow.save();
+            await inec.save();
+            await dtot.save();
+            await tleft.save();
+            await maxdl.save();
             await update_ietbl();
+            et.dispatchEvent(new Event("update"));
         });
-        await b3ot();
     });
-    let b3 = app.CreateButton("Recalc", 0.5, bsz);
-    b3ot = async () => {
-        await davg_dtot_calc();
-        await maxdl_calc();
-        await dallow_calc();
-        await tleft_calc();
-        await inec_calc();
-        await davg.save();
-        await dallow.save();
-        await inec.save();
-        await dtot.save();
-        await tleft.save();
-        await maxdl.save();
-    };
-    b3.SetOnTouch(b3ot);
     let b2 = app.CreateButton("Exit", 0.5, bsz);
     b2ot = async () => {
         if (db != null) {
@@ -386,13 +429,13 @@ async function OnStart() {
     lyo0.AddChild(lyo1);
     lyo0.AddChild(lyo2);
     lyo0.AddChild(b1);
-    lyo0.AddChild(b3);
     lyo0.AddChild(b2);
     lyo0.AddChild(rcb);
     set_color(lyo0);
     lyo0.SetSize(1, 2);
     app.AddLayout(lyo0);
 }
+
 function proxynums() {
     cashb = new Proxy(cashb, set_handler);
     fsb = new Proxy(fsb, set_handler);
@@ -408,6 +451,7 @@ function proxynums() {
     et.addEventListener(cashb.name + "-changed", bal_handler);
     et.addEventListener(dxb.name + "-changed", bal_handler);
     et.addEventListener(fsb.name + "-changed", bal_handler);
+    et.addEventListener("update", bal_handler);
     et.addEventListener(dallow.name + "-changed", (e) => {
         inec_calc();
     });
@@ -422,6 +466,7 @@ function proxynums() {
     setInterval(maxdl_calc, 2000);
     bal_handler();
 }
+
 async function SaveNumber(name, num) {
     await sql("UPDATE nums SET (num,ts)=(?,?) WHERE name=?", [
         num,
@@ -429,6 +474,7 @@ async function SaveNumber(name, num) {
         name,
     ]);
 }
+
 function set_color(o) {
     try {
         o.SetBackColor("white");
@@ -437,11 +483,13 @@ function set_color(o) {
         o.SetTextColor("black");
     } catch (e) {}
 }
+
 async function slow(f) {
     app.ShowProgress();
     await f();
     app.HideProgress();
 }
+
 async function sql(stmnt, dat) {
     if (db == null) {
         db = app.OpenDatabase(dbfn);
@@ -453,6 +501,7 @@ async function sql(stmnt, dat) {
         app.Alert(err + "," + stmnt + "," + dat);
     });
 }
+
 async function tblexists(nm) {
     let res = await sql(
         "SELECT COUNT() AS cnt FROM sqlite_master WHERE type='table' AND name=?",
@@ -460,10 +509,12 @@ async function tblexists(nm) {
     );
     return res.rows.item(0).cnt > 0;
 }
+
 function teot() {
     let v = this.mvar;
     app.ShowPopup(" v.name: " + v.name);
 }
+
 function tleft_calc() {
     let tf = cashb.num + dxb.num;
     let tl = tf / davg.num;
@@ -471,11 +522,13 @@ function tleft_calc() {
     tleft.te.SetText(tmp);
     tleft.save();
 }
+
 function txtp(txt) {
     return txtpa(txt).reduce((a, c) => {
         return a + c;
     }, 0);
 }
+
 function txtpa(txt) {
     let re = /([+\-]?\s*([0-9,]*)([\.][0-9]*)?)/g;
     let res1 = txt.match(re);
@@ -490,6 +543,7 @@ function txtpa(txt) {
             return n != null && Number.isFinite(n);
         });
 }
+
 async function update_ietbl() {
     app.ShowProgressBar("updating tables...");
     let pd = await lts();
@@ -585,6 +639,7 @@ async function update_ietbl() {
         rcb.SetChecked(false);
     }
 }
+
 class Mvar {
     constructor(n, ne) {
         this.num = 0;
@@ -641,3 +696,4 @@ class Mvar {
         return ncs(this.num);
     }
 }
+
