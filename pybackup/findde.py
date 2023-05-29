@@ -43,25 +43,17 @@ def getRemoteJSde(rd: Path, fn: str):
 
 
 def getRemoteDEs(rd: Path, fl: list[str]):
+    import concurrent.futures as cf
+    tpe = cf.ThreadPoolExecutor(max_workers=4)
     jsl = []
-    jstl = []
 
     def f1(fn):
         jsl.extend(getRemoteJSde(rd, fn))
 
     for fn in fl:
-        th = Thread(target=f1, args=(fn,))
-        th.start()
-        # print(th)
-        jstl.append(th)
-        while len(jstl) > 10:
-            th = jstl.pop(0)
-            th.join()
-            # print(th)
-    while len(jstl):
-        th = jstl.pop(0)
-        th.join()
-        # print(th)
+        tpe.submit(f1, fn)
+    tpe.shutdown()
+    
     pt = Path
     delst = []
     for it in jsl:
