@@ -1,5 +1,14 @@
-from textual.app import App
+from flexx import flx
 
-a=App()
+class Example(flx.Widget):
 
-a.run()
+    def init(self):
+        flx.Button(text='hello')
+        flx.Button(text='world')
+
+
+app = flx.App(Example)
+app.export('test.html', link=0)  # Export
+
+app.launch('browser')  # show it now in a browser
+flx.run() 
