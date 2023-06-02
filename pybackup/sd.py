@@ -187,7 +187,6 @@ class FS_Mixin(SD):
         from filelist import FileList
 
         # print('-ldlld', si)
-        ch = "r" if self.isremote else "l"
         if self.Dll_status() > 1:
             #print("sucking/scanning for", self.tag, ch + "dll...", end="")
             rv = FileList(self).getdll()

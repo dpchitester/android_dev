@@ -1,5 +1,6 @@
 from flexx import flx
 
+
 class Example(flx.Widget):
 
     def init(self):
