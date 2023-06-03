@@ -1,10 +1,12 @@
-import js2py
+import esprima
+import json
 
 with open("blog.js","r") as fh:
     txt = fh.read()
 
-pyth = js2py.eval_js6(txt)
+js_ast = esprima.parseScript(txt)
 
-with open("blog.py", "w") as fh:
-    fh.write(txt)
+with open("blog-script.txt", "w") as fh:
+    for it in js_ast.body:
+        fh.write(str(it)+'\n')
     
