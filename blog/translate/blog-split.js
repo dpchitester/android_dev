@@ -1,30 +1,54 @@
 var app;
+
 var b2ot;
+
 var b3ot;
+
 var bsz = 0.125;
+
 var cashb;
+
 var dallow;
+
 var davg;
+
 var db = null;
+
 var dbfn = "Finance.db";
+
 var dirty2 = false;
+
 var dirty3 = false;
+
 var dirty4 = false;
+
 var dtbl_cs =
     "CREATE TABLE daily (ts TIMESTAMP PRIMARY KEY,cash_recd REAL,fs_recd REAL,dx_recd REAL,cash_spent REAL,fs_spent REAL,dx_spent REAL)";
+
 var dtot;
+
 var dxb;
+
 var et = new EventTarget();
+
 var fsb;
+
 var ietbl_cs =
     "CREATE TABLE inc_exp (bts TIMESTAMP NOT NULL,ets TIMESTAMP NOT NULL PRIMARY KEY,cash_recd REAL,fs_recd REAL,dx_recd REAL,cash_spent REAL,fs_spent REAL,dx_spent REAL)";
+
 var inec;
+
 var losz = 0.075;
+
 var lts;
+
 var maxdl;
+
 var mtbl_cs =
     "CREATE TABLE monthly (ts TIMESTAMP PRIMARY KEY,cash_recd REAL,fs_recd REAL,dx_recd REAL,cash_spent REAL,fs_spent REAL,dx_spent REAL)";
+
 var rcb;
+
 var set_handler = {
     set: function (obj, prop, val) {
         let oval = obj[prop];
@@ -35,28 +59,38 @@ var set_handler = {
         return true;
     },
 };
+
 var tesz = 0.066;
+
 var tleft;
+
 var tsz = 0.045;
+
 var uc = 0;
+
 var updated = false;
+
 var uspop = 324459463;
+
 app.UpdateProgressBar = function (percent, options) {
     prompt("#", "App.UpdateProgressBar(\f" + percent + "\f" + options);
 };
+
 function d2t(dv) {
     let d = Math.floor(dv);
     let h = Math.floor((dv * 24) % 24);
     let m = Math.round((dv * (24 * 60)) % 60);
     return d + "d," + h + "h," + m + "m";
 }
+
 function dallow_calc() {
     let da = (cashb.num + dxb.num) / maxdl.num;
     dallow.te.SetText(ncs(da));
     dallow.save();
 }
-async function davg_dtot_calc() {
-    let res = await sql(
+
+function davg_dtot_calc() {
+    let res = sql(
         "SELECT * FROM daily WHERE 'ts' IS NOT NULL ORDER BY 'ts' ASC;"
     );
     let rc = res.rows.length;
@@ -80,6 +114,7 @@ async function davg_dtot_calc() {
     davg.te.SetText(tmp);
     davg.save();
 }
+
 function dbbackup() {
     try {
         var fe1 = app.FileExists(fn1);
@@ -103,6 +138,7 @@ function dbbackup() {
         app.Alert(e);
     }
 }
+
 function dbinstall() {
     try {
         var fe1 = app.FileExists(fn1);
@@ -127,6 +163,7 @@ function dbinstall() {
         app.Alert(e);
     }
 }
+
 function dbps() {
     var fn1 = app.GetPrivateFolder("") + "/../databases";
     if (fn1.length != 0) fn1 += "/";
@@ -135,9 +172,11 @@ function dbps() {
     if (fn2.length != 0) fn2 += "/";
     fn2 += dbfn;
 }
-async function de() {
-    return await tblexists("daily");
+
+function de() {
+    return tblexists("daily");
 }
+
 function dl(m, dom) {
     let cd = new Date();
     let nd = new Date();
@@ -159,26 +198,28 @@ function dl(m, dom) {
     let days = (t2 - t1) / 86400000;
     return days;
 }
-async function dtbl() {
-    let dex = await de();
+
+function dtbl() {
+    let dex = de();
     if (dex && dirty3) {
     } else {
         if (!dex) {
-            await sql(dtbl_cs);
+            sql(dtbl_cs);
             dirty3 = true;
         }
     }
     return dex;
 }
-async function fixtbl() {
+
+function fixtbl() {
     let sqlt1 =
         "CREATE TABLE IF NOT EXISTS tmpc (ts TIMESTAMP PRIMARY KEY NOT NULL,cash REAL,fs REAL,dx REAL)";
-    await sql(sqlt1);
-    await sql("DELETE FROM tmpc");
-    let res = await sql("select * from currentc order by ts");
+    sql(sqlt1);
+    sql("DELETE FROM tmpc");
+    let res = sql("select * from currentc order by ts");
     for (let i = 0; i < res.rows.length; i++) {
         let row = res.rows.item(i);
-        await sql("insert into tmpc (ts,cash,fs,dx) values (?,?,?,?)", [
+        sql("insert into tmpc (ts,cash,fs,dx) values (?,?,?,?)", [
             new Date(row.ts).toISOString(),
             row.cash,
             row.fs,
@@ -187,7 +228,8 @@ async function fixtbl() {
     }
     app.Exit();
 }
-async function ib() {
+
+function ib() {
     let ft = app.ReadFile(app.GetPath() + "/blog2.csv");
     let lna = ft.split("\n");
     for (i = 0; i < lna.length; i++) {
@@ -196,36 +238,40 @@ async function ib() {
         if (Number(tp[0]) < 10) tp[0] = "0" + Number(tp[0]);
         f[1] = tp.join(":");
         let ts = f[0] + " " + f[1];
-        let res = await sql(
+        let res = sql(
             "INSERT INTO currentc (ts, cash, fs, dx) VALUES (?,?,?,?)",
             [new Date(ts).toISOString(), f[2], f[3], f[4]]
         );
     }
     app.Exit();
 }
-async function iee() {
-    return await tblexists("inc_exp");
+
+function iee() {
+    return tblexists("inc_exp");
 }
-async function ietbl() {
-    let iex = await iee();
+
+function ietbl() {
+    let iex = iee();
     if (iex && dirty2) {
     } else {
         if (!iex) {
-            await sql(ietbl_cs);
+            sql(ietbl_cs);
             dirty2 = true;
         }
     }
     return iex;
 }
+
 function inec_calc() {
     let res1 = davg.num - dallow.num;
     inec.te.SetText(ncs(res1 * maxdl.num));
     inec.save();
 }
-async function loadnums() {
+
+function loadnums() {
     db.transaction(function (tx) {
-        async function load(mv) {
-            await new Promise((resolve, reject) => {
+        function load(mv) {
+            new Promise((resolve, reject) => {
                 tx.executeSql(
                     "SELECT num FROM nums WHERE name=?",
                     [mv.name],
@@ -258,8 +304,9 @@ async function loadnums() {
         load(tleft);
     });
 }
-async function log_balances() {
-    await sql("INSERT INTO currentc (ts, cash, fs, dx) VALUES (?,?,?,?)", [
+
+function log_balances() {
+    sql("INSERT INTO currentc (ts, cash, fs, dx) VALUES (?,?,?,?)", [
         new Date().toISOString(),
         cashb.num,
         fsb.num,
@@ -268,41 +315,47 @@ async function log_balances() {
     dirty2 = true;
     uc++;
 }
-async function lts() {
-    let res = await sql("SELECT ts FROM currentc ORDER BY ts DESC");
+
+function lts() {
+    let res = sql("SELECT ts FROM currentc ORDER BY ts DESC");
     return res.rows.item(uc).ts;
 }
+
 function maxdl_calc() {
     let cashd = dl(5, 28);
-    let dxd = dl(6, 3);
-    md = ncs((cashd+dxd)/2);
-    maxdl.te.SetText(md);
-    maxdl.num = md;
+    let dxd = dl(5, 3);
+    maxdl.te.SetText(ncs(Math.max(cashd, dxd)));
+    maxdl.num = ncs(Math.max(cashd, dxd));
 }
-async function me() {
-    return await tblexists("monthly");
+
+function me() {
+    return tblexists("monthly");
 }
-async function mtbl() {
-    let mex = await me();
+
+function mtbl() {
+    let mex = me();
     if (mex && dirty4) {
     } else {
         if (!mex) {
-            await sql(mtbl_cs);
+            sql(mtbl_cs);
             dirty4 = true;
         }
     }
     return mex;
 }
+
 function nc(d) {
     return Math.round(d * 100) / 100;
 }
+
 function ncs(d) {
     return nc(d).toLocaleString(undefined, {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
     });
 }
-async function OnStart() {
+
+function OnStart() {
     db = app.OpenDatabase(dbfn);
     cashb = new Mvar("Cash", "");
     fsb = new Mvar("FS", "");
@@ -324,23 +377,23 @@ async function OnStart() {
     proxynums();
     loadnums();
     let b1 = app.CreateButton("Update", 0.5, bsz);
-    b1.SetOnTouch(async () => {
-        await slow(async () => {
-            await cashb.save();
-            await fsb.save();
-            await dxb.save();
-            await davg.save();
-            await dallow.save();
-            await inec.save();
-            await dtot.save();
-            await tleft.save();
-            await maxdl.save();
-            await update_ietbl();
+    b1.SetOnTouch(() => {
+        slow(() => {
+            cashb.save();
+            fsb.save();
+            dxb.save();
+            davg.save();
+            dallow.save();
+            inec.save();
+            dtot.save();
+            tleft.save();
+            maxdl.save();
+            update_ietbl();
             et.dispatchEvent(new Event("update"));
         });
     });
     let b2 = app.CreateButton("Exit", 0.5, bsz);
-    b2ot = async () => {
+    b2ot = () => {
         if (db != null) {
             db.Close();
             db = null;
@@ -382,6 +435,7 @@ async function OnStart() {
     lyo0.SetSize(1, 2);
     app.AddLayout(lyo0);
 }
+
 function proxynums() {
     cashb = new Proxy(cashb, set_handler);
     fsb = new Proxy(fsb, set_handler);
@@ -412,13 +466,15 @@ function proxynums() {
     setInterval(maxdl_calc, 2000);
     bal_handler();
 }
-async function SaveNumber(name, num) {
-    await sql("UPDATE nums SET (num,ts)=(?,?) WHERE name=?", [
+
+function SaveNumber(name, num) {
+    sql("UPDATE nums SET (num,ts)=(?,?) WHERE name=?", [
         num,
         new Date().toISOString(),
         name,
     ]);
 }
+
 function set_color(o) {
     try {
         o.SetBackColor("white");
@@ -427,33 +483,38 @@ function set_color(o) {
         o.SetTextColor("black");
     } catch (e) {}
 }
-async function slow(f) {
+
+function slow(f) {
     app.ShowProgress();
-    await f();
+    f();
     app.HideProgress();
 }
-async function sql(stmnt, dat) {
+
+function sql(stmnt, dat) {
     if (db == null) {
         db = app.OpenDatabase(dbfn);
         db.ExecuteSql("PRAGMA synchronous = OFF");
     }
-    return await new Promise((res, err) => {
+    return new Promise((res, err) => {
         db.ExecuteSql(stmnt, dat, res, err);
     }).catch((err) => {
         app.Alert(err + "," + stmnt + "," + dat);
     });
 }
-async function tblexists(nm) {
-    let res = await sql(
+
+function tblexists(nm) {
+    let res = sql(
         "SELECT COUNT() AS cnt FROM sqlite_master WHERE type='table' AND name=?",
         [nm]
     );
     return res.rows.item(0).cnt > 0;
 }
+
 function teot() {
     let v = this.mvar;
     app.ShowPopup(" v.name: " + v.name);
 }
+
 function tleft_calc() {
     let tf = cashb.num + dxb.num;
     let tl = tf / davg.num;
@@ -461,11 +522,13 @@ function tleft_calc() {
     tleft.te.SetText(tmp);
     tleft.save();
 }
+
 function txtp(txt) {
     return txtpa(txt).reduce((a, c) => {
         return a + c;
     }, 0);
 }
+
 function txtpa(txt) {
     let re = /([+\-]?\s*([0-9,]*)([\.][0-9]*)?)/g;
     let res1 = txt.match(re);
@@ -480,21 +543,22 @@ function txtpa(txt) {
             return n != null && Number.isFinite(n);
         });
 }
-async function update_ietbl() {
+
+function update_ietbl() {
     app.ShowProgressBar("updating tables...");
-    let pd = await lts();
-    let iex = await ietbl();
+    let pd = lts();
+    let iex = ietbl();
     let wh = "";
     if (iex && !rcb.GetChecked()) {
         wh = " WHERE ts>='" + pd + "'";
     }
     if (dirty2 || rcb.GetChecked()) {
         let ss = "SELECT ts, cash, fs, dx FROM currentc" + wh + " ORDER BY ts";
-        let res = await sql(ss);
+        let res = sql(ss);
         let rc = res.rows.length;
         let j = 0;
         let i = 1;
-        db.transaction(async function (tx) {
+        db.transaction(function (tx) {
             for (; i < rc; i++) {
                 let pr = res.rows.item(j);
                 let cr = res.rows.item(i);
@@ -510,7 +574,7 @@ async function update_ietbl() {
                 let fs_spent = fs_diff < 0 ? nc(-fs_diff) : null;
                 let dx_spent = dx_diff < 0 ? nc(-dx_diff) : null;
                 if (cash_diff != 0 || fs_diff != 0 || dx_diff != 0) {
-                    let res2 = await tx.executeSql(
+                    let res2 = tx.executeSql(
                         "INSERT OR REPLACE INTO inc_exp (bts, ets, cash_recd, fs_recd, dx_recd, cash_spent, fs_spent, dx_spent) VALUES (?,?,?,?,?,?,?,?)",
                         [
                             bts,
@@ -533,7 +597,7 @@ async function update_ietbl() {
         dirty2 = false;
     }
     app.UpdateProgressBar(80);
-    let dex = await dtbl();
+    let dex = dtbl();
     wh = "";
     if (dex && !rcb.GetChecked()) {
         wh =
@@ -547,12 +611,12 @@ async function update_ietbl() {
             " SELECT substr(datetime(ets,'localtime'), 1, 10) AS ts, SUM(cash_recd) AS cash_recd, SUM(fs_recd) AS fs_recd, SUM(dx_recd) AS dx_recd, SUM(cash_spent) AS cash_spent, SUM(fs_spent) AS fs_spent, SUM(dx_spent) AS dx_spent FROM inc_exp" +
             wh +
             " GROUP BY substr(datetime(ets,'localtime'), 1, 10)";
-        await sql("INSERT OR REPLACE INTO daily" + sst);
+        sql("INSERT OR REPLACE INTO daily" + sst);
         dirty3 = false;
         dirty4 = true;
     }
     app.UpdateProgressBar(90);
-    let mex = await mtbl();
+    let mex = mtbl();
     wh = "";
     if (mex && !rcb.GetChecked()) {
         wh =
@@ -565,7 +629,7 @@ async function update_ietbl() {
             " SELECT substr(datetime(ets,'localtime'), 1, 7) AS ts, SUM(cash_recd) AS cash_recd, SUM(fs_recd) AS fs_recd, SUM(dx_recd) AS dx_recd, SUM(cash_spent) AS cash_spent, SUM(fs_spent) AS fs_spent, SUM(dx_spent) AS dx_spent FROM inc_exp" +
             wh +
             " GROUP BY substr(datetime(ets,'localtime'), 1, 7)";
-        await sql("INSERT OR REPLACE INTO monthly" + sst);
+        sql("INSERT OR REPLACE INTO monthly" + sst);
         dirty4 = false;
     }
     app.UpdateProgressBar(100);
@@ -575,6 +639,7 @@ async function update_ietbl() {
         rcb.SetChecked(false);
     }
 }
+
 class Mvar {
     constructor(n, ne) {
         this.num = 0;
@@ -592,7 +657,7 @@ class Mvar {
         this.lo.AddChild(this.lbl);
         this.lo.AddChild(this.te);
         this.lo.SetSize(0.8, tesz);
-        this.tf = async function () {
+        this.tf = function () {
             let res2, res3;
             let res1 = this.GetText();
             res2 = txtpa(res1);
@@ -610,24 +675,25 @@ class Mvar {
         set_color(this.lbl);
         set_color(this.lo);
     }
-    async save() {
+    save() {
         let txt = this.te.GetText();
         let ia = txtpa(txt);
         let acc = 0;
         for (let ci of ia) {
             acc = nc(acc + ci);
-            await this.newbal(acc);
+            this.newbal(acc);
         }
     }
-    async newbal(nb) {
+    newbal(nb) {
         if (this.num !== nb) {
             this.num = nb;
-            await this.te.SetText(this.toString());
-            await SaveNumber(this.name, this.num);
-            if (this.isbal) await log_balances();
+            this.te.SetText(this.toString());
+            SaveNumber(this.name, this.num);
+            if (this.isbal) log_balances();
         }
     }
     toString() {
         return ncs(this.num);
     }
 }
+

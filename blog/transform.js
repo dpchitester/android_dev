@@ -80,7 +80,8 @@ function main() {
     fs.writeFileSync("blog-ast2.json", txt3);
     n=1
     for (sn of ast.body) {
-       stream = fs.createWriteStream("blog-split"+n+".js");
+       bn = "translate/blog-split"+n.toString().padStart(2,'0')
+       stream = fs.createWriteStream(bn+".js");
        var tjs = esc.generate(sn);
        var ftjs = prettier.format(tjs, {
           parser: "acorn",
