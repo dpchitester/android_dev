@@ -12,4 +12,3 @@
 # pip uninstall six
 # pip uninstall tarjan
 # pip uninstall xxhash
-# pip uninstall zipp
