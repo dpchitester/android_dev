@@ -39,5 +39,8 @@
     "build": "jake default",
     "run": "node index.js"
   },
-  "version": "0.1.0"
+  "version": "0.1.0",
+  "jshintConfig": {
+     "esversion": 6
+  }
 }

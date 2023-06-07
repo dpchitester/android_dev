@@ -1,5 +1,5 @@
 /// <reference path='../typings/main.d.ts'/>
-"use strict";
+
 
 var cp = require("child_process");
 var diskutils = require("diskutils");
