@@ -389,8 +389,8 @@ function proxynums() {
     davg = new Proxy(davg, set_handler);
     dallow = new Proxy(dallow, set_handler);
     maxdl = new Proxy(maxdl, set_handler);
-    let bal_handler = (e) => {
-        davg_dtot_calc();
+    let bal_handler = async (e) => {
+        await davg_dtot_calc();
         dallow_calc();
         tleft_calc();
     };
