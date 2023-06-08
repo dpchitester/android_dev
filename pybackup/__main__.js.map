@@ -1,0 +1,1 @@
+{"version": 3, "mappings": "AAAA;AAEAA,QAAAC,KAAA", "sources": ["__main__.py"], "names": ["pybackup", "pybackup.main"], "sourcesContent": ["from . import pybackup\n\npybackup.main()\n"]}
