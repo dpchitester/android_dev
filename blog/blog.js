@@ -409,8 +409,8 @@ function proxynums() {
         dallow_calc();
         inec_calc();
     });
-    setInterval(maxdl_calc, 2000);
-    bal_handler();
+    setInterval(maxdl_calc, 500);
+    await bal_handler();
 }
 async function SaveNumber(name, num) {
     await sql("UPDATE nums SET (num,ts)=(?,?) WHERE name=?", [
