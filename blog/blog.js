@@ -321,7 +321,7 @@ async function OnStart() {
     tleft = new Mvar("TLeft", "readonly,nokeyboard");
     tleft.te.SetTextColor("red");
     maxdl = new Mvar("MaxDL", "readonly,nokeyboard");
-    proxynums();
+    await proxynums();
     loadnums();
     let b1 = app.CreateButton("Update", 0.5, bsz);
     b1.SetOnTouch(async () => {
@@ -382,7 +382,7 @@ async function OnStart() {
     lyo0.SetSize(1, 2);
     app.AddLayout(lyo0);
 }
-function proxynums() {
+async function proxynums() {
     cashb = new Proxy(cashb, set_handler);
     fsb = new Proxy(fsb, set_handler);
     dxb = new Proxy(dxb, set_handler);
