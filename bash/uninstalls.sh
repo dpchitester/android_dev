@@ -2,7 +2,6 @@
 
 
 # pkg uninstall git-crypt
-# pkg uninstall nodejs
 # pkg uninstall openssl-1.1
 # pkg uninstall rclone
 # pkg uninstall ruff
