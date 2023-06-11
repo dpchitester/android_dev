@@ -73,7 +73,7 @@ def findSis(fp1: Path):
         if isinstance(p, FS_Mixin):
             with contextlib.suppress(ValueError):
                 l1[si] = fp1.relative_to(p)
-
+    print('l1:', l1)
     return l1
 
 
@@ -83,7 +83,7 @@ def findDis(fp1: Path):
         if isinstance(p, FS_Mixin):
             with contextlib.suppress(ValueError):
                 l1[di] = fp1.relative_to(p)
-
+    print('l1:', l1)
     return l1
 
 
@@ -97,6 +97,7 @@ def findSDEs(fp: Path):
         if isinstance(p, FS_Mixin) and p.Dll:
             de, i = findDE(p.Dll, rp)
             de_l.append((p.Dll, rp, de, i, si))
+    print('de_l:', de_l)
     return de_l
 
 
@@ -110,6 +111,7 @@ def findTDEs(fp: Path):
         if isinstance(p, FS_Mixin) and p.Dll:
             de, i = findDE(p.Dll, rp)
             de_l.append((p.Dll, rp, de, i, di))
+    print('de_l:', de_l)
     return de_l
 
 

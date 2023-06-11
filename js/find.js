@@ -3,7 +3,7 @@ const { spawn } = require("child_process");
 // const child = spawn('pwd');
 const p1 = new Promise((res, rej) => {
   var txt = "";
-  const child = spawn("rclone", ["lsjson", ".", "--files-only","--recursive"]);
+  const child = spawn("rclone", ["lsjson", "..", "--files-only","--recursive"]);
 
   child.on("error", function (err) {
     rej(err);
