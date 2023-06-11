@@ -97,7 +97,6 @@ def findSDEs(fp: Path):
         if isinstance(p, FS_Mixin) and p.Dll:
             de, i = findDE(p.Dll, rp)
             de_l.append((p.Dll, rp, de, i, si))
-    print('de_l:', de_l)
     return de_l
 
 
@@ -111,7 +110,6 @@ def findTDEs(fp: Path):
         if isinstance(p, FS_Mixin) and p.Dll:
             de, i = findDE(p.Dll, rp)
             de_l.append((p.Dll, rp, de, i, di))
-    print('de_l:', de_l)
     return de_l
 
 
