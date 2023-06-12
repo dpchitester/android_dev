@@ -1,6 +1,6 @@
 import "dart:io";
 
-Future main() async {
+Future dl() async {
   var dir = Directory('/sdcard/projects');
 
   try {
