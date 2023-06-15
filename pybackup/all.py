@@ -1612,7 +1612,7 @@ def getOneJSde(rd: Path, fn):
 
 
 def getRemoteJSde(rd: Path, fn: str):
-    fp = rd / fn
+    fp = type(rd)(rd, fn)
     l1 = getOneJSde(fp.parent, fp.name)
     if len(l1):
         it = l1[0]
