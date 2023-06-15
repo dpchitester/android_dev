@@ -66,11 +66,10 @@ def proc_nodes(L):
         ss = changed_ops(node)
         for op in ss:
             if nodeps(op.npl1[0]):
-                #tpe.submit(f1, op)
-                f1(op)
+                tpe.submit(f1, op)
+                #f1(op)
             else:
                 f1(op)
-                updatets(n)
     tpe.shutdown()
     updatets(n)
 
