@@ -1,5 +1,5 @@
 import config
-
+import ldsv as ls
 
 def stsupdate(Si, Dh):
     # print(Si, end=' ')
@@ -37,11 +37,12 @@ def src_statuses2():
     SDl = []
     def f1(Si):
         # print('calling lckers', Si)
-        tr = config.src(Si).sdhck()
-        if tr is not None:
-            (Dh, changed) = tr
-            if changed:
-                SDl.append((Si, Dh))
+        with ls.dl:
+            tr = config.src(Si).sdhck()
+            if tr is not None:
+                (Dh, changed) = tr
+                if changed:
+                    SDl.append((Si, Dh))
     for Si in config.srcs:
         tpe.submit(f1, Si)
     tpe.shutdown()
