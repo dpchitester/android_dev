@@ -60,7 +60,7 @@ async function davg_dtot_calc() {
         "SELECT * FROM daily WHERE 'ts' IS NOT NULL ORDER BY 'ts' ASC;"
     );
     let rc = res.rows.length;
-    sc = 144;
+    sc = 33;
     bd = new Date(res.rows.item(rc - sc - 1).ts);
     ed = new Date(res.rows.item(rc - 1).ts);
     dd = (ed.getTime() - bd.getTime()) / (1000 * 60 * 60 * 24);
