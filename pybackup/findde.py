@@ -210,6 +210,7 @@ def updateDEs(rd: Path, flst: list[str]):
     with ls.dl:
         for fi in flst:
             fp = rd / fi
+            print('fp', fp)
             sdes = findSDEs(fp)
             tdes = findTDEs(fp)
 
