@@ -20,8 +20,8 @@ def findDE(dl, rp: Path):
 
 
 def getOneJSde(rd: Path, fn):
-    cmd = 'rclone lsjson "' + str(rd / fn) + '" '
-    cmd += "--stat"
+    cmd = 'rclone lsjson "' + str(rd / fn) + '"'
+    #cmd += " --stat"
     print(cmd)
     rc, txt = ar.run1(cmd)
 
