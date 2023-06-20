@@ -212,7 +212,9 @@ def updateDEs(rd: Path, flst: list[str]):
             fp = rd / fi
             print('fp', fp)
             sdes = findSDEs(fp)
+            print('sdes', sdes)
             tdes = findTDEs(fp)
+            print('tdes', tdes)
 
             for it in sdes:
                 doSOne(*it)
