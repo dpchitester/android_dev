@@ -51,7 +51,7 @@ def src_statuses2():
 
 def updatets(N):
     print("Status", N)
-    Sl = src_statuses()
+    Sl = src_statuses2()
     if len(Sl):
         print("changed: ", end="")
         for rv in Sl:
