@@ -63,7 +63,7 @@ def getRemoteDEs(rd: Path, fl: list[str]):
         fse = FSe(it2, it3)
         nde = DE(it1, fse)
         delst.append(nde)
-
+    print(len(delst), 'des')
     return delst
 
 
