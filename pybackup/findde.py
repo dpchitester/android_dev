@@ -121,6 +121,7 @@ def updateDEs(rd: Path, flst: list[str]):
         else:
             sde = None
         p = config.src(si)
+        print('sde', sde, 'tde', tde)
         if sde:
             if tde:
                 if tde.i.sz != sde.i.sz:
@@ -167,6 +168,7 @@ def updateDEs(rd: Path, flst: list[str]):
         else:
             sde = None
         p = config.tgt(di)
+        print('sde', sde, 'tde', tde)
         if sde:
             if tde:
                 if tde.i.sz != sde.i.sz:
@@ -212,9 +214,9 @@ def updateDEs(rd: Path, flst: list[str]):
             fp = rd / fi
             print('fp', fp)
             sdes = findSDEs(fp)
-            print('sdes', sdes)
+            #print('sdes', sdes)
             tdes = findTDEs(fp)
-            print('tdes', tdes)
+            #print('tdes', tdes)
 
             for it in sdes:
                 doSOne(*it)
