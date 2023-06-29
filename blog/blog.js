@@ -273,7 +273,7 @@ async function lts() {
     return res.rows.item(uc).ts;
 }
 function maxdl_calc() {
-    let cashd = dl(5, 28);
+    let cashd = dl(6, 28);
     let dxd = dl(6, 3);
     md = ncs((cashd+dxd)/2);
     maxdl.te.SetText(md);
